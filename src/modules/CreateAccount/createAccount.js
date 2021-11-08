@@ -2,7 +2,12 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { Row, Column } from "simple-flexbox";
 import LoginSideView from "../loginSideView/loginSideView";
+import { history } from "../../managers/history";
+
 export default function CreateAccount() {
+  const createaccount = () => {
+    history.push("/verify");
+  };
   const [pwd, setPwd] = useState("");
   const [isRevealPwd, setIsRevealPwd] = useState(false);
   return (
@@ -36,7 +41,7 @@ export default function CreateAccount() {
                     // onChange={(e) => setPwd(e.target.value)}
                   />
                   <img
-                    src="/images/transaction.svg"
+                    src="/images/showblack.svg"
                     // title={isRevealPwd ? "Hide password" : "Show password"}
                     // src={isRevealPwd ? hidePwdImg : showPwdImg}
                     // onClick={() => setIsRevealPwd((prevState) => !prevState)}
@@ -49,7 +54,7 @@ export default function CreateAccount() {
               <Row>
                 <InputDiv>
                   <Input placeholder="Enter password" type="password" />
-                  <img src="/images/transaction.svg" />
+                  <img src="/images/showblack.svg" />
                 </InputDiv>
               </Row>
               <RowSpan>
@@ -58,7 +63,7 @@ export default function CreateAccount() {
               </RowSpan>
             </div>
             <Row>
-              <Button>Create account</Button>
+              <Button onClick={createaccount}>Create account</Button>
             </Row>
           </MainComponent>
         </Div>
@@ -132,8 +137,12 @@ const Button = styled.button`
   font: normal normal medium 16px/20px Inter;
   color: #ffffff;
   border: 0px;
-  padding: 8px;
   margin-top: 20px;
+  width: 100%;
+  max-width: 175px;
+  display: flex;
+  justify-content: center;
+  padding: 7px;
 `;
 const HorizontalRule = styled.div`
   width: 100%;

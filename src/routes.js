@@ -8,6 +8,7 @@ import { history } from "./managers/history";
 import BaseComponent from "./modules/baseComponent";
 import LoginComponent from "./modules/login/loginComponent";
 import CreateAccount from "./modules/CreateAccount/createAccount";
+import VerifyEmail from "./modules/VerifyEmail/verifyEmail";
 
 class Routes extends BaseComponent {
   componentDidMount() {}
@@ -19,6 +20,7 @@ class Routes extends BaseComponent {
           <Switch>
             <Route exact path={"/"} component={LoginComponent} />
             <Route exact path={"/create-account"} component={CreateAccount} />
+            <Route exact path={"/verify"} component={VerifyEmail} />
             <Redirect exact from="*" to="/" />
           </Switch>
         </Router>
