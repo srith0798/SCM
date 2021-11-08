@@ -12,8 +12,6 @@ import CreateAccount from "./modules/CreateAccount/createAccount";
 class Routes extends BaseComponent {
   componentDidMount() {}
 
-  componentDidMount() {}
-
   render() {
     return (
       <MuiThemeProvider muiTheme={getMuiTheme()}>
