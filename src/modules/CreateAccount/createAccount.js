@@ -7,6 +7,7 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import Input from "@material-ui/core/Input";
 import { Row, Column } from "simple-flexbox";
+import LoginSideView from "../loginSideView/loginSideView";
 
 export default function CreateAccount() {
   const [values, setValues] = React.useState({
