@@ -37,12 +37,10 @@ const SubContainer = styled.div`
 const MainHeading = styled.span`
   text-align: left;
   font: normal normal 600 32px/39px Inter;
-  letter-spacing: 0px;
   color: #191919;
 `;
 const SubHeading = styled.span`
   font: normal normal medium 18px/21px Inter;
-  letter-spacing: 0px;
   color: #191919;
   display: flex;
   flex-flow: row nowrap;
@@ -52,7 +50,6 @@ const Button = styled.button`
   background: #102c78 0% 0% no-repeat padding-box;
   border-radius: 4px;
   font: normal normal medium 16px/20px Inter;
-  letter-spacing: 0px;
   color: #ffffff;
   width: 100%;
   max-width: 175px;

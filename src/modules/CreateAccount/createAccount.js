@@ -5,66 +5,72 @@ import LoginSideView from "../loginSideView/loginSideView";
 import { history } from "../../managers/history";
 
 export default function CreateAccount() {
-  const createaccount = () => {
+  const createAccount = () => {
     history.push("/verify");
   };
-  const [pwd, setPwd] = useState("");
-  const [isRevealPwd, setIsRevealPwd] = useState(false);
+  const [passwordShown, setPasswordShown] = useState(false);
+  const [confirmPasswordShown, setConfirmPasswordShown] = useState(false);
+  const togglePasswordVisiblity = () => {
+    setPasswordShown(passwordShown ? false : true);
+  };
+  const toggleConfirmPasswordVisibility = () => {
+    setConfirmPasswordShown(confirmPasswordShown ? false : true);
+  };
   return (
     <>
       <Row>
         <LoginSideView />
         <Div>
           <MainComponent>
-            <Heading>Create Account</Heading>
-            <RowSpan>
-              Already having an account? <Color> &nbsp;Sign in </Color>
-            </RowSpan>
-            <HorizontalRule></HorizontalRule>
+            <UpperComponent>
+              <Heading>Create Account</Heading>
+              <RowSpan>
+                Already having an account? <Color> &nbsp;Sign in </Color>
+              </RowSpan>
+            </UpperComponent>
+
             <div style={{ marginTop: "35px" }}>
-              <Row>
-                <MainHeading>Email</MainHeading>
-              </Row>
-              <Row>
-                <InputBox placeholder="Enter your email" />
-              </Row>
-              <Row>
-                <MainHeading>Password</MainHeading>
-              </Row>
-              <Row>
-                <InputDiv>
-                  <Input
-                    placeholder="Enter password"
-                    type="password"
-                    // type={isRevealPwd ? "text" : "password"}
-                    // value={pwd}
-                    // onChange={(e) => setPwd(e.target.value)}
-                  />
-                  <Image
-                    src="/images/showblack.svg"
-                    // title={isRevealPwd ? "Hide password" : "Show password"}
-                    // src={isRevealPwd ? hidePwdImg : showPwdImg}
-                    // onClick={() => setIsRevealPwd((prevState) => !prevState)}
-                  />
-                </InputDiv>
-              </Row>
-              <Row>
-                <MainHeading>Confirm Password</MainHeading>
-              </Row>
-              <Row>
-                <InputDiv>
-                  <Input placeholder="Enter password" type="password" />
-                  <Image src="/images/showblack.svg" />
-                </InputDiv>
-              </Row>
+              <MainHeading>Email</MainHeading>
+              <InputBox placeholder="Enter your email" type="text" required />
+              <MainHeading>Password</MainHeading>
+              <InputDiv>
+                <Input
+                  placeholder="Enter password"
+                  type="password"
+                  name="password"
+                  type={passwordShown ? "text" : "password"}
+                  required
+                  // ref={register({ required: "This is required." })}
+                />
+                <Image
+                  src="/images/showblack.svg"
+                  onClick={togglePasswordVisiblity}
+                />
+              </InputDiv>
+
+              <MainHeading>Confirm Password</MainHeading>
+
+              <InputDiv>
+                <Input
+                  placeholder="Enter password"
+                  type="password"
+                  name="password"
+                  type={confirmPasswordShown ? "text" : "password"}
+                  required
+                />
+                <Image
+                  src="/images/showblack.svg"
+                  onClick={toggleConfirmPasswordVisibility}
+                />
+              </InputDiv>
+
               <RowSpan>
                 I agree to the Xmartly <Color> &nbsp;terms &nbsp;</Color> and
                 <Color> &nbsp;services&nbsp; </Color>
               </RowSpan>
             </div>
-            <Row>
-              <Button onClick={createaccount}>Create account</Button>
-            </Row>
+
+            <Button onClick={createAccount}>Create account</Button>
           </MainComponent>
         </Div>
       </Row>
@@ -73,7 +79,6 @@ export default function CreateAccount() {
 }
 const Div = styled.div`
   width: 100%;
-  max-width: 700px;
   padding: 115px 0px 60px 100px;
 `;
 const MainComponent = styled.div``;
@@ -89,38 +94,44 @@ const MainHeading = styled.span`
   letter-spacing: 0px;
   color: #191919;
   margin-top: 21px;
+  display: flex;
+  flex-flow: row nowrap;
 `;
 const RowSpan = styled.span`
   display: flex;
   flex-flow: row nowrap;
   text-align: left;
   font: normal normal medium 18px/21px Inter;
-  letter-spacing: 0px;
-  margin-top: 21px;
+  margin: 21px 0px 29px 0px;
 `;
 const Image = styled.img`
   cursor: pointer;
 `;
 const InputBox = styled.input`
+  width: 100%;
+  max-width: 677px;
   background: #f5f5f5 0% 0% no-repeat padding-box;
   border-radius: 4px;
   border: 0px;
   font: normal normal medium 18px/21px Inter;
   color: #b1b1b1;
-  width: 100%;
-  max-width: 667px;
   margin-top: 10px;
   padding: 7px;
+  display: flex;
+  flex-flow: row nowrap;
 `;
 const InputDiv = styled.div`
+  display: flex;
+  flex-flow: row nowrap;
   background: #f5f5f5 0% 0% no-repeat padding-box;
   border-radius: 4px;
   width: 100%;
-  max-width: 667px;
+  max-width: 677px;
   font: normal normal medium 18px/21px Inter;
   color: #b1b1b1;
   padding: 6px;
   display: flex;
+  margin-top: 10px;
 `;
 const Input = styled.input`
   border: none;
@@ -134,22 +145,24 @@ const Color = styled.span`
   color: #3163f0;
 `;
 const Button = styled.button`
+  display: flex;
+  flex-flow: row nowrap;
   background: #919ec1 0% 0% no-repeat padding-box;
   border-radius: 4px;
   text-align: left;
   font: normal normal medium 16px/20px Inter;
   color: #ffffff;
   border: 0px;
-  margin-top: 20px;
+  margin-top: 15px;
   width: 100%;
   max-width: 175px;
   display: flex;
   justify-content: center;
   padding: 7px;
 `;
-const HorizontalRule = styled.div`
+
+const UpperComponent = styled.div`
   width: 100%;
-  max-width: 667px;
-  border: 0.5px solid #e3e7eb;
-  margin-top: 20px;
+  max-width: 900px;
+  border-bottom: 0.5px solid #e3e7eb;
 `;
