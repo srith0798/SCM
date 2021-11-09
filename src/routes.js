@@ -7,11 +7,14 @@ import { connect } from "react-redux";
 import { history } from "./managers/history";
 import BaseComponent from "./modules/baseComponent";
 import LoginComponent from "./modules/login/loginComponent";
+import TransactionList from "./modules/transactions/transactionList";
 import CreateAccount from "./modules/CreateAccount/createAccount";
 import VerifyEmail from "./modules/VerifyEmail/verifyEmail";
 import Contract from "./modules/Contract/contract";
 
 class Routes extends BaseComponent {
+  componentDidMount() {}
+
   componentDidMount() {}
 
   render() {
@@ -20,6 +23,11 @@ class Routes extends BaseComponent {
         <Router history={history}>
           <Switch>
             <Route exact path={"/"} component={LoginComponent} />
+            <Route
+              exact
+              path={"/transaction-list"}
+              component={TransactionList}
+            />
             <Route exact path={"/create-account"} component={CreateAccount} />
             <Route exact path={"/verify"} component={VerifyEmail} />
             <Route exact path={"/contract"} component={Contract} />
