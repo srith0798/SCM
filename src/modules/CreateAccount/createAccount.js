@@ -40,7 +40,7 @@ export default function CreateAccount() {
                     // value={pwd}
                     // onChange={(e) => setPwd(e.target.value)}
                   />
-                  <img
+                  <Image
                     src="/images/showblack.svg"
                     // title={isRevealPwd ? "Hide password" : "Show password"}
                     // src={isRevealPwd ? hidePwdImg : showPwdImg}
@@ -54,7 +54,7 @@ export default function CreateAccount() {
               <Row>
                 <InputDiv>
                   <Input placeholder="Enter password" type="password" />
-                  <img src="/images/showblack.svg" />
+                  <Image src="/images/showblack.svg" />
                 </InputDiv>
               </Row>
               <RowSpan>
@@ -97,6 +97,9 @@ const RowSpan = styled.span`
   font: normal normal medium 18px/21px Inter;
   letter-spacing: 0px;
   margin-top: 21px;
+`;
+const Image = styled.img`
+  cursor: pointer;
 `;
 const InputBox = styled.input`
   background: #f5f5f5 0% 0% no-repeat padding-box;
@@ -146,5 +149,7 @@ const Button = styled.button`
 `;
 const HorizontalRule = styled.div`
   width: 100%;
-  max-width: 200px;
+  max-width: 667px;
+  border: 0.5px solid #e3e7eb;
+  margin-top: 20px;
 `;
