@@ -12,7 +12,7 @@ const Icon = styled.img`
 `
 const Wrapper = styled.div`
 flex-wrap: wrap;
-margin: 40px 0px 0px 25px;
+padding: 40px 0px 0px 25px;
 cursor: pointer;
 `
 

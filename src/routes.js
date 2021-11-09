@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 import { history } from "./managers/history";
 import BaseComponent from "./modules/baseComponent";
 import LoginComponent from './modules/login/loginComponent';
+import TransactionList from './modules/transactions/transactionList';
 
 class Routes extends BaseComponent {
 
@@ -21,6 +22,7 @@ class Routes extends BaseComponent {
                 <Router history={history}>
                     <Switch>
                         <Route exact path={'/'} component={LoginComponent} />
+                        <Route exact path={'/transaction-list'} component={TransactionList} />
                         <Redirect exact from='*' to="/" />
                     </Switch>
                 </Router>
