@@ -70,10 +70,12 @@ export default function Contract() {
               <div>
                 <Heading>Contracts</Heading>
                 <Input placeholder="Search by address or name" />
-                {/* <img src="/images/Search.svg" /> */}
               </div>
-              <div>
-                <img />
+              <div style={{ display: "flex" }}>
+                <img
+                  src="/images/refresh.svg"
+                  style={{ marginRight: "10px" }}
+                />
                 <Button>Add Contract</Button>
               </div>
             </SubContainer>
@@ -126,15 +128,19 @@ const SubContainer = styled.div`
 const Heading = styled.span`
   font: normal normal 600 24px/29px Inter;
   color: #191919;
+  margin-right: 10px;
 `;
 const Button = styled.button`
   background: #3163f0 0% 0% no-repeat padding-box;
-  font: normal normal medium 14px/17px Inter;
   border-radius: 4px;
   border: 0px;
   color: #ffffff;
   max-width: 136px;
   width: 100%;
+  font-size: 14px;
+  font-weight: 600;
+  background-image: url("/images/Add.svg");
+  background-position: left;
 `;
 const Input = styled.input`
   background: #ffffff 0% 0% no-repeat padding-box;
@@ -143,8 +149,12 @@ const Input = styled.input`
   padding: 7px;
   color: #888888;
   border: 0px;
-
-  background: "url(/images/Search.svg) no-repeat 1px";
+  padding-left: 30px;
+  background-image: url("/images/search-icon.svg");
+  background-repeat: no-repeat;
+  background-position: 8px;
+  background-size: 12px;
+  position: relative;
 `;
 const TableContainer = styled.div`
   background-color: #ffffff;
@@ -153,8 +163,8 @@ const TableContainer = styled.div`
   height: 400px;
 `;
 const Div = styled.div`
-  padding: 20px 20px 15px 30px;
-
+  // padding: 20px 20px 15px 30px;
+  padding: 15px;
   border-bottom: 1px solid #e3e7eb;
 `;
 const ColumnOne = styled.div`
