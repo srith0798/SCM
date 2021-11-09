@@ -9,6 +9,7 @@ import BaseComponent from "./modules/baseComponent";
 import LoginComponent from "./modules/login/loginComponent";
 import CreateAccount from "./modules/CreateAccount/createAccount";
 import VerifyEmail from "./modules/VerifyEmail/verifyEmail";
+import Contract from "./modules/Contract/contract";
 
 class Routes extends BaseComponent {
   componentDidMount() {}
@@ -21,6 +22,7 @@ class Routes extends BaseComponent {
             <Route exact path={"/"} component={LoginComponent} />
             <Route exact path={"/create-account"} component={CreateAccount} />
             <Route exact path={"/verify"} component={VerifyEmail} />
+            <Route exact path={"/contract"} component={Contract} />
             <Redirect exact from="*" to="/" />
           </Switch>
         </Router>
