@@ -23,9 +23,6 @@ opacity: 1;
 margin-top:20px;
 `
 const SideView = styled.div`
-// padding: 80px 80px 10px 80px;
-// display: flex;
-// justify-content: center;
 position: absolute;
 top: 25%;
 left: 60px;
@@ -33,7 +30,6 @@ left: 60px;
 
 const MainContainer = styled.div`
 background: #102C78 0% 0% no-repeat padding-box;
-border: 1px solid #707070;
 opacity: 1;
 height: 753px;
 width: 500px;
