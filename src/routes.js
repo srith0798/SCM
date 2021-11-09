@@ -8,7 +8,6 @@ import { history } from "./managers/history";
 import BaseComponent from "./modules/baseComponent";
 import LoginComponent from './modules/login/loginComponent';
 import TransactionList from './modules/transactions/transactionList';
-import LoginComponent from "./modules/login/loginComponent";
 import CreateAccount from "./modules/CreateAccount/createAccount";
 import VerifyEmail from "./modules/VerifyEmail/verifyEmail";
 
