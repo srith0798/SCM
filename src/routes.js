@@ -11,6 +11,9 @@ import TransactionList from "./modules/transactions/transactionList";
 import CreateAccount from "./modules/CreateAccount/createAccount";
 import VerifyEmail from "./modules/VerifyEmail/verifyEmail";
 import Contract from "./modules/Contract/contract";
+import ContractDetails from "./modules/contractDetails/contractDetails";
+
+import AddContract from "./modules/Popup/addContract";
 
 class Routes extends BaseComponent {
   componentDidMount() {}
@@ -31,6 +34,12 @@ class Routes extends BaseComponent {
             <Route exact path={"/create-account"} component={CreateAccount} />
             <Route exact path={"/verify"} component={VerifyEmail} />
             <Route exact path={"/contract"} component={Contract} />
+            <Route
+              exact
+              path={"/contract-details"}
+              component={ContractDetails}
+            />
+            <Route exact path={"/add-contract"} component={AddContract} />
             <Redirect exact from="*" to="/" />
           </Switch>
         </Router>
