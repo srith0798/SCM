@@ -220,6 +220,7 @@ const TableData = styled.div`
 `;
 const CopyImg = styled.img`
   margin-left: 9%;
+  cursor: pointer;
 `;
 const TableHeading = styled.div`
   font: normal normal medium 14px/17px Inter;
@@ -251,6 +252,7 @@ const PopUpBlock = styled.div`
   height: 63px;
   color: #1d3c93;
   font-weight: 600;
+  cursor: pointer;
 `;
 const RowProperty = styled.div`
   display: flex;

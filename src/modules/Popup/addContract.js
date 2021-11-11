@@ -8,7 +8,7 @@ export default function AddContract() {
       <Container>
         <SubContainer>
           <Add>Add Contract</Add>
-          <img src="/images/hide.svg" />
+          <Img src="/images/XDC-Cross.svg" />
         </SubContainer>
         <ImportFile>Import Public Contracts</ImportFile>
         <Content>
@@ -28,7 +28,7 @@ const MainContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 13%;
+  margin-top: 8%;
 `;
 const Container = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
@@ -47,6 +47,9 @@ const SubContainer = styled.div`
 const Add = styled.div`
   font: normal normal 600 24px/29px Inter;
   color: #303134;
+`;
+const Img = styled.img`
+  cursor: pointer;
 `;
 const ImportFile = styled.div`
   //   font: normal normal 600 16px/20px Inter;
@@ -88,4 +91,5 @@ const Button = styled.button`
   font-weight: 600;
   padding: 7px;
   margin-top: 40px;
+  cursor: pointer;
 `;
