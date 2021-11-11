@@ -139,7 +139,7 @@ const Button = styled.button`
   width: 100%;
   font-size: 14px;
   font-weight: 600;
-  background-image: url("/images/Add.svg");
+  // background-image: url("/images/Add.svg");
   background-position: left;
 `;
 const Input = styled.input`
