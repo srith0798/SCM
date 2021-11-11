@@ -1,26 +1,31 @@
 import React from "react";
 import styled from "styled-components";
 import { Row, Column } from "simple-flexbox";
+import Dialog from "@mui/material/Dialog";
 
-export default function AddContract() {
+export default function AddContract(props) {
   return (
-    <MainContainer>
-      <Container>
-        <SubContainer>
-          <Add>Add Contract</Add>
-          <Img src="/images/XDC-Cross.svg" />
-        </SubContainer>
-        <ImportFile>Import Public Contracts</ImportFile>
-        <Content>
-          You can import contracts that have been verified publicly on XDC .
-        </Content>
-        <Input
-          type="text"
-          placeholder="Find a public contract by name or address"
-        />
-        <Button>Import Contracts</Button>
-      </Container>
-    </MainContainer>
+    <div>
+      <Dialog open>
+        <MainContainer>
+          <Container>
+            <SubContainer>
+              <Add>Add Contract</Add>
+              <Img src="/images/XDC-Cross.svg" onClick={props.click} />
+            </SubContainer>
+            <ImportFile>Import Public Contracts</ImportFile>
+            <Content>
+              You can import contracts that have been verified publicly on XDC.
+            </Content>
+            <Input
+              type="text"
+              placeholder="Find a public contract by name or address"
+            />
+            <Button>Import Contracts</Button>
+          </Container>
+        </MainContainer>
+      </Dialog>
+    </div>
   );
 }
 const MainContainer = styled.div`
@@ -28,7 +33,6 @@ const MainContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 8%;
 `;
 const Container = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;

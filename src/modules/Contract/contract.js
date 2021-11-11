@@ -1,10 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Row, Column } from "simple-flexbox";
 import Header from "../header/header";
 import Sidebar from "../sidebar/sidebar";
+import AddContract from "../Popup/addContract";
 
-export default function Contract() {
+export default function Contract(props) {
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
   React.useEffect(() => {
     let address = [
       {
@@ -76,7 +86,8 @@ export default function Contract() {
                   src="/images/refresh.svg"
                   style={{ marginRight: "10px" }}
                 />
-                <Button>Add Contract</Button>
+                {open && <AddContract click={handleClose} />}
+                <Button onClick={handleClickOpen}>Add Contract</Button>
               </div>
             </SubContainer>
 
@@ -131,16 +142,19 @@ const Heading = styled.span`
   margin-right: 10px;
 `;
 const Button = styled.button`
-  background: #3163f0 0% 0% no-repeat padding-box;
-  border-radius: 4px;
-  border: 0px;
+  background-image: url("/images/Add.svg");
+  background-repeat: no-repeat;
+  background-position: 8px;
+  padding-left: 21px;
+  background-size: 14px;
+  position: relative;
+  background-color: #3163f0;
   color: #ffffff;
-  max-width: 136px;
-  width: 100%;
+  border: none;
+  border-radius: 4px;
+  width: 130px;
+  height: 34px;
   font-size: 14px;
-  font-weight: 600;
-  // background-image: url("/images/Add.svg");
-  background-position: left;
 `;
 const Input = styled.input`
   background: #ffffff 0% 0% no-repeat padding-box;
@@ -170,10 +184,9 @@ const Div = styled.div`
 const ColumnOne = styled.div`
   display: flex;
   flex-flow: column nowrap;
-  font-size:14px;
-  font-weight:600
+  font-size: 14px;
+  font-weight: 600;
   color: #102c78;
   width: 100%;
   max-width: 300px;
-
 `;

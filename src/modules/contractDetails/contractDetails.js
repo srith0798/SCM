@@ -4,8 +4,10 @@ import Header from "../header/header";
 import Sidebar from "../sidebar/sidebar";
 import { Row, Column } from "simple-flexbox";
 import { CopyToClipboard } from "react-copy-to-clipboard";
+import ContractAbi from "../Popup/contractAbi";
+import RenameContract from "../Popup/renameContract";
 
-export default function ContractDetails() {
+export default function ContractDetails(props) {
   React.useEffect(() => {
     let address = [
       {
@@ -50,7 +52,13 @@ export default function ContractDetails() {
 
   const [address, setAddress] = React.useState([]);
   const [value, setValues] = useState("");
-
+  const [open, setOpen] = useState(false);
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
   return (
     <div>
       <Column>
@@ -110,13 +118,15 @@ export default function ContractDetails() {
                 </PopUpBlock>
 
                 <PopUpBlock>
-                  <RowProperty>
+                  {open && <ContractAbi click={handleClose} />}
+                  <RowProperty onClick={handleClickOpen}>
                     <img src="/images/code.svg" />
                   </RowProperty>
                   <RowProperty>Contract ABI</RowProperty>
                 </PopUpBlock>
                 <PopUpBlock>
-                  <RowProperty>
+                  {open && <RenameContract click={handleClose} />}
+                  <RowProperty onClick={handleClickOpen}>
                     <img src="/images/edit.svg" />
                   </RowProperty>
                   <RowProperty>Rename Contract</RowProperty>
@@ -129,7 +139,7 @@ export default function ContractDetails() {
                 </PopUpBlock>
                 <PopUpBlock>
                   <RowProperty>
-                    <img src="/images/hide.svg" />
+                    <img src="/images/delete.svg" />
                   </RowProperty>
                   <RowProperty>Remove Contract</RowProperty>
                 </PopUpBlock>

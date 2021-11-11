@@ -14,6 +14,8 @@ import Contract from "./modules/Contract/contract";
 import ContractDetails from "./modules/contractDetails/contractDetails";
 
 import AddContract from "./modules/Popup/addContract";
+import ContractAbi from "./modules/Popup/contractAbi";
+import RenameContract from "./modules/Popup/renameContract";
 
 class Routes extends BaseComponent {
   componentDidMount() {}
@@ -40,6 +42,8 @@ class Routes extends BaseComponent {
               component={ContractDetails}
             />
             <Route exact path={"/add-contract"} component={AddContract} />
+            <Route exact path={"/rename-contract"} component={RenameContract} />
+            <Route exact path={"/contract-abi"} component={ContractAbi} />
             <Redirect exact from="*" to="/" />
           </Switch>
         </Router>
