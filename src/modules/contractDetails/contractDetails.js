@@ -6,6 +6,10 @@ import { Row, Column } from "simple-flexbox";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import ContractAbi from "../Popup/contractAbi";
 import RenameContract from "../Popup/renameContract";
+import Remove from "../Popup/remove";
+import CommonDialog from "../../common/components/commonPopup";
+import { history } from "../../managers/history";
+import HideContract from "../Popup/hideContract";
 
 export default function ContractDetails(props) {
   React.useEffect(() => {
@@ -53,11 +57,49 @@ export default function ContractDetails(props) {
   const [address, setAddress] = React.useState([]);
   const [value, setValues] = useState("");
   const [open, setOpen] = useState(false);
+  const [commonOpen, setCommonOpen] = useState(false);
+
   const handleClickOpen = () => {
     setOpen(true);
   };
   const handleClose = () => {
     setOpen(false);
+  };
+  // const handleCommonPopUpOpen = () => {
+  //   setCommonOpen(true);
+  // };
+  // const handleCommonPopUpClose = () => {
+  //   setCommonOpen(false);
+  // };
+  // const handleCommonPopUP = (state, values) => {
+  //   if (state === "commonOpen") {
+  //     setCommonOpen(values);
+  //   }
+  // };
+
+  const [renameState, setRenameState] = useState(false);
+  const renameHandleOpen = () => {
+    setRenameState(true);
+  };
+  const renameHandleClose = () => {
+    setRenameState(false);
+  };
+  const [hide, setHide] = useState(false);
+  const hideHandleOpen = () => {
+    setHide(true);
+  };
+  const hideHandleClose = () => {
+    setHide(false);
+  };
+  const [remove, setRemoveState] = useState(false);
+  const removeHandleOpen = () => {
+    setRemoveState(true);
+  };
+  const removeHandleClose = () => {
+    setRemoveState(false);
+  };
+  const backButton = () => {
+    history.push("/contract");
   };
   return (
     <div>
@@ -68,7 +110,11 @@ export default function ContractDetails(props) {
           <MainContainer>
             <SubContainer>
               <div>
-                <img src="/images/back.svg" style={{ marginRight: "10px" }} />
+                <img
+                  src="/images/back.svg"
+                  style={{ marginRight: "10px" }}
+                  onClick={backButton}
+                />
                 <Heading>Contract Details</Heading>
               </div>
               <div style={{ display: "flex" }}>
@@ -88,7 +134,7 @@ export default function ContractDetails(props) {
                   <CopyImg src="/images/copy.svg" />
                 </CopyToClipboard>
               </div>
-              <Row>
+              <Row style={{ marginTop: "12px" }}>
                 <img src="/images/genrl.svg" />
                 &emsp;
                 <div>General</div>&emsp;&emsp;
@@ -125,20 +171,22 @@ export default function ContractDetails(props) {
                   <RowProperty>Contract ABI</RowProperty>
                 </PopUpBlock>
                 <PopUpBlock>
-                  {open && <RenameContract click={handleClose} />}
-                  <RowProperty onClick={handleClickOpen}>
+                  {renameState && <RenameContract click={renameHandleClose} />}
+                  <RowProperty onClick={() => renameHandleOpen()}>
                     <img src="/images/edit.svg" />
                   </RowProperty>
                   <RowProperty>Rename Contract</RowProperty>
                 </PopUpBlock>
                 <PopUpBlock>
-                  <RowProperty>
+                  {hide && <HideContract click={hideHandleClose} />}
+                  <RowProperty onClick={() => hideHandleOpen()}>
                     <img src="/images/hide.svg" />
                   </RowProperty>
                   <RowProperty>Hide Contract</RowProperty>
                 </PopUpBlock>
                 <PopUpBlock>
-                  <RowProperty>
+                  {remove && <Remove click={removeHandleClose} />}
+                  <RowProperty onClick={() => removeHandleOpen()}>
                     <img src="/images/delete.svg" />
                   </RowProperty>
                   <RowProperty>Remove Contract</RowProperty>

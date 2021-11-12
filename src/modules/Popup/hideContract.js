@@ -9,7 +9,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export default function RenameContract(props) {
+export default function HideContract(props) {
   const classes = useStyles();
   return (
     <div>
@@ -17,14 +17,17 @@ export default function RenameContract(props) {
         <MainContainer>
           <Container>
             <SubContainer>
-              <Add>Rename Contract</Add>
+              <Add>Hide Contract</Add>
               <Img src="/images/XDC-Cross.svg" onClick={props.click} />
             </SubContainer>
-            <Input type="text" />
+            <Content>
+              Are you sure you wish to hide this contract from the transaction
+              listing?
+            </Content>
             <SubContainer
-              style={{ width: "100%", maxWidth: "160px", marginTop: "30px" }}
+              style={{ width: "100%", maxWidth: "200px", marginTop: "30px" }}
             >
-              <RenameButton>Rename</RenameButton>
+              <HideButton>Hide Contract</HideButton>
               <CancelButton>Cancel</CancelButton>
             </SubContainer>
           </Container>
@@ -33,6 +36,7 @@ export default function RenameContract(props) {
     </div>
   );
 }
+
 const MainContainer = styled.div`
   width: 100%;
   display: flex;
@@ -60,22 +64,8 @@ const Add = styled.div`
 const Img = styled.img`
   cursor: pointer;
 `;
-const Input = styled.input`
-  background: #f0f2fc 0% 0% no-repeat padding-box;
-  border-radius: 4px;
-  padding: 7px;
-  border: 0px;
-  width: 100%;
-  max-width: 636px;
-  margin-top: 30px;
-  background-image: url("/images/globe.svg");
-  background-repeat: no-repeat;
-  background-position: 8px;
-  padding-left: 35px;
-  background-size: 20px;
-  color: #436ce0;
-`;
-const RenameButton = styled.button`
+
+const HideButton = styled.button`
   font: normal normal medium 14px/17px Inter;
   letter-spacing: 0px;
   color: #ffffff;
@@ -83,6 +73,7 @@ const RenameButton = styled.button`
   border: 0px;
   border-radius: 4px;
   text-align: center;
+  white-space: nowrap;
 `;
 const CancelButton = styled.button`
   font: normal normal medium 14px/17px Inter;
@@ -91,4 +82,10 @@ const CancelButton = styled.button`
   background-color: #ffffff;
   border: 1px solid #3163f0;
   text-align: center;
+`;
+const Content = styled.div`
+  font: normal normal medium 16px/20px Inter;
+  letter-spacing: 0px;
+  color: #303134;
+  margin-top: 20px;
 `;

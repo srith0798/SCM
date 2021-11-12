@@ -4,6 +4,7 @@ import { Row, Column } from "simple-flexbox";
 import Header from "../header/header";
 import Sidebar from "../sidebar/sidebar";
 import AddContract from "../Popup/addContract";
+import { history } from "../../managers/history";
 
 export default function Contract(props) {
   const [open, setOpen] = React.useState(false);
@@ -14,6 +15,9 @@ export default function Contract(props) {
 
   const handleClose = () => {
     setOpen(false);
+  };
+  const redirectTODetails = () => {
+    history.push("/contract-details");
   };
   React.useEffect(() => {
     let address = [
@@ -101,7 +105,7 @@ export default function Contract(props) {
                   <ColumnOne>Visibility</ColumnOne>
                 </Row>
               </Div>
-              <div>
+              <div onClick={redirectTODetails}>
                 {address.map((data, index) => {
                   return (
                     <Div>
