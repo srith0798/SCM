@@ -10,6 +10,9 @@ import Remove from "../Popup/remove";
 import CommonDialog from "../../common/components/commonPopup";
 import { history } from "../../managers/history";
 import HideContract from "../Popup/hideContract";
+import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import "react-tabs/style/react-tabs.css";
+import SourceCode from "./sourceCode";
 
 export default function ContractDetails(props) {
   React.useEffect(() => {
@@ -134,66 +137,79 @@ export default function ContractDetails(props) {
                   <CopyImg src="/images/copy.svg" />
                 </CopyToClipboard>
               </div>
-              <Row style={{ marginTop: "12px" }}>
-                <img src="/images/genrl.svg" />
-                &emsp;
-                <div>General</div>&emsp;&emsp;
-                <img src="/images/coding.svg" />
-                &emsp;
-                <div>Source Code</div>
-              </Row>
+
+              <Tabs>
+                <TabList>
+                  <Tab>
+                    <img src="/images/genrl.svg" />
+                    &emsp;General
+                  </Tab>
+                  <Tab>
+                    {" "}
+                    <img src="/images/coding.svg" />
+                    &emsp;Source Code
+                  </Tab>
+                </TabList>
+
+                <TabPanel>
+                  <DetailsSection>
+                    <div>
+                      {address.map((data, index) => {
+                        return (
+                          <Div>
+                            <TableHeading>{data.heading}</TableHeading>
+                            <TableData>{data.subheading}</TableData>
+                          </Div>
+                        );
+                      })}
+                    </div>
+                    <PopUp>
+                      <PopUpBlock>
+                        <RowProperty>
+                          <img src="/images/cube.svg" />
+                        </RowProperty>
+                        <RowProperty>View transactions</RowProperty>
+                      </PopUpBlock>
+
+                      <PopUpBlock>
+                        {open && <ContractAbi click={handleClose} />}
+                        <RowProperty onClick={handleClickOpen}>
+                          <img src="/images/code.svg" />
+                        </RowProperty>
+                        <RowProperty>Contract ABI</RowProperty>
+                      </PopUpBlock>
+
+                      <PopUpBlock>
+                        {renameState && (
+                          <RenameContract click={renameHandleClose} />
+                        )}
+                        <RowProperty onClick={() => renameHandleOpen()}>
+                          <img src="/images/edit.svg" />
+                        </RowProperty>
+                        <RowProperty>Rename Contract</RowProperty>
+                      </PopUpBlock>
+                      <PopUpBlock>
+                        {hide && <HideContract click={hideHandleClose} />}
+                        <RowProperty onClick={() => hideHandleOpen()}>
+                          <img src="/images/hide.svg" />
+                        </RowProperty>
+                        <RowProperty>Hide Contract</RowProperty>
+                      </PopUpBlock>
+                      <PopUpBlock>
+                        {remove && <Remove click={removeHandleClose} />}
+                        <RowProperty onClick={() => removeHandleOpen()}>
+                          <img src="/images/delete.svg" />
+                        </RowProperty>
+                        <RowProperty>Remove Contract</RowProperty>
+                      </PopUpBlock>
+                    </PopUp>
+                  </DetailsSection>
+                </TabPanel>
+                <TabPanel>
+                  <SourceCode />
+                </TabPanel>
+              </Tabs>
             </Container>
-
-            <DetailsSection>
-              <div>
-                {address.map((data, index) => {
-                  return (
-                    <Div>
-                      <TableHeading>{data.heading}</TableHeading>
-                      <TableData>{data.subheading}</TableData>
-                    </Div>
-                  );
-                })}
-              </div>
-              <PopUp>
-                <PopUpBlock>
-                  <RowProperty>
-                    <img src="/images/cube.svg" />
-                  </RowProperty>
-                  <RowProperty>View transactions</RowProperty>
-                </PopUpBlock>
-
-                <PopUpBlock>
-                  {open && <ContractAbi click={handleClose} />}
-                  <RowProperty onClick={handleClickOpen}>
-                    <img src="/images/code.svg" />
-                  </RowProperty>
-                  <RowProperty>Contract ABI</RowProperty>
-                </PopUpBlock>
-
-                <PopUpBlock>
-                  {renameState && <RenameContract click={renameHandleClose} />}
-                  <RowProperty onClick={() => renameHandleOpen()}>
-                    <img src="/images/edit.svg" />
-                  </RowProperty>
-                  <RowProperty>Rename Contract</RowProperty>
-                </PopUpBlock>
-                <PopUpBlock>
-                  {hide && <HideContract click={hideHandleClose} />}
-                  <RowProperty onClick={() => hideHandleOpen()}>
-                    <img src="/images/hide.svg" />
-                  </RowProperty>
-                  <RowProperty>Hide Contract</RowProperty>
-                </PopUpBlock>
-                <PopUpBlock>
-                  {remove && <Remove click={removeHandleClose} />}
-                  <RowProperty onClick={() => removeHandleOpen()}>
-                    <img src="/images/delete.svg" />
-                  </RowProperty>
-                  <RowProperty>Remove Contract</RowProperty>
-                </PopUpBlock>
-              </PopUp>
-            </DetailsSection>
           </MainContainer>
         </Row>
       </Column>
