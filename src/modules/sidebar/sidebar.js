@@ -24,9 +24,10 @@ const Heading = styled.span`
 `;
 
 function Sidebar() {
+  const redirectToTransaction = () => {};
   return (
     <SidebarContainer>
-      <Wrapper>
+      <Wrapper onClick={redirectToTransaction}>
         <Icon src="/images/Transactions.svg" />
         <Heading>Transactions</Heading>
       </Wrapper>

@@ -170,6 +170,7 @@ export default function ContractDetails(props) {
                   </RowProperty>
                   <RowProperty>Contract ABI</RowProperty>
                 </PopUpBlock>
+
                 <PopUpBlock>
                   {renameState && <RenameContract click={renameHandleClose} />}
                   <RowProperty onClick={() => renameHandleOpen()}>
