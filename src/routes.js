@@ -14,6 +14,11 @@ import Contract from "./modules/Contract/contract";
 import ContractDetails from "./modules/contractDetails/contractDetails";
 
 import AddContract from "./modules/Popup/addContract";
+import ContractAbi from "./modules/Popup/contractAbi";
+import RenameContract from "./modules/Popup/renameContract";
+import SourceCode from "./modules/contractDetails/sourceCode";
+import HideContract from "./modules/Popup/hideContract";
+import Remove from "./modules/Popup/remove";
 
 class Routes extends BaseComponent {
   componentDidMount() {}
@@ -40,6 +45,11 @@ class Routes extends BaseComponent {
               component={ContractDetails}
             />
             <Route exact path={"/add-contract"} component={AddContract} />
+            <Route exact path={"/rename-contract"} component={RenameContract} />
+            <Route exact path={"/contract-abi"} component={ContractAbi} />
+            <Route exact path={"/source-code"} component={SourceCode} />
+            <Route exact path={"/hide-contract"} component={HideContract} />
+            <Route exact path={"/remove"} component={Remove} />
             <Redirect exact from="*" to="/" />
           </Switch>
         </Router>
