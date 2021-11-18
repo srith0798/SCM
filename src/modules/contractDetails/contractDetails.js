@@ -108,110 +108,112 @@ export default function ContractDetails(props) {
     <div>
       <Column>
         <Header />
-        <Row>
-          <Sidebar />
-          <MainContainer>
-            <SubContainer>
-              <div>
-                <img
-                  src="/images/back.svg"
-                  style={{ marginRight: "10px" }}
-                  onClick={backButton}
-                />
-                <Heading>Contract Details</Heading>
-              </div>
-              <div style={{ display: "flex" }}>
-                <Button>View in Explorer</Button>
-              </div>
-            </SubContainer>
-            <Container>
-              <SubHeading>App_Transactions_Validator</SubHeading>
-              <div style={{ display: "flex", alignItems: "center" }}>
-                <Hash
-                  type="text"
-                  value={value}
-                  onChange={(e) => setValues(e.target.value)}
-                />
-                {/* xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c */}
-                <CopyToClipboard text={value}>
-                  <CopyImg src="/images/copy.svg" />
-                </CopyToClipboard>
-              </div>
+        <div>
+          <Row>
+            <Sidebar />
+            <MainContainer>
+              <SubContainer>
+                <div>
+                  <img
+                    src="/images/back.svg"
+                    style={{ marginRight: "10px" }}
+                    onClick={backButton}
+                  />
+                  <Heading>Contract Details</Heading>
+                </div>
+                <div style={{ display: "flex" }}>
+                  <Button>View in Explorer</Button>
+                </div>
+              </SubContainer>
+              <Container>
+                <SubHeading>App_Transactions_Validator</SubHeading>
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  <Hash
+                    type="text"
+                    value={value}
+                    onChange={(e) => setValues(e.target.value)}
+                  />
+                  {/* xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c */}
+                  <CopyToClipboard text={value}>
+                    <CopyImg src="/images/copy.svg" />
+                  </CopyToClipboard>
+                </div>
 
-              <Tabs>
-                <TabList>
-                  <Tab>
-                    <img src="/images/genrl.svg" />
-                    &emsp;General
-                  </Tab>
-                  <Tab>
-                    {" "}
-                    <img src="/images/coding.svg" />
-                    &emsp;Source Code
-                  </Tab>
-                </TabList>
+                <Tabs>
+                  <TabList>
+                    <Tab>
+                      <img src="/images/genrl.svg" />
+                      &emsp;General
+                    </Tab>
+                    <Tab>
+                      {" "}
+                      <img src="/images/coding.svg" />
+                      &emsp;Source Code
+                    </Tab>
+                  </TabList>
 
-                <TabPanel>
-                  <DetailsSection>
-                    <div>
-                      {address.map((data, index) => {
-                        return (
-                          <Div>
-                            <TableHeading>{data.heading}</TableHeading>
-                            <TableData>{data.subheading}</TableData>
-                          </Div>
-                        );
-                      })}
-                    </div>
-                    <PopUp>
-                      <PopUpBlock>
-                        <RowProperty>
-                          <img src="/images/cube.svg" />
-                        </RowProperty>
-                        <RowProperty>View transactions</RowProperty>
-                      </PopUpBlock>
+                  <TabPanel>
+                    <DetailsSection>
+                      <div>
+                        {address.map((data, index) => {
+                          return (
+                            <Div>
+                              <TableHeading>{data.heading}</TableHeading>
+                              <TableData>{data.subheading}</TableData>
+                            </Div>
+                          );
+                        })}
+                      </div>
+                      <PopUp>
+                        <PopUpBlock>
+                          <RowProperty>
+                            <img src="/images/cube.svg" />
+                          </RowProperty>
+                          <RowProperty>View transactions</RowProperty>
+                        </PopUpBlock>
 
-                      <PopUpBlock>
-                        {open && <ContractAbi click={handleClose} />}
-                        <RowProperty onClick={handleClickOpen}>
-                          <img src="/images/code.svg" />
-                        </RowProperty>
-                        <RowProperty>Contract ABI</RowProperty>
-                      </PopUpBlock>
+                        <PopUpBlock>
+                          {open && <ContractAbi click={handleClose} />}
+                          <RowProperty onClick={handleClickOpen}>
+                            <img src="/images/code.svg" />
+                          </RowProperty>
+                          <RowProperty>Contract ABI</RowProperty>
+                        </PopUpBlock>
 
-                      <PopUpBlock>
-                        {renameState && (
-                          <RenameContract click={renameHandleClose} />
-                        )}
-                        <RowProperty onClick={() => renameHandleOpen()}>
-                          <img src="/images/edit.svg" />
-                        </RowProperty>
-                        <RowProperty>Rename Contract</RowProperty>
-                      </PopUpBlock>
-                      <PopUpBlock>
-                        {hide && <HideContract click={hideHandleClose} />}
-                        <RowProperty onClick={() => hideHandleOpen()}>
-                          <img src="/images/hide.svg" />
-                        </RowProperty>
-                        <RowProperty>Hide Contract</RowProperty>
-                      </PopUpBlock>
-                      <PopUpBlock>
-                        {remove && <Remove click={removeHandleClose} />}
-                        <RowProperty onClick={() => removeHandleOpen()}>
-                          <img src="/images/delete.svg" />
-                        </RowProperty>
-                        <RowProperty>Remove Contract</RowProperty>
-                      </PopUpBlock>
-                    </PopUp>
-                  </DetailsSection>
-                </TabPanel>
-                <TabPanel>
-                  <SourceCode />
-                </TabPanel>
-              </Tabs>
-            </Container>
-          </MainContainer>
-        </Row>
+                        <PopUpBlock>
+                          {renameState && (
+                            <RenameContract click={renameHandleClose} />
+                          )}
+                          <RowProperty onClick={() => renameHandleOpen()}>
+                            <img src="/images/edit.svg" />
+                          </RowProperty>
+                          <RowProperty>Rename Contract</RowProperty>
+                        </PopUpBlock>
+                        <PopUpBlock>
+                          {hide && <HideContract click={hideHandleClose} />}
+                          <RowProperty onClick={() => hideHandleOpen()}>
+                            <img src="/images/hide.svg" />
+                          </RowProperty>
+                          <RowProperty>Hide Contract</RowProperty>
+                        </PopUpBlock>
+                        <PopUpBlock>
+                          {remove && <Remove click={removeHandleClose} />}
+                          <RowProperty onClick={() => removeHandleOpen()}>
+                            <img src="/images/delete.svg" />
+                          </RowProperty>
+                          <RowProperty>Remove Contract</RowProperty>
+                        </PopUpBlock>
+                      </PopUp>
+                    </DetailsSection>
+                  </TabPanel>
+                  <TabPanel>
+                    <SourceCode />
+                  </TabPanel>
+                </Tabs>
+              </Container>
+            </MainContainer>
+          </Row>
+        </div>
       </Column>
     </div>
   );

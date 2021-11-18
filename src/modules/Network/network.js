@@ -1,20 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Header from "../header/header";
 import Sidebar from "../sidebar/sidebar";
 import { Row, Column } from "simple-flexbox";
+import AddNetwork from "../Popup/addNetwork";
 
-export default function Network() {
+export default function Network(props) {
+  const [open, setOpen] = useState(false);
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
   React.useEffect(() => {
     let address = [
       {
         network: "App_Transactions_Validator",
         url: "https://explorer.xinfin.network/",
       },
-      //   {
-      //     network: "App_Transactions_Validator",
-      //     url: "https://explorer.xinfin.network/",
-      //   },
+
       //   {
       //     network: "App_Transactions_Validator",
       //     url: "https://explorer.xinfin.network/",
@@ -36,7 +42,7 @@ export default function Network() {
     <div>
       <Column>
         <Header />
-        <Row>
+        <Row style={{ height: "100vh" }}>
           <Sidebar />
           <MainContainer>
             <SubContainer>
@@ -44,7 +50,9 @@ export default function Network() {
                 <Heading>Networks</Heading>
               </div>
               <div style={{ display: "flex" }}>
-                <Button>Add Network</Button>
+                {open && <AddNetwork click={handleClose} />}
+
+                <Button onClick={handleClickOpen}>Add Network</Button>
               </div>
             </SubContainer>
             <Div>
