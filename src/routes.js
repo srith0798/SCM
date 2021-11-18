@@ -19,6 +19,7 @@ import RenameContract from "./modules/Popup/renameContract";
 import SourceCode from "./modules/contractDetails/sourceCode";
 import HideContract from "./modules/Popup/hideContract";
 import Remove from "./modules/Popup/remove";
+import transactionDetails from "./modules/TransactionDetails/transactionDetails";
 
 class Routes extends BaseComponent {
   componentDidMount() {}
@@ -43,6 +44,11 @@ class Routes extends BaseComponent {
               exact
               path={"/contract-details"}
               component={ContractDetails}
+            />
+            <Route
+              exact
+              path={"/transaction-details"}
+              component={transactionDetails}
             />
             <Route exact path={"/add-contract"} component={AddContract} />
             <Route exact path={"/rename-contract"} component={RenameContract} />
