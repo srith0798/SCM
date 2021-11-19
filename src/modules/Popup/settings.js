@@ -25,8 +25,50 @@ export default function Settings(props) {
               Change the layout of the transactions list and display only the
               columns and information that is most important to you.
             </Content>
-            <SubContainer style={{ borderBottom: "1px solid" }}>
+            <SubContainer style={{ borderBottom: "1px solid #d5e0ff" }}>
               <Heading>Transaction Hash</Heading>
+              <label class="switch">
+                <input type="checkbox" />
+                <span class="slider round"></span>
+              </label>
+            </SubContainer>
+            <SubContainer style={{ borderBottom: "1px solid #d5e0ff" }}>
+              <Heading>Status</Heading>
+              <label class="switch">
+                <input type="checkbox" />
+                <span class="slider round"></span>
+              </label>
+            </SubContainer>
+            <SubContainer style={{ borderBottom: "1px solid #d5e0ff" }}>
+              <Heading>Function</Heading>
+              <label class="switch">
+                <input type="checkbox" />
+                <span class="slider round"></span>
+              </label>
+            </SubContainer>
+            <SubContainer style={{ borderBottom: "1px solid #d5e0ff" }}>
+              <Heading>Contracts</Heading>
+              <label class="switch">
+                <input type="checkbox" />
+                <span class="slider round"></span>
+              </label>
+            </SubContainer>
+            <SubContainer style={{ borderBottom: "1px solid #d5e0ff" }}>
+              <Heading>From</Heading>
+              <label class="switch">
+                <input type="checkbox" />
+                <span class="slider round"></span>
+              </label>
+            </SubContainer>
+            <SubContainer style={{ borderBottom: "1px solid #d5e0ff" }}>
+              <Heading>Network</Heading>
+              <label class="switch">
+                <input type="checkbox" />
+                <span class="slider round"></span>
+              </label>
+            </SubContainer>
+            <SubContainer style={{ borderBottom: "1px solid #d5e0ff" }}>
+              <Heading>XDC value</Heading>
               <label class="switch">
                 <input type="checkbox" />
                 <span class="slider round"></span>

@@ -12,11 +12,11 @@ const useStyles = makeStyles(() => ({
 
 export default function LetsGetStarted(props) {
   const classes = useStyles();
-
+  console.log("fiffhiefhrfh", props);
   return (
     <div>
       {props.state ? (
-        <Dialog classes={{ paper: classes.dialogBox }}>
+        <Dialog classes={{ paper: classes.dialogBox }} open>
           <MainContainer>
             <Container>
               <SubContainer>

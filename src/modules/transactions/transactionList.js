@@ -15,10 +15,7 @@ const MainContainer = styled.div`
   width: 100%;
   padding: 50px;
 `;
-const HeadBar = styled.div`
-  display: flex;
-  justify-content: flex-end;
-`;
+
 const Transactions = styled.div`
   font-size: 20px;
 `;
@@ -63,9 +60,9 @@ const Card = styled.div`
 function TransactionList() {
   useEffect(() => {
     // code to run on component mount
-    setstate();
+    // setstate();
   }, []);
-  const [state, setstate] = useState(true);
+  const [state, setState] = useState(true);
   const [open, isOpen] = useState(false);
   const handleClickOpen = () => {
     isOpen(true);
@@ -116,7 +113,7 @@ function TransactionList() {
               >
                 <MenuItem color="#416BE0" value={10}>
                   <Column>
-                    App_Transactions_Validator
+                    App_Transactions
                     <TransactionNumber>
                       xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c
                     </TransactionNumber>
@@ -125,7 +122,7 @@ function TransactionList() {
 
                 <MenuItem value={20} color="#416BE0">
                   <Column>
-                    App_Transactions_Validator
+                    App_Transactions
                     <TransactionNumber>
                       xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c
                     </TransactionNumber>
@@ -134,7 +131,7 @@ function TransactionList() {
 
                 <MenuItem value={30} color="#416BE0">
                   <Column>
-                    App_Transactions_Validator
+                    App_Transactions
                     <TransactionNumber>
                       xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c
                     </TransactionNumber>
@@ -155,20 +152,36 @@ function TransactionList() {
                 <TableComponent.HeadColumn>When</TableComponent.HeadColumn>
               </TableComponent.TableHead>
               <TableComponent.TableBody>
-                <TableComponent.BodyColumn>kfjdkfjd</TableComponent.BodyColumn>
-                <TableComponent.BodyColumn>kfjdkfjd</TableComponent.BodyColumn>
-                <TableComponent.BodyColumn>kfjdkfjd</TableComponent.BodyColumn>
-                <TableComponent.BodyColumn>kfjdkfjd</TableComponent.BodyColumn>
-                <TableComponent.BodyColumn>kfjdkfjd</TableComponent.BodyColumn>
-                <TableComponent.BodyColumn>kfjdkfjd</TableComponent.BodyColumn>
-                <TableComponent.BodyColumn>kfjdkfjd</TableComponent.BodyColumn>
+                <TableComponent.BodyColumn>
+                  App_Transactions
+                </TableComponent.BodyColumn>
+                <TableComponent.BodyColumn>
+                  App_Transactions
+                </TableComponent.BodyColumn>
+                <TableComponent.BodyColumn>
+                  App_Transactions
+                </TableComponent.BodyColumn>
+                <TableComponent.BodyColumn>
+                  App_Transactions
+                </TableComponent.BodyColumn>
+                <TableComponent.BodyColumn>
+                  App_Transactions
+                </TableComponent.BodyColumn>
+                <TableComponent.BodyColumn>
+                  App_Transactions
+                </TableComponent.BodyColumn>
+                <TableComponent.BodyColumn>
+                  App_Transactions
+                </TableComponent.BodyColumn>
               </TableComponent.TableBody>
             </TableComponent.Table>
           </TableCard>
         </MainContainer>
       </Row>
       <div>
-        <LetsGetStarted onClose={setstate} state={state} />
+        {state && (
+          <LetsGetStarted click={() => setState(false)} state={state} />
+        )}
       </div>
     </>
   );
