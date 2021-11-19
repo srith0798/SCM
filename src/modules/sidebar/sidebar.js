@@ -34,6 +34,9 @@ function Sidebar() {
   const redirectToNetwork = () => {
     history.push("/network");
   };
+  const redirectToAnalytics = () => {
+    history.push("/analytics");
+  };
   return (
     <SidebarContainer>
       <Wrapper onClick={redirectToTransaction}>
@@ -48,7 +51,7 @@ function Sidebar() {
         <Icon src="/images/networks.svg" />
         <Heading>Networks</Heading>
       </Wrapper>
-      <Wrapper>
+      <Wrapper onClick={redirectToAnalytics}>
         <Icon src="/images/Analytics.svg" />
         <Heading>Analytics</Heading>
       </Wrapper>
