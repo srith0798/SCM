@@ -13,7 +13,9 @@ export default function Analytics(props) {
     <div>
       <Column>
         <Header />
-        <Row style={{ height: "100vh" }}>
+        <Row
+        // style={{ height: "300vh" }}
+        >
           <Sidebar />
           <MainContainer>
             <SubContainer>
@@ -81,9 +83,27 @@ export default function Analytics(props) {
               }}
             >
               <GraphContainer>
+                <SubContainer>
+                  <Head>Transactions over time</Head>
+                  <select name="cars" id="cars" class="">
+                    <option value="volvo">Last 5 days</option>
+                    <option value="saab">Last 7 days</option>
+                    <option value="mercedes">Last 15 days</option>
+                    <option value="audi">Last 25 days</option>
+                  </select>
+                </SubContainer>
                 <Line />
               </GraphContainer>
               <GraphContainer>
+                <SubContainer>
+                  <Head>Gas used overtime</Head>
+                  <select name="cars" id="cars">
+                    <option value="volvo">Last 5 days</option>
+                    <option value="saab">Last 7 days</option>
+                    <option value="mercedes">Last 15 days</option>
+                    <option value="audi">Last 25 days</option>
+                  </select>
+                </SubContainer>
                 <Line />
               </GraphContainer>
             </Row>
@@ -95,12 +115,80 @@ export default function Analytics(props) {
               }}
             >
               <GraphContainer>
-                <Line />
+                <SubContainer>
+                  <Head>Top Callers</Head>
+                  <select name="cars" id="cars">
+                    <option value="volvo">Last 5 days</option>
+                    <option value="saab">Last 7 days</option>
+                    <option value="mercedes">Last 15 days</option>
+                    <option value="audi">Last 25 days</option>
+                  </select>
+                </SubContainer>
+                <Div>
+                  <ContractFrom>Contract from</ContractFrom>
+                  <Network>xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c</Network>
+                </Div>
+                <Div>
+                  <ContractFrom>Network</ContractFrom>
+                  <Network>Mainnet</Network>
+                </Div>
+                <Div>
+                  <ContractFrom>Contract from</ContractFrom>
+                  <Network>xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c</Network>
+                </Div>
+                <Div>
+                  <ContractFrom>Network</ContractFrom>
+                  <Network>Mainnet</Network>
+                </Div>
+                <Div>
+                  <ContractFrom>Network</ContractFrom>
+                  <Network>Mainnet</Network>
+                </Div>
               </GraphContainer>
               <GraphContainer>
+                <SubContainer>
+                  <Head>Active users</Head>
+                  <select name="cars" id="cars">
+                    <option value="volvo">Last 5 days</option>
+                    <option value="saab">Last 7 days</option>
+                    <option value="mercedes">Last 15 days</option>
+                    <option value="audi">Last 25 days</option>
+                  </select>
+                </SubContainer>
                 <Line />
               </GraphContainer>
             </Row>
+            <GraphContainer>
+              <SubContainer>
+                <Head>Top Functions calls</Head>
+                <select name="cars" id="cars">
+                  <option value="volvo">Last 5 days</option>
+                  <option value="saab">Last 7 days</option>
+                  <option value="mercedes">Last 15 days</option>
+                  <option value="audi">Last 25 days</option>
+                </select>
+              </SubContainer>
+              <Div>
+                <ContractFrom>Contract from</ContractFrom>
+                <Network>xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c</Network>
+              </Div>
+              <Div>
+                <ContractFrom>Network</ContractFrom>
+                <Network>Mainnet</Network>
+              </Div>
+              <Div>
+                <ContractFrom>Contract from</ContractFrom>
+                <Network>xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c</Network>
+              </Div>
+              <Div>
+                <ContractFrom>Network</ContractFrom>
+                <Network>Mainnet</Network>
+              </Div>
+              <Div>
+                <ContractFrom>Network</ContractFrom>
+                <Network>Mainnet</Network>
+              </Div>
+            </GraphContainer>
           </MainContainer>
         </Row>
       </Column>
@@ -157,4 +245,23 @@ const GraphContainer = styled.div`
   margin-top: 20px;
   padding: 20px;
   max-width: 590px;
+`;
+const Head = styled.div`
+  font-size: 16px;
+  font-weight: 600;
+  color: #102c78;
+`;
+const ContractFrom = styled.div`
+  width: 100%;
+  max-width: 150px;
+`;
+const Network = styled.div`
+  width: 100%;
+  max-width: 150px;
+`;
+const Div = styled.div`
+  display: flex;
+  flex-flow: row nowrap;
+  border-top: 1px solid rgb(227, 231, 235);
+  margin-top: 20px;
 `;
