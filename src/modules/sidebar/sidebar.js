@@ -1,10 +1,12 @@
 import React from "react";
 import styled from "styled-components";
+import { history } from "../../managers/history";
 
 const SidebarContainer = styled.div`
   background: #102c78 0% 0% no-repeat padding-box;
   width: 100%;
   max-width: 200px;
+  height: 200vh;
 `;
 const Icon = styled.img``;
 const Wrapper = styled.div`
@@ -24,17 +26,26 @@ const Heading = styled.span`
 `;
 
 function Sidebar() {
+  const redirectToTransaction = () => {
+    history.push("/transaction-details");
+  };
+  const redirectToContract = () => {
+    history.push("/contract");
+  };
+  const redirectToNetwork = () => {
+    history.push("/network");
+  };
   return (
     <SidebarContainer>
-      <Wrapper>
+      <Wrapper onClick={redirectToTransaction}>
         <Icon src="/images/Transactions.svg" />
         <Heading>Transactions</Heading>
       </Wrapper>
-      <Wrapper>
+      <Wrapper onClick={redirectToContract}>
         <Icon src="/images/contracts.svg" />
         <Heading>Contracts</Heading>
       </Wrapper>
-      <Wrapper>
+      <Wrapper onClick={redirectToNetwork}>
         <Icon src="/images/networks.svg" />
         <Heading>Networks</Heading>
       </Wrapper>

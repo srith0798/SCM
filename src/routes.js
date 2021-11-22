@@ -20,6 +20,10 @@ import SourceCode from "./modules/contractDetails/sourceCode";
 import HideContract from "./modules/Popup/hideContract";
 import Remove from "./modules/Popup/remove";
 import transactionDetails from "./modules/TransactionDetails/transactionDetails";
+import Network from "./modules/Network/network";
+import LetsGetStarted from "./modules/Popup/letsGetStartedPopUp";
+import AddNetwork from "./modules/Popup/addNetwork";
+import Settings from "./modules/Popup/settings";
 
 class Routes extends BaseComponent {
   componentDidMount() {}
@@ -31,13 +35,9 @@ class Routes extends BaseComponent {
       <MuiThemeProvider muiTheme={getMuiTheme()}>
         <Router history={history}>
           <Switch>
-            <Route exact path={"/"} component={LoginComponent} />
-            <Route
-              exact
-              path={"/transaction-list"}
-              component={TransactionList}
-            />
-            <Route exact path={"/create-account"} component={CreateAccount} />
+            {/* <Route exact path={"/"} component={LoginComponent} /> */}
+            <Route exact path={"/"} component={TransactionList} />
+
             <Route exact path={"/verify"} component={VerifyEmail} />
             <Route exact path={"/contract"} component={Contract} />
             <Route
@@ -55,7 +55,13 @@ class Routes extends BaseComponent {
             <Route exact path={"/contract-abi"} component={ContractAbi} />
             <Route exact path={"/source-code"} component={SourceCode} />
             <Route exact path={"/hide-contract"} component={HideContract} />
+
+            <Route exact path={"/network"} component={Network} />
+            <Route exact path={"/startedPopUp"} component={LetsGetStarted} />
             <Route exact path={"/remove"} component={Remove} />
+            <Route exact path={"/add-network"} component={AddNetwork} />
+            <Route exact path={"/settings"} component={Settings} />
+
             <Redirect exact from="*" to="/" />
           </Switch>
         </Router>
