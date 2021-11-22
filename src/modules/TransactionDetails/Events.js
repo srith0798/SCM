@@ -2,12 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import { Row } from "simple-flexbox";
 import Select from "@mui/material/Select";
-import { appendOwnerState } from "@mui/base";
-import { borderLeft, borderRight } from "@mui/system";
 export default function Events() {
   return (
     <MidContainer>
-      <ThirdBox>
+      <ThirdBoxContainer>
         <Row
           style={{
             display: "flex",
@@ -43,7 +41,7 @@ export default function Events() {
             />
           </CAllADDs>
         </Row>
-      </ThirdBox>
+      </ThirdBoxContainer>
       <Heading>App_Transactions_Validator</Heading>
       <BoxContainer
         defaultValue={10}
@@ -104,7 +102,7 @@ const MidContainer = styled.div`
   height: 100vh;
 `;
 
-const ThirdBox = styled.div`
+const ThirdBoxContainer = styled.div`
   text-align: left;
   padding: 10px;
   font: normal normal 600 14px/17px Inter;
@@ -128,17 +126,6 @@ const Heading = styled.div`
   width: 100%;
   max-width: 260px;
 `;
-
-// const TransN = styled.div`
-//   text-align: left;
-//   padding: 10px;
-//   font: normal normal 600 14px/17px Inter;
-//   letter-spacing: 0px;
-//   color: #102c78;
-//   opacity: 1;
-//   width: 100%;
-//   max-width: 400px;
-// `;
 
 const BoxContainer = styled.div`
   padding: 10px;

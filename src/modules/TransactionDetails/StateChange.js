@@ -1,48 +1,61 @@
 import React from "react";
 import styled from "styled-components";
 import { Column, Row } from "simple-flexbox";
-import MenuItem from "@mui/material/MenuItem";
-import { red } from "@mui/material/colors";
 export default function StateChange() {
   return (
     <MidContainer>
-      <MenuItem value={30} color="#416BE0">
+      <SecondContainer>
         <Column>
           <Heading>App_Transactions_Validator</Heading>
           <SHead>xdcabfe4184e5f9f600fe86d20e2a32c</SHead>
-          <BoxContainer
-            defaultValue={10}
-            style={{
-              width: "250px",
-              height: "50px",
-              marginTop: 10,
-              background: "#F5F6FD",
-              border: "solid #D5E0FF",
-              outline: "none",
-            }}
-          >
-            Mappping(address=unit256)
-          </BoxContainer>
-          <br />
-          0.xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c{" "}
           <Row>
-            {" "}
+            <BoxContainer
+              defaultValue={10}
+              style={{
+                width: "250px",
+                height: "50px",
+                background: "#F5F6FD",
+                border: "solid #D5E0FF",
+              }}
+            >
+              Mappping(address=unit256)
+            </BoxContainer>
+            <Heading style={{ paddingTop: "20px", paddingLeft: "20px" }}>
+              {" "}
+              balances
+            </Heading>
+          </Row>
+          <Row>
+            <br />
+            0.xdcabfe4184e5f9f600fe84353599be1768b3c
             <BoxContainer
               defaultValue={10}
               style={{
                 width: "200px",
                 height: "50px",
-                marginTop: 10,
                 background: "#ef9a9a",
                 border: "solid #D5E0FF",
-                outline: "none",
               }}
             >
-              49634we2rdniwjk
+              84615710000481040
+            </BoxContainer>
+          </Row>
+          <Row>
+            <br />
+            0.xdcabfe4184e5f9f600fe84353599be1768b3c
+            <BoxContainer
+              style={{
+                width: "200px",
+                height: "50px",
+                background: "#ef9a9a",
+                border: "solid #D5E0FF",
+              }}
+            >
+              24274685008860000
             </BoxContainer>
           </Row>
         </Column>
-      </MenuItem>
+      </SecondContainer>
     </MidContainer>
   );
 }
@@ -52,6 +65,18 @@ const MidContainer = styled.div`
   opacity: 1;
   margin-top: 20px;
   height: 300px;
+`;
+const SecondContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+
+  width: 100%;
+
+  height: 60vh;
+  margin-top: 20px;
+  background-color: #ffffff;
+  border-radius: 4px;
+  padding: 8px 10px 25px 40px;
 `;
 
 const Heading = styled.div`
