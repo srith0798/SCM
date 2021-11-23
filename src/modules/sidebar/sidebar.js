@@ -35,7 +35,7 @@ function Sidebar() {
     history.push("/network");
   };
   const redirectToAnalytics = () => {
-    history.push("/analytics");
+    history.push("/analytics-Maincomponent");
   };
   return (
     <SidebarContainer>
