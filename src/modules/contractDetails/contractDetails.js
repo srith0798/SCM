@@ -109,7 +109,7 @@ export default function ContractDetails(props) {
       <Column>
         <Header />
         <div>
-          <Row>
+          <Row style={{ height: "100vh" }}>
             <Sidebar />
             <MainContainer>
               <SubContainer>
@@ -259,7 +259,7 @@ const Container = styled.div`
   background-color: #ffffff;
   border-radius: 6px;
   width: 100%;
-  height: 120px;
+
   margin-top: 20px;
   padding: 20px;
 `;
