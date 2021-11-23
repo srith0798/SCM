@@ -6,7 +6,9 @@ export default function StateChange() {
     <MidContainer>
       <SecondContainer>
         <Column>
-          <Heading>App_Transactions_Validator</Heading>
+          <Heading style={{ paddingTop: "20px" }}>
+            App_Transactions_Validator
+          </Heading>
           <SHead>xdcabfe4184e5f9f600fe86d20e2a32c</SHead>
           <Row>
             <BoxContainer
@@ -21,13 +23,12 @@ export default function StateChange() {
               Mappping(address=unit256)
             </BoxContainer>
             <Heading style={{ paddingTop: "20px", paddingLeft: "20px" }}>
-              {" "}
               balances
             </Heading>
           </Row>
           <Row>
             <br />
-            0.xdcabfe4184e5f9f600fe84353599be1768b3c
+            0.xdcabfe4184e5f9f600fe8435nfsa3599be1768b3c
             <BoxContainer
               defaultValue={10}
               style={{
@@ -42,7 +43,7 @@ export default function StateChange() {
           </Row>
           <Row>
             <br />
-            0.xdcabfe4184e5f9f600fe84353599be1768b3c
+            0.xdcabfe4184e5f9f600fe8435bdsa3599be1768b3c
             <BoxContainer
               style={{
                 width: "200px",

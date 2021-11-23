@@ -12,6 +12,7 @@ import CreateAccount from "./modules/CreateAccount/createAccount";
 import VerifyEmail from "./modules/VerifyEmail/verifyEmail";
 import Contract from "./modules/Contract/contract";
 import ContractDetails from "./modules/contractDetails/contractDetails";
+import SubContracts2 from "./modules/TransactionDetails/SubContracts2";
 
 import AddContract from "./modules/Popup/addContract";
 import ContractAbi from "./modules/Popup/contractAbi";
@@ -50,6 +51,7 @@ class Routes extends BaseComponent {
               path={"/transaction-details"}
               component={transactionDetails}
             />
+
             <Route exact path={"/add-contract"} component={AddContract} />
             <Route exact path={"/rename-contract"} component={RenameContract} />
             <Route exact path={"/contract-abi"} component={ContractAbi} />

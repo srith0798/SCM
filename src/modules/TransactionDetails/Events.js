@@ -42,7 +42,9 @@ export default function Events() {
           </CAllADDs>
         </Row>
       </ThirdBoxContainer>
-      <Heading>App_Transactions_Validator</Heading>
+      <Heading style={{ paddingLeft: "20px" }}>
+        App_Transactions_Validator
+      </Heading>
       <BoxContainer
         defaultValue={10}
         style={{

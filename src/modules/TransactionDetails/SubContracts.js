@@ -1,6 +1,11 @@
-import React, { setstate, state } from "react";
+import React, { onsetstate, state } from "react";
 import styled from "styled-components";
+import SubContracts2 from "./SubContracts2";
+import { history } from "../../managers/history";
 
+const SubButton = () => {
+  history.push("/SubContracts2");
+};
 export default function SubContracts() {
   return (
     <MainDiv>
@@ -16,7 +21,8 @@ export default function SubContracts() {
           }}
         >
           <Heading>App_Transactions_Validator</Heading>
-          xdcabfe4184e5f9f600fe86d20e
+          xdcabfe4184e5f9f600fe86d20ec
+          <Button onClick={SubButton}>Verified contracts</Button>
         </BoxContainer>
 
         <BoxContainer
@@ -31,6 +37,7 @@ export default function SubContracts() {
         >
           <Heading>App_Transactions_Validator</Heading>
           xdcabfe4184e5f9f600fe86d20e
+          <Button onClick={SubButton}>Verified contracts</Button>
         </BoxContainer>
 
         <BoxContainer
@@ -45,6 +52,7 @@ export default function SubContracts() {
         >
           <Heading>App_Transactions_Validator</Heading>
           xdcabfe4184e5f9f600fe86d20e
+          <Button onClick={SubButton}>Verified contracts</Button>
         </BoxContainer>
       </MainBoxContainer>
     </MainDiv>
@@ -55,12 +63,11 @@ const MainDiv = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
-
   height: 60vh;
   margin-top: 20px;
   background-color: #ffffff;
   border-radius: 4px;
-  padding: 8px 10px 25px 40px;
+  padding: 30px 10px 25px 40px;
 `;
 const BoxContainer = styled.div`
   padding: 10px;
@@ -80,4 +87,17 @@ const MainBoxContainer = styled.div`
   justify-content: space-between;
   max-width: 800px;
   width: 100%;
+`;
+
+const Button = styled.button`
+  background-color: green;
+  color: #ffffff;
+  font-size: 10px;
+  padding: 10px;
+  width: 200px;
+  border-radius: 5px;
+  margin: 5px;
+  cursor: pointer;
+  padding-bottom: 2px;
+  align-item: center;
 `;
