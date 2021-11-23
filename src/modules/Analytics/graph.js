@@ -308,7 +308,7 @@ const graphProperties = {
   useMesh: true,
   animate: true,
 };
-const MyResponsiveLine = ({ data, MouseMovePoint, CustomPoint }) => (
+const MyResponsiveLine = ({ MouseMovePoint, CustomPoint }) => (
   <ResponsiveLine
     {...graphProperties}
     data={data}
@@ -341,7 +341,7 @@ const MyResponsiveLine = ({ data, MouseMovePoint, CustomPoint }) => (
       reverse: false,
     }}
     yFormat=" >-.2f"
-    colors={["#ffe5b2"]}
+    colors={{ scheme: "blues" }}
     pointSize={10}
     legends={[]}
     onMouseMove={MouseMovePoint}
@@ -440,8 +440,8 @@ export default function Graph() {
         CustomPoint={CustomPoint}
       />
       <div className="dates">
-        <p>fgfdg</p>
-        <p>fdfgsdf</p>
+        {/* <p>fgfdg</p>
+        <p>fdfgsdf</p> */}
       </div>
     </GraphSize>
   );

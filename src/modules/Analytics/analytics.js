@@ -10,189 +10,196 @@ import Line from "./graph";
 
 export default function Analytics(props) {
   return (
-    <div>
-      <Column>
-        <Header />
-        <Row
-        // style={{ height: "300vh" }}
-        >
-          <Sidebar />
-          <MainContainer>
-            <SubContainer>
-              <MainHeading>Analytics</MainHeading>
-              <img src="/images/refresh.svg" />
-            </SubContainer>
-            <Container>
-              <View>View analytics for contract</View>
-              <Content>
-                You can view analytics data per contract by using the contract
-                picker below.
-              </Content>
-              <Card>
-                <Column>
-                  <Select
-                    defaultValue={10}
-                    style={{
-                      width: 500,
-                      marginTop: 10,
-                      background: "#F5F6FD",
-                      border: "solid #D5E0FF",
-                      outline: "none",
-                    }}
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    // value={age}
-                    // label="Age"
-                    // onChange={handleChange}
-                  >
-                    <MenuItem color="#416BE0" value={10}>
-                      <Column>
-                        App_Transactions
-                        <TransactionNumber>
-                          xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c
-                        </TransactionNumber>
-                      </Column>
-                    </MenuItem>
-
-                    <MenuItem value={20} color="#416BE0">
-                      <Column>
-                        App_Transactions
-                        <TransactionNumber>
-                          xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c
-                        </TransactionNumber>
-                      </Column>
-                    </MenuItem>
-
-                    <MenuItem value={30} color="#416BE0">
-                      <Column>
-                        App_Transactions
-                        <TransactionNumber>
-                          xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c
-                        </TransactionNumber>
-                      </Column>
-                    </MenuItem>
-                  </Select>
-                </Column>
-              </Card>
-            </Container>
-            <Row
-              style={{
-                width: "100%",
-
-                justifyContent: "space-between",
-              }}
-            >
-              <GraphContainer>
-                <SubContainer>
-                  <Head>Transactions over time</Head>
-                  <select name="cars" id="cars" class="">
-                    <option value="volvo">Last 5 days</option>
-                    <option value="saab">Last 7 days</option>
-                    <option value="mercedes">Last 15 days</option>
-                    <option value="audi">Last 25 days</option>
-                  </select>
-                </SubContainer>
-                <Line />
-              </GraphContainer>
-              <GraphContainer>
-                <SubContainer>
-                  <Head>Gas used overtime</Head>
-                  <select name="cars" id="cars">
-                    <option value="volvo">Last 5 days</option>
-                    <option value="saab">Last 7 days</option>
-                    <option value="mercedes">Last 15 days</option>
-                    <option value="audi">Last 25 days</option>
-                  </select>
-                </SubContainer>
-                <Line />
-              </GraphContainer>
-            </Row>
-            <Row
-              style={{
-                width: "100%",
-
-                justifyContent: "space-between",
-              }}
-            >
-              <GraphContainer>
-                <SubContainer>
-                  <Head>Top Callers</Head>
-                  <select name="cars" id="cars">
-                    <option value="volvo">Last 5 days</option>
-                    <option value="saab">Last 7 days</option>
-                    <option value="mercedes">Last 15 days</option>
-                    <option value="audi">Last 25 days</option>
-                  </select>
-                </SubContainer>
-                <Div>
-                  <ContractFrom>Contract from</ContractFrom>
-                  <Network>xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c</Network>
-                </Div>
-                <Div>
-                  <ContractFrom>Network</ContractFrom>
-                  <Network>Mainnet</Network>
-                </Div>
-                <Div>
-                  <ContractFrom>Contract from</ContractFrom>
-                  <Network>xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c</Network>
-                </Div>
-                <Div>
-                  <ContractFrom>Network</ContractFrom>
-                  <Network>Mainnet</Network>
-                </Div>
-                <Div>
-                  <ContractFrom>Network</ContractFrom>
-                  <Network>Mainnet</Network>
-                </Div>
-              </GraphContainer>
-              <GraphContainer>
-                <SubContainer>
-                  <Head>Active users</Head>
-                  <select name="cars" id="cars">
-                    <option value="volvo">Last 5 days</option>
-                    <option value="saab">Last 7 days</option>
-                    <option value="mercedes">Last 15 days</option>
-                    <option value="audi">Last 25 days</option>
-                  </select>
-                </SubContainer>
-                <Line />
-              </GraphContainer>
-            </Row>
-            <GraphContainer>
+    <>
+      {/* {fullScreen ? <MainComponent /> : <FullScreen />} */}
+      <div>
+        <Column>
+          <Header />
+          <Row
+          // style={{ height: "300vh" }}
+          >
+            <Sidebar />
+            <MainContainer>
               <SubContainer>
-                <Head>Top Functions calls</Head>
-                <select name="cars" id="cars">
-                  <option value="volvo">Last 5 days</option>
-                  <option value="saab">Last 7 days</option>
-                  <option value="mercedes">Last 15 days</option>
-                  <option value="audi">Last 25 days</option>
-                </select>
+                <MainHeading>Analytics</MainHeading>
+                <img src="/images/refresh.svg" />
               </SubContainer>
-              <Div>
-                <ContractFrom>Contract from</ContractFrom>
-                <Network>xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c</Network>
-              </Div>
-              <Div>
-                <ContractFrom>Network</ContractFrom>
-                <Network>Mainnet</Network>
-              </Div>
-              <Div>
-                <ContractFrom>Contract from</ContractFrom>
-                <Network>xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c</Network>
-              </Div>
-              <Div>
-                <ContractFrom>Network</ContractFrom>
-                <Network>Mainnet</Network>
-              </Div>
-              <Div>
-                <ContractFrom>Network</ContractFrom>
-                <Network>Mainnet</Network>
-              </Div>
-            </GraphContainer>
-          </MainContainer>
-        </Row>
-      </Column>
-    </div>
+              <Container>
+                <View>View analytics for contract</View>
+                <Content>
+                  You can view analytics data per contract by using the contract
+                  picker below.
+                </Content>
+                <Card>
+                  <Column>
+                    <Select
+                      defaultValue={10}
+                      style={{
+                        width: 500,
+                        marginTop: 10,
+                        background: "#F5F6FD",
+                        border: "solid #D5E0FF",
+                        outline: "none",
+                      }}
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
+                      // value={age}
+                      // label="Age"
+                      // onChange={handleChange}
+                    >
+                      <MenuItem color="#416BE0" value={10}>
+                        <Column>
+                          App_Transactions
+                          <TransactionNumber>
+                            xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c
+                          </TransactionNumber>
+                        </Column>
+                      </MenuItem>
+
+                      <MenuItem value={20} color="#416BE0">
+                        <Column>
+                          App_Transactions
+                          <TransactionNumber>
+                            xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c
+                          </TransactionNumber>
+                        </Column>
+                      </MenuItem>
+
+                      <MenuItem value={30} color="#416BE0">
+                        <Column>
+                          App_Transactions
+                          <TransactionNumber>
+                            xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c
+                          </TransactionNumber>
+                        </Column>
+                      </MenuItem>
+                    </Select>
+                  </Column>
+                </Card>
+              </Container>
+              <Row
+                style={{
+                  width: "100%",
+
+                  justifyContent: "space-between",
+                }}
+              >
+                <GraphContainer>
+                  <SubContainer>
+                    <Head>Transactions over time</Head>
+                    <select name="cars" id="cars" class="">
+                      <option value="volvo">Last 5 days</option>
+                      <option value="saab">Last 7 days</option>
+                      <option value="mercedes">Last 15 days</option>
+                      <option value="audi">Last 25 days</option>
+                    </select>
+                  </SubContainer>
+                  <Line />
+                </GraphContainer>
+                <GraphContainer>
+                  <SubContainer>
+                    <Head>Gas used overtime</Head>
+                    <select name="cars" id="cars">
+                      <option value="volvo">Last 5 days</option>
+                      <option value="saab">Last 7 days</option>
+                      <option value="mercedes">Last 15 days</option>
+                      <option value="audi">Last 25 days</option>
+                    </select>
+                  </SubContainer>
+                  <Line />
+                </GraphContainer>
+              </Row>
+              <Row
+                style={{
+                  width: "100%",
+
+                  justifyContent: "space-between",
+                }}
+              >
+                <GraphContainer>
+                  <SubContainer>
+                    <Head>Top Callers</Head>
+                    <select name="cars" id="cars">
+                      <option value="volvo">Last 5 days</option>
+                      <option value="saab">Last 7 days</option>
+                      <option value="mercedes">Last 15 days</option>
+                      <option value="audi">Last 25 days</option>
+                    </select>
+                  </SubContainer>
+                  <Div>
+                    <ContractFrom>Contract from</ContractFrom>
+                    <Network>
+                      xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c
+                    </Network>
+                  </Div>
+                  <Div>
+                    <ContractFrom>Network</ContractFrom>
+                    <Network>Mainnet</Network>
+                  </Div>
+                  <Div>
+                    <ContractFrom>Contract from</ContractFrom>
+                    <Network>
+                      xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c
+                    </Network>
+                  </Div>
+                  <Div>
+                    <ContractFrom>Network</ContractFrom>
+                    <Network>Mainnet</Network>
+                  </Div>
+                  <Div>
+                    <ContractFrom>Network</ContractFrom>
+                    <Network>Mainnet</Network>
+                  </Div>
+                </GraphContainer>
+                <GraphContainer>
+                  <SubContainer>
+                    <Head>Active users</Head>
+                    <select name="cars" id="cars">
+                      <option value="volvo">Last 5 days</option>
+                      <option value="saab">Last 7 days</option>
+                      <option value="mercedes">Last 15 days</option>
+                      <option value="audi">Last 25 days</option>
+                    </select>
+                  </SubContainer>
+                  <Line />
+                </GraphContainer>
+              </Row>
+              <GraphContainer>
+                <SubContainer>
+                  <Head>Top Functions calls</Head>
+                  <select name="cars" id="cars">
+                    <option value="volvo">Last 5 days</option>
+                    <option value="saab">Last 7 days</option>
+                    <option value="mercedes">Last 15 days</option>
+                    <option value="audi">Last 25 days</option>
+                  </select>
+                </SubContainer>
+                <Div>
+                  <ContractFrom>Contract from</ContractFrom>
+                  <Network>xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c</Network>
+                </Div>
+                <Div>
+                  <ContractFrom>Network</ContractFrom>
+                  <Network>Mainnet</Network>
+                </Div>
+                <Div>
+                  <ContractFrom>Contract from</ContractFrom>
+                  <Network>xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c</Network>
+                </Div>
+                <Div>
+                  <ContractFrom>Network</ContractFrom>
+                  <Network>Mainnet</Network>
+                </Div>
+                <Div>
+                  <ContractFrom>Network</ContractFrom>
+                  <Network>Mainnet</Network>
+                </Div>
+              </GraphContainer>
+            </MainContainer>
+          </Row>
+        </Column>
+      </div>
+    </>
   );
 }
 const MainContainer = styled.div`
