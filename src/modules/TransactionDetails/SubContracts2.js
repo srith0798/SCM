@@ -55,7 +55,7 @@ export default function SubContracts2() {
               </TabPanel>
             </Tabs>
           </Container>
-          <MainBoxContainer>hdhs</MainBoxContainer>
+          <MainBoxContainer></MainBoxContainer>
         </MainContainer>
       </Row>
     </>
