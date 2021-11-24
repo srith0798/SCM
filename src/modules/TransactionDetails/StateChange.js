@@ -65,14 +65,13 @@ const MidContainer = styled.div`
   border-radius: 6px;
   opacity: 1;
   margin-top: 20px;
+  display: flex;
   height: 300px;
 `;
 const SecondContainer = styled.div`
   display: flex;
   justify-content: space-between;
-
   width: 100%;
-
   height: 60vh;
   margin-top: 20px;
   background-color: #ffffff;

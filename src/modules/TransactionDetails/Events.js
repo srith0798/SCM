@@ -130,5 +130,5 @@ const Heading = styled.div`
 `;
 
 const BoxContainer = styled.div`
-  padding: 10px;
+  padding: 0.625rem;
 `;

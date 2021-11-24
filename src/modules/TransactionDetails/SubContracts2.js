@@ -62,43 +62,6 @@ export default function SubContracts2() {
   );
 }
 
-const NewContainer = styled.div`
-  background: #ffffff 0% 0% no-repeat padding-box;
-  border-radius: 6px;
-  opacity: 1;
-  margin-top: 20px;
-  height: auto;
-`;
-
-const SubHead = styled.div`
-  font-size: 12px;
-`;
-const CommonDiv = styled.div`
-  border-bottom: 1px solid;
-  padding: 13px;
-`;
-const MidContainer = styled.div`
-  background: #ffffff 0% 0% no-repeat padding-box;
-  border-radius: 6px;
-  opacity: 1;
-  margin-top: 20px;
-  height: auto;
-`;
-const StackContainer = styled.div`
-  background: #ffffff 0% 0% no-repeat padding-box;
-  border-radius: 6px;
-  padding: 30px;
-  opacity: 1;
-  margin-top: 20px;
-  height: 150px;
-`;
-const LastContainer = styled.div`
-  background: #ffffff 0% 0% no-repeat padding-box;
-  border-radius: 6px;
-  opacity: 1;
-  margin-top: 20px;
-  height: 300px;
-`;
 const MainContainer = styled.div`
   background: #ecf0f7 0% 0% no-repeat padding-box;
   opacity: 1;
@@ -116,31 +79,6 @@ const Transactions = styled.div`
   }
 `;
 
-const Heading = styled.div`
-  text-align: left;
-  font: normal normal 600 14px/17px Inter;
-  letter-spacing: 0px;
-  color: #102c78;
-  opacity: 1;
-  width: 100%;
-  max-width: 260px;
-`;
-
-const TransactionNumber = styled.b`
-  color: #416be0;
-`;
-const ThirdBox = styled.div`
-  text-align: left;
-  padding: 10px;
-  font: normal normal 600 14px/17px Inter;
-  letter-spacing: 0px;
-  color: #102c78;
-  opacity: 1;
-  width: 100%;
-  max-width: 400px;
-`;
-
-const CAllADDs = styled.div``;
 const Button = styled.button`
   background-image: url("/images/globe.svg");
   background-repeat: no-repeat;
@@ -184,34 +122,6 @@ const SubHeading = styled.div`
 const CopyImg = styled.img`
   margin-left: 9%;
   cursor: pointer;
-`;
-
-const SHead = styled.div`
-  color: #416be0;
-`;
-
-const TextLi = styled.div`
-  text-align: left;
-  letter-spacing: 0px;
-  color: #ce1a1a;
-  opacity: 1;
-`;
-const SearchBar = styled.input`
-  height: 35px;
-  width: 200px;
-  border: none;
-  margin-left: 15px;
-  border-radius: 4px;
-  background-image: url("/images/search-icon.svg");
-  background-repeat: no-repeat;
-  background-position: 8px;
-  padding-left: 30px;
-  background-size: 12px;
-  position: relative;
-  &:focus: {
-    outline: none;
-    border: none;
-  }
 `;
 
 const MainBoxContainer = styled.div`

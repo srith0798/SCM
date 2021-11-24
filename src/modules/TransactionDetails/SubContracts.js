@@ -64,7 +64,7 @@ const MainDiv = styled.div`
   justify-content: space-between;
   width: 100%;
   height: 60vh;
-  margin-top: 20px;
+  margin-top: 30px;
   background-color: #ffffff;
   border-radius: 4px;
   padding: 30px 10px 25px 40px;

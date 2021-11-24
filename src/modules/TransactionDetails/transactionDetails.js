@@ -9,6 +9,7 @@ import "react-tabs/style/react-tabs.css";
 import Events from "./Events";
 import StateChange from "./StateChange";
 import SubContracts from "./SubContracts";
+import { history } from "../../managers/history";
 
 export default function transactionDetails() {
   return (
@@ -18,9 +19,14 @@ export default function transactionDetails() {
         <Sidebar />
         <MainContainer>
           <Row style={{ display: "flex", justifyContent: "space-between" }}>
-            <Transactions>
+            <div>
+              <img
+                src="/images/back.svg"
+                style={{ marginRight: "10px" }}
+                onClick={backButton}
+              />
               <b>Transactions Details</b>
-            </Transactions>
+            </div>
             <Button>View in Explorer</Button>
           </Row>
 
@@ -214,6 +220,10 @@ export default function transactionDetails() {
     </>
   );
 }
+
+const backButton = () => {
+  history.push(transactionDetails);
+};
 
 const NewContainer = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
