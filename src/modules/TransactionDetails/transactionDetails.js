@@ -269,15 +269,6 @@ const MainContainer = styled.div`
   padding: 50px;
   display: 100vh;
 `;
-const Transactions = styled.div`
-  font-size: 20px;
-  display: flex;
-  justify-content: flex-end;
-  &::before {
-    content: "◀";
-    margin: 0 10px;
-  }
-`;
 
 const Heading = styled.div`
   text-align: left;
