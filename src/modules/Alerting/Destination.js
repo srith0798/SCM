@@ -7,55 +7,53 @@ export default function Destination() {
   return (
     <>
       <MainContainer>
-        <TableContainer>
-          <Div>
-            <Row>
-              <ColumnOne>Alert Type</ColumnOne>
-            </Row>
-            <RowContainer>
-              <Buttonn>
-                <img src="/images/slack.svg" style={{ width: "1rem" }} /> Slack
-              </Buttonn>
-              <Buttonn>
-                <img src="/images/webhook.svg" style={{ width: "1rem" }} />
-                Webhook
-              </Buttonn>
-              <Buttonn>
-                <img src="/images/email.svg" style={{ width: "1rem" }} />
-                Email
-              </Buttonn>
-            </RowContainer>
-          </Div>
-
-          <ColumnOne>Active Destination</ColumnOne>
-          <Div>
-            {" "}
-            <Row>
-              <img src="/images/email.svg" style={{ width: "1rem" }} />
-              <ColumnTwo>Finance</ColumnTwo>
-              <ColumnTwo>it@supportteam.com</ColumnTwo>
-              <ColumnTwo>
-                <ColorChanging>verified</ColorChanging>
-              </ColumnTwo>
-              <ColumnTwo>
-                <img src="/images/deletes.svg" style={{ width: "1rem" }} />
-              </ColumnTwo>
-            </Row>
-          </Div>
-          <Div>
-            <Row>
+        <Div>
+          <Row>
+            <ColumnOne>Alert Type</ColumnOne>
+          </Row>
+          <RowContainer>
+            <Buttonn>
+              <img src="/images/slack.svg" style={{ width: "1rem" }} /> Slack
+            </Buttonn>
+            <Buttonn>
               <img src="/images/webhook.svg" style={{ width: "1rem" }} />
-              <ColumnTwo> Finance</ColumnTwo>
-              <ColumnTwo>http://webhook.site/aOe</ColumnTwo>
-              <ColumnTwo>
-                <ColorChanging>connected</ColorChanging>
-              </ColumnTwo>
-              <ColumnTwo>
-                <img src="/images/deletes.svg" style={{ width: "1rem" }} />
-              </ColumnTwo>
-            </Row>
-          </Div>
-        </TableContainer>
+              Webhook
+            </Buttonn>
+            <Buttonn>
+              <img src="/images/email.svg" style={{ width: "1rem" }} />
+              Email
+            </Buttonn>
+          </RowContainer>
+        </Div>
+
+        <ColumnOne>Active Destination</ColumnOne>
+        <Div>
+          {" "}
+          <Row>
+            <img src="/images/email.svg" style={{ width: "1rem" }} />
+            <ColumnTwo>Finance</ColumnTwo>
+            <ColumnTwo>it@supportteam.com</ColumnTwo>
+            <ColumnTwo>
+              <ColorChanging>verified</ColorChanging>
+            </ColumnTwo>
+            <ColumnTwo>
+              <img src="/images/deletes.svg" style={{ width: "1rem" }} />
+            </ColumnTwo>
+          </Row>
+        </Div>
+        <Div>
+          <Row>
+            <img src="/images/webhook.svg" style={{ width: "1rem" }} />
+            <ColumnTwo> Finance</ColumnTwo>
+            <ColumnTwo>http://webhook.site/aOe</ColumnTwo>
+            <ColumnTwo>
+              <ColorChanging>connected</ColorChanging>
+            </ColumnTwo>
+            <ColumnTwo>
+              <img src="/images/deletes.svg" style={{ width: "1rem" }} />
+            </ColumnTwo>
+          </Row>
+        </Div>
       </MainContainer>
     </>
   );

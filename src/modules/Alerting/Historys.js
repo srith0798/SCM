@@ -5,39 +5,37 @@ import styled from "styled-components";
 
 export default function Historys() {
   return (
-    <>
+    <div>
       <MainContainer>
-        <TableContainer>
-          <Div>
-            <Row>
-              <ColumnOne>Alert Type</ColumnOne>
-              <ColumnOne>Contracts</ColumnOne>
-              <ColumnOne>Tx Hash</ColumnOne>
-              <ColumnOne>Network</ColumnOne>
-              <ColumnOne>When</ColumnOne>
-            </Row>
-          </Div>
-          <Div>
-            <Row>
-              <ColumnOne>Sucessfull transaction</ColumnOne>
-              <ColumnOne>App_Transactions_Validator</ColumnOne>
-              <ColumnOne>0xndfahkk57..fj9</ColumnOne>
-              <ColumnOne>XDC Mainnet</ColumnOne>
-              <ColumnOne>02.2.2022 12:02</ColumnOne>
-            </Row>
-          </Div>
-          <Div>
-            <Row>
-              <ColumnOne>Sucessfull transaction</ColumnOne>
-              <ColumnOne>App_Transactions_Validator</ColumnOne>
-              <ColumnOne>0xndfahkk57..fj9</ColumnOne>
-              <ColumnOne>XDC Mainnet</ColumnOne>
-              <ColumnOne>02.2.2022 12:02</ColumnOne>
-            </Row>
-          </Div>
-        </TableContainer>
+        <Div>
+          <Row>
+            <ColumnOne>Alert Type</ColumnOne>
+            <ColumnOne>Contracts</ColumnOne>
+            <ColumnOne>Tx Hash</ColumnOne>
+            <ColumnOne>Network</ColumnOne>
+            <ColumnOne>When</ColumnOne>
+          </Row>
+        </Div>
+        <Div>
+          <Row>
+            <ColumnOne>Sucessfull transaction</ColumnOne>
+            <ColumnOne>App_Transactions_Validator</ColumnOne>
+            <ColumnOne>0xndfahkk57..fj9</ColumnOne>
+            <ColumnOne>XDC Mainnet</ColumnOne>
+            <ColumnOne>02.2.2022 12:02</ColumnOne>
+          </Row>
+        </Div>
+        <Div>
+          <Row>
+            <ColumnOne>Sucessfull transaction</ColumnOne>
+            <ColumnOne>App_Transactions_Validator</ColumnOne>
+            <ColumnOne>0xndfahkk57..fj9</ColumnOne>
+            <ColumnOne>XDC Mainnet</ColumnOne>
+            <ColumnOne>02.2.2022 12:02</ColumnOne>
+          </Row>
+        </Div>
       </MainContainer>
-    </>
+    </div>
   );
 }
 const MainContainer = styled.div`

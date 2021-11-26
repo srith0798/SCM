@@ -8,7 +8,7 @@ import { history } from "../../managers/history";
 
 export default function AlertDetails() {
   return (
-    <>
+    <div>
       <Header />
       <Row>
         <Sidebar />
@@ -25,9 +25,10 @@ export default function AlertDetails() {
             </div>
             <Button>Add alert</Button>
           </Row>
+          <Container></Container>
         </MainContainer>
       </Row>
-    </>
+    </div>
   );
 }
 
@@ -56,4 +57,13 @@ const Button = styled.button`
   width: 130px;
   height: 34px;
   font-size: 14px;
+`;
+
+const Container = styled.div`
+  background-color: #ffffff;
+  border-radius: 6px;
+  width: 100%;
+  height: 120px;
+  margin-top: 20px;
+  padding: 20px;
 `;
