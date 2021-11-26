@@ -60,7 +60,7 @@ const graphProperties = {
   axisBottom: null,
   axisLeft: null,
   enableGridX: false,
-  enableGridY: false,
+  enableGridY: true,
   enableSlices: false,
   enablePoints: false,
   enableArea: true,
@@ -162,7 +162,7 @@ export default function Graph() {
       { x: "2 Nov 2021", y: 50 },
       { x: "3 Nov 2021", y: 40 },
       { x: "4 Nov 2021", y: 20 },
-      { x: "5 Nov 2021", y: 5 },
+      { x: "5 Nov 2021", y: 50 },
       { x: "6 Nov 2021", y: 7 },
       { x: "7 Nov 2021", y: 60 },
       { x: "8 Nov 2021", y: 50 },
@@ -170,6 +170,12 @@ export default function Graph() {
       { x: "10 Nov 2021", y: 53 },
       { x: "11 Nov 2021", y: 52 },
       { x: "12 Nov 2021", y: 45 },
+      { x: "13 Nov 2021", y: 40 },
+      { x: "14 Nov 2021", y: 95 },
+      { x: "15 Nov 2021", y: 55 },
+      { x: "16 Nov 2021", y: 45 },
+      { x: "17 Nov 2021", y: 35 },
+      { x: "18 Nov 2021", y: 75 },
     ];
     setData(arr);
   }, []);

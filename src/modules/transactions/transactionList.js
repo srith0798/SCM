@@ -73,7 +73,7 @@ function TransactionList() {
   return (
     <>
       <Header />
-      <Row style={{ height: "100vh" }}>
+      <Row style={{ height: "170vh" }}>
         <Sidebar />
         <MainContainer>
           <Row>

@@ -6,6 +6,9 @@ const SidebarContainer = styled.div`
   background: #102c78 0% 0% no-repeat padding-box;
   width: 100%;
   max-width: 200px;
+  @media (min-width: 300px) and (max-width: 1024px) {
+    display: none;
+  }
 `;
 const Icon = styled.img``;
 const Wrapper = styled.div`

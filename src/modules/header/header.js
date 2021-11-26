@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { Row, Column } from "simple-flexbox";
+import "../../assets/styles/custom.css";
+import "./index";
 
 const UserLogo = styled.img`
   width: 55px;
@@ -24,25 +26,37 @@ const UserId = styled.span`
 
 const HeaderContainer = styled.div`
   width: 100%;
-  height: 60px;
   background: #091f5c 0% 0% no-repeat padding-box;
   opacity: 1;
+  padding: 1rem;
 `;
 const XmartlyLogo = styled.img`
-  width: 95px;
-  height: 55px;
-  margin-left: 15px;
+  margin-right: 12px;
 `;
-const UserContainer = styled.div`
-  position: absolute;
-  right: 50px;
+const UserContainer = styled.div``;
+const SpaceBetween = styled.div`
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
 `;
-
+const Menu = styled.div`
+  width: 35px;
+  height: 5px;
+  background-color: #ffffff;
+  margin: 4px 0;
+`;
 function Header() {
   return (
     <HeaderContainer>
-      <Row>
-        <XmartlyLogo src="/images/Logo.svg" />
+      <SpaceBetween>
+        <div style={{ display: "flex" }}>
+          <XmartlyLogo src="/images/Logo.svg" />
+          <Column>
+            <Menu></Menu>
+            <Menu></Menu>
+            <Menu></Menu>
+          </Column>
+        </div>
         <UserContainer>
           <Row>
             <UserLogo src="/images/kakashi.png" />
@@ -52,8 +66,23 @@ function Header() {
             </Column>
           </Row>
         </UserContainer>
-      </Row>
+      </SpaceBetween>
     </HeaderContainer>
+    // <div class="topnav">
+    //   <a href="#home" class="active">
+    //     Logo
+    //   </a>
+    //   {/* <!-- Navigation links (hidden by default) --> */}
+    //   <div id="myLinks">
+    //     <a href="#news">News</a>
+    //     <a href="#contact">Contact</a>
+    //     <a href="#about">About</a>
+    //   </div>
+    //   {/* <!-- "Hamburger menu" / "Bar icon" to toggle the navigation links --> */}
+    //   <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+    //     <i class="fa fa-bars"></i>
+    //   </a>
+    // </div>
   );
 }
 
