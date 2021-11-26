@@ -5,8 +5,8 @@ import Sidebar from "../sidebar/sidebar";
 import "react-tabs/style/react-tabs.css";
 import styled from "styled-components";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
-
 import Historys from "./Historys";
+import Destination from "./Destination";
 
 export default function Rules() {
   return (
@@ -14,12 +14,12 @@ export default function Rules() {
       <Header />
       <Row>
         <Sidebar />
-        <MainContainer>
-          <Row style={{ display: "flex", justifyContent: "space-between" }}>
-            <Transactions>
-              <b>Alerting</b>
-            </Transactions>
-            <Button>Add alert</Button>
+        <MainContainer style={{ padding: "3rem" }}>
+          <Row>
+            <RowCorrecter>
+              <Title>Alerting</Title>
+              <Button>Add alert</Button>
+            </RowCorrecter>
           </Row>
           <Container>
             <Tabs>
@@ -32,51 +32,46 @@ export default function Rules() {
                 <Tab>Destination</Tab>
               </TabList>
               <TabPanel>
-                <TableContainer>
-                  <Div>
-                    <Row>
-                      <ColumnOne>Contract Name</ColumnOne>
-                      <ColumnOne>Address</ColumnOne>
-                      <ColumnOne>Network</ColumnOne>
-                      <ColumnOne>Alert Type</ColumnOne>
-                      <ColumnOne></ColumnOne>
-                      <ColumnOne></ColumnOne>
-                    </Row>
-                  </Div>
-                  <Div>
-                    <Row>
-                      <ColumnOne>App_Transactions_Validator</ColumnOne>
-                      <ColumnOne>0xndfahkk57..fj9</ColumnOne>
-                      <ColumnOne>XDC Mainnet</ColumnOne>
-                      <ColumnOne>Sucessfull transaction</ColumnOne>
-                      <ColumnOne>enabled</ColumnOne>
-                      <ColumnOne>
-                        <img
-                          src="/images/delete.svg"
-                          style={{ width: "16px" }}
-                        />
-                      </ColumnOne>
-                    </Row>
-                  </Div>
-                  <Div>
-                    <Row>
-                      <ColumnOne>App_Transactions_Validator</ColumnOne>
-                      <ColumnOne>0xndfahkk57..fj9</ColumnOne>
-                      <ColumnOne>XDC Mainnet</ColumnOne>
-                      <ColumnOne>Failed transaction</ColumnOne>
-                      <ColumnOne>enabled</ColumnOne>
-                      <ColumnOne>
-                        <img
-                          src="/images/delete.svg"
-                          style={{ width: "16px" }}
-                        />
-                      </ColumnOne>
-                    </Row>
-                  </Div>
-                </TableContainer>
+                <Div>
+                  <Row>
+                    <ColumnOne>Contract Name</ColumnOne>
+                    <ColumnOne>Address</ColumnOne>
+                    <ColumnOne>Network</ColumnOne>
+                    <ColumnOne>Alert Type</ColumnOne>
+                    <ColumnOne></ColumnOne>
+                    <ColumnOne></ColumnOne>
+                  </Row>
+                </Div>
+                <Div>
+                  <Row>
+                    <ColumnOne>App_Transactions_Validator</ColumnOne>
+                    <ColumnOne>0xndfahkk57..fj9</ColumnOne>
+                    <ColumnOne>XDC Mainnet</ColumnOne>
+                    <ColumnOne>Sucessfull transaction</ColumnOne>
+                    <ColumnOne>enabled</ColumnOne>
+                    <ColumnOne>
+                      <img src="/images/delete.svg" style={{ width: "16px" }} />
+                    </ColumnOne>
+                  </Row>
+                </Div>
+                <Div>
+                  <Row>
+                    <ColumnOne>App_Transactions_Validator</ColumnOne>
+                    <ColumnOne>0xndfahkk57..fj9</ColumnOne>
+                    <ColumnOne>XDC Mainnet</ColumnOne>
+                    <ColumnOne>Failed transaction</ColumnOne>
+                    <ColumnOne>enabled</ColumnOne>
+                    <ColumnOne>
+                      <img src="/images/delete.svg" style={{ width: "16px" }} />
+                    </ColumnOne>
+                  </Row>
+                </Div>
               </TabPanel>
               <TabPanel>
                 <Historys />
+              </TabPanel>
+              <TabPanel>
+                <Destination />
               </TabPanel>
             </Tabs>
           </Container>
@@ -86,10 +81,14 @@ export default function Rules() {
   );
 }
 
+const Title = styled.div`
+  font-size: 1.5rem;
+  font-weight: 600;
+`;
 const Container = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
   border-radius: 6px;
-  width: 76rem;
+  width: 100%;
   background-color: #ffffff;
   height: 20rem;
   padding: 8px;
@@ -111,11 +110,11 @@ const ColumnOne = styled.div`
   max-width: 300px;
 `;
 const MainContainer = styled.div`
-  background: #ffffff 0% 0% no-repeat padding-box;
-  border-radius: 6px;
+  background: #ecf0f7 0% 0% no-repeat padding-box;
   opacity: 1;
-  margin-top: 20px;
-  height: auto;
+  width: 100%;
+  padding: 50px;
+  display: 100vh;
 `;
 
 const Button = styled.button`
@@ -134,14 +133,15 @@ const Button = styled.button`
   font-size: 14px;
 `;
 
-const TableContainer = styled.div`
-  background-color: #ffffff;
-  border-radius: 6px;
-  width: 100%;
-  height: 400px;
-`;
 const Div = styled.div`
   // padding: 20px 20px 15px 30px;
   padding: 15px;
   border-bottom: 1px solid #e3e7eb;
+`;
+const RowCorrecter = styled.div`
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1200px;
 `;

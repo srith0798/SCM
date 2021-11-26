@@ -4,18 +4,6 @@ import "react-tabs/style/react-tabs.css";
 import styled from "styled-components";
 
 export default function Historys() {
-  React.useEffect(() => {
-    let address = [
-      {
-        contractName: "App_Transactions_Validator",
-        address: "xdcabf8b3c",
-        network: "XDC Mainnet",
-        tag: "Add Tag",
-        visibility: "Visible",
-      },
-    ];
-  }, []);
-
   return (
     <>
       <MainContainer>

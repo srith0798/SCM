@@ -26,6 +26,7 @@ import LetsGetStarted from "./modules/Popup/letsGetStartedPopUp";
 import AddNetwork from "./modules/Popup/addNetwork";
 import Settings from "./modules/Popup/settings";
 import Rules from "./modules/Alerting/Rules";
+import AlertDetails from "./modules/Alerting/AlertDetails";
 
 class Routes extends BaseComponent {
   componentDidMount() {}
@@ -52,6 +53,7 @@ class Routes extends BaseComponent {
               path={"/transaction-details"}
               component={transactionDetails}
             />
+            <Route exact path={"/AlertDetails"} component={AlertDetails} />
             <Route exact path={"/Alerting"} component={Rules} />
 
             <Route exact path={"/add-contract"} component={AddContract} />
