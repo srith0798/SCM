@@ -36,7 +36,7 @@ const MainContainer = styled.div`
   background: #ecf0f7 0% 0% no-repeat padding-box;
   opacity: 1;
   width: 100%;
-  padding: 50px;
+  padding: 3rem;
   display: 100vh;
 `;
 

@@ -94,12 +94,6 @@ const Container = styled.div`
   padding: 8px;
 `;
 
-const Transactions = styled.div`
-  font-size: 20px;
-  display: flex;
-  justify-content: flex-end;
-`;
-
 const ColumnOne = styled.div`
   display: flex;
   flex-flow: column nowrap;

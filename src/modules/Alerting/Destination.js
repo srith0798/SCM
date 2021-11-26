@@ -9,7 +9,7 @@ export default function Destination() {
       <MainContainer>
         <Div>
           <Row>
-            <ColumnOne>Alert Type</ColumnOne>
+            <ColumnOne>Destinations</ColumnOne>
           </Row>
           <RowContainer>
             <Buttonn>
