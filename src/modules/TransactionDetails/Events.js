@@ -117,7 +117,6 @@ const ThirdBoxContainer = styled.div`
 
 const CAllADDs = styled.div`
   padding: "200px";
-  //
 `;
 const Heading = styled.div`
   text-align: left;

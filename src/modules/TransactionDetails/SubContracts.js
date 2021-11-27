@@ -1,12 +1,11 @@
 import React, { onsetstate, state } from "react";
 import styled from "styled-components";
-import SubContracts2 from "./SubContracts2";
 import { history } from "../../managers/history";
 
-const SubButton = () => {
-  history.push("/SubContracts2");
-};
 export default function SubContracts() {
+  const SubButton = () => {
+    history.push("/subcontract2");
+  };
   return (
     <MainDiv>
       <MainBoxContainer>

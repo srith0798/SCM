@@ -28,7 +28,6 @@ export default function Destination() {
 
         <ColumnOne>Active Destination</ColumnOne>
         <Div>
-          {" "}
           <Row>
             <img src="/images/email.svg" style={{ width: "1rem" }} />
             <ColumnTwo>Finance</ColumnTwo>
@@ -65,15 +64,7 @@ const MainContainer = styled.div`
   margin-top: 20px;
   height: auto;
 `;
-
-const TableContainer = styled.div`
-  background-color: #ffffff;
-
-  width: 100%;
-  height: 400px;
-`;
 const Div = styled.div`
-  // padding: 20px 50px 15px 30px;
   padding: 1rem;
   border-bottom: 1px solid #e3e7eb;
 `;

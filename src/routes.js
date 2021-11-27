@@ -12,7 +12,7 @@ import CreateAccount from "./modules/CreateAccount/createAccount";
 import VerifyEmail from "./modules/VerifyEmail/verifyEmail";
 import Contract from "./modules/Contract/contract";
 import ContractDetails from "./modules/contractDetails/contractDetails";
-import SubContracts2 from "./modules/TransactionDetails/SubContracts2";
+import SubContractsInfo from "./modules/TransactionDetails/SubContracts2";
 
 import AddContract from "./modules/Popup/addContract";
 import ContractAbi from "./modules/Popup/contractAbi";
@@ -53,6 +53,7 @@ class Routes extends BaseComponent {
               path={"/transaction-details"}
               component={transactionDetails}
             />
+            <Route exact path={"/subcontract2"} component={SubContractsInfo} />
             <Route exact path={"/AlertDetails"} component={AlertDetails} />
             <Route exact path={"/Alerting"} component={Rules} />
 

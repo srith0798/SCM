@@ -55,7 +55,14 @@ export default function SubContracts2() {
               </TabPanel>
             </Tabs>
           </Container>
-          <MainBoxContainer></MainBoxContainer>
+          <BoxContainer>
+            <Row>
+              <Heading>Contracts = </Heading>App_Transactions_Validator
+            </Row>
+          </BoxContainer>
+          <NewContainer>
+            <Div>code</Div>
+          </NewContainer>
         </MainContainer>
       </Row>
     </>
@@ -103,7 +110,13 @@ const Container = styled.div`
   margin-top: 20px;
   padding: 20px;
 `;
-
+const BoxContainer = styled.div`
+  background-color: #ffffff;
+  border-radius: 6px;
+  width: 100%;
+  height: 40px;
+  margin-top: 20px;
+`;
 const Hash = styled.div`
   display: flex;
   flex-flow: row nowrap;
@@ -124,9 +137,39 @@ const CopyImg = styled.img`
   cursor: pointer;
 `;
 
-const MainBoxContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  max-width: 800px;
+const Div = styled.div`
+  background-color: #f0f2fc;
+  border-radius: 4px;
   width: 100%;
+  height: 400px;
+  margin-top: 8px;
+  paddingleft: 20px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  color: #aaadc4;
+  font-size: 45px;
+`;
+
+const NewContainer = styled.div`
+  background-color: #ffffff;
+  border-radius: 6px;
+  width: 100%;
+  height: 590px;
+  padding-left: 200px;
+  padding-top: 7px;
+  padding-right: 12px;
+`;
+
+const Heading = styled.div`
+  text-align: left;
+  font: normal normal 600 14px/17px Inter;
+  letter-spacing: 0px;
+  color: #102c78;
+  padding-left: 20px;
+  padding-top: 6px;
+  opacity: 1;
+  width: 100%;
+  max-width: 110px;
 `;
