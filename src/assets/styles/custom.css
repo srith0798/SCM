@@ -323,3 +323,22 @@ border: none;
     background-color: #04AA6D;
     color: white;
   }
+  .switch{
+    position: relative;
+    display: inline-block;
+    width: 51px;
+    height: 26px;
+  }
+  .slider:before{
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+  }
+  .slider.round:before{
+    border-radius: 60%;
+  }

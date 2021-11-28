@@ -191,7 +191,7 @@ export default TransactionList;
 
 const TableCard = styled.div`
   background-color: #ffffff;
-  padding: 0px 20px;
+  height: 480px;
   margin-top: 20px;
 `;
 const TransactionNumber = styled.b`

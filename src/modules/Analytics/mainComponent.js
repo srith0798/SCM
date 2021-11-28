@@ -6,6 +6,19 @@ import Sidebar from "../sidebar/sidebar";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import Line from "./graph";
+import { useHistory } from "react-router-dom";
+
+const FirstPage = (props) => {
+  let history = useHistory();
+
+  const someEventHandler = (event) => {
+    history.push({
+      pathname: "/fullScreen",
+      search: "?query=abc",
+      state: { detail: "some_value" },
+    });
+  };
+};
 
 export default function MainComponent() {
   return (
@@ -85,7 +98,7 @@ export default function MainComponent() {
                 <SubContainer>
                   <div style={{ display: "flex", alignItems: "center" }}>
                     <Head>Transactions over time</Head>
-                    <img src="/images/expand.svg" />
+                    <img src="/images/expand.svg" onClick={FirstPage} />
                   </div>
                   <select name="cars" id="cars" class="">
                     <option value="volvo">Last 5 days</option>

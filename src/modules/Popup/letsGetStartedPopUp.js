@@ -62,6 +62,7 @@ export default function LetsGetStarted(props) {
               </CenterDiv>
               <CenterDiv>
                 <input type="checkbox" />
+                &nbsp;
                 <Toast>Don’t show this message again</Toast>
               </CenterDiv>
               <br />
@@ -96,7 +97,7 @@ const SubContainer = styled.div`
 `;
 const Add = styled.div`
   font: normal normal 600 24px/29px Inter;
-  font-size:2rem;
+  font-size:1.5rem;
   font-weight:600
   color: #303134;
 `;
@@ -147,7 +148,7 @@ const Icon = styled.img`
 `;
 const SubHeading = styled.span`
   text-align: center;
-  font-size: 1rem;
+  font-size: 0.75rem;
   font: normal normal medium 14px/17px Inter;
   color: #303134;
   display: flex;

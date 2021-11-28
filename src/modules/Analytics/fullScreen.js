@@ -4,39 +4,81 @@ import { Row, Column } from "simple-flexbox";
 import Header from "../header/header";
 import Sidebar from "../sidebar/sidebar";
 import Line from "./graph";
+import { history } from "../../managers/history";
 
 export default function FullScreen() {
+  const backButton = () => {
+    history.push("/contract");
+  };
   return (
     <div>
       <Column>
         <Header />
-        <Row>
+        <Row style={{ height: "200vh" }}>
           <Sidebar />
+          <MainContainer>
+            <SubContainer>
+              <AlignmentContainer>
+                <Img src="/images/back.svg" onClick={backButton} />
+                <MainHeading>Transactions over time</MainHeading>
+              </AlignmentContainer>
+              <AlignmentContainer>
+                <ExpandButton>Expand</ExpandButton>
+                <Icon src="/images/refresh.svg" />
+              </AlignmentContainer>
+            </SubContainer>
+
+            <Row
+              style={{
+                width: "100%",
+                justifyContent: "space-between",
+              }}
+            >
+              <GraphContainer>
+                <FlexEnd>
+                  <select name="cars" id="cars" class="">
+                    <option value="volvo">Last 5 days</option>
+                    <option value="saab">Last 7 days</option>
+                    <option value="mercedes">Last 15 days</option>
+                    <option value="audi">Last 25 days</option>
+                  </select>
+                </FlexEnd>
+                <Line />
+              </GraphContainer>
+            </Row>
+          </MainContainer>
         </Row>
-        <Container>
-          <FirstContainer>
-            <img src="/images/back.svg" />
-            <Heading>Transactions over time</Heading>
-          </FirstContainer>
-          <SecondContainer>
-            <ExpandButton>Expand</ExpandButton>
-            <img src="/images/refresh.svg" />
-          </SecondContainer>
-        </Container>
-        <GraphContainer>
-          <Line />
-        </GraphContainer>
       </Column>
     </div>
   );
 }
-const Container = styled.div`
-  display: flex;
-  justify-content: center;
+
+const MainContainer = styled.div`
+  width: 100%;
+  padding: 50px;
+  background-color: #ecf0f7;
 `;
-const FirstContainer = styled.div``;
-const SecondContainer = styled.div``;
-const Heading = styled.div``;
+const MainHeading = styled.div`
+  text-align: left;
+  font: normal normal 600 24px/29px Inter;
+  letter-spacing: 0px;
+  color: #191919;
+`;
+const SubContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+`;
+
+const GraphContainer = styled.div`
+  width: 100%;
+  background: #ffffff 0% 0% no-repeat padding-box;
+  border-radius: 6px;
+  height: 500px;
+  margin-top: 20px;
+  padding: 20px;
+`;
+
 const ExpandButton = styled.button`
   background-image: url("/images/Add.svg");
   background-repeat: no-repeat;
@@ -44,20 +86,26 @@ const ExpandButton = styled.button`
   padding-left: 21px;
   background-size: 14px;
   position: relative;
-  background-color: #3163f0;
-  color: #ffffff;
+  background-color: #ffffff;
   border: none;
   border-radius: 4px;
-  width: 130px;
-  height: 34px;
-  font-size: 14px;
-`;
-const GraphContainer = styled.div`
   width: 100%;
-  background: #ffffff 0% 0% no-repeat padding-box;
-  border-radius: 6px;
-  height: auto;
-  margin-top: 20px;
-  padding: 20px;
-  max-width: 590px;
+  color: #3163f0;
+  height: 34px;
+  font-size: 1rem;
+  font-weight: 600;
+`;
+const AlignmentContainer = styled.div`
+  display: flex;
+  align-items: center;
+`;
+const FlexEnd = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`;
+const Img = styled.img`
+  margin-right: 10px;
+`;
+const Icon = styled.img`
+  margin-left: 10px;
 `;
