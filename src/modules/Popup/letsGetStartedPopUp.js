@@ -7,9 +7,7 @@ import { makeStyles } from "@material-ui/styles";
 const useStyles = makeStyles(() => ({
   dialogBox: {
     width: "100% !important",
-    maxWidth: "800px",
-    // height: "100%",
-    // maxHeight: "500px",
+    maxWidth: "700px !important",
     overflow: "hidden",
   },
 }));

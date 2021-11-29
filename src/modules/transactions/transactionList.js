@@ -24,7 +24,11 @@ function TransactionList() {
   const handleClose = () => {
     isOpen(false);
   };
-  const options = ["one", "two", "three"];
+  const options = [
+    "App_Transactions_Validator",
+    "App_Transactions_Validator",
+    "App_Transactions_Validator",
+  ];
   const defaultOption = options[0];
   React.useEffect(() => {
     let address = [
@@ -100,9 +104,9 @@ function TransactionList() {
         <MainContainer>
           <Row>
             <Transactions>
-              <b>Transactions</b>
+              <Bold>Transactions</Bold>
             </Transactions>
-            <SearchBar placeholder="Search bystatus or name" />
+            <SearchBar placeholder="Search by status or name" />
             <IconContainer>
               {open && <Settings click={handleClose} />}
               <Icons src="/images/settings.svg" onClick={handleClickOpen} />
@@ -172,14 +176,6 @@ function TransactionList() {
 
 export default TransactionList;
 
-const TableCard = styled.div`
-  background-color: #ffffff;
-  height: 480px;
-  margin-top: 20px;
-`;
-const TransactionNumber = styled.b`
-  color: #416be0;
-`;
 const Div = styled.div`
   padding: 12px;
   border-bottom: 1px solid #e3e7eb;
@@ -249,6 +245,10 @@ const Heading = styled.span`
 `;
 const InstructionText = styled.span`
   margin-top: 10px;
+  color: #191919;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-bottom: 10px;
 `;
 const Card = styled.div`
   margin-top: 20px;
@@ -264,4 +264,7 @@ const ColumnSecond = styled.div`
   color: #191919;
   width: 100%;
   max-width: 300px;
+`;
+const Bold = styled.b`
+  color: #191919;
 `;

@@ -6,6 +6,7 @@ const SidebarContainer = styled.div`
   background: #102c78 0% 0% no-repeat padding-box;
   width: 100%;
   max-width: 200px;
+  padding: 30px;
   @media (min-width: 300px) and (max-width: 1024px) {
     display: none;
   }
@@ -13,18 +14,18 @@ const SidebarContainer = styled.div`
 const Icon = styled.img``;
 const Wrapper = styled.div`
   flex-wrap: wrap;
-  padding: 40px 0px 0px 25px;
+
   cursor: pointer;
   width: 100%;
   max-width: 240px;
   white-space: nowrap;
+  &:hover {
+    background: #1d3c93;
+  }
 `;
 
 const Heading = styled.span`
-  letter-spacing: 0px;
-  color: #8ca6f0;
-  opacity: 1;
-  margin-left: 15px;
+  color: #ffffff;
 `;
 
 function Sidebar() {
