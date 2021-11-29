@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Row, Column } from "simple-flexbox";
 import Header from "../header/header";
@@ -10,7 +10,7 @@ import { useHistory } from "react-router-dom";
 
 const FirstPage = (props) => {
   let history = useHistory();
-
+  console.log("hello");
   const someEventHandler = (event) => {
     history.push({
       pathname: "/fullScreen",
@@ -21,6 +21,9 @@ const FirstPage = (props) => {
 };
 
 export default function MainComponent() {
+  useEffect(() => {
+    FirstPage();
+  }, []);
   return (
     <div>
       <Column>

@@ -7,12 +7,16 @@ import { makeStyles } from "@material-ui/styles";
 const useStyles = makeStyles(() => ({
   dialogBox: {
     width: "100% !important",
+    maxWidth: "800px",
+    // height: "100%",
+    // maxHeight: "500px",
+    overflow: "hidden",
   },
 }));
 
 export default function LetsGetStarted(props) {
   const classes = useStyles();
-  console.log("fiffhiefhrfh", props);
+
   return (
     <div>
       {props.state ? (
@@ -30,7 +34,7 @@ export default function LetsGetStarted(props) {
                   <RowProperty>
                     <Icon src="/images/contracts.svg" />
                   </RowProperty>
-                  <RowProperty>Mange contracts</RowProperty>
+                  <RowProperty>Manage contracts</RowProperty>
                   <SubHeading>
                     You can add and manage any contract deployed on XDC Network.
                   </SubHeading>
@@ -52,8 +56,8 @@ export default function LetsGetStarted(props) {
                   <RowProperty>Set Alerts</RowProperty>
                   <SubHeading>
                     {" "}
-                    You can set different types of alert for you contracts,
-                    without missing any information
+                    You can set different types of alert for your contracts,
+                    without missing any information.
                   </SubHeading>
                 </Between>
               </SpaceBetween>
@@ -79,16 +83,13 @@ const MainContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: auto;
 `;
 const Container = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
-
   border-radius: 6px;
   width: 100%;
   background-color: #ffffff;
-  max-width: 900px;
-  height: 400px;
+
   padding: 15px;
 `;
 const SubContainer = styled.div`
@@ -106,7 +107,7 @@ const Img = styled.img`
 `;
 const Content = styled.div`
   color: #102c78;
-  margin-top: 20px;
+  margin-top: 10px;
   font-size: 1rem;
   font-weight: 600;
 `;
@@ -136,7 +137,8 @@ const Between = styled.div`
   border: 1px solid #d5e0ff;
   border-radius: 6px;
   width: 100%;
-  max-width: 166px;
+
+  max-width: 192px;
   padding: 10px;
   color: #1d3c93;
   font-weight: 600;
@@ -160,8 +162,8 @@ const CenterDiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 2rem;
-  margin-bottom: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
 `;
 const Toast = styled.div`
   font-size: 1rem;
@@ -173,4 +175,5 @@ const RowProperty = styled.div`
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;
+  color: #102c78;
 `;
