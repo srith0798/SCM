@@ -20,7 +20,7 @@ export default function SubContracts() {
           }}
         >
           <Heading>App_Transactions_Validator</Heading>
-          xdcabfe4184e5f9f600fe86d20ec
+          xdcabfe4184e0fe86d20ec
           <Button onClick={SubButton}>Verified contracts</Button>
         </BoxContainer>
 
@@ -35,7 +35,7 @@ export default function SubContracts() {
           }}
         >
           <Heading>App_Transactions_Validator</Heading>
-          xdcabfe4184e5f9f600fe86d20e
+          xdcabfe4184e5f986d20e
           <Button onClick={SubButton}>Verified contracts</Button>
         </BoxContainer>
 
@@ -50,7 +50,7 @@ export default function SubContracts() {
           }}
         >
           <Heading>App_Transactions_Validator</Heading>
-          xdcabfe4184e5f9f600fe86d20e
+          xdcabfe4184e5fe86d20e
           <Button onClick={SubButton}>Verified contracts</Button>
         </BoxContainer>
       </MainBoxContainer>
@@ -89,14 +89,15 @@ const MainBoxContainer = styled.div`
 `;
 
 const Button = styled.button`
-  background-color: green;
+  background: #00a58c 0% 0% no-repeat padding-box;
+  border-radius: 3px;
+  opacity: 1;
+  font-color: white;
+  text-align: left;
+  align-items: center;
+  font: normal normal normal 12px/15px Inter;
+  letter-spacing: 0px;
   color: #ffffff;
-  font-size: 10px;
-  padding: 10px;
-  width: 200px;
-  border-radius: 5px;
-  margin: 5px;
-  cursor: pointer;
-  padding-bottom: 2px;
-  align-item: center;
+  width: 10rem;
+  text-align: center;
 `;

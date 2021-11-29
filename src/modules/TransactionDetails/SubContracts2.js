@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Row } from "simple-flexbox";
+import { Column, Row } from "simple-flexbox";
 import Header from "../header/header";
 import Sidebar from "../sidebar/sidebar";
 import { CopyToClipboard } from "react-copy-to-clipboard";
@@ -18,12 +18,16 @@ export default function SubContracts2() {
         <Sidebar />
         <MainContainer>
           <Row style={{ display: "flex", justifyContent: "space-between" }}>
-            <Transactions>
+            <div>
+              <img
+                src="/images/back.svg"
+                style={{ marginRight: "10px" }}
+                // onClick={backButton}
+              />
               <b>Transactions Details</b>
-            </Transactions>
+            </div>
             <Button>View in Explorer</Button>
           </Row>
-
           <Container>
             <SubHeading>Txn hash</SubHeading>
             <div style={{ display: "flex", alignItems: "center" }}>
@@ -43,31 +47,138 @@ export default function SubContracts2() {
                 <img src="/images/state change.svg" style={{ width: "16px" }} />
                 <Tab>State change</Tab>
               </TabList>
-              <TabPanel></TabPanel>
-              <TabPanel>
-                <SubContracts />
-              </TabPanel>
-              <TabPanel>
-                <Events />
-              </TabPanel>
-              <TabPanel>
-                <StateChange />
-              </TabPanel>
             </Tabs>
           </Container>
           <BoxContainer>
             <Row>
-              <Heading>Contracts = </Heading>App_Transactions_Validator
+              <Heading>Contracts </Heading>
+              <SubHead>App_Transactions_Validator</SubHead>
             </Row>
+            <Column>
+              <CommonDiv>
+                <Row>
+                  <Heads>
+                    <img
+                      src="/images/contracts.svg"
+                      style={{ width: "1rem" }}
+                    />
+                    <TextLi>Subcontracts name</TextLi>
+                  </Heads>
+                </Row>
+              </CommonDiv>
+              <CommonDiv>
+                <Row>
+                  <Head>
+                    <img
+                      src="/images/contracts.svg"
+                      style={{ width: "1rem" }}
+                    />
+                    Subcontracts name
+                  </Head>
+                </Row>
+              </CommonDiv>
+              <CommonDiv>
+                <Row>
+                  <Head>
+                    <img
+                      src="/images/contracts.svg"
+                      style={{ width: "1rem" }}
+                    />
+                    Subcontracts name
+                  </Head>
+                </Row>
+              </CommonDiv>
+              <CommonDiv>
+                <Row>
+                  <Head>
+                    <img
+                      src="/images/contracts.svg"
+                      style={{ width: "1rem" }}
+                    />
+                    Subcontracts name
+                  </Head>
+                </Row>
+              </CommonDiv>
+              <CommonDiv>
+                <Row>
+                  <Head>
+                    <img
+                      src="/images/contracts.svg"
+                      style={{ width: "1rem" }}
+                    />
+                    Subcontracts name
+                  </Head>
+                </Row>
+              </CommonDiv>
+              <CommonDiv>
+                <Row>
+                  <Head>
+                    <img
+                      src="/images/contracts.svg"
+                      style={{ width: "1rem" }}
+                    />
+                    Subcontracts name
+                  </Head>
+                </Row>
+              </CommonDiv>
+              <CommonDiv>
+                <Row>
+                  <Head>
+                    <img
+                      src="/images/contracts.svg"
+                      style={{ width: "1rem" }}
+                    />
+                    Subcontracts name
+                  </Head>
+                </Row>
+              </CommonDiv>
+              <CommonDiv>
+                <Row>
+                  <Head>
+                    <img
+                      src="/images/contracts.svg"
+                      style={{ width: "1rem" }}
+                    />
+                    Subcontracts name
+                  </Head>
+                </Row>
+              </CommonDiv>
+              <CommonDiv>
+                <Row>
+                  <Head>
+                    <img
+                      src="/images/contracts.svg"
+                      style={{ width: "1rem" }}
+                    />
+                    Subcontracts name
+                  </Head>
+                </Row>
+              </CommonDiv>
+              <CommonDiv>
+                <Row>
+                  <Head>
+                    <img
+                      src="/images/contracts.svg"
+                      style={{ width: "1rem" }}
+                    />
+                    Subcontracts name
+                  </Head>
+                </Row>
+              </CommonDiv>
+            </Column>
           </BoxContainer>
-          <NewContainer>
-            <Div>code</Div>
-          </NewContainer>
         </MainContainer>
       </Row>
     </>
   );
 }
+const SubHead = styled.div`
+  font: normal normal medium 14px/17px Inter;
+  letter-spacing: 0px;
+  color: #102c78;
+  font-size: 12px;
+`;
+const CommonDiv = styled.div``;
 
 const MainContainer = styled.div`
   background: #ecf0f7 0% 0% no-repeat padding-box;
@@ -75,15 +186,6 @@ const MainContainer = styled.div`
   width: 100%;
   padding: 50px;
   display: 100vh;
-`;
-const Transactions = styled.div`
-  font-size: 20px;
-  display: flex;
-  justify-content: flex-end;
-  &::before {
-    content: "◀";
-    margin: 0 10px;
-  }
 `;
 
 const Button = styled.button`
@@ -114,8 +216,9 @@ const BoxContainer = styled.div`
   background-color: #ffffff;
   border-radius: 6px;
   width: 100%;
-  height: 40px;
+  height: auto;
   margin-top: 20px;
+  padding: 10px;
 `;
 const Hash = styled.div`
   display: flex;
@@ -137,39 +240,46 @@ const CopyImg = styled.img`
   cursor: pointer;
 `;
 
-const Div = styled.div`
-  background-color: #f0f2fc;
-  border-radius: 4px;
-  width: 100%;
-  height: 400px;
-  margin-top: 8px;
-  paddingleft: 20px;
-  display: flex;
-  align-items: center;
-  text-align: center;
-  justify-content: center;
-  color: #aaadc4;
-  font-size: 45px;
-`;
-
-const NewContainer = styled.div`
-  background-color: #ffffff;
-  border-radius: 6px;
-  width: 100%;
-  height: 590px;
-  padding-left: 200px;
-  padding-top: 7px;
-  padding-right: 12px;
-`;
-
 const Heading = styled.div`
   text-align: left;
   font: normal normal 600 14px/17px Inter;
   letter-spacing: 0px;
   color: #102c78;
-  padding-left: 20px;
-  padding-top: 6px;
   opacity: 1;
   width: 100%;
   max-width: 110px;
+`;
+const Head = styled.div`
+  display: flex;
+  align-items: center;
+  font: normal normal 600 14px/17px Inter;
+  opacity: 1;
+  width 150px;
+  height: 50px;
+  &:hover{
+    background-color: blue;
+    color: #ffffff;
+  }
+  
+`;
+const Heads = styled.div`
+ display: flex;
+  align-items: center;
+  font: normal normal 600 14px/17px Inter;
+  opacity: 1;
+  width 150px;
+  height: 50px;
+  &:hover{
+    background-color: blue;
+    color: #ffffff;
+  }
+`;
+
+const TextLi = styled.div`
+  text-align: left;
+  font: normal normal medium 14px/17px Inter;
+  letter-spacing: 0px;
+
+  opacity: 1;
+  font-size: 14px;
 `;

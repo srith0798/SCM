@@ -24,6 +24,7 @@ export default function Events() {
                 background: "#F5F6FD",
                 border: "solid #D5E0FF",
                 outline: "none",
+                height: "3rem",
               }}
             />
           </CAllADDs>
@@ -37,6 +38,7 @@ export default function Events() {
                 background: "#F5F6FD",
                 border: "solid #D5E0FF",
                 outline: "none",
+                height: "3rem",
               }}
             />
           </CAllADDs>

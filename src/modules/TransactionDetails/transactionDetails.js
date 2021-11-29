@@ -33,7 +33,7 @@ export default function transactionDetails() {
           <Container>
             <SubHeading>Txn hash</SubHeading>
             <div style={{ display: "flex", alignItems: "center" }}>
-              <Hash>xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c</Hash>
+              <Hash>xdcabfe4184e5f9f600fe86d20e2fsfbsgsgsa32c99be1768b3c</Hash>
               <CopyToClipboard>
                 <CopyImg src="/images/copy.svg" />
               </CopyToClipboard>
@@ -202,6 +202,9 @@ export default function transactionDetails() {
                 </StackContainer>
                 <LastContainer>
                   <SearchBar placeholder="Execution trace" />
+                  <br />
+                  <img src="/images/contracts.svg" style={{ width: "1rem" }} />
+                  transfer in App_Transactions_Validator
                 </LastContainer>
               </TabPanel>
               <TabPanel>
@@ -237,7 +240,7 @@ const SubHead = styled.div`
   font-size: 12px;
 `;
 const CommonDiv = styled.div`
-  border-bottom: 1px solid;
+  border-bottom: 0.5px #c9d1cb solid;
   padding: 13px;
 `;
 const MidContainer = styled.div`
@@ -261,6 +264,7 @@ const LastContainer = styled.div`
   opacity: 1;
   margin-top: 20px;
   height: 300px;
+  padding: 2rem;
 `;
 const MainContainer = styled.div`
   background: #ecf0f7 0% 0% no-repeat padding-box;
@@ -315,7 +319,7 @@ const Container = styled.div`
   background-color: #ffffff;
   border-radius: 6px;
   width: 100%;
-  height: 120px;
+  // height: 120px;
   margin-top: 20px;
   padding: 20px;
 `;

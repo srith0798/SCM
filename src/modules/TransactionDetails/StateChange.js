@@ -11,49 +11,18 @@ export default function StateChange() {
           </Heading>
           <SHead>xdcabfe4184e5f9f600fe86d20e2a32c</SHead>
           <Row>
-            <BoxContainer
-              defaultValue={10}
-              style={{
-                width: "250px",
-                height: "50px",
-                background: "#F5F6FD",
-                border: "solid #D5E0FF",
-              }}
-            >
-              Mappping(address=unit256)
-            </BoxContainer>
-            <Heading style={{ paddingTop: "20px", paddingLeft: "20px" }}>
-              balances
-            </Heading>
+            <BoxContainer2>Mappping(address=unit256)</BoxContainer2>
+            <Heading style={{ paddingTop: "20px" }}>balances</Heading>
           </Row>
           <Row>
-            <br />
-            0.xdcabfe4184e5f9f600fe8435nfsa3599be1768b3c
-            <BoxContainer
-              defaultValue={10}
-              style={{
-                width: "200px",
-                height: "50px",
-                background: "#ef9a9a",
-                border: "solid #D5E0FF",
-              }}
-            >
-              84615710000481040
-            </BoxContainer>
+            <NewDivv>0.xdcabfe4184e5f9f600fe8435nfsa3599be1768b3c</NewDivv>
+            <BoxContainer>84615710000481040</BoxContainer>
+            <BoxContainer1>24</BoxContainer1>
           </Row>
           <Row>
-            <br />
-            0.xdcabfe4184e5f9f600fe8435bdsa3599be1768b3c
-            <BoxContainer
-              style={{
-                width: "200px",
-                height: "50px",
-                background: "#ef9a9a",
-                border: "solid #D5E0FF",
-              }}
-            >
-              24274685008860000
-            </BoxContainer>
+            <NewDivv>0.xdcabfe4184e5f9f600fe8435bdsa3599be1768b3c</NewDivv>
+            <BoxContainer>24274685008860000</BoxContainer>
+            <BoxContainer1>242746850088</BoxContainer1>
           </Row>
         </Column>
       </SecondContainer>
@@ -72,7 +41,7 @@ const SecondContainer = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  height: 60vh;
+
   margin-top: 20px;
   background-color: #ffffff;
   border-radius: 4px;
@@ -92,5 +61,25 @@ const SHead = styled.div`
   padding: 10px;
 `;
 const BoxContainer = styled.div`
-  padding: 10px;
+  background: #fde7e7 0% 0% no-repeat padding-box;
+  border: 1px solid #ce1a1a;
+  border-radius: 4px;
+  opacity: 1;
+`;
+const NewDivv = styled.div`
+  font-family: bold;
+  display: flex;
+`;
+const BoxContainer1 = styled.div`
+  background: #1ace2f 0% 0% no-repeat padding-box;
+border: 1px solid #1ACE2F
+  border-radius: 4px;
+  opacity: 1;
+`;
+
+const BoxContainer2 = styled.div`
+  background: #3163f11a 0% 0% no-repeat padding-box;
+  border: 1px solid #3163f0;
+  border-radius: 4px;
+  opacity: 1;
 `;
