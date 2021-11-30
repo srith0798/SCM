@@ -41,7 +41,7 @@ export default function Sidebar() {
     history.push("/network");
   };
   const redirectToAnalytics = () => {
-    history.push("/analytics-Maincomponent");
+    history.push("/analytics");
   };
   return (
     <SidebarContainer>

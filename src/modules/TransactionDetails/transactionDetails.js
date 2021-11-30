@@ -23,7 +23,7 @@ export default function TransactionDetails() {
         <MainContainer>
           <Row style={{ display: "flex", justifyContent: "space-between" }}>
             <div>
-              <img src="/images/back.svg" onClick={backButton} />
+              <img style={{marginRight: "10px"}} src="/images/back.svg" onClick={backButton} />
               <b>Transactions Details</b>
             </div>
             <Button>View in Explorer</Button>

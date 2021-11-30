@@ -74,7 +74,7 @@ class Routes extends BaseComponent {
             <Route exact path={"/analytics"} component={Analytics} />
             <Route
               exact
-              path={"/analytics-Maincomponent"}
+              path={"/analytics"}
               component={MainComponent}
             />
             <Route exact path={"/fullscreen"} component={FullScreen} />

@@ -177,7 +177,7 @@ export default function Graph() {
       { x: "17 Nov 2021", y: 35 },
       { x: "18 Nov 2021", y: 75 },
     ];
-    setData(arr);
+    await setData(arr);
   }, []);
   // var d = new Date();
   // var n = d.getFullYear();

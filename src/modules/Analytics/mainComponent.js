@@ -43,7 +43,8 @@ export default function MainComponent(props) {
     setOpen(false);
   };
   const FullScreen = () => {
-    history.push("/fullscreen");
+    // history.push("/fullscreen");
+    // props.changeExpand(1)
     // history.push(pathConstants.DASHBOARD_MENU.ADD_PRODUCT);
   };
   const styles = {
@@ -122,7 +123,7 @@ export default function MainComponent(props) {
                     <Head>Transactions over time</Head>
                     <img
                       src="/images/expand.svg"
-                      onClick={() => props.changeExpand(1)}
+                      onClick={FullScreen}
                     />
                   </div>
                   <select name="cars" id="cars" class="">
