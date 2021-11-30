@@ -8,7 +8,7 @@ import { history } from "../../managers/history";
 
 export default function FullScreen(props) {
   const ClickMe = () => {
-    console.log("expand");
+    props.changeExpand(0);
   };
   return (
     <div>

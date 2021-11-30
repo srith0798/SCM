@@ -7,6 +7,7 @@ import Line from "./graph";
 import { useHistory } from "react-router-dom";
 import Box from "@mui/material/Box";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
+import { history } from "../../managers/history";
 
 // const FirstPage = (props) => {
 //   let history = useHistory();
@@ -20,7 +21,7 @@ import ClickAwayListener from "@mui/material/ClickAwayListener";
 //   };
 // };
 
-export default function MainComponent() {
+export default function MainComponent(props) {
   // useEffect(() => {
 
   // }, []);
@@ -41,7 +42,10 @@ export default function MainComponent() {
   const handleClickAway = () => {
     setOpen(false);
   };
-
+  const FullScreen = () => {
+    history.push("/fullscreen");
+    // history.push(pathConstants.DASHBOARD_MENU.ADD_PRODUCT);
+  };
   const styles = {
     position: "absolute",
     top: 77,
@@ -90,7 +94,7 @@ export default function MainComponent() {
                     <TransactionHash>
                       xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c
                     </TransactionHash>
-                    <Image src="/images/add.svg" />
+                    <Image src="/images/dropdown.svg" />
                   </DropDown>
                   {isSetOpen ? (
                     <Box sx={styles}>
@@ -118,7 +122,7 @@ export default function MainComponent() {
                     <Head>Transactions over time</Head>
                     <img
                       src="/images/expand.svg"
-                      // onClick={FirstPage}
+                      onClick={() => props.changeExpand(1)}
                     />
                   </div>
                   <select name="cars" id="cars" class="">
@@ -280,12 +284,6 @@ const Content = styled.div`
   margin-top: 20px;
 `;
 
-const Card = styled.div`
-  border-radius: 4px;
-`;
-const TransactionNumber = styled.b`
-  color: #416be0;
-`;
 const GraphContainer = styled.div`
   width: 100%;
   background: #ffffff 0% 0% no-repeat padding-box;

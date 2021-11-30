@@ -59,7 +59,7 @@ class Routes extends BaseComponent {
               path={"/analytics-Maincomponent"}
               component={MainComponent}
             />
-            <Route exact path={"/fullScreen/:id"} component={FullScreen} />
+            <Route exact path={"/fullscreen"} component={FullScreen} />
             <Redirect exact from="*" to="/" />
           </Switch>
         </Router>
