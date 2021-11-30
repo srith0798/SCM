@@ -179,10 +179,10 @@ const TableContainer = styled.div`
   border-radius: 6px;
   width: 100%;
   height: 400px;
+  padding: 10px;
 `;
 const Div = styled.div`
-  // padding: 20px 20px 15px 30px;
-  padding: 15px;
+  padding: 12px;
   border-bottom: 1px solid #e3e7eb;
 `;
 const ColumnOne = styled.div`

@@ -6,25 +6,31 @@ const SidebarContainer = styled.div`
   background: #102c78 0% 0% no-repeat padding-box;
   width: 100%;
   max-width: 200px;
+  @media (min-width: 300px) and (max-width: 1024px) {
+    display: none;
+  }
 `;
-const Icon = styled.img``;
+const Icon = styled.img`
+  cursor: pointer;
+  margin-right: 13px;
+`;
 const Wrapper = styled.div`
   flex-wrap: wrap;
-  padding: 40px 0px 0px 25px;
   cursor: pointer;
   width: 100%;
   max-width: 240px;
   white-space: nowrap;
+  padding: 23px;
+  &:hover {
+    background: #1d3c93;
+  }
 `;
 
 const Heading = styled.span`
-  letter-spacing: 0px;
-  color: #8ca6f0;
-  opacity: 1;
-  margin-left: 15px;
+  color: #ffffff;
 `;
 
-function Sidebar() {
+export default function Sidebar() {
   const redirectToTransaction = () => {
     history.push("/transaction-details");
   };
@@ -34,9 +40,12 @@ function Sidebar() {
   const redirectToNetwork = () => {
     history.push("/network");
   };
+  const redirectToAnalytics = () => {
+    history.push("/analytics-Maincomponent");
+  };
   return (
     <SidebarContainer>
-      <Wrapper onClick={redirectToTransaction}>
+      <Wrapper onClick={redirectToTransaction} style={{ marginTop: "20px" }}>
         <Icon src="/images/Transactions.svg" />
         <Heading>Transactions</Heading>
       </Wrapper>
@@ -48,7 +57,7 @@ function Sidebar() {
         <Icon src="/images/networks.svg" />
         <Heading>Networks</Heading>
       </Wrapper>
-      <Wrapper>
+      <Wrapper onClick={redirectToAnalytics}>
         <Icon src="/images/Analytics.svg" />
         <Heading>Analytics</Heading>
       </Wrapper>
@@ -59,5 +68,3 @@ function Sidebar() {
     </SidebarContainer>
   );
 }
-
-export default Sidebar;

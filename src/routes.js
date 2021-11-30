@@ -23,6 +23,9 @@ import Network from "./modules/Network/network";
 import LetsGetStarted from "./modules/Popup/letsGetStartedPopUp";
 import AddNetwork from "./modules/Popup/addNetwork";
 import Settings from "./modules/Popup/settings";
+import Analytics from "./modules/Analytics/analytics";
+import MainComponent from "./modules/Analytics/mainComponent";
+import FullScreen from "./modules/Analytics/fullScreen";
 
 class Routes extends BaseComponent {
   componentDidMount() {}
@@ -50,7 +53,13 @@ class Routes extends BaseComponent {
             <Route exact path={"/remove"} component={Remove} />
             <Route exact path={"/add-network"} component={AddNetwork} />
             <Route exact path={"/settings"} component={Settings} />
-
+            <Route exact path={"/analytics"} component={Analytics} />
+            <Route
+              exact
+              path={"/analytics-Maincomponent"}
+              component={MainComponent}
+            />
+            <Route exact path={"/fullscreen"} component={FullScreen} />
             <Redirect exact from="*" to="/" />
           </Switch>
         </Router>

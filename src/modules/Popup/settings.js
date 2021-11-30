@@ -16,58 +16,95 @@ export default function Settings(props) {
       <Dialog classes={{ paper: classes.dialogBox }} open={true}>
         <MainContainer>
           <Container>
-            <SubContainer>
+            <SubContainer style={{ padding: "15px 12px 10px 10px" }}>
               <Add>Settings</Add>
               <Img src="/images/XDC-Cross.svg" onClick={props.click} />
             </SubContainer>
-            <MainHeading>Configure Columns</MainHeading>
+            <MainHeading style={{ padding: "15px 12px 10px 10px" }}>
+              Configure Columns
+            </MainHeading>
             <Content>
               Change the layout of the transactions list and display only the
               columns and information that is most important to you.
             </Content>
-            <SubContainer style={{ borderBottom: "1px solid #d5e0ff" }}>
+            <SubContainer
+              style={{
+                borderBottom: "1px solid #d5e0ff",
+                padding: "15px 12px 10px 10px",
+              }}
+            >
               <Heading>Transaction Hash</Heading>
               <label class="switch">
                 <input type="checkbox" />
                 <span class="slider round"></span>
               </label>
             </SubContainer>
-            <SubContainer style={{ borderBottom: "1px solid #d5e0ff" }}>
+            <SubContainer
+              style={{
+                borderBottom: "1px solid #d5e0ff",
+                padding: "5px 12px 10px 10px",
+              }}
+            >
               <Heading>Status</Heading>
               <label class="switch">
                 <input type="checkbox" />
                 <span class="slider round"></span>
               </label>
             </SubContainer>
-            <SubContainer style={{ borderBottom: "1px solid #d5e0ff" }}>
+            <SubContainer
+              style={{
+                borderBottom: "1px solid #d5e0ff",
+                padding: "5px 12px 10px 10px",
+              }}
+            >
               <Heading>Function</Heading>
               <label class="switch">
                 <input type="checkbox" />
                 <span class="slider round"></span>
               </label>
             </SubContainer>
-            <SubContainer style={{ borderBottom: "1px solid #d5e0ff" }}>
+            <SubContainer
+              style={{
+                borderBottom: "1px solid #d5e0ff",
+                padding: "5px 12px 10px 10px",
+              }}
+            >
               <Heading>Contracts</Heading>
               <label class="switch">
                 <input type="checkbox" />
                 <span class="slider round"></span>
               </label>
             </SubContainer>
-            <SubContainer style={{ borderBottom: "1px solid #d5e0ff" }}>
+            <SubContainer
+              style={{
+                borderBottom: "1px solid #d5e0ff",
+                padding: "5px 12px 10px 10px",
+              }}
+            >
               <Heading>From</Heading>
               <label class="switch">
                 <input type="checkbox" />
                 <span class="slider round"></span>
               </label>
             </SubContainer>
-            <SubContainer style={{ borderBottom: "1px solid #d5e0ff" }}>
+            <SubContainer
+              style={{
+                borderBottom: "1px solid #d5e0ff",
+                padding: "5px 12px 10px 10px",
+              }}
+            >
               <Heading>Network</Heading>
               <label class="switch">
                 <input type="checkbox" />
                 <span class="slider round"></span>
               </label>
             </SubContainer>
-            <SubContainer style={{ borderBottom: "1px solid #d5e0ff" }}>
+            <SubContainer
+              style={{
+                borderBottom: "1px solid #d5e0ff",
+                padding: "5px 12px 10px 10px",
+              }}
+            >
               <Heading>XDC value</Heading>
               <label class="switch">
                 <input type="checkbox" />
@@ -95,7 +132,6 @@ const Container = styled.div`
   background-color: #ffffff;
   max-width: 700px;
   height: auto;
-  padding: 20px;
 `;
 const SubContainer = styled.div`
   display: flex;
@@ -114,13 +150,15 @@ const MainHeading = styled.div`
   font-weight: 600;
   letter-spacing: 0px;
   color: #102c78;
-  margin-top: 20px;
+
+  border-bottom: 1px solid rgb(213, 224, 255);
 `;
 const Content = styled.div`
   font-size: 16px;
   font-weight: 600;
   color: #303134;
-  margin-top: 20px;
+  margin-top: 10px;
+  padding: 15px 12px 8px 10px;
 `;
 const Heading = styled.div`
   text-align: left;
