@@ -11,8 +11,8 @@ const ToolTipElement = (props) => {
   return (
     <div>
       <div className="Tooltip-graph">
-        <p className="Tooltip-graph-date">{props.point?.data?.x}</p>
-        <p className="Tooltip-graph-tx">Accounts: {props.point?.data?.y}</p>
+        <p className="Tooltip-graph-date">{props.point.data.x}</p>
+        <p className="Tooltip-graph-tx">Accounts: {props.point.data.y}</p>
       </div>
       {/* <TriangleArrowDown /> */}
     </div>
@@ -196,11 +196,11 @@ export default function Graph() {
   const firstDate =
     graphAccounts.length == 0
       ? ""
-      : moment(graphAccounts[length - 1]?.day).format("D MMM");
+      : moment(graphAccounts[length - 1].day).format("D MMM");
   const lastDate =
     graphAccounts.length == 0
       ? ""
-      : moment(graphAccounts[0]?.day).format("D MMM");
+      : moment(graphAccounts[0].day).format("D MMM");
   const MouseMovePoint = (event) => {
     const x = event.x;
     const y = event.y;
