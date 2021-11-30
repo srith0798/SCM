@@ -10,5 +10,9 @@ import MainComponent from "./mainComponent";
 import FullScreen from "./fullScreen";
 
 export default function Analytics(props) {
-  return <>{FullScreen ? <MainComponent /> : null}</>;
+  const [Expand, setExpand] = React.useState(0);
+  const changeExpand = (value) => {
+    setExpand(value);
+  };
+  return <>{Expand === 1 ? <FullScreen /> : <MainComponent />}</>;
 }

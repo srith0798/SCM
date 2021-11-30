@@ -28,7 +28,7 @@ const HeaderContainer = styled.div`
   width: 100%;
   background: #091f5c 0% 0% no-repeat padding-box;
   opacity: 1;
-  padding: 1rem;
+  padding: 5px;
 `;
 const XmartlyLogo = styled.img`
   margin-right: 12px;

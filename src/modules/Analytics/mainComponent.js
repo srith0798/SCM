@@ -3,27 +3,66 @@ import styled from "styled-components";
 import { Row, Column } from "simple-flexbox";
 import Header from "../header/header";
 import Sidebar from "../sidebar/sidebar";
-import MenuItem from "@mui/material/MenuItem";
-import Select from "@mui/material/Select";
 import Line from "./graph";
 import { useHistory } from "react-router-dom";
+import Box from "@mui/material/Box";
+import ClickAwayListener from "@mui/material/ClickAwayListener";
 
-const FirstPage = (props) => {
-  let history = useHistory();
-  console.log("hello");
-  const someEventHandler = (event) => {
-    history.push({
-      pathname: "/fullScreen",
-      search: "?query=abc",
-      state: { detail: "some_value" },
-    });
-  };
-};
+// const FirstPage = (props) => {
+//   let history = useHistory();
+//   console.log("hello");
+//   const someEventHandler = (event) => {
+//     history.push({
+//       pathname: "/fullScreen",
+//       search: "?query=abc",
+//       state: { detail: "some_value" },
+//     });
+//   };
+// };
 
 export default function MainComponent() {
-  useEffect(() => {
-    FirstPage();
-  }, []);
+  // useEffect(() => {
+
+  // }, []);
+  // const [Expand, setCountry] = React.useState(false);
+  // const changeExpand = (value) => {
+  //   setCountry(value);
+  // };
+  // const [Expand, setExpand] = React.useState(false);
+  // const changeExpand = (value) => {
+  //   setExpand(value);
+  // };
+  const [isSetOpen, setOpen] = React.useState(false);
+
+  const handleClick = () => {
+    setOpen((prev) => !prev);
+  };
+
+  const handleClickAway = () => {
+    setOpen(false);
+  };
+
+  const styles = {
+    position: "absolute",
+    top: 77,
+    right: 0,
+    left: 0,
+    zIndex: 1,
+    border: "1px solid",
+    p: 1,
+    bgcolor: "background.paper",
+    width: "100%",
+    maxWidth: "453px",
+    background: "#f5f6fd 0% 0% no-repeat padding-box",
+    border: "1px solid #d5e0ff",
+    borderRadius: "6px",
+    height: "80px",
+    marginTop: "4px",
+    fontSize: "14px",
+    fontWeight: "600",
+    color: "#191919",
+  };
+
   return (
     <div>
       <Column>
@@ -43,52 +82,28 @@ export default function MainComponent() {
                 You can view analytics data per contract by using the contract
                 picker below.
               </Content>
-              <Card>
-                <Column>
-                  <Select
-                    defaultValue={10}
-                    style={{
-                      width: 500,
-                      marginTop: 10,
-                      background: "#F5F6FD",
-                      border: "solid #D5E0FF",
-                      outline: "none",
-                    }}
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    // value={age}
-                    // label="Age"
-                    // onChange={handleChange}
-                  >
-                    <MenuItem color="#416BE0" value={10}>
-                      <Column>
-                        App_Transactions
-                        <TransactionNumber>
-                          xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c
-                        </TransactionNumber>
-                      </Column>
-                    </MenuItem>
-
-                    <MenuItem value={20} color="#416BE0">
-                      <Column>
-                        App_Transactions
-                        <TransactionNumber>
-                          xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c
-                        </TransactionNumber>
-                      </Column>
-                    </MenuItem>
-
-                    <MenuItem value={30} color="#416BE0">
-                      <Column>
-                        App_Transactions
-                        <TransactionNumber>
-                          xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c
-                        </TransactionNumber>
-                      </Column>
-                    </MenuItem>
-                  </Select>
-                </Column>
-              </Card>
+              <ClickAwayListener onClickAway={handleClickAway}>
+                <Box sx={{ position: "relative" }}>
+                  <DropDown onClick={handleClick}>
+                    App_Transactions_Validator
+                    <br />
+                    <TransactionHash>
+                      xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c
+                    </TransactionHash>
+                    <Image src="/images/add.svg" />
+                  </DropDown>
+                  {isSetOpen ? (
+                    <Box sx={styles}>
+                      <Label>Contract</Label>
+                      App_Transactions_Validator
+                      <br />
+                      <TransactionHash>
+                        xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c
+                      </TransactionHash>
+                    </Box>
+                  ) : null}
+                </Box>
+              </ClickAwayListener>
             </Container>
             <Row
               style={{
@@ -101,7 +116,10 @@ export default function MainComponent() {
                 <SubContainer>
                   <div style={{ display: "flex", alignItems: "center" }}>
                     <Head>Transactions over time</Head>
-                    <img src="/images/expand.svg" onClick={FirstPage} />
+                    <img
+                      src="/images/expand.svg"
+                      // onClick={FirstPage}
+                    />
                   </div>
                   <select name="cars" id="cars" class="">
                     <option value="volvo">Last 5 days</option>
@@ -296,4 +314,34 @@ const Div = styled.div`
   flex-flow: row nowrap;
   border-top: 1px solid rgb(227, 231, 235);
   margin-top: 20px;
+`;
+const DropDown = styled.div`
+  background: #f5f6fd 0% 0% no-repeat padding-box;
+  border: 1px solid #d5e0ff;
+  border-radius: 6px;
+  font: normal normal medium 14px/17px Inter;
+  font-size: 14px;
+  font-weight: 600;
+  color: #191919;
+  height: 75px;
+  padding: 10px;
+  width: 100%;
+  max-width: 453px;
+`;
+const TransactionHash = styled.div`
+  font-size: 14px;
+  font-weight: 600;
+  color: #416be0;
+  margin-top: 4px;
+`;
+const Image = styled.img`
+  width: 12px;
+  position: absolute;
+  top: 29px;
+  left: 35%;
+`;
+const Label = styled.div`
+  font-size: 12px;
+  font-weight: 600;
+  color: #767c93;
 `;

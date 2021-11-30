@@ -6,9 +6,9 @@ import Sidebar from "../sidebar/sidebar";
 import Line from "./graph";
 import { history } from "../../managers/history";
 
-export default function FullScreen() {
-  const backButton = () => {
-    history.push("/contract");
+export default function FullScreen(props) {
+  const ClickMe = () => {
+    console.log("expand");
   };
   return (
     <div>
@@ -19,7 +19,7 @@ export default function FullScreen() {
           <MainContainer>
             <SubContainer>
               <AlignmentContainer>
-                <Img src="/images/back.svg" onClick={backButton} />
+                <Img src="/images/back.svg" onClick={ClickMe} />
                 <MainHeading>Transactions over time</MainHeading>
               </AlignmentContainer>
               <AlignmentContainer>

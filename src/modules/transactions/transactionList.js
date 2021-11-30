@@ -3,15 +3,12 @@ import styled from "styled-components";
 import Header from "../header/header";
 import Sidebar from "../sidebar/sidebar";
 import { Column, Row } from "simple-flexbox";
-import TableComponent from "../../common/components/TableComponent";
-import MenuItem from "@mui/material/MenuItem";
-import Select from "@mui/material/Select";
 import LetsGetStarted from "../Popup/letsGetStartedPopUp";
 import Settings from "../Popup/settings";
-import Dropdown from "react-dropdown";
-import "react-dropdown/style.css";
+import Box from "@mui/material/Box";
+import ClickAwayListener from "@mui/material/ClickAwayListener";
 
-function TransactionList() {
+export default function TransactionList(props) {
   useEffect(() => {
     // code to run on component mount
     // setstate();
@@ -24,12 +21,7 @@ function TransactionList() {
   const handleClose = () => {
     isOpen(false);
   };
-  const options = [
-    "App_Transactions_Validator",
-    "App_Transactions_Validator",
-    "App_Transactions_Validator",
-  ];
-  const defaultOption = options[0];
+
   React.useEffect(() => {
     let address = [
       {
@@ -95,11 +87,41 @@ function TransactionList() {
   }, []);
 
   const [address, setAddress] = React.useState([]);
+  const [isSetOpen, setOpen] = React.useState(false);
+
+  const handleClick = () => {
+    setOpen((prev) => !prev);
+  };
+
+  const handleClickAway = () => {
+    setOpen(false);
+  };
+
+  const styles = {
+    position: "absolute",
+    top: 77,
+    right: 0,
+    left: 0,
+    zIndex: 1,
+    border: "1px solid",
+    p: 1,
+    bgcolor: "background.paper",
+    width: "100%",
+    maxWidth: "453px",
+    background: "#f5f6fd 0% 0% no-repeat padding-box",
+    border: "1px solid #d5e0ff",
+    borderRadius: "6px",
+    height: "80px",
+    marginTop: "4px",
+    fontSize: "14px",
+    fontWeight: "600",
+    color: "#191919",
+  };
 
   return (
     <>
       <Header />
-      <Row style={{ height: "170vh" }}>
+      <Row style={{ height: "200vh" }}>
         <Sidebar />
         <MainContainer>
           <Row>
@@ -123,12 +145,28 @@ function TransactionList() {
                 picker below
               </InstructionText>
 
-              <Dropdown
-                options={options}
-                // onChange={this._onSelect}
-                value={defaultOption}
-                placeholder="Select an option"
-              />
+              <ClickAwayListener onClickAway={handleClickAway}>
+                <Box sx={{ position: "relative" }}>
+                  <DropDown onClick={handleClick}>
+                    App_Transactions_Validator
+                    <br />
+                    <TransactionHash>
+                      xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c
+                    </TransactionHash>
+                    <Image src="/images/add.svg" />
+                  </DropDown>
+                  {isSetOpen ? (
+                    <Box sx={styles}>
+                      <Label>Contract</Label>
+                      App_Transactions_Validator
+                      <br />
+                      <TransactionHash>
+                        xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c
+                      </TransactionHash>
+                    </Box>
+                  ) : null}
+                </Box>
+              </ClickAwayListener>
             </Column>
           </Card>
 
@@ -173,8 +211,6 @@ function TransactionList() {
     </>
   );
 }
-
-export default TransactionList;
 
 const Div = styled.div`
   padding: 12px;
@@ -267,4 +303,35 @@ const ColumnSecond = styled.div`
 `;
 const Bold = styled.b`
   color: #191919;
+`;
+const DropDown = styled.div`
+  background: #f5f6fd 0% 0% no-repeat padding-box;
+  border: 1px solid #d5e0ff;
+  border-radius: 6px;
+  font: normal normal medium 14px/17px Inter;
+  font-size: 14px;
+  font-weight: 600;
+  color: #191919;
+  height: 75px;
+  padding: 10px;
+  width: 100%;
+  max-width: 453px;
+`;
+const TransactionHash = styled.div`
+  font-size: 14px;
+  font-weight: 600;
+  color: #416be0;
+  margin-top: 4px;
+`;
+const Image = styled.img`
+  width: 12px;
+  position: absolute;
+  top: 29px;
+  left: 35%;
+  cursor: pointer;
+`;
+const Label = styled.div`
+  font-size: 12px;
+  font-weight: 600;
+  color: #767c93;
 `;

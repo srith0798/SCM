@@ -9,6 +9,7 @@ const useStyles = makeStyles(() => ({
     width: "100% !important",
     maxWidth: "700px !important",
     overflow: "hidden",
+    top: "-9%",
   },
 }));
 
