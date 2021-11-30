@@ -7,12 +7,15 @@ import { makeStyles } from "@material-ui/styles";
 const useStyles = makeStyles(() => ({
   dialogBox: {
     width: "100% !important",
+    maxWidth: "700px !important",
+    overflow: "hidden",
+    top: "-9%",
   },
 }));
 
 export default function LetsGetStarted(props) {
   const classes = useStyles();
-  console.log("fiffhiefhrfh", props);
+
   return (
     <div>
       {props.state ? (
@@ -30,7 +33,7 @@ export default function LetsGetStarted(props) {
                   <RowProperty>
                     <Icon src="/images/contracts.svg" />
                   </RowProperty>
-                  <RowProperty>Mange contracts</RowProperty>
+                  <RowProperty>Manage contracts</RowProperty>
                   <SubHeading>
                     You can add and manage any contract deployed on XDC Network.
                   </SubHeading>
@@ -52,15 +55,21 @@ export default function LetsGetStarted(props) {
                   <RowProperty>Set Alerts</RowProperty>
                   <SubHeading>
                     {" "}
-                    You can set different types of alert for you contracts,
-                    without missing any information
+                    You can set different types of alert for your contracts,
+                    without missing any information.
                   </SubHeading>
                 </Between>
               </SpaceBetween>
               <CenterDiv>
                 <Button>Add your first contract</Button>
-                {/* <Toast>Don’t show this message again</Toast> */}
               </CenterDiv>
+              <CenterDiv>
+                <input type="checkbox" />
+                &nbsp;
+                <Toast>Don’t show this message again</Toast>
+              </CenterDiv>
+              <br />
+              <br />
             </Container>
           </MainContainer>
         </Dialog>
@@ -76,13 +85,11 @@ const MainContainer = styled.div`
 `;
 const Container = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
-
   border-radius: 6px;
   width: 100%;
   background-color: #ffffff;
-  max-width: 700px;
-  height: 400px;
-  padding: 20px;
+
+  padding: 15px;
 `;
 const SubContainer = styled.div`
   display: flex;
@@ -90,16 +97,17 @@ const SubContainer = styled.div`
 `;
 const Add = styled.div`
   font: normal normal 600 24px/29px Inter;
+  font-size:1.5rem;
+  font-weight:600
   color: #303134;
 `;
 const Img = styled.img`
   cursor: pointer;
 `;
 const Content = styled.div`
-  //   font: normal normal 600 16px/20px Inter;
   color: #102c78;
-  margin-top: 20px;
-  font-size: 16px;
+  margin-top: 10px;
+  font-size: 1rem;
   font-weight: 600;
 `;
 
@@ -109,7 +117,7 @@ const Button = styled.button`
   border: 0px;
   color: #ffffff;
   width: 100%;
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 600;
   padding: 7px;
   margin-top: 40px;
@@ -128,7 +136,8 @@ const Between = styled.div`
   border: 1px solid #d5e0ff;
   border-radius: 6px;
   width: 100%;
-  max-width: 166px;
+
+  max-width: 192px;
   padding: 10px;
   color: #1d3c93;
   font-weight: 600;
@@ -140,7 +149,7 @@ const Icon = styled.img`
 `;
 const SubHeading = styled.span`
   text-align: center;
-  font-size: 12px;
+  font-size: 0.75rem;
   font: normal normal medium 14px/17px Inter;
   color: #303134;
   display: flex;
@@ -151,9 +160,12 @@ const SubHeading = styled.span`
 const CenterDiv = styled.div`
   display: flex;
   justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
 `;
 const Toast = styled.div`
-  font-size: 12px;
+  font-size: 1rem;
   font-weight: 600;
   color: #303134;
 `;
@@ -162,4 +174,5 @@ const RowProperty = styled.div`
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;
+  color: #102c78;
 `;

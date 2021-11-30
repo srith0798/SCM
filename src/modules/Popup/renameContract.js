@@ -6,6 +6,7 @@ import { makeStyles } from "@material-ui/styles";
 const useStyles = makeStyles(() => ({
   dialogBox: {
     width: "100% !important",
+    top: "-15%",
   },
 }));
 
@@ -42,7 +43,7 @@ const MainContainer = styled.div`
 `;
 const Container = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
-  border: 1px solid #707070;
+
   border-radius: 6px;
   width: 100%;
   background-color: #ffffff;

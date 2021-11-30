@@ -66,11 +66,9 @@ export default function Network(props) {
                 {address.map((data, index) => {
                   return (
                     <Container>
-                      <Row>
-                        <ColumnOne>
-                          <Icon src="/images/mainnet.svg" />
-                          Mainnet
-                        </ColumnOne>
+                      <Row style={{ alignItems: "center" }}>
+                        <Icon src="/images/mainnet.svg" />
+                        <Head>Mainnet</Head>
                         <Url>https://explorer.xinfin.network/</Url>
                       </Row>
                     </Container>
@@ -100,6 +98,7 @@ const SubContainer = styled.div`
 const Heading = styled.span`
   font: normal normal 600 24px/29px Inter;
   color: #191919;
+
   margin-right: 10px;
 `;
 
@@ -124,14 +123,15 @@ const Div = styled.div`
   width: 100%;
   height: 400px;
   margin-top: 20px;
+  padding: 10px;
 `;
 const Container = styled.div`
   padding: 15px;
   border-bottom: 1px solid #e3e7eb;
 `;
 const ColumnOne = styled.div`
-  //   display: flex;
-  flex-flow: column nowrap;
+  // display: flex;
+  // flex-flow: column nowrap;
   font-size: 14px;
   font-weight: 600;
   color: #102c78;
@@ -147,4 +147,14 @@ const Url = styled.div`
   font-size: 14px;
   letter-spacing: 0px;
   color: #416be0;
+  width: 100%;
+  max-width: 250px;
+`;
+const Head = styled.div`
+  color: #191919;
+  font-size: 14px;
+  font-weight: 600;
+  width: 100%;
+  max-width: 215px;
+  white-space: nowrap;
 `;

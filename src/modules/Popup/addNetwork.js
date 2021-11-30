@@ -62,7 +62,6 @@ const MainContainer = styled.div`
 `;
 const Container = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
-  border: 1px solid #707070;
   border-radius: 6px;
   width: 100%;
   background-color: #ffffff;
@@ -89,4 +88,5 @@ const Button = styled.button`
   border-radius: 4px;
   color: #ffffff;
   margin-top: 20px;
+  border: 0;
 `;
