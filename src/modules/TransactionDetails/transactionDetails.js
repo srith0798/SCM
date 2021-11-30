@@ -4,11 +4,9 @@ import { Row } from "simple-flexbox";
 import Header from "../header/header";
 import Sidebar from "../sidebar/sidebar";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import Events from "./Events";
 import StateChange from "./StateChange";
-
 import SubContracts from "./SubContracts";
 import { history } from "../../managers/history";
 
@@ -20,7 +18,7 @@ export default function TransactionDetails() {
   return (
     <>
       <Header />
-      <Row>
+      <Row style={{ height: "250vh" }}>
         <Sidebar />
         <MainContainer>
           <Row style={{ display: "flex", justifyContent: "space-between" }}>
