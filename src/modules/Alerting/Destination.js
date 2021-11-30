@@ -42,14 +42,14 @@ export default function Destination() {
         </Div>
         <Div>
           <Row>
-            <img src="/images/webhook.svg" style={{ width: "1rem" }} />
+            <Icon src="/images/webhook.svg" />
             <ColumnTwo> Finance</ColumnTwo>
             <ColumnTwo>http://webhook.site/aOe</ColumnTwo>
             <ColumnTwo>
               <ColorChanging>connected</ColorChanging>
             </ColumnTwo>
             <ColumnTwo>
-              <img src="/images/deletes.svg" style={{ width: "1rem" }} />
+              <Icon src="/images/deletes.svg" />
             </ColumnTwo>
           </Row>
         </Div>
@@ -65,8 +65,8 @@ const MainContainer = styled.div`
   height: auto;
 `;
 const Div = styled.div`
-  padding: 1rem;
-  border-bottom: 1px solid #e3e7eb;
+  // padding: 1rem;
+  // border-bottom: 1px solid #e3e7eb;
 `;
 const ColumnOne = styled.div`
   display: flex;
@@ -75,7 +75,8 @@ const ColumnOne = styled.div`
   font-weight: 600;
   color: #102c78;
   width: 100%;
-  max-width: 300px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #e3e7eb;
 `;
 const Buttonn = styled.div`
   top: 279px;
@@ -98,6 +99,7 @@ const ColumnTwo = styled.div`
   color: #102c78;
   width: 100%;
   max-width: 200px;
+  margin: 4px;
 `;
 
 const RowContainer = styled.div`
@@ -108,6 +110,7 @@ const RowContainer = styled.div`
   justify-content: space-between;
   width: 100%;
   max-width: 374px;
+  margin-bottom: 20px;
 `;
 const ColorChanging = styled.text`
   text-align: left;
@@ -115,4 +118,8 @@ const ColorChanging = styled.text`
   letter-spacing: 0px;
   color: #00a58c;
   opacity: 1;
+`;
+
+const Icon = styled.img`
+  width: 1rem;
 `;

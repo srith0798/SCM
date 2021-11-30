@@ -14,7 +14,13 @@ export default function AlertDetails() {
         <Sidebar />
 
         <MainContainer>
-          <Row style={{ display: "flex", justifyContent: "space-between" }}>
+          <Row
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              marginBottom: "20px",
+            }}
+          >
             <div>
               <img
                 src="/images/back.svg"

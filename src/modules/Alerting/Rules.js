@@ -137,4 +137,5 @@ const RowCorrecter = styled.div`
   justify-content: space-between;
   width: 100%;
   max-width: 1200px;
+  margin-bottom: 20px;
 `;

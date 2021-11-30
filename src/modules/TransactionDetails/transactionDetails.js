@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Row } from "simple-flexbox";
 import Header from "../header/header";
@@ -8,10 +8,15 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import Events from "./Events";
 import StateChange from "./StateChange";
+
 import SubContracts from "./SubContracts";
 import { history } from "../../managers/history";
 
-export default function transactionDetails() {
+export default function TransactionDetails() {
+  const [activeButton, setActiveButton] = React.useState("Overview");
+  const handleViewClick = (e) => {
+    setActiveButton(e.target.id);
+  };
   return (
     <>
       <Header />
@@ -20,36 +25,76 @@ export default function transactionDetails() {
         <MainContainer>
           <Row style={{ display: "flex", justifyContent: "space-between" }}>
             <div>
-              <img
-                src="/images/back.svg"
-                style={{ marginRight: "10px" }}
-                onClick={backButton}
-              />
+              <img src="/images/back.svg" onClick={backButton} />
               <b>Transactions Details</b>
             </div>
             <Button>View in Explorer</Button>
           </Row>
 
           <Container>
-            <SubHeading>Txn hash</SubHeading>
-            <div style={{ display: "flex", alignItems: "center" }}>
-              <Hash>xdcabfe4184e5f9f600fe86d20e2fsfbsgsgsa32c99be1768b3c</Hash>
+            <SubHeading style={{ paddingLeft: "20px" }}>Txn hash</SubHeading>
+            <div
+              style={{
+                paddingLeft: "20px",
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
+              <Hash>xdcabfe4184e5f9f600fe86d20ffdse2fsfbsgsgsa768b3c</Hash>
               <CopyToClipboard>
                 <CopyImg src="/images/copy.svg" />
               </CopyToClipboard>
             </div>
-            <Tabs>
-              <TabList>
-                <img src="/images/rules.svg" style={{ width: "16px" }} />
-                <Tab> Overview </Tab>
-                <img src="/images/contracts.svg" style={{ width: "16px" }} />
-                <Tab>Contracts</Tab>
-                <img src="/images/general.svg" style={{ width: "16px" }} />
-                <Tab>Events</Tab>
-                <img src="/images/state change.svg" style={{ width: "16px" }} />
-                <Tab>State change</Tab>
-              </TabList>
-              <TabPanel>
+            <TabLister>
+              <TabView
+                id="Overview"
+                onClick={handleViewClick}
+                style={{
+                  color: activeButton === "Overview" ? "blue" : "",
+                  borderBottom:
+                    activeButton === "Overview" ? "2px solid blue" : "",
+                }}
+              >
+                <img src="/images/rules.svg" />
+                Overview
+              </TabView>
+              <TabView
+                id="Contracts"
+                onClick={handleViewClick}
+                style={{
+                  color: activeButton === "Contracts" ? "blue" : "",
+                  borderBottom:
+                    activeButton === "Contracts" ? "2px solid blue" : "",
+                }}
+              >
+                <img src="/images/contracts.svg" /> Contracts
+              </TabView>
+              <TabView
+                id="Events"
+                onClick={handleViewClick}
+                style={{
+                  color: activeButton === "Events" ? "blue" : "",
+                  borderBottom:
+                    activeButton === "Events" ? "2px solid blue" : "",
+                }}
+              >
+                <img src="/images/networks.svg" /> Events
+              </TabView>
+              <TabView
+                id="StateChange"
+                onClick={handleViewClick}
+                style={{
+                  color: activeButton === "StateChange" ? "blue" : "",
+                  borderBottom:
+                    activeButton === "StateChange" ? "2px solid blue" : "",
+                }}
+              >
+                <img src="/images/code.svg" />
+                State Change
+              </TabView>
+            </TabLister>
+            {activeButton === "Overview" && (
+              <div>
                 <MidContainer>
                   <CommonDiv>
                     <Row>
@@ -206,17 +251,11 @@ export default function transactionDetails() {
                   <img src="/images/contracts.svg" style={{ width: "1rem" }} />
                   transfer in App_Transactions_Validator
                 </LastContainer>
-              </TabPanel>
-              <TabPanel>
-                <SubContracts />
-              </TabPanel>
-              <TabPanel>
-                <Events />
-              </TabPanel>
-              <TabPanel>
-                <StateChange />
-              </TabPanel>
-            </Tabs>
+              </div>
+            )}
+            {activeButton === "Contracts" && <SubContracts />}
+            {activeButton === "Events" && <Events />}
+            {activeButton === "StateChange" && <StateChange />}
           </Container>
         </MainContainer>
       </Row>
@@ -225,7 +264,7 @@ export default function transactionDetails() {
 }
 
 const backButton = () => {
-  history.push(transactionDetails);
+  history.push();
 };
 
 const NewContainer = styled.div`
@@ -319,9 +358,12 @@ const Container = styled.div`
   background-color: #ffffff;
   border-radius: 6px;
   width: 100%;
-  // height: 120px;
+  height: 129px;
   margin-top: 20px;
-  padding: 20px;
+  // padding-left: 20px;
+  // padding-top: 20px;
+  // padding- bottom:0px;
+  // padding-right: 20px;
 `;
 
 const Hash = styled.div`
@@ -340,7 +382,7 @@ const SubHeading = styled.div`
 `;
 
 const CopyImg = styled.img`
-  margin-left: 9%;
+  margin-left: 4%;
   cursor: pointer;
 `;
 
@@ -370,4 +412,14 @@ const SearchBar = styled.input`
     outline: none;
     border: none;
   }
+`;
+const TabLister = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 530px;
+  margin: 25px 0px 10px 17px;
+`;
+const TabView = styled.div`
+  padding: 5px 8px 5px 8px;
 `;

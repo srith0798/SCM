@@ -22,8 +22,7 @@ export default function Events() {
                 width: "200px",
                 marginTop: "2px",
                 background: "#F5F6FD",
-                border: "solid #D5E0FF",
-                outline: "none",
+
                 height: "3rem",
               }}
             />
@@ -36,8 +35,7 @@ export default function Events() {
                 width: "200px",
                 marginTop: "2px",
                 background: "#F5F6FD",
-                border: "solid #D5E0FF",
-                outline: "none",
+
                 height: "3rem",
               }}
             />
@@ -50,13 +48,10 @@ export default function Events() {
       <BoxContainer
         defaultValue={10}
         style={{
-          width: "1200px",
+          width: "100%",
           height: "130px",
-
           background: "#F5F6FD",
-          border: "solid #D5E0FF",
-          outline: "none",
-          padding: "20px",
+          paddingLeft: "20px",
         }}
       >
         <Heading>
@@ -77,12 +72,11 @@ export default function Events() {
       <BoxContainer
         defaultValue={10}
         style={{
-          width: "1200px",
+          width: "100%",
           height: "150px",
           borderspacing: "10px",
           background: "#F5F6FD",
-          border: "solid #D5E0FF",
-          outline: "none",
+          paddingLeft: "20px",
         }}
       >
         <Heading>
@@ -104,6 +98,7 @@ const MidContainer = styled.div`
   opacity: 1;
   margin-top: 20px;
   height: 100vh;
+  width: 100%;
 `;
 
 const ThirdBoxContainer = styled.div`

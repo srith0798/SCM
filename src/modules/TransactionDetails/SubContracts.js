@@ -86,6 +86,7 @@ const MainBoxContainer = styled.div`
   justify-content: space-between;
   max-width: 800px;
   width: 100%;
+  height: 104px;
 `;
 
 const Button = styled.button`
