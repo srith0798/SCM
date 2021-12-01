@@ -7,6 +7,63 @@ import { AccountService } from "../../services";
 import Utils from "../../utility";
 import styled from "styled-components";
 
+const dataEntry = [
+  {
+    id: "japan",
+    color: "hsl(194, 70%, 50%)",
+    data: [
+      {
+        x: "plane",
+        y: 165,
+      },
+      {
+        x: "helicopter",
+        y: 76,
+      },
+      {
+        x: "boat",
+        y: 184,
+      },
+      {
+        x: "train",
+        y: 99,
+      },
+      {
+        x: "subway",
+        y: 195,
+      },
+      {
+        x: "bus",
+        y: 140,
+      },
+      {
+        x: "car",
+        y: 31,
+      },
+      {
+        x: "moto",
+        y: 43,
+      },
+      {
+        x: "bicycle",
+        y: 198,
+      },
+      {
+        x: "horse",
+        y: 293,
+      },
+      {
+        x: "skateboard",
+        y: 8,
+      },
+      {
+        x: "others",
+        y: 279,
+      },
+    ],
+  },
+];
+
 const ToolTipElement = (props) => {
   return (
     <div>
@@ -71,7 +128,7 @@ const graphProperties = {
 const MyResponsiveLine = ({ data, MouseMovePoint, CustomPoint }) => (
   <ResponsiveLine
     {...graphProperties}
-    data={data}
+    data={dataEntry}
     tooltip={ToolTipElement}
     layers={[
       "grid",
@@ -157,27 +214,27 @@ export default function Graph() {
 
   // let graphdata = resultData
   // graphdata.reverse()
-  //   arr[0].data = [
-  //     { x: "1 Nov 2021", y: 10 },
-  //     { x: "2 Nov 2021", y: 50 },
-  //     { x: "3 Nov 2021", y: 40 },
-  //     { x: "4 Nov 2021", y: 20 },
-  //     { x: "5 Nov 2021", y: 50 },
-  //     { x: "6 Nov 2021", y: 7 },
-  //     { x: "7 Nov 2021", y: 60 },
-  //     { x: "8 Nov 2021", y: 50 },
-  //     { x: "9 Nov 2021", y: 30 },
-  //     { x: "10 Nov 2021", y: 53 },
-  //     { x: "11 Nov 2021", y: 52 },
-  //     { x: "12 Nov 2021", y: 45 },
-  //     { x: "13 Nov 2021", y: 40 },
-  //     { x: "14 Nov 2021", y: 95 },
-  //     { x: "15 Nov 2021", y: 55 },
-  //     { x: "16 Nov 2021", y: 45 },
-  //     { x: "17 Nov 2021", y: 35 },
-  //     { x: "18 Nov 2021", y: 75 },
-  //   ];
-  //   await setData(arr);
+  // arr[0].data = [
+  //   { x: "1 Nov 2021", y: 10 },
+  //   { x: "2 Nov 2021", y: 50 },
+  //   { x: "3 Nov 2021", y: 40 },
+  //   { x: "4 Nov 2021", y: 20 },
+  //   { x: "5 Nov 2021", y: 50 },
+  //   { x: "6 Nov 2021", y: 7 },
+  //   { x: "7 Nov 2021", y: 60 },
+  //   { x: "8 Nov 2021", y: 50 },
+  //   { x: "9 Nov 2021", y: 30 },
+  //   { x: "10 Nov 2021", y: 53 },
+  //   { x: "11 Nov 2021", y: 52 },
+  //   { x: "12 Nov 2021", y: 45 },
+  //   { x: "13 Nov 2021", y: 40 },
+  //   { x: "14 Nov 2021", y: 95 },
+  //   { x: "15 Nov 2021", y: 55 },
+  //   { x: "16 Nov 2021", y: 45 },
+  //   { x: "17 Nov 2021", y: 35 },
+  //   { x: "18 Nov 2021", y: 75 },
+  // ];
+  // await setData(arr);
   // }, []);
   // var d = new Date();
   // var n = d.getFullYear();

@@ -23,7 +23,11 @@ export default function TransactionDetails() {
         <MainContainer>
           <Row style={{ display: "flex", justifyContent: "space-between" }}>
             <div>
-              <img style={{marginRight: "10px"}} src="/images/back.svg" onClick={backButton} />
+              <img
+                style={{ marginRight: "10px" }}
+                src="/images/back.svg"
+                onClick={backButton}
+              />
               <b>Transactions Details</b>
             </div>
             <Button>View in Explorer</Button>
@@ -262,7 +266,7 @@ export default function TransactionDetails() {
 }
 
 const backButton = () => {
-  history.push();
+  history.push("/");
 };
 
 const NewContainer = styled.div`

@@ -7,6 +7,7 @@ import LetsGetStarted from "../Popup/letsGetStartedPopUp";
 import Settings from "../Popup/settings";
 import Box from "@mui/material/Box";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
+import { history } from "../../managers/history";
 
 export default function TransactionList(props) {
   useEffect(() => {
@@ -117,7 +118,9 @@ export default function TransactionList(props) {
     fontWeight: "600",
     color: "#191919",
   };
-
+  const redirectToTransactionDetails = () => {
+    history.push("/transaction-details");
+  };
   return (
     <>
       <Header />
@@ -185,10 +188,9 @@ export default function TransactionList(props) {
             <div>
               {address.map((data, index) => {
                 return (
-                  <Div>
+                  <Div onClick={redirectToTransactionDetails}>
                     <Row>
                       <ColumnSecond>{data.txn}</ColumnSecond>
-
                       <ColumnSecond>{data.status}</ColumnSecond>
                       <ColumnSecond>{data.function}</ColumnSecond>
                       <ColumnSecond>{data.contracts}</ColumnSecond>

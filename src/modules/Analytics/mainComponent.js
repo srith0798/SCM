@@ -98,11 +98,19 @@ export default function MainComponent(props) {
                     <Head>Transactions over time</Head>
                     <img src="/images/expand.svg" onClick={FullScreen} />
                   </div>
-                  <select name="cars" id="cars" class="">
-                    <option value="volvo">Last 5 days</option>
-                    <option value="saab">Last 7 days</option>
-                    <option value="mercedes">Last 15 days</option>
-                    <option value="audi">Last 25 days</option>
+                  <select id="cars" className="select">
+                    <option value="volvo" className="select-dropdown">
+                      Last 5 days
+                    </option>
+                    <option value="saab" className="select-dropdown">
+                      Last 7 days
+                    </option>
+                    <option value="mercedes" className="select-dropdown">
+                      Last 15 days
+                    </option>
+                    <option value="audi" className="select-dropdown">
+                      Last 25 days
+                    </option>
                   </select>
                 </SubContainer>
                 <Line />
@@ -114,11 +122,19 @@ export default function MainComponent(props) {
                     <img src="/images/expand.svg" />
                   </div>
 
-                  <select name="cars" id="cars">
-                    <option value="volvo">Last 5 days</option>
-                    <option value="saab">Last 7 days</option>
-                    <option value="mercedes">Last 15 days</option>
-                    <option value="audi">Last 25 days</option>
+                  <select id="cars" className="select">
+                    <option value="volvo" className="select-dropdown">
+                      Last 5 days
+                    </option>
+                    <option value="saab" className="select-dropdown">
+                      Last 7 days
+                    </option>
+                    <option value="mercedes" className="select-dropdown">
+                      Last 15 days
+                    </option>
+                    <option value="audi" className="select-dropdown">
+                      Last 25 days
+                    </option>
                   </select>
                 </SubContainer>
                 <Line />
@@ -137,11 +153,19 @@ export default function MainComponent(props) {
                     <Head>Top Callers</Head>
                     <img src="/images/expand.svg" />
                   </div>
-                  <select name="cars" id="cars">
-                    <option value="volvo">Last 5 days</option>
-                    <option value="saab">Last 7 days</option>
-                    <option value="mercedes">Last 15 days</option>
-                    <option value="audi">Last 25 days</option>
+                  <select id="cars" className="select">
+                    <option value="volvo" className="select-dropdown">
+                      Last 5 days
+                    </option>
+                    <option value="saab" className="select-dropdown">
+                      Last 7 days
+                    </option>
+                    <option value="mercedes" className="select-dropdown">
+                      Last 15 days
+                    </option>
+                    <option value="audi" className="select-dropdown">
+                      Last 25 days
+                    </option>
                   </select>
                 </SubContainer>
                 <Div>
@@ -171,11 +195,19 @@ export default function MainComponent(props) {
                     <Head>Active users</Head>
                     <img src="/images/expand.svg" />
                   </div>
-                  <select name="cars" id="cars">
-                    <option value="volvo">Last 5 days</option>
-                    <option value="saab">Last 7 days</option>
-                    <option value="mercedes">Last 15 days</option>
-                    <option value="audi">Last 25 days</option>
+                  <select id="cars" className="select">
+                    <option value="volvo" className="select-dropdown">
+                      Last 5 days
+                    </option>
+                    <option value="saab" className="select-dropdown">
+                      Last 7 days
+                    </option>
+                    <option value="mercedes" className="select-dropdown">
+                      Last 15 days
+                    </option>
+                    <option value="audi" className="select-dropdown">
+                      Last 25 days
+                    </option>
                   </select>
                 </SubContainer>
                 <Line />
@@ -187,11 +219,19 @@ export default function MainComponent(props) {
                   <Head>Top Functions calls</Head>
                   <img src="/images/expand.svg" />
                 </div>
-                <select name="cars" id="cars">
-                  <option value="volvo">Last 5 days</option>
-                  <option value="saab">Last 7 days</option>
-                  <option value="mercedes">Last 15 days</option>
-                  <option value="audi">Last 25 days</option>
+                <select id="cars" className="select">
+                  <option value="volvo" className="select-dropdown">
+                    Last 5 days
+                  </option>
+                  <option value="saab" className="select-dropdown">
+                    Last 7 days
+                  </option>
+                  <option value="mercedes" className="select-dropdown">
+                    Last 15 days
+                  </option>
+                  <option value="audi" className="select-dropdown">
+                    Last 25 days
+                  </option>
                 </select>
               </SubContainer>
               <Div>

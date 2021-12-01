@@ -32,7 +32,7 @@ const Heading = styled.span`
 
 export default function Sidebar() {
   const redirectToTransaction = () => {
-    history.push("/transaction-details");
+    history.push("/transaction-list");
   };
   const redirectToContract = () => {
     history.push("/contract");

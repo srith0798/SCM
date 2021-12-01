@@ -370,3 +370,17 @@ border: none;
   .slider.round:before {
     border-radius: 50%;
   }
+  .select{
+    border: 1px solid #B2C5FA;
+    border-radius: 4px;
+    font-size:14px;
+    font-weight:600;
+    color: #303134;
+  }
+  .select-dropdown{
+    border: 1px solid #B2C5FA;
+    border-radius: 4px;
+    font-size:14px;
+    font-weight:600;
+    color: #303134;
+  }
