@@ -80,7 +80,7 @@ export default function Rules() {
                 </NewDiv>
                 <NewDiv>
                   <Row>
-                    <ColumnOne>App_Transactions_Validator</ColumnOne>
+                    <ColumnOne>App_Transactions</ColumnOne>
                     <ColumnOne>xdcabfe…8b3c</ColumnOne>
                     <ColumnOne>XDC Mainnet</ColumnOne>
                     <ColumnOne>Sucessfull transaction</ColumnOne>
@@ -94,7 +94,7 @@ export default function Rules() {
                 </NewDiv>
                 <NewDiv>
                   <Row>
-                    <ColumnOne>App_Transactions_Validator</ColumnOne>
+                    <ColumnOne>App_Transactions</ColumnOne>
                     <ColumnOne>xdcabfe…8b3c</ColumnOne>
                     <ColumnOne>XDC Mainnet</ColumnOne>
                     <ColumnOne>Failed transaction</ColumnOne>

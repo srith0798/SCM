@@ -43,6 +43,9 @@ export default function Sidebar() {
   const redirectToAnalytics = () => {
     history.push("/analytics");
   };
+  const redirectToAlerting = () => {
+    history.push("/Alerting");
+  };
   return (
     <SidebarContainer>
       <Wrapper onClick={redirectToTransaction} style={{ marginTop: "20px" }}>
@@ -61,7 +64,7 @@ export default function Sidebar() {
         <Icon src="/images/Analytics.svg" />
         <Heading>Analytics</Heading>
       </Wrapper>
-      <Wrapper>
+      <Wrapper onClick={redirectToAlerting}>
         <Icon src="/images/Alerting.svg" />
         <Heading>Alerting</Heading>
       </Wrapper>
