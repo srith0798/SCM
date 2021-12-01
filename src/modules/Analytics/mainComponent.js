@@ -8,6 +8,7 @@ import { useHistory } from "react-router-dom";
 import Box from "@mui/material/Box";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 import { history } from "../../managers/history";
+// import TopCallsFullScreen from "./analytics/TopCallsFullScreen";
 
 export default function MainComponent(props) {
   const [isSetOpen, setOpen] = React.useState(false);
@@ -19,9 +20,9 @@ export default function MainComponent(props) {
   const handleClickAway = () => {
     setOpen(false);
   };
-  const FullScreen = () => {
-    props.changeExpand(1);
-  };
+  // const FullScreen = () => {
+  //   props.changeExpand(1);
+  // };
   const styles = {
     position: "absolute",
     top: 77,
@@ -47,6 +48,7 @@ export default function MainComponent(props) {
     <div>
       <Column>
         <Header />
+
         <Row
         // style={{ height: "300vh" }}
         >
@@ -157,7 +159,10 @@ export default function MainComponent(props) {
                 <SubContainer>
                   <div style={{ display: "flex", alignItems: "center" }}>
                     <Head>Top Callers</Head>
-                    <img src="/images/expand.svg" />
+                    <img
+                      src="/images/expand.svg"
+                      onClick={() => props.changeTopCallExpand(4)}
+                    />
                   </div>
                   <select id="cars" className="select">
                     <option value="volvo" className="select-dropdown">
@@ -226,7 +231,10 @@ export default function MainComponent(props) {
               <SubContainer>
                 <div style={{ display: "flex", alignItems: "center" }}>
                   <Head>Top Functions calls</Head>
-                  <img src="/images/expand.svg" />
+                  <img
+                    src="/images/expand.svg"
+                    onClick={() => props.changeTopCallExpand(5)}
+                  />
                 </div>
                 <select id="cars" className="select">
                   <option value="volvo" className="select-dropdown">

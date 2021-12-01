@@ -8,7 +8,7 @@ import { useHistory } from "react-router-dom";
 
 export default function TopCalls(props) {
   const ClickMe = () => {
-    props.changeExpand(0);
+    props.changeTopCallExpand(0);
   };
   return (
     <div>
