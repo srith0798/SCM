@@ -9,50 +9,27 @@ export default function SubContracts() {
   return (
     <MainDiv>
       <MainBoxContainer>
-        <BoxContainer
-          style={{
-            width: "250px",
-            height: "100px",
-            marginTop: 10,
-            background: "#F5F6FD",
-            border: "solid #D5E0FF",
-            outline: "none",
-          }}
-        >
-          <Heading>App_Transactions_Validator</Heading>
-          xdcabfe4184e0fe86d20ec
-          <Button onClick={SubButton}>Verified contracts</Button>
-        </BoxContainer>
-
-        <BoxContainer
-          style={{
-            width: "250px",
-            height: "100px",
-            marginTop: 10,
-            background: "#F5F6FD",
-            border: "solid #D5E0FF",
-            outline: "none",
-          }}
-        >
-          <Heading>App_Transactions_Validator</Heading>
-          xdcabfe4184e5f986d20e
-          <Button onClick={SubButton}>Verified contracts</Button>
-        </BoxContainer>
-
-        <BoxContainer
-          style={{
-            width: "250px",
-            height: "100px",
-            marginTop: 10,
-            background: "#F5F6FD",
-            border: "solid #D5E0FF",
-            outline: "none",
-          }}
-        >
-          <Heading>App_Transactions_Validator</Heading>
-          xdcabfe4184e5fe86d20e
-          <Button onClick={SubButton}>Verified contracts</Button>
-        </BoxContainer>
+        <Container>
+          <Title>App Transactions Validator</Title>
+          <SubTitle>xdc02aaa39…8b3c</SubTitle>
+          <SubTitleTwo>
+            <Button onClick={SubButton}>Verified contracts</Button>
+          </SubTitleTwo>
+        </Container>
+        <Container>
+          <Title>App Transactions Validator</Title>
+          <SubTitle>xdc02aaa39…8b3c</SubTitle>
+          <SubTitleTwo>
+            <Button onClick={SubButton}>Verified contracts</Button>
+          </SubTitleTwo>
+        </Container>
+        <Container>
+          <Title>App Transactions Validator</Title>
+          <SubTitle>xdc02aaa39…8b3c</SubTitle>
+          <SubTitleTwo>
+            <Button onClick={SubButton}>Verified contracts</Button>
+          </SubTitleTwo>
+        </Container>
       </MainBoxContainer>
     </MainDiv>
   );
@@ -62,43 +39,57 @@ const MainDiv = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  height: 60vh;
-  margin-top: 30px;
+  height: 365px;
   background-color: #ffffff;
   border-radius: 4px;
-  padding: 30px 10px 25px 40px;
+  padding: 23px;
 `;
-const BoxContainer = styled.div`
+const Container = styled.div`
   padding: 10px;
+  width: 250px,
+  height: 200px,       
+  background: #F5F6FD;
+  border: solid #D5E0FF;
+  outline: none;
+  background: #F5F6FD 0% 0% no-repeat padding-box;
+  border: 1px solid #D5E0FF;
+  border-radius: 6px;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+          
 `;
 
-const Heading = styled.div`
-  text-align: left;
-  font: normal normal 600 14px/17px Inter;
-  letter-spacing: 0px;
-  color: #102c78;
-  opacity: 1;
-  width: 100%;
-  max-width: 260px;
-`;
 const MainBoxContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  max-width: 800px;
+  max-width: 650px;
   width: 100%;
   height: 104px;
 `;
+const Title = styled.div`
+  font-size: 14px;
+  font-weight: 600;
+  color: #1d3c93;
+  margin-bottom: 5px;
+`;
+const SubTitle = styled.div`
+  font-size: 14px;
+  color: #191919;
+  margin-bottom: 5px;
+`;
+const SubTitleTwo = styled.div``;
 
 const Button = styled.button`
   background: #00a58c 0% 0% no-repeat padding-box;
   border-radius: 3px;
-  opacity: 1;
-  font-color: white;
-  text-align: left;
-  align-items: center;
-  font: normal normal normal 12px/15px Inter;
-  letter-spacing: 0px;
-  color: #ffffff;
-  width: 10rem;
+  border: none;
+  padding: 3px;
+  width: 151px;
+  // height: 30px;
   text-align: center;
+  font-size: 12px;
+  color: #ffffff;
 `;

@@ -6,9 +6,6 @@ import Sidebar from "../sidebar/sidebar";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
-import Events from "./Events";
-import StateChange from "./StateChange";
-import SubContracts from "./SubContracts";
 
 export default function SubContracts2() {
   return (
