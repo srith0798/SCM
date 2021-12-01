@@ -9,30 +9,7 @@ import Box from "@mui/material/Box";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 import { history } from "../../managers/history";
 
-// const FirstPage = (props) => {
-//   let history = useHistory();
-//   console.log("hello");
-//   const someEventHandler = (event) => {
-//     history.push({
-//       pathname: "/fullScreen",
-//       search: "?query=abc",
-//       state: { detail: "some_value" },
-//     });
-//   };
-// };
-
 export default function MainComponent(props) {
-  // useEffect(() => {
-
-  // }, []);
-  // const [Expand, setCountry] = React.useState(false);
-  // const changeExpand = (value) => {
-  //   setCountry(value);
-  // };
-  // const [Expand, setExpand] = React.useState(false);
-  // const changeExpand = (value) => {
-  //   setExpand(value);
-  // };
   const [isSetOpen, setOpen] = React.useState(false);
 
   const handleClick = () => {
@@ -43,9 +20,7 @@ export default function MainComponent(props) {
     setOpen(false);
   };
   const FullScreen = () => {
-    // history.push("/fullscreen");
-    // props.changeExpand(1)
-    // history.push(pathConstants.DASHBOARD_MENU.ADD_PRODUCT);
+    props.changeExpand(1);
   };
   const styles = {
     position: "absolute",
@@ -95,7 +70,7 @@ export default function MainComponent(props) {
                     <TransactionHash>
                       xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c
                     </TransactionHash>
-                    <Image src="/images/dropdown.svg" />
+                    <Image src="/images/Arrrow.svg" />
                   </DropDown>
                   {isSetOpen ? (
                     <Box sx={styles}>
@@ -121,10 +96,7 @@ export default function MainComponent(props) {
                 <SubContainer>
                   <div style={{ display: "flex", alignItems: "center" }}>
                     <Head>Transactions over time</Head>
-                    <img
-                      src="/images/expand.svg"
-                      onClick={FullScreen}
-                    />
+                    <img src="/images/expand.svg" onClick={FullScreen} />
                   </div>
                   <select name="cars" id="cars" class="">
                     <option value="volvo">Last 5 days</option>
