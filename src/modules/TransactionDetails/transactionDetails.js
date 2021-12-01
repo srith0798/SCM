@@ -23,14 +23,20 @@ export default function TransactionDetails() {
         <MainContainer>
           <Row style={{ display: "flex", justifyContent: "space-between" }}>
             <div>
-              <img style={{marginRight: "10px"}} src="/images/back.svg" onClick={backButton} />
+              <img
+                style={{ marginRight: "10px" }}
+                src="/images/back.svg"
+                onClick={backButton}
+              />
               <b>Transactions Details</b>
             </div>
             <Button>View in Explorer</Button>
           </Row>
 
           <Container>
-            <SubHeading style={{ paddingLeft: "20px" }}>Txn hash</SubHeading>
+            <SubHeading style={{ paddingTop: "10px", paddingLeft: "20px" }}>
+              Txn hash
+            </SubHeading>
             <div
               style={{
                 paddingLeft: "20px",

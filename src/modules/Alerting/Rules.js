@@ -9,10 +9,14 @@ import Historys from "./Historys";
 import Destination from "./Destination";
 
 export default function Rules() {
+  const [activeButton, setActiveButton] = React.useState("Rules");
+  const handleViewClick = (e) => {
+    setActiveButton(e.target.id);
+  };
   return (
     <>
       <Header />
-      <Row>
+      <Row style={{ height: "250vh" }}>
         <Sidebar />
         <MainContainer style={{ padding: "3rem" }}>
           <Row>
@@ -21,60 +25,44 @@ export default function Rules() {
               <Button>Add alert</Button>
             </RowCorrecter>
           </Row>
-          <Container>
-            <Tabs>
-              <TabList>
-                <img src="/images/rules.svg" style={{ width: "16px" }} />
-                <Tab> Rules </Tab>
-                <img src="/images/history.svg" style={{ width: "17px" }} />
-                <Tab>History</Tab>
-                <img src="/images/destination.svg" style={{ width: "16px" }} />
-                <Tab>Destination</Tab>
-              </TabList>
-              <TabPanel>
-                <Div>
-                  <Row>
-                    <ColumnOne>Contract Name</ColumnOne>
-                    <ColumnOne>Address</ColumnOne>
-                    <ColumnOne>Network</ColumnOne>
-                    <ColumnOne>Alert Type</ColumnOne>
-                    <ColumnOne></ColumnOne>
-                    <ColumnOne></ColumnOne>
-                  </Row>
-                </Div>
-                <Div>
-                  <Row>
-                    <ColumnOne>App_Transactions_Validator</ColumnOne>
-                    <ColumnOne>0xndfahkk57..fj9</ColumnOne>
-                    <ColumnOne>XDC Mainnet</ColumnOne>
-                    <ColumnOne>Sucessfull transaction</ColumnOne>
-                    <ColumnOne>enabled</ColumnOne>
-                    <ColumnOne>
-                      <img src="/images/delete.svg" style={{ width: "16px" }} />
-                    </ColumnOne>
-                  </Row>
-                </Div>
-                <Div>
-                  <Row>
-                    <ColumnOne>App_Transactions_Validator</ColumnOne>
-                    <ColumnOne>0xndfahkk57..fj9</ColumnOne>
-                    <ColumnOne>XDC Mainnet</ColumnOne>
-                    <ColumnOne>Failed transaction</ColumnOne>
-                    <ColumnOne>enabled</ColumnOne>
-                    <ColumnOne>
-                      <img src="/images/delete.svg" style={{ width: "16px" }} />
-                    </ColumnOne>
-                  </Row>
-                </Div>
-              </TabPanel>
-              <TabPanel>
-                <Historys />
-              </TabPanel>
-              <TabPanel>
-                <Destination />
-              </TabPanel>
-            </Tabs>
-          </Container>
+          <TabLister>
+              <TabView
+                id="Overview"
+                onClick={handleViewClick}
+                style={{
+                  color: activeButton === "Rules" ? "blue" : "",
+                  borderBottom:
+                    activeButton === "Rules" ? "2px solid blue" : "",
+                }}
+              >
+                <img src="/images/rules.svg" />
+                Rules
+              </TabView>
+              <TabView
+                id="History"
+                onClick={handleViewClick}
+                style={{
+                  color: activeButton === "History" ? "blue" : "",
+                  borderBottom:
+                    activeButton === "History" ? "2px solid blue" : "",
+                }}
+              >
+                <img src="/images/rules.svg" />
+                History
+              </TabView>
+              <TabView
+                id="Destination"
+                onClick={handleViewClick}
+                style={{
+                  color: activeButton === "Destination" ? "blue" : "",
+                  borderBottom:
+                    activeButton === "Destination" ? "2px solid blue" : "",
+                }}
+              >
+                <img src="/images/rules.svg" />
+                Destination
+              </TabView>
+
         </MainContainer>
       </Row>
     </>
