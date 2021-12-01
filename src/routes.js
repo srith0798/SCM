@@ -30,6 +30,7 @@ import AlertDetails from "./modules/Alerting/AlertDetails";
 import Analytics from "./modules/Analytics/analytics";
 import MainComponent from "./modules/Analytics/mainComponent";
 import FullScreen from "./modules/Analytics/fullScreen";
+import TopCalls from "./modules/Analytics/topCalls";
 
 class Routes extends BaseComponent {
   componentDidMount() {}
@@ -72,12 +73,9 @@ class Routes extends BaseComponent {
             <Route exact path={"/add-network"} component={AddNetwork} />
             <Route exact path={"/settings"} component={Settings} />
             <Route exact path={"/analytics"} component={Analytics} />
-            <Route
-              exact
-              path={"/analytics"}
-              component={MainComponent}
-            />
+            <Route exact path={"/analytics"} component={MainComponent} />
             <Route exact path={"/fullscreen"} component={FullScreen} />
+            <Route exact path={"/top-callers"} component={TopCalls} />
             <Redirect exact from="*" to="/" />
           </Switch>
         </Router>

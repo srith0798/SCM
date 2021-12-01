@@ -96,7 +96,10 @@ export default function MainComponent(props) {
                 <SubContainer>
                   <div style={{ display: "flex", alignItems: "center" }}>
                     <Head>Transactions over time</Head>
-                    <img src="/images/expand.svg" onClick={FullScreen} />
+                    <img
+                      src="/images/expand.svg"
+                      onClick={() => props.changeExpand(1)}
+                    />
                   </div>
                   <select id="cars" className="select">
                     <option value="volvo" className="select-dropdown">
@@ -119,7 +122,10 @@ export default function MainComponent(props) {
                 <SubContainer>
                   <div style={{ display: "flex", alignItems: "center" }}>
                     <Head>Gas used overtime</Head>
-                    <img src="/images/expand.svg" />
+                    <img
+                      src="/images/expand.svg"
+                      onClick={() => props.changeExpand(2)}
+                    />
                   </div>
 
                   <select id="cars" className="select">
@@ -193,7 +199,10 @@ export default function MainComponent(props) {
                 <SubContainer>
                   <div style={{ display: "flex", alignItems: "center" }}>
                     <Head>Active users</Head>
-                    <img src="/images/expand.svg" />
+                    <img
+                      src="/images/expand.svg"
+                      onClick={() => props.changeExpand(3)}
+                    />
                   </div>
                   <select id="cars" className="select">
                     <option value="volvo" className="select-dropdown">
