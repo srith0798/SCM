@@ -34,7 +34,9 @@ export default function TransactionDetails() {
           </Row>
 
           <Container>
-            <SubHeading style={{ paddingLeft: "20px" }}>Txn hash</SubHeading>
+            <SubHeading style={{ paddingTop: "10px", paddingLeft: "20px" }}>
+              Txn hash
+            </SubHeading>
             <div
               style={{
                 paddingLeft: "20px",
@@ -57,7 +59,7 @@ export default function TransactionDetails() {
                     activeButton === "Overview" ? "2px solid blue" : "",
                 }}
               >
-                <img src="/images/rules.svg" />
+                <img style={{ marginRight: "8px" }} src="/images/rules.svg" />
                 Overview
               </TabView>
               <TabView
@@ -69,7 +71,11 @@ export default function TransactionDetails() {
                     activeButton === "Contracts" ? "2px solid blue" : "",
                 }}
               >
-                <img src="/images/contracts.svg" /> Contracts
+                <img
+                  style={{ marginRight: "6px" }}
+                  src="/images/contracts.svg"
+                />{" "}
+                Contracts
               </TabView>
               <TabView
                 id="Events"
@@ -80,7 +86,11 @@ export default function TransactionDetails() {
                     activeButton === "Events" ? "2px solid blue" : "",
                 }}
               >
-                <img src="/images/networks.svg" /> Events
+                <img
+                  style={{ marginRight: "8px" }}
+                  src="/images/networks.svg"
+                />{" "}
+                Events
               </TabView>
               <TabView
                 id="StateChange"
@@ -91,7 +101,7 @@ export default function TransactionDetails() {
                     activeButton === "StateChange" ? "2px solid blue" : "",
                 }}
               >
-                <img src="/images/code.svg" />
+                <img style={{ marginRight: "8px" }} src="/images/code.svg" />
                 State Change
               </TabView>
             </TabLister>
@@ -360,19 +370,15 @@ const Container = styled.div`
   background-color: #ffffff;
   border-radius: 6px;
   width: 100%;
-  height: 129px;
+  height: 133px;
   margin-top: 20px;
-  // padding-left: 20px;
-  // padding-top: 20px;
-  // padding- bottom:0px;
-  // padding-right: 20px;
 `;
 
 const Hash = styled.div`
   display: flex;
   flex-flow: row nowrap;
   margin-top: 10px;
-  font-weight: 600;
+  // font-weight: 600;
   border: none;
   width: 100%;
   max-width: 385px;
@@ -421,6 +427,7 @@ const TabLister = styled.div`
   width: 100%;
   max-width: 530px;
   margin: 25px 0px 10px 17px;
+  cursor: pointer;
 `;
 const TabView = styled.div`
   padding: 5px 8px 5px 8px;

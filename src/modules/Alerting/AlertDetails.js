@@ -66,21 +66,27 @@ export default function AlertDetails() {
           <NewContainer>
             <CommonDiv>
               <Row>
-                <img src="/images/email.svg" style={{ width: "1rem" }} />
+                <img
+                  src="/images/email.svg"
+                  style={{ marginRight: "4px", width: "1rem" }}
+                />
                 <Heading>Email :it@supportteam.com</Heading>
                 <SubHead>it@supportteam.com</SubHead>
               </Row>
             </CommonDiv>
             <CommonDiv>
               <Row>
-                <img src="/images/webhook.svg" style={{ width: "1rem" }} />
+                <img
+                  src="/images/webhook.svg"
+                  style={{ marginRight: "4px", width: "1rem" }}
+                />
                 <Heading>Finance</Heading>
                 <SubHead>https:webhook.site/aOe</SubHead>
               </Row>
             </CommonDiv>
             <RowContainer>
-              <Buttonn>Edit</Buttonn>
-              <Buttonn2>Disable</Buttonn2>
+              <Buttonn style={{ marginRight: "4px" }}>Edit</Buttonn>
+              <Buttonn2 style={{ marginLeft: "4px" }}>Disable</Buttonn2>
             </RowContainer>
           </NewContainer>
         </MainContainer>
@@ -119,9 +125,9 @@ const Button = styled.button`
   color: #ffffff;
   border: none;
   border-radius: 4px;
-  width: 130px;
-  height: 34px;
-  font-size: 14px;
+  width: 100px;
+  height: 30px;
+  font-size: 12px;
 `;
 
 const Container = styled.div`
@@ -130,11 +136,11 @@ const Container = styled.div`
   width: 100%;
   height: 12rem;
   margin-top: 20px;
-  padding: 20px;
+  padding: 12px;
 `;
 
 const CommonDiv = styled.div`
-  border-bottom: 1px solid;
+  border-bottom: 0.5px #c9d1cb solid;
   padding: 8px;
 `;
 const Heading = styled.div`
@@ -175,6 +181,7 @@ const Buttonn = styled.div`
   font: normal normal medium 16px/20px Inter;
   letter-spacing: 0px;
   color: #ffffff;
+  font-size: 14px;
 `;
 const Buttonn2 = styled.div`
   top: 548px;
@@ -186,11 +193,13 @@ const Buttonn2 = styled.div`
   align-items: center;
   display: flex;
   justify-content: center;
+  border-radius: 4px;
   text-align: left;
   font: normal normal medium 16px/20px Inter;
   letter-spacing: 0px;
   color: #3163f0;
   opacity: 1;
+  font-size: 14px;
 `;
 const TextColor = styled.div`
   text-align: left;

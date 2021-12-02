@@ -90,6 +90,7 @@ const Buttonn = styled.div`
   align-items: center;
   display: flex;
   justify-content: center;
+  color: #1d3c93;
 `;
 const ColumnTwo = styled.div`
   display: flex;
@@ -98,7 +99,7 @@ const ColumnTwo = styled.div`
   font-weight: 600;
   color: #102c78;
   width: 100%;
-  max-width: 200px;
+  max-width: 180px;
   margin: 4px;
 `;
 
