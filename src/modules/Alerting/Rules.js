@@ -181,6 +181,7 @@ const TabLister = styled.div`
   justify-content: space-between;
   width: 100%;
   max-width: 350px;
+  cursor: pointer;
   // margin: 25px 0px 10px 17px;
 `;
 const TabView = styled.div`
