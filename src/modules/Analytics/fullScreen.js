@@ -113,7 +113,9 @@ const FlexEnd = styled.div`
 `;
 const Img = styled.img`
   margin-right: 10px;
+  cursor: pointer;
 `;
 const Icon = styled.img`
   margin-left: 10px;
+  cursor: pointer;
 `;

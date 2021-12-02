@@ -8,6 +8,7 @@ import Settings from "../Popup/settings";
 import Box from "@mui/material/Box";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 import { history } from "../../managers/history";
+import Tooltip from "@mui/material/Tooltip";
 
 export default function TransactionList(props) {
   useEffect(() => {
@@ -177,8 +178,13 @@ export default function TransactionList(props) {
             <Div>
               <Row>
                 <ColumnOne>Tx Hash</ColumnOne>
-                <ColumnOne>Status</ColumnOne>
-                <ColumnOne>Function</ColumnOne>
+                <ColumnOne>Status</ColumnOne>{" "}
+                <ColumnOne>
+                  Function
+                  <Tooltip disableFocusListener title="Add">
+                    <ToolTipIcon src="/images/tool tip.svg" />
+                  </Tooltip>
+                </ColumnOne>
                 <ColumnOne>Contracts</ColumnOne>
                 <ColumnOne>Form</ColumnOne>
                 <ColumnOne>To</ColumnOne>
@@ -219,8 +225,6 @@ const Div = styled.div`
   border-bottom: 1px solid #e3e7eb;
 `;
 const ColumnOne = styled.div`
-  display: flex;
-  flex-flow: column nowrap;
   font-size: 14px;
   font-weight: 600;
   color: #102c78;
@@ -295,8 +299,6 @@ const Card = styled.div`
   padding: 10px;
 `;
 const ColumnSecond = styled.div`
-  display: flex;
-  flex-flow: column nowrap;
   font-size: 14px;
   font-weight: 600;
   color: #191919;
@@ -336,4 +338,9 @@ const Label = styled.div`
   font-size: 12px;
   font-weight: 600;
   color: #767c93;
+`;
+const ToolTipIcon = styled.img`
+  width: 12px;
+  cursor: pointer;
+  margin-left: 8px;
 `;

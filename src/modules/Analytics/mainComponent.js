@@ -55,7 +55,7 @@ export default function MainComponent(props) {
           <MainContainer>
             <SubContainer>
               <MainHeading>Analytics</MainHeading>
-              <img src="/images/refresh.svg" />
+              <BackImage src="/images/refresh.svg" />
             </SubContainer>
             <Container>
               <View>View analytics for contract</View>
@@ -97,7 +97,7 @@ export default function MainComponent(props) {
                 <SubContainer>
                   <div style={{ display: "flex", alignItems: "center" }}>
                     <Head>Transactions over time</Head>
-                    <img
+                    <BackImage
                       src="/images/expand.svg"
                       onClick={() => props.changeExpand(1)}
                     />
@@ -123,7 +123,7 @@ export default function MainComponent(props) {
                 <SubContainer>
                   <div style={{ display: "flex", alignItems: "center" }}>
                     <Head>Gas used overtime</Head>
-                    <img
+                    <BackImage
                       src="/images/expand.svg"
                       onClick={() => props.changeExpand(2)}
                     />
@@ -158,7 +158,7 @@ export default function MainComponent(props) {
                 <SubContainer>
                   <div style={{ display: "flex", alignItems: "center" }}>
                     <Head>Top Callers</Head>
-                    <img
+                    <BackImage
                       src="/images/expand.svg"
                       onClick={() => props.changeExpand(4)}
                     />
@@ -203,7 +203,7 @@ export default function MainComponent(props) {
                 <SubContainer>
                   <div style={{ display: "flex", alignItems: "center" }}>
                     <Head>Active users</Head>
-                    <img
+                    <BackImage
                       src="/images/expand.svg"
                       onClick={() => props.changeExpand(3)}
                     />
@@ -230,7 +230,7 @@ export default function MainComponent(props) {
               <SubContainer>
                 <div style={{ display: "flex", alignItems: "center" }}>
                   <Head>Top Functions calls</Head>
-                  <img
+                  <BackImage
                     src="/images/expand.svg"
                     onClick={() => props.changeExpand(5)}
                   />
@@ -366,9 +366,13 @@ const Image = styled.img`
   position: absolute;
   top: 29px;
   left: 35%;
+  cursor: pointer;
 `;
 const Label = styled.div`
   font-size: 12px;
   font-weight: 600;
   color: #767c93;
+`;
+const BackImage = styled.img`
+  cursor: pointer;
 `;
