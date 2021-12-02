@@ -2,6 +2,7 @@ import React from "react";
 import { Row } from "simple-flexbox";
 import "react-tabs/style/react-tabs.css";
 import styled from "styled-components";
+import { normalizeUnits } from "moment";
 
 export default function Destination() {
   return (
@@ -13,14 +14,24 @@ export default function Destination() {
           </Row>
           <RowContainer>
             <Buttonn>
-              <img src="/images/slack.svg" style={{ width: "1rem" }} /> Slack
+              <img
+                src="/images/slack.svg"
+                style={{ marginRight: "5px", width: "1.3rem" }}
+              />{" "}
+              Slack
             </Buttonn>
             <Buttonn>
-              <img src="/images/webhook.svg" style={{ width: "1rem" }} />
+              <img
+                src="/images/webhook.svg"
+                style={{ marginRight: "5px", width: "1.3rem" }}
+              />
               Webhook
             </Buttonn>
             <Buttonn>
-              <img src="/images/email.svg" style={{ width: "1rem" }} />
+              <img
+                src="/images/email.svg"
+                style={{ marginRight: "5px", width: "1.3rem" }}
+              />
               Email
             </Buttonn>
           </RowContainer>
@@ -29,27 +40,45 @@ export default function Destination() {
         <ColumnOne>Active Destination</ColumnOne>
         <Div>
           <Row>
-            <img src="/images/email.svg" style={{ width: "1rem" }} />
+            <img
+              src="/images/email.svg"
+              style={{ marginRight: "4px", width: "1rem" }}
+            />
             <ColumnTwo>Finance</ColumnTwo>
-            <ColumnTwo>it@supportteam.com</ColumnTwo>
-            <ColumnTwo>
-              <ColorChanging>verified</ColorChanging>
+            <ColumnTwo style={{ fontWeight: "normal" }}>
+              it@supportteam.com
             </ColumnTwo>
             <ColumnTwo>
-              <img src="/images/deletes.svg" style={{ width: "1rem" }} />
+              <ColorChanging style={{ fontWeight: "normal" }}>
+                Verified
+              </ColorChanging>
+            </ColumnTwo>
+            <ColumnTwo>
+              <img
+                alt=""
+                src="/images/deletes.svg"
+                style={{ width: "1.1rem" }}
+              />
             </ColumnTwo>
           </Row>
         </Div>
         <Div>
           <Row>
-            <Icon src="/images/webhook.svg" />
+            <img
+              src="/images/email.svg"
+              style={{ marginRight: "4px", width: "1rem" }}
+            />
             <ColumnTwo> Finance</ColumnTwo>
-            <ColumnTwo>http://webhook.site/aOe</ColumnTwo>
-            <ColumnTwo>
-              <ColorChanging>connected</ColorChanging>
+            <ColumnTwo style={{ fontWeight: "normal" }}>
+              http://webhook.site/aOe
             </ColumnTwo>
             <ColumnTwo>
-              <Icon src="/images/deletes.svg" />
+              <ColorChanging style={{ fontWeight: "normal" }}>
+                Connected
+              </ColorChanging>
+            </ColumnTwo>
+            <ColumnTwo>
+              <Icon src="/images/deletes.svg" style={{ width: "1.1rem" }} />
             </ColumnTwo>
           </Row>
         </Div>
@@ -79,18 +108,16 @@ const ColumnOne = styled.div`
   border-bottom: 2px solid #e3e7eb;
 `;
 const Buttonn = styled.div`
-  top: 279px;
-  left: 341px;
-  width: 112px;
-  height: 42px;
+  width: 96px;
+  height: 40px;
   background: #ffffff 0% 0% no-repeat padding-box;
   border: 1px solid #416be0;
   border-radius: 6px;
-  opacity: 1;
   align-items: center;
   display: flex;
   justify-content: center;
   color: #1d3c93;
+  font-size: 14px;
 `;
 const ColumnTwo = styled.div`
   display: flex;
@@ -110,15 +137,12 @@ const RowContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  max-width: 374px;
+  max-width: 340px;
   margin-bottom: 20px;
 `;
 const ColorChanging = styled.text`
-  text-align: left;
-  font: normal normal normal 14px/17px Inter;
-  letter-spacing: 0px;
   color: #00a58c;
-  opacity: 1;
+  font-size: 0.875rem;
 `;
 
 const Icon = styled.img`

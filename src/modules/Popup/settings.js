@@ -18,7 +18,7 @@ export default function Settings(props) {
           <Container>
             <SubContainer style={{ padding: "15px 12px 10px 10px" }}>
               <Add>Settings</Add>
-              <Img src="/images/XDC-Cross.svg" onClick={props.click} />
+              <img alt="" src="/images/XDC-Cross.svg" onClick={props.click} />
             </SubContainer>
             <MainHeading style={{ padding: "15px 12px 10px 10px" }}>
               Configure Columns
@@ -142,9 +142,6 @@ const Add = styled.div`
   font-size: 1.5rem;
   font-weight: 600;
   color: #303134;
-`;
-const Img = styled.img`
-  cursor: pointer;
 `;
 
 const MainHeading = styled.div`

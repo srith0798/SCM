@@ -24,7 +24,7 @@ export default function TransactionDetails() {
           <Row style={{ display: "flex", justifyContent: "space-between" }}>
             <div>
               <img
-                style={{ marginRight: "10px" }}
+                style={{ marginRight: "0.625rem" }}
                 src="/images/back.svg"
                 onClick={backButton}
               />
@@ -34,12 +34,14 @@ export default function TransactionDetails() {
           </Row>
 
           <Container>
-            <SubHeading style={{ paddingTop: "10px", paddingLeft: "20px" }}>
+            <SubHeading
+              style={{ paddingTop: "0.625rem", paddingLeft: "1.25rem" }}
+            >
               Txn hash
             </SubHeading>
             <div
               style={{
-                paddingLeft: "20px",
+                paddingLeft: "1.25rem",
                 display: "flex",
                 alignItems: "center",
               }}
@@ -55,11 +57,20 @@ export default function TransactionDetails() {
                 onClick={handleViewClick}
                 style={{
                   color: activeButton === "Overview" ? "blue" : "",
+                  display: "flex",
+                  paddingBottom: "0.875rem",
                   borderBottom:
-                    activeButton === "Overview" ? "2px solid blue" : "",
+                    activeButton === "Overview" ? "0.125rem solid blue" : "",
                 }}
               >
-                <img style={{ marginRight: "8px" }} src="/images/rules.svg" />
+                <img
+                  style={{ marginRight: "0.375rem" }}
+                  src={
+                    activeButton === "Overview"
+                      ? "/images/overview.svg"
+                      : "/images/overview_grey.svg"
+                  }
+                />
                 Overview
               </TabView>
               <TabView
@@ -67,14 +78,20 @@ export default function TransactionDetails() {
                 onClick={handleViewClick}
                 style={{
                   color: activeButton === "Contracts" ? "blue" : "",
+                  display: "flex",
+                  paddingBottom: "0.875rem",
                   borderBottom:
-                    activeButton === "Contracts" ? "2px solid blue" : "",
+                    activeButton === "Contracts" ? "0.125rem solid blue" : "",
                 }}
               >
                 <img
-                  style={{ marginRight: "6px" }}
-                  src="/images/contracts.svg"
-                />{" "}
+                  style={{ marginRight: "0.375rem" }}
+                  src={
+                    activeButton === "Contracts"
+                      ? "/images/contracts.svg"
+                      : "/images/contract_grey.svg"
+                  }
+                />
                 Contracts
               </TabView>
               <TabView
@@ -82,13 +99,19 @@ export default function TransactionDetails() {
                 onClick={handleViewClick}
                 style={{
                   color: activeButton === "Events" ? "blue" : "",
+                  display: "flex",
+                  paddingBottom: "0.875rem",
                   borderBottom:
-                    activeButton === "Events" ? "2px solid blue" : "",
+                    activeButton === "Events" ? "0.125rem solid blue" : "",
                 }}
               >
                 <img
-                  style={{ marginRight: "8px" }}
-                  src="/images/networks.svg"
+                  style={{ marginRight: "0.375rem" }}
+                  src={
+                    activeButton === "Events"
+                      ? "/images/event_blue.svg"
+                      : "/images/event_grey.svg"
+                  }
                 />{" "}
                 Events
               </TabView>
@@ -98,10 +121,17 @@ export default function TransactionDetails() {
                 style={{
                   color: activeButton === "StateChange" ? "blue" : "",
                   borderBottom:
-                    activeButton === "StateChange" ? "2px solid blue" : "",
+                    activeButton === "StateChange" ? "0.125rem solid blue" : "",
                 }}
               >
-                <img style={{ marginRight: "8px" }} src="/images/code.svg" />
+                <img
+                  style={{ marginRight: "0.375rem" }}
+                  src={
+                    activeButton === "Events"
+                      ? "/images/statechange_grey.svg"
+                      : "/images/statechange_grey.svg"
+                  }
+                />
                 State Change
               </TabView>
             </TabLister>
@@ -260,7 +290,11 @@ export default function TransactionDetails() {
                 <LastContainer>
                   <SearchBar placeholder="Execution trace" />
                   <br />
-                  <img src="/images/contracts.svg" style={{ width: "1rem" }} />
+                  <img
+                    alt=""
+                    src="/images/contracts.svg"
+                    style={{ width: "1rem" }}
+                  />
                   transfer in App_Transactions_Validator
                 </LastContainer>
               </div>
@@ -276,63 +310,59 @@ export default function TransactionDetails() {
 }
 
 const backButton = () => {
-  history.push();
+  history.push("/");
 };
 
 const NewContainer = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
-  border-radius: 6px;
+  border-radius: 0.375rem;
   opacity: 1;
-  margin-top: 20px;
+  margin-top: 1.25rem;
   height: auto;
 `;
 
 const SubHead = styled.div`
-  font-size: 12px;
+  font-size: 0.75rem;
 `;
 const CommonDiv = styled.div`
-  border-bottom: 0.5px #c9d1cb solid;
-  padding: 13px;
+  border-bottom: 0.031rem #c9d1cb solid;
+  padding: 0.813rem;
 `;
 const MidContainer = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
-  border-radius: 6px;
+  border-radius: 0.375rem;
   opacity: 1;
-  margin-top: 20px;
+  margin-top: 1.25rem;
   height: auto;
 `;
 const StackContainer = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
-  border-radius: 6px;
-  padding: 30px;
-  opacity: 1;
-  margin-top: 20px;
-  height: 150px;
+  border-radius: 0.375rem;
+  padding: 1.875rem;
+  margin-top: 1.25rem;
+  height: 9.375rem;
 `;
 const LastContainer = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
-  border-radius: 6px;
-  opacity: 1;
-  margin-top: 20px;
-  height: 300px;
+  border-radius: 0.375rem;
+  margin-top: 1.25rem;
+  height: 18.75rem;
   padding: 2rem;
 `;
 const MainContainer = styled.div`
   background: #ecf0f7 0% 0% no-repeat padding-box;
-  opacity: 1;
   width: 100%;
-  padding: 50px;
+  padding: 3.125rem;
   display: 100vh;
 `;
 
 const Heading = styled.div`
   text-align: left;
-  font: normal normal 600 14px/17px Inter;
-  letter-spacing: 0px;
+  font-size: 0.875rem;
+  font-weight: 600;
   color: #102c78;
-  opacity: 1;
   width: 100%;
-  max-width: 260px;
+  max-width: 16.25rem;
 `;
 
 const TransactionNumber = styled.b`
@@ -340,52 +370,62 @@ const TransactionNumber = styled.b`
 `;
 const ThirdBox = styled.div`
   text-align: left;
-  padding: 10px;
-  font: normal normal 600 14px/17px Inter;
-  letter-spacing: 0px;
+  padding: 0.625rem;
+  font-size: 0.875rem;
+  font-weight: 600;
   color: #102c78;
-  opacity: 1;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
   width: 100%;
-  max-width: 400px;
+  max-width: 21rem;
 `;
 
-const CAllADDs = styled.div``;
+const CAllADDs = styled.div`
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 21rem;
+`;
 const Button = styled.button`
   background-image: url("/images/globe.svg");
   background-repeat: no-repeat;
-  background-position: 8px;
-  padding-left: 21px;
-  background-size: 14px;
+  background-position: 0.5rem;
+  padding-left: 1.75rem;
+  background-size: 0.875rem;
   position: relative;
   background-color: #ffffff;
   color: #3163f0;
   border: none;
-  border-radius: 4px;
-  width: 130px;
-  height: 34px;
-  font-size: 14px;
+  border-radius: 0.25rem;
+  // width: 100%;
+  max-width: 17.75rem;
+  white-space: nowrap;
+  height: 2.125rem;
+  font-size: 0.875rem;
 `;
 
 const Container = styled.div`
   background-color: #ffffff;
-  border-radius: 6px;
+  border-radius: 0.375rem;
   width: 100%;
-  height: 133px;
-  margin-top: 20px;
+  height: 8.75rem;
+  margin-top: 1.25rem;
 `;
 
 const Hash = styled.div`
   display: flex;
   flex-flow: row nowrap;
-  margin-top: 10px;
+  margin-top: 0.625rem;
   // font-weight: 600;
   border: none;
   width: 100%;
-  max-width: 385px;
+  max-width: 24.063rem;
 `;
 const SubHeading = styled.div`
-  font: normal normal medium 14px/17px Inter;
-  letter-spacing: 0px;
+  font-size: 0.875rem;
+  font-weight: 600;
   color: #102c78;
 `;
 
@@ -400,21 +440,21 @@ const SHead = styled.div`
 
 const TextLi = styled.div`
   text-align: left;
-  letter-spacing: 0px;
+  letter-spacing: 0rem;
   color: #ce1a1a;
   opacity: 1;
 `;
 const SearchBar = styled.input`
-  height: 35px;
-  width: 200px;
+  height: 2.188rem;
+  width: 12.5rem;
   border: none;
-  margin-left: 15px;
-  border-radius: 4px;
+  margin-left: 0.938rem;
+  border-radius: 0.25rem;
   background-image: url("/images/search-icon.svg");
   background-repeat: no-repeat;
-  background-position: 8px;
-  padding-left: 30px;
-  background-size: 12px;
+  background-position: 0.5rem;
+  padding-left: 1.875rem;
+  background-size: 0.75rem;
   position: relative;
   &:focus: {
     outline: none;
@@ -425,10 +465,10 @@ const TabLister = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  max-width: 530px;
-  margin: 25px 0px 10px 17px;
+  max-width: 33.125rem;
+  margin: 1.563rem 0rem 0.625rem 1.063rem;
   cursor: pointer;
 `;
 const TabView = styled.div`
-  padding: 5px 8px 5px 8px;
+  padding: 0.313rem 0.5rem 0.313rem 0.5rem;
 `;

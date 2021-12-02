@@ -31,14 +31,19 @@ export default function Rules() {
                 onClick={handleViewClick}
                 style={{
                   color: activeButton === "Rules" ? "blue" : "",
+                  display: "flex",
+                  paddingBottom: "14px",
                   borderBottom:
                     activeButton === "Rules" ? "2px solid blue" : "",
                 }}
               >
                 <img
-                  alt=""
-                  style={{ marginRight: "3px" }}
-                  src="/images/rules.svg"
+                  style={{ marginRight: "6px" }}
+                  src={
+                    activeButton === "Rules"
+                      ? "/images/rules.svg"
+                      : "/images/rules1.svg"
+                  }
                 />
                 Rules
               </TabView>
@@ -47,11 +52,20 @@ export default function Rules() {
                 onClick={handleViewClick}
                 style={{
                   color: activeButton === "History" ? "blue" : "",
+                  display: "flex",
+                  paddingBottom: "14px",
                   borderBottom:
                     activeButton === "History" ? "2px solid blue" : "",
                 }}
               >
-                <img style={{ marginRight: "3px" }} src="/images/history.svg" />
+                <img
+                  style={{ marginRight: "6px" }}
+                  src={
+                    activeButton === "History"
+                      ? "/images/history_blue.svg"
+                      : "/images/history.svg"
+                  }
+                />
                 History
               </TabView>
               <TabView
@@ -59,13 +73,19 @@ export default function Rules() {
                 onClick={handleViewClick}
                 style={{
                   color: activeButton === "Destination" ? "blue" : "",
+                  display: "flex",
+                  paddingBottom: "14px",
                   borderBottom:
                     activeButton === "Destination" ? "2px solid blue" : "",
                 }}
               >
                 <img
-                  style={{ marginRight: "2px" }}
-                  src="/images/destination.svg"
+                  style={{ marginRight: "5px" }}
+                  src={
+                    activeButton === "Destination"
+                      ? "/images/destination_blue.svg"
+                      : "/images/destination.svg"
+                  }
                 />
                 Destination
               </TabView>
@@ -84,30 +104,38 @@ export default function Rules() {
                 </NewDiv>
                 <NewDiv>
                   <Row>
-                    <ColumnOne>App_Transactions</ColumnOne>
-                    <ColumnOne>xdcabfe…8b3c</ColumnOne>
-                    <ColumnOne>XDC Mainnet</ColumnOne>
-                    <ColumnOne>Sucessfull transaction</ColumnOne>
-                    <ColumnOne style={{ fontSize: "14px", color: "#00A58C" }}>
-                      enabled
-                    </ColumnOne>
-                    <ColumnOne>
-                      <img src="/images/delete.svg" style={{ width: "16px" }} />
-                    </ColumnOne>
+                    <ColumnTwo>App_Transactions</ColumnTwo>
+                    <ColumnTwo>xdcabfe…8b3c</ColumnTwo>
+                    <ColumnTwo>XDC Mainnet</ColumnTwo>
+                    <ColumnTwo>Sucessfull</ColumnTwo>
+                    <ColumnTwo style={{ fontSize: "14px", color: "#00A58C" }}>
+                      Enabled
+                    </ColumnTwo>
+                    <ColumnTwo>
+                      <img
+                        alt=""
+                        src="/images/delete_blue.svg"
+                        style={{ width: "16px" }}
+                      />
+                    </ColumnTwo>
                   </Row>
                 </NewDiv>
                 <NewDiv>
                   <Row>
-                    <ColumnOne>App_Transactions</ColumnOne>
-                    <ColumnOne>xdcabfe…8b3c</ColumnOne>
-                    <ColumnOne>XDC Mainnet</ColumnOne>
-                    <ColumnOne>Failed transaction</ColumnOne>
-                    <ColumnOne style={{ fontSize: "14px", color: "#00A58C" }}>
-                      enabled
-                    </ColumnOne>
-                    <ColumnOne>
-                      <img src="/images/delete.svg" style={{ width: "16px" }} />
-                    </ColumnOne>
+                    <ColumnTwo>App_Transactions</ColumnTwo>
+                    <ColumnTwo>xdcabfe…8b3c</ColumnTwo>
+                    <ColumnTwo>XDC Mainnet</ColumnTwo>
+                    <ColumnTwo>Failed </ColumnTwo>
+                    <ColumnTwo style={{ fontSize: "14px", color: "#00A58C" }}>
+                      Enabled
+                    </ColumnTwo>
+                    <ColumnTwo>
+                      <img
+                        alt=""
+                        src="/images/delete_blue.svg"
+                        style={{ width: "16px" }}
+                      />
+                    </ColumnTwo>
                   </Row>
                 </NewDiv>
               </div>
@@ -140,6 +168,14 @@ const ColumnOne = styled.div`
   font-size: 14px;
   font-weight: 600;
   color: #102c78;
+  width: 100%;
+  max-width: 300px;
+`;
+const ColumnTwo = styled.div`
+  display: flex;
+  flex-flow: column nowrap;
+  font-size: 14px;
+  color: #191919;
   width: 100%;
   max-width: 300px;
 `;

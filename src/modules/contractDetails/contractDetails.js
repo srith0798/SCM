@@ -142,12 +142,12 @@ export default function ContractDetails(props) {
                 <Tabs>
                   <TabList>
                     <Tab>
-                      <img src="/images/genrl.svg" />
+                      <img alt="" src="/images/genrl.svg" />
                       &emsp;General
                     </Tab>
                     <Tab>
                       {" "}
-                      <img src="/images/coding.svg" />
+                      <img alt="" src="/images/coding.svg" />
                       &emsp;Source Code
                     </Tab>
                   </TabList>
@@ -167,7 +167,7 @@ export default function ContractDetails(props) {
                       <PopUp>
                         <PopUpBlock>
                           <RowProperty>
-                            <img src="/images/cube.svg" />
+                            <img alt="" src="/images/cube.svg" />
                           </RowProperty>
                           <RowProperty>View transactions</RowProperty>
                         </PopUpBlock>
@@ -175,7 +175,7 @@ export default function ContractDetails(props) {
                         <PopUpBlock>
                           {open && <ContractAbi click={handleClose} />}
                           <RowProperty onClick={handleClickOpen}>
-                            <img src="/images/code.svg" />
+                            <img alt="" src="/images/code.svg" />
                           </RowProperty>
                           <RowProperty>Contract ABI</RowProperty>
                         </PopUpBlock>
@@ -185,21 +185,21 @@ export default function ContractDetails(props) {
                             <RenameContract click={renameHandleClose} />
                           )}
                           <RowProperty onClick={() => renameHandleOpen()}>
-                            <img src="/images/edit.svg" />
+                            <img alt="" src="/images/edit.svg" />
                           </RowProperty>
                           <RowProperty>Rename Contract</RowProperty>
                         </PopUpBlock>
                         <PopUpBlock>
                           {hide && <HideContract click={hideHandleClose} />}
                           <RowProperty onClick={() => hideHandleOpen()}>
-                            <img src="/images/hide.svg" />
+                            <img alt="" src="/images/hide.svg" />
                           </RowProperty>
                           <RowProperty>Hide Contract</RowProperty>
                         </PopUpBlock>
                         <PopUpBlock>
                           {remove && <Remove click={removeHandleClose} />}
                           <RowProperty onClick={() => removeHandleOpen()}>
-                            <img src="/images/delete.svg" />
+                            <img alt="" src="/images/delete.svg" />
                           </RowProperty>
                           <RowProperty>Remove Contract</RowProperty>
                         </PopUpBlock>

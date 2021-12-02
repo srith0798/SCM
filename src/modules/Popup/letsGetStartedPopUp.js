@@ -23,7 +23,7 @@ export default function LetsGetStarted(props) {
             <Container>
               <SubContainer>
                 <Add>Get Started</Add>
-                <Img src="/images/XDC-Cross.svg" onClick={props.click} />
+                <img alt="" src="/images/XDC-Cross.svg" onClick={props.click} />
               </SubContainer>
               <Content>Great to have you onboard! Feel free to explore</Content>
 

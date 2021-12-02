@@ -35,13 +35,25 @@ export default function SubContracts2() {
             </div>
             <Tabs>
               <TabList>
-                <img src="/images/rules.svg" style={{ width: "16px" }} />
+                <img alt="" src="/images/rules.svg" style={{ width: "16px" }} />
                 <Tab> Overview </Tab>
-                <img src="/images/contracts.svg" style={{ width: "16px" }} />
+                <img
+                  alt=""
+                  src="/images/contracts.svg"
+                  style={{ width: "16px" }}
+                />
                 <Tab>Contracts</Tab>
-                <img src="/images/general.svg" style={{ width: "16px" }} />
+                <img
+                  alt=""
+                  src="/images/general.svg"
+                  style={{ width: "16px" }}
+                />
                 <Tab>Events</Tab>
-                <img src="/images/state change.svg" style={{ width: "16px" }} />
+                <img
+                  alt=""
+                  src="/images/state change.svg"
+                  style={{ width: "16px" }}
+                />
                 <Tab>State change</Tab>
               </TabList>
             </Tabs>
