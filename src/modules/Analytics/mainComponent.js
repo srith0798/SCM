@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import { Row, Column } from "simple-flexbox";
 import Header from "../header/header";
 import Sidebar from "../sidebar/sidebar";
 import Line from "./graph";
-import { useHistory } from "react-router-dom";
+
 import Box from "@mui/material/Box";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
-import { history } from "../../managers/history";
 
 // const FirstPage = (props) => {
 //   let history = useHistory();
@@ -53,7 +52,7 @@ export default function MainComponent(props) {
     right: 0,
     left: 0,
     zIndex: 1,
-    border: "1px solid",
+    // border: "1px solid",
     p: 1,
     bgcolor: "background.paper",
     width: "100%",
@@ -121,10 +120,7 @@ export default function MainComponent(props) {
                 <SubContainer>
                   <div style={{ display: "flex", alignItems: "center" }}>
                     <Head>Transactions over time</Head>
-                    <img
-                      src="/images/expand.svg"
-                      onClick={FullScreen}
-                    />
+                    <img src="/images/expand.svg" onClick={FullScreen} />
                   </div>
                   <select name="cars" id="cars" class="">
                     <option value="volvo">Last 5 days</option>

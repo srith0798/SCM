@@ -109,7 +109,7 @@ export default function TransactionList(props) {
     width: "100%",
     maxWidth: "453px",
     background: "#f5f6fd 0% 0% no-repeat padding-box",
-    border: "1px solid #d5e0ff",
+    // border: "1px solid #d5e0ff",
     borderRadius: "6px",
     height: "80px",
     marginTop: "4px",

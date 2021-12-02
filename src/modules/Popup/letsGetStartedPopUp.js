@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import { Row, Column } from "simple-flexbox";
 import Dialog from "@mui/material/Dialog";
 import { makeStyles } from "@material-ui/styles";
 

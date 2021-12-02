@@ -127,10 +127,10 @@ const MainContainer = styled.div`
 const Container = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
 
-  border-radius: 6px;
+  border-radius: 0.375rem;
   width: 100%;
   background-color: #ffffff;
-  max-width: 700px;
+  max-width: 43.75rem;
   height: auto;
 `;
 const SubContainer = styled.div`
@@ -138,7 +138,9 @@ const SubContainer = styled.div`
   justify-content: space-between;
 `;
 const Add = styled.div`
-  font: normal normal 600 24px/29px Inter;
+  // font: normal normal 600 24px/29px Inter;
+  font-size: 1.5rem;
+  font-weight: 600;
   color: #303134;
 `;
 const Img = styled.img`
@@ -146,24 +148,23 @@ const Img = styled.img`
 `;
 
 const MainHeading = styled.div`
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 600;
-  letter-spacing: 0px;
   color: #102c78;
-
   border-bottom: 1px solid rgb(213, 224, 255);
 `;
 const Content = styled.div`
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 600;
   color: #303134;
-  margin-top: 10px;
+  margin-top: 0.625rem;
   padding: 15px 12px 8px 10px;
+  // padding: 0.938rem 0.75rem 0.5rem 0.625rem;
 `;
 const Heading = styled.div`
   text-align: left;
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 600;
   color: #303134;
-  margin-top: 20px;
+  margin-top: 1.25rem;
 `;

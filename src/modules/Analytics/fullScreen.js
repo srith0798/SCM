@@ -4,7 +4,7 @@ import { Row, Column } from "simple-flexbox";
 import Header from "../header/header";
 import Sidebar from "../sidebar/sidebar";
 import Line from "./graph";
-import { history } from "../../managers/history";
+// import { history } from "../../managers/history";
 
 export default function FullScreen(props) {
   const ClickMe = () => {

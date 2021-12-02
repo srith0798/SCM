@@ -6,9 +6,9 @@ import getMuiTheme from "material-ui/styles/getMuiTheme";
 import { connect } from "react-redux";
 import { history } from "./managers/history";
 import BaseComponent from "./modules/baseComponent";
-import LoginComponent from "./modules/login/loginComponent";
+// import LoginComponent from "./modules/login/loginComponent";
 import TransactionList from "./modules/transactions/transactionList";
-import CreateAccount from "./modules/CreateAccount/createAccount";
+// import CreateAccount from "./modules/CreateAccount/createAccount";
 import VerifyEmail from "./modules/VerifyEmail/verifyEmail";
 import Contract from "./modules/Contract/contract";
 import ContractDetails from "./modules/contractDetails/contractDetails";
@@ -34,7 +34,7 @@ import FullScreen from "./modules/Analytics/fullScreen";
 class Routes extends BaseComponent {
   componentDidMount() {}
 
-  componentDidMount() {}
+  // componentDidMount() {}
 
   render() {
     return (
@@ -72,11 +72,7 @@ class Routes extends BaseComponent {
             <Route exact path={"/add-network"} component={AddNetwork} />
             <Route exact path={"/settings"} component={Settings} />
             <Route exact path={"/analytics"} component={Analytics} />
-            <Route
-              exact
-              path={"/analytics"}
-              component={MainComponent}
-            />
+            <Route exact path={"/analytics"} component={MainComponent} />
             <Route exact path={"/fullscreen"} component={FullScreen} />
             <Redirect exact from="*" to="/" />
           </Switch>

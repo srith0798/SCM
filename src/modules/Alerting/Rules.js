@@ -35,7 +35,11 @@ export default function Rules() {
                     activeButton === "Rules" ? "2px solid blue" : "",
                 }}
               >
-                <img style={{ marginRight: "3px" }} src="/images/rules.svg" />
+                <img
+                  alt=""
+                  style={{ marginRight: "3px" }}
+                  src="/images/rules.svg"
+                />
                 Rules
               </TabView>
               <TabView

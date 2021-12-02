@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Row, Column } from "simple-flexbox";
+// import { Row, Column } from "simple-flexbox";
 import Dialog from "@mui/material/Dialog";
 
 export default function AddContract(props) {
