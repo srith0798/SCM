@@ -1,12 +1,12 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Row, Column } from "simple-flexbox";
 import Header from "../header/header";
 import Sidebar from "../sidebar/sidebar";
-import Line from "./graph";
+import { useHistory } from "react-router-dom";
 import { history } from "../../managers/history";
 
-export default function FullScreen(props) {
+export default function TopCalls(props) {
   const ClickMe = () => {
     props.changeExpand(0);
   };
@@ -51,7 +51,26 @@ export default function FullScreen(props) {
                     </option>
                   </select>
                 </FlexEnd>
-                <Line />
+                <Div>
+                  <ContractFrom>Contract from</ContractFrom>
+                  <Network>xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c</Network>
+                </Div>
+                <Div>
+                  <ContractFrom>Network</ContractFrom>
+                  <Network>Mainnet</Network>
+                </Div>
+                <Div>
+                  <ContractFrom>Contract from</ContractFrom>
+                  <Network>xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c</Network>
+                </Div>
+                <Div>
+                  <ContractFrom>Network</ContractFrom>
+                  <Network>Mainnet</Network>
+                </Div>
+                <Div>
+                  <ContractFrom>Network</ContractFrom>
+                  <Network>Mainnet</Network>
+                </Div>
               </GraphContainer>
             </Row>
           </MainContainer>
@@ -116,4 +135,18 @@ const Img = styled.img`
 `;
 const Icon = styled.img`
   margin-left: 10px;
+`;
+const ContractFrom = styled.div`
+  width: 100%;
+  max-width: 150px;
+`;
+const Network = styled.div`
+  width: 100%;
+  max-width: 150px;
+`;
+const Div = styled.div`
+  display: flex;
+  flex-flow: row nowrap;
+  border-top: 1px solid rgb(227, 231, 235);
+  padding: 10px;
 `;

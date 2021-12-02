@@ -110,11 +110,11 @@ export default function Contract(props) {
                   return (
                     <Div>
                       <Row>
-                        <ColumnOne>{data.contractName}</ColumnOne>
-                        <ColumnOne>{data.address}</ColumnOne>
-                        <ColumnOne>{data.network}</ColumnOne>
-                        <ColumnOne>{data.tag}</ColumnOne>
-                        <ColumnOne>{data.visibility}</ColumnOne>
+                        <ColumnSecond>{data.contractName}</ColumnSecond>
+                        <ColumnSecond>{data.address}</ColumnSecond>
+                        <ColumnSecond>{data.network}</ColumnSecond>
+                        <ColumnSecond>{data.tag}</ColumnSecond>
+                        <ColumnSecond>{data.visibility}</ColumnSecond>
                       </Row>
                     </Div>
                   );
@@ -191,6 +191,15 @@ const ColumnOne = styled.div`
   font-size: 14px;
   font-weight: 600;
   color: #102c78;
+  width: 100%;
+  max-width: 300px;
+`;
+const ColumnSecond = styled.div`
+  display: flex;
+  flex-flow: column nowrap;
+  font-size: 14px;
+  font-weight: 600;
+  color: #191919;
   width: 100%;
   max-width: 300px;
 `;

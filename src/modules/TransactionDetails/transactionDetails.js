@@ -276,7 +276,7 @@ export default function TransactionDetails() {
 }
 
 const backButton = () => {
-  history.push();
+  history.push("/");
 };
 
 const NewContainer = styled.div`

@@ -9,30 +9,7 @@ import Box from "@mui/material/Box";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 import { history } from "../../managers/history";
 
-// const FirstPage = (props) => {
-//   let history = useHistory();
-//   console.log("hello");
-//   const someEventHandler = (event) => {
-//     history.push({
-//       pathname: "/fullScreen",
-//       search: "?query=abc",
-//       state: { detail: "some_value" },
-//     });
-//   };
-// };
-
 export default function MainComponent(props) {
-  // useEffect(() => {
-
-  // }, []);
-  // const [Expand, setCountry] = React.useState(false);
-  // const changeExpand = (value) => {
-  //   setCountry(value);
-  // };
-  // const [Expand, setExpand] = React.useState(false);
-  // const changeExpand = (value) => {
-  //   setExpand(value);
-  // };
   const [isSetOpen, setOpen] = React.useState(false);
 
   const handleClick = () => {
@@ -42,11 +19,9 @@ export default function MainComponent(props) {
   const handleClickAway = () => {
     setOpen(false);
   };
-  const FullScreen = () => {
-    // history.push("/fullscreen");
-    // props.changeExpand(1)
-    // history.push(pathConstants.DASHBOARD_MENU.ADD_PRODUCT);
-  };
+  // const FullScreen = () => {
+  //   props.changeExpand(1);
+  // };
   const styles = {
     position: "absolute",
     top: 77,
@@ -72,6 +47,7 @@ export default function MainComponent(props) {
     <div>
       <Column>
         <Header />
+
         <Row
         // style={{ height: "300vh" }}
         >
@@ -95,7 +71,7 @@ export default function MainComponent(props) {
                     <TransactionHash>
                       xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c
                     </TransactionHash>
-                    <Image src="/images/dropdown.svg" />
+                    <Image src="/images/Arrrow.svg" />
                   </DropDown>
                   {isSetOpen ? (
                     <Box sx={styles}>
@@ -123,14 +99,22 @@ export default function MainComponent(props) {
                     <Head>Transactions over time</Head>
                     <img
                       src="/images/expand.svg"
-                      onClick={FullScreen}
+                      onClick={() => props.changeExpand(1)}
                     />
                   </div>
-                  <select name="cars" id="cars" class="">
-                    <option value="volvo">Last 5 days</option>
-                    <option value="saab">Last 7 days</option>
-                    <option value="mercedes">Last 15 days</option>
-                    <option value="audi">Last 25 days</option>
+                  <select id="cars" className="select">
+                    <option value="volvo" className="select-dropdown">
+                      Last 5 days
+                    </option>
+                    <option value="saab" className="select-dropdown">
+                      Last 7 days
+                    </option>
+                    <option value="mercedes" className="select-dropdown">
+                      Last 15 days
+                    </option>
+                    <option value="audi" className="select-dropdown">
+                      Last 25 days
+                    </option>
                   </select>
                 </SubContainer>
                 <Line />
@@ -139,14 +123,25 @@ export default function MainComponent(props) {
                 <SubContainer>
                   <div style={{ display: "flex", alignItems: "center" }}>
                     <Head>Gas used overtime</Head>
-                    <img src="/images/expand.svg" />
+                    <img
+                      src="/images/expand.svg"
+                      onClick={() => props.changeExpand(2)}
+                    />
                   </div>
 
-                  <select name="cars" id="cars">
-                    <option value="volvo">Last 5 days</option>
-                    <option value="saab">Last 7 days</option>
-                    <option value="mercedes">Last 15 days</option>
-                    <option value="audi">Last 25 days</option>
+                  <select id="cars" className="select">
+                    <option value="volvo" className="select-dropdown">
+                      Last 5 days
+                    </option>
+                    <option value="saab" className="select-dropdown">
+                      Last 7 days
+                    </option>
+                    <option value="mercedes" className="select-dropdown">
+                      Last 15 days
+                    </option>
+                    <option value="audi" className="select-dropdown">
+                      Last 25 days
+                    </option>
                   </select>
                 </SubContainer>
                 <Line />
@@ -163,13 +158,24 @@ export default function MainComponent(props) {
                 <SubContainer>
                   <div style={{ display: "flex", alignItems: "center" }}>
                     <Head>Top Callers</Head>
-                    <img src="/images/expand.svg" />
+                    <img
+                      src="/images/expand.svg"
+                      onClick={() => props.changeExpand(4)}
+                    />
                   </div>
-                  <select name="cars" id="cars">
-                    <option value="volvo">Last 5 days</option>
-                    <option value="saab">Last 7 days</option>
-                    <option value="mercedes">Last 15 days</option>
-                    <option value="audi">Last 25 days</option>
+                  <select id="cars" className="select">
+                    <option value="volvo" className="select-dropdown">
+                      Last 5 days
+                    </option>
+                    <option value="saab" className="select-dropdown">
+                      Last 7 days
+                    </option>
+                    <option value="mercedes" className="select-dropdown">
+                      Last 15 days
+                    </option>
+                    <option value="audi" className="select-dropdown">
+                      Last 25 days
+                    </option>
                   </select>
                 </SubContainer>
                 <Div>
@@ -197,13 +203,24 @@ export default function MainComponent(props) {
                 <SubContainer>
                   <div style={{ display: "flex", alignItems: "center" }}>
                     <Head>Active users</Head>
-                    <img src="/images/expand.svg" />
+                    <img
+                      src="/images/expand.svg"
+                      onClick={() => props.changeExpand(3)}
+                    />
                   </div>
-                  <select name="cars" id="cars">
-                    <option value="volvo">Last 5 days</option>
-                    <option value="saab">Last 7 days</option>
-                    <option value="mercedes">Last 15 days</option>
-                    <option value="audi">Last 25 days</option>
+                  <select id="cars" className="select">
+                    <option value="volvo" className="select-dropdown">
+                      Last 5 days
+                    </option>
+                    <option value="saab" className="select-dropdown">
+                      Last 7 days
+                    </option>
+                    <option value="mercedes" className="select-dropdown">
+                      Last 15 days
+                    </option>
+                    <option value="audi" className="select-dropdown">
+                      Last 25 days
+                    </option>
                   </select>
                 </SubContainer>
                 <Line />
@@ -213,13 +230,24 @@ export default function MainComponent(props) {
               <SubContainer>
                 <div style={{ display: "flex", alignItems: "center" }}>
                   <Head>Top Functions calls</Head>
-                  <img src="/images/expand.svg" />
+                  <img
+                    src="/images/expand.svg"
+                    onClick={() => props.changeExpand(5)}
+                  />
                 </div>
-                <select name="cars" id="cars">
-                  <option value="volvo">Last 5 days</option>
-                  <option value="saab">Last 7 days</option>
-                  <option value="mercedes">Last 15 days</option>
-                  <option value="audi">Last 25 days</option>
+                <select id="cars" className="select">
+                  <option value="volvo" className="select-dropdown">
+                    Last 5 days
+                  </option>
+                  <option value="saab" className="select-dropdown">
+                    Last 7 days
+                  </option>
+                  <option value="mercedes" className="select-dropdown">
+                    Last 15 days
+                  </option>
+                  <option value="audi" className="select-dropdown">
+                    Last 25 days
+                  </option>
                 </select>
               </SubContainer>
               <Div>
