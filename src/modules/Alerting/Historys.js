@@ -18,20 +18,40 @@ export default function Historys() {
         </Div>
         <Div>
           <Row>
-            <ColumnOne>Sucessfull transaction</ColumnOne>
-            <ColumnOne>App_Transactions_Validator</ColumnOne>
-            <ColumnOne>0xndfahkk57..fj9</ColumnOne>
-            <ColumnOne>XDC Mainnet</ColumnOne>
-            <ColumnOne>02.2.2022 12:02</ColumnOne>
+            <ColumnOne style={{ fontSize: "14px", color: "#191919" }}>
+              Sucessfull transaction
+            </ColumnOne>
+            <ColumnOne style={{ fontSize: "14px", color: "#191919" }}>
+              App_Transactions_Validator
+            </ColumnOne>
+            <ColumnOne style={{ fontSize: "14px", color: "#191919" }}>
+              0xndfahkk57..fj9
+            </ColumnOne>
+            <ColumnOne style={{ fontSize: "14px", color: "#191919" }}>
+              XDC Mainnet
+            </ColumnOne>
+            <ColumnOne style={{ fontSize: "14px", color: "#191919" }}>
+              02.2.2022 12:02
+            </ColumnOne>
           </Row>
         </Div>
         <Div>
           <Row>
-            <ColumnOne>Sucessfull transaction</ColumnOne>
-            <ColumnOne>App_Transactions_Validator</ColumnOne>
-            <ColumnOne>0xndfahkk57..fj9</ColumnOne>
-            <ColumnOne>XDC Mainnet</ColumnOne>
-            <ColumnOne>02.2.2022 12:02</ColumnOne>
+            <ColumnOne style={{ fontSize: "14px", color: "#191919" }}>
+              Sucessfull transaction
+            </ColumnOne>
+            <ColumnOne style={{ fontSize: "14px", color: "#191919" }}>
+              App_Transactions_Validator
+            </ColumnOne>
+            <ColumnOne style={{ fontSize: "14px", color: "#191919" }}>
+              0xndfahkk57..fj9
+            </ColumnOne>
+            <ColumnOne style={{ fontSize: "14px", color: "#191919" }}>
+              XDC Mainnet
+            </ColumnOne>
+            <ColumnOne style={{ fontSize: "14px", color: "#191919" }}>
+              02.2.2022 12:02
+            </ColumnOne>
           </Row>
         </Div>
       </MainContainer>
