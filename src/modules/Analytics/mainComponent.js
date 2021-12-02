@@ -8,7 +8,6 @@ import { useHistory } from "react-router-dom";
 import Box from "@mui/material/Box";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 import { history } from "../../managers/history";
-// import TopCallsFullScreen from "./analytics/TopCallsFullScreen";
 
 export default function MainComponent(props) {
   const [isSetOpen, setOpen] = React.useState(false);
@@ -161,7 +160,7 @@ export default function MainComponent(props) {
                     <Head>Top Callers</Head>
                     <img
                       src="/images/expand.svg"
-                      onClick={() => props.changeTopCallExpand(4)}
+                      onClick={() => props.changeExpand(4)}
                     />
                   </div>
                   <select id="cars" className="select">
@@ -233,7 +232,7 @@ export default function MainComponent(props) {
                   <Head>Top Functions calls</Head>
                   <img
                     src="/images/expand.svg"
-                    onClick={() => props.changeTopCallExpand(5)}
+                    onClick={() => props.changeExpand(5)}
                   />
                 </div>
                 <select id="cars" className="select">

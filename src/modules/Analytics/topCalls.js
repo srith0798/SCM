@@ -3,12 +3,12 @@ import styled from "styled-components";
 import { Row, Column } from "simple-flexbox";
 import Header from "../header/header";
 import Sidebar from "../sidebar/sidebar";
-import Line from "./graph";
 import { useHistory } from "react-router-dom";
+import { history } from "../../managers/history";
 
 export default function TopCalls(props) {
   const ClickMe = () => {
-    props.changeTopCallExpand(0);
+    props.changeExpand(0);
   };
   return (
     <div>
