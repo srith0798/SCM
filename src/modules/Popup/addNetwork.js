@@ -18,7 +18,7 @@ export default function AddNetwork(props) {
           <Container>
             <SubContainer>
               <Add>Add Network</Add>
-              <Img src="/images/XDC-Cross.svg" onClick={props.click} />
+              <img alt="" src="/images/XDC-Cross.svg" onClick={props.click} />
             </SubContainer>
 
             <Heading>Network name</Heading>
@@ -40,19 +40,19 @@ export default function AddNetwork(props) {
   );
 }
 const Heading = styled.div`
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 600;
   color: #303134;
-  margin-top: 20px;
+  margin-top: 1.25rem;
 `;
 const Input = styled.input`
   background: #f0f2fc 0% 0% no-repeat padding-box;
-  border-radius: 4px;
+  border-radius: 0.25rem;
   border: none;
   color: #767c93;
-  padding: 5px;
+  padding: 0.313;
   width: 100%;
-  margin-top: 20px;
+  margin-top: 1.25rem;
 `;
 const MainContainer = styled.div`
   width: 100%;
@@ -62,31 +62,35 @@ const MainContainer = styled.div`
 `;
 const Container = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
-  border: 1px solid #707070;
-  border-radius: 6px;
+  border-radius: 0.375rem;
   width: 100%;
   background-color: #ffffff;
-  max-width: 700px;
+  max-width: 43.75rem;
   height: auto;
-  padding: 20px;
+  padding: 1.25rem;
 `;
 const SubContainer = styled.div`
   display: flex;
   justify-content: space-between;
 `;
 const Add = styled.div`
-  font: normal normal 600 24px/29px Inter;
+  // font: normal normal 600 24px/29px Inter;
+  font-size: 1.5rem;
+  font-weight: 600;
   color: #303134;
 `;
-const Img = styled.img`
-  cursor: pointer;
-`;
+// const Img = styled.img`
+//   cursor: pointer;
+// `;
 
 const Button = styled.button`
   text-align: left;
-  font: normal normal medium 16px/20px Inter;
+  // font: normal normal medium 16px/20px Inter;
+  font-size: 1rem;
+  font-weight: 600;
   background: #9db5f8 0% 0% no-repeat padding-box;
-  border-radius: 4px;
+  border-radius: 0.25rem;
   color: #ffffff;
-  margin-top: 20px;
+  margin-top: 1.25rem;
+  border: 0;
 `;

@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { Row, Column } from "simple-flexbox";
 import Header from "../header/header";
 import Sidebar from "../sidebar/sidebar";
 import AddContract from "../Popup/addContract";
 import { history } from "../../managers/history";
+import Tooltip from "@mui/material/Tooltip";
 
 export default function Contract(props) {
   const [open, setOpen] = React.useState(false);
@@ -22,35 +23,49 @@ export default function Contract(props) {
   React.useEffect(() => {
     let address = [
       {
-        contractName: "App_Transactions_Validator",
+        contractName: "App_Transactions",
         address: "xdcabf8b3c",
         network: "XDC Mainnet",
         tag: "Add Tag",
         visibility: "Visible",
       },
       {
-        contractName: "App_Transactions_Validator",
+        contractName: "App_Transactions",
         address: "xdcabf8b3c",
         network: "XDC Mainnet",
         tag: "Add Tag",
         visibility: "Visible",
       },
       {
-        contractName: "App_Transactions_Validator",
+        contractName: "App_Transactions",
         address: "xdcabf8b3c",
         network: "XDC Mainnet",
         tag: "Add Tag",
         visibility: "Visible",
       },
       {
-        contractName: "App_Transactions_Validator",
+        contractName: "App_Transactions",
         address: "xdcabf8b3c",
         network: "XDC Mainnet",
         tag: "Add Tag",
         visibility: "Visible",
       },
       {
-        contractName: "App_Transactions_Validator",
+        contractName: "App_Transactions",
+        address: "xdcabf8b3c",
+        network: "XDC Mainnet",
+        tag: "Add Tag",
+        visibility: "Visible",
+      },
+      {
+        contractName: "App_Transactions",
+        address: "xdcabf8b3c",
+        network: "XDC Mainnet",
+        tag: "Add Tag",
+        visibility: "Visible",
+      },
+      {
+        contractName: "App_Transactions",
         address: "xdcabf8b3c",
         network: "XDC Mainnet",
         tag: "Add Tag",
@@ -77,7 +92,9 @@ export default function Contract(props) {
     <div>
       <Column>
         <Header />
-        <Row style={{ height: "100vh" }}>
+        <Row
+        // style={{ height: "180vh" }}
+        >
           <Sidebar />
           <MainContainer>
             <SubContainer>
@@ -87,8 +104,9 @@ export default function Contract(props) {
               </div>
               <div style={{ display: "flex" }}>
                 <img
+                  alt=""
                   src="/images/refresh.svg"
-                  style={{ marginRight: "10px" }}
+                  style={{ marginRight: "0.625rem" }}
                 />
                 {open && <AddContract click={handleClose} />}
                 <Button onClick={handleClickOpen}>Add Contract</Button>
@@ -101,7 +119,12 @@ export default function Contract(props) {
                   <ColumnOne>Contract Name</ColumnOne>
                   <ColumnOne>Address</ColumnOne>
                   <ColumnOne>Network</ColumnOne>
-                  <ColumnOne>Tag</ColumnOne>
+                  <ColumnOne>
+                    Tag{" "}
+                    <Tooltip disableFocusListener title="Add">
+                      <ToolTipIcon src="/images/tool tip.svg" />
+                    </Tooltip>
+                  </ColumnOne>
                   <ColumnOne>Visibility</ColumnOne>
                 </Row>
               </Div>
@@ -110,11 +133,11 @@ export default function Contract(props) {
                   return (
                     <Div>
                       <Row>
-                        <ColumnOne>{data.contractName}</ColumnOne>
-                        <ColumnOne>{data.address}</ColumnOne>
-                        <ColumnOne>{data.network}</ColumnOne>
-                        <ColumnOne>{data.tag}</ColumnOne>
-                        <ColumnOne>{data.visibility}</ColumnOne>
+                        <ColumnSecond>{data.contractName}</ColumnSecond>
+                        <ColumnSecond>{data.address}</ColumnSecond>
+                        <ColumnSecond>{data.network}</ColumnSecond>
+                        <ColumnSecond>{data.tag}</ColumnSecond>
+                        <ColumnSecond>{data.visibility}</ColumnSecond>
                       </Row>
                     </Div>
                   );
@@ -131,66 +154,80 @@ export default function Contract(props) {
 const MainContainer = styled.div`
   background-color: #ecf0f7;
   width: 100%;
-  padding: 50px;
+  padding: 3.125rem;
 `;
 const SubContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
-  height: 50px;
+  height: 3.125rem;
   align-items: center;
 `;
 const Heading = styled.span`
-  font: normal normal 600 24px/29px Inter;
+  font-size: 1.5rem;
+  font-weight: 600;
   color: #191919;
-  margin-right: 10px;
+  margin-right: 0.625rem;
 `;
 const Button = styled.button`
   background-image: url("/images/Add.svg");
   background-repeat: no-repeat;
-  background-position: 8px;
-  padding-left: 21px;
-  background-size: 14px;
+  background-position: 0.5rem;
+  padding-left: 1.313rem;
+  background-size: 0.875rem;
   position: relative;
   background-color: #3163f0;
   color: #ffffff;
   border: none;
-  border-radius: 4px;
-  width: 130px;
-  height: 34px;
-  font-size: 14px;
+  border-radius: 0.25rem;
+  width: 8.125rem;
+  height: 2.125rem;
+  font-size: 0.875rem;
 `;
 const Input = styled.input`
   background: #ffffff 0% 0% no-repeat padding-box;
-  border-radius: 4px;
-  font: normal normal normal 14px/17px Inter;
-  padding: 7px;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: 0.438rem;
   color: #888888;
-  border: 0px;
-  padding-left: 30px;
+  border: 0rem;
+  padding-left: 1.875rem;
   background-image: url("/images/search-icon.svg");
   background-repeat: no-repeat;
-  background-position: 8px;
-  background-size: 12px;
+  background-position: 0.5rem;
+  background-size: 0.75rem;
   position: relative;
+  border: none;
+  outline: none;
 `;
 const TableContainer = styled.div`
   background-color: #ffffff;
-  border-radius: 6px;
+  border-radius: 0.375rem;
   width: 100%;
-  height: 400px;
+  height: 25rem;
+  padding: 0.625rem;
 `;
 const Div = styled.div`
-  // padding: 20px 20px 15px 30px;
-  padding: 15px;
-  border-bottom: 1px solid #e3e7eb;
+  padding: 0.75rem;
+  border-bottom: 0.063rem solid #e3e7eb;
 `;
 const ColumnOne = styled.div`
-  display: flex;
-  flex-flow: column nowrap;
   font-size: 14px;
   font-weight: 600;
   color: #102c78;
   width: 100%;
+  max-width: 18.75rem;
+`;
+const ColumnSecond = styled.div`
+  font-size: 14px;
+  font-weight: 600;
+  color: #191919;
+  width: 100%;
   max-width: 300px;
+`;
+const ToolTipIcon = styled.img`
+  width: 12px;
+  cursor: pointer;
+  margin-left: 5px;
 `;

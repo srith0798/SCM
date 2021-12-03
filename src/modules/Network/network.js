@@ -20,11 +20,6 @@ export default function Network(props) {
         network: "App_Transactions_Validator",
         url: "https://explorer.xinfin.network/",
       },
-
-      //   {
-      //     network: "App_Transactions_Validator",
-      //     url: "https://explorer.xinfin.network/",
-      //   },
     ];
 
     setAddress(
@@ -42,7 +37,9 @@ export default function Network(props) {
     <div>
       <Column>
         <Header />
-        <Row style={{ height: "100vh" }}>
+        <Row
+        // style={{ height: "180vh" }}
+        >
           <Sidebar />
           <MainContainer>
             <SubContainer>
@@ -59,18 +56,16 @@ export default function Network(props) {
               <Container>
                 <Row>
                   <ColumnOne>Network</ColumnOne>
-                  <ColumnOne>URL</ColumnOne>
+                  <UrlHeading>URL</UrlHeading>
                 </Row>
               </Container>
               <div>
                 {address.map((data, index) => {
                   return (
                     <Container>
-                      <Row>
-                        <ColumnOne>
-                          <Icon src="/images/mainnet.svg" />
-                          Mainnet
-                        </ColumnOne>
+                      <Row style={{ alignItems: "center" }}>
+                        <Icon src="/images/mainnet.svg" />
+                        <Head>Mainnet</Head>
                         <Url>https://explorer.xinfin.network/</Url>
                       </Row>
                     </Container>
@@ -88,63 +83,95 @@ export default function Network(props) {
 const MainContainer = styled.div`
   background-color: #ecf0f7;
   width: 100%;
-  padding: 50px;
+  padding: 3.125rem;
 `;
 const SubContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
-  height: 50px;
+  height: 3.125rem;
   align-items: center;
 `;
 const Heading = styled.span`
   font: normal normal 600 24px/29px Inter;
   color: #191919;
-  margin-right: 10px;
+  margin-right: 0.625rem;
 `;
-
+const UrlHeading = styled.div`
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #102c78;
+  width: 100%;
+  max-width: 15.625rem;
+  white-space: nowrap;
+  @media (min-width: 300px) and (max-width: 767px) {
+    max-width: 7.625rem;
+    width: 100%;
+  }
+`;
 const Button = styled.button`
   background-image: url("/images/Add.svg");
   background-repeat: no-repeat;
-  background-position: 8px;
-  padding-left: 21px;
-  background-size: 14px;
+  background-position: 0.5rem;
+  padding-left: 1.313rem;
+  background-size: 0.875rem;
   position: relative;
   background-color: #3163f0;
   color: #ffffff;
   border: none;
-  border-radius: 4px;
-  width: 130px;
-  height: 34px;
-  font-size: 14px;
+  border-radius: 0.25rem;
+  width: 8.125rem;
+  height: 2.188rem;
+  font-size: 0.875rem;
 `;
 const Div = styled.div`
   background-color: #ffffff;
-  border-radius: 6px;
+  border-radius: 0.375rem;
   width: 100%;
-  height: 400px;
-  margin-top: 20px;
+  height: 25rem;
+  margin-top: 1.25rem;
+  padding: 0.625rem;
+
+  @media (min-width: 300px) and (max-width: 767px) {
+    height: 400px;
+    overflow: scroll;
+    // width: 100%;
+    // max-width: 200px;
+  }
 `;
 const Container = styled.div`
-  padding: 15px;
-  border-bottom: 1px solid #e3e7eb;
+  padding: 0.938rem;
+  border-bottom: 0.063rem solid #e3e7eb;
 `;
 const ColumnOne = styled.div`
-  //   display: flex;
-  flex-flow: column nowrap;
-  font-size: 14px;
+  // display: flex;
+  // flex-flow: column nowrap;
+  font-size: 0.875rem;
   font-weight: 600;
   color: #102c78;
   width: 100%;
-  max-width: 250px;
+  max-width: 15.625rem;
   white-space: nowrap;
 `;
 const Icon = styled.img`
-  width: 28px;
-  margin-right: 10px;
+  width: 1.75rem;
+  margin-right: 0.625rem;
 `;
 const Url = styled.div`
-  font-size: 14px;
-  letter-spacing: 0px;
+  font-size: 0.875rem;
   color: #416be0;
+  width: 100%;
+  max-width: 15.625rem;
+  @media (min-width: 300px) and (max-width: 767px) {
+    max-width: 7.625rem;
+    width: 100%;
+  }
+`;
+const Head = styled.div`
+  color: #191919;
+  font-size: 0.875rem;
+  font-weight: 600;
+  width: 100%;
+  max-width: 13.438rem;
+  white-space: nowrap;
 `;

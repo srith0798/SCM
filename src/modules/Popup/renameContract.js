@@ -6,6 +6,7 @@ import { makeStyles } from "@material-ui/styles";
 const useStyles = makeStyles(() => ({
   dialogBox: {
     width: "100% !important",
+    top: "-15%",
   },
 }));
 
@@ -19,7 +20,7 @@ export default function RenameContract(props) {
           <Container>
             <SubContainer>
               <Add>Rename Contract</Add>
-              <Img src="/images/XDC-Cross.svg" onClick={props.click} />
+              <img alt="" src="/images/XDC-Cross.svg" onClick={props.click} />
             </SubContainer>
             <Input type="text" />
             <SubContainer
@@ -42,7 +43,7 @@ const MainContainer = styled.div`
 `;
 const Container = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
-  border: 1px solid #707070;
+
   border-radius: 6px;
   width: 100%;
   background-color: #ffffff;
@@ -58,9 +59,9 @@ const Add = styled.div`
   font: normal normal 600 24px/29px Inter;
   color: #303134;
 `;
-const Img = styled.img`
-  cursor: pointer;
-`;
+// const Img = styled.img`
+//   cursor: pointer;
+// `;
 const Input = styled.input`
   background: #f0f2fc 0% 0% no-repeat padding-box;
   border-radius: 4px;

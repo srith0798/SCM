@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Row, Column } from "simple-flexbox";
+import { Row } from "simple-flexbox";
 import LoginSideView from "../loginSideView/loginSideView";
 
 export default function VerifyEmail() {

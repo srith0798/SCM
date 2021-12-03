@@ -18,7 +18,7 @@ export default function HideContract(props) {
           <Container>
             <SubContainer>
               <Add>Hide Contract</Add>
-              <Img src="/images/XDC-Cross.svg" onClick={props.click} />
+              <img alt="" src="/images/XDC-Cross.svg" onClick={props.click} />
             </SubContainer>
             <Content>
               Are you sure you wish to hide this contract from the transaction
@@ -45,7 +45,7 @@ const MainContainer = styled.div`
 `;
 const Container = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
-  border: 1px solid #707070;
+
   border-radius: 6px;
   width: 100%;
   background-color: #ffffff;
@@ -61,9 +61,9 @@ const Add = styled.div`
   font: normal normal 600 24px/29px Inter;
   color: #303134;
 `;
-const Img = styled.img`
-  cursor: pointer;
-`;
+// const Img = styled.img`
+//   cursor: pointer;
+// `;
 
 const HideButton = styled.button`
   font: normal normal medium 14px/17px Inter;

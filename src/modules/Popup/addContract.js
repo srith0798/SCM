@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Row, Column } from "simple-flexbox";
+
 import Dialog from "@mui/material/Dialog";
 
 export default function AddContract(props) {
@@ -11,7 +11,7 @@ export default function AddContract(props) {
           <Container>
             <SubContainer>
               <Add>Add Contract</Add>
-              <Img src="/images/XDC-Cross.svg" onClick={props.click} />
+              <img alt="" src="/images/XDC-Cross.svg" onClick={props.click} />
             </SubContainer>
             <ImportFile>Import Public Contracts</ImportFile>
             <Content>
@@ -36,7 +36,7 @@ const MainContainer = styled.div`
 `;
 const Container = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
-  border: 1px solid #707070;
+
   border-radius: 6px;
   width: 100%;
   background-color: #ffffff;
@@ -52,9 +52,9 @@ const Add = styled.div`
   font: normal normal 600 24px/29px Inter;
   color: #303134;
 `;
-const Img = styled.img`
-  cursor: pointer;
-`;
+// const Img = styled.img`
+//   cursor: pointer;
+// `;
 const ImportFile = styled.div`
   //   font: normal normal 600 16px/20px Inter;
   color: #102c78;

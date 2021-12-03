@@ -3,30 +3,42 @@ import styled from "styled-components";
 import { history } from "../../managers/history";
 
 const SidebarContainer = styled.div`
-  background: #102c78 0% 0% no-repeat padding-box;
   width: 100%;
   max-width: 200px;
+
+  @media (min-width: 300px) and (max-width: 1024px) {
+    // display: none;
+    position: absolute;
+    z-index: 1;
+  }
 `;
-const Icon = styled.img``;
+const Icon = styled.img`
+  cursor: pointer;
+  margin-right: 13px;
+`;
+
 const Wrapper = styled.div`
   flex-wrap: wrap;
-  padding: 40px 0px 0px 25px;
   cursor: pointer;
   width: 100%;
   max-width: 240px;
   white-space: nowrap;
+  padding: 23px;
+  &:hover {
+    background: #1d3c93;
+  }
 `;
 
 const Heading = styled.span`
-  letter-spacing: 0px;
-  color: #8ca6f0;
-  opacity: 1;
-  margin-left: 15px;
+  color: #ffffff;
+`;
+const Div = styled.div`
+  background: #102c78 0% 0% no-repeat padding-box;
 `;
 
-function Sidebar() {
+export default function Sidebar(props) {
   const redirectToTransaction = () => {
-    history.push("/transaction-details");
+    history.push("/transaction-list");
   };
   const redirectToContract = () => {
     history.push("/contract");
@@ -34,30 +46,116 @@ function Sidebar() {
   const redirectToNetwork = () => {
     history.push("/network");
   };
+  const redirectToAnalytics = () => {
+    history.push("/analytics");
+  };
+  const redirectToAlerting = () => {
+    history.push("/Alerting");
+  };
+  const redirectToFaqs = () => {
+    history.push("/");
+  };
+  const redirectToLogout = () => {
+    history.push("/");
+  };
+  const redirectToAbout = () => {
+    history.push("/");
+  };
+  const [transactionIcon, setTransactionIcon] = React.useState("/images/Transactions.svg");
+  const [contractsIcon, setContractsIcon] = React.useState("/images/Transactions.svg");
+  const [networksIcon, setNetworksIcon] = React.useState("/images/networks.svg");
+  const [analyticsIcon, setAnalyticsIcon] = React.useState("/images/Analytics.svg");
+  const [alertingIcon, setAlertingIcon] = React.useState("/images/Alerting.svg");
+
+  const changeSourceForIcons = (value) => {
+    if (value === "Transaction")
+      setTransactionIcon("/images/Transactions_white.svg")
+    if (value === "Contracts")
+      setContractsIcon("/images/contracts_white.svg")
+    if (value === "Networks")
+    setNetworksIcon("/images/networks_white.svg")
+    if (value === "Analytics")
+    setAnalyticsIcon("/images/Analytics_white.svg")
+    if (value === "Alerting")
+    setAlertingIcon("/images/Alerting_white.svg")
+  }
+  const changeOriginalSourceForIcons = (value) => {
+    if (value === "Transaction")
+      setTransactionIcon("/images/Transactions.svg")
+      if (value === "Networks")
+      setNetworksIcon("/images/networks.svg")
+    if (value === "Contracts")
+      setContractsIcon("/images/contracts.svg")
+      if (value === "Analytics")
+      setAnalyticsIcon("/images/Analytics.svg")
+      if (value === "Alerting")
+      setAlertingIcon("/images/Alerting.svg")
+  }
+
   return (
-    <SidebarContainer>
-      <Wrapper onClick={redirectToTransaction}>
-        <Icon src="/images/Transactions.svg" />
-        <Heading>Transactions</Heading>
-      </Wrapper>
-      <Wrapper onClick={redirectToContract}>
-        <Icon src="/images/contracts.svg" />
-        <Heading>Contracts</Heading>
-      </Wrapper>
-      <Wrapper onClick={redirectToNetwork}>
-        <Icon src="/images/networks.svg" />
-        <Heading>Networks</Heading>
-      </Wrapper>
-      <Wrapper>
-        <Icon src="/images/Analytics.svg" />
-        <Heading>Analytics</Heading>
-      </Wrapper>
-      <Wrapper>
-        <Icon src="/images/Alerting.svg" />
-        <Heading>Alerting</Heading>
-      </Wrapper>
-    </SidebarContainer>
+    <Div>
+      {/* {props.openHumburger && ( */}
+      <SidebarContainer>
+        <Wrapper onClick={redirectToAbout} style={{ marginTop: "4rem" }}>
+          <Icon src="/images/Xmartly.svg" />
+          <Heading>About Xmartly</Heading>
+        </Wrapper>
+        <Wrapper onClick={redirectToTransaction}
+          onMouseOver={() => changeSourceForIcons("Transaction")}
+          onMouseOut={() => changeOriginalSourceForIcons("Transaction")}
+        >
+          <Icon src={transactionIcon} />
+          <Heading>Transactions</Heading>
+        </Wrapper>
+        <Wrapper onClick={redirectToContract}
+          onMouseOver={() => changeSourceForIcons("Contracts")}
+          onMouseOut={() => changeOriginalSourceForIcons("Contracts")}>
+          <Icon src={contractsIcon} />
+          <Heading>Contracts</Heading>
+        </Wrapper>
+        <Wrapper onClick={redirectToNetwork}
+          onMouseOver={() => changeSourceForIcons("Networks")}
+          onMouseOut={() => changeOriginalSourceForIcons("Networks")}>
+          <Icon src={networksIcon} />
+          <Heading>Networks</Heading>
+        </Wrapper>
+        <Wrapper onClick={redirectToAnalytics}
+          onMouseOver={() => changeSourceForIcons("Analytics")}
+          onMouseOut={() => changeOriginalSourceForIcons("Analytics")}>
+          <Icon src={analyticsIcon} />
+          <Heading>Analytics</Heading>
+        </Wrapper>
+        <Wrapper onClick={redirectToAlerting}
+          onMouseOver={() => changeSourceForIcons("Alerting")}
+          onMouseOut={() => changeOriginalSourceForIcons("Alerting")}>
+          <Icon src={alertingIcon} />
+          <Heading>Alerting</Heading>
+        </Wrapper>
+        <Spacing>
+          <Wrapper onClick={redirectToFaqs}>
+            <Icon src="/images/Subtraction 2.svg" />
+            <Heading>FAQs</Heading>
+          </Wrapper>
+        </Spacing>
+        <Wrapper onClick={redirectToLogout}>
+          <Icon src="/images/Log out.svg" />
+          <Heading>Logout</Heading>
+        </Wrapper>
+        <CenterDiv>
+          <img src="/images/Group 12.svg" />
+        </CenterDiv>
+      </SidebarContainer>
+      {/* )} */}
+    </Div>
   );
 }
 
-export default Sidebar;
+const CenterDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  margin-bottom: 3rem;
+`;
+const Spacing = styled.div`
+  margin-top: 14rem;
+`;

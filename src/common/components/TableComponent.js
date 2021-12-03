@@ -15,13 +15,13 @@ const TableBody = styled.tbody`
   position: relative;
 `;
 const HeadColumn = styled.th`
-  color: #102C78;
+  color: #102c78;
   padding: 14px 0 14px 26px;
   font-weight: 300;
   text-align: left;
-  font-size: 16px;
-  font-weight: 300;
-  width:320px;
+  font-size: 1rem;
+  font-weight: 600;
+  width: 320px;
   border-left: none;
   border-right: none;
   border-top: none;
@@ -73,4 +73,4 @@ export default {
   HeadColumn,
   BodyColumn,
   BodyRow,
-}
+};

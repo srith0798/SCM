@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import Dialog from "@mui/material/Dialog";
 import { makeStyles } from "@material-ui/styles";
@@ -18,7 +18,7 @@ export default function ContractAbi(props) {
           <Container>
             <SubContainer>
               <Add>Contract ABI</Add>
-              <Img src="/images/XDC-Cross.svg" onClick={props.click} />
+              <img alt="" src="/images/XDC-Cross.svg" onClick={props.click} />
             </SubContainer>
             <Div>Code</Div>
           </Container>
@@ -36,7 +36,7 @@ const MainContainer = styled.div`
 `;
 const Container = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
-  border: 1px solid #707070;
+
   border-radius: 6px;
   width: 100%;
   background-color: #ffffff;
@@ -52,9 +52,9 @@ const Add = styled.div`
   font: normal normal 600 24px/29px Inter;
   color: #303134;
 `;
-const Img = styled.img`
-  cursor: pointer;
-`;
+// const Img = styled.img`
+//   cursor: pointer;
+// `;
 const Div = styled.div`
   background-color: #f0f2fc;
   border-radius: 4px;
