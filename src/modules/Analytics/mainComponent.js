@@ -118,7 +118,7 @@ export default function MainComponent(props) {
                 </SubContainer>
                 <Line />
               </GraphContainer>
-              <GraphContainer>
+              <GraphContainer style={{marginRight:"0"}}>
                 <SubContainer>
                   <div style={{ display: "flex", alignItems: "center" }}>
                     <Head>Gas used overtime</Head>
@@ -198,7 +198,7 @@ export default function MainComponent(props) {
                   <Network>Mainnet</Network>
                 </Div>
               </GraphContainer>
-              <GraphContainer>
+              <GraphContainer style={{marginRight:"0"}}>
                 <SubContainer>
                   <div style={{ display: "flex", alignItems: "center" }}>
                     <Head>Active users</Head>
@@ -317,9 +317,10 @@ const GraphContainer = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
   border-radius: 6px;
   height: auto;
-  margin-top: 20px;
+  /* margin-top: 20px; */
   padding: 20px;
-  max-width: 590px;
+  /* max-width: 590px; */
+  margin : 20px 30px 30px 0px
 `;
 const Head = styled.div`
   font-size: 16px;
@@ -353,6 +354,7 @@ const DropDown = styled.div`
   padding: 10px;
   width: 100%;
   max-width: 453px;
+  position: relative;
 `;
 const TransactionHash = styled.div`
   font-size: 14px;
@@ -363,9 +365,11 @@ const TransactionHash = styled.div`
 const Image = styled.img`
   width: 12px;
   position: absolute;
-  top: 29px;
-  left: 35%;
   cursor: pointer;
+  top: 29px;
+    right: 8px;
+  /* right : 0; */
+  /* top : 0; */
 `;
 const Label = styled.div`
   font-size: 12px;

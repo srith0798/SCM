@@ -354,6 +354,7 @@ const MainContainer = styled.div`
   width: 100%;
   padding: 3.125rem;
   display: 100vh;
+  overflow-x: scroll;
 `;
 
 const Heading = styled.div`

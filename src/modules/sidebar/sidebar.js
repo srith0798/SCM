@@ -16,6 +16,7 @@ const Icon = styled.img`
   cursor: pointer;
   margin-right: 13px;
 `;
+
 const Wrapper = styled.div`
   flex-wrap: wrap;
   cursor: pointer;
@@ -60,6 +61,36 @@ export default function Sidebar(props) {
   const redirectToAbout = () => {
     history.push("/");
   };
+  const [transactionIcon, setTransactionIcon] = React.useState("/images/Transactions.svg");
+  const [contractsIcon, setContractsIcon] = React.useState("/images/Transactions.svg");
+  const [networksIcon, setNetworksIcon] = React.useState("/images/networks.svg");
+  const [analyticsIcon, setAnalyticsIcon] = React.useState("/images/Analytics.svg");
+  const [alertingIcon, setAlertingIcon] = React.useState("/images/Alerting.svg");
+
+  const changeSourceForIcons = (value) => {
+    if (value === "Transaction")
+      setTransactionIcon("/images/Transactions_white.svg")
+    if (value === "Contracts")
+      setContractsIcon("/images/contracts_white.svg")
+    if (value === "Networks")
+    setNetworksIcon("/images/networks_white.svg")
+    if (value === "Analytics")
+    setAnalyticsIcon("/images/Analytics_white.svg")
+    if (value === "Alerting")
+    setAlertingIcon("/images/Alerting_white.svg")
+  }
+  const changeOriginalSourceForIcons = (value) => {
+    if (value === "Transaction")
+      setTransactionIcon("/images/Transactions.svg")
+      if (value === "Networks")
+      setNetworksIcon("/images/networks.svg")
+    if (value === "Contracts")
+      setContractsIcon("/images/contracts.svg")
+      if (value === "Analytics")
+      setAnalyticsIcon("/images/Analytics.svg")
+      if (value === "Alerting")
+      setAlertingIcon("/images/Alerting.svg")
+  }
 
   return (
     <Div>
@@ -69,24 +100,35 @@ export default function Sidebar(props) {
           <Icon src="/images/Xmartly.svg" />
           <Heading>About Xmartly</Heading>
         </Wrapper>
-        <Wrapper onClick={redirectToTransaction}>
-          <Icon src="/images/Transactions.svg" />
+        <Wrapper onClick={redirectToTransaction}
+          onMouseOver={() => changeSourceForIcons("Transaction")}
+          onMouseOut={() => changeOriginalSourceForIcons("Transaction")}
+        >
+          <Icon src={transactionIcon} />
           <Heading>Transactions</Heading>
         </Wrapper>
-        <Wrapper onClick={redirectToContract}>
-          <Icon src="/images/contracts.svg" />
+        <Wrapper onClick={redirectToContract}
+          onMouseOver={() => changeSourceForIcons("Contracts")}
+          onMouseOut={() => changeOriginalSourceForIcons("Contracts")}>
+          <Icon src={contractsIcon} />
           <Heading>Contracts</Heading>
         </Wrapper>
-        <Wrapper onClick={redirectToNetwork}>
-          <Icon src="/images/networks.svg" />
+        <Wrapper onClick={redirectToNetwork}
+          onMouseOver={() => changeSourceForIcons("Networks")}
+          onMouseOut={() => changeOriginalSourceForIcons("Networks")}>
+          <Icon src={networksIcon} />
           <Heading>Networks</Heading>
         </Wrapper>
-        <Wrapper onClick={redirectToAnalytics}>
-          <Icon src="/images/Analytics.svg" />
+        <Wrapper onClick={redirectToAnalytics}
+          onMouseOver={() => changeSourceForIcons("Analytics")}
+          onMouseOut={() => changeOriginalSourceForIcons("Analytics")}>
+          <Icon src={analyticsIcon} />
           <Heading>Analytics</Heading>
         </Wrapper>
-        <Wrapper onClick={redirectToAlerting}>
-          <Icon src="/images/Alerting.svg" />
+        <Wrapper onClick={redirectToAlerting}
+          onMouseOver={() => changeSourceForIcons("Alerting")}
+          onMouseOut={() => changeOriginalSourceForIcons("Alerting")}>
+          <Icon src={alertingIcon} />
           <Heading>Alerting</Heading>
         </Wrapper>
         <Spacing>

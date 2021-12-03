@@ -301,7 +301,7 @@ const Card = styled.div`
 `;
 const ColumnSecond = styled.div`
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 300;
   color: #191919;
   width: 100%;
   max-width: 300px;
@@ -321,6 +321,7 @@ const DropDown = styled.div`
   padding: 10px;
   width: 100%;
   max-width: 453px;
+  position: relative;
 `;
 const TransactionHash = styled.div`
   font-size: 14px;
@@ -332,7 +333,7 @@ const Image = styled.img`
   width: 12px;
   position: absolute;
   top: 29px;
-  left: 35%;
+  right: 8px;
   cursor: pointer;
 `;
 const Label = styled.div`
