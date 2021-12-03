@@ -60,7 +60,7 @@ export default function ContractDetails(props) {
   const [address, setAddress] = React.useState([]);
   const [value, setValues] = useState("");
   const [open, setOpen] = useState(false);
-  const [] = useState(false);
+  // const [] = useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -115,6 +115,7 @@ export default function ContractDetails(props) {
               <SubContainer>
                 <div>
                   <img
+                    alt=""
                     src="/images/back.svg"
                     style={{ marginRight: "0.625rem" }}
                     onClick={backButton}

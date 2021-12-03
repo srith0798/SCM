@@ -79,9 +79,9 @@ const Add = styled.div`
   font-weight: 600;
   color: #303134;
 `;
-const Img = styled.img`
-  cursor: pointer;
-`;
+// const Img = styled.img`
+//   cursor: pointer;
+// `;
 
 const Button = styled.button`
   text-align: left;

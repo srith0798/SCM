@@ -54,15 +54,15 @@ const ValidatorContainer = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
   border-radius: 6px;
 
-  margin-top: 20px;
-  height: 600px;
-  padding: 20px;
+  margin-top: 1.25rem;
+  height: 37.5rem;
+  padding: 1.25rem;
 `;
 const TargetButtons = styled.div`
   display: flex;
   width: 100%;
-  margin-top: 10px;
-  max-width: 277px;
+  margin-top: 0.625rem;
+  max-width: 17.313rem;
   align-items: center;
   justify-content: space-between;
 `;
@@ -72,72 +72,72 @@ const TransactionHash = styled.div`
   color: #191919;
 `;
 const TitleHead = styled.div`
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 600;
-  margin-bottom: 20px;
+  margin-bottom: 1.25rem;
   color: #102c78;
 `;
 const HashList = styled.div`
-  font-size: 14px;
+  font-size: 0.875rem;
   // font-weight: 600;
   color: #191919;
-  margin-right: 13px;
+  margin-right: 0.813rem;
 `;
 const HeaderName = styled.div`
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  height: 64px;
-  margin-bottom: 20px;
+  height: 4rem;
+  margin-bottom: 1.25rem;
 `;
 const Mapping = styled.div`
   background: #3163f11a 0% 0% no-repeat padding-box;
   border: 1px solid #3163f0;
-  border-radius: 4px;
-  padding: 5px;
+  border-radius: 0.25rem;
+  padding: 0.313rem;
   width: 100%;
-  max-width: 500px;
+  max-width: 31.25rem;
   white-space: nowrap;
-  font-size: 13px;
+  font-size: 0.813rem;
   font-weight: 600;
-  margin-right: 10px;
+  margin-right: 0.625rem;
 `;
 const GreenButton = styled.div`
   background: #effff1 0% 0% no-repeat padding-box;
   border: 1px solid #1ace2f;
-  border-radius: 4px;
-  font-size: 12px;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
   font-weight: 600;
   color: #1ace2f;
-  padding: 5px;
+  padding: 0.313rem;
   width: 100%;
-  max-width: 500px;
+  max-width: 31.25rem;
   white-space: nowrap;
-  height: 25px;
-  margin: 8px;
-  margin-right: 8px;
+  height: 1.563rem;
+  margin: 0.5rem;
+  margin-right: 0.5rem;
   display: flex;
   align-items: center;
 `;
 const RedButton = styled.div`
   background: #fde7e7 0% 0% no-repeat padding-box;
   border: 1px solid #ce1a1a;
-  border-radius: 4px;
-  font-size: 12px;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
   font-weight: 600;
   color: #ce1a1a;
-  padding: 5px;
+  padding: 0.313rem;
   width: 100%;
-  max-width: 500px;
+  max-width: 31.25rem;
   white-space: nowrap;
-  height: 25px;
-  margin-right: 8px;
+  height: 1.563rem;
+  margin-right: 0.5rem;
   display: flex;
   align-items: center;
 }
 `;
 const Balances = styled.div`
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 600;
   color: #102c78;
 `;
@@ -145,7 +145,7 @@ const ValidatorList = styled.div`
     display: flex;
     justify-content: space-between;
     width: 100%;
-    max-width: 411px;
-    margin-top: 10px;
+    max-width: 25.688rem;
+    margin-top: 0.625rem;
     align-items: center;
 }`;

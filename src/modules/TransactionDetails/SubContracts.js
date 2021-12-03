@@ -39,15 +39,15 @@ const MainDiv = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  height: 365px;
+  height: 22.813rem;
   background-color: #ffffff;
-  border-radius: 4px;
-  padding: 23px;
+  border-radius: 0.25rem;
+  padding: 1.438rem;
 `;
 const Container = styled.div`
-  padding: 10px;
-  width: 250px,
-  height: 200px,       
+  padding: 0.625rem;
+  width: 15.625rem,
+  height: 12.5rem,       
   background: #F5F6FD;
   border: solid #D5E0FF;
   outline: none;
@@ -65,31 +65,30 @@ const Container = styled.div`
 const MainBoxContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  max-width: 650px;
+  max-width: 40.625rem;
   width: 100%;
-  height: 104px;
+  height: 6.5rem;
 `;
 const Title = styled.div`
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 600;
   color: #1d3c93;
-  margin-bottom: 5px;
+  margin-bottom: 0.313rem;
 `;
 const SubTitle = styled.div`
-  font-size: 14px;
+  font-size: 0.875rem;
   color: #191919;
-  margin-bottom: 5px;
+  margin-bottom: 0.313rem;
 `;
 const SubTitleTwo = styled.div``;
 
 const Button = styled.button`
   background: #00a58c 0% 0% no-repeat padding-box;
-  border-radius: 3px;
+  border-radius: 0.188rem;
   border: none;
-  padding: 3px;
-  width: 151px;
-  // height: 30px;
+  padding: 0.188rem;
+  width: 9.438rem
   text-align: center;
-  font-size: 12px;
+  font-size: 0.75rem;
   color: #ffffff;
 `;

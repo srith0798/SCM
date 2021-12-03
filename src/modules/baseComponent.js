@@ -2,7 +2,7 @@
 import { Component } from "react";
 
 export default class BaseComponent extends Component {
-  constructor(props) {
-    super(props);
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
 }
