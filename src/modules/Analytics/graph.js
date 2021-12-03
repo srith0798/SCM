@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { ResponsiveLine } from "@nivo/line";
 import { linearGradientDef } from "@nivo/core";
 import "../../assets/styles/custom.css";
@@ -176,7 +176,7 @@ const GraphSize = styled.div`
 
 export default function Graph() {
   const [points, setPoints] = useState({ x: 0, y: 0 });
-  const [data, setData] = useState([]);
+  const [data] = useState([]);
 
   const [graphAccounts] = useState([]);
 
@@ -193,15 +193,15 @@ export default function Graph() {
   //     // alert(JSON.stringify(AccountGraph))
   // }, 90000)
 
-  var arr = [
-    {
-      id: "Accounts",
-      color: "hsl(248, 70%, 50%)",
-      data: [],
-    },
-  ];
+  // var arr = [
+  //   {
+  //     id: "Accounts",
+  //     color: "hsl(248, 70%, 50%)",
+  //     data: [],
+  //   },
+  // ];
 
-  var resultData = [];
+  // var resultData = [];
   //         AccountGraph.map(items => {
   //             resultData.push({
   //                 x: items.day,

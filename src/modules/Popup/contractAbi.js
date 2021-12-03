@@ -52,9 +52,9 @@ const Add = styled.div`
   font: normal normal 600 24px/29px Inter;
   color: #303134;
 `;
-const Img = styled.img`
-  cursor: pointer;
-`;
+// const Img = styled.img`
+//   cursor: pointer;
+// `;
 const Div = styled.div`
   background-color: #f0f2fc;
   border-radius: 4px;

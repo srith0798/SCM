@@ -24,6 +24,7 @@ export default function TransactionDetails() {
           <Row style={{ display: "flex", justifyContent: "space-between" }}>
             <div>
               <img
+                alt=""
                 style={{ marginRight: "0.625rem" }}
                 src="/images/back.svg"
                 onClick={backButton}
@@ -64,6 +65,7 @@ export default function TransactionDetails() {
                 }}
               >
                 <img
+                  alt=""
                   style={{ marginRight: "0.375rem" }}
                   src={
                     activeButton === "Overview"
@@ -85,6 +87,7 @@ export default function TransactionDetails() {
                 }}
               >
                 <img
+                  alt=""
                   style={{ marginRight: "0.375rem" }}
                   src={
                     activeButton === "Contracts"
@@ -106,6 +109,7 @@ export default function TransactionDetails() {
                 }}
               >
                 <img
+                  alt=""
                   style={{ marginRight: "0.375rem" }}
                   src={
                     activeButton === "Events"
@@ -125,6 +129,7 @@ export default function TransactionDetails() {
                 }}
               >
                 <img
+                  alt=""
                   style={{ marginRight: "0.375rem" }}
                   src={
                     activeButton === "Events"

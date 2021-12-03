@@ -62,9 +62,9 @@ const Add = styled.div`
   font: normal normal 600 24px/29px Inter;
   color: #303134;
 `;
-const Img = styled.img`
-  cursor: pointer;
-`;
+// const Img = styled.img`
+//   cursor: pointer;
+// `;
 
 const RemoveButton = styled.button`
   font: normal normal medium 14px/17px Inter;

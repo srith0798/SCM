@@ -90,6 +90,7 @@ export default function Contract(props) {
               </div>
               <div style={{ display: "flex" }}>
                 <img
+                  alt=""
                   src="/images/refresh.svg"
                   style={{ marginRight: "0.625rem" }}
                 />

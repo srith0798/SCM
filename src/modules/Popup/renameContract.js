@@ -59,9 +59,9 @@ const Add = styled.div`
   font: normal normal 600 24px/29px Inter;
   color: #303134;
 `;
-const Img = styled.img`
-  cursor: pointer;
-`;
+// const Img = styled.img`
+//   cursor: pointer;
+// `;
 const Input = styled.input`
   background: #f0f2fc 0% 0% no-repeat padding-box;
   border-radius: 4px;

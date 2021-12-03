@@ -2,7 +2,6 @@ import React from "react";
 import { Row } from "simple-flexbox";
 import "react-tabs/style/react-tabs.css";
 import styled from "styled-components";
-import { normalizeUnits } from "moment";
 
 export default function Destination() {
   return (
@@ -15,6 +14,7 @@ export default function Destination() {
           <RowContainer>
             <Buttonn>
               <img
+                alt=""
                 src="/images/slack.svg"
                 style={{ marginRight: "0.25rem", width: "1.3rem" }}
               />{" "}
@@ -22,6 +22,7 @@ export default function Destination() {
             </Buttonn>
             <Buttonn>
               <img
+                alt=""
                 src="/images/webhook.svg"
                 style={{ marginRight: "0.25rem", width: "1.3rem" }}
               />
@@ -29,6 +30,7 @@ export default function Destination() {
             </Buttonn>
             <Buttonn>
               <img
+                alt=""
                 src="/images/email.svg"
                 style={{ marginRight: "0.25rem", width: "1.3rem" }}
               />
@@ -41,6 +43,7 @@ export default function Destination() {
         <Div>
           <Row>
             <img
+              alt=""
               src="/images/email.svg"
               style={{ marginRight: "4px", width: "1rem" }}
             />
@@ -65,6 +68,7 @@ export default function Destination() {
         <Div>
           <Row>
             <img
+              alt=""
               src="/images/email.svg"
               style={{ marginRight: "0.25rem", width: "1rem" }}
             />
