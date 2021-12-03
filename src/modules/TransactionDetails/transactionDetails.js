@@ -18,7 +18,7 @@ export default function TransactionDetails() {
   return (
     <>
       <Header />
-      <Row style={{ height: "250vh" }}>
+      <Row>
         <Sidebar />
         <MainContainer>
           <Row style={{ display: "flex", justifyContent: "space-between" }}>

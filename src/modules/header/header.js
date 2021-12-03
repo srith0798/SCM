@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Row, Column } from "simple-flexbox";
 import "../../assets/styles/custom.css";
-import "./index";
 
 const UserLogo = styled.img`
   width: 55px;
@@ -31,7 +30,7 @@ const HeaderContainer = styled.div`
   padding: 5px;
 `;
 const XmartlyLogo = styled.img`
-  margin-right: 12px;
+  margin-right: 17px;
 `;
 const UserContainer = styled.div``;
 const SpaceBetween = styled.div`
@@ -39,23 +38,19 @@ const SpaceBetween = styled.div`
   flex-flow: row nowrap;
   justify-content: space-between;
 `;
-const Menu = styled.div`
-  width: 35px;
-  height: 5px;
-  background-color: #ffffff;
-  margin: 4px 0;
-`;
+
 function Header() {
+  const [openHumburger, setOpenHumburger] = useState(true);
+
   return (
     <HeaderContainer>
       <SpaceBetween>
-        <div style={{ display: "flex" }}>
+        <div style={{ display: "flex", marginLeft: "12px" }}>
+          <XmartlyLogo
+            src="/images/Grid.svg"
+            onClick={() => setOpenHumburger(openHumburger)}
+          />
           <XmartlyLogo src="/images/Logo.svg" />
-          <Column>
-            <Menu></Menu>
-            <Menu></Menu>
-            <Menu></Menu>
-          </Column>
         </div>
         <UserContainer>
           <Row>
@@ -68,21 +63,6 @@ function Header() {
         </UserContainer>
       </SpaceBetween>
     </HeaderContainer>
-    // <div class="topnav">
-    //   <a href="#home" class="active">
-    //     Logo
-    //   </a>
-    //   {/* <!-- Navigation links (hidden by default) --> */}
-    //   <div id="myLinks">
-    //     <a href="#news">News</a>
-    //     <a href="#contact">Contact</a>
-    //     <a href="#about">About</a>
-    //   </div>
-    //   {/* <!-- "Hamburger menu" / "Bar icon" to toggle the navigation links --> */}
-    //   <a href="javascript:void(0);" class="icon" onclick="myFunction()">
-    //     <i class="fa fa-bars"></i>
-    //   </a>
-    // </div>
   );
 }
 

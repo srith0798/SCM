@@ -3,11 +3,13 @@ import styled from "styled-components";
 import { history } from "../../managers/history";
 
 const SidebarContainer = styled.div`
-  background: #102c78 0% 0% no-repeat padding-box;
   width: 100%;
   max-width: 200px;
+
   @media (min-width: 300px) and (max-width: 1024px) {
-    display: none;
+    // display: none;
+    position: absolute;
+    z-index: 1;
   }
 `;
 const Icon = styled.img`
@@ -29,8 +31,11 @@ const Wrapper = styled.div`
 const Heading = styled.span`
   color: #ffffff;
 `;
+const Div = styled.div`
+  background: #102c78 0% 0% no-repeat padding-box;
+`;
 
-export default function Sidebar() {
+export default function Sidebar(props) {
   const redirectToTransaction = () => {
     history.push("/transaction-list");
   };
@@ -46,28 +51,69 @@ export default function Sidebar() {
   const redirectToAlerting = () => {
     history.push("/Alerting");
   };
+  const redirectToFaqs = () => {
+    history.push("/");
+  };
+  const redirectToLogout = () => {
+    history.push("/");
+  };
+  const redirectToAbout = () => {
+    history.push("/");
+  };
+
   return (
-    <SidebarContainer>
-      <Wrapper onClick={redirectToTransaction} style={{ marginTop: "20px" }}>
-        <Icon src="/images/Transactions.svg" />
-        <Heading>Transactions</Heading>
-      </Wrapper>
-      <Wrapper onClick={redirectToContract}>
-        <Icon src="/images/contracts.svg" />
-        <Heading>Contracts</Heading>
-      </Wrapper>
-      <Wrapper onClick={redirectToNetwork}>
-        <Icon src="/images/networks.svg" />
-        <Heading>Networks</Heading>
-      </Wrapper>
-      <Wrapper onClick={redirectToAnalytics}>
-        <Icon src="/images/Analytics.svg" />
-        <Heading>Analytics</Heading>
-      </Wrapper>
-      <Wrapper onClick={redirectToAlerting}>
-        <Icon src="/images/Alerting.svg" />
-        <Heading>Alerting</Heading>
-      </Wrapper>
-    </SidebarContainer>
+    <Div>
+      {/* {props.openHumburger && ( */}
+      <SidebarContainer>
+        <Wrapper onClick={redirectToAbout} style={{ marginTop: "4rem" }}>
+          <Icon src="/images/Xmartly.svg" />
+          <Heading>About Xmartly</Heading>
+        </Wrapper>
+        <Wrapper onClick={redirectToTransaction}>
+          <Icon src="/images/Transactions.svg" />
+          <Heading>Transactions</Heading>
+        </Wrapper>
+        <Wrapper onClick={redirectToContract}>
+          <Icon src="/images/contracts.svg" />
+          <Heading>Contracts</Heading>
+        </Wrapper>
+        <Wrapper onClick={redirectToNetwork}>
+          <Icon src="/images/networks.svg" />
+          <Heading>Networks</Heading>
+        </Wrapper>
+        <Wrapper onClick={redirectToAnalytics}>
+          <Icon src="/images/Analytics.svg" />
+          <Heading>Analytics</Heading>
+        </Wrapper>
+        <Wrapper onClick={redirectToAlerting}>
+          <Icon src="/images/Alerting.svg" />
+          <Heading>Alerting</Heading>
+        </Wrapper>
+        <Spacing>
+          <Wrapper onClick={redirectToFaqs}>
+            <Icon src="/images/Subtraction 2.svg" />
+            <Heading>FAQs</Heading>
+          </Wrapper>
+        </Spacing>
+        <Wrapper onClick={redirectToLogout}>
+          <Icon src="/images/Log out.svg" />
+          <Heading>Logout</Heading>
+        </Wrapper>
+        <CenterDiv>
+          <img src="/images/Group 12.svg" />
+        </CenterDiv>
+      </SidebarContainer>
+      {/* )} */}
+    </Div>
   );
 }
+
+const CenterDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  margin-bottom: 3rem;
+`;
+const Spacing = styled.div`
+  margin-top: 14rem;
+`;

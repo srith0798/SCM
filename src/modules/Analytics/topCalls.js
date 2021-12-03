@@ -14,7 +14,9 @@ export default function TopCalls(props) {
     <div>
       <Column>
         <Header />
-        <Row style={{ height: "200vh" }}>
+        <Row
+        // style={{ height: "200vh" }}
+        >
           <Sidebar />
           <MainContainer>
             <SubContainer>

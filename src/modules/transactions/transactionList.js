@@ -53,24 +53,24 @@ export default function TransactionList(props) {
         to: "0x63Ac0CA1…f617",
         when: "2 minutes ago",
       },
-      {
-        txn: "0x1822a4c5…2ca8",
-        status: "Success",
-        function: "Transfer",
-        contracts: "App_Transactions",
-        from: "0x63Ac0CA1…f617",
-        to: "0x63Ac0CA1…f617",
-        when: "2 minutes ago",
-      },
-      {
-        txn: "0x1822a4c5…2ca8",
-        status: "Success",
-        function: "Transfer",
-        contracts: "App_Transactions",
-        from: "0x63Ac0CA1…f617",
-        to: "0x63Ac0CA1…f617",
-        when: "2 minutes ago",
-      },
+      // {
+      //   txn: "0x1822a4c5…2ca8",
+      //   status: "Success",
+      //   function: "Transfer",
+      //   contracts: "App_Transactions",
+      //   from: "0x63Ac0CA1…f617",
+      //   to: "0x63Ac0CA1…f617",
+      //   when: "2 minutes ago",
+      // },
+      // {
+      //   txn: "0x1822a4c5…2ca8",
+      //   status: "Success",
+      //   function: "Transfer",
+      //   contracts: "App_Transactions",
+      //   from: "0x63Ac0CA1…f617",
+      //   to: "0x63Ac0CA1…f617",
+      //   when: "2 minutes ago",
+      // },
     ];
 
     setAddress(
@@ -105,13 +105,12 @@ export default function TransactionList(props) {
     right: 0,
     left: 0,
     zIndex: 1,
-    border: "1px solid",
     p: 1,
     bgcolor: "background.paper",
     width: "100%",
     maxWidth: "453px",
     background: "#f5f6fd 0% 0% no-repeat padding-box",
-    // border: "1px solid #d5e0ff",
+    border: "1px solid #d5e0ff",
     borderRadius: "6px",
     height: "80px",
     marginTop: "4px",
@@ -125,7 +124,7 @@ export default function TransactionList(props) {
   return (
     <>
       <Header />
-      <Row style={{ height: "200vh" }}>
+      <Row>
         <Sidebar />
         <MainContainer>
           <Row>
@@ -196,7 +195,9 @@ export default function TransactionList(props) {
                 return (
                   <Div onClick={redirectToTransactionDetails}>
                     <Row>
+                      {/* <ColorBox> */}
                       <ColumnSecond>{data.txn}</ColumnSecond>
+                      {/* </ColorBox> */}
                       <ColumnSecond>{data.status}</ColumnSecond>
                       <ColumnSecond>{data.function}</ColumnSecond>
                       <ColumnSecond>{data.contracts}</ColumnSecond>
@@ -344,3 +345,4 @@ const ToolTipIcon = styled.img`
   cursor: pointer;
   margin-left: 8px;
 `;
+const ColorBox = styled.div``;

@@ -78,7 +78,9 @@ export default function Contract(props) {
     <div>
       <Column>
         <Header />
-        <Row style={{ height: "180vh" }}>
+        <Row
+        // style={{ height: "180vh" }}
+        >
           <Sidebar />
           <MainContainer>
             <SubContainer>
