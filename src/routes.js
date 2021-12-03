@@ -6,9 +6,9 @@ import getMuiTheme from "material-ui/styles/getMuiTheme";
 import { connect } from "react-redux";
 import { history } from "./managers/history";
 import BaseComponent from "./modules/baseComponent";
-import LoginComponent from "./modules/login/loginComponent";
+// import LoginComponent from "./modules/login/loginComponent";
 import TransactionList from "./modules/transactions/transactionList";
-import CreateAccount from "./modules/CreateAccount/createAccount";
+// import CreateAccount from "./modules/CreateAccount/createAccount";
 import VerifyEmail from "./modules/VerifyEmail/verifyEmail";
 import Contract from "./modules/Contract/contract";
 import ContractDetails from "./modules/contractDetails/contractDetails";
@@ -36,7 +36,7 @@ import TopCallsFullScreen from "./modules/Analytics/topCallsFullscreen";
 class Routes extends BaseComponent {
   componentDidMount() {}
 
-  componentDidMount() {}
+  // componentDidMount() {}
 
   render() {
     return (

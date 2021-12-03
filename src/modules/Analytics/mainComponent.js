@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import { Row, Column } from "simple-flexbox";
 import Header from "../header/header";
 import Sidebar from "../sidebar/sidebar";
 import Line from "./graph";
-import { useHistory } from "react-router-dom";
+
 import Box from "@mui/material/Box";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
-import { history } from "../../managers/history";
 
 export default function MainComponent(props) {
   const [isSetOpen, setOpen] = React.useState(false);
@@ -28,7 +27,7 @@ export default function MainComponent(props) {
     right: 0,
     left: 0,
     zIndex: 1,
-    border: "1px solid",
+    // border: "1px solid",
     p: 1,
     bgcolor: "background.paper",
     width: "100%",
@@ -55,7 +54,7 @@ export default function MainComponent(props) {
           <MainContainer>
             <SubContainer>
               <MainHeading>Analytics</MainHeading>
-              <img src="/images/refresh.svg" />
+              <img alt="" src="/images/refresh.svg" />
             </SubContainer>
             <Container>
               <View>View analytics for contract</View>
@@ -98,6 +97,7 @@ export default function MainComponent(props) {
                   <div style={{ display: "flex", alignItems: "center" }}>
                     <Head>Transactions over time</Head>
                     <img
+                      alt=""
                       src="/images/expand.svg"
                       onClick={() => props.changeExpand(1)}
                     />

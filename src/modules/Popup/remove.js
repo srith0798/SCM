@@ -18,7 +18,7 @@ export default function Remove(props) {
           <Container>
             <SubContainer>
               <Add>Remove Contract</Add>
-              <Img src="/images/XDC-Cross.svg" onClick={props.click} />
+              <img alt="" src="/images/XDC-Cross.svg" onClick={props.click} />
             </SubContainer>
             <Content>
               Are you sure you wish to remove the contract? This will remove the

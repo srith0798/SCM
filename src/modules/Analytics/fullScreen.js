@@ -4,7 +4,7 @@ import { Row, Column } from "simple-flexbox";
 import Header from "../header/header";
 import Sidebar from "../sidebar/sidebar";
 import Line from "./graph";
-import { history } from "../../managers/history";
+// import { history } from "../../managers/history";
 
 export default function FullScreen(props) {
   const ClickMe = () => {
@@ -19,7 +19,7 @@ export default function FullScreen(props) {
           <MainContainer>
             <SubContainer>
               <AlignmentContainer>
-                <Img src="/images/back.svg" onClick={ClickMe} />
+                <img alt="" src="/images/back.svg" onClick={ClickMe} />
                 <MainHeading>{props.graphName}</MainHeading>
               </AlignmentContainer>
               <AlignmentContainer>

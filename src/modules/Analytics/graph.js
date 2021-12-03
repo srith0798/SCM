@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { ResponsiveLine } from "@nivo/line";
-import { Defs, linearGradientDef } from "@nivo/core";
+import { linearGradientDef } from "@nivo/core";
 import "../../assets/styles/custom.css";
 import moment from "moment";
-import { AccountService } from "../../services";
-import Utils from "../../utility";
+// import { AccountService } from "../../services";
+// import Utils from "../../utility";
 import styled from "styled-components";
 
 const dataEntry = [
@@ -178,7 +178,7 @@ export default function Graph() {
   const [points, setPoints] = useState({ x: 0, y: 0 });
   const [data, setData] = useState([]);
 
-  const [graphAccounts, setGraphAccounts] = useState([]);
+  const [graphAccounts] = useState([]);
 
   // useEffect(async () => {
   // let [error, AccountGraph] = await Utils.parseResponse(AccountService.getSomeDaysAccount())
@@ -251,11 +251,11 @@ export default function Graph() {
   // let lastDate = value2?.slice(atIndex2, colonIndex2);
   let length = graphAccounts.length;
   const firstDate =
-    graphAccounts.length == 0
+    graphAccounts.length === 0
       ? ""
       : moment(graphAccounts[length - 1].day).format("D MMM");
   const lastDate =
-    graphAccounts.length == 0
+    graphAccounts.length === 0
       ? ""
       : moment(graphAccounts[0].day).format("D MMM");
   const MouseMovePoint = (event) => {
