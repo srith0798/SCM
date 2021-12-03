@@ -263,13 +263,12 @@ const SearchBar = styled.input`
   padding-left: 30px;
   background-size: 12px;
   outline: none;
-
   width: 100%;
   max-width: 261px;
-  // &:focus: {
-  //   outline: none;
-  //   border: none;
-  // }
+
+  *:focus {
+    outline: none;
+  }
 `;
 const Icons = styled.img`
   margin-right: 10px;

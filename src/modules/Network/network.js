@@ -56,7 +56,7 @@ export default function Network(props) {
               <Container>
                 <Row>
                   <ColumnOne>Network</ColumnOne>
-                  <ColumnOne>URL</ColumnOne>
+                  <UrlHeading>URL</UrlHeading>
                 </Row>
               </Container>
               <div>
@@ -97,7 +97,18 @@ const Heading = styled.span`
   color: #191919;
   margin-right: 0.625rem;
 `;
-
+const UrlHeading = styled.div`
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #102c78;
+  width: 100%;
+  max-width: 15.625rem;
+  white-space: nowrap;
+  @media (min-width: 300px) and (max-width: 767px) {
+    max-width: 7.625rem;
+    width: 100%;
+  }
+`;
 const Button = styled.button`
   background-image: url("/images/Add.svg");
   background-repeat: no-repeat;
@@ -120,6 +131,13 @@ const Div = styled.div`
   height: 25rem;
   margin-top: 1.25rem;
   padding: 0.625rem;
+
+  @media (min-width: 300px) and (max-width: 767px) {
+    height: 400px;
+    overflow: scroll;
+    // width: 100%;
+    // max-width: 200px;
+  }
 `;
 const Container = styled.div`
   padding: 0.938rem;
@@ -144,6 +162,10 @@ const Url = styled.div`
   color: #416be0;
   width: 100%;
   max-width: 15.625rem;
+  @media (min-width: 300px) and (max-width: 767px) {
+    max-width: 7.625rem;
+    width: 100%;
+  }
 `;
 const Head = styled.div`
   color: #191919;
