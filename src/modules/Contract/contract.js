@@ -71,27 +71,6 @@ export default function Contract(props) {
         tag: "Add Tag",
         visibility: "Visible",
       },
-      {
-        contractName: "App_Transactions",
-        address: "xdcabf8b3c",
-        network: "XDC Mainnet",
-        tag: "Add Tag",
-        visibility: "Visible",
-      },
-      {
-        contractName: "App_Transactions",
-        address: "xdcabf8b3c",
-        network: "XDC Mainnet",
-        tag: "Add Tag",
-        visibility: "Visible",
-      },
-      {
-        contractName: "App_Transactions",
-        address: "xdcabf8b3c",
-        network: "XDC Mainnet",
-        tag: "Add Tag",
-        visibility: "Visible",
-      },
     ];
 
     setAddress(
