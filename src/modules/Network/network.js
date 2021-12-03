@@ -37,7 +37,9 @@ export default function Network(props) {
     <div>
       <Column>
         <Header />
-        <Row style={{ height: "180vh" }}>
+        <Row
+        // style={{ height: "180vh" }}
+        >
           <Sidebar />
           <MainContainer>
             <SubContainer>

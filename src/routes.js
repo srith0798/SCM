@@ -36,7 +36,6 @@ import TopCallsFullScreen from "./modules/Analytics/topCallsFullscreen";
 class Routes extends BaseComponent {
   componentDidMount() {}
 
-  // componentDidMount() {}
 
   render() {
     return (
@@ -45,7 +44,6 @@ class Routes extends BaseComponent {
           <Switch>
             {/* <Route exact path={"/"} component={LoginComponent} /> */}
             <Route exact path={"/"} component={TransactionList} />
-
             <Route exact path={"/verify"} component={VerifyEmail} />
             <Route exact path={"/contract"} component={Contract} />
             <Route
