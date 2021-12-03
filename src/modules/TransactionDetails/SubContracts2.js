@@ -276,8 +276,8 @@ const Heads = styled.div`
   align-items: center;
   font: normal normal 600 14px/17px Inter;
   opacity: 1;
-  width 150px;
-  height: 50px;
+  width 9.375rem;
+  height: 3.125rem;
   &:hover{
     background-color: blue;
     color: #ffffff;
@@ -286,9 +286,7 @@ const Heads = styled.div`
 
 const TextLi = styled.div`
   text-align: left;
-  font: normal normal medium 14px/17px Inter;
-  letter-spacing: 0px;
-
-  opacity: 1;
-  font-size: 14px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  font-size: 0.875rem;
 `;

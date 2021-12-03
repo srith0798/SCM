@@ -375,7 +375,6 @@ const ThirdBox = styled.div`
   font-weight: 600;
   color: #102c78;
   display: flex;
-  flex-flow: row nowrap;
   justify-content: space-between;
   width: 100%;
   max-width: 21rem;

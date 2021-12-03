@@ -32,13 +32,13 @@ export default function Rules() {
                 style={{
                   color: activeButton === "Rules" ? "blue" : "",
                   display: "flex",
-                  paddingBottom: "14px",
+                  paddingBottom: "0.875rem",
                   borderBottom:
                     activeButton === "Rules" ? "2px solid blue" : "",
                 }}
               >
                 <img
-                  style={{ marginRight: "6px" }}
+                  style={{ marginRight: "0.375rem" }}
                   src={
                     activeButton === "Rules"
                       ? "/images/rules.svg"
@@ -53,13 +53,13 @@ export default function Rules() {
                 style={{
                   color: activeButton === "History" ? "blue" : "",
                   display: "flex",
-                  paddingBottom: "14px",
+                  paddingBottom: "0.875rem",
                   borderBottom:
-                    activeButton === "History" ? "2px solid blue" : "",
+                    activeButton === "History" ? "0.125rem solid blue" : "",
                 }}
               >
                 <img
-                  style={{ marginRight: "6px" }}
+                  style={{ marginRight: "0.375rem" }}
                   src={
                     activeButton === "History"
                       ? "/images/history_blue.svg"
@@ -74,9 +74,9 @@ export default function Rules() {
                 style={{
                   color: activeButton === "Destination" ? "blue" : "",
                   display: "flex",
-                  paddingBottom: "14px",
+                  paddingBottom: "0.875rem",
                   borderBottom:
-                    activeButton === "Destination" ? "2px solid blue" : "",
+                    activeButton === "Destination" ? "0.125rem solid blue" : "",
                 }}
               >
                 <img
@@ -115,7 +115,7 @@ export default function Rules() {
                       <img
                         alt=""
                         src="/images/delete_blue.svg"
-                        style={{ width: "16px" }}
+                        style={{ width: "1rem" }}
                       />
                     </ColumnTwo>
                   </Row>
@@ -126,14 +126,16 @@ export default function Rules() {
                     <ColumnTwo>xdcabfe…8b3c</ColumnTwo>
                     <ColumnTwo>XDC Mainnet</ColumnTwo>
                     <ColumnTwo>Failed </ColumnTwo>
-                    <ColumnTwo style={{ fontSize: "14px", color: "#00A58C" }}>
+                    <ColumnTwo
+                      style={{ fontSize: "0.875rem", color: "#00A58C" }}
+                    >
                       Enabled
                     </ColumnTwo>
                     <ColumnTwo>
                       <img
                         alt=""
                         src="/images/delete_blue.svg"
-                        style={{ width: "16px" }}
+                        style={{ width: "1rem" }}
                       />
                     </ColumnTwo>
                   </Row>
@@ -155,75 +157,75 @@ const Title = styled.div`
 `;
 const Container = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
-  border-radius: 6px;
+  border-radius: 0.375rem;
   width: 100%;
   background-color: #ffffff;
-  height: 20rem;
-  padding: 8px;
+  height: 22.25rem;
+  padding: 0.5rem;
 `;
 
 const ColumnOne = styled.div`
   display: flex;
   flex-flow: column nowrap;
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 600;
   color: #102c78;
   width: 100%;
-  max-width: 300px;
+  max-width: 18.75rem;
 `;
 const ColumnTwo = styled.div`
   display: flex;
   flex-flow: column nowrap;
-  font-size: 14px;
+  font-size: 0.875rem;
   color: #191919;
   width: 100%;
-  max-width: 300px;
+  max-width: 18.75rem;
 `;
 const MainContainer = styled.div`
   background: #ecf0f7 0% 0% no-repeat padding-box;
   opacity: 1;
   width: 100%;
-  padding: 40px;
+  padding: 2.5rem;
   display: 100vh;
 `;
 
 const Button = styled.button`
   background-image: url("/images/Add.svg");
   background-repeat: no-repeat;
-  background-position: 8px;
-  padding-left: 21px;
-  background-size: 14px;
+  background-position: 0.5rem;
+  padding-left: 1.313rem;
+  background-size: 0.875rem;
   position: relative;
   background-color: #3163f0;
   color: #ffffff;
   border: none;
-  border-radius: 4px;
-  width: 100px;
-  height: 30px;
-  font-size: 12px;
+  border-radius: 0.25rem;
+  width: 6.25rem;
+  height: 1.875rem;
+  font-size: 0.75rem;
 `;
 
 const NewDiv = styled.div`
-  padding: 15px;
-  border-bottom: 1px solid #e3e7eb;
+  padding: 0.938rem;
+  border-bottom: 0.063rem solid #e3e7eb;
 `;
 const RowCorrecter = styled.div`
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
   width: 100%;
-  max-width: 1200px;
-  margin-bottom: 20px;
+  max-width: 75rem;
+  margin-bottom: 1.25rem;
 `;
 
 const TabLister = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  max-width: 350px;
+  max-width: 21.875rem;
   cursor: pointer;
   // margin: 25px 0px 10px 17px;
 `;
 const TabView = styled.div`
-  padding: 5px 8px 5px 8px;
+  padding: 0.313rem 0.5rem 0.313rem 0.5rem;
 `;

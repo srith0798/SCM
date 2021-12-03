@@ -16,21 +16,21 @@ export default function Destination() {
             <Buttonn>
               <img
                 src="/images/slack.svg"
-                style={{ marginRight: "5px", width: "1.3rem" }}
+                style={{ marginRight: "0.25rem", width: "1.3rem" }}
               />{" "}
               Slack
             </Buttonn>
             <Buttonn>
               <img
                 src="/images/webhook.svg"
-                style={{ marginRight: "5px", width: "1.3rem" }}
+                style={{ marginRight: "0.25rem", width: "1.3rem" }}
               />
               Webhook
             </Buttonn>
             <Buttonn>
               <img
                 src="/images/email.svg"
-                style={{ marginRight: "5px", width: "1.3rem" }}
+                style={{ marginRight: "0.25rem", width: "1.3rem" }}
               />
               Email
             </Buttonn>
@@ -66,7 +66,7 @@ export default function Destination() {
           <Row>
             <img
               src="/images/email.svg"
-              style={{ marginRight: "4px", width: "1rem" }}
+              style={{ marginRight: "0.25rem", width: "1rem" }}
             />
             <ColumnTwo> Finance</ColumnTwo>
             <ColumnTwo style={{ fontWeight: "normal" }}>
@@ -88,9 +88,9 @@ export default function Destination() {
 }
 const MainContainer = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
-  border-radius: 6px;
+  border-radius: 0.375rem;
   opacity: 1;
-  margin-top: 20px;
+  margin-top: 1.25rem;
   height: auto;
 `;
 const Div = styled.div`
@@ -100,34 +100,34 @@ const Div = styled.div`
 const ColumnOne = styled.div`
   display: flex;
   flex-flow: column nowrap;
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 600;
   color: #102c78;
   width: 100%;
-  margin-bottom: 20px;
-  border-bottom: 2px solid #e3e7eb;
+  margin-bottom: 1.25rem;
+  border-bottom: 0.125rem solid #e3e7eb;
 `;
 const Buttonn = styled.div`
-  width: 96px;
-  height: 40px;
+  width: 6rem;
+  height: 2.5rem;
   background: #ffffff 0% 0% no-repeat padding-box;
   border: 1px solid #416be0;
-  border-radius: 6px;
+  border-radius: 0.375rem;
   align-items: center;
   display: flex;
   justify-content: center;
   color: #1d3c93;
-  font-size: 14px;
+  font-size: 0.875rem;
 `;
 const ColumnTwo = styled.div`
   display: flex;
   flex-flow: column nowrap;
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 600;
   color: #102c78;
   width: 100%;
-  max-width: 180px;
-  margin: 4px;
+  max-width: 11.25rem;
+  margin: 0.25rem;
 `;
 
 const RowContainer = styled.div`
@@ -137,8 +137,8 @@ const RowContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  max-width: 340px;
-  margin-bottom: 20px;
+  max-width: 21.25rem;
+  margin-bottom: 1.25rem;
 `;
 const ColorChanging = styled.text`
   color: #00a58c;
