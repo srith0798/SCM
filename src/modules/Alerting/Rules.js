@@ -38,6 +38,7 @@ export default function Rules() {
                 }}
               >
                 <img
+                  alt=""
                   style={{ marginRight: "0.375rem" }}
                   src={
                     activeButton === "Rules"
@@ -59,6 +60,7 @@ export default function Rules() {
                 }}
               >
                 <img
+                  alt=""
                   style={{ marginRight: "0.375rem" }}
                   src={
                     activeButton === "History"
@@ -80,6 +82,7 @@ export default function Rules() {
                 }}
               >
                 <img
+                  alt=""
                   style={{ marginRight: "5px" }}
                   src={
                     activeButton === "Destination"
@@ -214,7 +217,7 @@ const RowCorrecter = styled.div`
   flex-flow: row nowrap;
   justify-content: space-between;
   width: 100%;
-  max-width: 75rem;
+  // max-width: 75rem;
   margin-bottom: 1.25rem;
 `;
 

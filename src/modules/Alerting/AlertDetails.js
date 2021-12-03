@@ -23,6 +23,7 @@ export default function AlertDetails() {
           >
             <div>
               <img
+                alt=""
                 src="/images/back.svg"
                 style={{ marginRight: "10px" }}
                 onClick={backButton}
@@ -67,6 +68,7 @@ export default function AlertDetails() {
             <CommonDiv>
               <Row>
                 <img
+                  alt=""
                   src="/images/email.svg"
                   style={{ marginRight: "4px", width: "1rem" }}
                 />
@@ -77,6 +79,7 @@ export default function AlertDetails() {
             <CommonDiv>
               <Row>
                 <img
+                  alt=""
                   src="/images/webhook.svg"
                   style={{ marginRight: "4px", width: "1rem" }}
                 />

@@ -111,10 +111,10 @@ const FlexEnd = styled.div`
   display: flex;
   justify-content: flex-end;
 `;
-const Img = styled.img`
-  margin-right: 10px;
-  cursor: pointer;
-`;
+// const Img = styled.img`
+//   margin-right: 10px;
+//   cursor: pointer;
+// `;
 const Icon = styled.img`
   margin-left: 10px;
   cursor: pointer;

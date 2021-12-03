@@ -17,6 +17,7 @@ export default function SubContracts2() {
           <Row style={{ display: "flex", justifyContent: "space-between" }}>
             <div>
               <img
+                alt=""
                 src="/images/back.svg"
                 style={{ marginRight: "10px" }}
                 // onClick={backButton}
@@ -68,6 +69,7 @@ export default function SubContracts2() {
                 <Row>
                   <Heads>
                     <img
+                      alt=""
                       src="/images/contracts.svg"
                       style={{ width: "1rem" }}
                     />
@@ -79,6 +81,7 @@ export default function SubContracts2() {
                 <Row>
                   <Head>
                     <img
+                      alt=""
                       src="/images/contracts.svg"
                       style={{ width: "1rem" }}
                     />
@@ -90,6 +93,7 @@ export default function SubContracts2() {
                 <Row>
                   <Head>
                     <img
+                      alt=""
                       src="/images/contracts.svg"
                       style={{ width: "1rem" }}
                     />
@@ -101,6 +105,7 @@ export default function SubContracts2() {
                 <Row>
                   <Head>
                     <img
+                      alt=""
                       src="/images/contracts.svg"
                       style={{ width: "1rem" }}
                     />
@@ -112,6 +117,7 @@ export default function SubContracts2() {
                 <Row>
                   <Head>
                     <img
+                      alt=""
                       src="/images/contracts.svg"
                       style={{ width: "1rem" }}
                     />
@@ -123,6 +129,7 @@ export default function SubContracts2() {
                 <Row>
                   <Head>
                     <img
+                      alt=""
                       src="/images/contracts.svg"
                       style={{ width: "1rem" }}
                     />
@@ -134,6 +141,7 @@ export default function SubContracts2() {
                 <Row>
                   <Head>
                     <img
+                      alt=""
                       src="/images/contracts.svg"
                       style={{ width: "1rem" }}
                     />
@@ -145,6 +153,7 @@ export default function SubContracts2() {
                 <Row>
                   <Head>
                     <img
+                      alt=""
                       src="/images/contracts.svg"
                       style={{ width: "1rem" }}
                     />
@@ -156,6 +165,7 @@ export default function SubContracts2() {
                 <Row>
                   <Head>
                     <img
+                      alt=""
                       src="/images/contracts.svg"
                       style={{ width: "1rem" }}
                     />
@@ -167,6 +177,7 @@ export default function SubContracts2() {
                 <Row>
                   <Head>
                     <img
+                      alt=""
                       src="/images/contracts.svg"
                       style={{ width: "1rem" }}
                     />

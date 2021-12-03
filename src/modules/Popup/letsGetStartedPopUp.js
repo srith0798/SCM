@@ -100,9 +100,9 @@ const Add = styled.div`
   font-weight:600
   color: #303134;
 `;
-const Img = styled.img`
-  cursor: pointer;
-`;
+// const Img = styled.img`
+//   cursor: pointer;
+// `;
 const Content = styled.div`
   color: #102c78;
   margin-top: 10px;

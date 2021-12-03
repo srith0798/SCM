@@ -32,6 +32,7 @@ import MainComponent from "./modules/Analytics/mainComponent";
 import FullScreen from "./modules/Analytics/fullScreen";
 import TopCalls from "./modules/Analytics/topCalls";
 import TopCallsFullScreen from "./modules/Analytics/topCallsFullscreen";
+import AddAlert from "./modules/Alerting/AddAlert";
 
 class Routes extends BaseComponent {
   componentDidMount() {}
@@ -61,6 +62,7 @@ class Routes extends BaseComponent {
             <Route exact path={"/subcontract2"} component={SubContractsInfo} />
             <Route exact path={"/AlertDetails"} component={AlertDetails} />
             <Route exact path={"/Alerting"} component={Rules} />
+            <Route exact path={"/AddAlert"} component={AddAlert} />
 
             <Route exact path={"/add-contract"} component={AddContract} />
             <Route exact path={"/rename-contract"} component={RenameContract} />
