@@ -18,7 +18,7 @@ export default function TransactionDetails() {
   return (
     <>
       <Header />
-      <Row style={{ height: "250vh" }}>
+      <Row>
         <Sidebar />
         <MainContainer>
           <Row style={{ display: "flex", justifyContent: "space-between" }}>
@@ -354,6 +354,7 @@ const MainContainer = styled.div`
   width: 100%;
   padding: 3.125rem;
   display: 100vh;
+  overflow-x: scroll;
 `;
 
 const Heading = styled.div`
