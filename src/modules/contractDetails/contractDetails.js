@@ -7,7 +7,7 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import ContractAbi from "../Popup/contractAbi";
 import RenameContract from "../Popup/renameContract";
 import Remove from "../Popup/remove";
-import CommonDialog from "../../common/components/commonPopup";
+
 import { history } from "../../managers/history";
 import HideContract from "../Popup/hideContract";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
@@ -60,7 +60,7 @@ export default function ContractDetails(props) {
   const [address, setAddress] = React.useState([]);
   const [value, setValues] = useState("");
   const [open, setOpen] = useState(false);
-  const [commonOpen, setCommonOpen] = useState(false);
+  const [] = useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -116,7 +116,7 @@ export default function ContractDetails(props) {
                 <div>
                   <img
                     src="/images/back.svg"
-                    style={{ marginRight: "10px" }}
+                    style={{ marginRight: "0.625rem" }}
                     onClick={backButton}
                   />
                   <Heading>Contract Details</Heading>
@@ -142,12 +142,12 @@ export default function ContractDetails(props) {
                 <Tabs>
                   <TabList>
                     <Tab>
-                      <img src="/images/genrl.svg" />
+                      <img alt="" src="/images/genrl.svg" />
                       &emsp;General
                     </Tab>
                     <Tab>
                       {" "}
-                      <img src="/images/coding.svg" />
+                      <img alt="" src="/images/coding.svg" />
                       &emsp;Source Code
                     </Tab>
                   </TabList>
@@ -167,7 +167,7 @@ export default function ContractDetails(props) {
                       <PopUp>
                         <PopUpBlock>
                           <RowProperty>
-                            <img src="/images/cube.svg" />
+                            <img alt="" src="/images/cube.svg" />
                           </RowProperty>
                           <RowProperty>View transactions</RowProperty>
                         </PopUpBlock>
@@ -175,7 +175,7 @@ export default function ContractDetails(props) {
                         <PopUpBlock>
                           {open && <ContractAbi click={handleClose} />}
                           <RowProperty onClick={handleClickOpen}>
-                            <img src="/images/code.svg" />
+                            <img alt="" src="/images/code.svg" />
                           </RowProperty>
                           <RowProperty>Contract ABI</RowProperty>
                         </PopUpBlock>
@@ -185,21 +185,21 @@ export default function ContractDetails(props) {
                             <RenameContract click={renameHandleClose} />
                           )}
                           <RowProperty onClick={() => renameHandleOpen()}>
-                            <img src="/images/edit.svg" />
+                            <img alt="" src="/images/edit.svg" />
                           </RowProperty>
                           <RowProperty>Rename Contract</RowProperty>
                         </PopUpBlock>
                         <PopUpBlock>
                           {hide && <HideContract click={hideHandleClose} />}
                           <RowProperty onClick={() => hideHandleOpen()}>
-                            <img src="/images/hide.svg" />
+                            <img alt="" src="/images/hide.svg" />
                           </RowProperty>
                           <RowProperty>Hide Contract</RowProperty>
                         </PopUpBlock>
                         <PopUpBlock>
                           {remove && <Remove click={removeHandleClose} />}
                           <RowProperty onClick={() => removeHandleOpen()}>
-                            <img src="/images/delete.svg" />
+                            <img alt="" src="/images/delete.svg" />
                           </RowProperty>
                           <RowProperty>Remove Contract</RowProperty>
                         </PopUpBlock>
@@ -221,78 +221,81 @@ export default function ContractDetails(props) {
 const MainContainer = styled.div`
   background-color: #ecf0f7;
   width: 100%;
-  padding: 50px;
+  padding: 3.125rem;
 `;
 const SubContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
-  height: 50px;
+  height: 3.125rem;
   align-items: center;
 `;
 const Heading = styled.span`
-  font: normal normal 600 24px/29px Inter;
+  font-size: 1.5rem;
+  font-weight: 600;
   color: #191919;
-  margin-right: 10px;
+  margin-right: 0.625rem;
 `;
 const SubHeading = styled.div`
-  font: normal normal medium 14px/17px Inter;
-  letter-spacing: 0px;
+  font-size: 0.875rem;
+  font-weight: 600;
   color: #102c78;
 `;
 const Button = styled.button`
   background-image: url("/images/globe.svg");
   background-repeat: no-repeat;
-  background-position: 8px;
-  padding-left: 21px;
-  background-size: 14px;
+  background-position: 0.5rem;
+  padding-left: 1.75rem;
+  background-size: 0.875rem;
   position: relative;
   background-color: #ffffff;
   color: #3163f0;
   border: none;
-  border-radius: 4px;
-  width: 130px;
-  height: 34px;
-  font-size: 14px;
+  border-radius: 0.25rem;
+  width: 100%;
+  max-width: 17.75rem;
+  white-space: nowrap;
+  height: 2.125rem;
+  font-size: 0.875rem;
 `;
 const Container = styled.div`
   background-color: #ffffff;
-  border-radius: 6px;
+  border-radius: 0.375rem;
   width: 100%;
 
-  margin-top: 20px;
-  padding: 20px;
+  margin-top: 1.25rem;
+  padding: 1.25rem;
 `;
 const Hash = styled.input`
   display: flex;
   flex-flow: row nowrap;
-  margin-top: 10px;
+  margin-top: 0.625rem;
   font-weight: 600;
   border: none;
   width: 100%;
-  max-width: 385px;
+  max-width: 24.063rem;
 `;
 const DetailsSection = styled.div`
   background-color: #ffffff;
-  border-radius: 6px;
+  border-radius: 0.375rem;
   width: 100%;
   height: auto;
-  margin-top: 20px;
-  padding: 10px;
+  margin-top: 1.25rem;
+  padding: 0.625rem;
 `;
 const Div = styled.div`
   display: flex;
   flex-flow: row nowrap;
-  border-bottom: 1px solid #e3e7eb;
-  padding: 20px;
+  border-bottom: 0.063rem solid #e3e7eb;
+  padding: 1.25rem;
 `;
 const TableData = styled.div`
-  font: normal normal medium 14px/17px Inter;
-  letter-spacing: 0px;
+  font-size: 0.875rem;
+  font-weight: 600;
   color: #191919;
   width: 100%;
-  max-width: 150px;
-  font-size: 17px;
+  max-width: 9.375rem;
+  font-size: 1.063rem;
   font-weight: 600;
 `;
 const CopyImg = styled.img`
@@ -300,33 +303,30 @@ const CopyImg = styled.img`
   cursor: pointer;
 `;
 const TableHeading = styled.div`
-  font: normal normal medium 14px/17px Inter;
-  font-size: 17px;
+  font-size: 0.875rem;
   font-weight: 600;
-  letter-spacing: 0px;
   color: #102c78;
-  max-width: 300px;
+  max-width: 18.75rem;
   width: 100%;
 `;
 const PopUp = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 70px;
+  margin-top: 4.375rem;
   width: 100%;
-
-  max-width: 950px;
-  font-size: 14px;
+  max-width: 59.375rem;
+  font-size: 0.875rem;
 `;
 
 const PopUpBlock = styled.div`
   background: #f5f6fd 0% 0% no-repeat padding-box;
-  border: 1px solid #d5e0ff;
-  border-radius: 6px;
+  border: 0.063rem solid #d5e0ff;
+  border-radius: 0.375rem;
   width: 100%;
-  max-width: 166px;
-  padding: 10px;
-  height: 63px;
+  max-width: 10.375rem;
+  padding: 0.625rem;
+  height: 3.938rem;
   color: #1d3c93;
   font-weight: 600;
   cursor: pointer;

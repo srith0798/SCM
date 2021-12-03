@@ -18,40 +18,40 @@ export default function Historys() {
         </Div>
         <Div>
           <Row>
-            <ColumnOne style={{ fontSize: "14px", color: "#191919" }}>
+            <ColumnTwo style={{ fontSize: "0.875rem", color: "#191919" }}>
               Sucessfull transaction
-            </ColumnOne>
-            <ColumnOne style={{ fontSize: "14px", color: "#191919" }}>
-              App_Transactions_Validator
-            </ColumnOne>
-            <ColumnOne style={{ fontSize: "14px", color: "#191919" }}>
+            </ColumnTwo>
+            <ColumnTwo style={{ fontSize: "0.875rem", color: "#191919" }}>
+              App_Transactions
+            </ColumnTwo>
+            <ColumnTwo style={{ fontSize: "0.875rem", color: "#191919" }}>
               0xndfahkk57..fj9
-            </ColumnOne>
-            <ColumnOne style={{ fontSize: "14px", color: "#191919" }}>
+            </ColumnTwo>
+            <ColumnTwo style={{ fontSize: "0.875rem", color: "#191919" }}>
               XDC Mainnet
-            </ColumnOne>
-            <ColumnOne style={{ fontSize: "14px", color: "#191919" }}>
+            </ColumnTwo>
+            <ColumnTwo style={{ fontSize: "0.875rem", color: "#191919" }}>
               02.2.2022 12:02
-            </ColumnOne>
+            </ColumnTwo>
           </Row>
         </Div>
         <Div>
           <Row>
-            <ColumnOne style={{ fontSize: "14px", color: "#191919" }}>
+            <ColumnTwo style={{ fontSize: "0.875rem", color: "#191919" }}>
               Sucessfull transaction
-            </ColumnOne>
-            <ColumnOne style={{ fontSize: "14px", color: "#191919" }}>
-              App_Transactions_Validator
-            </ColumnOne>
-            <ColumnOne style={{ fontSize: "14px", color: "#191919" }}>
+            </ColumnTwo>
+            <ColumnTwo style={{ fontSize: "0.875rem", color: "#191919" }}>
+              App_Transactions
+            </ColumnTwo>
+            <ColumnTwo style={{ fontSize: "0.875rem", color: "#191919" }}>
               0xndfahkk57..fj9
-            </ColumnOne>
-            <ColumnOne style={{ fontSize: "14px", color: "#191919" }}>
+            </ColumnTwo>
+            <ColumnTwo style={{ fontSize: "0.875rem", color: "#191919" }}>
               XDC Mainnet
-            </ColumnOne>
-            <ColumnOne style={{ fontSize: "14px", color: "#191919" }}>
+            </ColumnTwo>
+            <ColumnTwo style={{ fontSize: "0.875rem", color: "#191919" }}>
               02.2.2022 12:02
-            </ColumnOne>
+            </ColumnTwo>
           </Row>
         </Div>
       </MainContainer>
@@ -60,22 +60,32 @@ export default function Historys() {
 }
 const MainContainer = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
-  border-radius: 6px;
+  border-radius: 0.375rem;
   opacity: 1;
-  margin-top: 20px;
-  height: auto;
+  margin-top: 1.25rem;
+  height: 15.625rem;
 `;
 
 const Div = styled.div`
-  padding: 15px;
-  border-bottom: 1px solid #e3e7eb;
+  padding: 0.938rem;
+  border-bottom: 0.063rem solid #e3e7eb;
 `;
 const ColumnOne = styled.div`
   display: flex;
   flex-flow: column nowrap;
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 600;
   color: #102c78;
   width: 100%;
-  max-width: 300px;
+  max-width: 18.75rem;
+`;
+
+const ColumnTwo = styled.div`
+  display: flex;
+  flex-flow: column nowrap;
+  font-size: 0.875rem;
+  color: #191919;
+  // font-weight: 600;
+  width: 100%;
+  max-width: 18.75rem;
 `;

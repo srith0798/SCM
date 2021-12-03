@@ -4,7 +4,7 @@ import { Column, Row } from "simple-flexbox";
 import Header from "../header/header";
 import Sidebar from "../sidebar/sidebar";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import { Tab, Tabs, TabList } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 
 export default function SubContracts2() {
@@ -35,13 +35,25 @@ export default function SubContracts2() {
             </div>
             <Tabs>
               <TabList>
-                <img src="/images/rules.svg" style={{ width: "16px" }} />
+                <img alt="" src="/images/rules.svg" style={{ width: "16px" }} />
                 <Tab> Overview </Tab>
-                <img src="/images/contracts.svg" style={{ width: "16px" }} />
+                <img
+                  alt=""
+                  src="/images/contracts.svg"
+                  style={{ width: "16px" }}
+                />
                 <Tab>Contracts</Tab>
-                <img src="/images/general.svg" style={{ width: "16px" }} />
+                <img
+                  alt=""
+                  src="/images/general.svg"
+                  style={{ width: "16px" }}
+                />
                 <Tab>Events</Tab>
-                <img src="/images/state change.svg" style={{ width: "16px" }} />
+                <img
+                  alt=""
+                  src="/images/state change.svg"
+                  style={{ width: "16px" }}
+                />
                 <Tab>State change</Tab>
               </TabList>
             </Tabs>
@@ -264,8 +276,8 @@ const Heads = styled.div`
   align-items: center;
   font: normal normal 600 14px/17px Inter;
   opacity: 1;
-  width 150px;
-  height: 50px;
+  width 9.375rem;
+  height: 3.125rem;
   &:hover{
     background-color: blue;
     color: #ffffff;
@@ -274,9 +286,7 @@ const Heads = styled.div`
 
 const TextLi = styled.div`
   text-align: left;
-  font: normal normal medium 14px/17px Inter;
-  letter-spacing: 0px;
-
-  opacity: 1;
-  font-size: 14px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  font-size: 0.875rem;
 `;

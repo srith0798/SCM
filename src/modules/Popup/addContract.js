@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Row, Column } from "simple-flexbox";
+// import { Row, Column } from "simple-flexbox";
 import Dialog from "@mui/material/Dialog";
 
 export default function AddContract(props) {
@@ -11,7 +11,7 @@ export default function AddContract(props) {
           <Container>
             <SubContainer>
               <Add>Add Contract</Add>
-              <Img src="/images/XDC-Cross.svg" onClick={props.click} />
+              <img alt="" src="/images/XDC-Cross.svg" onClick={props.click} />
             </SubContainer>
             <ImportFile>Import Public Contracts</ImportFile>
             <Content>

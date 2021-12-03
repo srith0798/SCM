@@ -19,7 +19,7 @@ export default function TopCalls(props) {
           <MainContainer>
             <SubContainer>
               <AlignmentContainer>
-                <Img src="/images/back.svg" onClick={ClickMe} />
+                <img alt="" src="/images/back.svg" onClick={ClickMe} />
                 <MainHeading>{props.graphName}</MainHeading>
               </AlignmentContainer>
               <AlignmentContainer>

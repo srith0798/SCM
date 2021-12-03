@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import Dialog from "@mui/material/Dialog";
 import { makeStyles } from "@material-ui/styles";
@@ -18,7 +18,7 @@ export default function ContractAbi(props) {
           <Container>
             <SubContainer>
               <Add>Contract ABI</Add>
-              <Img src="/images/XDC-Cross.svg" onClick={props.click} />
+              <img alt="" src="/images/XDC-Cross.svg" onClick={props.click} />
             </SubContainer>
             <Div>Code</Div>
           </Container>

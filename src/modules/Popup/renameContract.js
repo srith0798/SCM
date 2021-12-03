@@ -20,7 +20,7 @@ export default function RenameContract(props) {
           <Container>
             <SubContainer>
               <Add>Rename Contract</Add>
-              <Img src="/images/XDC-Cross.svg" onClick={props.click} />
+              <img alt="" src="/images/XDC-Cross.svg" onClick={props.click} />
             </SubContainer>
             <Input type="text" />
             <SubContainer
