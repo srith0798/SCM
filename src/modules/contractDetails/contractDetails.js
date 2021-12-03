@@ -109,7 +109,7 @@ export default function ContractDetails(props) {
       <Column>
         <Header />
         <div>
-          <Row style={{ height: "150vh" }}>
+          <Row>
             <Sidebar />
             <MainContainer>
               <SubContainer>

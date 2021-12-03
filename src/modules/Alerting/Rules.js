@@ -15,7 +15,9 @@ export default function Rules() {
   return (
     <>
       <Header />
-      <Row style={{ height: "250vh" }}>
+      <Row
+      // style={{ height: "250vh" }}
+      >
         <Sidebar />
         <MainContainer>
           <Row>

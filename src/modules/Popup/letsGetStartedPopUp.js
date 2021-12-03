@@ -23,7 +23,11 @@ export default function LetsGetStarted(props) {
             <Container>
               <SubContainer>
                 <Add>Get Started</Add>
-                <img alt="" src="/images/XDC-Cross.svg" onClick={props.click} />
+                <CrossIcon
+                  alt=""
+                  src="/images/XDC-Cross.svg"
+                  onClick={props.click}
+                />
               </SubContainer>
               <Content>Great to have you onboard! Feel free to explore</Content>
 
@@ -76,6 +80,19 @@ export default function LetsGetStarted(props) {
     </div>
   );
 }
+
+const CrossIcon = styled.img`
+  cursor: pointer;
+  width: 16px;
+  transition: width 0.1s;
+  &:hover {
+    width: 18px;
+    box-shadow: 15px 18px 78px -23px rgba(0, 0, 0, 1);
+    -webkit-box-shadow: 15px 18px 78px -23px rgba(0, 0, 0, 1);
+    -moz-box-shadow: 15px 18px 78px -23px rgba(0, 0, 0, 1);
+  }
+`;
+
 const MainContainer = styled.div`
   width: 100%;
   display: flex;
@@ -87,8 +104,8 @@ const Container = styled.div`
   border-radius: 6px;
   width: 100%;
   background-color: #ffffff;
-
-  padding: 15px;
+  padding: 20px 30px 20px 30px;
+  height: 473px;
 `;
 const SubContainer = styled.div`
   display: flex;
@@ -96,13 +113,13 @@ const SubContainer = styled.div`
 `;
 const Add = styled.div`
   font: normal normal 600 24px/29px Inter;
-  font-size:1.5rem;
-  font-weight:600
+  font-size: 1.5rem;
+  font-weight: 600;
   color: #303134;
 `;
-// const Img = styled.img`
-//   cursor: pointer;
-// `;
+const Img = styled.img`
+  cursor: pointer;
+`;
 const Content = styled.div`
   color: #102c78;
   margin-top: 10px;
