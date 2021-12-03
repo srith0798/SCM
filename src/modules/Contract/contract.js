@@ -5,6 +5,7 @@ import Header from "../header/header";
 import Sidebar from "../sidebar/sidebar";
 import AddContract from "../Popup/addContract";
 import { history } from "../../managers/history";
+import Tooltip from "@mui/material/Tooltip";
 
 export default function Contract(props) {
   const [open, setOpen] = React.useState(false);
@@ -77,7 +78,7 @@ export default function Contract(props) {
     <div>
       <Column>
         <Header />
-        <Row style={{ height: "100vh" }}>
+        <Row style={{ height: "180vh" }}>
           <Sidebar />
           <MainContainer>
             <SubContainer>
@@ -101,7 +102,12 @@ export default function Contract(props) {
                   <ColumnOne>Contract Name</ColumnOne>
                   <ColumnOne>Address</ColumnOne>
                   <ColumnOne>Network</ColumnOne>
-                  <ColumnOne>Tag</ColumnOne>
+                  <ColumnOne>
+                    Tag{" "}
+                    <Tooltip disableFocusListener title="Add">
+                      <ToolTipIcon src="/images/tool tip.svg" />
+                    </Tooltip>
+                  </ColumnOne>
                   <ColumnOne>Visibility</ColumnOne>
                 </Row>
               </Div>
@@ -175,6 +181,8 @@ const Input = styled.input`
   background-position: 0.5rem;
   background-size: 0.75rem;
   position: relative;
+  border: none;
+  outline: none;
 `;
 const TableContainer = styled.div`
   background-color: #ffffff;
@@ -188,20 +196,21 @@ const Div = styled.div`
   border-bottom: 0.063rem solid #e3e7eb;
 `;
 const ColumnOne = styled.div`
-  display: flex;
-  flex-flow: column nowrap;
-  font-size: 0.875rem;
+  font-size: 14px;
   font-weight: 600;
   color: #102c78;
   width: 100%;
   max-width: 18.75rem;
 `;
 const ColumnSecond = styled.div`
-  display: flex;
-  flex-flow: column nowrap;
   font-size: 14px;
   font-weight: 600;
   color: #191919;
   width: 100%;
   max-width: 300px;
+`;
+const ToolTipIcon = styled.img`
+  width: 12px;
+  cursor: pointer;
+  margin-left: 5px;
 `;

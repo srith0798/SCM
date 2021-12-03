@@ -20,11 +20,6 @@ export default function Network(props) {
         network: "App_Transactions_Validator",
         url: "https://explorer.xinfin.network/",
       },
-
-      //   {
-      //     network: "App_Transactions_Validator",
-      //     url: "https://explorer.xinfin.network/",
-      //   },
     ];
 
     setAddress(
@@ -42,7 +37,7 @@ export default function Network(props) {
     <div>
       <Column>
         <Header />
-        <Row style={{ height: "100vh" }}>
+        <Row style={{ height: "180vh" }}>
           <Sidebar />
           <MainContainer>
             <SubContainer>
