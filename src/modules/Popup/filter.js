@@ -178,7 +178,6 @@ const RowBoxOne = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
-
   max-width: 400px;
 `;
 const RowContainer = styled.div`
