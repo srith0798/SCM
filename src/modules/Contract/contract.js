@@ -213,21 +213,21 @@ const Div = styled.div`
   border-bottom: 0.063rem solid #e3e7eb;
 `;
 const ColumnOne = styled.div`
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 600;
   color: #102c78;
   width: 100%;
   max-width: 18.75rem;
 `;
 const ColumnSecond = styled.div`
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 600;
   color: #191919;
   width: 100%;
-  max-width: 300px;
+  max-width: 18.75rem;
 `;
 const ToolTipIcon = styled.img`
-  width: 12px;
+  width: 0.75rem;
   cursor: pointer;
-  margin-left: 5px;
+  margin-left: 0.313rem;
 `;

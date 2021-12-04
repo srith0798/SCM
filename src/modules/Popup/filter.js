@@ -2,8 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import Dialog from "@mui/material/Dialog";
 import { makeStyles } from "@material-ui/styles";
-import { Button } from "@mui/material";
-import { Column, Row } from "simple-flexbox";
 
 const useStyles = makeStyles(() => ({
   dialogBox: {
@@ -153,10 +151,11 @@ const Container = styled.div`
   height: 359px;
 `;
 const Add = styled.div`
-  // font: normal normal 600 24px/29px Inter;
   font-size: 1.5rem;
   font-weight: 600;
   color: #303134;
+  padding-top: 15px;
+  padding-bottom: 40px;
 `;
 
 const Content = styled.div`

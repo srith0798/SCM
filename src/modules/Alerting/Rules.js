@@ -6,7 +6,6 @@ import "react-tabs/style/react-tabs.css";
 import styled from "styled-components";
 import Historys from "./Historys";
 import Destination from "./Destination";
-import AlertDetails from "./AlertDetails";
 
 export default function Rules() {
   const [activeButton, setActiveButton] = React.useState("Rules");

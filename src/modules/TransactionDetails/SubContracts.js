@@ -13,21 +13,31 @@ export default function SubContracts() {
           <Title>App Transactions Validator</Title>
           <SubTitle>xdc02aaa39…8b3c</SubTitle>
           <SubTitleTwo>
-            <Button onClick={SubButton}>Verified contracts</Button>
+            <Button onClick={SubButton}>
+              {" "}
+              <img alt="" src="/images/Verified_tick.svg" />
+              Verified contracts
+            </Button>
           </SubTitleTwo>
         </Container>
         <Container>
           <Title>App Transactions Validator</Title>
           <SubTitle>xdc02aaa39…8b3c</SubTitle>
           <SubTitleTwo>
-            <Button onClick={SubButton}>Verified contracts</Button>
+            <Button onClick={SubButton}>
+              <img alt="" src="/images/Verified_tick.svg" />
+              Verified contracts
+            </Button>
           </SubTitleTwo>
         </Container>
         <Container>
           <Title>App Transactions Validator</Title>
           <SubTitle>xdc02aaa39…8b3c</SubTitle>
           <SubTitleTwo>
-            <Button onClick={SubButton}>Verified contracts</Button>
+            <Button onClick={SubButton}>
+              <img alt="" src="/images/Verified_tick.svg" />
+              Verified contracts
+            </Button>
           </SubTitleTwo>
         </Container>
       </MainBoxContainer>

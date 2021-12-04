@@ -33,7 +33,7 @@ import FullScreen from "./modules/Analytics/fullScreen";
 import TopCalls from "./modules/Analytics/topCalls";
 import TopCallsFullScreen from "./modules/Analytics/topCallsFullscreen";
 import AddAlert from "./modules/Alerting/AddAlert";
-import filter from "./modules/Popup/filter";
+
 import Filter from "./modules/Popup/filter";
 
 class Routes extends BaseComponent {
