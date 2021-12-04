@@ -33,10 +33,11 @@ import FullScreen from "./modules/Analytics/fullScreen";
 import TopCalls from "./modules/Analytics/topCalls";
 import TopCallsFullScreen from "./modules/Analytics/topCallsFullscreen";
 import AddAlert from "./modules/Alerting/AddAlert";
+import filter from "./modules/Popup/filter";
+import Filter from "./modules/Popup/filter";
 
 class Routes extends BaseComponent {
   componentDidMount() {}
-
 
   render() {
     return (
@@ -71,6 +72,7 @@ class Routes extends BaseComponent {
             <Route exact path={"/network"} component={Network} />
             <Route exact path={"/startedPopUp"} component={LetsGetStarted} />
             <Route exact path={"/remove"} component={Remove} />
+            <Route exact path={"/filter"} component={Filter} />
             <Route exact path={"/add-network"} component={AddNetwork} />
             <Route exact path={"/settings"} component={Settings} />
             <Route exact path={"/analytics"} component={Analytics} />

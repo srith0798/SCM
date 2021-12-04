@@ -346,4 +346,4 @@ const ToolTipIcon = styled.img`
   cursor: pointer;
   margin-left: 8px;
 `;
-const ColorBox = styled.div``;
+// const ColorBox = styled.div``;
