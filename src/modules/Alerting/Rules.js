@@ -6,10 +6,12 @@ import "react-tabs/style/react-tabs.css";
 import styled from "styled-components";
 import Historys from "./Historys";
 import Destination from "./Destination";
+import { history } from "../../managers/history";
 
 export default function Rules() {
   const [activeButton, setActiveButton] = React.useState("Rules");
   const handleViewClick = (e) => {
+    console.log("clicked");
     setActiveButton(e.target.id);
   };
   return (
@@ -23,7 +25,9 @@ export default function Rules() {
           <Row>
             <RowCorrecter>
               <Title>Alerting</Title>
-              <Button>Add alert</Button>
+              <Button onClick={() => history.push("/AddAlert")}>
+                Add alert
+              </Button>
             </RowCorrecter>
           </Row>
           <Container>

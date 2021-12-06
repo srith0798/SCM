@@ -9,27 +9,35 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export default function Filter() {
+export default function Filter(props) {
   const classes = useStyles();
+
   return (
     <div>
       <Dialog classes={{ paper: classes.dialogBox }} open={true}>
         <MainContainer>
-          <Container style={{ paddingBottom: "20px" }}>
+          <Container>
             <RowContainer>
-              <Add>Filter Transaction</Add>
+              <Add>Filter Transactions</Add>
             </RowContainer>
-            <NewContainer style={{ paddingBottom: "20px" }}>
+            <NewContainer>
               <Content>Status</Content>
               <RowBoxOne>
                 <ButtonA>All</ButtonA>
                 <ButtonB>Success</ButtonB>
-                <ButtonC>fail</ButtonC>
+                <ButtonC>Fail</ButtonC>
               </RowBoxOne>
             </NewContainer>
-            <NewContainerOne style={{ paddingBottom: "20px" }}>
+            <NewContainerOne>
               <Content>Network</Content>
-              <DropDown>Select Network</DropDown>
+              <DropDown>
+                Select Network
+                <img
+                  style={{ marginLeft: "208px" }}
+                  alt=""
+                  src="/images/drop down.svg"
+                />
+              </DropDown>
             </NewContainerOne>
             <NewContainer style={{ paddingBottom: "20px" }}>
               <Content>Date Range</Content>
@@ -40,7 +48,7 @@ export default function Filter() {
             </NewContainer>
             <LastContainer>
               <ApplyButton>Apply</ApplyButton>
-              <CancelButton>Cancel</CancelButton>
+              <CancelButton onClick={props.closePopup}>Cancel</CancelButton>
             </LastContainer>
           </Container>
         </MainContainer>
@@ -50,16 +58,16 @@ export default function Filter() {
 }
 
 const ApplyButton = styled.div`
-  top: 432px;
-  left: 1094px;
   width: 68px;
   height: 34px;
   background: #3163f0 0% 0% no-repeat padding-box;
-  opacity: 1;
+  border-radius: 3px;
   color: #ffffff;
-  padding-top: 3px;
+  padding-top: 6px;
   font-size: 14px;
+  margin-right: 15px;
   text-align: center;
+  cursor: pointer;
 `;
 const CancelButton = styled.div`
   top: 432px;
@@ -68,38 +76,41 @@ const CancelButton = styled.div`
   height: 34px;
   border: 1px solid #3163f0;
   opacity: 1;
-  padding-top: 3px;
+  padding-top: 6px;
+  border-radius: 3px;
   font-size: 14px;
   text-align: center;
+  cursor: pointer;
+  margin-left: -5px;
+  margin-right: -11px;
+
+  color: #3163f0;
 `;
 const ButtonA = styled.div`
-  top: 254px;
-  left: 899px;
   width: 38px;
   height: 34px;
   background: #ffffff 0% 0% no-repeat padding-box;
   border: 1px solid #3163f0;
   border-radius: 6px;
-  opacity: 1;
   padding-top: 4px;
+  margin-right: 20px;
   text-align: center;
   color: #3062ef;
+  text-size: 14px;
 `;
 const ButtonB = styled.div`
-  top: 254px;
-  left: 959px;
   width: 78px;
+  text-size: 14px;
   height: 34px;
   background: #ffffff 0% 0% no-repeat padding-box;
   border: 1px solid #d9d9d9;
   border-radius: 6px;
   opacity: 1;
   padding-top: 4px;
+  margin-right: 20px;
   text-align: center;
 `;
 const ButtonC = styled.div`
-  top: 254px;
-  left: 1059px;
   width: 78px;
   height: 34px;
   background: #ffffff 0% 0% no-repeat padding-box;
@@ -108,6 +119,7 @@ const ButtonC = styled.div`
   opacity: 1;
   padding-top: 4px;
   text-align: center;
+  text-size: 14px;
 `;
 const DropDown = styled.div`
   background: #f5f6fd 0% 0% no-repeat padding-box;
@@ -115,12 +127,13 @@ const DropDown = styled.div`
   border-radius: 6px;
   font-size: 14px;
   font-weight: 600;
-  color: grey;
+  // color: #767c93;
+  color: #b7b7b7;
   height: 40px;
   padding: 10px;
   width: 352px;
   height: 34px;
-  padding-top: 4px;
+  padding-top: 5px;
   position: relative;
 `;
 const DropDownTwo = styled.div`
@@ -129,21 +142,25 @@ const DropDownTwo = styled.div`
   border-radius: 6px;
   font-size: 14px;
   font-weight: 600;
-  color: grey;
+  color: #b7b7b7;
   height: 34px;
-  padding-bottom: 20px;
-  padding: 8px;
+  padding-left: 9px;
+  padding-top: 6px;
+
   width: 160px;
+
+  margin-right: 50px;
 `;
 const MainContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-left: 30px;
 `;
 const Container = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
-
+  padding-bottom: 20px;
   border-radius: 0.375rem;
   width: 100%;
   background-color: #ffffff;
@@ -156,6 +173,7 @@ const Add = styled.div`
   color: #303134;
   padding-top: 15px;
   padding-bottom: 40px;
+  margin-left: -12px;
 `;
 
 const Content = styled.div`
@@ -175,7 +193,7 @@ const LastRowBox = styled.div`
 `;
 const RowBoxOne = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: start;
   width: 100%;
   max-width: 400px;
 `;
@@ -187,6 +205,7 @@ const NewContainer = styled.div`
   justify-content: space-between;
   width: 100%;
   max-width: 3 00px;
+  padding-bottom: 20px;
 `;
 const LastContainer = styled.div`
   display: flex;
@@ -199,4 +218,5 @@ const NewContainerOne = styled.div`
   justify-content: space-between;
   width: 100%;
   max-width: 515px;
+  padding-bottom: 20px;
 `;

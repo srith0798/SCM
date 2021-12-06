@@ -9,6 +9,7 @@ import Box from "@mui/material/Box";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 import { history } from "../../managers/history";
 import Tooltip from "@mui/material/Tooltip";
+import FilterPopUp from "../Popup/filter";
 
 export default function TransactionList(props) {
   useEffect(() => {
@@ -17,6 +18,10 @@ export default function TransactionList(props) {
   }, []);
   const [state, setState] = useState(true);
   const [open, isOpen] = useState(false);
+  const [filterBox, setFilterBox] = useState(false);
+  const handleFilterBox = () => {
+    setFilterBox(!filterBox);
+  };
   const handleClickOpen = () => {
     isOpen(true);
   };
@@ -134,9 +139,10 @@ export default function TransactionList(props) {
             <SearchBar placeholder="Search by status or name" />
             <IconContainer>
               {open && <Settings click={handleClose} />}
+              {filterBox && <FilterPopUp closePopup={handleFilterBox} />}
               <Icons src="/images/settings.svg" onClick={handleClickOpen} />
               <Icons src="/images/refresh.svg" />
-              <Icons src="/images/filter.svg" />
+              <Icons src="/images/filter.svg" onClick={handleFilterBox} />
             </IconContainer>
           </Row>
 
@@ -213,7 +219,7 @@ export default function TransactionList(props) {
         </MainContainer>
       </Row>
       <div>
-        {state && (
+        {false && (
           <LetsGetStarted click={() => setState(false)} state={state} />
         )}
       </div>
