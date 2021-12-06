@@ -28,9 +28,14 @@ export default function AddAlert() {
   const [balanceToken, setBalanceToken] = React.useState(
     "/images/XDC logo.svg"
   );
+  const [stateChange, setstateChange] = React.useState("/images/state change_");
+
   // alert target
   const [addressToken, setaddressToken] = React.useState(
     "/images/address_blue.svg"
+  );
+  const [networkAddress, setnetworkAddress] = React.useState(
+    "/images/network_logo.svg"
   );
   const [progress, setProgress] = React.useState("ALERT_TYPE");
 
@@ -44,9 +49,13 @@ export default function AddAlert() {
     if (value === "transactionValue")
       settransactionValue("/images/XDC logo_white.svg");
     if (value === "balanceToken") setBalanceToken("/images/XDC logo_white.svg");
+    if (value === "stateChange")
+      setstateChange("/images/statechange_white.svg");
     // for alert target tabs
     if (value === "addressToken")
       setaddressToken("/images/Address_logowhite.svg");
+    if (value === "networkAddress")
+      setnetworkAddress("/images/network_white.svg");
   };
 
   const changeProgress = () => {
@@ -62,8 +71,11 @@ export default function AddAlert() {
     if (value === "transactionValue")
       settransactionValue("/images/XDC logo.svg");
     if (value === "balanceToken") setBalanceToken("/images/XDC logo.svg");
-
+    if (value === "statechange") setstateChange("/images/state change_.svg");
+    // for alert target
     if (value === "addressToken") setaddressToken("/images/address_blue.svg");
+    if (value === "networkAddress")
+      setnetworkAddress("/images/network_logo.svg");
   };
 
   return (
@@ -233,8 +245,14 @@ export default function AddAlert() {
                     </BoxContainer>
 
                     {/* <BoxRow> */}
-                    <BoxContainer>
-                      <img alt="" src="/images/state change_.svg" />
+                    <BoxContainer
+                      onClick={() => changeProgress()}
+                      onMouseOver={() => changeSourceForIcons("stateChange")}
+                      onMouseOut={() =>
+                        changeOriginalSourceForIcons("stateChange")
+                      }
+                    >
+                      <img alt="" src={stateChange} />
                       <Title>State Change</Title>
                       <SubTitle>
                         trigger whenever stable variable changes
@@ -267,8 +285,14 @@ export default function AddAlert() {
                       <Title>Address</Title>
                       <SubTitle>recieve alert for only one address</SubTitle>
                     </BoxContainer>
-                    <BoxContainer>
-                      <img alt="" src="/images/network_logo.svg" />
+                    <BoxContainer
+                      onClick={() => changeProgress()}
+                      onMouseOver={() => changeSourceForIcons("networkAddress")}
+                      onMouseOut={() =>
+                        changeOriginalSourceForIcons("networkAddress")
+                      }
+                    >
+                      <img alt="" src={networkAddress} />
                       <Title>Network</Title>
                       <SubTitle>
                         recieve alert for deployment on a network
@@ -305,7 +329,7 @@ export default function AddAlert() {
                     sent to.
                   </SelectType>
                   <LastContainer>
-                    <ApplyButton>Apply</ApplyButton>
+                    <ApplyButton>Done</ApplyButton>
                     <CancelButton>Cancel</CancelButton>
                   </LastContainer>
                 </AlertContainer>
