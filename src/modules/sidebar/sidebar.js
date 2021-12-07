@@ -167,5 +167,5 @@ const CenterDiv = styled.div`
   margin-bottom: 3rem;
 `;
 const Spacing = styled.div`
-  margin-top: 14rem;
+  margin-top: 9rem;
 `;

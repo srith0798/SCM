@@ -199,7 +199,7 @@ export default function TransactionList(props) {
               </Row>
             </Div>
 
-            //TODO: add placeholder when there is no data to render
+            {/*TODO: add placeholder when there is no data to render */}
             <div>
               {address.map((data, index) => {
                 return (
