@@ -93,7 +93,9 @@ const SubContainer = styled.div`
   align-items: center;
 `;
 const Heading = styled.span`
-  font: normal normal 600 24px/29px Inter;
+  // font: normal normal 600 24px/29px Inter;
+  font-size: 1.5rem;
+  font-weight: 600;
   color: #191919;
   margin-right: 0.625rem;
 `;

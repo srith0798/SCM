@@ -7,6 +7,9 @@ import styled from "styled-components";
 import { history } from "../../managers/history";
 
 export default function AlertDetails() {
+  const backButton = () => {
+    history.push("/Alerting");
+  };
   return (
     <div>
       <Header />
@@ -26,7 +29,7 @@ export default function AlertDetails() {
                 alt=""
                 src="/images/back.svg"
                 style={{ marginRight: "10px" }}
-                onClick={backButton}
+                onClick={() => backButton()}
               />
               <b>Alert Details</b>
             </div>
@@ -114,9 +117,6 @@ const NewContainer = styled.div`
   padding: 20px;
 `;
 
-const backButton = () => {
-  history.push(AlertDetails);
-};
 const Button = styled.button`
   background-image: url("/images/Add.svg");
   background-repeat: no-repeat;

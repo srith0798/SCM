@@ -7,7 +7,7 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import { Tab, Tabs, TabList } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 
-export default function SubContracts2() {
+export default function verifiedContracts() {
   return (
     <>
       <Header />
@@ -75,30 +75,6 @@ export default function SubContracts2() {
                     />
                     <TextLi>Subcontracts name</TextLi>
                   </Heads>
-                </Row>
-              </CommonDiv>
-              <CommonDiv>
-                <Row>
-                  <Head>
-                    <img
-                      alt=""
-                      src="/images/contracts.svg"
-                      style={{ width: "1rem" }}
-                    />
-                    Subcontracts name
-                  </Head>
-                </Row>
-              </CommonDiv>
-              <CommonDiv>
-                <Row>
-                  <Head>
-                    <img
-                      alt=""
-                      src="/images/contracts.svg"
-                      style={{ width: "1rem" }}
-                    />
-                    Subcontracts name
-                  </Head>
                 </Row>
               </CommonDiv>
               <CommonDiv>

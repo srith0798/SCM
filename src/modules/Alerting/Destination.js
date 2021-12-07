@@ -9,7 +9,7 @@ export default function Destination() {
       <MainContainer>
         <Div>
           <Row>
-            <ColumnOne>Destinations</ColumnOne>
+            <ColumnOne style={{ borderBottom: "none" }}>Destinations</ColumnOne>
           </Row>
           <RowContainer>
             <Buttonn>
@@ -39,7 +39,9 @@ export default function Destination() {
           </RowContainer>
         </Div>
 
-        <ColumnOne>Active Destination</ColumnOne>
+        <ColumnOne style={{ paddingBottom: "10px" }}>
+          Active Destination
+        </ColumnOne>
         <Div>
           <Row>
             <img
@@ -47,7 +49,7 @@ export default function Destination() {
               src="/images/email.svg"
               style={{ marginRight: "4px", width: "1rem" }}
             />
-            <ColumnTwo>Finance</ColumnTwo>
+            <ColumnTwo style={{ color: "#191919" }}>Finance</ColumnTwo>
             <ColumnTwo style={{ fontWeight: "normal" }}>
               it@supportteam.com
             </ColumnTwo>
@@ -72,7 +74,7 @@ export default function Destination() {
               src="/images/email.svg"
               style={{ marginRight: "0.25rem", width: "1rem" }}
             />
-            <ColumnTwo> Finance</ColumnTwo>
+            <ColumnTwo style={{ color: "#191919" }}> Finance</ColumnTwo>
             <ColumnTwo style={{ fontWeight: "normal" }}>
               http://webhook.site/aOe
             </ColumnTwo>

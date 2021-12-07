@@ -15,6 +15,9 @@ export default function TransactionDetails() {
   const handleViewClick = (e) => {
     setActiveButton(e.target.id);
   };
+  const backButton = () => {
+    history.push("/");
+  };
   return (
     <>
       <Header />
@@ -313,10 +316,6 @@ export default function TransactionDetails() {
     </>
   );
 }
-
-const backButton = () => {
-  history.push("/");
-};
 
 const NewContainer = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;

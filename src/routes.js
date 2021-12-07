@@ -12,7 +12,7 @@ import TransactionList from "./modules/transactions/transactionList";
 import VerifyEmail from "./modules/VerifyEmail/verifyEmail";
 import Contract from "./modules/Contract/contract";
 import ContractDetails from "./modules/contractDetails/contractDetails";
-import SubContractsInfo from "./modules/TransactionDetails/SubContracts2";
+import VerifiedContracts from "./modules/TransactionDetails/verifiedContracts";
 
 import AddContract from "./modules/Popup/addContract";
 import ContractAbi from "./modules/Popup/contractAbi";
@@ -20,7 +20,7 @@ import RenameContract from "./modules/Popup/renameContract";
 import SourceCode from "./modules/contractDetails/sourceCode";
 import HideContract from "./modules/Popup/hideContract";
 import Remove from "./modules/Popup/remove";
-import transactionDetails from "./modules/TransactionDetails/transactionDetails";
+import TransactionDetails from "./modules/TransactionDetails/transactionDetails";
 import Network from "./modules/Network/network";
 import LetsGetStarted from "./modules/Popup/letsGetStartedPopUp";
 import AddNetwork from "./modules/Popup/addNetwork";
@@ -33,10 +33,12 @@ import FullScreen from "./modules/Analytics/fullScreen";
 import TopCalls from "./modules/Analytics/topCalls";
 import TopCallsFullScreen from "./modules/Analytics/topCallsFullscreen";
 import AddAlert from "./modules/Alerting/AddAlert";
+import WalletPopUp from "./modules/aboutScreen/walletPopUp";
+
+import Filter from "./modules/Popup/filter";
 
 class Routes extends BaseComponent {
   componentDidMount() {}
-
 
   render() {
     return (
@@ -55,12 +57,17 @@ class Routes extends BaseComponent {
             <Route
               exact
               path={"/transaction-details"}
-              component={transactionDetails}
+              component={TransactionDetails}
             />
-            <Route exact path={"/subcontract2"} component={SubContractsInfo} />
-            <Route exact path={"/AlertDetails"} component={AlertDetails} />
-            <Route exact path={"/Alerting"} component={Rules} />
-            <Route exact path={"/AddAlert"} component={AddAlert} />
+            <Route
+              exact
+              path={"/verified-contracts"}
+              component={VerifiedContracts}
+            />
+            <Route exact path={"/alert-details"} component={AlertDetails} />
+            <Route exact path={"/alerting"} component={Rules} />
+            <Route exact path={"/add-alert"} component={AddAlert} />
+            <Route exact path={"/wallet-popup"} component={WalletPopUp} />
 
             <Route exact path={"/add-contract"} component={AddContract} />
             <Route exact path={"/rename-contract"} component={RenameContract} />
@@ -69,8 +76,9 @@ class Routes extends BaseComponent {
             <Route exact path={"/hide-contract"} component={HideContract} />
 
             <Route exact path={"/network"} component={Network} />
-            <Route exact path={"/startedPopUp"} component={LetsGetStarted} />
+            <Route exact path={"/started-popup"} component={LetsGetStarted} />
             <Route exact path={"/remove"} component={Remove} />
+            <Route exact path={"/filter"} component={Filter} />
             <Route exact path={"/add-network"} component={AddNetwork} />
             <Route exact path={"/settings"} component={Settings} />
             <Route exact path={"/analytics"} component={Analytics} />
