@@ -22,63 +22,14 @@ export default function Contract(props) {
   const redirectTODetails = () => {
     history.push("/contract-details");
   };
-  React.useEffect(async () => {
-    const response = await ContractsService.getContractsList({});
-    console.log(response)
-    setAddress(response.contractList);
-    let address = [
-      {
-        contractName: "App_Transactions",
-        address: "xdcabf8b3c",
-        network: "XDC Mainnet",
-        tag: "Add Tag",
-        visibility: "Visible",
-      },
-      {
-        contractName: "App_Transactions",
-        address: "xdcabf8b3c",
-        network: "XDC Mainnet",
-        tag: "Add Tag",
-        visibility: "Visible",
-      },
-      {
-        contractName: "App_Transactions",
-        address: "xdcabf8b3c",
-        network: "XDC Mainnet",
-        tag: "Add Tag",
-        visibility: "Visible",
-      },
-      {
-        contractName: "App_Transactions",
-        address: "xdcabf8b3c",
-        network: "XDC Mainnet",
-        tag: "Add Tag",
-        visibility: "Visible",
-      },
-      {
-        contractName: "App_Transactions",
-        address: "xdcabf8b3c",
-        network: "XDC Mainnet",
-        tag: "Add Tag",
-        visibility: "Visible",
-      },
-      {
-        contractName: "App_Transactions",
-        address: "xdcabf8b3c",
-        network: "XDC Mainnet",
-        tag: "Add Tag",
-        visibility: "Visible",
-      },
-      {
-        contractName: "App_Transactions",
-        address: "xdcabf8b3c",
-        network: "XDC Mainnet",
-        tag: "Add Tag",
-        visibility: "Visible",
-      },
-    ];
 
+  const getContractList = async () => {
+    const response = await ContractsService.getContractsList({});
     setAddress(response.contractList);
+  }
+
+  React.useEffect(() => {
+    getContractList();
   }, []);
 
   const [address, setAddress] = React.useState([]);

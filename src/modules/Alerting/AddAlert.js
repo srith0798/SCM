@@ -524,38 +524,29 @@ const BoxContainer = styled.div`
     color: white;
   }
 `;
-const BoxContainerOne = styled.div`
-  padding: 0.625rem;
-  width: 450px;
-  height: 150px;
-  max-width: 215px;
-  border: solid #d5e0ff;
-  outline: none;
-  // background: #3163f0 0% 0% no-repeat padding-box;
-  border: 1px solid #d5e0ff;
-  border-radius: 6px;
-  justify-content: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  &:hover {
-    color: #ffffff;
-  }
-`;
+// const BoxContainerOne = styled.div`
+//   padding: 0.625rem;
+//   width: 450px;
+//   height: 150px;
+//   max-width: 215px;
+//   border: solid #d5e0ff;
+//   outline: none;
+//   // background: #3163f0 0% 0% no-repeat padding-box;
+//   border: 1px solid #d5e0ff;
+//   border-radius: 6px;
+//   justify-content: center;
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   text-align: center;
+//   &:hover {
+//     color: #ffffff;
+//   }
+// `;
 const MainBoxContainer = styled.div`
   display: flex;
   flex-flow: row wrap;
   // justify-content: space-between;
-`;
-const BoxRow = styled.div`
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-between;
-  align-content: space-between;
-  width: 100%;
-  max-width: 458px;
-  padding-top: 28px;
 `;
 const AlertTargetContainer = styled.div`
   display: flex;
