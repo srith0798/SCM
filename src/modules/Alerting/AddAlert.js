@@ -6,6 +6,7 @@ import "react-tabs/style/react-tabs.css";
 import styled from "styled-components";
 import Historys from "./Historys";
 import Destination from "./Destination";
+// import Rules from "./Rules";
 import { history } from "../../managers/history";
 
 export default function AddAlert() {
@@ -13,6 +14,7 @@ export default function AddAlert() {
   const handleViewClick = (e) => {
     setActiveButton(e.target.id);
   };
+
   const [successfulTransaction, setsuccessfulTransaction] = React.useState(
     "/images/Successful transaction_blue.svg"
   );
@@ -28,13 +30,22 @@ export default function AddAlert() {
   const [balanceToken, setBalanceToken] = React.useState(
     "/images/XDC logo.svg"
   );
+  const [stateChange, setstateChange] = React.useState("/images/state change_");
+
   // alert target
   const [addressToken, setaddressToken] = React.useState(
     "/images/address_blue.svg"
   );
+  const [networkAddress, setnetworkAddress] = React.useState(
+    "/images/network_logo.svg"
+  );
+  const [tagAddress, settagAddress] = React.useState("/images/Tag_logo.svg");
   const [progress, setProgress] = React.useState("ALERT_TYPE");
   const changeProgress = (value) => {
     setProgress(value);
+  };
+  const backButton = () => {
+    history.push("/");
   };
 
   const changeSourceForIcons = (value) => {
@@ -47,9 +58,14 @@ export default function AddAlert() {
     if (value === "transactionValue")
       settransactionValue("/images/XDC logo_white.svg");
     if (value === "balanceToken") setBalanceToken("/images/XDC logo_white.svg");
+    if (value === "stateChange")
+      setstateChange("/images/statechange_white.svg");
     // for alert target tabs
     if (value === "addressToken")
       setaddressToken("/images/Address_logowhite.svg");
+    if (value === "networkAddress")
+      setnetworkAddress("/images/networks_white.svg");
+    if (value === "tagAddress") settagAddress("/images/tag_white.svg");
   };
 
   const changeOriginalSourceForIcons = (value) => {
@@ -62,8 +78,12 @@ export default function AddAlert() {
     if (value === "transactionValue")
       settransactionValue("/images/XDC logo.svg");
     if (value === "balanceToken") setBalanceToken("/images/XDC logo.svg");
-
+    if (value === "statechange") setstateChange("/images/state change_.svg");
+    // for alert target
     if (value === "addressToken") setaddressToken("/images/address_blue.svg");
+    if (value === "networkAddress")
+      setnetworkAddress("/images/network_logo.svg");
+    if (value === "tagAddress") settagAddress("/images/Tag_logo.svg");
   };
 
   return (
@@ -157,19 +177,15 @@ export default function AddAlert() {
             {activeButton === "Rules" && (
               <div>
                 <AlertContainer>
-                  <NumberShowUP>
-                    1
-                  </NumberShowUP>
+                  <NumberShowUP>1</NumberShowUP>
                   <ProgressHeader>
                     <TypeRow> Alert type</TypeRow>
                     <SelectType>Select a alert triger type</SelectType>
                   </ProgressHeader>
                 </AlertContainer>
 
-
                 <SideLineProvider>
-                  <Line>
-                  </Line>
+                  <Line></Line>
 
                   {progress === "ALERT_TYPE" && (
                     <MainBoxContainer>
@@ -203,7 +219,9 @@ export default function AddAlert() {
                       </BoxContainer>
                       <BoxContainer
                         onClick={() => changeProgress("ALERT_TARGET")}
-                        onMouseOver={() => changeSourceForIcons("tokenTransfer")}
+                        onMouseOver={() =>
+                          changeSourceForIcons("tokenTransfer")
+                        }
                         onMouseOut={() =>
                           changeOriginalSourceForIcons("tokenTransfer")
                         }
@@ -231,7 +249,9 @@ export default function AddAlert() {
                       </BoxContainer>
                       <BoxContainer
                         onClick={() => changeProgress("ALERT_TARGET")}
-                        onMouseOver={() => changeSourceForIcons("balanceToken ")}
+                        onMouseOver={() =>
+                          changeSourceForIcons("balanceToken ")
+                        }
                         onMouseOut={() =>
                           changeOriginalSourceForIcons("balanceToken")
                         }
@@ -262,9 +282,7 @@ export default function AddAlert() {
                 </SideLineProvider>
 
                 <AlertContainer style={{ width: "315px" }}>
-                  <NumberShowUP>
-                    2
-                  </NumberShowUP>
+                  <NumberShowUP>2</NumberShowUP>
                   <ProgressHeader>
                     <TypeRow> Alert target</TypeRow>
                     <SelectType>
@@ -274,8 +292,7 @@ export default function AddAlert() {
                 </AlertContainer>
 
                 <SideLineProvider>
-                  <Line>
-                  </Line>
+                  <Line></Line>
 
                   {progress === "ALERT_TARGET" && (
                     <AlertTargetContainer>
@@ -292,8 +309,14 @@ export default function AddAlert() {
                       </BoxContainer>
                       <BoxContainer
                         onClick={() => changeProgress("PARAMETERS")}
+                        onMouseOver={() =>
+                          changeSourceForIcons("networkAddress")
+                        }
+                        onMouseOut={() =>
+                          changeOriginalSourceForIcons("networkAddress")
+                        }
                       >
-                        <img alt="" src="/images/network_logo.svg" />
+                        <img alt="" src={networkAddress} />
                         <Title>Network</Title>
                         <SubTitle>
                           recieve alert for deployment on a network
@@ -301,8 +324,12 @@ export default function AddAlert() {
                       </BoxContainer>
                       <BoxContainer
                         onClick={() => changeProgress("PARAMETERS")}
+                        onMouseOver={() => changeSourceForIcons("tagAddress")}
+                        onMouseOut={() =>
+                          changeOriginalSourceForIcons("tagAddress")
+                        }
                       >
-                        <img alt="" src="/images/Tag_logo.svg" />
+                        <img alt="" src={tagAddress} />
                         <Title>Tag</Title>
                         <SubTitle>
                           Recieve alert for every address that selected tag
@@ -312,39 +339,29 @@ export default function AddAlert() {
                   )}
                 </SideLineProvider>
 
-
                 <AlertContainer style={{ width: "225px" }}>
-                  <NumberShowUP>
-                    3
-                  </NumberShowUP>
+                  <NumberShowUP>3</NumberShowUP>
                   <ProgressHeader>
                     <TypeRow>Parameters</TypeRow>
                     <SelectType>Set alert trigger Parameters</SelectType>
                   </ProgressHeader>
                 </AlertContainer>
                 <SideLineProvider>
-                  <Line>
-                  </Line>
+                  <Line></Line>
                   {progress === "PARAMETERS" && (
                     <ParameterContainer>
-                      <DropDown>
-                        Select Address
-                        <DownArrow
-                          style={{ marginLeft: "500px", paddingBottom: "100px" }}
-                          alt=""
-                          src="/images/drop down.svg"
-                        />
-                      </DropDown>
                       <TypeRow>
-                        <ApplyButton>Next</ApplyButton>
+                        <ApplyButton
+                          onClick={() => changeProgress("DESTINATION")}
+                        >
+                          Next
+                        </ApplyButton>
                       </TypeRow>
                     </ParameterContainer>
                   )}
                 </SideLineProvider>
                 <AlertContainer style={{ width: "435px" }}>
-                  <NumberShowUP>
-                    4
-                  </NumberShowUP>
+                  <NumberShowUP>4</NumberShowUP>
                   <ProgressHeader>
                     <TypeRow>Destination</TypeRow>
                     <SelectType>
@@ -354,12 +371,17 @@ export default function AddAlert() {
                   </ProgressHeader>
                 </AlertContainer>
                 <SideLineProvider>
-                  <Line>
-                  </Line>
+                  <Line></Line>
                   <AlertContainer>
                     <LastContainer>
-                      <ApplyButton>Apply</ApplyButton>
-                      <CancelButton>Cancel</CancelButton>
+                      <ApplyButton onClick={() => history.push("/Rules")}>
+                        Done
+                      </ApplyButton>
+                      <CancelButton
+                        onClick={() => changeProgress("ALERT_TYPE")}
+                      >
+                        Cancel
+                      </CancelButton>
                     </LastContainer>
                   </AlertContainer>
                 </SideLineProvider>
@@ -409,22 +431,6 @@ const ApplyButton = styled.div`
   margin-right: 15px;
   text-align: center;
   cursor: pointer;
-`;
-const DropDown = styled.div`
-  background: #f5f6fd 0% 0% no-repeat padding-box;
-  border: 1px solid #d5e0ff;
-  border-radius: 6px;
-  font-size: 14px;
-  font-weight: 600;
-  // color: #767c93;
-  color: #b7b7b7;
-  height: 30px;
-  padding-left: 10px;
-  width: 600px;
-  height: 50px;
-  padding-top: 10px;
-  position: relative;
-  margin: 0px 0px 15px 0px;
 `;
 const Title = styled.div`
   font-size: 0.775rem;
@@ -483,15 +489,11 @@ const TabView = styled.div`
   padding: 0.313rem 0.5rem 0.313rem 0.5rem;
 `;
 
-const backButton = () => {
-  history.push("/");
-};
-
 const AlertContainer = styled.div`
   display: flex;
   width: 200px;
-    padding: 10px 10px 10px 0px;
-    justify-content: space-between;
+  padding: 10px 10px 10px 0px;
+  justify-content: space-between;
 `;
 const TypeRow = styled.div`
   font-size: 0.875rem;
@@ -558,34 +560,27 @@ const AlertTargetContainer = styled.div`
 `;
 
 const ProgressHeader = styled.div`
-flex-flow: row;
-`
+  flex-flow: row;
+`;
 
 const SideLineProvider = styled.div`
   display: flex;
   min-height: 10px;
-`
+`;
 const Line = styled.div`
   width: 2px;
   background-color: #3163f0;
   margin-left: 10px;
-`
+`;
 const NumberShowUP = styled.div`
-margin-top: 5px;
+  margin-top: 5px;
   width: 30px;
   height: 30px;
   border-radius: 50%;
   border: 2px solid #3163f0;
   padding: 0px 0px 0px 8px;
-`
+`;
 
 const ParameterContainer = styled.div`
-      margin: 0px 0px 5px 20px;
-`
-const DownArrow = styled.img`
-  width: 12px;
-  position: absolute;
-  top: 20px;
-  right: 8px;
-  cursor: pointer;
+  margin: 0px 0px 5px 20px;
 `;

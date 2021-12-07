@@ -33,7 +33,7 @@ export default function Filter(props) {
               <DropDown>
                 Select Network
                 <img
-                  style={{ marginLeft: "208px" }}
+                  style={{ marginLeft: "208px", cursor: "pointer" }}
                   alt=""
                   src="/images/drop down.svg"
                 />
@@ -97,6 +97,7 @@ const ButtonA = styled.div`
   text-align: center;
   color: #3062ef;
   text-size: 14px;
+  cursor: pointer;
 `;
 const ButtonB = styled.div`
   width: 78px;
@@ -109,6 +110,7 @@ const ButtonB = styled.div`
   padding-top: 4px;
   margin-right: 20px;
   text-align: center;
+  cursor: pointer;
 `;
 const ButtonC = styled.div`
   width: 78px;
@@ -120,6 +122,7 @@ const ButtonC = styled.div`
   padding-top: 4px;
   text-align: center;
   text-size: 14px;
+  cursor: pointer;
 `;
 const DropDown = styled.div`
   background: #f5f6fd 0% 0% no-repeat padding-box;
