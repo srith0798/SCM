@@ -6,13 +6,15 @@ import "react-tabs/style/react-tabs.css";
 import styled from "styled-components";
 import Historys from "./Historys";
 import Destination from "./Destination";
+import Rules from "./Rules";
 import { history } from "../../managers/history";
 
 export default function AddAlert() {
-  const [activeButton, setActiveButton] = React.useState("AddAlert");
+  const [activeButton, setActiveButton] = React.useState("Rules");
   const handleViewClick = (e) => {
     setActiveButton(e.target.id);
   };
+
   const [successfulTransaction, setsuccessfulTransaction] = React.useState(
     "/images/Successful transaction_blue.svg"
   );
@@ -37,7 +39,14 @@ export default function AddAlert() {
   const [networkAddress, setnetworkAddress] = React.useState(
     "/images/network_logo.svg"
   );
+  const [tagAddress, settagAddress] = React.useState("/images/Tag_logo.svg");
   const [progress, setProgress] = React.useState("ALERT_TYPE");
+  const changeProgress = (value) => {
+    setProgress(value);
+  };
+  const backButton = () => {
+    history.push("/");
+  };
 
   const changeSourceForIcons = (value) => {
     if (value === "successfulTransaction")
@@ -55,12 +64,10 @@ export default function AddAlert() {
     if (value === "addressToken")
       setaddressToken("/images/Address_logowhite.svg");
     if (value === "networkAddress")
-      setnetworkAddress("/images/network_white.svg");
+      setnetworkAddress("/images/networks_white.svg");
+    if (value === "tagAddress") settagAddress("/images/tag_white.svg");
   };
 
-  const changeProgress = () => {
-    setProgress("ALERT_TARGET");
-  };
   const changeOriginalSourceForIcons = (value) => {
     if (value === "successfulTransaction")
       setsuccessfulTransaction("/images/Successful transaction_blue.svg");
@@ -76,6 +83,7 @@ export default function AddAlert() {
     if (value === "addressToken") setaddressToken("/images/address_blue.svg");
     if (value === "networkAddress")
       setnetworkAddress("/images/network_logo.svg");
+    if (value === "tagAddress") settagAddress("/images/Tag_logo.svg");
   };
 
   return (
@@ -169,170 +177,214 @@ export default function AddAlert() {
             {activeButton === "Rules" && (
               <div>
                 <AlertContainer>
-                  <TypeRow> Alert type</TypeRow>
-                  <SelectType>Select a alert triger type</SelectType>
+                  <NumberShowUP>1</NumberShowUP>
+                  <ProgressHeader>
+                    <TypeRow> Alert type</TypeRow>
+                    <SelectType>Select a alert triger type</SelectType>
+                  </ProgressHeader>
                 </AlertContainer>
-                {progress === "ALERT_TYPE" && (
-                  <MainBoxContainer>
-                    <BoxContainer
-                      onClick={() => changeProgress()}
-                      onMouseOver={() =>
-                        changeSourceForIcons("successfulTransaction")
-                      }
-                      onMouseOut={() =>
-                        changeOriginalSourceForIcons("successfulTransaction")
-                      }
-                    >
-                      <img alt="" src={successfulTransaction} />
-                      <Title>Successful Transaction</Title>
-                      <SubTitle>
-                        trigger when Successful Transaction happen
-                      </SubTitle>
-                    </BoxContainer>
-                    <BoxContainer
-                      onClick={() => changeProgress()}
-                      onMouseOver={() =>
-                        changeSourceForIcons("failedTransaction")
-                      }
-                      onMouseOut={() =>
-                        changeOriginalSourceForIcons("failedTransaction")
-                      }
-                    >
-                      <img alt="" src={failedTransaction} />
-                      <Title>Failed Transaction</Title>
-                      <SubTitle>trigger when Transactions fails</SubTitle>
-                    </BoxContainer>
-                    <BoxContainer
-                      onClick={() => changeProgress()}
-                      onMouseOver={() => changeSourceForIcons("tokenTransfer")}
-                      onMouseOut={() =>
-                        changeOriginalSourceForIcons("tokenTransfer")
-                      }
-                    >
-                      <img alt="" src={tokenTransfer} />
-                      <Title>XRC-20 Token Transfer </Title>
-                      <SubTitle>
-                        trigger whenever an XRC-20 Token Transfer happen
-                      </SubTitle>
-                    </BoxContainer>
-                    <BoxContainer
-                      onClick={() => changeProgress()}
-                      onMouseOver={() =>
-                        changeSourceForIcons("transactionValue")
-                      }
-                      onMouseOut={() =>
-                        changeOriginalSourceForIcons("transactionValue")
-                      }
-                    >
-                      <img alt="" src={transactionValue} />
-                      <Title>Transaction Value</Title>
-                      <SubTitle>
-                        trigger whenever transaction value matches
-                      </SubTitle>
-                    </BoxContainer>
-                    <BoxContainer
-                      onClick={() => changeProgress()}
-                      onMouseOver={() => changeSourceForIcons("balanceToken ")}
-                      onMouseOut={() =>
-                        changeOriginalSourceForIcons("balanceToken")
-                      }
-                    >
-                      <img alt="" src={balanceToken} />
-                      <Title>XDC Balance</Title>
-                      <SubTitle>
-                        trigger when XDC balance falls below certain threshold
-                      </SubTitle>
-                    </BoxContainer>
 
-                    {/* <BoxRow> */}
-                    <BoxContainer
-                      onClick={() => changeProgress()}
-                      onMouseOver={() => changeSourceForIcons("stateChange")}
-                      onMouseOut={() =>
-                        changeOriginalSourceForIcons("stateChange")
-                      }
-                    >
-                      <img alt="" src={stateChange} />
-                      <Title>State Change</Title>
-                      <SubTitle>
-                        trigger whenever stable variable changes
-                      </SubTitle>
-                    </BoxContainer>
-                    <BoxContainer>
-                      <img alt="" src="/images/functioncall.svg" />
-                      <Title>Function call</Title>
-                      <SubTitle>COMMING SOON</SubTitle>
-                    </BoxContainer>
-                    {/* </BoxRow> */}
-                  </MainBoxContainer>
-                )}
+                <SideLineProvider>
+                  <Line></Line>
 
-                <AlertContainer>
-                  <TypeRow> Alert target</TypeRow>
-                  <SelectType>
-                    Select a address which alert will be trigger
-                  </SelectType>
+                  {progress === "ALERT_TYPE" && (
+                    <MainBoxContainer>
+                      <BoxContainer
+                        onClick={() => changeProgress("ALERT_TARGET")}
+                        onMouseOver={() =>
+                          changeSourceForIcons("successfulTransaction")
+                        }
+                        onMouseOut={() =>
+                          changeOriginalSourceForIcons("successfulTransaction")
+                        }
+                      >
+                        <img alt="" src={successfulTransaction} />
+                        <Title>Successful Transaction</Title>
+                        <SubTitle>
+                          trigger when Successful Transaction happen
+                        </SubTitle>
+                      </BoxContainer>
+                      <BoxContainer
+                        onClick={() => changeProgress("ALERT_TARGET")}
+                        onMouseOver={() =>
+                          changeSourceForIcons("failedTransaction")
+                        }
+                        onMouseOut={() =>
+                          changeOriginalSourceForIcons("failedTransaction")
+                        }
+                      >
+                        <img alt="" src={failedTransaction} />
+                        <Title>Failed Transaction</Title>
+                        <SubTitle>trigger when Transactions fails</SubTitle>
+                      </BoxContainer>
+                      <BoxContainer
+                        onClick={() => changeProgress("ALERT_TARGET")}
+                        onMouseOver={() =>
+                          changeSourceForIcons("tokenTransfer")
+                        }
+                        onMouseOut={() =>
+                          changeOriginalSourceForIcons("tokenTransfer")
+                        }
+                      >
+                        <img alt="" src={tokenTransfer} />
+                        <Title>XRC-20 Token Transfer </Title>
+                        <SubTitle>
+                          trigger whenever an XRC-20 Token Transfer happen
+                        </SubTitle>
+                      </BoxContainer>
+                      <BoxContainer
+                        onClick={() => changeProgress("ALERT_TARGET")}
+                        onMouseOver={() =>
+                          changeSourceForIcons("transactionValue")
+                        }
+                        onMouseOut={() =>
+                          changeOriginalSourceForIcons("transactionValue")
+                        }
+                      >
+                        <img alt="" src={transactionValue} />
+                        <Title>Transaction Value</Title>
+                        <SubTitle>
+                          trigger whenever transaction value matches
+                        </SubTitle>
+                      </BoxContainer>
+                      <BoxContainer
+                        onClick={() => changeProgress("ALERT_TARGET")}
+                        onMouseOver={() =>
+                          changeSourceForIcons("balanceToken ")
+                        }
+                        onMouseOut={() =>
+                          changeOriginalSourceForIcons("balanceToken")
+                        }
+                      >
+                        <img alt="" src={balanceToken} />
+                        <Title>XDC Balance</Title>
+                        <SubTitle>
+                          trigger when XDC balance falls below certain threshold
+                        </SubTitle>
+                      </BoxContainer>
+
+                      {/* <BoxRow> */}
+                      <BoxContainer>
+                        <img alt="" src="/images/state change_.svg" />
+                        <Title>State Change</Title>
+                        <SubTitle>
+                          trigger whenever stable variable changes
+                        </SubTitle>
+                      </BoxContainer>
+                      <BoxContainer>
+                        <img alt="" src="/images/functioncall.svg" />
+                        <Title>Function call</Title>
+                        <SubTitle>COMMING SOON</SubTitle>
+                      </BoxContainer>
+                      {/* </BoxRow> */}
+                    </MainBoxContainer>
+                  )}
+                </SideLineProvider>
+
+                <AlertContainer style={{ width: "315px" }}>
+                  <NumberShowUP>2</NumberShowUP>
+                  <ProgressHeader>
+                    <TypeRow> Alert target</TypeRow>
+                    <SelectType>
+                      Select a address which alert will be trigger
+                    </SelectType>
+                  </ProgressHeader>
                 </AlertContainer>
-                {progress === "ALERT_TARGET" && (
-                  <AlertTargetContainer>
-                    <BoxContainer
-                      onMouseOver={() => changeSourceForIcons("addressToken")}
-                      onMouseOut={() =>
-                        changeOriginalSourceForIcons("addressToken")
-                      }
-                    >
-                      <img alt="" src={addressToken} />
-                      <Title>Address</Title>
-                      <SubTitle>recieve alert for only one address</SubTitle>
-                    </BoxContainer>
-                    <BoxContainer
-                      onClick={() => changeProgress()}
-                      onMouseOver={() => changeSourceForIcons("networkAddress")}
-                      onMouseOut={() =>
-                        changeOriginalSourceForIcons("networkAddress")
-                      }
-                    >
-                      <img alt="" src={networkAddress} />
-                      <Title>Network</Title>
-                      <SubTitle>
-                        recieve alert for deployment on a network
-                      </SubTitle>
-                    </BoxContainer>
-                    <BoxContainer>
-                      <img alt="" src="/images/Tag_logo.svg" />
-                      <Title>Tag</Title>
-                      <SubTitle>
-                        Recieve alert for every address that selected tag
-                      </SubTitle>
-                    </BoxContainer>
-                  </AlertTargetContainer>
-                )}
-                <AlertContainer>
-                  <TypeRow>Parameters</TypeRow>
-                  <SelectType>Set alert trigger Parameters</SelectType>
-                  <DropDown>
-                    Select Address
-                    <img
-                      style={{ marginLeft: "500px", paddingBottom: "100px" }}
-                      alt=""
-                      src="/images/drop down.svg"
-                    />
-                  </DropDown>
-                  <TypeRow>
-                    <ApplyButton>Next</ApplyButton>
-                  </TypeRow>
+
+                <SideLineProvider>
+                  <Line></Line>
+
+                  {progress === "ALERT_TARGET" && (
+                    <AlertTargetContainer>
+                      <BoxContainer
+                        onClick={() => changeProgress("PARAMETERS")}
+                        onMouseOver={() => changeSourceForIcons("addressToken")}
+                        onMouseOut={() =>
+                          changeOriginalSourceForIcons("addressToken")
+                        }
+                      >
+                        <img alt="" src={addressToken} />
+                        <Title>Address</Title>
+                        <SubTitle>recieve alert for only one address</SubTitle>
+                      </BoxContainer>
+                      <BoxContainer
+                        onClick={() => changeProgress("PARAMETERS")}
+                        onMouseOver={() =>
+                          changeSourceForIcons("networkAddress")
+                        }
+                        onMouseOut={() =>
+                          changeOriginalSourceForIcons("networkAddress")
+                        }
+                      >
+                        <img alt="" src={networkAddress} />
+                        <Title>Network</Title>
+                        <SubTitle>
+                          recieve alert for deployment on a network
+                        </SubTitle>
+                      </BoxContainer>
+                      <BoxContainer
+                        onClick={() => changeProgress("PARAMETERS")}
+                        onMouseOver={() => changeSourceForIcons("tagAddress")}
+                        onMouseOut={() =>
+                          changeOriginalSourceForIcons("tagAddress")
+                        }
+                      >
+                        <img alt="" src={tagAddress} />
+                        <Title>Tag</Title>
+                        <SubTitle>
+                          Recieve alert for every address that selected tag
+                        </SubTitle>
+                      </BoxContainer>
+                    </AlertTargetContainer>
+                  )}
+                </SideLineProvider>
+
+                <AlertContainer style={{ width: "225px" }}>
+                  <NumberShowUP>3</NumberShowUP>
+                  <ProgressHeader>
+                    <TypeRow>Parameters</TypeRow>
+                    <SelectType>Set alert trigger Parameters</SelectType>
+                  </ProgressHeader>
                 </AlertContainer>
-                <AlertContainer>
-                  <TypeRow>Destination</TypeRow>
-                  <SelectType>
-                    Select the destination in which alert notification will be
-                    sent to.
-                  </SelectType>
-                  <LastContainer>
-                    <ApplyButton>Done</ApplyButton>
-                    <CancelButton>Cancel</CancelButton>
-                  </LastContainer>
+                <SideLineProvider>
+                  <Line></Line>
+                  {progress === "PARAMETERS" && (
+                    <ParameterContainer>
+                      <TypeRow>
+                        <ApplyButton
+                          onClick={() => changeProgress("DESTINATION")}
+                        >
+                          Next
+                        </ApplyButton>
+                      </TypeRow>
+                    </ParameterContainer>
+                  )}
+                </SideLineProvider>
+                <AlertContainer style={{ width: "435px" }}>
+                  <NumberShowUP>4</NumberShowUP>
+                  <ProgressHeader>
+                    <TypeRow>Destination</TypeRow>
+                    <SelectType>
+                      Select the destination in which alert notification will be
+                      sent to.
+                    </SelectType>
+                  </ProgressHeader>
                 </AlertContainer>
+                <SideLineProvider>
+                  <Line></Line>
+                  <AlertContainer>
+                    <LastContainer>
+                      <ApplyButton onClick={() => history.push("/Rules")}>
+                        Done
+                      </ApplyButton>
+                      <CancelButton
+                        onClick={() => changeProgress("ALERT_TYPE")}
+                      >
+                        Cancel
+                      </CancelButton>
+                    </LastContainer>
+                  </AlertContainer>
+                </SideLineProvider>
               </div>
             )}
 
@@ -348,6 +400,7 @@ const LastContainer = styled.div`
   display: flex;
   justify-content: start;
   /* width: 100%; */
+  margin-left: 22px;
   max-width: 503px;
 `;
 const CancelButton = styled.div`
@@ -379,21 +432,6 @@ const ApplyButton = styled.div`
   text-align: center;
   cursor: pointer;
 `;
-const DropDown = styled.div`
-  background: #f5f6fd 0% 0% no-repeat padding-box;
-  border: 1px solid #d5e0ff;
-  border-radius: 6px;
-  font-size: 14px;
-  font-weight: 600;
-  // color: #767c93;
-  color: #b7b7b7;
-  height: 30px;
-  padding-left: 10px;
-  width: 600px;
-  height: 50px;
-  padding-top: 10px;
-  position: relative;
-`;
 const Title = styled.div`
   font-size: 0.775rem;
   font-weight: 600;
@@ -405,44 +443,12 @@ const Title = styled.div`
     color: white;
   }
 `;
-const TitleOne = styled.div`
-  font-size: 0.775rem;
-  font-weight: 600;
-  width: 100%;
-  color: #ffffff;
-  max-width: 16.25rem;
-  padding-top: 10px;
-`;
-
 const SubTitle = styled.div`
   font-size: 0.775rem;
   // color: #1d3c93;
   width: 100%;
   max-width: 16.25rem;
   padding-top: 5px;
-`;
-const SubTitleOne = styled.div`
-  font-size: 0.775rem;
-  color: #ffffff;
-  width: 100%;
-  max-width: 16.25rem;
-  padding-top: 5px;
-`;
-const SubTitleLast = styled.div`
-  font-size: 1rem;
-  font-weight: 600;
-  color: #1d3c93;
-  width: 100%;
-  max-width: 16.25rem;
-  padding-top: 13px;
-`;
-const TitleLast = styled.div`
-  font-size: 0.7rem;
-  font-weight: 600;
-  color: #1d3c93;
-  width: 100%;
-  max-width: 16.25rem;
-  padding-top: 10px;
 `;
 
 const Container = styled.div`
@@ -483,23 +489,19 @@ const TabView = styled.div`
   padding: 0.313rem 0.5rem 0.313rem 0.5rem;
 `;
 
-const backButton = () => {
-  history.push("/");
-};
-
-const AlertContainer = styled.div``;
+const AlertContainer = styled.div`
+  display: flex;
+  width: 200px;
+  padding: 10px 10px 10px 0px;
+  justify-content: space-between;
+`;
 const TypeRow = styled.div`
-  padding-left: 20px;
-  padding-top: 20px;
-  padding-bottom: 10px;
   font-size: 0.875rem;
   font-weight: 600;
 `;
 const SelectType = styled.div`
   font-size: 0.875rem;
   color: #7c828a;
-  padding-left: 20px;
-  padding-bottom: 10px;
 `;
 const BoxContainer = styled.div`
   padding: 0.625rem;
@@ -518,44 +520,16 @@ const BoxContainer = styled.div`
   flex-direction: column;
   align-items: center;
   text-align: center;
+  cursor: pointer;
   &:hover {
     background-color: #3163f0;
     color: white;
-  }
-`;
-const BoxContainerOne = styled.div`
-  padding: 0.625rem;
-  width: 450px;
-  height: 150px;
-  max-width: 215px;
-  border: solid #d5e0ff;
-  outline: none;
-  // background: #3163f0 0% 0% no-repeat padding-box;
-  border: 1px solid #d5e0ff;
-  border-radius: 6px;
-  justify-content: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  &:hover {
-    background-color: ;
-    color: #ffffff;
   }
 `;
 const MainBoxContainer = styled.div`
   display: flex;
   flex-flow: row wrap;
   // justify-content: space-between;
-`;
-const BoxRow = styled.div`
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-between;
-  align-content: space-between;
-  width: 100%;
-  max-width: 458px;
-  padding-top: 28px;
 `;
 const AlertTargetContainer = styled.div`
   display: flex;
@@ -564,4 +538,30 @@ const AlertTargetContainer = styled.div`
   width: 100%;
   max-width: 695px;
   padding-top: 28px;
+`;
+
+const ProgressHeader = styled.div`
+  flex-flow: row;
+`;
+
+const SideLineProvider = styled.div`
+  display: flex;
+  min-height: 10px;
+`;
+const Line = styled.div`
+  width: 2px;
+  background-color: #3163f0;
+  margin-left: 10px;
+`;
+const NumberShowUP = styled.div`
+  margin-top: 5px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid #3163f0;
+  padding: 0px 0px 0px 8px;
+`;
+
+const ParameterContainer = styled.div`
+  margin: 0px 0px 5px 20px;
 `;

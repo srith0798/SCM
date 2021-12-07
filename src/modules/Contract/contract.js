@@ -6,6 +6,8 @@ import Sidebar from "../sidebar/sidebar";
 import AddContract from "../Popup/addContract";
 import { history } from "../../managers/history";
 import Tooltip from "@mui/material/Tooltip";
+import ContractsService from "../../services/contractsService";
+import utility from "../../utility";
 
 export default function Contract(props) {
   const [open, setOpen] = React.useState(false);
@@ -20,7 +22,10 @@ export default function Contract(props) {
   const redirectTODetails = () => {
     history.push("/contract-details");
   };
-  React.useEffect(() => {
+  React.useEffect(async () => {
+    const response = await ContractsService.getContractsList({});
+    console.log(response)
+    setAddress(response.contractList);
     let address = [
       {
         contractName: "App_Transactions",
@@ -73,17 +78,7 @@ export default function Contract(props) {
       },
     ];
 
-    setAddress(
-      address.map((object) => {
-        return {
-          contractName: object.contractName,
-          address: object.address,
-          network: object.network,
-          tag: object.tag,
-          visibility: object.visibility,
-        };
-      })
-    );
+    setAddress(response.contractList);
   }, []);
 
   const [address, setAddress] = React.useState([]);
@@ -134,10 +129,10 @@ export default function Contract(props) {
                     <Div>
                       <Row>
                         <ColumnSecond>{data.contractName}</ColumnSecond>
-                        <ColumnSecond>{data.address}</ColumnSecond>
-                        <ColumnSecond>{data.network}</ColumnSecond>
-                        <ColumnSecond>{data.tag}</ColumnSecond>
-                        <ColumnSecond>{data.visibility}</ColumnSecond>
+                        <ColumnSecond>{utility.truncateTxnAddress(data.address)}</ColumnSecond>
+                        <ColumnSecond>{data.tokenName}</ColumnSecond>
+                        <ColumnSecond>{tagDiv()} </ColumnSecond>
+                        <ColumnSecond>{data.status}</ColumnSecond>
                       </Row>
                     </Div>
                   );
@@ -150,6 +145,32 @@ export default function Contract(props) {
     </div>
   );
 }
+
+function tagDiv() {
+  return (
+    <Tag>
+      Finance
+      <TagImage src="/images/Tag_logo.svg"></TagImage>
+    </Tag>
+  )
+}
+
+const Tag = styled.div`
+  background-color: #EAEFFF;
+  border-radius : 3px;
+  width: 80px;
+  color: #436CE0;
+  padding: 2px 5px 2px 25px;
+  position: relative;
+  cursor: pointer;
+`
+
+const TagImage = styled.img`
+  position: absolute;
+  width: 12px;
+  left: 5px;
+  top : 7px; 
+`
 
 const MainContainer = styled.div`
   background-color: #ecf0f7;
@@ -221,7 +242,7 @@ const ColumnOne = styled.div`
 `;
 const ColumnSecond = styled.div`
   font-size: 0.875rem;
-  font-weight: 600;
+  font-weight: 400;
   color: #191919;
   width: 100%;
   max-width: 18.75rem;

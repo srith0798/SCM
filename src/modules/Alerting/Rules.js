@@ -26,7 +26,7 @@ export default function Rules() {
             <RowCorrecter>
               <Title>Alerting</Title>
               <Button onClick={() => history.push("/AddAlert")}>
-                Add alert
+                Add Alert
               </Button>
             </RowCorrecter>
           </Row>

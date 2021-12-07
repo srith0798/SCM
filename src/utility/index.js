@@ -14,6 +14,7 @@ const toast = ToastService.new({
 let moment = require('moment');
 const cookies = new Cookies();
 const utility = {
+    truncateTxnAddress,
     getHeader,
     apiFailureToast,
     apiSuccessToast,
@@ -164,6 +165,12 @@ function apiFailureToast(message) {
 
 function apiSuccessToast(msg) {
     toast.success(msg ? msg : "apiConstant.API_SUCCESS");
+}
+function truncateTxnAddress (address) {
+    const start = address.slice(0,7);
+    const end = address.slice(-5);
+    console.log(start , end)
+    return start + "..." + end
 }
 
 function generateGUID() {
