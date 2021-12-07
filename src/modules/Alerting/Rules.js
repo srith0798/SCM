@@ -14,6 +14,10 @@ export default function Rules() {
     console.log("clicked");
     setActiveButton(e.target.id);
   };
+  const redirectToAlertDetails = () => {
+    history.push("/alert-details");
+  };
+
   return (
     <>
       <Header />
@@ -24,85 +28,94 @@ export default function Rules() {
         <MainContainer>
           <Row>
             <RowCorrecter>
-              <Title>Alerting</Title>
-              <Button onClick={() => history.push("/AddAlert")}>
+              <Title style={{ color: "#191919" }}>Alerting</Title>
+              <Button onClick={() => history.push("/add-alert")}>
                 Add Alert
               </Button>
             </RowCorrecter>
           </Row>
           <Container>
-            <TabLister>
-              <TabView
-                id="Rules"
-                onClick={handleViewClick}
-                style={{
-                  color: activeButton === "Rules" ? "blue" : "",
-                  display: "flex",
-                  paddingBottom: "0.875rem",
-                  borderBottom:
-                    activeButton === "Rules" ? "2px solid blue" : "",
-                }}
-              >
-                <img
-                  alt=""
-                  style={{ marginRight: "0.375rem" }}
-                  src={
-                    activeButton === "Rules"
-                      ? "/images/rules.svg"
-                      : "/images/rules1.svg"
-                  }
-                />
-                Rules
-              </TabView>
-              <TabView
-                id="History"
-                onClick={handleViewClick}
-                style={{
-                  color: activeButton === "History" ? "blue" : "",
-                  display: "flex",
-                  paddingBottom: "0.875rem",
-                  borderBottom:
-                    activeButton === "History" ? "0.125rem solid blue" : "",
-                }}
-              >
-                <img
-                  alt=""
-                  style={{ marginRight: "0.375rem" }}
-                  src={
-                    activeButton === "History"
-                      ? "/images/history_blue.svg"
-                      : "/images/history.svg"
-                  }
-                />
-                History
-              </TabView>
-              <TabView
-                id="Destination"
-                onClick={handleViewClick}
-                style={{
-                  color: activeButton === "Destination" ? "blue" : "",
-                  display: "flex",
-                  paddingBottom: "0.875rem",
-                  borderBottom:
-                    activeButton === "Destination" ? "0.125rem solid blue" : "",
-                }}
-              >
-                <img
-                  alt=""
-                  style={{ marginRight: "5px" }}
-                  src={
-                    activeButton === "Destination"
-                      ? "/images/destination_blue.svg"
-                      : "/images/destination.svg"
-                  }
-                />
-                Destination
-              </TabView>
-            </TabLister>
+            <NewDivOne>
+              <Row>
+                <TabLister>
+                  <TabView
+                    id="Rules"
+                    onClick={handleViewClick}
+                    style={{
+                      color: activeButton === "Rules" ? "#3163F0" : "#AEB7D0",
+                      display: "flex",
+                      paddingBottom: "0.875rem",
+                      borderBottom:
+                        activeButton === "Rules" ? "2px solid #3163F0" : "",
+                    }}
+                  >
+                    <img
+                      alt=""
+                      style={{ marginRight: "0.375rem" }}
+                      src={
+                        activeButton === "Rules"
+                          ? "/images/rules.svg"
+                          : "/images/rules1.svg"
+                      }
+                    />
+                    Rules
+                  </TabView>
+                  <TabView
+                    id="History"
+                    onClick={handleViewClick}
+                    style={{
+                      color: activeButton === "History" ? "#3163F0" : "#AEB7D0",
+                      display: "flex",
+                      paddingBottom: "0.875rem",
+                      borderBottom:
+                        activeButton === "History"
+                          ? "0.125rem solid #3163F0"
+                          : "",
+                    }}
+                  >
+                    <img
+                      alt=""
+                      style={{ marginRight: "0.375rem" }}
+                      src={
+                        activeButton === "History"
+                          ? "/images/history_blue.svg"
+                          : "/images/history.svg"
+                      }
+                    />
+                    History
+                  </TabView>
+                  <TabView
+                    id="Destination"
+                    onClick={handleViewClick}
+                    style={{
+                      color:
+                        activeButton === "Destination" ? "#3163F0" : "#AEB7D0",
+                      display: "flex",
+                      paddingBottom: "0.875rem",
+                      borderBottom:
+                        activeButton === "Destination"
+                          ? "0.125rem solid #3163F0"
+                          : "",
+                    }}
+                  >
+                    <img
+                      alt=""
+                      style={{ marginRight: "5px" }}
+                      src={
+                        activeButton === "Destination"
+                          ? "/images/destination_blue.svg"
+                          : "/images/destination.svg"
+                      }
+                    />
+                    Destination
+                  </TabView>
+                </TabLister>
+              </Row>
+            </NewDivOne>
             {activeButton === "Rules" && (
               <div>
                 <NewDiv>
-                  <Row>
+                  <Row onClick={redirectToAlertDetails}>
                     <ColumnOne>Contract Name</ColumnOne>
                     <ColumnOne>Address</ColumnOne>
                     <ColumnOne>Network</ColumnOne>
@@ -112,7 +125,7 @@ export default function Rules() {
                   </Row>
                 </NewDiv>
                 <NewDiv>
-                  <Row>
+                  <Row onClick={redirectToAlertDetails}>
                     <ColumnTwo>App_Transactions</ColumnTwo>
                     <ColumnTwo>xdcabfe…8b3c</ColumnTwo>
                     <ColumnTwo>XDC Mainnet</ColumnTwo>
@@ -130,7 +143,7 @@ export default function Rules() {
                   </Row>
                 </NewDiv>
                 <NewDiv>
-                  <Row>
+                  <Row onClick={redirectToAlertDetails}>
                     <ColumnTwo>App_Transactions</ColumnTwo>
                     <ColumnTwo>xdcabfe…8b3c</ColumnTwo>
                     <ColumnTwo>XDC Mainnet</ColumnTwo>
@@ -216,6 +229,10 @@ const Button = styled.button`
 
 const NewDiv = styled.div`
   padding: 0.938rem;
+  border-bottom: 0.063rem solid #e3e7eb;
+`;
+const NewDivOne = styled.div`
+  // padding: 0.938rem;
   border-bottom: 0.063rem solid #e3e7eb;
 `;
 const RowCorrecter = styled.div`

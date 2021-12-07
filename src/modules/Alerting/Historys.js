@@ -7,15 +7,15 @@ export default function Historys() {
   return (
     <div>
       <MainContainer>
-        <Div>
+        <NewDivOne>
           <Row>
             <ColumnOne>Alert Type</ColumnOne>
-            <ColumnOne>Contracts</ColumnOne>
+            <ColumnOne>Contract</ColumnOne>
             <ColumnOne>Tx Hash</ColumnOne>
             <ColumnOne>Network</ColumnOne>
             <ColumnOne>When</ColumnOne>
           </Row>
-        </Div>
+        </NewDivOne>
         <Div>
           <Row>
             <ColumnTwo style={{ fontSize: "0.875rem", color: "#191919" }}>
@@ -68,6 +68,11 @@ const MainContainer = styled.div`
 
 const Div = styled.div`
   padding: 0.938rem;
+  border-bottom: 0.063rem solid #e3e7eb;
+`;
+const NewDivOne = styled.div`
+  padding-left: 0.938rem;
+  padding-bottom: 0.938rem;
   border-bottom: 0.063rem solid #e3e7eb;
 `;
 const ColumnOne = styled.div`

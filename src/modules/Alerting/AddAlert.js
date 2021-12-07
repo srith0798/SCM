@@ -30,7 +30,9 @@ export default function AddAlert() {
   const [balanceToken, setBalanceToken] = React.useState(
     "/images/XDC logo.svg"
   );
-  const [stateChange, setstateChange] = React.useState("/images/state change_");
+  const [stateChange, setstateChange] = React.useState(
+    "/images/state change_blue.svg"
+  );
 
   // alert target
   const [addressToken, setaddressToken] = React.useState(
@@ -78,7 +80,8 @@ export default function AddAlert() {
     if (value === "transactionValue")
       settransactionValue("/images/XDC logo.svg");
     if (value === "balanceToken") setBalanceToken("/images/XDC logo.svg");
-    if (value === "statechange") setstateChange("/images/state change_.svg");
+    if (value === "stateChange")
+      setstateChange("/images/state change_blue.svg");
     // for alert target
     if (value === "addressToken") setaddressToken("/images/address_blue.svg");
     if (value === "networkAddress")
@@ -94,7 +97,7 @@ export default function AddAlert() {
         <MainContainer>
           <Row>
             <RowCorrecter>
-              <Title>
+              <TitleHead>
                 <img
                   alt=""
                   style={{ marginRight: "0.625rem" }}
@@ -102,7 +105,7 @@ export default function AddAlert() {
                   onClick={backButton}
                 />
                 Create Alert
-              </Title>
+              </TitleHead>
             </RowCorrecter>
           </Row>
           <Container>
@@ -263,9 +266,14 @@ export default function AddAlert() {
                         </SubTitle>
                       </BoxContainer>
 
-                      {/* <BoxRow> */}
-                      <BoxContainer>
-                        <img alt="" src="/images/state change_.svg" />
+                      <BoxContainer
+                        onClick={() => changeProgress("ALERT_TARGET")}
+                        onMouseOver={() => changeSourceForIcons("stateChange")}
+                        onMouseOut={() =>
+                          changeOriginalSourceForIcons("stateChange")
+                        }
+                      >
+                        <img alt="" src={stateChange} />
                         <Title>State Change</Title>
                         <SubTitle>
                           trigger whenever stable variable changes
@@ -276,7 +284,6 @@ export default function AddAlert() {
                         <Title>Function call</Title>
                         <SubTitle>COMMING SOON</SubTitle>
                       </BoxContainer>
-                      {/* </BoxRow> */}
                     </MainBoxContainer>
                   )}
                 </SideLineProvider>
@@ -361,20 +368,71 @@ export default function AddAlert() {
                   )}
                 </SideLineProvider>
                 <AlertContainer style={{ width: "435px" }}>
-                  <NumberShowUP>4</NumberShowUP>
+                  <NumberShowUP style={{ marginRight: "20px" }}>4</NumberShowUP>
                   <ProgressHeader>
                     <TypeRow>Destination</TypeRow>
-                    <SelectType>
+                    <SelectType
+                      style={{
+                        marginBottom: "12px",
+                      }}
+                    >
                       Select the destination in which alert notification will be
                       sent to.
                     </SelectType>
+                    {progress === "DESTINATION" && (
+                      <DestinationDetail>
+                        <EmailBox>
+                          <Row>
+                            <img
+                              alt=""
+                              src="/images/email.svg"
+                              style={{
+                                marginRight: "4px",
+                                marginBottom: "8px",
+                                width: "1rem",
+                              }}
+                            />
+                            <ColumnTwo>Email</ColumnTwo>
+                            <ColumnTwo>it@supportteam.com</ColumnTwo>
+                            <ColumnTwo>
+                              {" "}
+                              <label class="switch" style={{ left: "114px" }}>
+                                <input type="checkbox" />
+                                <span class="slider round"></span>
+                              </label>
+                            </ColumnTwo>
+                          </Row>
+                        </EmailBox>
+                        <EmailBox>
+                          <Row>
+                            <img
+                              alt=""
+                              src="/images/webhook.svg"
+                              style={{
+                                marginRight: "4px",
+                                marginBottom: "8px",
+                                width: "1rem",
+                              }}
+                            />
+                            <ColumnTwo>Finance</ColumnTwo>
+                            <ColumnTwo>
+                              {" "}
+                              <label class="switch" style={{ left: "114px" }}>
+                                <input type="checkbox" />
+                                <span class="slider round"></span>
+                              </label>
+                            </ColumnTwo>
+                          </Row>
+                        </EmailBox>
+                      </DestinationDetail>
+                    )}
                   </ProgressHeader>
                 </AlertContainer>
                 <SideLineProvider>
                   <Line></Line>
                   <AlertContainer>
                     <LastContainer>
-                      <ApplyButton onClick={() => history.push("/Rules")}>
+                      <ApplyButton onClick={() => changeProgress("Rules")}>
                         Done
                       </ApplyButton>
                       <CancelButton
@@ -396,6 +454,30 @@ export default function AddAlert() {
     </>
   );
 }
+const ColumnTwo = styled.div`
+  display: flex;
+  flex-flow: column nowrap;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #102c78;
+  width: 100%;
+  max-width: 2.25rem;
+  margin: 0.25rem;
+`;
+const DestinationDetail = styled.div`
+  margin-bottom: 10px;
+`;
+const EmailBox = styled.div`
+  margin-bottom: 10px;
+  background: #f5f6fd 0% 0% no-repeat padding-box;
+  border: 1px solid #d5e0ff;
+  border-radius: 6px;
+
+  height: 62px;
+  padding: 10px;
+  width: 1000px;
+  // max-width: 453px;
+`;
 const LastContainer = styled.div`
   display: flex;
   justify-content: start;
@@ -467,7 +549,10 @@ const MainContainer = styled.div`
   padding: 2.5rem;
   display: 100vh;
 `;
-
+const TitleHead = styled.div`
+  font-size: 24px;
+  font-weight: 600;
+`;
 const RowCorrecter = styled.div`
   display: flex;
   flex-flow: row nowrap;
