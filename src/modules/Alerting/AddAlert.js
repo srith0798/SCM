@@ -47,7 +47,7 @@ export default function AddAlert() {
   const backButton = () => {
     history.push("/");
   };
-
+  //TODO: code needs to be optimized for src change
   const changeSourceForIcons = (value) => {
     if (value === "successfulTransaction")
       setsuccessfulTransaction("/images/Successful transaction.svg");

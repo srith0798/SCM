@@ -28,7 +28,7 @@ export default function TransactionList(props) {
   const handleClose = () => {
     isOpen(false);
   };
-
+  //TODO: for dummy data , create a saperate file and import
   React.useEffect(() => {
     let address = [
       {
@@ -123,6 +123,8 @@ export default function TransactionList(props) {
     fontWeight: "600",
     color: "#191919",
   };
+
+  //TODO: All the strings constants should be in constants file.
   const redirectToTransactionDetails = () => {
     history.push("/transaction-details");
   };
@@ -196,10 +198,12 @@ export default function TransactionList(props) {
                 <ColumnOne>When</ColumnOne>
               </Row>
             </Div>
+
+            //TODO: add placeholder when there is no data to render
             <div>
               {address.map((data, index) => {
                 return (
-                  <Div onClick={redirectToTransactionDetails}>
+                  <Div key={index} onClick={redirectToTransactionDetails}>
                     <Row>
                       {/* <ColorBox> */}
                       <ColumnSecond>{data.txn}</ColumnSecond>

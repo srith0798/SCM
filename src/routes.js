@@ -58,6 +58,7 @@ class Routes extends BaseComponent {
               path={"/transaction-details"}
               component={transactionDetails}
             />
+            //TODO: Follow naming conventions for routes
             <Route exact path={"/subcontract2"} component={SubContractsInfo} />
             <Route exact path={"/AlertDetails"} component={AlertDetails} />
             <Route exact path={"/Alerting"} component={Rules} />
