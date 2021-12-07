@@ -316,14 +316,14 @@ const Bold = styled.b`
 `;
 const DropDown = styled.div`
   background: #f5f6fd 0% 0% no-repeat padding-box;
-  border: 1px solid #d5e0ff;
+  border: 1px;
   border-radius: 6px;
   font: normal normal medium 14px/17px Inter;
   font-size: 14px;
   font-weight: 600;
   color: #191919;
   height: 75px;
-  padding: 10px;
+  padding: 14px;
   width: 100%;
   max-width: 453px;
   position: relative;

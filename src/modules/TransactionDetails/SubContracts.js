@@ -4,7 +4,7 @@ import { history } from "../../managers/history";
 
 export default function SubContracts() {
   const SubButton = () => {
-    history.push("/subcontract2");
+    history.push("/verified-contracts");
   };
   return (
     <MainDiv>
