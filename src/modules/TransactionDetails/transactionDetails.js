@@ -60,11 +60,13 @@ export default function TransactionDetails() {
                 id="Overview"
                 onClick={handleViewClick}
                 style={{
-                  color: activeButton === "Overview" ? "blue" : "",
+                  color: activeButton === "Overview" ? "#3163F0" : "#AEB7D0",
                   display: "flex",
                   paddingBottom: "0.875rem",
                   borderBottom:
-                    activeButton === "Overview" ? "0.125rem solid blue" : "",
+                    activeButton === "Overview"
+                      ? "0.125rem solid #3163F0"
+                      : "#AEB7D0",
                 }}
               >
                 <img
@@ -82,7 +84,7 @@ export default function TransactionDetails() {
                 id="Contracts"
                 onClick={handleViewClick}
                 style={{
-                  color: activeButton === "Contracts" ? "blue" : "",
+                  color: activeButton === "Contracts" ? "#3163F0" : "#AEB7D0",
                   display: "flex",
                   paddingBottom: "0.875rem",
                   borderBottom:
@@ -104,11 +106,11 @@ export default function TransactionDetails() {
                 id="Events"
                 onClick={handleViewClick}
                 style={{
-                  color: activeButton === "Events" ? "blue" : "",
+                  color: activeButton === "Events" ? "#3163F0" : "#AEB7D0",
                   display: "flex",
                   paddingBottom: "0.875rem",
                   borderBottom:
-                    activeButton === "Events" ? "0.125rem solid blue" : "",
+                    activeButton === "Events" ? "0.125rem solid #3163F0" : "",
                 }}
               >
                 <img
@@ -126,9 +128,11 @@ export default function TransactionDetails() {
                 id="StateChange"
                 onClick={handleViewClick}
                 style={{
-                  color: activeButton === "StateChange" ? "blue" : "",
+                  color: activeButton === "StateChange" ? "#3163F0" : "#AEB7D0",
                   borderBottom:
-                    activeButton === "StateChange" ? "0.125rem solid blue" : "",
+                    activeButton === "StateChange"
+                      ? "0.125rem solid #3163F0"
+                      : "",
                 }}
               >
                 <img

@@ -118,7 +118,7 @@ export default function MainComponent(props) {
                 </SubContainer>
                 <Line />
               </GraphContainer>
-              <GraphContainer style={{marginRight:"0"}}>
+              <GraphContainer style={{ marginRight: "0" }}>
                 <SubContainer>
                   <div style={{ display: "flex", alignItems: "center" }}>
                     <Head>Gas used overtime</Head>
@@ -198,7 +198,7 @@ export default function MainComponent(props) {
                   <Network>Mainnet</Network>
                 </Div>
               </GraphContainer>
-              <GraphContainer style={{marginRight:"0"}}>
+              <GraphContainer style={{ marginRight: "0" }}>
                 <SubContainer>
                   <div style={{ display: "flex", alignItems: "center" }}>
                     <Head>Active users</Head>
@@ -320,7 +320,7 @@ const GraphContainer = styled.div`
   /* margin-top: 20px; */
   padding: 20px;
   /* max-width: 590px; */
-  margin : 20px 30px 30px 0px
+  margin: 20px 30px 30px 0px;
 `;
 const Head = styled.div`
   font-size: 16px;
@@ -331,6 +331,7 @@ const Head = styled.div`
 const ContractFrom = styled.div`
   width: 100%;
   max-width: 150px;
+  color: #102c78;
 `;
 const Network = styled.div`
   width: 100%;
@@ -367,7 +368,7 @@ const Image = styled.img`
   position: absolute;
   cursor: pointer;
   top: 29px;
-    right: 8px;
+  right: 8px;
   /* right : 0; */
   /* top : 0; */
 `;

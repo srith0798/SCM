@@ -18,7 +18,12 @@ export default function Settings(props) {
           <Container>
             <SubContainer style={{ padding: "15px 12px 10px 10px" }}>
               <Add>Settings</Add>
-              <img alt="" src="/images/XDC-Cross.svg" onClick={props.click} />
+              <img
+                style={{ cursor: "pointer" }}
+                alt=""
+                src="/images/XDC-Cross.svg"
+                onClick={props.click}
+              />
             </SubContainer>
             <MainHeading style={{ padding: "15px 12px 10px 10px" }}>
               Configure Columns
