@@ -25,15 +25,15 @@ export default function TransactionDetails() {
         <Sidebar />
         <MainContainer>
           <Row style={{ display: "flex", justifyContent: "space-between" }}>
-            <div>
+            <TitleDiv>
               <img
                 alt=""
-                style={{ marginRight: "0.625rem" }}
+                style={{ marginRight: "0.425rem", cursor: "pointer" }}
                 src="/images/back.svg"
                 onClick={backButton}
               />
-              <b>Transactions Details</b>
-            </div>
+              <Title>Transactions Details</Title>
+            </TitleDiv>
             <Button>View in Explorer</Button>
           </Row>
 
@@ -133,7 +133,7 @@ export default function TransactionDetails() {
               >
                 <img
                   alt=""
-                  style={{ marginRight: "0.375rem" }}
+                  style={{ marginRight: "0.375rem", marginBottom: "4px" }}
                   src={
                     activeButton === "Events"
                       ? "/images/statechange_grey.svg"
@@ -316,7 +316,16 @@ export default function TransactionDetails() {
     </>
   );
 }
-
+const TitleDiv = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 267px;
+  align-items: center;
+  font-size: 24px;
+  font-weight: 600;
+`;
+const Title = styled.div``;
 const NewContainer = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
   border-radius: 0.375rem;
