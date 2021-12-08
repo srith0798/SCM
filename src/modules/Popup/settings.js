@@ -141,12 +141,17 @@ const Container = styled.div`
 const SubContainer = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: baseline;
+  margin-left: 9px;
+  margin-right: 5px;
+}
 `;
 const Add = styled.div`
   // font: normal normal 600 24px/29px Inter;
   font-size: 1.5rem;
   font-weight: 600;
   color: #303134;
+  margin-left: 1.5px;
 `;
 
 const MainHeading = styled.div`
@@ -154,6 +159,7 @@ const MainHeading = styled.div`
   font-weight: 600;
   color: #102c78;
   border-bottom: 1px solid rgb(213, 224, 255);
+  margin-left: 9px;
 `;
 const Content = styled.div`
   font-size: 1rem;
@@ -161,7 +167,7 @@ const Content = styled.div`
   color: #303134;
   margin-top: 0.625rem;
   padding: 15px 12px 8px 10px;
-  // padding: 0.938rem 0.75rem 0.5rem 0.625rem;
+  margin-left: 9px;
 `;
 const Heading = styled.div`
   text-align: left;
