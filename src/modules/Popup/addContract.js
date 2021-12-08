@@ -1,9 +1,46 @@
 import React from "react";
 import styled from "styled-components";
-
+import ContractsService from "../../services/contractsService";
 import Dialog from "@mui/material/Dialog";
+import utility from "../../utility";
 
 export default function AddContract(props) {
+  const [ address , setAddress ] = React.useState("")
+console.log(props)
+
+  const addContract = async () => {
+    try {
+      let requestData = {
+        contractAddress : address
+      }
+      const response = await ContractsService.addContract(requestData);
+      console.log(response)
+      // if(error){
+      //   utility.apiFailureToast(error)
+      //   return
+      // }
+      if(response.address && response.address=== address){
+        utility.apiSuccessToast("Contract added");
+        props.click()
+        props.reloadData()
+      }
+      else{
+        utility.apiFailureToast("Contract not found")
+      }
+    }
+    catch (e) {
+      if(e==="Address already Exists")
+        utility.apiFailureToast(e)
+      console.log(e)
+      // utility.apiFailureToast(e)
+    }
+  }
+
+  const handleEnterKey = (e) => {
+    if (e.key === 'Enter') {
+      addContract()
+    }
+  }
   return (
     <div>
       <Dialog open>
@@ -20,8 +57,10 @@ export default function AddContract(props) {
             <Input
               type="text"
               placeholder="Find a public contract by name or address"
+              onChange={(e) => setAddress(e.target.value)}
+              onKeyDown={(e) => handleEnterKey(e)}
             />
-            <Button>Import Contracts</Button>
+            <Button onClick={addContract}>Import Contracts</Button>
           </Container>
         </MainContainer>
       </Dialog>
