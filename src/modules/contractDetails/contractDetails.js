@@ -152,7 +152,8 @@ export default function ContractDetails(props) {
                       &emsp;Source Code
                     </Tab>
                   </TabList>
-
+                  <Gap>
+                    </Gap>
                   <TabPanel>
                     <DetailsSection>
                       <div>
@@ -219,6 +220,11 @@ export default function ContractDetails(props) {
     </div>
   );
 }
+
+const Gap = styled.div`
+  height: 30px;
+  background-color: #F5F6FD;
+`
 const MainContainer = styled.div`
   background-color: #ecf0f7;
   width: 100%;
