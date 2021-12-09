@@ -34,6 +34,7 @@ import TopCalls from "./modules/Analytics/topCalls";
 import TopCallsFullScreen from "./modules/Analytics/topCallsFullscreen";
 import AddAlert from "./modules/Alerting/AddAlert";
 import WalletPopUp from "./modules/aboutScreen/walletPopUp";
+import About from "./modules/aboutScreen/about";
 
 import Filter from "./modules/Popup/filter";
 
@@ -68,6 +69,7 @@ class Routes extends BaseComponent {
             <Route exact path={"/alerting"} component={Rules} />
             <Route exact path={"/add-alert"} component={AddAlert} />
             <Route exact path={"/wallet-popup"} component={WalletPopUp} />
+            <Route exact path={"/about"} component={About} />
 
             <Route exact path={"/add-contract"} component={AddContract} />
             <Route exact path={"/rename-contract"} component={RenameContract} />
