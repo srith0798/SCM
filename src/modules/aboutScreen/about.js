@@ -1,10 +1,13 @@
 import React from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import { Row } from "simple-flexbox";
 import Header from "../header/header";
 import Sidebar from "../sidebar/sidebar";
+import WalletPopUp from "./walletPopUp";
 
 export default function About() {
+  const [state, setState] = useState(true);
   return (
     <>
       <Header />
@@ -14,9 +17,11 @@ export default function About() {
           <MainBoxContainer>
             <Container>
               <LeftContainer>
-                <DetailBox>
-                  Manage your Smart Contracts on XDC Network
-                </DetailBox>
+                <Row>
+                  <DetailBox>
+                    Manage your <Span>Smart Contracts</Span> on XDC Network
+                  </DetailBox>
+                </Row>
                 <DataBox>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                   do eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -36,7 +41,7 @@ export default function About() {
               <RightContainer>
                 <VideoBox>
                   <img
-                    style={{ paddingLeft: "90px" }}
+                    style={{ width: "60px", height: "60px" }}
                     alt=""
                     src="/images/play.svg"
                   />
@@ -78,10 +83,17 @@ export default function About() {
           </MainBoxContainer>
         </MainContainer>
       </Row>
+      <div>
+        {true && <WalletPopUp click={() => setState(false)} state={state} />}
+      </div>
     </>
   );
 }
 
+const Span = styled.span`
+  color: #0089ff;
+  white-space: nowrap;
+`;
 const IconRow = styled.div`
   display: flex;
   justify-content: space-between;
@@ -90,22 +102,15 @@ const IconRow = styled.div`
 `;
 const DataBox = styled.div`
   display: flex;
-  justify-content: space-between;
   width: 100%;
-  align-items: center;
   font-size: 16px;
-  margin-left: 20px;
-  padding-left: 25px;
 `;
 const DetailBox = styled.div`
-  display: flex;
-  justify-content: space-between;
   width: 100%;
-  align-items: center;
-  padding: 25px;
+  // padding-top: 20px;
+  padding-bottom: 15px;
   font-size: 32px;
   font-weight: 600;
-  margin-left: 20px;
 `;
 
 const Button = styled.button`
@@ -119,22 +124,23 @@ const Button = styled.button`
   color: #ffffff;
   border: none;
   border-radius: 0.25rem;
-  width: 40%;
   margin-top: 30px;
-  margin-left: 60px;
   height: 3.125rem;
   display: flex;
   font-size: 16px;
   font-weight: 600;
+  white-space: nowrap;
 `;
 const VideoBox = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
   border: 2px solid #d8d8d8;
   border-radius: 2px;
   opacity: 1;
-  margin: 34px 49px 40px 126px;
-  padding: 100px;
+  position: relative;
+  height: 100%;
   display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const MainContainer = styled.div`
@@ -147,7 +153,6 @@ const MainBoxContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-item: center;
-
   padding: 3.125rem;
 `;
 
@@ -155,17 +160,17 @@ const Container = styled.div`
   background-color: #ffffff;
   border-radius: 0.375rem;
   width: 80%;
-  height: 21.75rem;
-  margin-top: -0.75rem;
   display: flex;
   justify-content: center;
   align-self: center;
 `;
 const RightContainer = styled.div`
   width: 100%;
+  padding: 70px;
 `;
 const LeftContainer = styled.div`
   width: 100%;
+  padding: 40px;
 `;
 const HeadingContainer = styled.div`
   font-size: 32px;
@@ -194,20 +199,16 @@ const SubTitle = styled.div`
   font-size: 16px;
   color: #4b4b4b;
   margin-top: 7px;
-  //   font-weight: 600;
   width: 240px;
 `;
 
 const IconContainer = styled.div`
   padding: 0.625rem;
-
   width: 450px;
   height: 150px;
   margin: 0px 10px 20px 10px;
   max-width: 300px;
-
   outline: none;
-
   justify-content: center;
   display: flex;
   flex-direction: column;

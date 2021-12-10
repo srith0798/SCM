@@ -1,7 +1,5 @@
 import React from "react";
 import { Row } from "simple-flexbox";
-import Header from "../header/header";
-import Sidebar from "../sidebar/sidebar";
 import "react-tabs/style/react-tabs.css";
 import styled from "styled-components";
 import Historys from "./Historys";
@@ -20,11 +18,11 @@ export default function Rules() {
 
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <Row
       // style={{ height: "250vh" }}
       >
-        <Sidebar />
+        {/* <Sidebar /> */}
         <MainContainer>
           <Row>
             <RowCorrecter>

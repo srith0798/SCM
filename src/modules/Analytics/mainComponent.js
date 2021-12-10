@@ -1,8 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { Row, Column } from "simple-flexbox";
-import Header from "../header/header";
-import Sidebar from "../sidebar/sidebar";
 import Line from "./graph";
 
 import Box from "@mui/material/Box";
@@ -27,7 +25,6 @@ export default function MainComponent(props) {
     right: 0,
     left: 0,
     zIndex: 1,
-    // border: "1px solid",
     p: 1,
     bgcolor: "background.paper",
     width: "100%",
@@ -35,22 +32,21 @@ export default function MainComponent(props) {
     background: "#f5f6fd 0% 0% no-repeat padding-box",
     border: "1px solid #d5e0ff",
     borderRadius: "6px",
-    height: "80px",
+    height: "5rem",
     marginTop: "4px",
-    fontSize: "14px",
+    fontSize: "0.875rem",
     fontWeight: "600",
     color: "#191919",
   };
 
   return (
-    <div>
+    <div style={{overflow:"auto"}}>
       <Column>
-        <Header />
 
         <Row
         // style={{ height: "300vh" }}
         >
-          <Sidebar />
+          {/* <Sidebar /> */}
           <MainContainer>
             <SubContainer>
               <MainHeading>Analytics</MainHeading>
@@ -65,7 +61,12 @@ export default function MainComponent(props) {
               <ClickAwayListener onClickAway={handleClickAway}>
                 <Box sx={{ position: "relative" }}>
                   <DropDown onClick={handleClick}>
-                    App_Transactions_Validator
+                    App_Transactions_Validator{" "}
+                    <img
+                      style={{ marginLeft: "0.5rem" }}
+                      alt=""
+                      src="/images/XDCmainnet.svg"
+                    />
                     <br />
                     <TransactionHash>
                       xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c
@@ -278,102 +279,104 @@ export default function MainComponent(props) {
 }
 const MainContainer = styled.div`
   width: 100%;
-  padding: 50px;
+  padding-left: 3.125rem;
+  padding-top: 1.563rem;
+  padding-right: 1.563rem;
+  padding-bottom: 1.563rem;
   background-color: #ecf0f7;
 `;
 const MainHeading = styled.div`
   text-align: left;
-  font: normal normal 600 24px/29px Inter;
-  letter-spacing: 0px;
+  font-size: 1.5rem;
+  font-weight: 600;
   color: #191919;
 `;
 const SubContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-top: 20px;
+  margin-top: 1.25rem;
 `;
 const Container = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
-  border-radius: 6px;
+  border-radius: 0.375rem;
   width: 100%;
   height: auto;
-  margin-top: 20px;
-  padding: 20px;
+  margin-top: 0.625rem;
+  padding: 1.25rem;
 `;
 const View = styled.div`
-  font-size: 14px;
+  font-size: 1rem;
   font-weight: 600;
   color: #102c78;
 `;
 const Content = styled.div`
   font-weight: 600;
-  font-size: 14px;
+  font-size: 0.875rem;
   color: #191919;
-  margin-top: 20px;
+  margin-top: 0.625rem;
+  padding-bottom: 1.25rem;
 `;
 
 const GraphContainer = styled.div`
   width: 100%;
   background: #ffffff 0% 0% no-repeat padding-box;
-  border-radius: 6px;
+  border-radius: 0.375rem;
   height: auto;
-  /* margin-top: 20px; */
-  padding: 20px;
-  /* max-width: 590px; */
-  margin: 20px 30px 30px 0px;
+
+  padding: 1.25rem;
+
+  margin: 1.25rem 1.875rem 1.875rem 0px;
 `;
 const Head = styled.div`
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 600;
   color: #102c78;
-  margin-right: 10px;
+  margin-right: 0.625rem;
 `;
 const ContractFrom = styled.div`
   width: 100%;
-  max-width: 150px;
+  max-width: 9.375rem;
   color: #102c78;
 `;
 const Network = styled.div`
   width: 100%;
-  max-width: 150px;
+  max-width: 9.375rem;
 `;
 const Div = styled.div`
   display: flex;
   flex-flow: row nowrap;
   border-top: 1px solid rgb(227, 231, 235);
-  margin-top: 20px;
+  margin-top: 1.25rem;
 `;
 const DropDown = styled.div`
   background: #f5f6fd 0% 0% no-repeat padding-box;
   border: 1px solid #d5e0ff;
-  border-radius: 6px;
+  border-radius: 0.375rem;
   font: normal normal medium 14px/17px Inter;
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 600;
   color: #191919;
-  height: 75px;
-  padding: 10px;
+  height: 4.688rem;
+  padding: 0.625rem;
   width: 100%;
   max-width: 453px;
   position: relative;
 `;
 const TransactionHash = styled.div`
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 600;
   color: #416be0;
   margin-top: 4px;
 `;
 const Image = styled.img`
-  width: 12px;
+  width: 0.75rem;
   position: absolute;
   cursor: pointer;
-  top: 29px;
-  right: 8px;
-  /* right : 0; */
-  /* top : 0; */
+  top: 1.813rem;
+  right: 0.5rem;
 `;
 const Label = styled.div`
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: 600;
   color: #767c93;
 `;

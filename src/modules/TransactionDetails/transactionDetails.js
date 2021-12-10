@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Row } from "simple-flexbox";
 import Header from "../header/header";
-import Sidebar from "../sidebar/sidebar";
+// import Sidebar from "../sidebar/sidebar";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import "react-tabs/style/react-tabs.css";
 import Events from "./Events";
@@ -22,7 +22,7 @@ export default function TransactionDetails() {
     <>
       <Header />
       <Row>
-        <Sidebar />
+        {/* <Sidebar /> */}
         <MainContainer>
           <Row style={{ display: "flex", justifyContent: "space-between" }}>
             <TitleDiv>
@@ -55,6 +55,7 @@ export default function TransactionDetails() {
                 <CopyImg src="/images/copy.svg" />
               </CopyToClipboard>
             </div>
+
             <TabLister>
               <TabView
                 id="Overview"
