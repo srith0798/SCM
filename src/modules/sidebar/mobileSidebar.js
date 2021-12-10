@@ -5,13 +5,13 @@ import { history } from "../../managers/history";
 const SidebarContainer = styled.div`
   // width: 100%;
   // max-width: 200px;
-
+  // position: absolute;
+  // z-index: 1;
   // @media (min-width: 300px) and (max-width: 1024px) {
-  //   // display: none;
   //   position: absolute;
   //   z-index: 1;
   // }
-  display: flex;
+  display: none;
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
@@ -19,7 +19,8 @@ const SidebarContainer = styled.div`
   padding-top: 15px;
 
   @media (max-width: 768px) {
-    display: none;
+    display: flex;
+    margin-top: 60px;
   }
 `;
 const Icon = styled.img`

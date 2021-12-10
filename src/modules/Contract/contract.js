@@ -26,7 +26,7 @@ export default function Contract(props) {
   const getContractList = async () => {
     const response = await ContractsService.getContractsList({});
     setAddress(response.contractList);
-  }
+  };
 
   React.useEffect(() => {
     getContractList();
@@ -36,63 +36,60 @@ export default function Contract(props) {
 
   return (
     <div>
-      <Column>
-        <Header />
-        <Row
-        // style={{ height: "180vh" }}
-        >
-          <Sidebar />
-          <MainContainer>
-            <SubContainer>
-              <div>
-                <Heading>Contracts</Heading>
-                <Input placeholder="Search by address or name" />
-              </div>
-              <div style={{ display: "flex" }}>
-                <img
-                  alt=""
-                  src="/images/refresh.svg"
-                  style={{ marginRight: "0.625rem" }}
-                />
-                {open && <AddContract click={handleClose} />}
-                <Button onClick={handleClickOpen}>Add Contract</Button>
-              </div>
-            </SubContainer>
+      {/* <Header /> */}
 
-            <TableContainer>
-              <Div>
-                <Row>
-                  <ColumnOne>Contract Name</ColumnOne>
-                  <ColumnOne>Address</ColumnOne>
-                  <ColumnOne>Network</ColumnOne>
-                  <ColumnOne>
-                    Tag{" "}
-                    <Tooltip disableFocusListener title="Add">
-                      <ToolTipIcon src="/images/tool tip.svg" />
-                    </Tooltip>
-                  </ColumnOne>
-                  <ColumnOne>Visibility</ColumnOne>
-                </Row>
-              </Div>
-              <div onClick={redirectTODetails}>
-                {address.map((data, index) => {
-                  return (
-                    <Div>
-                      <Row>
-                        <ColumnSecond>{data.contractName}</ColumnSecond>
-                        <ColumnSecond>{utility.truncateTxnAddress(data.address)}</ColumnSecond>
-                        <ColumnSecond>{data.tokenName}</ColumnSecond>
-                        <ColumnSecond>{tagDiv()} </ColumnSecond>
-                        <ColumnSecond>{data.status}</ColumnSecond>
-                      </Row>
-                    </Div>
-                  );
-                })}
-              </div>
-            </TableContainer>
-          </MainContainer>
-        </Row>
-      </Column>
+      {/* <Sidebar /> */}
+      <MainContainer>
+        <SubContainer>
+          <div>
+            <Heading>Contracts</Heading>
+            <Input placeholder="Search by address or name" />
+          </div>
+          <div style={{ display: "flex" }}>
+            <img
+              alt=""
+              src="/images/refresh.svg"
+              style={{ marginRight: "0.625rem" }}
+            />
+            {open && <AddContract click={handleClose} />}
+            <Button onClick={handleClickOpen}>Add Contract</Button>
+          </div>
+        </SubContainer>
+
+        <TableContainer>
+          <Div>
+            <Row>
+              <ColumnOne>Contract Name</ColumnOne>
+              <ColumnOne>Address</ColumnOne>
+              <ColumnOne>Network</ColumnOne>
+              <ColumnOne>
+                Tag{" "}
+                <Tooltip disableFocusListener title="Add">
+                  <ToolTipIcon src="/images/tool tip.svg" />
+                </Tooltip>
+              </ColumnOne>
+              <ColumnOne>Visibility</ColumnOne>
+            </Row>
+          </Div>
+          <div onClick={redirectTODetails}>
+            {address.map((data, index) => {
+              return (
+                <Div>
+                  <Row>
+                    <ColumnSecond>{data.contractName}</ColumnSecond>
+                    <ColumnSecond>
+                      {utility.truncateTxnAddress(data.address)}
+                    </ColumnSecond>
+                    <ColumnSecond>{data.tokenName}</ColumnSecond>
+                    <ColumnSecond>{tagDiv()} </ColumnSecond>
+                    <ColumnSecond>{data.status}</ColumnSecond>
+                  </Row>
+                </Div>
+              );
+            })}
+          </div>
+        </TableContainer>
+      </MainContainer>
     </div>
   );
 }
@@ -103,25 +100,25 @@ function tagDiv() {
       Finance
       <TagImage src="/images/Tag_logo.svg"></TagImage>
     </Tag>
-  )
+  );
 }
 
 const Tag = styled.div`
-  background-color: #EAEFFF;
-  border-radius : 3px;
+  background-color: #eaefff;
+  border-radius: 3px;
   width: 80px;
-  color: #436CE0;
+  color: #436ce0;
   padding: 2px 5px 2px 25px;
   position: relative;
   cursor: pointer;
-`
+`;
 
 const TagImage = styled.img`
   position: absolute;
   width: 12px;
   left: 5px;
-  top : 7px; 
-`
+  top: 7px;
+`;
 
 const MainContainer = styled.div`
   background-color: #ecf0f7;

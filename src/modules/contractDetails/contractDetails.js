@@ -107,10 +107,10 @@ export default function ContractDetails(props) {
   return (
     <div>
       <Column>
-        <Header />
+        {/* <Header /> */}
         <div>
           <Row>
-            <Sidebar />
+            {/* <Sidebar /> */}
             <MainContainer>
               <SubContainer>
                 <div>

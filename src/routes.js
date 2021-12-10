@@ -36,7 +36,7 @@ import AddAlert from "./modules/Alerting/AddAlert";
 import WalletPopUp from "./modules/aboutScreen/walletPopUp";
 
 import Filter from "./modules/Popup/filter";
-
+import Dashboard from "./modules/dashboard/dashboardComponent";
 class Routes extends BaseComponent {
   componentDidMount() {}
 
@@ -45,6 +45,13 @@ class Routes extends BaseComponent {
       <MuiThemeProvider muiTheme={getMuiTheme()}>
         <Router history={history}>
           <Switch>
+            <Route exact path={"/dashboard"} component={Dashboard} />
+            <Route exact path={"/dashboard/:menu"} component={Dashboard} />
+            <Route
+              exact
+              path={"/dashboard/:menu/:subMenu"}
+              component={Dashboard}
+            />
             {/* <Route exact path={"/"} component={LoginComponent} /> */}
             <Route exact path={"/"} component={TransactionList} />
             <Route exact path={"/verify"} component={VerifyEmail} />
