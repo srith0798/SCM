@@ -39,7 +39,29 @@ import Filter from "./modules/Popup/filter";
 import Dashboard from "./modules/dashboard/dashboardComponent";
 class Routes extends BaseComponent {
   componentDidMount() {}
+  getPublicRoutes = () => {
+    return (
+      <Switch>
+        {/* <Route exact path={"/"} component={Login} /> */}
+        {/* <Route exact path={"/forgot-password"} component={ForgotPassword} /> */}
 
+        <Redirect exact from="*" to="/" />
+      </Switch>
+    );
+  };
+  getPrivateRoutes = () => {
+    return (
+      <Switch>
+        {/* <Route exact path={"/"} component={Login} /> */}
+        {/* <Route exact path={"/forgot-password"} component={ForgotPassword} />
+        <Route exact path={"/change-password"} component={ChangePassword} /> */}
+        <Route exact path={"/dashboard"} component={Dashboard} />
+        <Route exact path={"/dashboard/:menu"} component={Dashboard} />
+        <Route exact path={"/dashboard/:menu/:subMenu"} component={Dashboard} />
+        <Redirect exact from="*" to="/" />
+      </Switch>
+    );
+  };
   render() {
     return (
       <MuiThemeProvider muiTheme={getMuiTheme()}>
@@ -76,15 +98,15 @@ class Routes extends BaseComponent {
             <Route exact path={"/add-alert"} component={AddAlert} />
             <Route exact path={"/wallet-popup"} component={WalletPopUp} />
 
-            <Route exact path={"/add-contract"} component={AddContract} />
+            {/* <Route exact path={"/add-contract"} component={AddContract} />
             <Route exact path={"/rename-contract"} component={RenameContract} />
             <Route exact path={"/contract-abi"} component={ContractAbi} />
             <Route exact path={"/source-code"} component={SourceCode} />
-            <Route exact path={"/hide-contract"} component={HideContract} />
+            <Route exact path={"/hide-contract"} component={HideContract} /> */}
 
             <Route exact path={"/network"} component={Network} />
-            <Route exact path={"/started-popup"} component={LetsGetStarted} />
-            <Route exact path={"/remove"} component={Remove} />
+            {/* <Route exact path={"/started-popup"} component={LetsGetStarted} />
+            <Route exact path={"/remove"} component={Remove} /> */}
             <Route exact path={"/filter"} component={Filter} />
             <Route exact path={"/add-network"} component={AddNetwork} />
             <Route exact path={"/settings"} component={Settings} />

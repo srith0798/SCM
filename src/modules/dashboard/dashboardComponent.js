@@ -3,26 +3,21 @@ import styled from "styled-components";
 
 import Utility from "../../utility";
 
-// import HeaderComponent from "./headerComponent";
 import HeaderComponent from "../header/header";
-// import DesktopSideMenu from "./desktopSideMenu";
+
 import DesktopSideMenu from "../sidebar/sidebar";
 import MobileSideMenu from "../sidebar/mobileSidebar";
 /////////////////////////////
 
 import ContractDetails from "../contractDetails/contractDetails";
 import Contract from "../Contract/contract";
+import TransactionDetails from "../TransactionDetails/transactionDetails";
+import TransactionList from "../transactions/transactionList";
+import Network from "../Network/network";
 
 const Container = styled.div`
   height: 100%;
   width: 100%;
-  font-size: 32px;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: row;
-  text-align: center;
-  min-height: 88vh;
-  color: #3a3a3a;
 `;
 
 //Replace Under Development with component once developed-
@@ -35,48 +30,48 @@ const HomeComponent = (props) => {
         ) : (
           <Contract />
         ))}
-      {/* {Utility.isMenuActive("/") &&
+      {Utility.isMenuActive("/transaction") &&
         (Utility.isMenuActive("/transaction-details") ? (
           <TransactionDetails />
         ) : (
           <TransactionList />
-        ))} */}
+        ))}
 
       {/* {Utility.isMenuActive("/content") &&
         (Utility.isMenuActive("/add") ? (
           <ComponentAdd />
         ) : (
           <ContentComponent />
-        ))}
-      {Utility.isMenuActive("/products") &&
+        ))} */}
+      {/* {Utility.isMenuActive("/products") &&
         (Utility.isMenuActive("/add") ? (
           <AddProductComponent />
         ) : (
           <ProductComponent />
-        ))}
+        ))} */}
 
-      {Utility.isMenuActive("/reports") && <ReportsComponent />}
+      {Utility.isMenuActive("/network") && <Network />}
 
-      {Utility.isMenuActive("/settings") && <SettingComponent />} */}
+      {/* {Utility.isMenuActive("/settings") && <SettingComponent />} */}
     </Container>
   );
 };
 
 const DashboardContainer = styled.div`
-  height: 100%;
   width: 100%;
   display: flex;
   flex-direction: row;
   overflow-y: hidden;
+  height: 100%;
 `;
 
 const HomeContainer = styled.div`
   height: 100%;
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  overflow-y: hidden;
-  overflow-x: hidden;
+  // display: flex;
+  // flex-direction: column;
+  // overflow-y: hidden;
+  // overflow-x: hidden;
 `;
 
 const dashboardComponent = (props) => {
