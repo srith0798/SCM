@@ -365,7 +365,7 @@ const PopUp = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 2.375rem;
+  margin-top: 1rem;
   width: 100%;
   max-width: 59.375rem;
   font-size: 0.875rem;

@@ -1,13 +1,20 @@
 import React from "react";
 import styled from "styled-components";
-import { Column, Row } from "simple-flexbox";
+import { Row } from "simple-flexbox";
 import Header from "../header/header";
 import Sidebar from "../sidebar/sidebar";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import { Tab, Tabs, TabList } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
+import { history } from "../../managers/history";
 
-export default function verifiedContracts() {
+export default function TransactionDetails() {
+  const [activeButton, setActiveButton] = React.useState("Overview");
+  const handleViewClick = (e) => {
+    setActiveButton(e.target.id);
+  };
+  const backButton = () => {
+    history.push("/transaction-details");
+  };
   return (
     <>
       <Header />
@@ -15,153 +22,233 @@ export default function verifiedContracts() {
         <Sidebar />
         <MainContainer>
           <Row style={{ display: "flex", justifyContent: "space-between" }}>
-            <div>
+            <TitleDiv>
               <img
                 alt=""
+                style={{ marginRight: "0.425rem", cursor: "pointer" }}
                 src="/images/back.svg"
-                style={{ marginRight: "10px" }}
-                // onClick={backButton}
+                onClick={backButton}
               />
-              <b>Transactions Details</b>
-            </div>
+              <Title>Transactions Details</Title>
+            </TitleDiv>
             <Button>View in Explorer</Button>
           </Row>
+
           <Container>
-            <SubHeading>Txn hash</SubHeading>
-            <div style={{ display: "flex", alignItems: "center" }}>
-              <Hash>xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c</Hash>
+            <SubHeading
+              style={{ paddingTop: "0.625rem", paddingLeft: "1.25rem" }}
+            >
+              Txn hash
+            </SubHeading>
+            <div
+              style={{
+                paddingLeft: "1.25rem",
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
+              <Hash>xdcabfe4184e5f9f600fe86d20ffdse2fsfbsgsgsa768b3c</Hash>
               <CopyToClipboard>
                 <CopyImg src="/images/copy.svg" />
               </CopyToClipboard>
             </div>
-            <Tabs>
-              <TabList>
-                <img alt="" src="/images/rules.svg" style={{ width: "16px" }} />
-                <Tab> Overview </Tab>
+            <TabLister>
+              <TabView
+                id="Overview"
+                onClick={handleViewClick}
+                style={{
+                  color: activeButton === "Overview" ? "#3163F0" : "#AEB7D0",
+                  display: "flex",
+                  paddingBottom: "0.875rem",
+                  borderBottom:
+                    activeButton === "Overview"
+                      ? "0.125rem solid #3163F0"
+                      : "#AEB7D0",
+                }}
+              >
                 <img
                   alt=""
-                  src="/images/contracts.svg"
-                  style={{ width: "1rem" }}
+                  style={{ marginRight: "0.375rem" }}
+                  src={
+                    activeButton === "Overview"
+                      ? "/images/overview.svg"
+                      : "/images/overview_grey.svg"
+                  }
                 />
-                <Tab>Contracts</Tab>
+                Overview
+              </TabView>
+              <TabView
+                id="Contracts"
+                onClick={handleViewClick}
+                style={{
+                  color: activeButton === "Contracts" ? "#3163F0" : "#AEB7D0",
+                  display: "flex",
+                  paddingBottom: "0.875rem",
+                  borderBottom:
+                    activeButton === "Contracts" ? "0.125rem solid blue" : "",
+                }}
+              >
                 <img
                   alt=""
-                  src="/images/general.svg"
-                  style={{ width: "1rem" }}
+                  style={{ marginRight: "0.375rem" }}
+                  src={
+                    activeButton === "Contracts"
+                      ? "/images/contracts.svg"
+                      : "/images/contract_grey.svg"
+                  }
                 />
-                <Tab>Events</Tab>
+                Contracts
+              </TabView>
+              <TabView
+                id="Events"
+                onClick={handleViewClick}
+                style={{
+                  color: activeButton === "Events" ? "#3163F0" : "#AEB7D0",
+                  display: "flex",
+                  paddingBottom: "0.875rem",
+                  borderBottom:
+                    activeButton === "Events" ? "0.125rem solid #3163F0" : "",
+                }}
+              >
                 <img
                   alt=""
-                  src="/images/state change.svg"
-                  style={{ width: "1rem" }}
+                  style={{ marginRight: "0.375rem" }}
+                  src={
+                    activeButton === "Events"
+                      ? "/images/event_blue.svg"
+                      : "/images/event_grey.svg"
+                  }
+                />{" "}
+                Events
+              </TabView>
+              <TabView
+                id="StateChange"
+                onClick={handleViewClick}
+                style={{
+                  color: activeButton === "StateChange" ? "#3163F0" : "#AEB7D0",
+                  borderBottom:
+                    activeButton === "StateChange"
+                      ? "0.125rem solid #3163F0"
+                      : "",
+                }}
+              >
+                <img
+                  alt=""
+                  style={{ marginRight: "0.375rem", marginBottom: "4px" }}
+                  src={
+                    activeButton === "Events"
+                      ? "/images/statechange_grey.svg"
+                      : "/images/statechange_grey.svg"
+                  }
                 />
-                <Tab>State change</Tab>
-              </TabList>
-            </Tabs>
+                State Change
+              </TabView>
+            </TabLister>{" "}
           </Container>
           <BoxContainer>
-            <Row>
-              <Heading>Contracts </Heading>
-              <SubHead>App_Transactions_Validator</SubHead>
-            </Row>
-            <Column>
-              <CommonDiv>
-                <Row>
-                  <Heads>
-                    <img
-                      alt=""
-                      src="/images/contracts.svg"
-                      style={{ width: "1rem" }}
-                    />
-                    <TextLi>Subcontracts name</TextLi>
-                  </Heads>
-                </Row>
-              </CommonDiv>
-              <CommonDiv>
-                <Row>
-                  <Head>
-                    <img
-                      alt=""
-                      src="/images/contracts.svg"
-                      style={{ width: "1rem" }}
-                    />
-                    Subcontracts name
-                  </Head>
-                </Row>
-              </CommonDiv>
-              <CommonDiv>
-                <Row>
-                  <Head>
-                    <img
-                      alt=""
-                      src="/images/contracts.svg"
-                      style={{ width: "1rem" }}
-                    />
-                    Subcontracts name
-                  </Head>
-                </Row>
-              </CommonDiv>
-              <CommonDiv>
-                <Row>
-                  <Head>
-                    <img
-                      alt=""
-                      src="/images/contracts.svg"
-                      style={{ width: "1rem" }}
-                    />
-                    Subcontracts name
-                  </Head>
-                </Row>
-              </CommonDiv>
-              <CommonDiv>
-                <Row>
-                  <Head>
-                    <img
-                      alt=""
-                      src="/images/contracts.svg"
-                      style={{ width: "1rem" }}
-                    />
-                    Subcontracts name
-                  </Head>
-                </Row>
-              </CommonDiv>
-              <CommonDiv>
-                <Row>
-                  <Head>
-                    <img
-                      alt=""
-                      src="/images/contracts.svg"
-                      style={{ width: "1rem" }}
-                    />
-                    Subcontracts name
-                  </Head>
-                </Row>
-              </CommonDiv>
-              <CommonDiv>
-                <Row>
-                  <Head>
-                    <img
-                      alt=""
-                      src="/images/contracts.svg"
-                      style={{ width: "1rem" }}
-                    />
-                    Subcontracts name
-                  </Head>
-                </Row>
-              </CommonDiv>
-              <CommonDiv>
-                <Row>
-                  <Head>
-                    <img
-                      alt=""
-                      src="/images/contracts.svg"
-                      style={{ width: "1rem" }}
-                    />
-                    Subcontracts name
-                  </Head>
-                </Row>
-              </CommonDiv>
-            </Column>
+            <DetailContainer>
+              <Row>
+                <Heading>Contracts </Heading>
+                <SubHead>App_Transactions_Validator</SubHead>
+              </Row>
+            </DetailContainer>
+
+            <CommonDiv>
+              <Row>
+                <Heads>
+                  <img
+                    alt=""
+                    src="/images/contracts.svg"
+                    style={{ width: "1rem" }}
+                  />
+                  <TextLi>Subcontracts name</TextLi>
+                </Heads>
+              </Row>
+            </CommonDiv>
+            <CommonDiv>
+              <Row>
+                <Head>
+                  <img
+                    alt=""
+                    src="/images/contracts.svg"
+                    style={{ width: "1rem" }}
+                  />
+                  Subcontracts name
+                </Head>
+              </Row>
+            </CommonDiv>
+            <CommonDiv>
+              <Row>
+                <Head>
+                  <img
+                    alt=""
+                    src="/images/contracts.svg"
+                    style={{ width: "1rem" }}
+                  />
+                  Subcontracts name
+                </Head>
+              </Row>
+            </CommonDiv>
+            <CommonDiv>
+              <Row>
+                <Head>
+                  <img
+                    alt=""
+                    src="/images/contracts.svg"
+                    style={{ width: "1rem" }}
+                  />
+                  Subcontracts name
+                </Head>
+              </Row>
+            </CommonDiv>
+            <CommonDiv>
+              <Row>
+                <Head>
+                  <img
+                    alt=""
+                    src="/images/contracts.svg"
+                    style={{ width: "1rem" }}
+                  />
+                  Subcontracts name
+                </Head>
+              </Row>
+            </CommonDiv>
+            <CommonDiv>
+              <Row>
+                <Head>
+                  <img
+                    alt=""
+                    src="/images/contracts.svg"
+                    style={{ width: "1rem" }}
+                  />
+                  Subcontracts name
+                </Head>
+              </Row>
+            </CommonDiv>
+            <CommonDiv>
+              <Row>
+                <Head>
+                  <img
+                    alt=""
+                    src="/images/contracts.svg"
+                    style={{ width: "1rem" }}
+                  />
+                  Subcontracts name
+                </Head>
+              </Row>
+            </CommonDiv>
+            <CommonDiv>
+              <Row>
+                <Head>
+                  <img
+                    alt=""
+                    src="/images/contracts.svg"
+                    style={{ width: "1rem" }}
+                  />
+                  Subcontracts name
+                </Head>
+              </Row>
+            </CommonDiv>
           </BoxContainer>
         </MainContainer>
       </Row>
@@ -169,12 +256,21 @@ export default function verifiedContracts() {
   );
 }
 const SubHead = styled.div`
-  font: normal normal medium 14px/17px Inter;
+  // font: normal normal medium 14px/17px Inter;
+  font-size: 20px;
+  font-weight: 600px;
   letter-spacing: 0px;
   color: #102c78;
-  font-size: 12px;
+  font-size: 15px;
 `;
-const CommonDiv = styled.div``;
+const DetailContainer = styled.div`
+  padding: 15px;
+`;
+
+const CommonDiv = styled.div`
+  width: 100%;
+  padding-left: 10px;
+`;
 
 const MainContainer = styled.div`
   background: #ecf0f7 0% 0% no-repeat padding-box;
@@ -204,7 +300,7 @@ const Container = styled.div`
   background-color: #ffffff;
   border-radius: 6px;
   width: 100%;
-  height: 120px;
+  height: 167px;
   margin-top: 20px;
   padding: 20px;
 `;
@@ -238,8 +334,8 @@ const CopyImg = styled.img`
 
 const Heading = styled.div`
   text-align: left;
-  font: normal normal 600 14px/17px Inter;
-  letter-spacing: 0px;
+  font-size: 16px;
+  font-weight: 600;
   color: #102c78;
   opacity: 1;
   width: 100%;
@@ -253,7 +349,7 @@ const Head = styled.div`
   width 150px;
   height: 50px;
   &:hover{
-    background-color: blue;
+    background-color: #3163F0;
     color: #ffffff;
   }
   
@@ -266,10 +362,31 @@ const Heads = styled.div`
   width 9.375rem;
   height: 3.125rem;
   &:hover{
-    background-color: blue;
+    background-color: #3163F0;
     color: #ffffff;
   }
 `;
+const TabLister = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 33.125rem;
+  margin: 1.563rem 0rem 0.625rem 1.063rem;
+  cursor: pointer;
+`;
+const TabView = styled.div`
+  padding: 0.313rem 0.5rem 0.313rem 0.5rem;
+`;
+const TitleDiv = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 267px;
+  align-items: center;
+  font-size: 24px;
+  font-weight: 600;
+`;
+const Title = styled.div``;
 
 const TextLi = styled.div`
   text-align: left;

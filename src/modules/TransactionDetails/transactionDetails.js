@@ -55,6 +55,7 @@ export default function TransactionDetails() {
                 <CopyImg src="/images/copy.svg" />
               </CopyToClipboard>
             </div>
+
             <TabLister>
               <TabView
                 id="Overview"
