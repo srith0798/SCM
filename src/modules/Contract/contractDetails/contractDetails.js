@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import Header from "../header/header";
-import Sidebar from "../sidebar/sidebar";
+import Header from "../../header/header";
+// import Sidebar from "../sidebar/sidebar";
 import { Row, Column } from "simple-flexbox";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import ContractAbi from "../Popup/contractAbi";
-import RenameContract from "../Popup/renameContract";
-import Remove from "../Popup/remove";
+import ContractAbi from "../../Popup/contractAbi";
+import RenameContract from "../../Popup/renameContract";
+import Remove from "../../Popup/remove";
 
-import { history } from "../../managers/history";
-import HideContract from "../Popup/hideContract";
+import { history } from "../../../managers/history";
+import HideContract from "../../Popup/hideContract";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import SourceCode from "./sourceCode";

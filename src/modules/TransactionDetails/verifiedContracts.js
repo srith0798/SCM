@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import { Column, Row } from "simple-flexbox";
 import Header from "../header/header";
-import Sidebar from "../sidebar/sidebar";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { Tab, Tabs, TabList } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
@@ -12,7 +11,7 @@ export default function verifiedContracts() {
     <>
       <Header />
       <Row>
-        <Sidebar />
+        {/* <Sidebar /> */}
         <MainContainer>
           <Row style={{ display: "flex", justifyContent: "space-between" }}>
             <div>

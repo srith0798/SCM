@@ -28,7 +28,7 @@ export default function Contract(props) {
   };
 
   React.useEffect(() => {
-    getContractList();
+    // getContractList();
   }, []);
 
   const [address, setAddress] = React.useState([]);

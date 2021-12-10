@@ -5,22 +5,23 @@ import { history } from "../../managers/history";
 const SidebarContainer = styled.div`
   // width: 100%;
   // max-width: 200px;
-  // position: absolute;
-  // z-index: 1;
+
   // @media (min-width: 300px) and (max-width: 1024px) {
+  //   // display: none;
   //   position: absolute;
   //   z-index: 1;
   // }
-  display: none;
+  background: #102c78 0% 0% no-repeat padding-box;
+  display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 100vh;
-  width: 228px;
+  /* min-height: 100vh; */
+  height: 100%;
+  width: 280px;
   padding-top: 15px;
 
   @media (max-width: 768px) {
-    display: flex;
-    margin-top: 60px;
+    display: none;
   }
 `;
 const Icon = styled.img`
@@ -49,19 +50,19 @@ const Div = styled.div`
 
 export default function Sidebar(props) {
   const redirectToTransaction = () => {
-    history.push("/transaction-list");
+    history.push("/dashboard/transaction-list");
   };
   const redirectToContract = () => {
-    history.push("/contract");
+    history.push("/dashboard/contract");
   };
   const redirectToNetwork = () => {
-    history.push("/network");
+    history.push("/dashboard/network");
   };
   const redirectToAnalytics = () => {
-    history.push("/analytics");
+    history.push("/dashboard/analytics");
   };
   const redirectToAlerting = () => {
-    history.push("/Alerting");
+    history.push("/dashboard/Alerting");
   };
   const redirectToFaqs = () => {
     history.push("/");
@@ -105,8 +106,6 @@ export default function Sidebar(props) {
   };
 
   return (
-    <Div>
-      {/* {props.openHumburger && ( */}
       <SidebarContainer>
         <Wrapper onClick={redirectToAbout} style={{ marginTop: "4rem" }}>
           <Icon src="/images/Xmartly.svg" />
@@ -166,8 +165,6 @@ export default function Sidebar(props) {
           <img alt="" src="/images/Group 12.svg" />
         </CenterDiv>
       </SidebarContainer>
-      {/* )} */}
-    </Div>
   );
 }
 
@@ -178,5 +175,5 @@ const CenterDiv = styled.div`
   margin-bottom: 3rem;
 `;
 const Spacing = styled.div`
-  margin-top: 9rem;
+  margin-top: 8rem;
 `;

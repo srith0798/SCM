@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Header from "../header/header";
-import Sidebar from "../sidebar/sidebar";
+// import Sidebar from "../sidebar/sidebar";
 import { Column, Row } from "simple-flexbox";
 import LetsGetStarted from "../Popup/letsGetStartedPopUp";
 import Settings from "../Popup/settings";

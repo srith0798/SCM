@@ -1,7 +1,6 @@
 import React from "react";
 import { Row } from "simple-flexbox";
-import Header from "../header/header";
-import Sidebar from "../sidebar/sidebar";
+
 import "react-tabs/style/react-tabs.css";
 import styled from "styled-components";
 import { history } from "../../managers/history";
@@ -12,9 +11,9 @@ export default function AlertDetails() {
   };
   return (
     <div>
-      <Header />
+      {/* <Header /> */}
       <Row>
-        <Sidebar />
+        {/* <Sidebar /> */}
 
         <MainContainer>
           <Row

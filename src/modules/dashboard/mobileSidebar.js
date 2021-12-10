@@ -1,7 +1,19 @@
-import React from "react";
+import React , { useState } from "react";
 import styled from "styled-components";
 import { history } from "../../managers/history";
 
+const Hamburger  = styled.img`
+  width: 25px;
+  height: 25px;
+  margin: 5px 12px 0px 9px;
+  position: absolute;
+  left: 1%;
+  top: 1%;
+  cursor:pointer;
+  @media (min-width: 769px) {
+    display: none;
+  }
+`;
 const SidebarContainer = styled.div`
   // width: 100%;
   // max-width: 200px;
@@ -11,14 +23,16 @@ const SidebarContainer = styled.div`
   //   position: absolute;
   //   z-index: 1;
   // }
+  background: #102c78 0% 0% no-repeat padding-box;
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 100vh;
-  width: 228px;
+  /* min-height: 100vh; */
+  height: 100%;
+  width: 280px;
   padding-top: 15px;
 
-  @media (max-width: 768px) {
+  @media (min-width: 769px) {
     display: none;
   }
 `;
@@ -47,20 +61,21 @@ const Div = styled.div`
 `;
 
 export default function Sidebar(props) {
+  const [open, setOpen] = useState(false);
   const redirectToTransaction = () => {
-    history.push("/transaction-list");
+    history.push("/dashboard/transaction-list");
   };
   const redirectToContract = () => {
-    history.push("/contract");
+    history.push("/dashboard/contract");
   };
   const redirectToNetwork = () => {
-    history.push("/network");
+    history.push("/dashboard/network");
   };
   const redirectToAnalytics = () => {
-    history.push("/analytics");
+    history.push("/dashboard/analytics");
   };
   const redirectToAlerting = () => {
-    history.push("/Alerting");
+    history.push("/dashboard/Alerting");
   };
   const redirectToFaqs = () => {
     history.push("/");
@@ -103,9 +118,9 @@ export default function Sidebar(props) {
     if (value === "Alerting") setAlertingIcon("/images/Alerting.svg");
   };
 
-  return (
-    <Div>
-      {/* {props.openHumburger && ( */}
+  return (<>
+      <Hamburger src="/images/Grid.svg" onClick={() => setOpen(!open)} />
+      {open && 
       <SidebarContainer>
         <Wrapper onClick={redirectToAbout} style={{ marginTop: "4rem" }}>
           <Icon src="/images/Xmartly.svg" />
@@ -164,9 +179,8 @@ export default function Sidebar(props) {
         <CenterDiv>
           <img alt="" src="/images/Group 12.svg" />
         </CenterDiv>
-      </SidebarContainer>
-      {/* )} */}
-    </Div>
+      </SidebarContainer>}
+      </>
   );
 }
 
@@ -177,5 +191,5 @@ const CenterDiv = styled.div`
   margin-bottom: 3rem;
 `;
 const Spacing = styled.div`
-  margin-top: 9rem;
+  margin-top: 8rem;
 `;
