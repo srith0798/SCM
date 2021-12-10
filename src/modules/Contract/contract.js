@@ -24,8 +24,13 @@ export default function Contract(props) {
   };
 
   const getContractList = async () => {
+    try {
     const response = await ContractsService.getContractsList({});
     setAddress(response.contractList);
+    }
+    catch (e) {
+      console.log(e)
+    }
   }
 
   React.useEffect(() => {
@@ -54,7 +59,7 @@ export default function Contract(props) {
                   src="/images/refresh.svg"
                   style={{ marginRight: "0.625rem" }}
                 />
-                {open && <AddContract click={handleClose} />}
+                {open && <AddContract click={handleClose} reloadData={getContractList}/>}
                 <Button onClick={handleClickOpen}>Add Contract</Button>
               </div>
             </SubContainer>

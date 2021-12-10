@@ -119,7 +119,7 @@ export default function TransactionList(props) {
     borderRadius: "6px",
     height: "80px",
     marginTop: "4px",
-    fontSize: "14px",
+    fontSize: "0.875rem",
     fontWeight: "600",
     color: "#191919",
   };
@@ -232,46 +232,45 @@ export default function TransactionList(props) {
 }
 
 const Div = styled.div`
-  padding: 12px;
+  padding: 0.75rem;
   border-bottom: 1px solid #e3e7eb;
 `;
 const ColumnOne = styled.div`
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 600;
   color: #102c78;
   width: 100%;
-  max-width: 300px;
+  max-width: 18.75rem;
 `;
 const TableContainer = styled.div`
   background-color: #ffffff;
-  border-radius: 6px;
+  border-radius: 0.375rem;
   width: 100%;
-  height: 400px;
-  padding: 10px;
-  margin-top: 25px;
+  height: 25rem;
+  padding: 0.625rem;
+  margin-top: 1.563rem;
 `;
 
 const MainContainer = styled.div`
   background: #ecf0f7 0% 0% no-repeat padding-box;
   opacity: 1;
   width: 100%;
-  padding: 50px;
+  padding: 3.125rem;
 `;
 
 const Transactions = styled.div`
-  font-size: 20px;
+  font-size: 1.25rem;
 `;
 const SearchBar = styled.input`
-  height: 35px;
-
+  height: 2.188rem;
   border: none;
-  margin-left: 15px;
-  border-radius: 4px;
+  margin-left: 0.938rem;
+  border-radius: 0.25rem;
   background-image: url("/images/search-icon.svg");
   background-repeat: no-repeat;
-  background-position: 8px;
-  padding-left: 30px;
-  background-size: 12px;
+  background-position: 0.5rem;
+  padding-left: 1.875rem;
+  background-size: 0.75rem;
   outline: none;
   width: 100%;
   max-width: 261px;
@@ -281,7 +280,7 @@ const SearchBar = styled.input`
   }
 `;
 const Icons = styled.img`
-  margin-right: 10px;
+  margin-right: 0.625rem;
   cursor: pointer;
 `;
 const IconContainer = styled.div`
@@ -289,27 +288,26 @@ const IconContainer = styled.div`
   right: 40px;
 `;
 const Heading = styled.span`
-  margin-top: 10px;
+  margin-top: 0.625rem;
   color: #102c78;
   font-size: 1rem;
   font-weight: 600;
-  font: normal normal medium 14px/17px Inter;
 `;
 const InstructionText = styled.span`
-  margin-top: 10px;
+  margin-top: 0.625rem;
   color: #191919;
   font-size: 0.8rem;
   font-weight: 600;
-  margin-bottom: 10px;
+  margin-bottom: 0.625rem;
 `;
 const Card = styled.div`
-  margin-top: 20px;
+  margin-top: 1.25rem;
   background-color: #ffffff;
-  border-radius: 4px;
-  padding: 10px;
+  border-radius: 0.25rem;
+  padding: 0.625rem;
 `;
 const ColumnSecond = styled.div`
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 300;
   color: #191919;
   width: 100%;
@@ -317,42 +315,43 @@ const ColumnSecond = styled.div`
 `;
 const Bold = styled.b`
   color: #191919;
+  font-size: 1.5rem;
+  font-weight: 600;
 `;
 const DropDown = styled.div`
   background: #f5f6fd 0% 0% no-repeat padding-box;
   border: 1px;
-  border-radius: 6px;
-  font: normal normal medium 14px/17px Inter;
-  font-size: 14px;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
   font-weight: 600;
   color: #191919;
-  height: 75px;
-  padding: 14px;
+  height: 4.688rem;
+  padding: 0.875rem;
   width: 100%;
   max-width: 453px;
   position: relative;
 `;
 const TransactionHash = styled.div`
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 600;
   color: #416be0;
-  margin-top: 4px;
+  margin-top: 0.25rem;
 `;
 const Image = styled.img`
-  width: 12px;
+  width: 0.75rem;
   position: absolute;
   top: 29px;
   right: 8px;
   cursor: pointer;
 `;
 const Label = styled.div`
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: 600;
   color: #767c93;
 `;
 const ToolTipIcon = styled.img`
-  width: 12px;
+  width: 0.75rem;
   cursor: pointer;
-  margin-left: 8px;
+  margin-left: 0.5rem;
 `;
 // const ColorBox = styled.div``;

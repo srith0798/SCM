@@ -25,15 +25,15 @@ export default function TransactionDetails() {
         <Sidebar />
         <MainContainer>
           <Row style={{ display: "flex", justifyContent: "space-between" }}>
-            <div>
+            <TitleDiv>
               <img
                 alt=""
-                style={{ marginRight: "0.625rem" }}
+                style={{ marginRight: "0.425rem", cursor: "pointer" }}
                 src="/images/back.svg"
                 onClick={backButton}
               />
-              <b>Transactions Details</b>
-            </div>
+              <Title>Transactions Details</Title>
+            </TitleDiv>
             <Button>View in Explorer</Button>
           </Row>
 
@@ -60,11 +60,13 @@ export default function TransactionDetails() {
                 id="Overview"
                 onClick={handleViewClick}
                 style={{
-                  color: activeButton === "Overview" ? "blue" : "",
+                  color: activeButton === "Overview" ? "#3163F0" : "#AEB7D0",
                   display: "flex",
                   paddingBottom: "0.875rem",
                   borderBottom:
-                    activeButton === "Overview" ? "0.125rem solid blue" : "",
+                    activeButton === "Overview"
+                      ? "0.125rem solid #3163F0"
+                      : "#AEB7D0",
                 }}
               >
                 <img
@@ -82,7 +84,7 @@ export default function TransactionDetails() {
                 id="Contracts"
                 onClick={handleViewClick}
                 style={{
-                  color: activeButton === "Contracts" ? "blue" : "",
+                  color: activeButton === "Contracts" ? "#3163F0" : "#AEB7D0",
                   display: "flex",
                   paddingBottom: "0.875rem",
                   borderBottom:
@@ -104,11 +106,11 @@ export default function TransactionDetails() {
                 id="Events"
                 onClick={handleViewClick}
                 style={{
-                  color: activeButton === "Events" ? "blue" : "",
+                  color: activeButton === "Events" ? "#3163F0" : "#AEB7D0",
                   display: "flex",
                   paddingBottom: "0.875rem",
                   borderBottom:
-                    activeButton === "Events" ? "0.125rem solid blue" : "",
+                    activeButton === "Events" ? "0.125rem solid #3163F0" : "",
                 }}
               >
                 <img
@@ -126,14 +128,16 @@ export default function TransactionDetails() {
                 id="StateChange"
                 onClick={handleViewClick}
                 style={{
-                  color: activeButton === "StateChange" ? "blue" : "",
+                  color: activeButton === "StateChange" ? "#3163F0" : "#AEB7D0",
                   borderBottom:
-                    activeButton === "StateChange" ? "0.125rem solid blue" : "",
+                    activeButton === "StateChange"
+                      ? "0.125rem solid #3163F0"
+                      : "",
                 }}
               >
                 <img
                   alt=""
-                  style={{ marginRight: "0.375rem" }}
+                  style={{ marginRight: "0.375rem", marginBottom: "4px" }}
                   src={
                     activeButton === "Events"
                       ? "/images/statechange_grey.svg"
@@ -316,7 +320,16 @@ export default function TransactionDetails() {
     </>
   );
 }
-
+const TitleDiv = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 267px;
+  align-items: center;
+  font-size: 24px;
+  font-weight: 600;
+`;
+const Title = styled.div``;
 const NewContainer = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
   border-radius: 0.375rem;
