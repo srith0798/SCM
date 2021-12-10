@@ -14,25 +14,112 @@ export default function WalletPopUp(props) {
 
   return (
     <div>
-      <Dialog classes={{ paper: classes.dialogBox }} open={true}>
-        <MainContainer>
-          <Container>
-            <RowContainer>
-              <Add>
-                Connect Wallet{" "}
-                <CrossIcon
+      {props.state ? (
+        <Dialog classes={{ paper: classes.dialogBox }} open={true}>
+          <MainContainer>
+            <Container>
+              <RowContainer>
+                <Add>
+                  Connect Wallet
+                  <CrossIcon
+                    alt=""
+                    src="/images/XDC-Cross.svg"
+                    onClick={props.click}
+                  />
+                </Add>
+              </RowContainer>
+              <DetailBox>
+                <IconContainer>
+                  <StepsTitle>Step 1</StepsTitle>
+                  <img
+                    style={{ width: "50px" }}
+                    alt=""
+                    src="/images/XDCinstall.svg"
+                  />
+                  <Title>Install XDCPay</Title>
+                  <SubTitle>
+                    Install XDCPay Chrome extension from here.
+                  </SubTitle>
+                </IconContainer>
+                <IconContainer>
+                  <StepsTitle>Step 1</StepsTitle>
+                  <img alt="" src="/images/XDClogin.svg" />
+                  <Title>Login to XDCPay</Title>
+                  <SubTitle>
+                    Login to you account on XDCPay Chrome extension.
+                  </SubTitle>
+                </IconContainer>
+                <IconContainer>
+                  <StepsTitle>Step 1</StepsTitle>
+                  <img alt="" src="/images/XDCwallet.svg" />
+                  <Title>Connect Wallet</Title>
+                  <SubTitle>Connect your XDCPay wallet with SmartHub.</SubTitle>
+                </IconContainer>
+              </DetailBox>
+              <Button>
+                <img
+                  style={{ paddingLeft: "30px", marginRight: "15px" }}
                   alt=""
-                  src="/images/XDC-Cross.svg"
-                  onClick={props.click}
+                  src="/images/XDC logo_white.svg"
                 />
-              </Add>
-            </RowContainer>
-          </Container>
-        </MainContainer>
-      </Dialog>
+                Connect Wallet
+              </Button>
+            </Container>
+          </MainContainer>
+        </Dialog>
+      ) : null}
     </div>
   );
 }
+const Button = styled.button`
+  background-repeat: no-repeat;
+  display: -webkit-inline-box;
+  background-position: 0.5rem;
+  padding: 14px;
+  item-align: center;
+  background-size: 0.875rem;
+  width: 264px;
+  height: 50px;
+  padding-top: 9px;
+  background-color: #3163f0;
+  color: #ffffff;
+  border: none;
+  border-radius: 0.25rem;
+  font-size: 16px;
+  font-weight: 600;
+`;
+const Title = styled.div`
+  text-align: center;
+  font: normal normal 600 16px/20px Inter;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0px;
+  color: #1f1f1f;
+  opacity: 1;
+  padding-top: 20px;
+`;
+const StepsTitle = styled.div`
+  text-align: center;
+  font: normal normal normal 14px/17px Inter;
+  letter-spacing: 0px;
+  color: #7b7979;
+  opacity: 1;
+  padding-bottom: 10px;
+`;
+const SubTitle = styled.div`
+  text-align: center;
+
+  letter-spacing: 0px;
+  opacity: 1;
+  padding-top: 10px;
+  font-size: 16px;
+  font-weight: normal;
+`;
+
+const IconContainer = styled.div`
+  padding: 20px;
+`;
+
 const CrossIcon = styled.img`
   cursor: pointer;
   width: 16px;
@@ -44,119 +131,33 @@ const CrossIcon = styled.img`
     -moz-box-shadow: 15px 18px 78px -23px rgba(0, 0, 0, 1);
   }
 `;
-
-// const ApplyButton = styled.div`
-//   width: 68px;
-//   height: 34px;
-//   background: #3163f0 0% 0% no-repeat padding-box;
-//   border-radius: 3px;
-//   color: #ffffff;
-//   padding-top: 6px;
-//   font-size: 14px;
-//   margin-right: 15px;
-//   text-align: center;
-//   cursor: pointer;
-// `;
-// const CancelButton = styled.div`
-//   top: 432px;
-//   left: 1179px;
-//   width: 72px;
-//   height: 34px;
-//   border: 1px solid #3163f0;
-//   opacity: 1;
-//   padding-top: 6px;
-//   border-radius: 3px;
-//   font-size: 14px;
-//   text-align: center;
-//   cursor: pointer;
-//   margin-left: -5px;
-//   margin-right: -11px;
-
-//   color: #3163f0;
-// `;
-// const ButtonA = styled.div`
-//   width: 38px;
-//   height: 34px;
-//   background: #ffffff 0% 0% no-repeat padding-box;
-//   border: 1px solid #3163f0;
-//   border-radius: 6px;
-//   padding-top: 4px;
-//   margin-right: 20px;
-//   text-align: center;
-//   color: #3062ef;
-//   text-size: 14px;
-//   cursor: pointer;
-// `;
-// const ButtonB = styled.div`
-//   width: 78px;
-//   text-size: 14px;
-//   height: 34px;
-//   background: #ffffff 0% 0% no-repeat padding-box;
-//   border: 1px solid #d9d9d9;
-//   border-radius: 6px;
-//   opacity: 1;
-//   padding-top: 4px;
-//   margin-right: 20px;
-//   text-align: center;
-//   cursor: pointer;
-// `;
-// const ButtonC = styled.div`
-//   width: 78px;
-//   height: 34px;
-//   background: #ffffff 0% 0% no-repeat padding-box;
-//   border: 1px solid #d9d9d9;
-//   border-radius: 6px;
-//   opacity: 1;
-//   padding-top: 4px;
-//   text-align: center;
-//   text-size: 14px;
-//   cursor: pointer;
-// `;
-// const DropDown = styled.div`
-//   background: #f5f6fd 0% 0% no-repeat padding-box;
-//   border: 1px solid #d5e0ff;
-//   border-radius: 6px;
-//   font-size: 14px;
-//   font-weight: 600;
-//   // color: #767c93;
-//   color: #b7b7b7;
-//   height: 40px;
-//   padding: 10px;
-//   width: 352px;
-//   height: 34px;
-//   padding-top: 5px;
-//   position: relative;
-// `;
-// const DropDownTwo = styled.div`
-//   background: #f5f6fd 0% 0% no-repeat padding-box;
-//   border: 1px solid #d5e0ff;
-//   border-radius: 6px;
-//   font-size: 14px;
-//   font-weight: 600;
-//   color: #b7b7b7;
-//   height: 34px;
-//   padding-left: 9px;
-//   padding-top: 6px;
-
-//   width: 160px;
-
-//   margin-right: 50px;
-// `;
+const DetailBox = styled.div`
+  display: flex;
+  padding-bottom: 35px;
+`;
 const MainContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-left: 30px;
+  // padding-left: 30px;
 `;
 const Container = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
-  padding-bottom: 20px;
+  // padding-bottom: 20px;
   border-radius: 0.375rem;
   width: 100%;
   background-color: #ffffff;
   max-width: 563px;
-  height: 359px;
+  padding: 4px;
+  background: #ffffff 0% 0% no-repeat padding-box;
+  border-radius: 0.375rem;
+  width: 100%;
+  background-color: #ffffff;
+  max-width: 563px;
+  align-items: center;
+  text-align: center;
+  height: 420px;
 `;
 const Add = styled.div`
   font-size: 1.2rem;
@@ -164,51 +165,16 @@ const Add = styled.div`
   color: #303134;
   padding-top: 15px;
   padding-bottom: 5px;
-  margin-left: -12px;
-  border-bottom: 1px solid grey;
+  // margin-left: -12px;
+  border-bottom: 1px solid #d8d8d8;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 `;
 
-// const Content = styled.div`
-//   font-size: 1rem;
-//   font-weight: 600;
-//   color: #303134;
-//   margin-top: 0.625rem;
-//   //   padding: 15px 12px 8px 10px;
-//   // padding: 0.938rem 0.75rem 0.5rem 0.625rem;
-// `;
-// const LastRowBox = styled.div`
-//   display: flex;
-//   justify-content: space-between;
-//   width: 100%;
-//   max-width: 400px;
-//   padding-bottom: 10px;
-// `;
-// const RowBoxOne = styled.div`
-//   display: flex;
-//   justify-content: start;
-//   width: 100%;
-//   max-width: 400px;
-// `;
 const RowContainer = styled.div`
-  //   padding: 18px 14px 12px 12px;
+  // padding: 18px 14px 12px 12px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 `;
-// const NewContainer = styled.div`
-//   display: flex;
-//   justify-content: space-between;
-//   width: 100%;
-//   max-width: 3 00px;
-//   padding-bottom: 20px;
-// `;
-// const LastContainer = styled.div`
-//   display: flex;
-//   justify-content: end;
-//   /* width: 100%; */
-//   max-width: 503px;
-// `;
-// const NewContainerOne = styled.div`
-//   display: flex;
-//   justify-content: space-between;
-//   width: 100%;
-//   max-width: 515px;
-//   padding-bottom: 20px;
-// `;

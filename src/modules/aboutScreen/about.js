@@ -1,10 +1,13 @@
 import React from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import { Row } from "simple-flexbox";
 import Header from "../header/header";
 import Sidebar from "../sidebar/sidebar";
+import WalletPopUp from "./walletPopUp";
 
 export default function About() {
+  const [state, setState] = useState(true);
   return (
     <>
       <Header />
@@ -80,6 +83,9 @@ export default function About() {
           </MainBoxContainer>
         </MainContainer>
       </Row>
+      <div>
+        {true && <WalletPopUp click={() => setState(false)} state={state} />}
+      </div>
     </>
   );
 }
