@@ -102,7 +102,7 @@ export default function ContractDetails() {
     <>
       <Header />
       <Row>
-        <Sidebar />
+        {/* <Sidebar /> */}
         <MainContainer>
           <Row style={{ display: "flex", justifyContent: "space-between" }}>
             <TitleDiv>

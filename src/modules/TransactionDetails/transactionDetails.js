@@ -22,7 +22,7 @@ export default function TransactionDetails() {
     <>
       <Header />
       <Row>
-        <Sidebar />
+        {/* <Sidebar /> */}
         <MainContainer>
           <Row style={{ display: "flex", justifyContent: "space-between" }}>
             <TitleDiv>
@@ -41,222 +41,283 @@ export default function TransactionDetails() {
             <SubHeading
               style={{ paddingTop: "0.625rem", paddingLeft: "1.25rem" }}
             >
-              <img
-                alt=""
-                style={{ marginRight: "0.375rem" }}
-                src={
-                  activeButton === "Contracts"
-                    ? "/images/contracts.svg"
-                    : "/images/contract_grey.svg"
-                }
-              />
-              Contracts
-            </TabView>
-            <TabView
-              id="Events"
-              onClick={handleViewClick}
+              Txn hash
+            </SubHeading>
+            <div
               style={{
-                color: activeButton === "Events" ? "blue" : "",
+                paddingLeft: "1.25rem",
                 display: "flex",
-                paddingBottom: "0.875rem",
-                borderBottom:
-                  activeButton === "Events" ? "0.125rem solid blue" : "",
+                alignItems: "center",
               }}
             >
-              <img
-                alt=""
-                style={{ marginRight: "0.375rem" }}
-                src={
-                  activeButton === "Events"
-                    ? "/images/event_blue.svg"
-                    : "/images/event_grey.svg"
-                }
-              />{" "}
-              Events
-            </TabView>
-            <TabView
-              id="StateChange"
-              onClick={handleViewClick}
-              style={{
-                color: activeButton === "StateChange" ? "blue" : "",
-                borderBottom:
-                  activeButton === "StateChange" ? "0.125rem solid blue" : "",
-              }}
-            >
-              <img
-                alt=""
-                style={{ marginRight: "0.375rem" }}
-                src={
-                  activeButton === "Events"
-                    ? "/images/statechange_grey.svg"
-                    : "/images/statechange_grey.svg"
-                }
-              />
-              State Change
-            </TabView>
-          </TabLister>
-          {activeButton === "Overview" && (
-            <div>
-              <MidContainer>
-                <CommonDiv>
-                  <Row>
-                    <Heading>Network</Heading>
-                    <SubHead>XDC mainnet</SubHead>
-                  </Row>
-                </CommonDiv>
-                <CommonDiv>
-                  <Row>
-                    <Heading>Error</Heading>
-                    <SubHead>Out of Gas</SubHead>
-                  </Row>
-                </CommonDiv>
-                <CommonDiv>
-                  <Row>
-                    <Heading>Block</Heading>
-                    <SubHead>365474(2456block)</SubHead>
-                  </Row>
-                </CommonDiv>
-                <CommonDiv>
-                  <Row>
-                    <Heading>Transactions index</Heading>
-                    <SubHead>5</SubHead>
-                  </Row>
-                </CommonDiv>
-                <CommonDiv>
-                  <Row>
-                    <Heading>From</Heading>
-                    <SubHead style={{ display: "flex", alignItems: "center" }}>
-                      <Hash>
-                        <TransactionNumber>
-                          xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c
-                        </TransactionNumber>
-                      </Hash>
-                      <CopyImg src="/images/copy.svg" />
-                    </SubHead>
-                  </Row>
-                </CommonDiv>
-                <CommonDiv>
-                  <Row>
-                    <Heading>To</Heading>
-                    <SubHead style={{ display: "flex", alignItems: "center" }}>
-                      <Hash>
-                        <TransactionNumber>
-                          xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c
-                        </TransactionNumber>
-                      </Hash>
-                      <CopyImg src="/images/copy.svg" />
-                    </SubHead>
-                  </Row>
-                </CommonDiv>
-                <CommonDiv>
-                  <Row>
-                    <Heading>Timestamp</Heading>
-                    <SubHead>213 322 adhfb</SubHead>
-                  </Row>
-                </CommonDiv>
-                <CommonDiv>
-                  <Row>
-                    <Heading>Value</Heading>
-                    <SubHead> 10 XDC</SubHead>
-                  </Row>
-                </CommonDiv>
-                <CommonDiv>
-                  <Row>
-                    <Heading>Nonce</Heading>
-                    <SubHead>453</SubHead>
-                  </Row>
-                </CommonDiv>
-                <CommonDiv>
-                  <Row>
-                    <Heading>Gas Used</Heading>
-                    <SubHead>60,500(100%)</SubHead>
-                  </Row>
-                </CommonDiv>
-                <CommonDiv>
-                  <Row>
-                    <Heading>Gas Price</Heading>
-                    <SubHead>72462568294732962 XDC(54253.gwel)</SubHead>
-                  </Row>
-                </CommonDiv>
-                <CommonDiv>
-                  <Row>
-                    <Heading>Transaction Fee</Heading>
-                    <SubHead>0.2372723762728 XDC</SubHead>
-                  </Row>
-                </CommonDiv>
-                <CommonDiv>
-                  <Row>
-                    <Heading>Raw input</Heading>
-                    <SubHead style={{ display: "flex", alignItems: "center" }}>
-                      <Hash>
-                        <TransactionNumber>
-                          xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c
-                        </TransactionNumber>
-                      </Hash>
-                      <CopyImg src="/images/copy.svg" />
-                    </SubHead>
-                  </Row>
-                </CommonDiv>
-              </MidContainer>
-              <NewContainer>
-                <CommonDiv>
-                  <Row>
-                    <Heading>Function:</Heading>
-                    <SHead>transfer()</SHead>
-                  </Row>
-                </CommonDiv>
-                <CommonDiv>
-                  <Row>
-                    <Heading>Input</Heading>
-                    <SHead>view data </SHead>
-                  </Row>
-                </CommonDiv>
+              <Hash>xdcabfe4184e5f9f600fe86d20ffdse2fsfbsgsgsa768b3c</Hash>
+              <CopyToClipboard>
+                <CopyImg src="/images/copy.svg" />
+              </CopyToClipboard>
+            </div>
 
-                <ThirdBox>
-                  <Row
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                    }}
-                  >
-                    <CAllADDs>
-                      Caller Address:
-                      <br />
-                      462482482765
-                    </CAllADDs>
-
-                    <CAllADDs>
-                      Contract Address:
-                      <br />
-                      4752589752
-                    </CAllADDs>
-                  </Row>
-                </ThirdBox>
-              </NewContainer>
-              <b>Stack Trace</b>
-              <StackContainer>
-                <TextLi>Error Messege:out of gas</TextLi>
-                balances[_to] = balances[_to].add(_value);
-                <br />
-                at App_Transactions_Validator.sol in App_Transactions_Validator
-              </StackContainer>
-              <LastContainer>
-                <SearchBar placeholder="Execution trace" />
-                <br />
+            <TabLister>
+              <TabView
+                id="Overview"
+                onClick={handleViewClick}
+                style={{
+                  color: activeButton === "Overview" ? "#3163F0" : "#AEB7D0",
+                  display: "flex",
+                  paddingBottom: "0.875rem",
+                  borderBottom:
+                    activeButton === "Overview"
+                      ? "0.125rem solid #3163F0"
+                      : "#AEB7D0",
+                }}
+              >
                 <img
                   alt=""
-                  src="/images/contracts.svg"
-                  style={{ width: "1rem" }}
+                  style={{ marginRight: "0.375rem" }}
+                  src={
+                    activeButton === "Overview"
+                      ? "/images/overview.svg"
+                      : "/images/overview_grey.svg"
+                  }
                 />
-                transfer in App_Transactions_Validator
-              </LastContainer>
-            </div>
-          )}
-          {activeButton === "Contracts" && <SubContracts />}
-          {activeButton === "Events" && <Events />}
-          {activeButton === "StateChange" && <StateChange />}
-        </Container>
-      </MainContainer>
+                Overview
+              </TabView>
+              <TabView
+                id="Contracts"
+                onClick={handleViewClick}
+                style={{
+                  color: activeButton === "Contracts" ? "#3163F0" : "#AEB7D0",
+                  display: "flex",
+                  paddingBottom: "0.875rem",
+                  borderBottom:
+                    activeButton === "Contracts" ? "0.125rem solid blue" : "",
+                }}
+              >
+                <img
+                  alt=""
+                  style={{ marginRight: "0.375rem" }}
+                  src={
+                    activeButton === "Contracts"
+                      ? "/images/contracts.svg"
+                      : "/images/contract_grey.svg"
+                  }
+                />
+                Contracts
+              </TabView>
+              <TabView
+                id="Events"
+                onClick={handleViewClick}
+                style={{
+                  color: activeButton === "Events" ? "#3163F0" : "#AEB7D0",
+                  display: "flex",
+                  paddingBottom: "0.875rem",
+                  borderBottom:
+                    activeButton === "Events" ? "0.125rem solid #3163F0" : "",
+                }}
+              >
+                <img
+                  alt=""
+                  style={{ marginRight: "0.375rem" }}
+                  src={
+                    activeButton === "Events"
+                      ? "/images/event_blue.svg"
+                      : "/images/event_grey.svg"
+                  }
+                />{" "}
+                Events
+              </TabView>
+              <TabView
+                id="StateChange"
+                onClick={handleViewClick}
+                style={{
+                  color: activeButton === "StateChange" ? "#3163F0" : "#AEB7D0",
+                  borderBottom:
+                    activeButton === "StateChange"
+                      ? "0.125rem solid #3163F0"
+                      : "",
+                }}
+              >
+                <img
+                  alt=""
+                  style={{ marginRight: "0.375rem", marginBottom: "4px" }}
+                  src={
+                    activeButton === "Events"
+                      ? "/images/statechange_grey.svg"
+                      : "/images/statechange_grey.svg"
+                  }
+                />
+                State Change
+              </TabView>
+            </TabLister>
+            {activeButton === "Overview" && (
+              <div>
+                <MidContainer>
+                  <CommonDiv>
+                    <Row>
+                      <Heading>Network</Heading>
+                      <SubHead>XDC mainnet</SubHead>
+                    </Row>
+                  </CommonDiv>
+                  <CommonDiv>
+                    <Row>
+                      <Heading>Error</Heading>
+                      <SubHead>Out of Gas</SubHead>
+                    </Row>
+                  </CommonDiv>
+                  <CommonDiv>
+                    <Row>
+                      <Heading>Block</Heading>
+                      <SubHead>365474(2456block)</SubHead>
+                    </Row>
+                  </CommonDiv>
+                  <CommonDiv>
+                    <Row>
+                      <Heading>Transactions index</Heading>
+                      <SubHead>5</SubHead>
+                    </Row>
+                  </CommonDiv>
+                  <CommonDiv>
+                    <Row>
+                      <Heading>From</Heading>
+                      <SubHead
+                        style={{ display: "flex", alignItems: "center" }}
+                      >
+                        <Hash>
+                          <TransactionNumber>
+                            xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c
+                          </TransactionNumber>
+                        </Hash>
+                        <CopyImg src="/images/copy.svg" />
+                      </SubHead>
+                    </Row>
+                  </CommonDiv>
+                  <CommonDiv>
+                    <Row>
+                      <Heading>To</Heading>
+                      <SubHead
+                        style={{ display: "flex", alignItems: "center" }}
+                      >
+                        <Hash>
+                          <TransactionNumber>
+                            xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c
+                          </TransactionNumber>
+                        </Hash>
+                        <CopyImg src="/images/copy.svg" />
+                      </SubHead>
+                    </Row>
+                  </CommonDiv>
+                  <CommonDiv>
+                    <Row>
+                      <Heading>Timestamp</Heading>
+                      <SubHead>213 322 adhfb</SubHead>
+                    </Row>
+                  </CommonDiv>
+                  <CommonDiv>
+                    <Row>
+                      <Heading>Value</Heading>
+                      <SubHead> 10 XDC</SubHead>
+                    </Row>
+                  </CommonDiv>
+                  <CommonDiv>
+                    <Row>
+                      <Heading>Nonce</Heading>
+                      <SubHead>453</SubHead>
+                    </Row>
+                  </CommonDiv>
+                  <CommonDiv>
+                    <Row>
+                      <Heading>Gas Used</Heading>
+                      <SubHead>60,500(100%)</SubHead>
+                    </Row>
+                  </CommonDiv>
+                  <CommonDiv>
+                    <Row>
+                      <Heading>Gas Price</Heading>
+                      <SubHead>72462568294732962 XDC(54253.gwel)</SubHead>
+                    </Row>
+                  </CommonDiv>
+                  <CommonDiv>
+                    <Row>
+                      <Heading>Transaction Fee</Heading>
+                      <SubHead>0.2372723762728 XDC</SubHead>
+                    </Row>
+                  </CommonDiv>
+                  <CommonDiv>
+                    <Row>
+                      <Heading>Raw input</Heading>
+                      <SubHead
+                        style={{ display: "flex", alignItems: "center" }}
+                      >
+                        <Hash>
+                          <TransactionNumber>
+                            xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c
+                          </TransactionNumber>
+                        </Hash>
+                        <CopyImg src="/images/copy.svg" />
+                      </SubHead>
+                    </Row>
+                  </CommonDiv>
+                </MidContainer>
+                <NewContainer>
+                  <CommonDiv>
+                    <Row>
+                      <Heading>Function:</Heading>
+                      <SHead>transfer()</SHead>
+                    </Row>
+                  </CommonDiv>
+                  <CommonDiv>
+                    <Row>
+                      <Heading>Input</Heading>
+                      <SHead>view data </SHead>
+                    </Row>
+                  </CommonDiv>
+
+                  <ThirdBox>
+                    <Row
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <CAllADDs>
+                        Caller Address:
+                        <br />
+                        462482482765
+                      </CAllADDs>
+
+                      <CAllADDs>
+                        Contract Address:
+                        <br />
+                        4752589752
+                      </CAllADDs>
+                    </Row>
+                  </ThirdBox>
+                </NewContainer>
+                <b>Stack Trace</b>
+                <StackContainer>
+                  <TextLi>Error Messege:out of gas</TextLi>
+                  balances[_to] = balances[_to].add(_value);
+                  <br />
+                  at App_Transactions_Validator.sol in
+                  App_Transactions_Validator
+                </StackContainer>
+                <LastContainer>
+                  <SearchBar placeholder="Execution trace" />
+                  <br />
+                  <img
+                    alt=""
+                    src="/images/contracts.svg"
+                    style={{ width: "1rem" }}
+                  />
+                  transfer in App_Transactions_Validator
+                </LastContainer>
+              </div>
+            )}
+            {activeButton === "Contracts" && <SubContracts />}
+            {activeButton === "Events" && <Events />}
+            {activeButton === "StateChange" && <StateChange />}
+          </Container>
+        </MainContainer>
+      </Row>
     </>
   );
 }
