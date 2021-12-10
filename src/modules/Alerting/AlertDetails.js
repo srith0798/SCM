@@ -32,7 +32,7 @@ export default function AlertDetails() {
               />
               <b>Alert Details</b>
             </div>
-            <Button>Add alert</Button>
+            <Button>Add Alert</Button>
           </Row>
           <Container>
             <CommonDiv>

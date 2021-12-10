@@ -1,9 +1,46 @@
 import React from "react";
 import styled from "styled-components";
-
+import ContractsService from "../../services/contractsService";
 import Dialog from "@mui/material/Dialog";
+import utility from "../../utility";
 
 export default function AddContract(props) {
+  const [address, setAddress] = React.useState("")
+  console.log(props)
+
+  const addContract = async () => {
+    try {
+      let requestData = {
+        contractAddress: address
+      }
+      const response = await ContractsService.addContract(requestData);
+      console.log(response)
+      // if(error){
+      //   utility.apiFailureToast(error)
+      //   return
+      // }
+      if (response.address && response.address === address) {
+        utility.apiSuccessToast("Contract added");
+        props.click()
+        props.reloadData()
+      }
+      else {
+        utility.apiFailureToast("Contract not found")
+      }
+    }
+    catch (e) {
+      if (e === "Address already Exists")
+        utility.apiFailureToast(e)
+      console.log(e)
+      // utility.apiFailureToast(e)
+    }
+  }
+
+  const handleEnterKey = (e) => {
+    if (e.key === 'Enter') {
+      addContract()
+    }
+  }
   return (
     <div>
       <Dialog open>
@@ -20,14 +57,72 @@ export default function AddContract(props) {
             <Input
               type="text"
               placeholder="Find a public contract by name or address"
+              onChange={(e) => setAddress(e.target.value)}
+              onKeyDown={(e) => handleEnterKey(e)}
             />
-            <Button>Import Contracts</Button>
+            <Text>
+              1. Go to XDC Explorer <br></br>
+              2. Check for an verified contract <br>
+              </br> 3. Copy contract address <br>
+              </br>4. Paste it on the given field below
+            </Text>
+
+            <ImportBox>
+              <IconImport>
+                <XDCLogo src="/images/network.svg"></XDCLogo>
+                <BlueLine>
+
+                </BlueLine>
+              </IconImport>
+              <SelectImport>
+                <CheckBox type="checkbox" />
+                <AddressImport>xdckdjhflkasjhf987sdf8as7df9</AddressImport>
+              </SelectImport>
+            </ImportBox>
+            <Button onClick={addContract}>Import Contracts</Button>
           </Container>
         </MainContainer>
       </Dialog>
     </div>
   );
 }
+
+
+const CheckBox = styled.input`
+  outline: none;
+  
+`
+const XDCLogo = styled.img`
+  margin-bottom: 5px;
+`
+const BlueLine = styled.div`
+  width: 30px;
+  border-bottom: 2px solid blue;
+`
+const AddressImport = styled.div`
+  color: #436CE0;
+  font: normal normal medium 14px/17px Inter;
+  margin-left:5px;
+`
+const ImportBox = styled.div`
+  background-color: #F0F2FC;
+  width: 100%;
+`
+const IconImport = styled.div`
+      padding: 8px 8px 0px 8px;
+    border-bottom: 1px solid #c3c3c3;
+`
+const SelectImport = styled.div`
+  display: flex;
+  padding: 5px;
+    display: flex;
+    align-items: baseline;
+    margin-top: 25px;
+`
+
+const Text = styled.div`
+
+`
 const MainContainer = styled.div`
   width: 100%;
   display: flex;

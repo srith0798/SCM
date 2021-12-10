@@ -16,6 +16,7 @@ const MainContainer = styled.div`
   align-items: center;
   border: none;
   background-color: #ffffff;
+  margin-top: 33px;
 `;
 const Container = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
@@ -25,6 +26,7 @@ const Container = styled.div`
   background-color: #ffffff;
   max-width: 700px;
   height: 300px;
+
   padding: 20px;
 `;
 
@@ -34,7 +36,8 @@ const Div = styled.div`
   width: 100%;
   max-width: 650px;
   height: 220px;
-  margin-top: 8px;
+  // margin-top: 8px;
+  margin-top: 33px;
   padding: 20px;
   display: flex;
   align-items: center;

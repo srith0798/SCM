@@ -23,9 +23,14 @@ export default function Contract(props) {
   };
 
   const getContractList = async () => {
+    try {
     const response = await ContractsService.getContractsList({});
     setAddress(response.contractList);
-  };
+    }
+    catch (e) {
+      console.log(e)
+    }
+  }
 
   React.useEffect(() => {
     // getContractList();

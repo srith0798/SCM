@@ -20,71 +20,26 @@ export default function TransactionDetails() {
   };
   return (
     <>
-      <MainContainer>
-        <Row style={{ display: "flex", justifyContent: "space-between" }}>
-          <div>
-            <img
-              alt=""
-              style={{ marginRight: "0.625rem" }}
-              src="/images/back.svg"
-              onClick={backButton}
-            />
-            <b>Transactions Details</b>
-          </div>
-          <Button>View in Explorer</Button>
-        </Row>
-
-        <Container>
-          <SubHeading
-            style={{ paddingTop: "0.625rem", paddingLeft: "1.25rem" }}
-          >
-            Txn hash
-          </SubHeading>
-          <div
-            style={{
-              paddingLeft: "1.25rem",
-              display: "flex",
-              alignItems: "center",
-            }}
-          >
-            <Hash>xdcabfe4184e5f9f600fe86d20ffdse2fsfbsgsgsa768b3c</Hash>
-            <CopyToClipboard>
-              <CopyImg src="/images/copy.svg" />
-            </CopyToClipboard>
-          </div>
-          <TabLister>
-            <TabView
-              id="Overview"
-              onClick={handleViewClick}
-              style={{
-                color: activeButton === "Overview" ? "blue" : "",
-                display: "flex",
-                paddingBottom: "0.875rem",
-                borderBottom:
-                  activeButton === "Overview" ? "0.125rem solid blue" : "",
-              }}
-            >
+      <Header />
+      <Row>
+        <Sidebar />
+        <MainContainer>
+          <Row style={{ display: "flex", justifyContent: "space-between" }}>
+            <TitleDiv>
               <img
                 alt=""
-                style={{ marginRight: "0.375rem" }}
-                src={
-                  activeButton === "Overview"
-                    ? "/images/overview.svg"
-                    : "/images/overview_grey.svg"
-                }
+                style={{ marginRight: "0.425rem", cursor: "pointer" }}
+                src="/images/back.svg"
+                onClick={backButton}
               />
-              Overview
-            </TabView>
-            <TabView
-              id="Contracts"
-              onClick={handleViewClick}
-              style={{
-                color: activeButton === "Contracts" ? "blue" : "",
-                display: "flex",
-                paddingBottom: "0.875rem",
-                borderBottom:
-                  activeButton === "Contracts" ? "0.125rem solid blue" : "",
-              }}
+              <Title>Transactions Details</Title>
+            </TitleDiv>
+            <Button>View in Explorer</Button>
+          </Row>
+
+          <Container>
+            <SubHeading
+              style={{ paddingTop: "0.625rem", paddingLeft: "1.25rem" }}
             >
               <img
                 alt=""
@@ -305,7 +260,16 @@ export default function TransactionDetails() {
     </>
   );
 }
-
+const TitleDiv = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 267px;
+  align-items: center;
+  font-size: 24px;
+  font-weight: 600;
+`;
+const Title = styled.div``;
 const NewContainer = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
   border-radius: 0.375rem;
