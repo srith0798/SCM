@@ -14,7 +14,7 @@ const useStyles = makeStyles(() => ({
 export default function AddContract(props) {
   const classes = useStyles();
   const [hideStep, setHideStep] = useState(true);
-
+  const [disabled, setDisabled] = useState("");
   const [address, setAddress] = React.useState("");
   console.log(props);
 
