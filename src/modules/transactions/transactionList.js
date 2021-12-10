@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Header from "../header/header";
-import Sidebar from "../sidebar/sidebar";
+// import Sidebar from "../sidebar/sidebar";
 import { Column, Row } from "simple-flexbox";
 import LetsGetStarted from "../Popup/letsGetStartedPopUp";
 import Settings from "../Popup/settings";
@@ -9,7 +9,6 @@ import Box from "@mui/material/Box";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 import { history } from "../../managers/history";
 import Tooltip from "@mui/material/Tooltip";
-import FilterPopUp from "../Popup/filter";
 
 export default function TransactionList(props) {
   useEffect(() => {
@@ -18,17 +17,13 @@ export default function TransactionList(props) {
   }, []);
   const [state, setState] = useState(true);
   const [open, isOpen] = useState(false);
-  const [filterBox, setFilterBox] = useState(false);
-  const handleFilterBox = () => {
-    setFilterBox(!filterBox);
-  };
   const handleClickOpen = () => {
     isOpen(true);
   };
   const handleClose = () => {
     isOpen(false);
   };
-  //TODO: for dummy data , create a saperate file and import
+
   React.useEffect(() => {
     let address = [
       {
@@ -123,16 +118,14 @@ export default function TransactionList(props) {
     fontWeight: "600",
     color: "#191919",
   };
-
-  //TODO: All the strings constants should be in constants file.
   const redirectToTransactionDetails = () => {
     history.push("/transaction-details");
   };
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <Row>
-        <Sidebar />
+        {/* <Sidebar /> */}
         <MainContainer>
           <Row>
             <Transactions>
@@ -141,10 +134,9 @@ export default function TransactionList(props) {
             <SearchBar placeholder="Search by status or name" />
             <IconContainer>
               {open && <Settings click={handleClose} />}
-              {filterBox && <FilterPopUp closePopup={handleFilterBox} />}
               <Icons src="/images/settings.svg" onClick={handleClickOpen} />
               <Icons src="/images/refresh.svg" />
-              <Icons src="/images/filter.svg" onClick={handleFilterBox} />
+              <Icons src="/images/filter.svg" />
             </IconContainer>
           </Row>
 
@@ -198,12 +190,10 @@ export default function TransactionList(props) {
                 <ColumnOne>When</ColumnOne>
               </Row>
             </Div>
-
-            {/*TODO: add placeholder when there is no data to render */}
             <div>
               {address.map((data, index) => {
                 return (
-                  <Div key={index} onClick={redirectToTransactionDetails}>
+                  <Div onClick={redirectToTransactionDetails}>
                     <Row>
                       {/* <ColorBox> */}
                       <ColumnSecond>{data.txn}</ColumnSecond>
@@ -223,7 +213,7 @@ export default function TransactionList(props) {
         </MainContainer>
       </Row>
       <div>
-        {false && (
+        {state && (
           <LetsGetStarted click={() => setState(false)} state={state} />
         )}
       </div>
@@ -320,13 +310,14 @@ const Bold = styled.b`
 `;
 const DropDown = styled.div`
   background: #f5f6fd 0% 0% no-repeat padding-box;
-  border: 1px;
-  border-radius: 0.375rem;
-  font-size: 0.875rem;
+  border: 1px solid #d5e0ff;
+  border-radius: 6px;
+  font: normal normal medium 14px/17px Inter;
+  font-size: 14px;
   font-weight: 600;
   color: #191919;
-  height: 4.688rem;
-  padding: 0.875rem;
+  height: 75px;
+  padding: 10px;
   width: 100%;
   max-width: 453px;
   position: relative;
@@ -354,4 +345,4 @@ const ToolTipIcon = styled.img`
   cursor: pointer;
   margin-left: 0.5rem;
 `;
-// const ColorBox = styled.div``;
+const ColorBox = styled.div``;

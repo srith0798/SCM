@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import Header from "../header/header";
-import Sidebar from "../sidebar/sidebar";
+
 import { Row, Column } from "simple-flexbox";
 import AddNetwork from "../Popup/addNetwork";
 
@@ -35,47 +34,39 @@ export default function Network(props) {
   const [address, setAddress] = React.useState([]);
   return (
     <div>
-      <Column>
-        <Header />
-        <Row
-        // style={{ height: "180vh" }}
-        >
-          <Sidebar />
-          <MainContainer>
-            <SubContainer>
-              <div>
-                <Heading>Networks</Heading>
-              </div>
-              <div style={{ display: "flex" }}>
-                {open && <AddNetwork click={handleClose} />}
+      <MainContainer>
+        <SubContainer>
+          <div>
+            <Heading>Networks</Heading>
+          </div>
+          <div style={{ display: "flex" }}>
+            {open && <AddNetwork click={handleClose} />}
 
-                <Button onClick={handleClickOpen}>Add Network</Button>
-              </div>
-            </SubContainer>
-            <Div>
-              <Container>
-                <Row>
-                  <ColumnOne>Network</ColumnOne>
-                  <UrlHeading>URL</UrlHeading>
-                </Row>
-              </Container>
-              <div>
-                {address.map((data, index) => {
-                  return (
-                    <Container>
-                      <Row style={{ alignItems: "center" }}>
-                        <Icon src="/images/mainnet.svg" />
-                        <Head>Mainnet</Head>
-                        <Url>https://explorer.xinfin.network/</Url>
-                      </Row>
-                    </Container>
-                  );
-                })}
-              </div>
-            </Div>
-          </MainContainer>
-        </Row>
-      </Column>
+            <Button onClick={handleClickOpen}>Add Network</Button>
+          </div>
+        </SubContainer>
+        <Div>
+          <Container>
+            <Row>
+              <ColumnOne>Network</ColumnOne>
+              <UrlHeading>URL</UrlHeading>
+            </Row>
+          </Container>
+          <div>
+            {address.map((data, index) => {
+              return (
+                <Container>
+                  <Row style={{ alignItems: "center" }}>
+                    <Icon src="/images/mainnet.svg" />
+                    <Head>Mainnet</Head>
+                    <Url>https://explorer.xinfin.network/</Url>
+                  </Row>
+                </Container>
+              );
+            })}
+          </div>
+        </Div>
+      </MainContainer>
     </div>
   );
 }

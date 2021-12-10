@@ -1,8 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { Row, Column } from "simple-flexbox";
-import Header from "../header/header";
-import Sidebar from "../sidebar/sidebar";
 import Line from "./graph";
 
 import Box from "@mui/material/Box";
@@ -42,14 +40,13 @@ export default function MainComponent(props) {
   };
 
   return (
-    <div>
+    <div style={{overflow:"auto"}}>
       <Column>
-        <Header />
 
         <Row
         // style={{ height: "300vh" }}
         >
-          <Sidebar />
+          {/* <Sidebar /> */}
           <MainContainer>
             <SubContainer>
               <MainHeading>Analytics</MainHeading>
