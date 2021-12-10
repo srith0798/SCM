@@ -49,6 +49,9 @@ const Div = styled.div`
 `;
 
 export default function Sidebar(props) {
+  const redirectToAbout = () => {
+    history.push("/about");
+  };
   const redirectToTransaction = () => {
     history.push("/dashboard/transaction-list");
   };
@@ -70,9 +73,12 @@ export default function Sidebar(props) {
   const redirectToLogout = () => {
     history.push("/");
   };
-  const redirectToAbout = () => {
-    history.push("/");
-  };
+  // const redirectToAbout = () => {
+  //   history.push("/");
+  // };
+  const [aboutIcon, setAboutIcon] = React.useState(
+    "/images/abouticon_blue.svg"
+  );
   const [transactionIcon, setTransactionIcon] = React.useState(
     "/images/Transactions.svg"
   );
@@ -90,6 +96,7 @@ export default function Sidebar(props) {
   );
 
   const changeSourceForIcons = (value) => {
+    if (value === "about") setAboutIcon("/images/abouticon_white.svg");
     if (value === "Transaction")
       setTransactionIcon("/images/Transactions_white.svg");
     if (value === "Contracts") setContractsIcon("/images/contracts_white.svg");
@@ -98,6 +105,7 @@ export default function Sidebar(props) {
     if (value === "Alerting") setAlertingIcon("/images/Alerting_white.svg");
   };
   const changeOriginalSourceForIcons = (value) => {
+    if (value === "about") setAboutIcon("/images/abouticon_blue.svg");
     if (value === "Transaction") setTransactionIcon("/images/Transactions.svg");
     if (value === "Networks") setNetworksIcon("/images/networks.svg");
     if (value === "Contracts") setContractsIcon("/images/contracts.svg");
@@ -107,8 +115,13 @@ export default function Sidebar(props) {
 
   return (
       <SidebarContainer>
-        <Wrapper onClick={redirectToAbout} style={{ marginTop: "4rem" }}>
-          <Icon src="/images/Xmartly.svg" />
+        <Wrapper
+          onClick={redirectToAbout}
+          style={{ marginTop: "4rem" }}
+          onMouseOver={() => changeSourceForIcons("about")}
+          onMouseOut={() => changeOriginalSourceForIcons("about")}
+        >
+          <Icon src={aboutIcon} />
           <Heading>About Xmartly</Heading>
         </Wrapper>
         <Wrapper

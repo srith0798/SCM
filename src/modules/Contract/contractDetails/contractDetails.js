@@ -274,13 +274,20 @@ const MainContainer = styled.div`
   padding: 3.125rem;
   display: 100vh;
 `;
+const Container = styled.div`
+  background-color: #ffffff;
+  border-radius: 0.375rem;
+  width: 100%;
+  margin-top: 0.625rem;
+  height: 9.25rem;
+`;
 const TitleDiv = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
   max-width: 217px;
   align-items: center;
-  font-size: 24px;
+  font-size: 1.5rem;
   font-weight: 600;
 `;
 const Title = styled.div``;
@@ -289,34 +296,7 @@ const SubHeading = styled.div`
   font-weight: 600;
   color: #102c78;
 `;
-// const Button = styled.button`
-//   background-image: url(/images/globe.svg);
-//   background-repeat: no-repeat;
-//   background-position: 0.5rem;
-//   padding-left: 1.75rem;
-//   item-align: baseline;
-//   background-size: 1.3rem;
-//   position: relative;
-//   background-color: #ffffff;
-//   color: #3163f0;
-//   border: none;
-//   border-radius: 0.25rem;
-//   width: 100%;
-//   max-width: 9.75rem;
-//   white-space: nowrap;
-//   height: 2.125rem;
-//   font-size: 1rem;
-// `;
-const Container = styled.div`
-  background-color: #ffffff;
-  border-radius: 0.375rem;
-  width: 100%;
 
-  margin-top: 1.25rem;
-  // padding: 1.25rem;
-  padding: 0.25rem;
-  height: 158px;
-`;
 const Hash = styled.input`
   display: flex;
   flex-flow: row nowrap;
@@ -330,10 +310,9 @@ const DetailsSection = styled.div`
   background-color: #ffffff;
   border-radius: 0.375rem;
   width: 100%;
-  height: 479px;
-  // margin-top: 1.25rem;
+  height: 35.313rem;
   padding: 0.625rem;
-  margin-top: 2.25rem;
+  margin-top: 1.25rem;
 `;
 const Div = styled.div`
   display: flex;
@@ -365,7 +344,7 @@ const PopUp = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 2.375rem;
+  margin-top: 1rem;
   width: 100%;
   max-width: 59.375rem;
   font-size: 0.875rem;
@@ -399,34 +378,6 @@ const TabLister = styled.div`
 const TabView = styled.div`
   padding: 0.313rem 0.5rem 0.313rem 0.5rem;
 `;
-
-// const TitleDiv = styled.div`
-//   display: flex;
-//   justify-content: space-between;
-//   width: 100%;
-//   max-width: 267px;
-//   align-items: center;
-//   font-size: 24px;
-//   font-weight: 600;
-// `;
-
-// const MainContainer = styled.div`
-//   background: #ecf0f7 0% 0% no-repeat padding-box;
-//   width: 100%;
-//   padding: 3.125rem;
-//   display: 100vh;
-//   overflow-x: scroll;
-// `;
-
-// const Heading = styled.div`
-//   text-align: left;
-//   font-size: 0.875rem;
-//   font-weight: 600;
-//   color: #102c78;
-//   width: 100%;
-//   max-width: 16.25rem;
-// `;
-
 const Button = styled.button`
   background-image: url("/images/globe.svg");
   background-repeat: no-repeat;

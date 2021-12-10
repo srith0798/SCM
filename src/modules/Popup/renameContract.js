@@ -64,7 +64,7 @@ const Add = styled.div`
 // `;
 const Input = styled.input`
   background: #f0f2fc 0% 0% no-repeat padding-box;
-  border-radius: 4px;
+
   padding: 7px;
   border: 0px;
   width: 100%;
