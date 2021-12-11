@@ -10,7 +10,7 @@ import Dashboard from "./modules/dashboard/dashboardComponent";
 import { createMuiTheme } from "@material-ui/core/styles";
 
 class Routes extends BaseComponent {
-  componentDidMount() { }
+  componentDidMount() {}
   getPublicRoutes = () => {
     return (
       <Switch>
@@ -21,6 +21,7 @@ class Routes extends BaseComponent {
   getPrivateRoutes = () => {
     return (
       <Switch>
+        <Redirect exact from="/" to="/dashboard/about" />
         <Route exact path={"/dashboard"} component={Dashboard} />
         <Route exact path={"/dashboard/:menu"} component={Dashboard} />
         <Route exact path={"/dashboard/:menu/:subMenu"} component={Dashboard} />

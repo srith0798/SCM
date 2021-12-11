@@ -24,13 +24,12 @@ export default function Contract(props) {
 
   const getContractList = async () => {
     try {
-    const response = await ContractsService.getContractsList({});
-    setAddress(response.contractList);
+      const response = await ContractsService.getContractsList({});
+      setAddress(response.contractList);
+    } catch (e) {
+      console.log(e);
     }
-    catch (e) {
-      console.log(e)
-    }
-  }
+  };
 
   React.useEffect(() => {
     // getContractList();
@@ -39,59 +38,57 @@ export default function Contract(props) {
   const [address, setAddress] = React.useState([]);
 
   return (
-    <div>
-      <MainContainer>
-        <SubContainer>
-          <div>
-            <Heading>Contracts</Heading>
-            <Input placeholder="Search by address or name" />
-          </div>
-          <div style={{ display: "flex" }}>
-            <img
-              alt=""
-              src="/images/refresh.svg"
-              style={{ marginRight: "0.625rem" }}
-            />
-            {open && <AddContract click={handleClose} />}
-            <Button onClick={handleClickOpen}>Add Contract</Button>
-          </div>
-        </SubContainer>
+    <MainContainer>
+      <SubContainer>
+        <div>
+          <Heading>Contracts</Heading>
+          <Input placeholder="Search by address or name" />
+        </div>
+        <div style={{ display: "flex" }}>
+          <img
+            alt=""
+            src="/images/refresh.svg"
+            style={{ marginRight: "0.625rem" }}
+          />
+          {open && <AddContract click={handleClose} />}
+          <Button onClick={handleClickOpen}>Add Contract</Button>
+        </div>
+      </SubContainer>
 
-        <TableContainer>
-          <Div>
-            <Row>
-              <ColumnOne>Contract Name</ColumnOne>
-              <ColumnOne>Address</ColumnOne>
-              <ColumnOne>Network</ColumnOne>
-              <ColumnOne>
-                Tag{" "}
-                <Tooltip disableFocusListener title="Add">
-                  <ToolTipIcon src="/images/tool tip.svg" />
-                </Tooltip>
-              </ColumnOne>
-              <ColumnOne>Visibility</ColumnOne>
-            </Row>
-          </Div>
-          <div onClick={redirectTODetails}>
-            {address.map((data, index) => {
-              return (
-                <Div>
-                  <Row>
-                    <ColumnSecond>{data.contractName}</ColumnSecond>
-                    <ColumnSecond>
-                      {utility.truncateTxnAddress(data.address)}
-                    </ColumnSecond>
-                    <ColumnSecond>{data.tokenName}</ColumnSecond>
-                    <ColumnSecond>{tagDiv()} </ColumnSecond>
-                    <ColumnSecond>{data.status}</ColumnSecond>
-                  </Row>
-                </Div>
-              );
-            })}
-          </div>
-        </TableContainer>
-      </MainContainer>
-    </div>
+      <TableContainer>
+        <Div>
+          <Row>
+            <ColumnOne>Contract Name</ColumnOne>
+            <ColumnOne>Address</ColumnOne>
+            <ColumnOne>Network</ColumnOne>
+            <ColumnOne>
+              Tag{" "}
+              <Tooltip disableFocusListener title="Add">
+                <ToolTipIcon src="/images/tool tip.svg" />
+              </Tooltip>
+            </ColumnOne>
+            <ColumnOne>Visibility</ColumnOne>
+          </Row>
+        </Div>
+        <div onClick={redirectTODetails}>
+          {address.map((data, index) => {
+            return (
+              <Div>
+                <Row>
+                  <ColumnSecond>{data.contractName}</ColumnSecond>
+                  <ColumnSecond>
+                    {utility.truncateTxnAddress(data.address)}
+                  </ColumnSecond>
+                  <ColumnSecond>{data.tokenName}</ColumnSecond>
+                  <ColumnSecond>{tagDiv()} </ColumnSecond>
+                  <ColumnSecond>{data.status}</ColumnSecond>
+                </Row>
+              </Div>
+            );
+          })}
+        </div>
+      </TableContainer>
+    </MainContainer>
   );
 }
 
@@ -125,6 +122,7 @@ const MainContainer = styled.div`
   background-color: #ecf0f7;
   width: 100%;
   padding: 3.125rem;
+  height: 100vh;
 `;
 const SubContainer = styled.div`
   width: 100%;

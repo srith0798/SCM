@@ -119,13 +119,11 @@ export default function TransactionList(props) {
     color: "#191919",
   };
   const redirectToTransactionDetails = () => {
-    history.push("/transaction-details");
+    history.push("/dashboard/transaction-details");
   };
   return (
     <>
-      {/* <Header /> */}
       <Row>
-        {/* <Sidebar /> */}
         <MainContainer>
           <Row>
             <Transactions>
@@ -213,7 +211,7 @@ export default function TransactionList(props) {
         </MainContainer>
       </Row>
       <div>
-        {state && (
+        {false && (
           <LetsGetStarted click={() => setState(false)} state={state} />
         )}
       </div>
@@ -246,6 +244,7 @@ const MainContainer = styled.div`
   opacity: 1;
   width: 100%;
   padding: 3.125rem;
+  height: 100vh;
 `;
 
 const Transactions = styled.div`

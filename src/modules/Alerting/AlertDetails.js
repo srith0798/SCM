@@ -7,7 +7,7 @@ import { history } from "../../managers/history";
 
 export default function AlertDetails() {
   const backButton = () => {
-    history.push("/Alerting");
+    history.push("/dashboard/Alerting");
   };
   return (
     <div>
@@ -105,7 +105,7 @@ const MainContainer = styled.div`
   opacity: 1;
   width: 100%;
   padding: 3rem;
-  display: 100vh;
+  height: 100vh;
 `;
 const NewContainer = styled.div`
   background-color: #ffffff;

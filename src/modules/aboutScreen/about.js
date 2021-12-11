@@ -2,17 +2,14 @@ import React from "react";
 import { useState } from "react";
 import styled from "styled-components";
 import { Row } from "simple-flexbox";
-import Header from "../header/header";
-import Sidebar from "../sidebar/sidebar";
+
 import WalletPopUp from "./walletPopUp";
 
 export default function About() {
   const [state, setState] = useState(true);
   return (
     <>
-      <Header />
       <Row>
-        <Sidebar />
         <MainContainer>
           <MainBoxContainer>
             <Container>
@@ -32,7 +29,7 @@ export default function About() {
                 <Button>
                   Add Your Smart Contract
                   <img
-                    style={{ marginLeft: "6px" }}
+                    style={{ marginLeft: "0.375rem" }}
                     alt=""
                     src="/images/questionmark.svg"
                   />
@@ -41,7 +38,7 @@ export default function About() {
               <RightContainer>
                 <VideoBox>
                   <img
-                    style={{ width: "60px", height: "60px" }}
+                    style={{ width: "3.75rem", height: "3.75rem" }}
                     alt=""
                     src="/images/play.svg"
                   />
@@ -89,60 +86,6 @@ export default function About() {
     </>
   );
 }
-
-const Span = styled.span`
-  color: #0089ff;
-  white-space: nowrap;
-`;
-const IconRow = styled.div`
-  display: flex;
-  justify-content: space-between;
-  max-width: 759px;
-  width: 100%;
-`;
-const DataBox = styled.div`
-  display: flex;
-  width: 100%;
-  font-size: 16px;
-`;
-const DetailBox = styled.div`
-  width: 100%;
-  // padding-top: 20px;
-  padding-bottom: 15px;
-  font-size: 32px;
-  font-weight: 600;
-`;
-
-const Button = styled.button`
-  background-repeat: no-repeat;
-  background-position: 0.5rem;
-  padding: 14px;
-  item-align: center;
-  background-size: 0.875rem;
-  position: relative;
-  background-color: #3163f0;
-  color: #ffffff;
-  border: none;
-  border-radius: 0.25rem;
-  margin-top: 30px;
-  height: 3.125rem;
-  display: flex;
-  font-size: 16px;
-  font-weight: 600;
-  white-space: nowrap;
-`;
-const VideoBox = styled.div`
-  background: #ffffff 0% 0% no-repeat padding-box;
-  border: 2px solid #d8d8d8;
-  border-radius: 2px;
-  opacity: 1;
-  position: relative;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
 const MainContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -155,7 +98,6 @@ const MainBoxContainer = styled.div`
   align-item: center;
   padding: 3.125rem;
 `;
-
 const Container = styled.div`
   background-color: #ffffff;
   border-radius: 0.375rem;
@@ -166,48 +108,100 @@ const Container = styled.div`
 `;
 const RightContainer = styled.div`
   width: 100%;
-  padding: 70px;
+  padding: 4.375rem;
 `;
 const LeftContainer = styled.div`
   width: 100%;
-  padding: 40px;
+  padding: 2.5rem;
 `;
+
+const Span = styled.span`
+  color: #0089ff;
+  white-space: nowrap;
+`;
+const IconRow = styled.div`
+  display: flex;
+  justify-content: space-between;
+  max-width: 47.438rem;
+  width: 100%;
+`;
+const DataBox = styled.div`
+  display: flex;
+  width: 100%;
+  font-size: 1rem;
+`;
+const DetailBox = styled.div`
+  width: 100%;
+  padding-bottom: 0.938rem;
+  font-size: 2rem;
+  font-weight: 600;
+`;
+
+const Button = styled.button`
+  background-repeat: no-repeat;
+  background-position: 0.5rem;
+  padding: 0.875rem;
+  item-align: center;
+  background-size: 0.875rem;
+  position: relative;
+  background-color: #3163f0;
+  color: #ffffff;
+  border: none;
+  border-radius: 0.25rem;
+  margin-top: 1.875rem;
+  height: 3.125rem;
+  display: flex;
+  font-size: 1rem;
+  font-weight: 600;
+  white-space: nowrap;
+`;
+const VideoBox = styled.div`
+  background: #ffffff 0% 0% no-repeat padding-box;
+  border: 0.125rem solid #d8d8d8;
+  border-radius: 0.125rem;
+  opacity: 1;
+  position: relative;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 const HeadingContainer = styled.div`
-  font-size: 32px;
+  font-size: 2rem;
   font-weight: 600;
   color: #1f1f1f;
-  padding: 60px;
+  padding: 3.75rem;
 `;
 const GreyContainer = styled.div`
   background-color: none;
-  padding-bottom: 20px;
+  padding-bottom: 1.25rem;
   display: flex;
   flex-direction: column;
   align-self: center;
 `;
 const Title = styled.div`
   text-align: center;
-  font: normal normal 600 20px/24px Inter;
-  font-size: 20px;
+  font-size: 1.25rem;
   font-weight: 600;
-  margin-bottom: 6px;
+  margin-bottom: 0.375rem;
   color: #1f1f1f;
   opacity: 1;
 `;
 const SubTitle = styled.div`
   text-align: center;
-  font-size: 16px;
+  font-size: 1rem;
   color: #4b4b4b;
-  margin-top: 7px;
-  width: 240px;
+  margin-top: 0.438rem;
+  width: 15rem;
 `;
 
 const IconContainer = styled.div`
   padding: 0.625rem;
-  width: 450px;
+  width: 28.125rem;
   height: 150px;
   margin: 0px 10px 20px 10px;
-  max-width: 300px;
+  max-width: 18.75rem;
   outline: none;
   justify-content: center;
   display: flex;
@@ -217,9 +211,9 @@ const IconContainer = styled.div`
   cursor: pointer;
 `;
 const SubHead = styled.div`
-  font-size: 16px;
+  font-size: 1rem;
   color: #4b4b4b;
   text-align: center;
   width: 100%;
-  padding-bottom: 20px;
+  padding-bottom: 1.25rem;
 `;

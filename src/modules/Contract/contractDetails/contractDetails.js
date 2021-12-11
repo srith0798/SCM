@@ -272,7 +272,7 @@ const MainContainer = styled.div`
   background: #ecf0f7 0% 0% no-repeat padding-box;
   width: 100%;
   padding: 3.125rem;
-  display: 100vh;
+  height: 100vh;
 `;
 const Container = styled.div`
   background-color: #ffffff;

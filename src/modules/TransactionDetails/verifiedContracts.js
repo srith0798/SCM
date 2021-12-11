@@ -276,7 +276,7 @@ const MainContainer = styled.div`
   opacity: 1;
   width: 100%;
   padding: 50px;
-  display: 100vh;
+  height: 100vh;
 `;
 
 const Button = styled.button`
