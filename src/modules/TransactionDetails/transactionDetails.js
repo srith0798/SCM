@@ -46,6 +46,16 @@ export default function TransactionDetails() {
           <CopyToClipboard>
             <CopyImg src="/images/copy.svg" />
           </CopyToClipboard>
+          <RedButton>Fail</RedButton>
+          <AlertButton>
+            {" "}
+            <img
+              alt=""
+              style={{ width: "15px", cursor: "pointer", marginRight: "6px" }}
+              src="/images/addalert.svg"
+            />
+            Add Alert
+          </AlertButton>
         </div>
 
         <TabLister>
@@ -481,4 +491,43 @@ const ToolTipIcon = styled.img`
   width: 0.75rem;
   cursor: pointer;
   margin-left: 0.513rem;
+`;
+const RedButton = styled.div`
+  // background: #fde7e7 0% 0% no-repeat padding-box;
+  // border: 1px solid;
+  // border-radius: 0.25rem;
+  // font-size: 0.9rem;
+  // font-weight: 600;
+  color: #ce1a1a;
+  padding: 14px;
+  width: 100%;
+  // max-width: 20.25rem;
+  // white-space: nowrap;
+  // height: 10px;
+  margin-left: 1rem;
+  display: flex;
+  align-items: center;
+  top: 202px;
+  left: 939px;
+  width: 69px;
+  height: 25px;
+  background: #fde7e7 0% 0% no-repeat padding-box;
+  border: 1px solid #fda6a6;
+  border-radius: 4px;
+  opacity: 1;
+`;
+const AlertButton = styled.div`
+  top: 202px;
+  left: 1016px;
+  width: 100px;
+  height: 27px;
+  font-size: 14px;
+  background: #ffffff 0% 0% no-repeat padding-box;
+  border: 1px solid #3163f0;
+  border-radius: 4px;
+  opacity: 1;
+  color: #3163f0;
+  margin-left: 20px;
+  padding-top: 2px;
+  padding-left: 8px;
 `;
