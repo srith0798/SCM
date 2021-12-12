@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Row, Column } from "simple-flexbox";
+import { Row } from "simple-flexbox";
 
 import AddContract from "../Popup/addContract";
 import { history } from "../../managers/history";

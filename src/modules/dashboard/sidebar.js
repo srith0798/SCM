@@ -44,9 +44,6 @@ const Wrapper = styled.div`
 const Heading = styled.span`
   color: #ffffff;
 `;
-const Div = styled.div`
-  background: #102c78 0% 0% no-repeat padding-box;
-`;
 
 export default function Sidebar(props) {
   const redirectToAbout = () => {
@@ -186,7 +183,4 @@ const CenterDiv = styled.div`
   justify-content: center;
   margin-top: 2rem;
   margin-bottom: 3rem;
-`;
-const Spacing = styled.div`
-  margin-top: 8rem;
 `;

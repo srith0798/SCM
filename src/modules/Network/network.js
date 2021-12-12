@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-import { Row, Column } from "simple-flexbox";
+import { Row } from "simple-flexbox";
 import AddNetwork from "../Popup/addNetwork";
 
 export default function Network(props) {
