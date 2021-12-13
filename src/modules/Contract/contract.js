@@ -108,11 +108,13 @@ function tagDiv() {
 const Tag = styled.div`
   background-color: #eaefff;
   border-radius: 3px;
-  width: 80px;
+
   color: #436ce0;
   padding: 2px 5px 2px 25px;
   position: relative;
   cursor: pointer;
+  width: 100%;
+  max-width: 100px;
 `;
 
 const TagImage = styled.img`
