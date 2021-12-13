@@ -95,6 +95,6 @@ function isEmpty(string) {
 }
 
 function isMenuActive(path) {
-  console.log(window.location.pathname, path);
+  // console.log(window.location.pathname, path);
   return window.location.pathname.includes(path);
 }
