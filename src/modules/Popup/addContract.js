@@ -14,8 +14,9 @@ const useStyles = makeStyles(() => ({
 export default function AddContract(props) {
   const classes = useStyles();
   const [hideStep, setHideStep] = useState(true);
-  const [disabled, setDisabled] = useState("");
+  const [checkBox, setCheckBox] = useState(false);
   const [address, setAddress] = React.useState("");
+  console.log("address", checkBox);
   console.log(props);
 
   const addContract = async () => {
@@ -100,14 +101,17 @@ export default function AddContract(props) {
                   <BlueLine></BlueLine>
                 </IconImport>
                 <SelectImport>
-                  <CheckBox type="checkbox" />
+                  <CheckBox
+                    type="checkbox"
+                    onChange={(e) => setCheckBox(e.target.checked)}
+                  />
                   <AddressImport>{address}</AddressImport>
                 </SelectImport>
               </ImportBox>
             )}
             <Button
               onClick={addContract}
-              disabled={address === "" ? true : false}
+              disabled={address.trim().length >= 0 && !checkBox ? true : false}
               style={{ backgroundColor: address === "" ? "#9DB5F8" : "" }}
             >
               Import Contracts
