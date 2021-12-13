@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Dialog from "@mui/material/Dialog";
 import { makeStyles } from "@material-ui/styles";
+import ContractsService from "../../services/contractsService";
 
 const useStyles = makeStyles(() => ({
   dialogBox: {
@@ -10,6 +11,15 @@ const useStyles = makeStyles(() => ({
 }));
 
 export default function HideContract(props) {
+  // const hideContract = async () => {
+  //   try {
+  //     const response = await ContractsService.hideContracts({});
+  //     setAddress(response);
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // };
+
   const classes = useStyles();
   return (
     <div>

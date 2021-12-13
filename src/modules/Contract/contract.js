@@ -6,6 +6,8 @@ import AddContract from "../Popup/addContract";
 import { history } from "../../managers/history";
 import Tooltip from "@mui/material/Tooltip";
 import ContractsService from "../../services/contractsService";
+
+
 import utility from "../../utility";
 
 export default function Contract(props) {
@@ -32,7 +34,7 @@ export default function Contract(props) {
   };
 
   React.useEffect(() => {
-    // getContractList();
+    getContractList();
   }, []);
 
   const [address, setAddress] = React.useState([]);
