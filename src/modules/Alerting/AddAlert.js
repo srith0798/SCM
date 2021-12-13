@@ -547,7 +547,7 @@ const MainContainer = styled.div`
   opacity: 1;
   width: 100%;
   padding: 2.5rem;
-  display: 100vh;
+  height: 100vh;
 `;
 const TitleHead = styled.div`
   font-size: 24px;

@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Header from "../../header/header";
-// import Sidebar from "../sidebar/sidebar";
-import { Row, Column } from "simple-flexbox";
+import { Row } from "simple-flexbox";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import ContractAbi from "../../Popup/contractAbi";
 import RenameContract from "../../Popup/renameContract";
@@ -10,7 +9,6 @@ import Remove from "../../Popup/remove";
 
 import { history } from "../../../managers/history";
 import HideContract from "../../Popup/hideContract";
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import SourceCode from "./sourceCode";
 
@@ -21,6 +19,12 @@ export default function ContractDetails() {
   };
 
   React.useEffect(() => {
+    console.log(window.location.pathname);
+    let url = window.location.pathname;
+    let addressURL = url.split("/")
+    console.log(addressURL)
+    addressURL = addressURL[3]
+    console.log(addressURL)
     let address = [
       {
         heading: "Network",
@@ -100,7 +104,7 @@ export default function ContractDetails() {
   };
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <Row>
         {/* <Sidebar /> */}
         <MainContainer>
@@ -272,7 +276,7 @@ const MainContainer = styled.div`
   background: #ecf0f7 0% 0% no-repeat padding-box;
   width: 100%;
   padding: 3.125rem;
-  display: 100vh;
+  height: 100vh;
 `;
 const Container = styled.div`
   background-color: #ffffff;

@@ -9,8 +9,11 @@ import Contract from "../Contract/contract";
 import TransactionDetails from "../TransactionDetails/transactionDetails";
 import TransactionList from "../transactions/transactionList";
 import Network from "../Network/network";
-import Analytics from "../Analytics/analytics"
-
+import Analytics from "../Analytics/analytics";
+import About from "../aboutScreen/about";
+import Rules from "../Alerting/Rules";
+import AddAlert from "../Alerting/AddAlert";
+import AlertDetails from "../Alerting/AlertDetails";
 const Container = styled.div`
   height: 100%;
   width: 100%;
@@ -32,10 +35,13 @@ const HomeComponent = (props) => {
         ) : (
           <TransactionList />
         ))}
+      {/* {Utility.isMenuActive("/transaction-details") && <TransactionDetails />} */}
+      {Utility.isMenuActive("/analytics") && <Analytics />}
 
-      {Utility.isMenuActive("/analytics") && (
-        <Analytics />
-      )}
+      {Utility.isMenuActive("/about") && <About />}
+      {Utility.isMenuActive("/rules") && <Rules />}
+      {Utility.isMenuActive("/add-alert") && <AddAlert />}
+      {Utility.isMenuActive("/alert-detail") && <AlertDetails />}
       {/* {Utility.isMenuActive("/products") &&
         (Utility.isMenuActive("/add") ? (
           <AddProductComponent />
@@ -82,7 +88,7 @@ const dashboardComponent = (props) => {
           <DesktopSideMenu {...props} />
           <MobileSideMenu {...props} />
           <ScrollableDiv>
-          <HomeComponent {...props} />
+            <HomeComponent {...props} />
           </ScrollableDiv>
         </HomeContainer>
       </DashboardContainer>

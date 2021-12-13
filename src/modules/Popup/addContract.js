@@ -189,13 +189,7 @@ const Add = styled.div`
 // const Img = styled.img`
 //   cursor: pointer;
 // `;
-const ImportFile = styled.div`
-  //   font: normal normal 600 16px/20px Inter;
-  color: #102c78;
-  margin-top: 20px;
-  font-size: 16px;
-  font-weight: 600;
-`;
+
 const Content = styled.div`
   color: #303134;
   margin-top: 15px;

@@ -1,83 +1,78 @@
 import "react-s-alert/dist/s-alert-default.css";
-import {history} from "../managers/history";
+import { history } from "../managers/history";
 // import Cookies from "universal-cookie";
-import ToastService from 'react-material-toast';
+import ToastService from "react-material-toast";
 
 const toast = ToastService.new({
-    place: 'topRight',
-    duration: 1,
-    maxCount: 2
+  place: "topRight",
+  duration: 1,
+  maxCount: 2,
 });
 const utility = {
-    truncateTxnAddress,
-    getHeader,
-    apiFailureToast,
-    apiSuccessToast,
-    isNumber,
-    trackEvent,
-    navigateToPath,
-    toggleDropDown,
-    // validateName,
-    // validateEmail,
-    // isPasswordValid,
-    isEmpty,
-    isMenuActive,
+  truncateTxnAddress,
+  getHeader,
+  apiFailureToast,
+  apiSuccessToast,
+  isNumber,
+  trackEvent,
+  navigateToPath,
+  toggleDropDown,
+  // validateName,
+  // validateEmail,
+  // isPasswordValid,
+  isEmpty,
+  isMenuActive,
 };
 export default utility;
 
-
 export const dispatchAction = (type, data) => {
-    return dispatch => dispatch({type, data});
+  return (dispatch) => dispatch({ type, data });
 };
 
 function trackEvent(event, eventData) {
-    // try {
-    //     if (!eventData)
-    //         mixpanel.track(event);
-    //     else
-    //         mixpanel.track(event, eventData);
-    // } catch (err) {
-    //     console.log(err)
-    // }
+  // try {
+  //     if (!eventData)
+  //         mixpanel.track(event);
+  //     else
+  //         mixpanel.track(event, eventData);
+  // } catch (err) {
+  //     console.log(err)
+  // }
 }
 
-
-
-
 function getHeader() {
-    // return {
-    //     'session-token': sessionManager.getDataFromCookies(genericConstants.COOKIES_KEY.SESSION_TOKEN),
-    //     'device-id': sessionManager.getDataFromCookies(genericConstants.COOKIES_KEY.DEVICE_ID),
-    //     'Content-Type': httpConstants.CONTENT_TYPE.APPLICATION_JSON
-    // };
+  // return {
+  //     'session-token': sessionManager.getDataFromCookies(genericConstants.COOKIES_KEY.SESSION_TOKEN),
+  //     'device-id': sessionManager.getDataFromCookies(genericConstants.COOKIES_KEY.DEVICE_ID),
+  //     'Content-Type': httpConstants.CONTENT_TYPE.APPLICATION_JSON
+  // };
 }
 
 function isNumber(n) {
-    return !isNaN(parseFloat(n)) && isFinite(n);
+  return !isNaN(parseFloat(n)) && isFinite(n);
 }
 
 //TODO: update apiConstant.API_FAILURE
 function apiFailureToast(message) {
-    toast.error(message ? message : "apiConstant.API_FAILURE");
+  toast.error(message ? message : "apiConstant.API_FAILURE");
 }
 
 function apiSuccessToast(msg) {
-    toast.success(msg ? msg : "apiConstant.API_SUCCESS");
+  toast.success(msg ? msg : "apiConstant.API_SUCCESS");
 }
-function truncateTxnAddress (address) {
-    const start = address.slice(0,7);
-    const end = address.slice(-5);
-    console.log(start , end)
-    return start + "..." + end
+function truncateTxnAddress(address) {
+  const start = address.slice(0, 7);
+  const end = address.slice(-5);
+  console.log(start, end);
+  return start + "..." + end;
 }
-
 
 function navigateToPath(path) {
-    history.push(path)
+  history.push(path);
 }
 
 function toggleDropDown(dropdownID) {
-    // $("#" + dropdownID).toggle("show");
+  // $("#" + dropdownID).toggle("show");
 }
 
 // function validateName(name) {
@@ -96,13 +91,10 @@ function toggleDropDown(dropdownID) {
 // }
 
 function isEmpty(string) {
-    return !string || string.trim().length === 0;
+  return !string || string.trim().length === 0;
 }
 
 function isMenuActive(path) {
-    return window.location.pathname.includes(path);
+  // console.log(window.location.pathname, path);
+  return window.location.pathname.includes(path);
 }
-
-
-
-

@@ -53,7 +53,6 @@ export default function StateChange() {
 const ValidatorContainer = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
   border-radius: 6px;
-
   margin-top: 1.25rem;
   height: 37.5rem;
   padding: 1.25rem;
