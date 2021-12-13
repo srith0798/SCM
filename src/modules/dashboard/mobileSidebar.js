@@ -15,14 +15,8 @@ const Hamburger  = styled.img`
   }
 `;
 const SidebarContainer = styled.div`
-  // width: 100%;
-  // max-width: 200px;
-
-  // @media (min-width: 300px) and (max-width: 1024px) {
-  //   // display: none;
-  //   position: absolute;
-  //   z-index: 1;
-  // }
+  position: absolute;
+  z-index:1000;
   background: #102c78 0% 0% no-repeat padding-box;
   display: flex;
   flex-direction: column;
@@ -166,12 +160,10 @@ export default function Sidebar(props) {
           <Icon src={alertingIcon} />
           <Heading>Alerting</Heading>
         </Wrapper>
-        <Spacing>
-          <Wrapper onClick={redirectToFaqs}>
-            <Icon src="/images/Subtraction 2.svg" />
-            <Heading>FAQs</Heading>
-          </Wrapper>
-        </Spacing>
+        <Wrapper style={{ marginTop: "8rem" }} >
+        <Icon src="/images/Subtraction 2.svg" />
+        <Heading>FAQs</Heading>
+      </Wrapper>
         <Wrapper onClick={redirectToLogout}>
           <Icon src="/images/Log out.svg" />
           <Heading>Logout</Heading>
