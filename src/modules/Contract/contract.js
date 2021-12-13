@@ -20,13 +20,18 @@ export default function Contract(props) {
   const handleClose = () => {
     setOpen(false);
   };
-  const redirectTODetails = () => {
-    history.push("/contract-details");
+  const redirectTODetails = (id) => {
+    
+    history.push("/dashboard/contract-details/"+ id);
   };
 
   const getContractList = async () => {
     try {
-      const response = await ContractsService.getContractsList({});
+      const requestData = {
+        skip : 0,
+        limit: 10
+      }
+      const response = await ContractsService.getContractsList(requestData);
       setAddress(response.contractList);
     } catch (e) {
       console.log(e);
@@ -72,9 +77,9 @@ export default function Contract(props) {
             <ColumnOne>Visibility</ColumnOne>
           </Row>
         </Div>
-        <div onClick={redirectTODetails}>
           {address.map((data, index) => {
             return (
+        <div onClick={() => redirectTODetails(data._id)}>
               <Div>
                 <Row>
                   <ColumnSecond>{data.contractName}</ColumnSecond>
@@ -86,9 +91,9 @@ export default function Contract(props) {
                   <ColumnSecond>{data.status}</ColumnSecond>
                 </Row>
               </Div>
+        </div>
             );
           })}
-        </div>
       </TableContainer>
     </MainContainer>
   );

@@ -19,6 +19,12 @@ export default function ContractDetails() {
   };
 
   React.useEffect(() => {
+    console.log(window.location.pathname);
+    let url = window.location.pathname;
+    let addressURL = url.split("/")
+    console.log(addressURL)
+    addressURL = addressURL[3]
+    console.log(addressURL)
     let address = [
       {
         heading: "Network",
@@ -98,7 +104,7 @@ export default function ContractDetails() {
   };
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <Row>
         {/* <Sidebar /> */}
         <MainContainer>
