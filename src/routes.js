@@ -2,7 +2,6 @@ import React from "react";
 import { Router, Route } from "react-router-dom";
 import { Redirect, Switch } from "react-router";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
-import getMuiTheme from "material-ui/styles/getMuiTheme";
 import { connect } from "react-redux";
 import { history } from "./managers/history";
 import BaseComponent from "./modules/baseComponent";
@@ -10,7 +9,7 @@ import Dashboard from "./modules/dashboard/dashboardComponent";
 import { createMuiTheme } from "@material-ui/core/styles";
 
 class Routes extends BaseComponent {
-  componentDidMount() { }
+  componentDidMount() {}
   getPublicRoutes = () => {
     return (
       <Switch>
@@ -21,6 +20,7 @@ class Routes extends BaseComponent {
   getPrivateRoutes = () => {
     return (
       <Switch>
+        <Redirect exact from="/" to="/dashboard/about" />
         <Route exact path={"/dashboard"} component={Dashboard} />
         <Route exact path={"/dashboard/:menu"} component={Dashboard} />
         <Route exact path={"/dashboard/:menu/:subMenu"} component={Dashboard} />

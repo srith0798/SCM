@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-import { Row, Column } from "simple-flexbox";
+import { Row } from "simple-flexbox";
 import AddNetwork from "../Popup/addNetwork";
 
 export default function Network(props) {
@@ -75,6 +75,7 @@ const MainContainer = styled.div`
   background-color: #ecf0f7;
   width: 100%;
   padding: 3.125rem;
+  height: 100vh;
 `;
 const SubContainer = styled.div`
   width: 100%;

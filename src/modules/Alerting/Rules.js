@@ -13,21 +13,17 @@ export default function Rules() {
     setActiveButton(e.target.id);
   };
   const redirectToAlertDetails = () => {
-    history.push("/alert-details");
+    history.push("/dashboard/Alerting/alert-details");
   };
 
   return (
     <>
-      {/* <Header /> */}
-      <Row
-      // style={{ height: "250vh" }}
-      >
-        {/* <Sidebar /> */}
+      <Row>
         <MainContainer>
           <Row>
             <RowCorrecter>
               <Title style={{ color: "#191919" }}>Alerting</Title>
-              <Button onClick={() => history.push("/add-alert")}>
+              <Button onClick={() => history.push("/dashboard/add-alert")}>
                 Add Alert
               </Button>
             </RowCorrecter>
@@ -206,7 +202,7 @@ const MainContainer = styled.div`
   opacity: 1;
   width: 100%;
   padding: 2.5rem;
-  display: 100vh;
+  height: 100vh;
 `;
 
 const Button = styled.button`

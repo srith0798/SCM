@@ -56,9 +56,9 @@ const Wrapper = styled.div`
 const Heading = styled.span`
   color: #ffffff;
 `;
-const Div = styled.div`
-  background: #102c78 0% 0% no-repeat padding-box;
-`;
+// const Div = styled.div`
+//   background: #102c78 0% 0% no-repeat padding-box;
+// `;
 
 export default function Sidebar(props) {
   const [open, setOpen] = useState(false);

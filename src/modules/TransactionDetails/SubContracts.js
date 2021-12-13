@@ -7,45 +7,56 @@ export default function SubContracts() {
     history.push("/verified-contracts");
   };
   return (
-    <MainDiv>
+    <MainContainer>
       <MainBoxContainer>
         <Container>
-          <Title>App Transactions Validator</Title>
+          <Title>App_Transactions_Validator</Title>
           <SubTitle>xdc02aaa39…8b3c</SubTitle>
           <SubTitleTwo>
             <Button onClick={SubButton}>
-              {" "}
-              <img alt="" src="/images/Verified_tick.svg" />
-              Verified contracts
+              <img
+                style={{ marginRight: "4px" }}
+                alt=""
+                src="/images/Verified_tick.svg"
+              />
+              Verified Contracts
             </Button>
           </SubTitleTwo>
         </Container>
         <Container>
-          <Title>App Transactions Validator</Title>
+          <Title>App_Transactions_Validator</Title>
           <SubTitle>xdc02aaa39…8b3c</SubTitle>
           <SubTitleTwo>
             <Button onClick={SubButton}>
-              <img alt="" src="/images/Verified_tick.svg" />
-              Verified contracts
+              <img
+                style={{ marginRight: "4px" }}
+                alt=""
+                src="/images/Verified_tick.svg"
+              />
+              Verified Contracts
             </Button>
           </SubTitleTwo>
         </Container>
         <Container>
-          <Title>App Transactions Validator</Title>
+          <Title>App_Transactions_Validator</Title>
           <SubTitle>xdc02aaa39…8b3c</SubTitle>
           <SubTitleTwo>
             <Button onClick={SubButton}>
-              <img alt="" src="/images/Verified_tick.svg" />
-              Verified contracts
+              <img
+                style={{ marginRight: "4px" }}
+                alt=""
+                src="/images/Verified_tick.svg"
+              />
+              Verified Contracts
             </Button>
           </SubTitleTwo>
         </Container>
       </MainBoxContainer>
-    </MainDiv>
+    </MainContainer>
   );
 }
 
-const MainDiv = styled.div`
+const MainContainer = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -53,11 +64,12 @@ const MainDiv = styled.div`
   background-color: #ffffff;
   border-radius: 0.25rem;
   padding: 1.438rem;
+  margin-top: 1.25rem;
 `;
 const Container = styled.div`
-  padding: 0.625rem;
-  width: 15.625rem,
-  height: 12.5rem,       
+  padding: 10px;
+  width: 1.625rem,
+  height: 13.5rem,       
   background: #F5F6FD;
   border: solid #D5E0FF;
   outline: none;
@@ -75,13 +87,13 @@ const Container = styled.div`
 const MainBoxContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  max-width: 40.625rem;
+  max-width: 38.625rem;
   width: 100%;
   height: 6.5rem;
 `;
 const Title = styled.div`
   font-size: 0.875rem;
-  font-weight: 600;
+  // font-weight: 600;
   color: #1d3c93;
   margin-bottom: 0.313rem;
 `;
@@ -90,14 +102,17 @@ const SubTitle = styled.div`
   color: #191919;
   margin-bottom: 0.313rem;
 `;
-const SubTitleTwo = styled.div``;
+const SubTitleTwo = styled.div`
+  height: 22px;
+`;
 
 const Button = styled.button`
   background: #00a58c 0% 0% no-repeat padding-box;
   border-radius: 0.188rem;
   border: none;
-  padding: 0.188rem;
-  width: 9.438rem
+  padding: 0.288rem;
+  width: 10.438rem
+  height: 2px;
   text-align: center;
   font-size: 0.75rem;
   color: #ffffff;
