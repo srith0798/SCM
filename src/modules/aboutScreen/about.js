@@ -9,7 +9,7 @@ export default function About() {
   const [state, setState] = useState(true);
   return (
     <>
-      <Row>
+      {/* <Row> */}
         <MainContainer>
           <MainBoxContainer>
             <Container>
@@ -79,7 +79,7 @@ export default function About() {
             </GreyContainer>
           </MainBoxContainer>
         </MainContainer>
-      </Row>
+      {/* </Row> */}
       <div>
         {true && <WalletPopUp click={() => setState(false)} state={state} />}
       </div>
@@ -101,10 +101,12 @@ const MainBoxContainer = styled.div`
 const Container = styled.div`
   background-color: #ffffff;
   border-radius: 0.375rem;
-  width: 80%;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-self: center;
+   height: 500px;
+  max-width: 1306px;
 `;
 const RightContainer = styled.div`
   width: 100%;
@@ -172,6 +174,7 @@ const HeadingContainer = styled.div`
   font-weight: 600;
   color: #1f1f1f;
   padding: 3.75rem;
+
 `;
 const GreyContainer = styled.div`
   background-color: none;
@@ -193,12 +196,13 @@ const SubTitle = styled.div`
   font-size: 1rem;
   color: #4b4b4b;
   margin-top: 0.438rem;
-  width: 15rem;
+  // width: 15rem;
 `;
 
 const IconContainer = styled.div`
   padding: 0.625rem;
-  width: 28.125rem;
+  // width: 28.125rem;
+  width:100%;
   height: 150px;
   margin: 0px 10px 20px 10px;
   max-width: 18.75rem;
@@ -209,6 +213,7 @@ const IconContainer = styled.div`
   align-items: center;
   text-align: center;
   cursor: pointer;
+
 `;
 const SubHead = styled.div`
   font-size: 1rem;

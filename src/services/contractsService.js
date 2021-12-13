@@ -17,8 +17,8 @@ function getHeaders() {
 
 async function getContractsList(requestData) {
     // let url = `${process.env.REACT_APP_CONTRACTS_SERVICE_URL}${httpConstants.API_END_POINT.GET_CONTRACTS_LIST}`;
-    let url = `http://localhost:3001/contract-list`;
-    // let url = `http://xdc-scm-elb-dev-18733672.us-east-1.elb.amazonaws.com:3000/contract-list`;
+    // let url = `http://localhost:3001/contract-list`;
+    let url = `http://xdc-scm-elb-dev-18733672.us-east-1.elb.amazonaws.com:3000/contract-list`;
     console.log("url----",url);
     return httpService(httpConstants.METHOD_TYPE.POST, getHeaders(), requestData, url)
         .then(
@@ -35,8 +35,8 @@ async function getContractsList(requestData) {
 
 async function addContract(requestData) {
     // let url = `${process.env.REACT_APP_CONTRACTS_SERVICE_URL}${httpConstants.API_END_POINT.GET_CONTRACTS_LIST}`;
-    let url = `http://localhost:3001/contract`;
-    // let url = `http://xdc-scm-elb-dev-18733672.us-east-1.elb.amazonaws.com:3000/contract`;
+    // let url = `http://localhost:3001/contract`;
+    let url = `http://xdc-scm-elb-dev-18733672.us-east-1.elb.amazonaws.com:3000/contract`;
     console.log("url----",url);
     return httpService(httpConstants.METHOD_TYPE.POST, getHeaders(), requestData, url)
         .then(
