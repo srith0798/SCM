@@ -19,16 +19,15 @@ export default function Contract(props) {
     setOpen(false);
   };
   const redirectTODetails = (id) => {
-    
-    history.push("/dashboard/contract-details/"+ id);
+    history.push("/dashboard/contract-details/" + id);
   };
 
   const getContractList = async () => {
     try {
       const requestData = {
-        skip : 0,
-        limit: 10
-      }
+        skip: 0,
+        limit: 10,
+      };
       const response = await ContractsService.getContractsList(requestData);
       setAddress(response.contractList);
     } catch (e) {
@@ -75,9 +74,9 @@ export default function Contract(props) {
             <ColumnOne>Visibility</ColumnOne>
           </Row>
         </Div>
-          {address.map((data, index) => {
-            return (
-        <div onClick={() => redirectTODetails(data._id)}>
+        {address.map((data, index) => {
+          return (
+            <div onClick={() => redirectTODetails(data._id)}>
               <Div>
                 <Row>
                   <ColumnSecond>{data.contractName}</ColumnSecond>
@@ -89,9 +88,9 @@ export default function Contract(props) {
                   <ColumnSecond>{data.status}</ColumnSecond>
                 </Row>
               </Div>
-        </div>
-            );
-          })}
+            </div>
+          );
+        })}
       </TableContainer>
     </MainContainer>
   );
@@ -109,11 +108,13 @@ function tagDiv() {
 const Tag = styled.div`
   background-color: #eaefff;
   border-radius: 3px;
-  width: 80px;
+
   color: #436ce0;
   padding: 2px 5px 2px 25px;
   position: relative;
   cursor: pointer;
+  width: 100%;
+  max-width: 100px;
 `;
 
 const TagImage = styled.img`
@@ -126,6 +127,7 @@ const TagImage = styled.img`
 const MainContainer = styled.div`
   background-color: #ecf0f7;
   width: 100%;
+  height: 100vh;
   padding: 3.125rem;
   height: 100vh;
 `;

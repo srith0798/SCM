@@ -11,6 +11,8 @@ import { history } from "../../../managers/history";
 import HideContract from "../../Popup/hideContract";
 import "react-tabs/style/react-tabs.css";
 import SourceCode from "./sourceCode";
+import ContractsService from "../../../services/contractsService";
+import utility from "../../../utility";
 
 export default function ContractDetails() {
   const [activeButton, setActiveButton] = React.useState("General");
@@ -18,58 +20,66 @@ export default function ContractDetails() {
     setActiveButton(e.target.id);
   };
 
-  React.useEffect(() => {
-    console.log(window.location.pathname);
+  const getContractById = async () => {
+    // console.log(window.location.pathname);
     let url = window.location.pathname;
-    let addressURL = url.split("/")
-    console.log(addressURL)
-    addressURL = addressURL[3]
-    console.log(addressURL)
-    let address = [
-      {
-        heading: "Network",
-        subheading: "XDC Mainnet",
-      },
-      {
-        heading: "Solidity version",
-        subheading: "^0.4.16",
-      },
-      {
-        heading: "Verification",
-        subheading: "Verified",
-      },
-      {
-        heading: "Tags",
-        subheading: "XDC Mainnet",
-      },
-      {
-        heading: "Compiler",
-        subheading: "v0.4.20+commit.3155dd80",
-      },
-      {
-        heading: "EVM version",
-        subheading: "default",
-      },
-      {
-        heading: "Optimizations",
-        subheading: "Enabled",
-      },
-    ];
-
-    setAddress(
-      address.map((object) => {
-        return {
-          heading: object.heading,
-          subheading: object.subheading,
-        };
-      })
-    );
+    let addressURL = url.split("/");
+    // console.log(addressURL);
+    addressURL = addressURL[3];
+    // console.log(addressURL);
+    try {
+      const response = await ContractsService.getContractsById(addressURL);
+      console.log("response", response);
+      setAddress(response);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  React.useEffect(() => {
+    getContractById();
+    //   let address = [
+    //     {
+    //       heading: "Network",
+    //       subheading: "XDC Mainnet",
+    //     },
+    //     {
+    //       heading: "Solidity version",
+    //       subheading: "^0.4.16",
+    //     },
+    //     {
+    //       heading: "Verification",
+    //       subheading: "Verified",
+    //     },
+    //     {
+    //       heading: "Tags",
+    //       subheading: "XDC Mainnet",
+    //     },
+    //     {
+    //       heading: "Compiler",
+    //       subheading: "v0.4.20+commit.3155dd80",
+    //     },
+    //     {
+    //       heading: "EVM version",
+    //       subheading: "default",
+    //     },
+    //     {
+    //       heading: "Optimizations",
+    //       subheading: "Enabled",
+    //     },
+    //   ];
+    //   setAddress(
+    //     address.map((object) => {
+    //       return {
+    //         heading: object.heading,
+    //         subheading: object.subheading,
+    //       };
+    //     })
+    //   );
   }, []);
 
-  const [address, setAddress] = React.useState([]);
+  const [address, setAddress] = React.useState({});
   const [value, setValues] = useState("");
   const [open, setOpen] = useState(false);
-  // const [] = useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -100,177 +110,271 @@ export default function ContractDetails() {
     setRemoveState(false);
   };
   const backButton = () => {
-    history.push("/contract");
+    history.push("/dashboard/contract");
   };
   return (
     <>
-      {/* <Header /> */}
-      <Row>
-        {/* <Sidebar /> */}
-        <MainContainer>
-          <Row style={{ display: "flex", justifyContent: "space-between" }}>
-            <TitleDiv>
-              <img
-                alt=""
-                style={{ marginRight: "4px", cursor: "pointer" }}
-                src="/images/back.svg"
-                onClick={backButton}
-              />
-              <Title>Contract Details</Title>
-            </TitleDiv>
-            <Button>View in Explorer</Button>
-          </Row>
-          <Container>
-            <SubHeading style={{ paddingTop: "0.625rem", paddingLeft: "1rem" }}>
-              App_Transactions_Validator
-            </SubHeading>
-            <div
+      {/* <Row> */}
+      <MainContainer>
+        <Row style={{ display: "flex", justifyContent: "space-between" }}>
+          <TitleDiv>
+            <img
+              alt=""
+              style={{ marginRight: "4px", cursor: "pointer" }}
+              src="/images/back.svg"
+              onClick={backButton}
+            />
+            <Title>Contract Details</Title>
+          </TitleDiv>
+          <Button>View in Explorer</Button>
+        </Row>
+        <Container>
+          <SubHeading style={{ paddingTop: "0.625rem", paddingLeft: "1rem" }}>
+            App_Transactions_Validator
+          </SubHeading>
+          <div
+            style={{
+              paddingLeft: "1.25rem",
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            <Hash
+              type="text"
+              value={value}
+              onChange={(e) => setValues(e.target.value)}
+            />
+            {/* xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c */}
+            <CopyToClipboard text={value}>
+              <CopyImg src="/images/copy.svg" />
+            </CopyToClipboard>
+          </div>
+
+          <TabLister>
+            <TabView
+              id="General"
+              onClick={handleViewClick}
               style={{
-                paddingLeft: "1.25rem",
+                color: activeButton === "General" ? "#3163F0" : "#AEB7D0",
                 display: "flex",
+                paddingBottom: "0.875rem",
+                paddingright: "16px",
                 alignItems: "center",
+                borderBottom:
+                  activeButton === "General"
+                    ? "0.125rem solid #3163F0"
+                    : "#AEB7D0",
               }}
             >
-              <Hash
-                type="text"
-                value={value}
-                onChange={(e) => setValues(e.target.value)}
+              <img
+                alt=""
+                style={{ marginRight: "0.375rem" }}
+                src={
+                  activeButton === "General"
+                    ? "/images/genrl.svg"
+                    : "/images/general_grey.svg"
+                }
               />
-              {/* xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c */}
-              <CopyToClipboard text={value}>
-                <CopyImg src="/images/copy.svg" />
-              </CopyToClipboard>
-            </div>
+              General
+            </TabView>
+            <TabView
+              id="Source Code"
+              onClick={handleViewClick}
+              style={{
+                color: activeButton === "Source Code" ? "#3163F0" : "#AEB7D0",
+                display: "flex",
+                paddingBottom: "0.875rem",
+                paddingright: "16px",
+                alignItems: "center",
+                borderBottom:
+                  activeButton === "Source Code" ? "0.125rem solid blue" : "",
+              }}
+            >
+              <img
+                alt=""
+                style={{ marginRight: "0.375rem" }}
+                src={
+                  activeButton === "Source Code"
+                    ? "/images/source code_blue.svg"
+                    : "/images/source code_grey.svg"
+                }
+              />
+              Source Code
+            </TabView>
+          </TabLister>
+          {activeButton === "General" && (
+            <DetailsSection>
+              <div>
+                {/* {address.map((data) => { */}
 
-            <TabLister>
-              <TabView
-                id="General"
-                onClick={handleViewClick}
-                style={{
-                  color: activeButton === "General" ? "#3163F0" : "#AEB7D0",
-                  display: "flex",
-                  paddingBottom: "0.875rem",
-                  paddingright: "16px",
-                  alignItems: "center",
-                  borderBottom:
-                    activeButton === "General"
-                      ? "0.125rem solid #3163F0"
-                      : "#AEB7D0",
-                }}
-              >
-                <img
-                  alt=""
-                  style={{ marginRight: "0.375rem" }}
-                  src={
-                    activeButton === "General"
-                      ? "/images/genrl.svg"
-                      : "/images/general_grey.svg"
-                  }
-                />
-                General
-              </TabView>
-              <TabView
-                id="Source Code"
-                onClick={handleViewClick}
-                style={{
-                  color: activeButton === "Source Code" ? "#3163F0" : "#AEB7D0",
-                  display: "flex",
-                  paddingBottom: "0.875rem",
-                  paddingright: "16px",
-                  alignItems: "center",
-                  borderBottom:
-                    activeButton === "Source Code" ? "0.125rem solid blue" : "",
-                }}
-              >
-                <img
-                  alt=""
-                  style={{ marginRight: "0.375rem" }}
-                  src={
-                    activeButton === "Source Code"
-                      ? "/images/source code_blue.svg"
-                      : "/images/source code_grey.svg"
-                  }
-                />
-                Source Code
-              </TabView>
-            </TabLister>
-            {activeButton === "General" && (
-              <DetailsSection>
-                <div>
-                  {address.map((data) => {
-                    return (
-                      <Div>
-                        <TableHeading>{data.heading}</TableHeading>
-                        <TableData>{data.subheading}</TableData>
-                      </Div>
-                    );
-                  })}
-                </div>
-                <PopUp>
-                  <PopUpBlock>
-                    <RowProperty>
-                      <img alt="" src="/images/cube.svg" />
-                    </RowProperty>
-                    <RowProperty>View transactions</RowProperty>
-                  </PopUpBlock>
+                <Div>
+                  <TableHeading>Network</TableHeading>
+                  <TableData>{address.address}</TableData>
+                </Div>
+                <Div>
+                  <TableHeading>Solidity version</TableHeading>
+                  <TableData>{address.blockNumber}</TableData>
+                </Div>
+                <Div>
+                  <TableHeading>Verification</TableHeading>
+                  <Verified>{address.status}</Verified>
+                </Div>
+                <Div>
+                  <TableHeading>Tags</TableHeading>
+                  <TableData>{tagDiv()} </TableData>
+                </Div>
+                <Div>
+                  <TableHeading>Compiler</TableHeading>
+                  <TableData>{address.blockNumber}</TableData>
+                </Div>
+                <Div>
+                  <TableHeading>EVM version</TableHeading>
+                  <TableData>{address.blockNumber}</TableData>
+                </Div>
+                <Div>
+                  <TableHeading>Optimizations</TableHeading>
+                  <Enabled>{address.status}</Enabled>
+                </Div>
 
-                  <PopUpBlock>
-                    {open && <ContractAbi click={handleClose} />}
-                    <RowProperty
-                      onClick={() => {
-                        handleClickOpen();
-                      }}
-                    >
-                      <img alt="" src="/images/code.svg" />
-                    </RowProperty>
-                    <RowProperty
-                      onClick={() => {
-                        handleClickOpen();
-                      }}
-                    >
-                      Contract ABI
-                    </RowProperty>
-                  </PopUpBlock>
+                {/* })} */}
+              </div>
+              <PopUp>
+                <PopUpBlock>
+                  <RowProperty>
+                    <img alt="" src="/images/cube.svg" />
+                  </RowProperty>
+                  <RowProperty>View transactions</RowProperty>
+                </PopUpBlock>
 
-                  <PopUpBlock>
-                    {renameState && (
-                      <RenameContract click={renameHandleClose} />
-                    )}
-                    <RowProperty onClick={() => renameHandleOpen()}>
-                      <img alt="" src="/images/edit.svg" />
-                    </RowProperty>
-                    <RowProperty onClick={() => renameHandleOpen()}>
-                      Rename Contract
-                    </RowProperty>
-                  </PopUpBlock>
-                  <PopUpBlock>
-                    {hide && <HideContract click={hideHandleClose} />}
-                    <RowProperty onClick={() => hideHandleOpen()}>
-                      <img alt="" src="/images/hide.svg" />
-                    </RowProperty>
-                    <RowProperty onClick={() => hideHandleOpen()}>
-                      Hide Contract
-                    </RowProperty>
-                  </PopUpBlock>
-                  <PopUpBlock>
-                    {remove && <Remove click={removeHandleClose} />}
-                    <RowProperty onClick={() => removeHandleOpen()}>
-                      <img alt="" src="/images/delete.svg" />
-                    </RowProperty>
-                    <RowProperty onClick={() => removeHandleOpen()}>
-                      Remove Contract
-                    </RowProperty>
-                  </PopUpBlock>
-                </PopUp>
-              </DetailsSection>
-            )}
-            {activeButton === "Source Code" && <SourceCode />}
-          </Container>
-        </MainContainer>
-      </Row>
+                <PopUpBlock>
+                  {open && <ContractAbi click={handleClose} />}
+                  <RowProperty
+                    onClick={() => {
+                      handleClickOpen();
+                    }}
+                  >
+                    <img alt="" src="/images/code.svg" />
+                  </RowProperty>
+                  <RowProperty
+                    onClick={() => {
+                      handleClickOpen();
+                    }}
+                  >
+                    Contract ABI
+                  </RowProperty>
+                </PopUpBlock>
+
+                <PopUpBlock>
+                  {renameState && <RenameContract click={renameHandleClose} />}
+                  <RowProperty onClick={() => renameHandleOpen()}>
+                    <img alt="" src="/images/edit.svg" />
+                  </RowProperty>
+                  <RowProperty onClick={() => renameHandleOpen()}>
+                    Rename Contract
+                  </RowProperty>
+                </PopUpBlock>
+                <PopUpBlock>
+                  {hide && <HideContract click={hideHandleClose} />}
+                  {address.isHidden ? (
+                    <>
+                      <RowProperty onClick={() => hideHandleOpen()}>
+                        <img alt="" src="/images/hide.svg" />
+                      </RowProperty>
+                      <RowProperty onClick={() => hideHandleOpen()}>
+                        Show Contract
+                      </RowProperty>
+                    </>
+                  ) : (
+                    <>
+                      <RowProperty onClick={() => hideHandleOpen()}>
+                        <img alt="" src="/images/hide.svg" />
+                      </RowProperty>
+                      <RowProperty onClick={() => hideHandleOpen()}>
+                        Hide Contract
+                      </RowProperty>
+                    </>
+                  )}
+                </PopUpBlock>
+                <PopUpBlock>
+                  {remove && <Remove click={removeHandleClose} />}
+                  <RowProperty onClick={() => removeHandleOpen()}>
+                    <img alt="" src="/images/delete.svg" />
+                  </RowProperty>
+                  <RowProperty onClick={() => removeHandleOpen()}>
+                    Remove Contract
+                  </RowProperty>
+                </PopUpBlock>
+              </PopUp>
+            </DetailsSection>
+          )}
+          {activeButton === "Source Code" && <SourceCode />}
+        </Container>
+      </MainContainer>
+      {/* </Row> */}
     </>
   );
 }
+
+function tagDiv() {
+  return (
+    <Row>
+      <FinanceTag>Finance</FinanceTag>
+      <AddTag>Add Tag</AddTag>
+    </Row>
+  );
+}
+const Verified = styled.div`
+  font-size: 1rem;
+  font-weight: 600;
+  color: #00a58c;
+`;
+const Enabled = styled.div`
+  font-size: 1rem;
+  font-weight: 600;
+  color: #00a58c;
+`;
+const FinanceTag = styled.div`
+  background-image: url("/images/Tag_logo.svg");
+  background-repeat: no-repeat;
+  background-position: 0.5rem;
+  padding-left: 1.75rem;
+  background-size: 0.875rem;
+  position: relative;
+  background-color: #eaefff;
+  border: 1px solid #eaefff;
+  border-radius: 0.25rem;
+  width: 100%;
+  max-width: 17.75rem;
+  white-space: nowrap;
+  height: 2.125rem;
+  align-items: center;
+  text-align: center;
+  display: flex;
+  font-size: 0.8rem;
+`;
+const AddTag = styled.button`
+  color: #416be0;
+  background: #ffffff 0% 0% no-repeat padding-box;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border: none;
+  outline: none;
+  white-space: nowrap;
+  background-image: url("/images/globe.svg");
+  background-repeat: no-repeat;
+  background-position: 0.5rem;
+  padding-left: 1.75rem;
+  background-size: 0.875rem;
+  position: relative;
+  background-color: #ffffff;
+
+  border: none;
+  border-radius: 0.25rem;
+  width: 100%;
+  max-width: 17.75rem;
+  white-space: nowrap;
+  height: 2.125rem;
+`;
 
 const MainContainer = styled.div`
   background: #ecf0f7 0% 0% no-repeat padding-box;

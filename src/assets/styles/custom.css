@@ -39,7 +39,7 @@ label {
 }
 
 input:focus {
-  border: solid 1px #0099ff;
+  /* border: solid 1px #0099ff; */
   outline: none;
 }
 
