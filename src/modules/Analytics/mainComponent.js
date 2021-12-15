@@ -40,13 +40,11 @@ export default function MainComponent(props) {
   };
 
   return (
-    <div style={{overflow:"auto"}}>
+    <div style={{ overflow: "auto" }}>
       <Column>
-
         <Row
         // style={{ height: "300vh" }}
         >
-          {/* <Sidebar /> */}
           <MainContainer>
             <SubContainer>
               <MainHeading>Analytics</MainHeading>
@@ -86,13 +84,8 @@ export default function MainComponent(props) {
                 </Box>
               </ClickAwayListener>
             </Container>
-            <Row
-              style={{
-                width: "100%",
 
-                justifyContent: "space-between",
-              }}
-            >
+            <ResponsiveRow>
               <GraphContainer>
                 <SubContainer>
                   <div style={{ display: "flex", alignItems: "center" }}>
@@ -146,14 +139,8 @@ export default function MainComponent(props) {
                 </SubContainer>
                 <Line />
               </GraphContainer>
-            </Row>
-            <Row
-              style={{
-                width: "100%",
-
-                justifyContent: "space-between",
-              }}
-            >
+            </ResponsiveRow>
+            <ResponsiveRow>
               <GraphContainer>
                 <SubContainer>
                   <div style={{ display: "flex", alignItems: "center" }}>
@@ -225,7 +212,7 @@ export default function MainComponent(props) {
                 </SubContainer>
                 <Line />
               </GraphContainer>
-            </Row>
+            </ResponsiveRow>
             <GraphContainer>
               <SubContainer>
                 <div style={{ display: "flex", alignItems: "center" }}>
@@ -277,6 +264,17 @@ export default function MainComponent(props) {
     </div>
   );
 }
+const ResponsiveRow = styled.div`
+  display: flex;
+  flex-flow: row nowrap;
+  width: 100%;
+  justify-content: space-between;
+  width: 100%;
+  justify-content: space-between;
+  @media (min-width: 300px) and (max-width: 767px) {
+    display: block;
+  }
+`;
 const MainContainer = styled.div`
   width: 100%;
   padding-left: 3.125rem;
@@ -322,9 +320,7 @@ const GraphContainer = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
   border-radius: 0.375rem;
   height: auto;
-
   padding: 1.25rem;
-
   margin: 1.25rem 1.875rem 1.875rem 0px;
 `;
 const Head = styled.div`
