@@ -14,7 +14,7 @@ export default function TransactionDetails() {
     setActiveButton(e.target.id);
   };
   const backButton = () => {
-    history.push("/");
+    history.push("/dashboard/transaction-list");
   };
   return (
     <MainContainer>

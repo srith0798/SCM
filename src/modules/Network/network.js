@@ -33,41 +33,39 @@ export default function Network(props) {
 
   const [address, setAddress] = React.useState([]);
   return (
-    <div>
-      <MainContainer>
-        <SubContainer>
-          <div>
-            <Heading>Networks</Heading>
-          </div>
-          <div style={{ display: "flex" }}>
-            {open && <AddNetwork click={handleClose} />}
+    <MainContainer>
+      <SubContainer>
+        <div>
+          <Heading>Networks</Heading>
+        </div>
+        <div style={{ display: "flex" }}>
+          {open && <AddNetwork click={handleClose} />}
 
-            <Button onClick={handleClickOpen}>Add Network</Button>
-          </div>
-        </SubContainer>
-        <Div>
-          <Container>
-            <Row>
-              <ColumnOne>Network</ColumnOne>
-              <UrlHeading>URL</UrlHeading>
-            </Row>
-          </Container>
-          <div>
-            {address.map((data, index) => {
-              return (
-                <Container>
-                  <Row style={{ alignItems: "center" }}>
-                    <Icon src="/images/mainnet.svg" />
-                    <Head>Mainnet</Head>
-                    <Url>https://explorer.xinfin.network/</Url>
-                  </Row>
-                </Container>
-              );
-            })}
-          </div>
-        </Div>
-      </MainContainer>
-    </div>
+          <Button onClick={handleClickOpen}>Add Network</Button>
+        </div>
+      </SubContainer>
+      <Div>
+        <Container>
+          <Row>
+            <ColumnOne>Network</ColumnOne>
+            <UrlHeading>URL</UrlHeading>
+          </Row>
+        </Container>
+        <div>
+          {address.map((data, index) => {
+            return (
+              <Container>
+                <Row style={{ alignItems: "center" }}>
+                  <Icon src="/images/mainnet.svg" />
+                  <Head>Mainnet</Head>
+                  <Url>https://explorer.xinfin.network/</Url>
+                </Row>
+              </Container>
+            );
+          })}
+        </div>
+      </Div>
+    </MainContainer>
   );
 }
 
