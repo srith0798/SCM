@@ -9,7 +9,7 @@ export default function About() {
   const [state, setState] = useState(true);
   return (
     <>
-      {/* <Row> */}
+    
         <MainContainer>
           <MainBoxContainer>
             <Container>
@@ -79,7 +79,7 @@ export default function About() {
             </GreyContainer>
           </MainBoxContainer>
         </MainContainer>
-      {/* </Row> */}
+     
       <div>
         {true && <WalletPopUp click={() => setState(false)} state={state} />}
       </div>

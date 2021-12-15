@@ -493,17 +493,9 @@ const ToolTipIcon = styled.img`
   margin-left: 0.513rem;
 `;
 const RedButton = styled.div`
-  // background: #fde7e7 0% 0% no-repeat padding-box;
-  // border: 1px solid;
-  // border-radius: 0.25rem;
-  // font-size: 0.9rem;
-  // font-weight: 600;
   color: #ce1a1a;
   padding: 14px;
   width: 100%;
-  // max-width: 20.25rem;
-  // white-space: nowrap;
-  // height: 10px;
   margin-left: 1rem;
   display: flex;
   align-items: center;

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Column, Row } from "simple-flexbox";
 import LetsGetStarted from "../Popup/letsGetStartedPopUp";
 import Settings from "../Popup/settings";
+import Filter from "../Popup/filter"
 import Box from "@mui/material/Box";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 import { history } from "../../managers/history";
@@ -10,8 +11,7 @@ import Tooltip from "@mui/material/Tooltip";
 
 export default function TransactionList(props) {
   useEffect(() => {
-    // code to run on component mount
-    // setstate();
+  
   }, []);
   const [state, setState] = useState(true);
   const [open, isOpen] = useState(false);
@@ -121,7 +121,7 @@ export default function TransactionList(props) {
   };
   return (
     <>
-      <Row>
+      {/* <Row> */}
         <MainContainer>
           <Row>
             <Transactions>
@@ -147,12 +147,17 @@ export default function TransactionList(props) {
               <ClickAwayListener onClickAway={handleClickAway}>
                 <Box sx={{ position: "relative" }}>
                   <DropDown onClick={handleClick}>
-                    App_Transactions_Validator
+                    App_Transactions_Validator  <img
+                      style={{ marginLeft: "0.5rem" }}
+                      alt=""
+                      src="/images/XDCmainnet.svg"
+                    />
                     <br />
                     <TransactionHash>
                       xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c
                     </TransactionHash>
                     <Image src="/images/Arrrow.svg" />
+                    
                   </DropDown>
                   {isSetOpen ? (
                     <Box sx={styles}>
@@ -207,7 +212,7 @@ export default function TransactionList(props) {
             </div>
           </TableContainer>
         </MainContainer>
-      </Row>
+      {/* </Row> */}
       <div>
         {false && (
           <LetsGetStarted click={() => setState(false)} state={state} />

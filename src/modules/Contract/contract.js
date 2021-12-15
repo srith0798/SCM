@@ -137,6 +137,11 @@ const SubContainer = styled.div`
   justify-content: space-between;
   height: 3.125rem;
   align-items: center;
+   @media (min-width: 300px) and (max-width: 767px) {
+    
+    // overflow: scroll;
+
+  
 `;
 const Heading = styled.span`
   font-size: 1.5rem;
@@ -182,10 +187,14 @@ const TableContainer = styled.div`
   width: 100%;
   height: 25rem;
   padding: 0.625rem;
+   @media (min-width: 300px) and (max-width: 767px) {
+    
+    overflow: scroll;
 `;
 const Div = styled.div`
   padding: 0.75rem;
   border-bottom: 0.063rem solid #e3e7eb;
+
 `;
 const ColumnOne = styled.div`
   font-size: 0.875rem;
