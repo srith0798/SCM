@@ -11,6 +11,8 @@ const useStyles = makeStyles(() => ({
 }));
 
 export default function HideContract(props) {
+  console.log(props)
+  
   // const hideContract = async () => {
   //   try {
   //     const response = await ContractsService.hideContracts({});
@@ -37,7 +39,7 @@ export default function HideContract(props) {
             <SubContainer
               style={{ width: "100%", maxWidth: "200px", marginTop: "30px" }}
             >
-              <HideButton>Hide Contract</HideButton>
+              <HideButton onClick={props.hideContract}>Hide Contract</HideButton>
               <CancelButton>Cancel</CancelButton>
             </SubContainer>
           </Container>
