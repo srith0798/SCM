@@ -7,11 +7,12 @@ const Hamburger  = styled.img`
   height: 25px;
   margin: 5px 12px 0px 9px;
   position: absolute;
-  left: 1%;
-  top: 1%;
+    left: 123px;
+    top: 35px;
   cursor:pointer;
   @media (min-width: 769px) {
     display: none;
+    
   }
 `;
 const SidebarContainer = styled.div`
@@ -21,7 +22,7 @@ const SidebarContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* min-height: 100vh; */
+  /* min-height:100vh; */
   height: 100%;
   width: 280px;
   padding-top: 15px;
@@ -113,7 +114,7 @@ export default function Sidebar(props) {
   };
 
   return (<>
-      <Hamburger src="/images/Grid.svg" onClick={() => setOpen(!open)} />
+      <Hamburger src="/images/overview_grey.svg" onClick={() => setOpen(!open)} />
       {open && 
       <SidebarContainer>
         <Wrapper onClick={redirectToAbout} style={{ marginTop: "4rem" }}>

@@ -547,7 +547,7 @@ const MainContainer = styled.div`
   opacity: 1;
   width: 100%;
   padding: 2.5rem;
-  height: 100vh;
+  height: 110vh;
 `;
 const TitleHead = styled.div`
   font-size: 24px;
@@ -569,6 +569,7 @@ const TabLister = styled.div`
   max-width: 21.875rem;
   cursor: pointer;
   // margin: 25px 0px 10px 17px;
+  @media
 `;
 const TabView = styled.div`
   padding: 0.313rem 0.5rem 0.313rem 0.5rem;
@@ -611,25 +612,7 @@ const BoxContainer = styled.div`
     color: white;
   }
 `;
-// const BoxContainerOne = styled.div`
-//   padding: 0.625rem;
-//   width: 450px;
-//   height: 150px;
-//   max-width: 215px;
-//   border: solid #d5e0ff;
-//   outline: none;
-//   // background: #3163f0 0% 0% no-repeat padding-box;
-//   border: 1px solid #d5e0ff;
-//   border-radius: 6px;
-//   justify-content: center;
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   text-align: center;
-//   &:hover {
-//     color: #ffffff;
-//   }
-// `;
+
 const MainBoxContainer = styled.div`
   display: flex;
   flex-flow: row wrap;

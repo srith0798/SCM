@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 export default function Historys() {
   return (
-    <div>
+   
       <MainContainer>
         <NewDivOne>
           <Row>
@@ -55,7 +55,7 @@ export default function Historys() {
           </Row>
         </Div>
       </MainContainer>
-    </div>
+    
   );
 }
 const MainContainer = styled.div`
@@ -69,11 +69,19 @@ const MainContainer = styled.div`
 const Div = styled.div`
   padding: 0.938rem;
   border-bottom: 0.063rem solid #e3e7eb;
+  @media (min-width: 300px) and (max-width: 768px) {
+   
+   overflow: scroll;
 `;
 const NewDivOne = styled.div`
   padding-left: 0.938rem;
   padding-bottom: 0.938rem;
   border-bottom: 0.063rem solid #e3e7eb;
+    @media (min-width: 300px) and (max-width: 768px) {
+   
+   overflow: scroll;
+  
+  
 `;
 const ColumnOne = styled.div`
   display: flex;

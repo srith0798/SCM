@@ -6,6 +6,7 @@ import AddContract from "../Popup/addContract";
 import { history } from "../../managers/history";
 import Tooltip from "@mui/material/Tooltip";
 import ContractsService from "../../services/contractsService";
+
 import utility from "../../utility";
 
 export default function Contract(props) {
@@ -44,10 +45,10 @@ export default function Contract(props) {
   return (
     <MainContainer>
       <SubContainer>
-        <div>
+        <MainHeading>
           <Heading>Contracts</Heading>
           <Input placeholder="Search by address or name" />
-        </div>
+        </MainHeading>
         <div style={{ display: "flex" }}>
           <img
             alt=""
@@ -131,12 +132,26 @@ const MainContainer = styled.div`
   padding: 3.125rem;
   height: 100vh;
 `;
+const MainHeading = styled.div`
+display:flex;
+width:100%;
+@media (min-width: 340px) and (max-width: 768px) {
+   display:flex;
+   flex-direction:column;
+   
+   padding-bottom:60px;
+`;
 const SubContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
   height: 3.125rem;
   align-items: center;
+   @media (min-width: 300px) and (max-width: 767px) {
+    padding-top:28px;
+    // overflow: scroll;
+
+  
 `;
 const Heading = styled.span`
   font-size: 1.5rem;
@@ -158,6 +173,10 @@ const Button = styled.button`
   width: 8.125rem;
   height: 2.125rem;
   font-size: 0.875rem;
+   @media (min-width: 340px) and (max-width: 768px) {
+ width: 1.225rem;
+ font-size:0.1px;
+  
 `;
 const Input = styled.input`
   background: #ffffff 0% 0% no-repeat padding-box;
@@ -182,6 +201,10 @@ const TableContainer = styled.div`
   width: 100%;
   height: 25rem;
   padding: 0.625rem;
+   @media (min-width: 300px) and (max-width: 767px) {
+    
+    overflow: scroll;
+    
 `;
 const Div = styled.div`
   padding: 0.75rem;

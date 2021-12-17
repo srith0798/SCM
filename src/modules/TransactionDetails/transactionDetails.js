@@ -381,6 +381,7 @@ const Heading = styled.div`
 const TransactionNumber = styled.b`
   color: #416be0;
   display: flex;
+  width: 100%;
 `;
 const ThirdBox = styled.div`
   text-align: left;
@@ -418,6 +419,7 @@ const Button = styled.button`
   white-space: nowrap;
   height: 2.125rem;
   font-size: 0.875rem;
+  width: 100%;
 `;
 
 const Container = styled.div`
@@ -426,6 +428,7 @@ const Container = styled.div`
   width: 100%;
   height: 8.75rem;
   margin-top: 1.25rem;
+  width: 100%;
 `;
 
 const Hash = styled.div`
@@ -493,17 +496,9 @@ const ToolTipIcon = styled.img`
   margin-left: 0.513rem;
 `;
 const RedButton = styled.div`
-  // background: #fde7e7 0% 0% no-repeat padding-box;
-  // border: 1px solid;
-  // border-radius: 0.25rem;
-  // font-size: 0.9rem;
-  // font-weight: 600;
   color: #ce1a1a;
   padding: 14px;
   width: 100%;
-  // max-width: 20.25rem;
-  // white-space: nowrap;
-  // height: 10px;
   margin-left: 1rem;
   display: flex;
   align-items: center;
