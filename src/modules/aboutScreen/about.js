@@ -97,6 +97,7 @@ const MainBoxContainer = styled.div`
   flex-direction: column;
   align-item: center;
   padding: 3.125rem;
+   @media (min-width: 340px) and (max-width: 768px) {
 `;
 const Container = styled.div`
   background-color: #ffffff;
@@ -107,10 +108,23 @@ const Container = styled.div`
   align-self: center;
    height: 500px;
   max-width: 1306px;
-`;
+  @media  (min-width: 340px) and (max-width: 768px) {
+    flex-direction:column;
+    
+    padding-right:30px;
+    padding-top: 30px;
+   
+    padding-left: 46px;
+    height: 778px;
+}
+
+`; 
 const RightContainer = styled.div`
   width: 100%;
   padding: 4.375rem;
+   @media (min-width: 340px) and (max-width: 768px) {
+     padding: 4.375rem;
+         height: 100%;
 `;
 const LeftContainer = styled.div`
   width: 100%;
@@ -167,6 +181,10 @@ const VideoBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+ @media (min-width: 340px) and (max-width: 768px) {
+
+
+
 `;
 
 const HeadingContainer = styled.div`

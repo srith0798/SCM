@@ -3,16 +3,14 @@ import styled from "styled-components";
 import { Column, Row } from "simple-flexbox";
 import LetsGetStarted from "../Popup/letsGetStartedPopUp";
 import Settings from "../Popup/settings";
-import Filter from "../Popup/filter"
+import Filter from "../Popup/filter";
 import Box from "@mui/material/Box";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 import { history } from "../../managers/history";
 import Tooltip from "@mui/material/Tooltip";
 
 export default function TransactionList(props) {
-  useEffect(() => {
-  
-  }, []);
+  useEffect(() => {}, []);
   const [state, setState] = useState(true);
   const [open, isOpen] = useState(false);
   const handleClickOpen = () => {
@@ -122,8 +120,23 @@ export default function TransactionList(props) {
   return (
     <>
       {/* <Row> */}
-        <MainContainer>
-          <Row>
+      <MainContainer>
+        <TransactionBox>
+          <TransactionMedia>Transactions</TransactionMedia>
+          <NewDiv>
+            <Transactions>Transactions</Transactions>
+            <SearchBar placeholder="Search by status or name" />
+          </NewDiv>
+
+          <IconContainer>
+            {open && <Settings click={handleClose} />}
+            <Icons src="/images/settings.svg" onClick={handleClickOpen} />
+            <Icons src="/images/refresh.svg" />
+            <Icons src="/images/filter.svg" />
+          </IconContainer>
+        </TransactionBox>
+
+        {/*           
             <Transactions>
               <Bold>Transactions</Bold>
             </Transactions>
@@ -133,85 +146,84 @@ export default function TransactionList(props) {
               <Icons src="/images/settings.svg" onClick={handleClickOpen} />
               <Icons src="/images/refresh.svg" />
               <Icons src="/images/filter.svg" />
-            </IconContainer>
-          </Row>
+            </IconContainer> */}
 
-          <Card>
-            <Column>
-              <Heading>View Transaction for Contract</Heading>
-              <InstructionText>
-                You can view transactions per contract by using the contract
-                picker below
-              </InstructionText>
+        <Card>
+          <Column>
+            <Heading>View Transaction for Contract</Heading>
+            <InstructionText>
+              You can view transactions per contract by using the contract
+              picker below
+            </InstructionText>
 
-              <ClickAwayListener onClickAway={handleClickAway}>
-                <Box sx={{ position: "relative" }}>
-                  <DropDown onClick={handleClick}>
-                    App_Transactions_Validator  <img
-                      style={{ marginLeft: "0.5rem" }}
-                      alt=""
-                      src="/images/XDCmainnet.svg"
-                    />
+            <ClickAwayListener onClickAway={handleClickAway}>
+              <Box sx={{ position: "relative" }}>
+                <DropDown onClick={handleClick}>
+                  App_Transactions_Validator{" "}
+                  <img
+                    style={{ marginLeft: "0.5rem" }}
+                    alt=""
+                    src="/images/XDCmainnet.svg"
+                  />
+                  <br />
+                  <TransactionHash>
+                    xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c
+                  </TransactionHash>
+                  <Image src="/images/Arrrow.svg" />
+                </DropDown>
+                {isSetOpen ? (
+                  <Box sx={styles}>
+                    <Label>Contract</Label>
+                    App_Transactions_Validator
                     <br />
                     <TransactionHash>
                       xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c
                     </TransactionHash>
-                    <Image src="/images/Arrrow.svg" />
-                    
-                  </DropDown>
-                  {isSetOpen ? (
-                    <Box sx={styles}>
-                      <Label>Contract</Label>
-                      App_Transactions_Validator
-                      <br />
-                      <TransactionHash>
-                        xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c
-                      </TransactionHash>
-                    </Box>
-                  ) : null}
-                </Box>
-              </ClickAwayListener>
-            </Column>
-          </Card>
+                  </Box>
+                ) : null}
+              </Box>
+            </ClickAwayListener>
+          </Column>
+        </Card>
 
-          <TableContainer>
-            <Div>
-              <Row>
-                <ColumnOne>Tx Hash</ColumnOne>
-                <ColumnOne>Status</ColumnOne>{" "}
-                <ColumnOne>
-                  Function
-                  <Tooltip disableFocusListener title="Add">
-                    <ToolTipIcon src="/images/tool tip.svg" />
-                  </Tooltip>
-                </ColumnOne>
-                <ColumnOne>Contracts</ColumnOne>
-                <ColumnOne>Form</ColumnOne>
-                <ColumnOne>To</ColumnOne>
-                <ColumnOne>When</ColumnOne>
-              </Row>
-            </Div>
-            <div>
-              {address.map((data, index) => {
-                return (
-                  <Div onClick={redirectToTransactionDetails}>
-                    <Row>
-                      {/* <ColorBox> */}
-                      <ColumnSecond>{data.txn}</ColumnSecond>
-                      {/* </ColorBox> */}
-                      <ColumnSecond>{data.status}</ColumnSecond>
-                      <ColumnSecond>{data.function}</ColumnSecond>
-                      <ColumnSecond>{data.contracts}</ColumnSecond>
-                      <ColumnSecond>{data.from}</ColumnSecond>
-                      <ColumnSecond>{data.to}</ColumnSecond>
-                      <ColumnSecond>{data.when}</ColumnSecond>
-                    </Row>
-                  </Div>
-                );
-              })}
-            </div>
-          </TableContainer>
-        </MainContainer>
+        <TableContainer>
+          <Div>
+            <Row>
+              <ColumnOne>Tx Hash</ColumnOne>
+              <ColumnOne>Status</ColumnOne>{" "}
+              <ColumnOne>
+                Function
+                <Tooltip disableFocusListener title="Add">
+                  <ToolTipIcon src="/images/tool tip.svg" />
+                </Tooltip>
+              </ColumnOne>
+              <ColumnOne>Contracts</ColumnOne>
+              <ColumnOne>Form</ColumnOne>
+              <ColumnOne>To</ColumnOne>
+              <ColumnOne>When</ColumnOne>
+            </Row>
+          </Div>
+          <div>
+            {address.map((data, index) => {
+              return (
+                <Div onClick={redirectToTransactionDetails}>
+                  <Row>
+                    {/* <ColorBox> */}
+                    <ColumnSecond>{data.txn}</ColumnSecond>
+                    {/* </ColorBox> */}
+                    <ColumnSecond>{data.status}</ColumnSecond>
+                    <ColumnSecond>{data.function}</ColumnSecond>
+                    <ColumnSecond>{data.contracts}</ColumnSecond>
+                    <ColumnSecond>{data.from}</ColumnSecond>
+                    <ColumnSecond>{data.to}</ColumnSecond>
+                    <ColumnSecond>{data.when}</ColumnSecond>
+                  </Row>
+                </Div>
+              );
+            })}
+          </div>
+        </TableContainer>
+      </MainContainer>
       {/* </Row> */}
       <div>
         {false && (
@@ -225,6 +237,9 @@ export default function TransactionList(props) {
 const Div = styled.div`
   padding: 0.75rem;
   border-bottom: 1px solid #e3e7eb;
+  
+    // max-width: 200px;
+  }
 `;
 const ColumnOne = styled.div`
   font-size: 0.875rem;
@@ -232,6 +247,10 @@ const ColumnOne = styled.div`
   color: #102c78;
   width: 100%;
   max-width: 18.75rem;
+  @media (min-width: 300px) and (max-width: 767px) {
+   
+     margin-right: 59px;
+    width: 100%;
 `;
 const TableContainer = styled.div`
   background-color: #ffffff;
@@ -240,6 +259,13 @@ const TableContainer = styled.div`
   height: 25rem;
   padding: 0.625rem;
   margin-top: 1.563rem;
+   @media (min-width: 300px) and (max-width: 767px) {
+   
+    overflow: scroll;
+  
+
+
+    width: 100%;
 `;
 
 const MainContainer = styled.div`
@@ -249,9 +275,32 @@ const MainContainer = styled.div`
   padding: 3.125rem;
   height: 100vh;
 `;
-
+const TransactionBox = styled.div`
+  width: 100%;
+  max-width: 1540px;
+  display: flex;
+  justify-content: space-between;
+`;
+const NewDiv = styled.div`
+display:flex;
+@media (min-width: 340px) and (max-width: 768px) {
+    margin-left: -3px;
+    padding: 2px;
+        
+`;
 const Transactions = styled.div`
   font-size: 1.25rem;
+  font-weight: 600;
+  @media (min-width: 360px) and (max-width: 577px) {
+   display:none;
+    
+`;
+const TransactionMedia = styled.div`
+ display:none;
+  @media (min-width: 360px) (max-width: 577px){
+  font-size: 1.25rem;
+  font-weight: 600;
+    
 `;
 const SearchBar = styled.input`
   height: 2.188rem;
@@ -270,14 +319,21 @@ const SearchBar = styled.input`
   *:focus {
     outline: none;
   }
+   @media (min-width: 300px) and (max-width: 767px) {
+    display:flex;
+        margin-left: -1px;
+    margin-right: 8px;
+    padding: 0px;
+    font-size: 14px;
+    background-image:none;
+
 `;
 const Icons = styled.img`
-  margin-right: 0.625rem;
+  // margin-right: 0.625rem;
   cursor: pointer;
 `;
 const IconContainer = styled.div`
-  position: absolute;
-  right: 40px;
+  display: flex;
 `;
 const Heading = styled.span`
   margin-top: 0.625rem;
@@ -329,6 +385,9 @@ const TransactionHash = styled.div`
   font-weight: 600;
   color: #416be0;
   margin-top: 0.25rem;
+  width:100%;
+   @media (min-width: 300px) and (max-width: 767px) {
+     font-size: 0.575rem;
 `;
 const Image = styled.img`
   width: 0.75rem;
