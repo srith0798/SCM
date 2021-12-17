@@ -49,7 +49,7 @@ export default function Contract(props) {
           <Heading>Contracts</Heading>
           <Input placeholder="Search by address or name" />
         </MainHeading>
-        <div style={{ display: "flex" }}>
+        <IconDiv>
           <img
             alt=""
             src="/images/refresh.svg"
@@ -57,7 +57,7 @@ export default function Contract(props) {
           />
           {open && <AddContract click={handleClose} />}
           <Button onClick={handleClickOpen}>Add Contract</Button>
-        </div>
+        </IconDiv>
       </SubContainer>
 
       <TableContainer>
@@ -105,17 +105,24 @@ function tagDiv() {
     </Tag>
   );
 }
-
+const IconDiv = styled.div`
+  display: flex;
+`;
 const Tag = styled.div`
   background-color: #eaefff;
   border-radius: 3px;
 
   color: #436ce0;
-  padding: 2px 5px 2px 25px;
+  padding: 2px 2px 2px 25px;
   position: relative;
   cursor: pointer;
   width: 100%;
   max-width: 100px;
+  @media (min-width: 340px) and (max-width: 768px) {
+    padding: 2px 14px 2px 25px;
+    margin-right: 56px;
+    margin-left: 36px;
+  }
 `;
 
 const TagImage = styled.img`
@@ -149,7 +156,7 @@ const SubContainer = styled.div`
   align-items: center;
    @media (min-width: 300px) and (max-width: 767px) {
     padding-top:28px;
-    // overflow: scroll;
+   
 
   
 `;
@@ -204,6 +211,15 @@ const TableContainer = styled.div`
    @media (min-width: 300px) and (max-width: 767px) {
     
     overflow: scroll;
+    width: 100%;
+    height: 381px;
+    overflow-y: auto;
+    position: relative;
+    &::-webkit-scrollbar {
+        width: 10px;
+        border: 0.5px solid blue;
+        outline:none;
+    }
     
 `;
 const Div = styled.div`
@@ -216,6 +232,10 @@ const ColumnOne = styled.div`
   color: #102c78;
   width: 100%;
   max-width: 18.75rem;
+   @media (min-width: 300px) and (max-width: 767px) {
+    
+    margin-right:60px;
+    
 `;
 const ColumnSecond = styled.div`
   font-size: 0.875rem;
@@ -223,6 +243,11 @@ const ColumnSecond = styled.div`
   color: #191919;
   width: 100%;
   max-width: 18.75rem;
+   @media (min-width: 300px) and (max-width: 767px) {
+    
+  
+  
+    
 `;
 const ToolTipIcon = styled.img`
   width: 0.75rem;

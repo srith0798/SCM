@@ -249,7 +249,7 @@ const ColumnOne = styled.div`
   max-width: 18.75rem;
   @media (min-width: 300px) and (max-width: 767px) {
    
-     margin-right: 59px;
+    margin-right: 59px;
     width: 100%;
 `;
 const TableContainer = styled.div`
@@ -261,9 +261,19 @@ const TableContainer = styled.div`
   margin-top: 1.563rem;
    @media (min-width: 300px) and (max-width: 767px) {
    
-    overflow: scroll;
-  
 
+  
+ overflow: scroll;
+    width: 100%;
+    height: 381px;
+    overflow-y: auto;
+    position: relative;
+    &::-webkit-scrollbar {
+        width: 10px;
+        border: 0.5px solid blue;
+        outline:none;
+    }
+    
 
     width: 100%;
 `;
@@ -273,7 +283,7 @@ const MainContainer = styled.div`
   opacity: 1;
   width: 100%;
   padding: 3.125rem;
-  height: 100vh;
+  height: 120vh;
 `;
 const TransactionBox = styled.div`
   width: 100%;
