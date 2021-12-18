@@ -5,57 +5,55 @@ import styled from "styled-components";
 
 export default function Historys() {
   return (
-   
-      <MainContainer>
-        <NewDivOne>
-          <Row>
-            <ColumnOne>Alert Type</ColumnOne>
-            <ColumnOne>Contract</ColumnOne>
-            <ColumnOne>Tx Hash</ColumnOne>
-            <ColumnOne>Network</ColumnOne>
-            <ColumnOne>When</ColumnOne>
-          </Row>
-        </NewDivOne>
-        <Div>
-          <Row>
-            <ColumnTwo style={{ fontSize: "0.875rem", color: "#191919" }}>
-              Sucessfull transaction
-            </ColumnTwo>
-            <ColumnTwo style={{ fontSize: "0.875rem", color: "#191919" }}>
-              App_Transactions
-            </ColumnTwo>
-            <ColumnTwo style={{ fontSize: "0.875rem", color: "#191919" }}>
-              0xndfahkk57..fj9
-            </ColumnTwo>
-            <ColumnTwo style={{ fontSize: "0.875rem", color: "#191919" }}>
-              XDC Mainnet
-            </ColumnTwo>
-            <ColumnTwo style={{ fontSize: "0.875rem", color: "#191919" }}>
-              02.2.2022 12:02
-            </ColumnTwo>
-          </Row>
-        </Div>
-        <Div>
-          <Row>
-            <ColumnTwo style={{ fontSize: "0.875rem", color: "#191919" }}>
-              Sucessfull transaction
-            </ColumnTwo>
-            <ColumnTwo style={{ fontSize: "0.875rem", color: "#191919" }}>
-              App_Transactions
-            </ColumnTwo>
-            <ColumnTwo style={{ fontSize: "0.875rem", color: "#191919" }}>
-              0xndfahkk57..fj9
-            </ColumnTwo>
-            <ColumnTwo style={{ fontSize: "0.875rem", color: "#191919" }}>
-              XDC Mainnet
-            </ColumnTwo>
-            <ColumnTwo style={{ fontSize: "0.875rem", color: "#191919" }}>
-              02.2.2022 12:02
-            </ColumnTwo>
-          </Row>
-        </Div>
-      </MainContainer>
-    
+    <MainContainer>
+      <NewDivOne>
+        <Row>
+          <ColumnOne>Alert Type</ColumnOne>
+          <ColumnOne>Contract</ColumnOne>
+          <ColumnOne>Tx Hash</ColumnOne>
+          <ColumnOne>Network</ColumnOne>
+          <ColumnOne>When</ColumnOne>
+        </Row>
+      </NewDivOne>
+      <Div>
+        <Row>
+          <ColumnTwo style={{ fontSize: "0.875rem", color: "#191919" }}>
+            Sucessfull transaction
+          </ColumnTwo>
+          <ColumnTwo style={{ fontSize: "0.875rem", color: "#191919" }}>
+            App_Transactions
+          </ColumnTwo>
+          <ColumnTwo style={{ fontSize: "0.875rem", color: "#191919" }}>
+            0xndfahkk57..fj9
+          </ColumnTwo>
+          <ColumnTwo style={{ fontSize: "0.875rem", color: "#191919" }}>
+            XDC Mainnet
+          </ColumnTwo>
+          <ColumnTwo style={{ fontSize: "0.875rem", color: "#191919" }}>
+            02.2.2022 12:02
+          </ColumnTwo>
+        </Row>
+      </Div>
+      <Div>
+        <Row>
+          <ColumnTwo style={{ fontSize: "0.875rem", color: "#191919" }}>
+            Sucessfull transaction
+          </ColumnTwo>
+          <ColumnTwo style={{ fontSize: "0.875rem", color: "#191919" }}>
+            App_Transactions
+          </ColumnTwo>
+          <ColumnTwo style={{ fontSize: "0.875rem", color: "#191919" }}>
+            0xndfahkk57..fj9
+          </ColumnTwo>
+          <ColumnTwo style={{ fontSize: "0.875rem", color: "#191919" }}>
+            XDC Mainnet
+          </ColumnTwo>
+          <ColumnTwo style={{ fontSize: "0.875rem", color: "#191919" }}>
+            02.2.2022 12:02
+          </ColumnTwo>
+        </Row>
+      </Div>
+    </MainContainer>
   );
 }
 const MainContainer = styled.div`

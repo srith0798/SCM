@@ -107,56 +107,58 @@ export default function Rules() {
               </Row>
             </NewDivOne>
             {activeButton === "Rules" && (
-              <DetailBox>
-                <NewDiv>
-                  <Row onClick={redirectToAlertDetails}>
-                    <ColumnOne>Contract Name</ColumnOne>
-                    <ColumnOne>Address</ColumnOne>
-                    <ColumnOne>Network</ColumnOne>
-                    <ColumnOne>Alert Type</ColumnOne>
-                    <ColumnOne></ColumnOne>
-                    <ColumnOne></ColumnOne>
-                  </Row>
-                </NewDiv>
-                <NewDiv>
-                  <Row onClick={redirectToAlertDetails}>
-                    <ColumnTwo>App_Transactions</ColumnTwo>
-                    <ColumnTwo>xdcabfe…8b3c</ColumnTwo>
-                    <ColumnTwo>XDC Mainnet</ColumnTwo>
-                    <ColumnTwo>Sucessfull</ColumnTwo>
-                    <ColumnTwo style={{ fontSize: "14px", color: "#00A58C" }}>
-                      Enabled
-                    </ColumnTwo>
-                    <ColumnTwo>
-                      <img
-                        alt=""
-                        src="/images/delete_blue.svg"
-                        style={{ width: "1rem" }}
-                      />
-                    </ColumnTwo>
-                  </Row>
-                </NewDiv>
-                <NewDiv>
-                  <Row onClick={redirectToAlertDetails}>
-                    <ColumnTwo>App_Transactions</ColumnTwo>
-                    <ColumnTwo>xdcabfe…8b3c</ColumnTwo>
-                    <ColumnTwo>XDC Mainnet</ColumnTwo>
-                    <ColumnTwo>Failed </ColumnTwo>
-                    <ColumnTwo
-                      style={{ fontSize: "0.875rem", color: "#00A58C" }}
-                    >
-                      Enabled
-                    </ColumnTwo>
-                    <ColumnTwo>
-                      <img
-                        alt=""
-                        src="/images/delete_blue.svg"
-                        style={{ width: "1rem" }}
-                      />
-                    </ColumnTwo>
-                  </Row>
-                </NewDiv>
-              </DetailBox>
+              <TableContainer>
+                <DetailBox>
+                  <NewDiv>
+                    <Row onClick={redirectToAlertDetails}>
+                      <ColumnOne>Contract Name</ColumnOne>
+                      <ColumnOne>Address</ColumnOne>
+                      <ColumnOne>Network</ColumnOne>
+                      <ColumnOne>Alert Type</ColumnOne>
+                      <ColumnOne></ColumnOne>
+                      <ColumnOne></ColumnOne>
+                    </Row>
+                  </NewDiv>
+                  <NewDiv>
+                    <Row onClick={redirectToAlertDetails}>
+                      <ColumnTwo>App_Transactions</ColumnTwo>
+                      <ColumnTwo>xdcabfe…8b3c</ColumnTwo>
+                      <ColumnTwo>XDC Mainnet</ColumnTwo>
+                      <ColumnTwo>Sucessfull</ColumnTwo>
+                      <ColumnTwo style={{ fontSize: "14px", color: "#00A58C" }}>
+                        Enabled
+                      </ColumnTwo>
+                      <ColumnTwo>
+                        <img
+                          alt=""
+                          src="/images/delete_blue.svg"
+                          style={{ width: "1rem" }}
+                        />
+                      </ColumnTwo>
+                    </Row>
+                  </NewDiv>
+                  <NewDiv>
+                    <Row onClick={redirectToAlertDetails}>
+                      <ColumnTwo>App_Transactions</ColumnTwo>
+                      <ColumnTwo>xdcabfe…8b3c</ColumnTwo>
+                      <ColumnTwo>XDC Mainnet</ColumnTwo>
+                      <ColumnTwo>Failed </ColumnTwo>
+                      <ColumnTwo
+                        style={{ fontSize: "0.875rem", color: "#00A58C" }}
+                      >
+                        Enabled
+                      </ColumnTwo>
+                      <ColumnTwo>
+                        <img
+                          alt=""
+                          src="/images/delete_blue.svg"
+                          style={{ width: "1rem" }}
+                        />
+                      </ColumnTwo>
+                    </Row>
+                  </NewDiv>
+                </DetailBox>
+              </TableContainer>
             )}
             {activeButton === "History" && <Historys />}
             {activeButton === "Destination" && <Destination />}
@@ -167,6 +169,26 @@ export default function Rules() {
   );
 }
 
+const TableContainer = styled.div`
+  background-color: #ffffff;
+  border-radius: 0.375rem;
+  width: 100%;
+  height: 25rem;
+  padding: 0.625rem;
+   @media (min-width: 300px) and (max-width: 767px) {
+    
+    overflow: scroll;
+    width: 100%;
+    height: 281px;
+    overflow-y: auto;
+    position: relative;
+    &::-webkit-scrollbar {
+        width: 10px;
+        border: 0.5px solid blue;
+        outline:none;
+    }
+    
+`;
 const Title = styled.div`
   font-size: 1.5rem;
   font-weight: 600;
@@ -176,9 +198,7 @@ const Container = styled.div`
   border-radius: 0.375rem;
   width: 100%;
   background-color: #ffffff;
-  height: 22.25rem;
   padding: 0.5rem;
-  
 `;
 
 const ColumnOne = styled.div`
@@ -189,9 +209,8 @@ const ColumnOne = styled.div`
   color: #102c78;
   width: 100%;
   max-width: 18.75rem;
-   @media (min-width: 300px) and (max-width: 768px) {
-   
-   margin-right:40px;
+  @media (min-width: 300px) and (max-width: 768px) {
+    margin-right: 40px;
     // max-width: 200px;
   }
 `;
@@ -202,9 +221,8 @@ const ColumnTwo = styled.div`
   color: #191919;
   width: 100%;
   max-width: 18.75rem;
-   @media (min-width: 300px) and (max-width: 768px) {
-   
-    margin-right:20px;
+  @media (min-width: 300px) and (max-width: 768px) {
+    margin-right: 20px;
     // width: 100%;
     // max-width: 200px;
   }
@@ -236,13 +254,12 @@ const Button = styled.button`
 const NewDiv = styled.div`
   padding: 0.938rem;
   border-bottom: 0.063rem solid #e3e7eb;
-  
 
+  padding-left: 0;
 `;
 const NewDivOne = styled.div`
   // padding: 0.938rem;
   border-bottom: 0.063rem solid #e3e7eb;
- 
 `;
 const RowCorrecter = styled.div`
   display: flex;
@@ -267,10 +284,10 @@ const TabView = styled.div`
    padding: 0rem 0rem 0rem 0rem;
 `;
 
-const DetailBox =styled.div`
- @media (min-width: 300px) and (max-width: 768px) {
-   
-   overflow: scroll;
-//     // width: 100%;
-//     // max-width: 200px;
-//   }`
+const DetailBox = styled.div``;
+//  @media (min-width: 300px) and (max-width: 768px) {
+
+//    overflow: scroll;
+// //     // width: 100%;
+// //     // max-width: 200px;
+// //   }`;

@@ -10,96 +10,92 @@ export default function AlertDetails() {
     history.push("/dashboard/Alerting");
   };
   return (
-    <div>
-      {/* <Header /> */}
-      <Row>
-        {/* <Sidebar /> */}
-
-        <MainContainer>
-          <Row
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              marginBottom: "20px",
-            }}
-          >
-            <div>
+    <MainBoxContainer>
+      <MainContainer>
+        <Row
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            marginBottom: "20px",
+          }}
+        >
+          <div>
+            <img
+              alt=""
+              src="/images/back.svg"
+              style={{ marginRight: "10px" }}
+              onClick={() => backButton()}
+            />
+            <b>Alert Details</b>
+          </div>
+          <Button>Add Alert</Button>
+        </Row>
+        <Container>
+          <CommonDiv>
+            <Row>
+              <Heading>ID</Heading>
+              <SubHead>45fej-46de-41d3-b23a-fhf783</SubHead>
+            </Row>
+          </CommonDiv>
+          <CommonDiv>
+            <Row>
+              <Heading>Name</Heading>
+              <SubHead>
+                Sucessfull transaction in App_Transactions_Validator
+              </SubHead>
+            </Row>
+          </CommonDiv>
+          <CommonDiv>
+            <Row>
+              <Heading>Alert Type</Heading>
+              <SubHead>
+                <TextColor>Sucessfull transaction</TextColor>
+              </SubHead>
+            </Row>
+          </CommonDiv>
+          <CommonDiv>
+            <Row>
+              <Heading>Target</Heading>
+              <SubHead>App_Transactions_Validator</SubHead>
+            </Row>
+          </CommonDiv>
+        </Container>
+        <br />
+        <b>Alert will be sent to this destination</b>
+        <NewContainer>
+          <CommonDiv>
+            <Row>
               <img
                 alt=""
-                src="/images/back.svg"
-                style={{ marginRight: "10px" }}
-                onClick={() => backButton()}
+                src="/images/email.svg"
+                style={{ marginRight: "4px", width: "1rem" }}
               />
-              <b>Alert Details</b>
-            </div>
-            <Button>Add Alert</Button>
-          </Row>
-          <Container>
-            <CommonDiv>
-              <Row>
-                <Heading>ID</Heading>
-                <SubHead>45fej-46de-41d3-b23a-fhf783</SubHead>
-              </Row>
-            </CommonDiv>
-            <CommonDiv>
-              <Row>
-                <Heading>Name</Heading>
-                <SubHead>
-                  Sucessfull transaction in App_Transactions_Validator
-                </SubHead>
-              </Row>
-            </CommonDiv>
-            <CommonDiv>
-              <Row>
-                <Heading>Alert Type</Heading>
-                <SubHead>
-                  <TextColor>Sucessfull transaction</TextColor>
-                </SubHead>
-              </Row>
-            </CommonDiv>
-            <CommonDiv>
-              <Row>
-                <Heading>Target</Heading>
-                <SubHead>App_Transactions_Validator</SubHead>
-              </Row>
-            </CommonDiv>
-          </Container>
-          <br />
-          <b>Alert will be sent to this destination</b>
-          <NewContainer>
-            <CommonDiv>
-              <Row>
-                <img
-                  alt=""
-                  src="/images/email.svg"
-                  style={{ marginRight: "4px", width: "1rem" }}
-                />
-                <Heading>Email :it@supportteam.com</Heading>
-                <SubHead>it@supportteam.com</SubHead>
-              </Row>
-            </CommonDiv>
-            <CommonDiv>
-              <Row>
-                <img
-                  alt=""
-                  src="/images/webhook.svg"
-                  style={{ marginRight: "4px", width: "1rem" }}
-                />
-                <Heading>Finance</Heading>
-                <SubHead>https:webhook.site/aOe</SubHead>
-              </Row>
-            </CommonDiv>
-            <RowContainer>
-              <Buttonn style={{ marginRight: "4px" }}>Edit</Buttonn>
-              <Buttonn2 style={{ marginLeft: "4px" }}>Disable</Buttonn2>
-            </RowContainer>
-          </NewContainer>
-        </MainContainer>
-      </Row>
-    </div>
+              <Heading>Email </Heading>
+              <SubHead>it@supportteam.com</SubHead>
+            </Row>
+          </CommonDiv>
+          <CommonDiv>
+            <Row>
+              <img
+                alt=""
+                src="/images/webhook.svg"
+                style={{ marginRight: "4px", width: "1rem" }}
+              />
+              <Heading>Finance</Heading>
+              <SubHead>https:webhook.site/aOe</SubHead>
+            </Row>
+          </CommonDiv>
+          <RowContainer>
+            <Buttonn style={{ marginRight: "4px" }}>Edit</Buttonn>
+            <Buttonn2 style={{ marginLeft: "4px" }}>Disable</Buttonn2>
+          </RowContainer>
+        </NewContainer>
+      </MainContainer>
+    </MainBoxContainer>
   );
 }
 
+const MainBoxContainer = styled.div``;
 const MainContainer = styled.div`
   background: #ecf0f7 0% 0% no-repeat padding-box;
   opacity: 1;
@@ -139,6 +135,14 @@ const Container = styled.div`
   height: 12rem;
   margin-top: 20px;
   padding: 12px;
+  @media (min-width: 300px) and (max-width: 768px) {
+    background-color: #ffffff;
+    border-radius: 6px;
+    /* width: 106%; */
+    height: 252px;
+    margin-top: 20px;
+    padding: 4px;
+  }
 `;
 
 const CommonDiv = styled.div`
@@ -156,6 +160,9 @@ const Heading = styled.div`
 `;
 const SubHead = styled.div`
   font-size: 13px;
+  @media (min-width: 300px) and (max-width: 768px) {
+  
+    margin-left:5px;
 `;
 
 const RowContainer = styled.div`

@@ -5,7 +5,7 @@ export default {
   getContractsList,
   addContract,
   getContractsById,
-  hideContract
+  hideContract,
 };
 
 function getHeaders() {

@@ -42,52 +42,54 @@ export default function Destination() {
         <ColumnOne style={{ paddingBottom: "10px" }}>
           Active Destination
         </ColumnOne>
-        <Div>
-          <Row>
-            <img
-              alt=""
-              src="/images/email.svg"
-              style={{ marginRight: "4px", width: "1rem" }}
-            />
-            <ColumnTwo style={{ color: "#191919" }}>Finance</ColumnTwo>
-            <ColumnTwo style={{ fontWeight: "normal" }}>
-              it@supportteam.com
-            </ColumnTwo>
-            <ColumnTwo>
-              <ColorChanging style={{ fontWeight: "normal" }}>
-                Verified
-              </ColorChanging>
-            </ColumnTwo>
-            <ColumnTwo>
+        <LastDiv>
+          <Div>
+            <Row>
               <img
                 alt=""
-                src="/images/deletes.svg"
-                style={{ width: "1.1rem" }}
+                src="/images/email.svg"
+                style={{ marginRight: "4px", width: "1rem" }}
               />
-            </ColumnTwo>
-          </Row>
-        </Div>
-        <Div>
-          <Row>
-            <img
-              alt=""
-              src="/images/email.svg"
-              style={{ marginRight: "0.25rem", width: "1rem" }}
-            />
-            <ColumnTwo style={{ color: "#191919" }}> Finance</ColumnTwo>
-            <ColumnTwo style={{ fontWeight: "normal" }}>
-              http://webhook.site/aOe
-            </ColumnTwo>
-            <ColumnTwo>
-              <ColorChanging style={{ fontWeight: "normal" }}>
-                Connected
-              </ColorChanging>
-            </ColumnTwo>
-            <ColumnTwo>
-              <Icon src="/images/deletes.svg" style={{ width: "1.1rem" }} />
-            </ColumnTwo>
-          </Row>
-        </Div>
+              <ColumnTwo style={{ color: "#191919" }}>Finance</ColumnTwo>
+              <ColumnTwo style={{ fontWeight: "normal" }}>
+                it@supportteam.com
+              </ColumnTwo>
+              <ColumnTwo>
+                <ColorChanging style={{ fontWeight: "normal" }}>
+                  Verified
+                </ColorChanging>
+              </ColumnTwo>
+              <ColumnTwo>
+                <img
+                  alt=""
+                  src="/images/deletes.svg"
+                  style={{ width: "1.1rem" }}
+                />
+              </ColumnTwo>
+            </Row>
+          </Div>
+          <Div>
+            <Row>
+              <img
+                alt=""
+                src="/images/email.svg"
+                style={{ marginRight: "0.25rem", width: "1rem" }}
+              />
+              <ColumnTwo style={{ color: "#191919" }}> Finance</ColumnTwo>
+              <ColumnTwo style={{ fontWeight: "normal" }}>
+                http://webhook.site/aOe
+              </ColumnTwo>
+              <ColumnTwo>
+                <ColorChanging style={{ fontWeight: "normal" }}>
+                  Connected
+                </ColorChanging>
+              </ColumnTwo>
+              <ColumnTwo>
+                <Icon src="/images/deletes.svg" style={{ width: "1.1rem" }} />
+              </ColumnTwo>
+            </Row>
+          </Div>
+        </LastDiv>
       </MainContainer>
     </>
   );
@@ -100,8 +102,15 @@ const MainContainer = styled.div`
   height: auto;
 `;
 const Div = styled.div`
-  // padding: 1rem;
+  padding-bottom: 0.5rem;
   // border-bottom: 1px solid #e3e7eb;
+`;
+const LastDiv = styled.div`
+  @media (min-width: 300px) and (max-width: 768px) {
+    display: flex;
+    overflow: auto;
+    flex-direction: column;
+  }
 `;
 const ColumnOne = styled.div`
   display: flex;
@@ -124,6 +133,9 @@ const Buttonn = styled.div`
   justify-content: center;
   color: #1d3c93;
   font-size: 0.875rem;
+  @media (min-width: 300px) and (max-width: 768px) {
+    width: 5rem;
+  }
 `;
 const ColumnTwo = styled.div`
   display: flex;
@@ -134,6 +146,8 @@ const ColumnTwo = styled.div`
   width: 100%;
   max-width: 11.25rem;
   margin: 0.25rem;
+  @media (min-width: 300px) and (max-width: 768px) {
+  }
 `;
 
 const RowContainer = styled.div`
@@ -145,6 +159,8 @@ const RowContainer = styled.div`
   width: 100%;
   max-width: 21.25rem;
   margin-bottom: 1.25rem;
+  @media (min-width: 300px) and (max-width: 768px) {
+  }
 `;
 const ColorChanging = styled.text`
   color: #00a58c;
