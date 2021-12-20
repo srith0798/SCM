@@ -178,7 +178,7 @@ export default function AddAlert() {
               </TabView>
             </TabLister>
             {activeButton === "Rules" && (
-              <div>
+              <div style={{ overflow: "scroll" }}>
                 <AlertContainer>
                   <NumberShowUP>1</NumberShowUP>
                   <ProgressHeader>
@@ -569,10 +569,12 @@ const TabLister = styled.div`
   max-width: 21.875rem;
   cursor: pointer;
   // margin: 25px 0px 10px 17px;
-  @media
 `;
 const TabView = styled.div`
-  padding: 0.313rem 0.5rem 0.313rem 0.5rem;
+  // padding: 0.313rem 0.5rem 0.313rem 0.5rem;
+  @media (min-width: 340px) and (max-width: 768px) {
+    padding: 1px;
+  }
 `;
 
 const AlertContainer = styled.div`
@@ -610,6 +612,9 @@ const BoxContainer = styled.div`
   &:hover {
     background-color: #3163f0;
     color: white;
+  }
+  @media (min-width: 340px) and (max-width: 768px) {
+    margin: 0px 10px 20px 2px;
   }
 `;
 

@@ -99,6 +99,7 @@ const UrlHeading = styled.div`
   @media (min-width: 300px) and (max-width: 767px) {
     max-width: 7.625rem;
     width: 100%;
+    margin-left: 18px;
   }
 `;
 const Button = styled.button`
@@ -115,6 +116,11 @@ const Button = styled.button`
   width: 8.125rem;
   height: 2.188rem;
   font-size: 0.875rem;
+  @media (min-width: 300px) and (max-width: 768px) {
+    width: 6.125rem;
+    height: 2rem;
+    font-size: 0.675rem;
+  }
 `;
 const Div = styled.div`
   background-color: #ffffff;
@@ -166,4 +172,7 @@ const Head = styled.div`
   width: 100%;
   max-width: 13.438rem;
   white-space: nowrap;
+  @media (min-width: 300px) and (max-width: 768px) {
+    margin-right: 22px;
+  }
 `;

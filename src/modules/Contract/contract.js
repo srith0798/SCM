@@ -143,13 +143,14 @@ const MainContainer = styled.div`
   height: 100vh;
 `;
 const MainHeading = styled.div`
-display:flex;
-width:100%;
-@media (min-width: 340px) and (max-width: 768px) {
-   display:flex;
-   flex-direction:column;
-   
-  padding-bottom: 58px;
+  display: flex;
+  width: 100%;
+  @media (min-width: 340px) and (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+
+    padding-bottom: 58px;
+  }
 `;
 const SubContainer = styled.div`
   width: 100%;
@@ -157,21 +158,20 @@ const SubContainer = styled.div`
   justify-content: space-between;
   height: 3.125rem;
   align-items: center;
-   @media (min-width: 300px) and (max-width: 767px) {
-     padding-top: 47px;
+  @media (min-width: 300px) and (max-width: 767px) {
+    padding-top: 47px;
     padding-bottom: 33px;
-   
-
-  
+  }
 `;
 const Heading = styled.span`
   font-size: 1.5rem;
   font-weight: 600;
   color: #191919;
   margin-right: 0.625rem;
-   @media (min-width: 300px) and (max-width: 767px) {
-     font-size: 1rem;
-     padding-bottom:10px;
+  @media (min-width: 300px) and (max-width: 767px) {
+    font-size: 1rem;
+    padding-bottom: 10px;
+  }
 `;
 const Button = styled.button`
   background-image: url("/images/Add.svg");
@@ -187,10 +187,10 @@ const Button = styled.button`
   width: 8.125rem;
   height: 2.125rem;
   font-size: 0.875rem;
-   @media (min-width: 340px) and (max-width: 768px) {
- width: 1.225rem;
- font-size:0.1px;
-  
+  @media (min-width: 340px) and (max-width: 768px) {
+    width: 1.225rem;
+    font-size: 0.1px;
+  }
 `;
 const Input = styled.input`
   background: #ffffff 0% 0% no-repeat padding-box;
