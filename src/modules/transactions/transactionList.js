@@ -217,6 +217,7 @@ const ColumnOne = styled.div`
   color: #102c78;
   width: 100%;
   max-width: 18.75rem;
+  white-space: nowrap;
   @media (min-width: 300px) and (max-width: 767px) {
    
     margin-right: 59px;

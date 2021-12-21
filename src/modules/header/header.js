@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Row, Column } from "simple-flexbox";
+import { Row } from "simple-flexbox";
 import "../../assets/styles/custom.css";
 
 const UserLogo = styled.img`
@@ -11,31 +11,17 @@ const UserLogo = styled.img`
   margin-left: 7px;
 `;
 
-const UserName = styled.span`
-  color: #ffffff;
-  font-size: 14px;
-  margin: 7px 0px 0px 15px;
-`;
-
-const UserId = styled.span`
-  color: #ffffff;
-  font-size: 12px;
-  margin: 0px 0px 0px 15px;
-`;
-
 const HeaderContainer = styled.div`
   width: 100%;
   background: #091f5c 0% 0% no-repeat padding-box;
   opacity: 1;
   padding: 5px;
   @media (max-width: 768px) {
-    padding-top:30px;
+    padding-top: 42px;
   }
 `;
 const XmartlyLogo = styled.img`
   margin-right: 17px;
-  
-
 `;
 const GridLogo = styled.img`
   margin-right: 17px;
@@ -67,10 +53,6 @@ function Header() {
         <UserContainer>
           <Row>
             <UserLogo src="/images/kakashi.png" />
-            <Column>
-              <UserName>John Appleased</UserName>
-              <UserId>it@supportteam.com</UserId>
-            </Column>
           </Row>
         </UserContainer>
       </SpaceBetween>

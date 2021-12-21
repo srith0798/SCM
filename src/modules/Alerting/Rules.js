@@ -39,6 +39,8 @@ export default function Rules() {
                       color: activeButton === "Rules" ? "#3163F0" : "#AEB7D0",
                       display: "flex",
                       paddingBottom: "0.875rem",
+                      paddingTop: " 9px",
+                      fontSize: "14px",
                       borderBottom:
                         activeButton === "Rules" ? "2px solid #3163F0" : "",
                     }}
@@ -61,6 +63,8 @@ export default function Rules() {
                       color: activeButton === "History" ? "#3163F0" : "#AEB7D0",
                       display: "flex",
                       paddingBottom: "0.875rem",
+                      paddingTop: " 9px",
+                      fontSize: "14px",
                       borderBottom:
                         activeButton === "History"
                           ? "0.125rem solid #3163F0"
@@ -85,7 +89,10 @@ export default function Rules() {
                       color:
                         activeButton === "Destination" ? "#3163F0" : "#AEB7D0",
                       display: "flex",
+                      fontSize: "1rem",
                       paddingBottom: "0.875rem",
+                      paddingTop: " 9px",
+                      fontSize: "14px",
                       borderBottom:
                         activeButton === "Destination"
                           ? "0.125rem solid #3163F0"
@@ -110,17 +117,17 @@ export default function Rules() {
               <TableContainer>
                 <DetailBox>
                   <NewDiv>
-                    <Row onClick={redirectToAlertDetails}>
+                    <RowData onClick={redirectToAlertDetails}>
                       <ColumnOne>Contract Name</ColumnOne>
                       <ColumnOne>Address</ColumnOne>
                       <ColumnOne>Network</ColumnOne>
                       <ColumnOne>Alert Type</ColumnOne>
                       <ColumnOne></ColumnOne>
                       <ColumnOne></ColumnOne>
-                    </Row>
+                    </RowData>
                   </NewDiv>
                   <NewDiv>
-                    <Row onClick={redirectToAlertDetails}>
+                    <RowData onClick={redirectToAlertDetails}>
                       <ColumnTwo>App_Transactions</ColumnTwo>
                       <ColumnTwo>xdcabfe…8b3c</ColumnTwo>
                       <ColumnTwo>XDC Mainnet</ColumnTwo>
@@ -135,10 +142,10 @@ export default function Rules() {
                           style={{ width: "1rem" }}
                         />
                       </ColumnTwo>
-                    </Row>
+                    </RowData>
                   </NewDiv>
                   <NewDiv>
-                    <Row onClick={redirectToAlertDetails}>
+                    <RowData onClick={redirectToAlertDetails}>
                       <ColumnTwo>App_Transactions</ColumnTwo>
                       <ColumnTwo>xdcabfe…8b3c</ColumnTwo>
                       <ColumnTwo>XDC Mainnet</ColumnTwo>
@@ -155,7 +162,7 @@ export default function Rules() {
                           style={{ width: "1rem" }}
                         />
                       </ColumnTwo>
-                    </Row>
+                    </RowData>
                   </NewDiv>
                 </DetailBox>
               </TableContainer>
@@ -173,32 +180,50 @@ const TableContainer = styled.div`
   background-color: #ffffff;
   border-radius: 0.375rem;
   width: 100%;
-  height: 25rem;
+  height: 15rem;
   padding: 0.625rem;
-   @media (min-width: 300px) and (max-width: 767px) {
-    
-    overflow: scroll;
+  overflow-y: hidden;
+
+  @media (min-width: 300px) and (max-width: 767px) {
     width: 100%;
-    height: 281px;
-    overflow-y: auto;
-    position: relative;
-    &::-webkit-scrollbar {
-        width: 10px;
-        border: 0.5px solid blue;
-        outline:none;
+    ::-webkit-scrollbar {
+      width: 10px;
+      border: 0.5px solid rgb(204, 229, 243);
+      outline: none;
     }
-    
+    ::-webkit-scrollbar-track {
+      box-shadow: inset 0 0 5px grey;
+      border-radius: 2px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgb(56, 56, 231);
+      border-radius: 15px;
+    }
+  }
 `;
 const Title = styled.div`
   font-size: 1.5rem;
   font-weight: 600;
+  @media (min-width: 300px) and (max-width: 768px) {
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
 `;
 const Container = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
   border-radius: 0.375rem;
   width: 100%;
+
   background-color: #ffffff;
   padding: 0.5rem;
+
+  white-space: nowrap;
+`;
+const RowData = styled.div`
+  display: flex;
+  @media (min-width: 300px) and (max-width: 768px) {
+    column-gap: 84px;
+  }
 `;
 
 const ColumnOne = styled.div`
@@ -211,7 +236,6 @@ const ColumnOne = styled.div`
   max-width: 18.75rem;
   @media (min-width: 300px) and (max-width: 768px) {
     margin-right: 40px;
-    // max-width: 200px;
   }
 `;
 const ColumnTwo = styled.div`
@@ -233,6 +257,9 @@ const MainContainer = styled.div`
   width: 100%;
   padding: 2.5rem;
   height: 100vh;
+  @media (min-width: 340px) and (max-width: 768px) {
+   padding: 38px 20px 20px 20px;
+
 `;
 
 const Button = styled.button`

@@ -39,17 +39,13 @@ export default function Destination() {
           </RowContainer>
         </Div>
 
-        <ColumnOne style={{ paddingBottom: "10px" }}>
+        <ColumnOne style={{ paddingBottom: "10px", paddingLeft: "20px" }}>
           Active Destination
         </ColumnOne>
         <LastDiv>
           <Div>
-            <Row>
-              <img
-                alt=""
-                src="/images/email.svg"
-                style={{ marginRight: "4px", width: "1rem" }}
-              />
+            <RowData>
+              <Img alt="" src="/images/email.svg" />
               <ColumnTwo style={{ color: "#191919" }}>Finance</ColumnTwo>
               <ColumnTwo style={{ fontWeight: "normal" }}>
                 it@supportteam.com
@@ -66,15 +62,11 @@ export default function Destination() {
                   style={{ width: "1.1rem" }}
                 />
               </ColumnTwo>
-            </Row>
+            </RowData>
           </Div>
           <Div>
-            <Row>
-              <img
-                alt=""
-                src="/images/email.svg"
-                style={{ marginRight: "0.25rem", width: "1rem" }}
-              />
+            <RowData>
+              <Img alt="" src="/images/email.svg" />
               <ColumnTwo style={{ color: "#191919" }}> Finance</ColumnTwo>
               <ColumnTwo style={{ fontWeight: "normal" }}>
                 http://webhook.site/aOe
@@ -87,7 +79,7 @@ export default function Destination() {
               <ColumnTwo>
                 <Icon src="/images/deletes.svg" style={{ width: "1.1rem" }} />
               </ColumnTwo>
-            </Row>
+            </RowData>
           </Div>
         </LastDiv>
       </MainContainer>
@@ -103,13 +95,27 @@ const MainContainer = styled.div`
 `;
 const Div = styled.div`
   padding-bottom: 0.5rem;
+  padding-left: 10px;
   // border-bottom: 1px solid #e3e7eb;
 `;
 const LastDiv = styled.div`
-  @media (min-width: 300px) and (max-width: 768px) {
-    display: flex;
-    overflow: auto;
-    flex-direction: column;
+  overflow-y: hidden;
+  height: 109px;
+  @media (min-width: 300px) and (max-width: 767px) {
+    width: 100%;
+    ::-webkit-scrollbar {
+      width: 10px;
+      border: 0.5px solid rgb(204, 229, 243);
+      outline: none;
+    }
+    ::-webkit-scrollbar-track {
+      box-shadow: inset 0 0 5px grey;
+      border-radius: 2px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgb(56, 56, 231);
+      border-radius: 15px;
+    }
   }
 `;
 const ColumnOne = styled.div`
@@ -134,7 +140,6 @@ const Buttonn = styled.div`
   color: #1d3c93;
   font-size: 0.875rem;
   @media (min-width: 300px) and (max-width: 768px) {
-    width: 5rem;
   }
 `;
 const ColumnTwo = styled.div`
@@ -147,6 +152,12 @@ const ColumnTwo = styled.div`
   max-width: 11.25rem;
   margin: 0.25rem;
   @media (min-width: 300px) and (max-width: 768px) {
+  }
+`;
+const RowData = styled.div`
+  display: flex;
+  @media (min-width: 300px) and (max-width: 768px) {
+    column-gap: 55px;
   }
 `;
 
@@ -169,4 +180,11 @@ const ColorChanging = styled.text`
 
 const Icon = styled.img`
   width: 1rem;
+`;
+const Img = styled.img`
+  width: 1rem;
+  @media (min-width: 300px) and (max-width: 768px) {
+    margin-right: -49px;
+    width: 1rem;
+  }
 `;

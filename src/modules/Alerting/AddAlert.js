@@ -178,7 +178,9 @@ export default function AddAlert() {
               </TabView>
             </TabLister>
             {activeButton === "Rules" && (
-              <div style={{ overflow: "scroll" }}>
+              <div
+              // style={{ overflow: "scroll" }}
+              >
                 <AlertContainer>
                   <NumberShowUP>1</NumberShowUP>
                   <ProgressHeader>
@@ -338,9 +340,7 @@ export default function AddAlert() {
                       >
                         <img alt="" src={tagAddress} />
                         <Title>Tag</Title>
-                        <SubTitle>
-                          Recieve alert for every address that selected tag
-                        </SubTitle>
+                        <SubTitle>Recieve alert for every address</SubTitle>
                       </BoxContainer>
                     </AlertTargetContainer>
                   )}

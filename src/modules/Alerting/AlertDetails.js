@@ -32,32 +32,32 @@ export default function AlertDetails() {
         </Row>
         <Container>
           <CommonDiv>
-            <Row>
+            <RowData>
               <Heading>ID</Heading>
               <SubHead>45fej-46de-41d3-b23a-fhf783</SubHead>
-            </Row>
+            </RowData>
           </CommonDiv>
           <CommonDiv>
-            <Row>
+            <RowData>
               <Heading>Name</Heading>
               <SubHead>
                 Sucessfull transaction in App_Transactions_Validator
               </SubHead>
-            </Row>
+            </RowData>
           </CommonDiv>
           <CommonDiv>
-            <Row>
+            <RowData>
               <Heading>Alert Type</Heading>
               <SubHead>
                 <TextColor>Sucessfull transaction</TextColor>
               </SubHead>
-            </Row>
+            </RowData>
           </CommonDiv>
           <CommonDiv>
-            <Row>
+            <RowData>
               <Heading>Target</Heading>
               <SubHead>App_Transactions_Validator</SubHead>
-            </Row>
+            </RowData>
           </CommonDiv>
         </Container>
         <br />
@@ -95,13 +95,26 @@ export default function AlertDetails() {
   );
 }
 
-const MainBoxContainer = styled.div``;
+const MainBoxContainer = styled.div`
+  display: flex;
+  @media (min-width: 300px) and (max-width: 768px) {
+    overflow: auto;
+  }
+`;
 const MainContainer = styled.div`
   background: #ecf0f7 0% 0% no-repeat padding-box;
   opacity: 1;
   width: 100%;
   padding: 3rem;
   height: 100vh;
+  white-space: nowrap;
+`;
+const RowData = styled.div`
+  display: flex;
+  @media (min-width: 300px) and (max-width: 768px) {
+    column-gap: 80px;
+    text-align: left;
+  }
 `;
 const NewContainer = styled.div`
   background-color: #ffffff;
@@ -136,12 +149,14 @@ const Container = styled.div`
   margin-top: 20px;
   padding: 12px;
   @media (min-width: 300px) and (max-width: 768px) {
-    background-color: #ffffff;
+   background-color: #ffffff;
     border-radius: 6px;
-    /* width: 106%; */
-    height: 252px;
-    margin-top: 20px;
-    padding: 4px;
+    height: 180px;
+    height: auto;
+    /* margin-top: 20px; */
+    padding: 8px;
+    overflow: auto;
+}
   }
 `;
 
