@@ -12,11 +12,7 @@ export default function FullScreen(props) {
   return (
     <div>
       <Column>
-        <Header />
-        <Row
-        // style={{ height: "200vh" }}
-        >
-          {/* <Sidebar /> */}
+        <Row>
           <MainContainer>
             <SubContainer>
               <AlignmentContainer>

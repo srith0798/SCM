@@ -140,13 +140,14 @@ const MainContainer = styled.div`
   height: 100vh;
 `;
 const MainHeading = styled.div`
-display:flex;
-width:100%;
-@media (min-width: 340px) and (max-width: 768px) {
-   display:flex;
-   flex-direction:column;
-   
-   padding-bottom:60px;
+  display: flex;
+  width: 100%;
+  @media (min-width: 340px) and (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+
+    padding-bottom: 60px;
+  }
 `;
 const SubContainer = styled.div`
   width: 100%;
@@ -154,11 +155,9 @@ const SubContainer = styled.div`
   justify-content: space-between;
   height: 3.125rem;
   align-items: center;
-   @media (min-width: 300px) and (max-width: 767px) {
-    padding-top:28px;
-   
-
-  
+  @media (min-width: 300px) and (max-width: 767px) {
+    padding-top: 28px;
+  }
 `;
 const Heading = styled.span`
   font-size: 1.5rem;
@@ -180,10 +179,10 @@ const Button = styled.button`
   width: 8.125rem;
   height: 2.125rem;
   font-size: 0.875rem;
-   @media (min-width: 340px) and (max-width: 768px) {
- width: 1.225rem;
- font-size:0.1px;
-  
+  @media (min-width: 340px) and (max-width: 768px) {
+    width: 1.225rem;
+    font-size: 0.1px;
+  }
 `;
 const Input = styled.input`
   background: #ffffff 0% 0% no-repeat padding-box;
@@ -208,19 +207,18 @@ const TableContainer = styled.div`
   width: 100%;
   height: 25rem;
   padding: 0.625rem;
-   @media (min-width: 300px) and (max-width: 767px) {
-    
+  @media (min-width: 300px) and (max-width: 767px) {
     overflow: scroll;
     width: 100%;
     height: 381px;
     overflow-y: auto;
     position: relative;
     &::-webkit-scrollbar {
-        width: 10px;
-        border: 0.5px solid blue;
-        outline:none;
+      width: 10px;
+      border: 0.5px solid blue;
+      outline: none;
     }
-    
+  }
 `;
 const Div = styled.div`
   padding: 0.75rem;
@@ -232,22 +230,20 @@ const ColumnOne = styled.div`
   color: #102c78;
   width: 100%;
   max-width: 18.75rem;
-   @media (min-width: 300px) and (max-width: 767px) {
-    
-    margin-right:60px;
-    
+  white-space: nowrap;
+  @media (min-width: 300px) and (max-width: 767px) {
+    margin-right: 60px;
+  }
 `;
 const ColumnSecond = styled.div`
   font-size: 0.875rem;
   font-weight: 400;
   color: #191919;
   width: 100%;
+  white-space: nowrap;
   max-width: 18.75rem;
-   @media (min-width: 300px) and (max-width: 767px) {
-    
-  
-  
-    
+  @media (min-width: 300px) and (max-width: 767px) {
+  }
 `;
 const ToolTipIcon = styled.img`
   width: 0.75rem;

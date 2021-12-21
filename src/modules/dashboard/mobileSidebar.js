@@ -1,28 +1,27 @@
-import React , { useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { history } from "../../managers/history";
 
-const Hamburger  = styled.img`
+const Hamburger = styled.img`
   width: 25px;
   height: 25px;
   margin: 5px 12px 0px 9px;
   position: absolute;
-    left: 123px;
-    top: 35px;
-  cursor:pointer;
+  left: 123px;
+  top: 35px;
+  cursor: pointer;
   @media (min-width: 769px) {
     display: none;
-    
   }
 `;
 const SidebarContainer = styled.div`
   position: absolute;
-  z-index:1000;
+  z-index: 1000;
   background: #102c78 0% 0% no-repeat padding-box;
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* min-height:100vh; */
+
   height: 100%;
   width: 280px;
   padding-top: 15px;
@@ -113,67 +112,72 @@ export default function Sidebar(props) {
     if (value === "Alerting") setAlertingIcon("/images/Alerting.svg");
   };
 
-  return (<>
-      <Hamburger src="/images/overview_grey.svg" onClick={() => setOpen(!open)} />
-      {open && 
-      <SidebarContainer>
-        <Wrapper onClick={redirectToAbout} style={{ marginTop: "4rem" }}>
-          <Icon src="/images/Xmartly.svg" />
-          <Heading>About Xmartly</Heading>
-        </Wrapper>
-        <Wrapper
-          onClick={redirectToTransaction}
-          onMouseOver={() => changeSourceForIcons("Transaction")}
-          onMouseOut={() => changeOriginalSourceForIcons("Transaction")}
-        >
-          <Icon src={transactionIcon} />
-          <Heading>Transactions</Heading>
-        </Wrapper>
-        <Wrapper
-          onClick={redirectToContract}
-          onMouseOver={() => changeSourceForIcons("Contracts")}
-          onMouseOut={() => changeOriginalSourceForIcons("Contracts")}
-        >
-          <Icon src={contractsIcon} />
-          <Heading>Contracts</Heading>
-        </Wrapper>
-        <Wrapper
-          onClick={redirectToNetwork}
-          onMouseOver={() => changeSourceForIcons("Networks")}
-          onMouseOut={() => changeOriginalSourceForIcons("Networks")}
-        >
-          <Icon src={networksIcon} />
-          <Heading>Networks</Heading>
-        </Wrapper>
-        <Wrapper
-          onClick={redirectToAnalytics}
-          onMouseOver={() => changeSourceForIcons("Analytics")}
-          onMouseOut={() => changeOriginalSourceForIcons("Analytics")}
-        >
-          <Icon src={analyticsIcon} />
-          <Heading>Analytics</Heading>
-        </Wrapper>
-        <Wrapper
-          onClick={redirectToAlerting}
-          onMouseOver={() => changeSourceForIcons("Alerting")}
-          onMouseOut={() => changeOriginalSourceForIcons("Alerting")}
-        >
-          <Icon src={alertingIcon} />
-          <Heading>Alerting</Heading>
-        </Wrapper>
-        <Wrapper style={{ marginTop: "8rem" }} >
-        <Icon src="/images/Subtraction 2.svg" />
-        <Heading>FAQs</Heading>
-      </Wrapper>
-        <Wrapper onClick={redirectToLogout}>
-          <Icon src="/images/Log out.svg" />
-          <Heading>Logout</Heading>
-        </Wrapper>
-        <CenterDiv>
-          <img alt="" src="/images/Group 12.svg" />
-        </CenterDiv>
-      </SidebarContainer>}
-      </>
+  return (
+    <>
+      <Hamburger
+        src="/images/overview_grey.svg"
+        onClick={() => setOpen(!open)}
+      />
+      {open && (
+        <SidebarContainer>
+          <Wrapper onClick={redirectToAbout} style={{ marginTop: "4rem" }}>
+            <Icon src="/images/Xmartly.svg" />
+            <Heading>About Xmartly</Heading>
+          </Wrapper>
+          <Wrapper
+            onClick={redirectToTransaction}
+            onMouseOver={() => changeSourceForIcons("Transaction")}
+            onMouseOut={() => changeOriginalSourceForIcons("Transaction")}
+          >
+            <Icon src={transactionIcon} />
+            <Heading>Transactions</Heading>
+          </Wrapper>
+          <Wrapper
+            onClick={redirectToContract}
+            onMouseOver={() => changeSourceForIcons("Contracts")}
+            onMouseOut={() => changeOriginalSourceForIcons("Contracts")}
+          >
+            <Icon src={contractsIcon} />
+            <Heading>Contracts</Heading>
+          </Wrapper>
+          <Wrapper
+            onClick={redirectToNetwork}
+            onMouseOver={() => changeSourceForIcons("Networks")}
+            onMouseOut={() => changeOriginalSourceForIcons("Networks")}
+          >
+            <Icon src={networksIcon} />
+            <Heading>Networks</Heading>
+          </Wrapper>
+          <Wrapper
+            onClick={redirectToAnalytics}
+            onMouseOver={() => changeSourceForIcons("Analytics")}
+            onMouseOut={() => changeOriginalSourceForIcons("Analytics")}
+          >
+            <Icon src={analyticsIcon} />
+            <Heading>Analytics</Heading>
+          </Wrapper>
+          <Wrapper
+            onClick={redirectToAlerting}
+            onMouseOver={() => changeSourceForIcons("Alerting")}
+            onMouseOut={() => changeOriginalSourceForIcons("Alerting")}
+          >
+            <Icon src={alertingIcon} />
+            <Heading>Alerting</Heading>
+          </Wrapper>
+          <Wrapper style={{ marginTop: "8rem" }}>
+            <Icon src="/images/Subtraction 2.svg" />
+            <Heading>FAQs</Heading>
+          </Wrapper>
+          <Wrapper onClick={redirectToLogout}>
+            <Icon src="/images/Log out.svg" />
+            <Heading>Logout</Heading>
+          </Wrapper>
+          <CenterDiv>
+            <img alt="" src="/images/Group 12.svg" />
+          </CenterDiv>
+        </SidebarContainer>
+      )}
+    </>
   );
 }
 

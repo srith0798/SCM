@@ -144,7 +144,6 @@ const SubContainer = styled.div`
   align-items: baseline;
   margin-left: 9px;
   margin-right: 5px;
-}
 `;
 const Add = styled.div`
   // font: normal normal 600 24px/29px Inter;
