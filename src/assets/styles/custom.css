@@ -397,6 +397,8 @@ input:checked + .slider:before {
   font-weight: 600;
   color: #303134;
   outline: none;
+  white-space: nowrap;
+  
 }
 .select-dropdown {
   border: 1px solid #b2c5fa;
