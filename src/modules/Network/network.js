@@ -124,7 +124,7 @@ const Div = styled.div`
   margin-top: 1.25rem;
   padding: 0.625rem;
 
-  @media (min-width: 300px) and (max-width: 767px) {
+  @media (min-width: 300px) and (max-width: 768px) {
     height: 400px;
     overflow: scroll;
     // width: 100%;

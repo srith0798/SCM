@@ -14,6 +14,7 @@ import SourceCode from "./sourceCode";
 import ContractsService from "../../../services/contractsService";
 import utility from "../../../utility";
 
+
 export default function ContractDetails() {
   const [activeButton, setActiveButton] = React.useState("General");
   const handleViewClick = (e) => {
@@ -86,6 +87,16 @@ export default function ContractDetails() {
   };
   const handleClose = () => {
     setOpen(false);
+  };
+  const hideContract = async () => {
+    let requestData ={
+      id : "61b6ddbcbf43f62ed425c60c"
+    }
+    try{
+
+    const response = await ContractsService.hideContract(requestData);
+    console.log(response)
+    } catch(e){console.log(e)}
   };
 
   const [renameState, setRenameState] = useState(false);
@@ -274,14 +285,14 @@ export default function ContractDetails() {
                   </RowProperty>
                 </PopUpBlock>
                 <PopUpBlock>
-                  {hide && <HideContract click={hideHandleClose} />}
+                  {hide && <HideContract hideContract={hideContract} click={hideHandleClose} />}
                   {address.isHidden ? (
                     <>
                       <RowProperty onClick={() => hideHandleOpen()}>
                         <img alt="" src="/images/hide.svg" />
                       </RowProperty>
                       <RowProperty onClick={() => hideHandleOpen()}>
-                        Show Contract
+                       Hide Contract
                       </RowProperty>
                     </>
                   ) : (

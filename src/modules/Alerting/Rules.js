@@ -107,7 +107,7 @@ export default function Rules() {
               </Row>
             </NewDivOne>
             {activeButton === "Rules" && (
-              <div>
+              <DetailBox>
                 <NewDiv>
                   <Row onClick={redirectToAlertDetails}>
                     <ColumnOne>Contract Name</ColumnOne>
@@ -156,7 +156,7 @@ export default function Rules() {
                     </ColumnTwo>
                   </Row>
                 </NewDiv>
-              </div>
+              </DetailBox>
             )}
             {activeButton === "History" && <Historys />}
             {activeButton === "Destination" && <Destination />}
@@ -178,6 +178,7 @@ const Container = styled.div`
   background-color: #ffffff;
   height: 22.25rem;
   padding: 0.5rem;
+  
 `;
 
 const ColumnOne = styled.div`
@@ -188,6 +189,11 @@ const ColumnOne = styled.div`
   color: #102c78;
   width: 100%;
   max-width: 18.75rem;
+   @media (min-width: 300px) and (max-width: 768px) {
+   
+   margin-right:40px;
+    // max-width: 200px;
+  }
 `;
 const ColumnTwo = styled.div`
   display: flex;
@@ -196,6 +202,12 @@ const ColumnTwo = styled.div`
   color: #191919;
   width: 100%;
   max-width: 18.75rem;
+   @media (min-width: 300px) and (max-width: 768px) {
+   
+    margin-right:20px;
+    // width: 100%;
+    // max-width: 200px;
+  }
 `;
 const MainContainer = styled.div`
   background: #ecf0f7 0% 0% no-repeat padding-box;
@@ -224,10 +236,13 @@ const Button = styled.button`
 const NewDiv = styled.div`
   padding: 0.938rem;
   border-bottom: 0.063rem solid #e3e7eb;
+  
+
 `;
 const NewDivOne = styled.div`
   // padding: 0.938rem;
   border-bottom: 0.063rem solid #e3e7eb;
+ 
 `;
 const RowCorrecter = styled.div`
   display: flex;
@@ -248,4 +263,14 @@ const TabLister = styled.div`
 `;
 const TabView = styled.div`
   padding: 0.313rem 0.5rem 0.313rem 0.5rem;
+  @media (min-width: 340px) and (max-width: 768px) {
+   padding: 0rem 0rem 0rem 0rem;
 `;
+
+const DetailBox =styled.div`
+ @media (min-width: 300px) and (max-width: 768px) {
+   
+   overflow: scroll;
+//     // width: 100%;
+//     // max-width: 200px;
+//   }`

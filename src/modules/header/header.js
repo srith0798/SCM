@@ -28,9 +28,21 @@ const HeaderContainer = styled.div`
   background: #091f5c 0% 0% no-repeat padding-box;
   opacity: 1;
   padding: 5px;
+  @media (max-width: 768px) {
+    padding-top:30px;
+  }
 `;
 const XmartlyLogo = styled.img`
   margin-right: 17px;
+  
+
+`;
+const GridLogo = styled.img`
+  margin-right: 17px;
+  @media (max-width: 768px) {
+    display: none;
+   
+  
 `;
 const UserContainer = styled.div``;
 const SpaceBetween = styled.div`
@@ -46,7 +58,7 @@ function Header() {
     <HeaderContainer>
       <SpaceBetween>
         <div style={{ display: "flex", marginLeft: "12px" }}>
-          <XmartlyLogo
+          <GridLogo
             src="/images/Grid.svg"
             onClick={() => setOpenHumburger(openHumburger)}
           />

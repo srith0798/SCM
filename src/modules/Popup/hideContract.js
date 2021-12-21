@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Dialog from "@mui/material/Dialog";
 import { makeStyles } from "@material-ui/styles";
+import ContractsService from "../../services/contractsService";
 
 const useStyles = makeStyles(() => ({
   dialogBox: {
@@ -10,6 +11,17 @@ const useStyles = makeStyles(() => ({
 }));
 
 export default function HideContract(props) {
+  console.log(props)
+  
+  // const hideContract = async () => {
+  //   try {
+  //     const response = await ContractsService.hideContracts({});
+  //     setAddress(response);
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // };
+
   const classes = useStyles();
   return (
     <div>
@@ -27,7 +39,7 @@ export default function HideContract(props) {
             <SubContainer
               style={{ width: "100%", maxWidth: "200px", marginTop: "30px" }}
             >
-              <HideButton>Hide Contract</HideButton>
+              <HideButton onClick={props.hideContract}>Hide Contract</HideButton>
               <CancelButton>Cancel</CancelButton>
             </SubContainer>
           </Container>
