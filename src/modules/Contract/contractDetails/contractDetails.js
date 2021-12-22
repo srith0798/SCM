@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import Header from "../../header/header";
+
 import { Row } from "simple-flexbox";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import ContractAbi from "../../Popup/contractAbi";
@@ -12,7 +12,6 @@ import HideContract from "../../Popup/hideContract";
 import "react-tabs/style/react-tabs.css";
 import SourceCode from "./sourceCode";
 import ContractsService from "../../../services/contractsService";
-import utility from "../../../utility";
 
 export default function ContractDetails() {
   const [activeButton, setActiveButton] = React.useState("General");
@@ -91,7 +90,7 @@ export default function ContractDetails() {
       <MainContainer>
         <SubContainer>
           <MainHeading>
-            <Heading>ContractDetails</Heading>
+            <Heading>Contract Details</Heading>
             <Button>View in Explorer</Button>
           </MainHeading>
         </SubContainer>
@@ -300,7 +299,7 @@ const MainHeading = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  max-width: 1100px;
+  // max-width: 1100px;
   @media (min-width: 340px) and (max-width: 768px) {
     display: flex;
     flex-direction: column;
