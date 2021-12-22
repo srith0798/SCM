@@ -1,12 +1,11 @@
 import React from "react";
 import { Row } from "simple-flexbox";
-// import Header from "../header/header";
-// import Sidebar from "../sidebar/sidebar";
+
 import "react-tabs/style/react-tabs.css";
 import styled from "styled-components";
 import Historys from "./Historys";
 import Destination from "./Destination";
-// import Rules from "./Rules";
+
 import { history } from "../../managers/history";
 
 export default function AddAlert() {
@@ -114,9 +113,11 @@ export default function AddAlert() {
                 id="Rules"
                 onClick={handleViewClick}
                 style={{
-                  color: activeButton === "Rules" ? "blue" : "",
+                  color: activeButton === "Rules" ? "#3163F0" : "#AEB7D0",
                   display: "flex",
                   paddingBottom: "0.875rem",
+                  paddingTop: "0.5rem",
+                  fontSize: "14px",
                   borderBottom:
                     activeButton === "Rules" ? "2px solid blue" : "",
                 }}
@@ -136,9 +137,11 @@ export default function AddAlert() {
                 id="History"
                 onClick={handleViewClick}
                 style={{
-                  color: activeButton === "History" ? "blue" : "",
+                  color: activeButton === "History" ? "#3163F0" : "#AEB7D0",
                   display: "flex",
                   paddingBottom: "0.875rem",
+                  paddingTop: "0.5rem",
+                  fontSize: "14px",
                   borderBottom:
                     activeButton === "History" ? "0.125rem solid blue" : "",
                 }}
@@ -158,9 +161,11 @@ export default function AddAlert() {
                 id="Destination"
                 onClick={handleViewClick}
                 style={{
-                  color: activeButton === "Destination" ? "blue" : "",
+                  color: activeButton === "Destination" ? "#3163F0" : "#AEB7D0",
                   display: "flex",
                   paddingBottom: "0.875rem",
+                  paddingTop: "0.5rem",
+                  fontSize: "14px",
                   borderBottom:
                     activeButton === "Destination" ? "0.125rem solid blue" : "",
                 }}
@@ -538,8 +543,9 @@ const Container = styled.div`
   border-radius: 0.375rem;
   width: 100%;
   background-color: #ffffff;
-  height: 55.25rem;
+  height: auto;
   padding: 0.5rem;
+  overflow: auto;
 `;
 
 const MainContainer = styled.div`
@@ -547,10 +553,10 @@ const MainContainer = styled.div`
   opacity: 1;
   width: 100%;
   padding: 2.5rem;
-  height: 110vh;
+  height: auto;
 `;
 const TitleHead = styled.div`
-  font-size: 24px;
+  font-size: 16px;
   font-weight: 600;
 `;
 const RowCorrecter = styled.div`
@@ -590,7 +596,11 @@ const TypeRow = styled.div`
 const SelectType = styled.div`
   font-size: 0.875rem;
   color: #7c828a;
+  @media (min-width: 300px) and (max-width: 768px) {
+    overflow: auto;
+  }
 `;
+
 const BoxContainer = styled.div`
   padding: 0.625rem;
   width: 450px;
