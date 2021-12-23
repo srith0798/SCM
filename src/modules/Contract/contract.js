@@ -221,7 +221,7 @@ const TableContainer = styled.div`
   width: 100%;
   min-height: 25rem;
   /* height: 25rem; */
-  padding: 0.625rem;
+  padding: 0.625rem 0.625rem 1px 0.625rem;
   @media (min-width: 300px) and (max-width: 767px) {
     overflow: scroll;
     width: 100%;

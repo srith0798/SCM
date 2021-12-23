@@ -69,7 +69,7 @@ export default function Destination() {
               <Img alt="" src="/images/email.svg" />
               <ColumnTwo style={{ color: "#191919" }}> Finance</ColumnTwo>
               <ColumnTwo style={{ fontWeight: "normal" }}>
-                http://webhook.site/aOe
+                http://webhook.site/ssss
               </ColumnTwo>
               <ColumnTwo>
                 <ColorChanging style={{ fontWeight: "normal" }}>
@@ -110,10 +110,10 @@ const LastDiv = styled.div`
     }
     ::-webkit-scrollbar-track {
       box-shadow: inset 0 0 5px grey;
-      border-radius: 2px;
+      border-radius: 8px;
     }
     ::-webkit-scrollbar-thumb {
-      background: rgb(56, 56, 231);
+      background:#3163f0;
       border-radius: 15px;
     }
   }
@@ -147,6 +147,7 @@ const ColumnTwo = styled.div`
   flex-flow: column nowrap;
   font-size: 0.875rem;
   font-weight: 600;
+  min-width: 200px;
   color: #102c78;
   width: 100%;
   max-width: 11.25rem;

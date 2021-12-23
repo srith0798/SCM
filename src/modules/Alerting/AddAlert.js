@@ -46,7 +46,7 @@ export default function AddAlert() {
     setProgress(value);
   };
   const backButton = () => {
-    history.push("/");
+    history.push("/dashboard/rules");
   };
   //TODO: code needs to be optimized for src change
   const changeSourceForIcons = (value) => {
@@ -90,9 +90,6 @@ export default function AddAlert() {
 
   return (
     <>
-      {/* <Header /> */}
-      <Row style={{ height: "250vh" }}>
-        {/* <Sidebar /> */}
         <MainContainer>
           <Row>
             <RowCorrecter>
@@ -184,13 +181,13 @@ export default function AddAlert() {
             </TabLister>
             {activeButton === "Rules" && (
               <div
-              // style={{ overflow: "scroll" }}
+                style={{ padding: "20px 0px 0px 10px" }}
               >
                 <AlertContainer>
                   {progress === "ALERT_TYPE" ? (
                     <NumberShowUP>1</NumberShowUP>
                   ) : (
-                    <img src="/images/tick-icon.svg" />
+                    <TickIcon src="/images/tick-icon.svg" />
                   )}
 
                   <ProgressHeader>
@@ -198,9 +195,9 @@ export default function AddAlert() {
                     <SelectType>Select a alert triger type</SelectType>
                   </ProgressHeader>
                 </AlertContainer>
-                {progress === "ALERT_TYPE" && (
-                  <SideLineProvider>
-                    <Line></Line>
+                <SideLineProvider>
+                  <Line></Line>
+                  {progress === "ALERT_TYPE" && (
 
                     <MainBoxContainer>
                       <BoxContainer
@@ -296,15 +293,15 @@ export default function AddAlert() {
                         <SubTitle>COMMING SOON</SubTitle>
                       </BoxContainer>
                     </MainBoxContainer>
-                  </SideLineProvider>
-                )}
+                  )}
+                </SideLineProvider>
 
-                <AlertContainer style={{ width: "315px" }}>
+                <AlertContainer>
                   {/* <NumberShowUP>2</NumberShowUP> */}
                   {progress === "ALERT_TYPE" || progress === "ALERT_TARGET" ? (
                     <NumberShowUP>2</NumberShowUP>
                   ) : (
-                    <img src="/images/tick-icon.svg" />
+                    <TickIcon src="/images/tick-icon.svg" />
                   )}
 
                   <ProgressHeader>
@@ -314,9 +311,9 @@ export default function AddAlert() {
                     </SelectType>
                   </ProgressHeader>
                 </AlertContainer>
-                {progress === "ALERT_TARGET" && (
-                  <SideLineProvider>
-                    <Line></Line>
+                <SideLineProvider>
+                  <Line></Line>
+                  {progress === "ALERT_TARGET" && (
 
                     <AlertTargetContainer>
                       <BoxContainer
@@ -357,40 +354,43 @@ export default function AddAlert() {
                         <SubTitle>Recieve alert for every address</SubTitle>
                       </BoxContainer>
                     </AlertTargetContainer>
-                  </SideLineProvider>
-                )}
+                  )}
+                </SideLineProvider>
 
-                <AlertContainer style={{ width: "225px" }}>
+                <AlertContainer>
                   {progress === "PARAMETERS" ||
-                  progress === "ALERT_TARGET" ||
-                  progress === "ALERT_TYPE" ? (
+                    progress === "ALERT_TARGET" ||
+                    progress === "ALERT_TYPE" ? (
                     <NumberShowUP>3</NumberShowUP>
                   ) : (
-                    <img src="/images/tick-icon.svg" />
+                    <TickIcon src="/images/tick-icon.svg" />
                   )}
                   <ProgressHeader>
                     <TypeRow>Parameters</TypeRow>
                     <SelectType>Set alert trigger Parameters</SelectType>
                   </ProgressHeader>
                 </AlertContainer>
-                {progress === "PARAMETERS" && (
                   <SideLineProvider>
                     <Line></Line>
+                {progress === "PARAMETERS" && (
 
-                    <ParameterContainer>
-                      <TypeRow>
-                        <ApplyButton
-                          onClick={() => changeProgress("DESTINATION")}
-                        >
-                          Next
-                        </ApplyButton>
-                      </TypeRow>
-                    </ParameterContainer>
-                  </SideLineProvider>
+                    <AlertTargetContainer style={{flexDirection : "column"}}>
+                      <ParameterContainer>
+                        <FilterSelect>
+                          <option value="filter">Filter by event name</option>
+                        </FilterSelect>
+                      </ParameterContainer>
+                          <ApplyButton
+                            onClick={() => changeProgress("DESTINATION")}
+                          >
+                            Next
+                          </ApplyButton>
+                    </AlertTargetContainer>
                 )}
+                  </SideLineProvider>
 
-                <AlertContainer style={{ width: "435px" }}>
-                  <NumberShowUP style={{ marginRight: "12px" }}>4</NumberShowUP>
+                <AlertContainer>
+                  <NumberShowUP>4</NumberShowUP>
                   <ProgressHeader>
                     <TypeRow>Destination</TypeRow>
                     <SelectType style={{}}>
@@ -470,7 +470,7 @@ export default function AddAlert() {
                 <Line></Line>
                 <AlertContainer>
                   <LastContainer>
-                    <ApplyButton onClick={() => changeProgress("Rules")}>
+                    <ApplyButton onClick={() => changeProgress("Rules")} style={{marginLeft: "0px"}}>
                       Done
                     </ApplyButton>
                     <CancelButton onClick={() => changeProgress("ALERT_TYPE")}>
@@ -486,14 +486,14 @@ export default function AddAlert() {
             {activeButton === "Destination" && <Destination />}
           </Container>
         </MainContainer>
-      </Row>
     </>
   );
 }
 const SliderDiv = styled.div``;
 
-const DestinationDetail = styled.div`
+const DestinationDetail =  styled.div`
   margin-bottom: 10px;
+  padding: 20px 0 0 0;
 `;
 const EmailBox = styled.div`
   display: flex;
@@ -505,7 +505,7 @@ const EmailBox = styled.div`
   display: flex;
   height: 66px;
   padding: 14px;
-  width: 300px;
+  width: 100%;
   // max-width: 453px;
 `;
 const Buttonn = styled.div`
@@ -548,8 +548,8 @@ const EmailShow = styled.div`
 const LastContainer = styled.div`
   display: flex;
   justify-content: start;
-  /* width: 100%; */
-  margin-left: 22px;
+  width: 100%;
+  padding : 20px 0 10px 0;
   max-width: 503px;
 `;
 const CancelButton = styled.div`
@@ -578,6 +578,7 @@ const ApplyButton = styled.div`
   padding-top: 6px;
   font-size: 14px;
   margin-right: 15px;
+  margin-left : 16px;
   text-align: center;
   cursor: pointer;
 `;
@@ -596,6 +597,7 @@ const SubTitle = styled.div`
   font-size: 0.775rem;
   // color: #1d3c93;
   width: 100%;
+  /* min-width: 100% */
   max-width: 16.25rem;
   padding-top: 5px;
 `;
@@ -615,7 +617,7 @@ const MainContainer = styled.div`
   opacity: 1;
   width: 100%;
   padding: 2.5rem;
-  height: auto;
+  height: 100%;
   @media (min-width: 300px) and (max-width: 768px) {
     padding: 2.5rem 1.5rem 1.5rem 1.5rem;
   }
@@ -650,13 +652,13 @@ const TabView = styled.div`
 
 const AlertContainer = styled.div`
   display: flex;
-  width: 200px;
-  padding: 14px 10px 10px 0px;
-  justify-content: space-between;
+  width: 100%;
+  padding: 0px 10px 0px 0px;
 `;
 const TypeRow = styled.div`
   font-size: 0.875rem;
   font-weight: 600;
+  text-align: left;
 `;
 const SelectType = styled.div`
   font-size: 0.875rem;
@@ -671,7 +673,7 @@ const BoxContainer = styled.div`
 
   height: 150px;
   margin: 0px 10px 20px 10px;
-  max-width: 215px;
+  width: 215px;
   background: #f5f6fd;
   border: solid #d5e0ff;
   outline: none;
@@ -696,36 +698,54 @@ const BoxContainer = styled.div`
 const MainBoxContainer = styled.div`
   display: flex;
   flex-flow: row wrap;
+  margin-left: 16px;
+  /* min-height : 30px; */
+  padding: 15px 0px 15px 0px;
   // justify-content: space-between;
   @media (min-width: 340px) and (max-width: 768px) {
     padding-left: 20px;
   }
 `;
+// const AlertTargetContainer = styled.div`
+//   display: flex;
+//   flex-flow: row nowrap;
+//   justify-content: space-between;
+//   width: 100%;
+//   max-width: 695px;
+//   padding-top: 28px;
+//   margin-left: 16px;
+// `;
 const AlertTargetContainer = styled.div`
   display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-between;
+  flex-flow: row wrap;
   width: 100%;
-  max-width: 695px;
   padding-top: 28px;
+  margin-left: 16px;
 `;
 
 const ProgressHeader = styled.div`
   flex-flow: row;
+  margin-left: 16px;
 `;
+
+const TickIcon = styled.img`
+  width: 30px;
+  height: 30px;
+`
 
 const SideLineProvider = styled.div`
   display: flex;
-  min-height: 10px;
+  min-height: 25px;
 `;
 const Line = styled.div`
   width: 2px;
   background-color: #3163f0;
-  margin-left: 10px;
+  margin-left: 15px;
 `;
 const NumberShowUP = styled.div`
   margin-top: 5px;
   width: 30px;
+  min-width: 30px;
   height: 30px;
   border-radius: 50%;
   border: 2px solid #3163f0;
@@ -734,8 +754,21 @@ const NumberShowUP = styled.div`
 
 const ParameterContainer = styled.div`
   margin: 0px 0px 5px 20px;
+  width: 100%;
+  padding: 10px 50px 10px 0;
 `;
 const Img = styled.img`
   width: 1.3rem;
   margin-right: 4px;
+`;
+const FilterSelect = styled.select`
+  outline: none;
+  border: none;
+  background-color: #f5f6fd;
+  border-radius: 3px;
+  width: 100%;
+  padding: 0px 10px 0px 10px;
+  font-size: 12px;
+  height: 40px;
+  color: #a6aabf;
 `;
