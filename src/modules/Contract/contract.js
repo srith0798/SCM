@@ -206,7 +206,8 @@ const TableContainer = styled.div`
   background-color: #ffffff;
   border-radius: 0.375rem;
   width: 100%;
-  height: 25rem;
+  min-height: 25rem;
+  /* height: 25rem; */
   padding: 0.625rem;
    @media (min-width: 300px) and (max-width: 767px) {
     

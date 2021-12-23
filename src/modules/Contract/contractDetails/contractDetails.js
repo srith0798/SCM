@@ -9,6 +9,7 @@ import Remove from "../../Popup/remove";
 
 import { history } from "../../../managers/history";
 import HideContract from "../../Popup/hideContract";
+import ShowContract from './showContract'
 import "react-tabs/style/react-tabs.css";
 import SourceCode from "./sourceCode";
 import ContractsService from "../../../services/contractsService";
@@ -20,14 +21,13 @@ export default function ContractDetails() {
   const handleViewClick = (e) => {
     setActiveButton(e.target.id);
   };
-
+  
+  const [contractAddress , setContractAddress] = React.useState({});
   const getContractById = async () => {
-    // console.log(window.location.pathname);
     let url = window.location.pathname;
     let addressURL = url.split("/");
-    // console.log(addressURL);
     addressURL = addressURL[3];
-    // console.log(addressURL);
+    setContractAddress(addressURL)
     try {
       const response = await ContractsService.getContractsById(addressURL);
       console.log("response", response);
@@ -38,44 +38,6 @@ export default function ContractDetails() {
   };
   React.useEffect(() => {
     getContractById();
-    //   let address = [
-    //     {
-    //       heading: "Network",
-    //       subheading: "XDC Mainnet",
-    //     },
-    //     {
-    //       heading: "Solidity version",
-    //       subheading: "^0.4.16",
-    //     },
-    //     {
-    //       heading: "Verification",
-    //       subheading: "Verified",
-    //     },
-    //     {
-    //       heading: "Tags",
-    //       subheading: "XDC Mainnet",
-    //     },
-    //     {
-    //       heading: "Compiler",
-    //       subheading: "v0.4.20+commit.3155dd80",
-    //     },
-    //     {
-    //       heading: "EVM version",
-    //       subheading: "default",
-    //     },
-    //     {
-    //       heading: "Optimizations",
-    //       subheading: "Enabled",
-    //     },
-    //   ];
-    //   setAddress(
-    //     address.map((object) => {
-    //       return {
-    //         heading: object.heading,
-    //         subheading: object.subheading,
-    //       };
-    //     })
-    //   );
   }, []);
 
   const [address, setAddress] = React.useState({});
@@ -89,14 +51,27 @@ export default function ContractDetails() {
     setOpen(false);
   };
   const hideContract = async () => {
-    let requestData ={
-      id : "61b6ddbcbf43f62ed425c60c"
+    let requestData = {
+      id: contractAddress
     }
-    try{
+    try {
 
-    const response = await ContractsService.hideContract(requestData);
-    console.log(response)
-    } catch(e){console.log(e)}
+      const response = await ContractsService.hideContract(requestData);
+      console.log(response)
+      setHide(false)
+      window.location.reload();
+    } catch (e) { console.log(e) }
+  };
+  const showContract = async () => {
+    let requestData = {
+      id: contractAddress
+    }
+    try {
+      const response = await ContractsService.showContract(requestData);
+      console.log(response)
+      setShowBox(false)
+      window.location.reload();
+    } catch (e) { console.log(e) }
   };
 
   const [renameState, setRenameState] = useState(false);
@@ -106,12 +81,25 @@ export default function ContractDetails() {
   const renameHandleClose = () => {
     setRenameState(false);
   };
+
+  // hide popup box handlers
+
   const [hide, setHide] = useState(false);
   const hideHandleOpen = () => {
     setHide(true);
   };
   const hideHandleClose = () => {
     setHide(false);
+  };
+
+  // show popup box handlers
+
+  const [show, setShowBox] = useState(false);
+  const hideShowOpen = () => {
+    setShowBox(true);
+  };
+  const hideShowClose = () => {
+    setShowBox(false);
   };
   const [remove, setRemoveState] = useState(false);
   const removeHandleOpen = () => {
@@ -286,13 +274,14 @@ export default function ContractDetails() {
                 </PopUpBlock>
                 <PopUpBlock>
                   {hide && <HideContract hideContract={hideContract} click={hideHandleClose} />}
+                  {show && <ShowContract showContract={showContract} click={hideShowClose} />}
                   {address.isHidden ? (
                     <>
-                      <RowProperty onClick={() => hideHandleOpen()}>
+                      <RowProperty onClick={() => hideShowOpen()}>
                         <img alt="" src="/images/hide.svg" />
                       </RowProperty>
-                      <RowProperty onClick={() => hideHandleOpen()}>
-                       Hide Contract
+                      <RowProperty onClick={() => hideShowOpen()}>
+                        Show Contract
                       </RowProperty>
                     </>
                   ) : (
