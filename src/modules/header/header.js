@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Row } from "simple-flexbox";
 import "../../assets/styles/custom.css";
+import { sessionManager } from "../../managers/sessionManager";
+import utility from "../../utility";
 
 const UserLogo = styled.img`
-  width: 55px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
-  margin-top: 10px;
   margin-left: 7px;
 `;
 
@@ -27,10 +27,25 @@ const GridLogo = styled.img`
   margin-right: 17px;
   @media (max-width: 768px) {
     display: none;
-   
-  
+  }
 `;
-const UserContainer = styled.div``;
+const XDCContainer = styled.div`
+  background: #324988;
+  display: flex;
+  color: white;
+  border-radius: 5px;
+  align-items: center;
+  padding: 0 0 0 10px;
+`;
+
+const UserContainer = styled.div`
+  width: 190px;
+  background: #3e579a;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  padding: 0px 10px;
+`;
 const SpaceBetween = styled.div`
   display: flex;
   flex-flow: row nowrap;
@@ -50,11 +65,15 @@ function Header() {
           />
           <XmartlyLogo src="/images/Logo.svg" />
         </div>
-        <UserContainer>
-          <Row>
-            <UserLogo src="/images/kakashi.png" />
-          </Row>
-        </UserContainer>
+        <XDCContainer>
+          <div style={{marginRight: "10px"}}>1450 XDC</div>
+          <UserContainer>
+            {utility.truncateTxnAddress(
+              sessionManager.getDataFromCookies("accountAddress")
+            )}
+            <UserLogo src="/images/user-round.png" />
+          </UserContainer>
+        </XDCContainer>
       </SpaceBetween>
     </HeaderContainer>
   );

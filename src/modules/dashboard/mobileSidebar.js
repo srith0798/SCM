@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { history } from "../../managers/history";
-import utility from "../../utility";
 
 const Hamburger = styled.img`
   width: 25px;
@@ -71,9 +70,6 @@ export default function Sidebar(props) {
   };
   const redirectToAlerting = () => {
     history.push("/dashboard/Alerting");
-  };
-  const redirectToFaqs = () => {
-    history.push("/");
   };
   const redirectToLogout = () => {
     history.push("/");
@@ -181,7 +177,4 @@ const CenterDiv = styled.div`
   justify-content: center;
   margin-top: 2rem;
   margin-bottom: 3rem;
-`;
-const Spacing = styled.div`
-  margin-top: 8rem;
 `;

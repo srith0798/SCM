@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { Row, Column } from "simple-flexbox";
-import Header from "../header/header";
 import Line from "./graph";
 // import { history } from "../../managers/history";
 
