@@ -407,3 +407,9 @@ input:checked + .slider:before {
   font-weight: 600;
   color: #303134;
 }
+
+    
+    /* ::-webkit-scrollbar-thumb:hover {
+      background: red;
+    } */
+  

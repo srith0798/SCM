@@ -8,7 +8,7 @@ const Hamburger = styled.img`
   margin: 5px 12px 0px 9px;
   position: absolute;
   left: 123px;
-  top: 35px;
+  top: 51px;
   cursor: pointer;
   @media (min-width: 769px) {
     display: none;
