@@ -178,9 +178,8 @@ export default function TransactionList(props) {
               return (
                 <Div onClick={redirectToTransactionDetails}>
                   <Row>
-                    {/* <ColorBox> */}
                     <ColumnSecond>{data.txn}</ColumnSecond>
-                    {/* </ColorBox> */}
+
                     <ColumnSecond>{data.status}</ColumnSecond>
                     <ColumnSecond>{data.function}</ColumnSecond>
                     <ColumnSecond>{data.contracts}</ColumnSecond>
@@ -214,7 +213,7 @@ const Div = styled.div`
 const ColumnOne = styled.div`
   font-size: 0.875rem;
   font-weight: 600;
-  color: #102c78;
+  color: #102C78;
   width: 100%;
   max-width: 18.75rem;
   white-space: nowrap;
@@ -261,7 +260,7 @@ const MainContainer = styled.div`
 `;
 const TransactionBox = styled.div`
   width: 100%;
-  max-width: 1540px;
+
   display: flex;
   justify-content: space-between;
 `;
@@ -273,7 +272,7 @@ display:flex;
         
 `;
 const Transactions = styled.div`
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   font-weight: 600;
   @media (min-width: 360px) and (max-width: 577px) {
    display:none;
@@ -301,6 +300,7 @@ const SearchBar = styled.input`
   outline: none;
   width: 100%;
   max-width: 261px;
+  font-size:0.775rem;
 
   *:focus {
     outline: none;
@@ -320,25 +320,28 @@ const Icons = styled.img`
 `;
 const IconContainer = styled.div`
   display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 119px;
 `;
 const Heading = styled.span`
   margin-top: 0.625rem;
   color: #102c78;
-  font-size: 1rem;
+  font-size: 0.975rem;
   font-weight: 600;
 `;
 const InstructionText = styled.span`
   margin-top: 0.625rem;
   color: #191919;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   font-weight: 600;
-  margin-bottom: 0.625rem;
+  margin-bottom: 0.725rem;
 `;
 const Card = styled.div`
   margin-top: 1.25rem;
   background-color: #ffffff;
   border-radius: 0.25rem;
-  padding: 0.625rem;
+  padding: 1rem 0rem 2rem 1rem;
 `;
 const ColumnSecond = styled.div`
   font-size: 0.875rem;
@@ -360,8 +363,8 @@ const DropDown = styled.div`
   font-size: 14px;
   font-weight: 600;
   color: #191919;
-  height: 75px;
-  padding: 10px;
+  height: 89px;
+  padding: 14px;
   width: 100%;
   max-width: 453px;
   position: relative;
@@ -370,7 +373,7 @@ const TransactionHash = styled.div`
   font-size: 0.875rem;
   font-weight: 600;
   color: #416be0;
-  margin-top: 0.25rem;
+  margin-top: 0.5rem;
   width:100%;
    @media (min-width: 300px) and (max-width: 767px) {
      font-size: 0.575rem;
