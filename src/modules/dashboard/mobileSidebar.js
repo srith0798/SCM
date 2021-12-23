@@ -21,7 +21,7 @@ const SidebarContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* min-height:100vh; */
+
   height: 100%;
   width: 280px;
   padding-top: 15px;
