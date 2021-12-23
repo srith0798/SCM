@@ -36,13 +36,7 @@ export default function TransactionDetails() {
         <SubHeading style={{ paddingTop: "0.625rem", paddingLeft: "1.25rem" }}>
           Txn hash
         </SubHeading>
-        <div
-          style={{
-            paddingLeft: "1.25rem",
-            display: "flex",
-            alignItems: "center",
-          }}
-        >
+        <TopContainer>
           <Hash>
             {utility.truncateTxnAddress(
               "xdcabfe4184e5f9f600fe86d20ffdse2fsfbsgsgsa768b3c"
@@ -61,7 +55,7 @@ export default function TransactionDetails() {
             />
             Add Alert
           </AlertButton>
-        </div>
+        </TopContainer>
 
         <TabLister>
           <TabView
@@ -71,13 +65,14 @@ export default function TransactionDetails() {
               color: activeButton === "Overview" ? "#3163F0" : "#AEB7D0",
               display: "flex",
               paddingBottom: "0.875rem",
+              paddingLeft: "10px",
               borderBottom:
                 activeButton === "Overview"
                   ? "0.225rem solid #3163F0"
                   : "#AEB7D0",
             }}
           >
-            <img
+            <TabImage
               alt=""
               style={{ marginRight: "0.375rem" }}
               src={
@@ -94,12 +89,12 @@ export default function TransactionDetails() {
             style={{
               color: activeButton === "Contracts" ? "#3163F0" : "#AEB7D0",
               display: "flex",
-              paddingBottom: "0.875rem",
+              paddingBottom: "1rem",
               borderBottom:
                 activeButton === "Contracts" ? "0.225rem solid #3163F0" : "",
             }}
           >
-            <img
+            <TabImage
               alt=""
               style={{ marginRight: "0.375rem" }}
               src={
@@ -116,12 +111,12 @@ export default function TransactionDetails() {
             style={{
               color: activeButton === "Events" ? "#3163F0" : "#AEB7D0",
               display: "flex",
-              paddingBottom: "0.875rem",
+              paddingBottom: "1rem",
               borderBottom:
                 activeButton === "Events" ? "0.225rem solid #3163F0" : "",
             }}
           >
-            <img
+            <TabImage
               alt=""
               style={{ marginRight: "0.375rem" }}
               src={
@@ -141,7 +136,7 @@ export default function TransactionDetails() {
                 activeButton === "StateChange" ? "0.225rem solid #3163F0" : "",
             }}
           >
-            <img
+            <TabImage
               alt=""
               style={{ marginRight: "0.375rem", marginBottom: "4px" }}
               src={
@@ -185,11 +180,12 @@ export default function TransactionDetails() {
                 <Row>
                   <Heading>From</Heading>
                   <SubHead style={{ display: "flex", alignItems: "center" }}>
-                    <Hash>
-                      <TransactionNumber>
-                        xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c
-                      </TransactionNumber>
-                    </Hash>
+                    <TransactionNumber>
+                      {utility.truncateTxnAddress(
+                        "xdcabfe4184e5f9f600fe86d20ffdse2fsfbsgsgsa768b3c"
+                      )}
+                    </TransactionNumber>
+
                     <CopyImg src="/images/copy.svg" />
                   </SubHead>
                 </Row>
@@ -197,12 +193,13 @@ export default function TransactionDetails() {
               <CommonDiv>
                 <Row>
                   <Heading>To</Heading>
-                  <SubHead style={{ display: "flex", alignItems: "center" }}>
-                    <Hash>
-                      <TransactionNumber>
-                        xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c
-                      </TransactionNumber>
-                    </Hash>
+                  <SubHead>
+                    <TransactionNumber>
+                      {utility.truncateTxnAddress(
+                        "xdcabfe4184e5f9f600fe86d20ffdse2fsfbsgsgsa768b3c"
+                      )}
+                    </TransactionNumber>
+
                     <CopyImg src="/images/copy.svg" />
                   </SubHead>
                 </Row>
@@ -246,10 +243,12 @@ export default function TransactionDetails() {
               <CommonDiv>
                 <Row>
                   <Heading>Raw input</Heading>
-                  <SubHead style={{ display: "flex", alignItems: "center" }}>
+                  <SubHead>
                     <Hash>
                       <TransactionNumber>
-                        xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c
+                        {utility.truncateTxnAddress(
+                          "xdcabfe4184e5f9f600fe86d20ffdse2fsfbsgsgsa768b3c"
+                        )}
                       </TransactionNumber>
                     </Hash>
                     <CopyImg src="/images/copy.svg" />
@@ -318,6 +317,17 @@ export default function TransactionDetails() {
     </MainContainer>
   );
 }
+const TopContainer = styled.div`
+  padding-left: 1.25rem;
+  display: flex;
+  align-items: center;
+`;
+const TabImage = styled.img`
+  @media (min-width: 300px) and (max-width: 485px) {
+    width: 13px;
+  }
+`;
+
 const TitleDiv = styled.div`
   display: flex;
   justify-content: space-between;
@@ -337,10 +347,16 @@ const NewContainer = styled.div`
   opacity: 1;
   margin-top: 1.25rem;
   height: auto;
+
+  @media (min-width: 300px) and (max-width: 485px) {
+    flex-direction: column;
+    display: flex;
+  }
 `;
 
 const SubHead = styled.div`
   font-size: 0.75rem;
+  display: flex;
 `;
 const CommonDiv = styled.div`
   border-bottom: 0.031rem #eaf1ec solid;
@@ -352,6 +368,7 @@ const MidContainer = styled.div`
   opacity: 1;
   margin-top: 1.25rem;
   height: auto;
+  white-space: nowrap;
 `;
 const StackContainer = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
@@ -370,7 +387,7 @@ const LastContainer = styled.div`
 const MainContainer = styled.div`
   background: #ecf0f7 0% 0% no-repeat padding-box;
   width: 100%;
-  padding: 3.125rem;
+  padding: 2.125rem;
   display: 100%;
   overflow-x: scroll;
   height: 100vh;
@@ -385,10 +402,10 @@ const Heading = styled.div`
   max-width: 16.25rem;
 `;
 
-const TransactionNumber = styled.b`
+const TransactionNumber = styled.div`
   color: #416be0;
-  display: flex;
-  width: 100%;
+
+  font-weight: 600;
 `;
 const ThirdBox = styled.div`
   text-align: left;
@@ -426,6 +443,9 @@ const Button = styled.button`
   white-space: nowrap;
   height: 2.125rem;
   font-size: 0.875rem;
+  @media (min-width: 300px) and (max-width: 485px) {
+    display: none;
+  }
 `;
 const SubContainer = styled.div`
   width: 100%;
@@ -434,9 +454,8 @@ const SubContainer = styled.div`
   height: 3.125rem;
   align-items: center;
   padding-bottom: 15px;
-  @media (min-width: 300px) and (max-width: 767px) {
-    padding-top: 47px;
-    padding-bottom: 33px;
+  @media (min-width: 300px) and (max-width: 485px) {
+    flex-direction: column;
   }
 `;
 
@@ -444,15 +463,27 @@ const Container = styled.div`
   background-color: #ffffff;
   border-radius: 0.375rem;
   width: 100%;
-  height: 8.75rem;
+  height: 9.2rem;
   margin-top: 1.25rem;
   width: 100%;
+  @media (min-width: 300px) and (max-width: 767px) {
+    background-color: #ffffff;
+    border-radius: 0.375rem;
+    width: 100%;
+    height: 8.75rem;
+    margin-top: 1.25rem;
+    /* width: 100%; */
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
 `;
 
 const Hash = styled.div`
   display: flex;
   flex-flow: row nowrap;
   margin-top: 0.625rem;
+  margin-bottom: 10px;
   // font-weight: 600;
   border: none;
   width: 100%;
@@ -505,12 +536,21 @@ const TabLister = styled.div`
   margin: 1.563rem 0rem 0.625rem 1.063rem;
   cursor: pointer;
   @media (min-width: 340px) and (max-width: 768px) {
-    margin: 0px;
+    display: flex;
+    justify-content: space-between;
+    min-height: 45px;
+    font-size: 13px;
+    overflow-y: hidden;
+    margin: 0rem 0rem 0rem 0rem;
+    white-space: nowrap;
   }
 `;
 const TabView = styled.div`
   padding: 0.313rem 0.5rem 0.313rem 0.5rem;
   displat: flex;
+  @media (min-width: 340px) and (max-width: 768px) {
+    padding-bottom: 1.2rem;
+  }
 `;
 const ToolTipIcon = styled.img`
   width: 0.75rem;
@@ -524,14 +564,14 @@ const RedButton = styled.div`
   margin-left: 1rem;
   display: flex;
   align-items: center;
-  top: 202px;
-  left: 939px;
+
   width: 69px;
   height: 25px;
   background: #fde7e7 0% 0% no-repeat padding-box;
   border: 1px solid #fda6a6;
   border-radius: 4px;
   opacity: 1;
+  margin-right: 12px;
 `;
 const AlertButton = styled.div`
   top: 202px;
@@ -547,4 +587,7 @@ const AlertButton = styled.div`
   margin-left: 20px;
   padding-top: 2px;
   padding-left: 8px;
+  @media (min-width: 300px) and (max-width: 767px) {
+    display: none;
+  }
 `;
