@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { history } from "../../managers/history";
+import utility from "../../utility";
 
 const Hamburger = styled.img`
   width: 25px;
@@ -80,21 +81,15 @@ export default function Sidebar(props) {
   const redirectToAbout = () => {
     history.push("/");
   };
-  const [transactionIcon, setTransactionIcon] = React.useState(
+  const [transactionIcon, setTransactionIcon] = useState(
     "/images/Transactions.svg"
   );
-  const [contractsIcon, setContractsIcon] = React.useState(
+  const [contractsIcon, setContractsIcon] = useState(
     "/images/Transactions.svg"
   );
-  const [networksIcon, setNetworksIcon] = React.useState(
-    "/images/networks.svg"
-  );
-  const [analyticsIcon, setAnalyticsIcon] = React.useState(
-    "/images/Analytics.svg"
-  );
-  const [alertingIcon, setAlertingIcon] = React.useState(
-    "/images/Alerting.svg"
-  );
+  const [networksIcon, setNetworksIcon] = useState("/images/networks.svg");
+  const [analyticsIcon, setAnalyticsIcon] = useState("/images/Analytics.svg");
+  const [alertingIcon, setAlertingIcon] = useState("/images/Alerting.svg");
 
   const changeSourceForIcons = (value) => {
     if (value === "Transaction")
