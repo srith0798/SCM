@@ -1,12 +1,11 @@
 import React from "react";
 import { Row } from "simple-flexbox";
-// import Header from "../header/header";
-// import Sidebar from "../sidebar/sidebar";
+
 import "react-tabs/style/react-tabs.css";
 import styled from "styled-components";
 import Historys from "./Historys";
 import Destination from "./Destination";
-// import Rules from "./Rules";
+
 import { history } from "../../managers/history";
 
 export default function AddAlert() {
@@ -47,7 +46,7 @@ export default function AddAlert() {
     setProgress(value);
   };
   const backButton = () => {
-    history.push("/");
+    history.push("/dashboard/rules");
   };
   //TODO: code needs to be optimized for src change
   const changeSourceForIcons = (value) => {
@@ -91,9 +90,6 @@ export default function AddAlert() {
 
   return (
     <>
-      {/* <Header /> */}
-      <Row style={{ height: "250vh" }}>
-        {/* <Sidebar /> */}
         <MainContainer>
           <Row>
             <RowCorrecter>
@@ -114,9 +110,11 @@ export default function AddAlert() {
                 id="Rules"
                 onClick={handleViewClick}
                 style={{
-                  color: activeButton === "Rules" ? "blue" : "",
+                  color: activeButton === "Rules" ? "#3163F0" : "#AEB7D0",
                   display: "flex",
                   paddingBottom: "0.875rem",
+                  paddingTop: "0.5rem",
+                  fontSize: "14px",
                   borderBottom:
                     activeButton === "Rules" ? "2px solid blue" : "",
                 }}
@@ -136,9 +134,11 @@ export default function AddAlert() {
                 id="History"
                 onClick={handleViewClick}
                 style={{
-                  color: activeButton === "History" ? "blue" : "",
+                  color: activeButton === "History" ? "#3163F0" : "#AEB7D0",
                   display: "flex",
                   paddingBottom: "0.875rem",
+                  paddingTop: "0.5rem",
+                  fontSize: "14px",
                   borderBottom:
                     activeButton === "History" ? "0.125rem solid blue" : "",
                 }}
@@ -158,9 +158,11 @@ export default function AddAlert() {
                 id="Destination"
                 onClick={handleViewClick}
                 style={{
-                  color: activeButton === "Destination" ? "blue" : "",
+                  color: activeButton === "Destination" ? "#3163F0" : "#AEB7D0",
                   display: "flex",
                   paddingBottom: "0.875rem",
+                  paddingTop: "0.5rem",
+                  fontSize: "14px",
                   borderBottom:
                     activeButton === "Destination" ? "0.125rem solid blue" : "",
                 }}
@@ -178,19 +180,25 @@ export default function AddAlert() {
               </TabView>
             </TabLister>
             {activeButton === "Rules" && (
-              <div>
+              <div
+                style={{ padding: "20px 0px 0px 10px" }}
+              >
                 <AlertContainer>
-                  <NumberShowUP>1</NumberShowUP>
+                  {progress === "ALERT_TYPE" ? (
+                    <NumberShowUP>1</NumberShowUP>
+                  ) : (
+                    <TickIcon src="/images/tick-icon.svg" />
+                  )}
+
                   <ProgressHeader>
                     <TypeRow> Alert type</TypeRow>
                     <SelectType>Select a alert triger type</SelectType>
                   </ProgressHeader>
                 </AlertContainer>
-
                 <SideLineProvider>
                   <Line></Line>
-
                   {progress === "ALERT_TYPE" && (
+
                     <MainBoxContainer>
                       <BoxContainer
                         onClick={() => changeProgress("ALERT_TARGET")}
@@ -288,8 +296,14 @@ export default function AddAlert() {
                   )}
                 </SideLineProvider>
 
-                <AlertContainer style={{ width: "315px" }}>
-                  <NumberShowUP>2</NumberShowUP>
+                <AlertContainer>
+                  {/* <NumberShowUP>2</NumberShowUP> */}
+                  {progress === "ALERT_TYPE" || progress === "ALERT_TARGET" ? (
+                    <NumberShowUP>2</NumberShowUP>
+                  ) : (
+                    <TickIcon src="/images/tick-icon.svg" />
+                  )}
+
                   <ProgressHeader>
                     <TypeRow> Alert target</TypeRow>
                     <SelectType>
@@ -297,11 +311,10 @@ export default function AddAlert() {
                     </SelectType>
                   </ProgressHeader>
                 </AlertContainer>
-
                 <SideLineProvider>
                   <Line></Line>
-
                   {progress === "ALERT_TARGET" && (
+
                     <AlertTargetContainer>
                       <BoxContainer
                         onClick={() => changeProgress("PARAMETERS")}
@@ -338,111 +351,134 @@ export default function AddAlert() {
                       >
                         <img alt="" src={tagAddress} />
                         <Title>Tag</Title>
-                        <SubTitle>
-                          Recieve alert for every address that selected tag
-                        </SubTitle>
+                        <SubTitle>Recieve alert for every address</SubTitle>
                       </BoxContainer>
                     </AlertTargetContainer>
                   )}
                 </SideLineProvider>
 
-                <AlertContainer style={{ width: "225px" }}>
-                  <NumberShowUP>3</NumberShowUP>
+                <AlertContainer>
+                  {progress === "PARAMETERS" ||
+                    progress === "ALERT_TARGET" ||
+                    progress === "ALERT_TYPE" ? (
+                    <NumberShowUP>3</NumberShowUP>
+                  ) : (
+                    <TickIcon src="/images/tick-icon.svg" />
+                  )}
                   <ProgressHeader>
                     <TypeRow>Parameters</TypeRow>
                     <SelectType>Set alert trigger Parameters</SelectType>
                   </ProgressHeader>
                 </AlertContainer>
-                <SideLineProvider>
-                  <Line></Line>
-                  {progress === "PARAMETERS" && (
-                    <ParameterContainer>
-                      <TypeRow>
-                        <ApplyButton
-                          onClick={() => changeProgress("DESTINATION")}
-                        >
-                          Next
-                        </ApplyButton>
-                      </TypeRow>
-                    </ParameterContainer>
-                  )}
-                </SideLineProvider>
-                <AlertContainer style={{ width: "435px" }}>
-                  <NumberShowUP style={{ marginRight: "20px" }}>4</NumberShowUP>
+                  <SideLineProvider>
+                    <Line></Line>
+                {progress === "PARAMETERS" && (
+
+                    <AlertTargetContainer style={{flexDirection : "column"}}>
+                      <ParameterContainer>
+                        <FilterSelect>
+                          <option value="filter">Filter by event name</option>
+                        </FilterSelect>
+                      </ParameterContainer>
+                          <ApplyButton
+                            onClick={() => changeProgress("DESTINATION")}
+                          >
+                            Next
+                          </ApplyButton>
+                    </AlertTargetContainer>
+                )}
+                  </SideLineProvider>
+
+                <AlertContainer>
+                  <NumberShowUP>4</NumberShowUP>
                   <ProgressHeader>
                     <TypeRow>Destination</TypeRow>
-                    <SelectType
-                      style={{
-                        marginBottom: "12px",
-                      }}
-                    >
+                    <SelectType style={{}}>
                       Select the destination in which alert notification will be
                       sent to.
                     </SelectType>
                     {progress === "DESTINATION" && (
                       <DestinationDetail>
                         <EmailBox>
-                          <Row>
-                            <img
-                              alt=""
-                              src="/images/email.svg"
-                              style={{
-                                marginRight: "4px",
-                                marginBottom: "8px",
-                                width: "1rem",
-                              }}
-                            />
-                            <ColumnTwo>Email</ColumnTwo>
-                            <ColumnTwo>it@supportteam.com</ColumnTwo>
-                            <ColumnTwo>
-                              {" "}
-                              <label class="switch" style={{ left: "114px" }}>
-                                <input type="checkbox" />
-                                <span class="slider round"></span>
-                              </label>
-                            </ColumnTwo>
-                          </Row>
+                          <EmailDetail>
+                            <Img alt="" src="/images/email.svg" />
+                            Email
+                            <EmailShow>it@supportteam.com</EmailShow>
+                          </EmailDetail>
+
+                          <SliderDiv>
+                            <label class="switch">
+                              <input type="checkbox" />
+                              <span class="slider round"></span>
+                            </label>
+                          </SliderDiv>
                         </EmailBox>
                         <EmailBox>
-                          <Row>
+                          <EmailDetail>
+                            <Img alt="" src="/images/webhook.svg" />
+                            Finance
+                            <EmailShow>https://webhook.site/a0e</EmailShow>
+                          </EmailDetail>
+                          <SliderDiv>
+                            <label class="switch">
+                              <input type="checkbox" />
+                              <span class="slider round"></span>
+                            </label>
+                          </SliderDiv>
+                        </EmailBox>
+
+                        <RowContainer>
+                          <Buttonn>
+                            <img
+                              alt=""
+                              src="/images/slack.svg"
+                              style={{
+                                marginRight: "0.25rem",
+                                width: "1.3rem",
+                              }}
+                            />{" "}
+                            Slack
+                          </Buttonn>
+                          <Buttonn>
                             <img
                               alt=""
                               src="/images/webhook.svg"
                               style={{
-                                marginRight: "4px",
-                                marginBottom: "8px",
-                                width: "1rem",
+                                marginRight: "0.25rem",
+                                width: "1.3rem",
                               }}
                             />
-                            <ColumnTwo>Finance</ColumnTwo>
-                            <ColumnTwo>
-                              {" "}
-                              <label class="switch" style={{ left: "114px" }}>
-                                <input type="checkbox" />
-                                <span class="slider round"></span>
-                              </label>
-                            </ColumnTwo>
-                          </Row>
-                        </EmailBox>
+                            Webhook
+                          </Buttonn>
+                          <Buttonn>
+                            <img
+                              alt=""
+                              src="/images/email.svg"
+                              style={{
+                                marginRight: "0.25rem",
+                                width: "1.3rem",
+                              }}
+                            />
+                            Email
+                          </Buttonn>
+                        </RowContainer>
                       </DestinationDetail>
                     )}
                   </ProgressHeader>
                 </AlertContainer>
-                <SideLineProvider>
-                  <Line></Line>
-                  <AlertContainer>
-                    <LastContainer>
-                      <ApplyButton onClick={() => changeProgress("Rules")}>
-                        Done
-                      </ApplyButton>
-                      <CancelButton
-                        onClick={() => changeProgress("ALERT_TYPE")}
-                      >
-                        Cancel
-                      </CancelButton>
-                    </LastContainer>
-                  </AlertContainer>
-                </SideLineProvider>
+                {/* <SideLineProvider> */}
+                <Line></Line>
+                <AlertContainer>
+                  <LastContainer>
+                    <ApplyButton onClick={() => changeProgress("Rules")} style={{marginLeft: "0px"}}>
+                      Done
+                    </ApplyButton>
+                    <CancelButton onClick={() => changeProgress("ALERT_TYPE")}>
+                      Cancel
+                    </CancelButton>
+                  </LastContainer>
+                </AlertContainer>
+                {/* </SideLineProvider> */}
               </div>
             )}
 
@@ -450,39 +486,70 @@ export default function AddAlert() {
             {activeButton === "Destination" && <Destination />}
           </Container>
         </MainContainer>
-      </Row>
     </>
   );
 }
-const ColumnTwo = styled.div`
-  display: flex;
-  flex-flow: column nowrap;
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: #102c78;
-  width: 100%;
-  max-width: 2.25rem;
-  margin: 0.25rem;
-`;
-const DestinationDetail = styled.div`
+const SliderDiv = styled.div``;
+
+const DestinationDetail =  styled.div`
   margin-bottom: 10px;
+  padding: 20px 0 0 0;
 `;
 const EmailBox = styled.div`
+  display: flex;
+  justify-content: space-between;
   margin-bottom: 10px;
   background: #f5f6fd 0% 0% no-repeat padding-box;
   border: 1px solid #d5e0ff;
   border-radius: 6px;
-
-  height: 62px;
-  padding: 10px;
-  width: 1000px;
+  display: flex;
+  height: 66px;
+  padding: 14px;
+  width: 100%;
   // max-width: 453px;
+`;
+const Buttonn = styled.div`
+  width: 6rem;
+  height: 2.5rem;
+  background: #ffffff 0% 0% no-repeat padding-box;
+  border: 1px solid #416be0;
+  border-radius: 0.375rem;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  color: #1d3c93;
+  font-size: 0.875rem;
+  cursor: pointer;
+  @media (min-width: 300px) and (max-width: 768px) {
+  }
+`;
+const RowContainer = styled.div`
+  display: flex;
+  flex-flow: row nowrap;
+  text-align: center;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 21.25rem;
+  margin-bottom: 1.25rem;
+  padding-top: 1rem;
+
+  @media (min-width: 300px) and (max-width: 768px) {
+    max-width: 19.25rem;
+  }
+`;
+const EmailDetail = styled.div`
+  font-weight: 600;
+  font-size: 1rem;
+`;
+const EmailShow = styled.div`
+  font-size: 0.9rem;
 `;
 const LastContainer = styled.div`
   display: flex;
   justify-content: start;
-  /* width: 100%; */
-  margin-left: 22px;
+  width: 100%;
+  padding : 20px 0 10px 0;
   max-width: 503px;
 `;
 const CancelButton = styled.div`
@@ -511,6 +578,7 @@ const ApplyButton = styled.div`
   padding-top: 6px;
   font-size: 14px;
   margin-right: 15px;
+  margin-left : 16px;
   text-align: center;
   cursor: pointer;
 `;
@@ -529,6 +597,7 @@ const SubTitle = styled.div`
   font-size: 0.775rem;
   // color: #1d3c93;
   width: 100%;
+  /* min-width: 100% */
   max-width: 16.25rem;
   padding-top: 5px;
 `;
@@ -538,8 +607,9 @@ const Container = styled.div`
   border-radius: 0.375rem;
   width: 100%;
   background-color: #ffffff;
-  height: 55.25rem;
+  height: auto;
   padding: 0.5rem;
+  overflow: auto;
 `;
 
 const MainContainer = styled.div`
@@ -547,10 +617,13 @@ const MainContainer = styled.div`
   opacity: 1;
   width: 100%;
   padding: 2.5rem;
-  height: 110vh;
+  height: 100%;
+  @media (min-width: 300px) and (max-width: 768px) {
+    padding: 2.5rem 1.5rem 1.5rem 1.5rem;
+  }
 `;
 const TitleHead = styled.div`
-  font-size: 24px;
+  font-size: 16px;
   font-weight: 600;
 `;
 const RowCorrecter = styled.div`
@@ -569,32 +642,38 @@ const TabLister = styled.div`
   max-width: 21.875rem;
   cursor: pointer;
   // margin: 25px 0px 10px 17px;
-  @media
 `;
 const TabView = styled.div`
-  padding: 0.313rem 0.5rem 0.313rem 0.5rem;
+  // padding: 0.313rem 0.5rem 0.313rem 0.5rem;
+  @media (min-width: 340px) and (max-width: 768px) {
+    padding: 1px;
+  }
 `;
 
 const AlertContainer = styled.div`
   display: flex;
-  width: 200px;
-  padding: 10px 10px 10px 0px;
-  justify-content: space-between;
+  width: 100%;
+  padding: 0px 10px 0px 0px;
 `;
 const TypeRow = styled.div`
   font-size: 0.875rem;
   font-weight: 600;
+  text-align: left;
 `;
 const SelectType = styled.div`
   font-size: 0.875rem;
   color: #7c828a;
+  @media (min-width: 300px) and (max-width: 768px) {
+    overflow: auto;
+  }
 `;
+
 const BoxContainer = styled.div`
   padding: 0.625rem;
-  width: 450px;
+
   height: 150px;
   margin: 0px 10px 20px 10px;
-  max-width: 215px;
+  width: 215px;
   background: #f5f6fd;
   border: solid #d5e0ff;
   outline: none;
@@ -611,38 +690,62 @@ const BoxContainer = styled.div`
     background-color: #3163f0;
     color: white;
   }
+  @media (min-width: 340px) and (max-width: 768px) {
+    margin: 0px 10px 20px 2px;
+  }
 `;
 
 const MainBoxContainer = styled.div`
   display: flex;
   flex-flow: row wrap;
+  margin-left: 16px;
+  /* min-height : 30px; */
+  padding: 15px 0px 15px 0px;
   // justify-content: space-between;
+  @media (min-width: 340px) and (max-width: 768px) {
+    padding-left: 20px;
+  }
 `;
+// const AlertTargetContainer = styled.div`
+//   display: flex;
+//   flex-flow: row nowrap;
+//   justify-content: space-between;
+//   width: 100%;
+//   max-width: 695px;
+//   padding-top: 28px;
+//   margin-left: 16px;
+// `;
 const AlertTargetContainer = styled.div`
   display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-between;
+  flex-flow: row wrap;
   width: 100%;
-  max-width: 695px;
   padding-top: 28px;
+  margin-left: 16px;
 `;
 
 const ProgressHeader = styled.div`
   flex-flow: row;
+  margin-left: 16px;
 `;
+
+const TickIcon = styled.img`
+  width: 30px;
+  height: 30px;
+`
 
 const SideLineProvider = styled.div`
   display: flex;
-  min-height: 10px;
+  min-height: 25px;
 `;
 const Line = styled.div`
   width: 2px;
   background-color: #3163f0;
-  margin-left: 10px;
+  margin-left: 15px;
 `;
 const NumberShowUP = styled.div`
   margin-top: 5px;
   width: 30px;
+  min-width: 30px;
   height: 30px;
   border-radius: 50%;
   border: 2px solid #3163f0;
@@ -651,4 +754,21 @@ const NumberShowUP = styled.div`
 
 const ParameterContainer = styled.div`
   margin: 0px 0px 5px 20px;
+  width: 100%;
+  padding: 10px 50px 10px 0;
+`;
+const Img = styled.img`
+  width: 1.3rem;
+  margin-right: 4px;
+`;
+const FilterSelect = styled.select`
+  outline: none;
+  border: none;
+  background-color: #f5f6fd;
+  border-radius: 3px;
+  width: 100%;
+  padding: 0px 10px 0px 10px;
+  font-size: 12px;
+  height: 40px;
+  color: #a6aabf;
 `;

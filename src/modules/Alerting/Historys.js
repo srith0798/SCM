@@ -5,57 +5,38 @@ import styled from "styled-components";
 
 export default function Historys() {
   return (
-   
-      <MainContainer>
-        <NewDivOne>
-          <Row>
+    <MainContainer>
+      <DetailBox>
+        <NewDiv>
+          <RowContainer>
             <ColumnOne>Alert Type</ColumnOne>
             <ColumnOne>Contract</ColumnOne>
             <ColumnOne>Tx Hash</ColumnOne>
             <ColumnOne>Network</ColumnOne>
             <ColumnOne>When</ColumnOne>
-          </Row>
-        </NewDivOne>
+          </RowContainer>
+        </NewDiv>
         <Div>
-          <Row>
-            <ColumnTwo style={{ fontSize: "0.875rem", color: "#191919" }}>
-              Sucessfull transaction
-            </ColumnTwo>
-            <ColumnTwo style={{ fontSize: "0.875rem", color: "#191919" }}>
-              App_Transactions
-            </ColumnTwo>
-            <ColumnTwo style={{ fontSize: "0.875rem", color: "#191919" }}>
-              0xndfahkk57..fj9
-            </ColumnTwo>
-            <ColumnTwo style={{ fontSize: "0.875rem", color: "#191919" }}>
-              XDC Mainnet
-            </ColumnTwo>
-            <ColumnTwo style={{ fontSize: "0.875rem", color: "#191919" }}>
-              02.2.2022 12:02
-            </ColumnTwo>
-          </Row>
+          <RowData>
+            <ColumnTwo>Sucessfull transaction</ColumnTwo>
+            <ColumnTwo>App_Transactions</ColumnTwo>
+            <ColumnTwo>0xndfahkk57..fj9</ColumnTwo>
+            <ColumnTwo>XDC Mainnet</ColumnTwo>
+            <ColumnTwo>02.2.2022 12:02</ColumnTwo>
+          </RowData>
         </Div>
         <Div>
-          <Row>
-            <ColumnTwo style={{ fontSize: "0.875rem", color: "#191919" }}>
-              Sucessfull transaction
-            </ColumnTwo>
-            <ColumnTwo style={{ fontSize: "0.875rem", color: "#191919" }}>
-              App_Transactions
-            </ColumnTwo>
-            <ColumnTwo style={{ fontSize: "0.875rem", color: "#191919" }}>
-              0xndfahkk57..fj9
-            </ColumnTwo>
-            <ColumnTwo style={{ fontSize: "0.875rem", color: "#191919" }}>
-              XDC Mainnet
-            </ColumnTwo>
-            <ColumnTwo style={{ fontSize: "0.875rem", color: "#191919" }}>
-              02.2.2022 12:02
-            </ColumnTwo>
-          </Row>
+          <RowData>
+            <ColumnTwo>Sucessfull transaction</ColumnTwo>
+            <ColumnTwo>App_Transactions</ColumnTwo>
+            <ColumnTwo>0xndfahkk57..fj9</ColumnTwo>
+            <ColumnTwo>XDC Mainnet</ColumnTwo>
+            <ColumnTwo>02.2.2022 12:02</ColumnTwo>
+          </RowData>
         </Div>
-      </MainContainer>
-    
+      </DetailBox>
+      {/* </TableContainer> */}
+    </MainContainer>
   );
 }
 const MainContainer = styled.div`
@@ -64,24 +45,57 @@ const MainContainer = styled.div`
   opacity: 1;
   margin-top: 1.25rem;
   height: 15.625rem;
+
+  overflow-y: hidden;
+  @media (min-width: 300px) and (max-width: 767px) {
+    width: 100%;
+    ::-webkit-scrollbar {
+      width: 10px;
+      border: 0.5px solid rgb(204, 229, 243);
+      outline: none;
+    }
+    ::-webkit-scrollbar-track {
+      box-shadow: inset 0 0 5px grey;
+      border-radius: 2px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgb(56, 56, 231);
+      border-radius: 15px;
+    }
+  }
 `;
 
+const NewDiv = styled.div`
+  padding: 0.738rem;
+  border-bottom: 0.063rem solid #e3e7eb;
+
+  @media (min-width: 300px) and (max-width: 768px) {
+  }
+`;
+const DetailBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  @media (min-width: 300px) and (max-width: 768px) {
+    // overflow: scroll;
+  }
+`;
 const Div = styled.div`
   padding: 0.938rem;
   border-bottom: 0.063rem solid #e3e7eb;
   @media (min-width: 300px) and (max-width: 768px) {
-   
-   overflow: scroll;
+  }
 `;
-const NewDivOne = styled.div`
-  padding-left: 0.938rem;
-  padding-bottom: 0.938rem;
-  border-bottom: 0.063rem solid #e3e7eb;
-    @media (min-width: 300px) and (max-width: 768px) {
-   
-   overflow: scroll;
-  
-  
+const RowData = styled.div`
+  display: flex;
+  @media (min-width: 300px) and (max-width: 768px) {
+    column-gap: 54px;
+  }
+`;
+const RowContainer = styled.div`
+  display: flex;
+  @media (min-width: 300px) and (max-width: 768px) {
+    column-gap: 84px;
+  }
 `;
 const ColumnOne = styled.div`
   display: flex;
@@ -91,6 +105,10 @@ const ColumnOne = styled.div`
   color: #102c78;
   width: 100%;
   max-width: 18.75rem;
+  @media (min-width: 300px) and (max-width: 768px) {
+    margin-right: 32px;
+    margin-left: 5px;
+  }
 `;
 
 const ColumnTwo = styled.div`
@@ -98,6 +116,7 @@ const ColumnTwo = styled.div`
   flex-flow: column nowrap;
   font-size: 0.875rem;
   color: #191919;
+  font-size: 0.875rem;
   // font-weight: 600;
   width: 100%;
   max-width: 18.75rem;

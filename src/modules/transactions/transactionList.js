@@ -49,24 +49,6 @@ export default function TransactionList(props) {
         to: "0x63Ac0CA1…f617",
         when: "2 minutes ago",
       },
-      // {
-      //   txn: "0x1822a4c5…2ca8",
-      //   status: "Success",
-      //   function: "Transfer",
-      //   contracts: "App_Transactions",
-      //   from: "0x63Ac0CA1…f617",
-      //   to: "0x63Ac0CA1…f617",
-      //   when: "2 minutes ago",
-      // },
-      // {
-      //   txn: "0x1822a4c5…2ca8",
-      //   status: "Success",
-      //   function: "Transfer",
-      //   contracts: "App_Transactions",
-      //   from: "0x63Ac0CA1…f617",
-      //   to: "0x63Ac0CA1…f617",
-      //   when: "2 minutes ago",
-      // },
     ];
 
     setAddress(
@@ -121,8 +103,8 @@ export default function TransactionList(props) {
     <>
       {/* <Row> */}
       <MainContainer>
+        <TransactionMedia>Transactions</TransactionMedia>
         <TransactionBox>
-          <TransactionMedia>Transactions</TransactionMedia>
           <NewDiv>
             <Transactions>Transactions</Transactions>
             <SearchBar placeholder="Search by status or name" />
@@ -135,18 +117,6 @@ export default function TransactionList(props) {
             <Icons src="/images/filter.svg" />
           </IconContainer>
         </TransactionBox>
-
-        {/*           
-            <Transactions>
-              <Bold>Transactions</Bold>
-            </Transactions>
-            <SearchBar placeholder="Search by status or name" />
-            <IconContainer>
-              {open && <Settings click={handleClose} />}
-              <Icons src="/images/settings.svg" onClick={handleClickOpen} />
-              <Icons src="/images/refresh.svg" />
-              <Icons src="/images/filter.svg" />
-            </IconContainer> */}
 
         <Card>
           <Column>
@@ -247,6 +217,7 @@ const ColumnOne = styled.div`
   color: #102c78;
   width: 100%;
   max-width: 18.75rem;
+  white-space: nowrap;
   @media (min-width: 300px) and (max-width: 767px) {
    
     margin-right: 59px;
@@ -284,6 +255,9 @@ const MainContainer = styled.div`
   width: 100%;
   padding: 3.125rem;
   height: 120vh;
+  @media (min-width: 340px) and (max-width: 768px) {
+    padding: 3.125rem 1.5rem 1.5rem 1.5rem;
+  }
 `;
 const TransactionBox = styled.div`
   width: 100%;
@@ -306,11 +280,13 @@ const Transactions = styled.div`
     
 `;
 const TransactionMedia = styled.div`
- display:none;
-  @media (min-width: 360px) (max-width: 577px){
-  font-size: 1.25rem;
-  font-weight: 600;
-    
+  display: none;
+  @media (min-width: 360px) and (max-width: 577px) {
+    font-size: 1rem;
+    padding-bottom: 10px;
+    font-weight: 600;
+    display: flex;
+  }
 `;
 const SearchBar = styled.input`
   height: 2.188rem;
@@ -333,7 +309,7 @@ const SearchBar = styled.input`
     display:flex;
         margin-left: -1px;
     margin-right: 8px;
-    padding: 0px;
+    padding: 5px;
     font-size: 14px;
     background-image:none;
 

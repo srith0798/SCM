@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import Header from "../../header/header";
+
 import { Row } from "simple-flexbox";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import ContractAbi from "../../Popup/contractAbi";
@@ -9,25 +9,23 @@ import Remove from "../../Popup/remove";
 
 import { history } from "../../../managers/history";
 import HideContract from "../../Popup/hideContract";
+import ShowContract from './showContract'
 import "react-tabs/style/react-tabs.css";
 import SourceCode from "./sourceCode";
 import ContractsService from "../../../services/contractsService";
-import utility from "../../../utility";
-
 
 export default function ContractDetails() {
   const [activeButton, setActiveButton] = React.useState("General");
   const handleViewClick = (e) => {
     setActiveButton(e.target.id);
   };
-
+  
+  const [contractAddress , setContractAddress] = React.useState({});
   const getContractById = async () => {
-    // console.log(window.location.pathname);
     let url = window.location.pathname;
     let addressURL = url.split("/");
-    // console.log(addressURL);
     addressURL = addressURL[3];
-    // console.log(addressURL);
+    setContractAddress(addressURL)
     try {
       const response = await ContractsService.getContractsById(addressURL);
       console.log("response", response);
@@ -38,44 +36,6 @@ export default function ContractDetails() {
   };
   React.useEffect(() => {
     getContractById();
-    //   let address = [
-    //     {
-    //       heading: "Network",
-    //       subheading: "XDC Mainnet",
-    //     },
-    //     {
-    //       heading: "Solidity version",
-    //       subheading: "^0.4.16",
-    //     },
-    //     {
-    //       heading: "Verification",
-    //       subheading: "Verified",
-    //     },
-    //     {
-    //       heading: "Tags",
-    //       subheading: "XDC Mainnet",
-    //     },
-    //     {
-    //       heading: "Compiler",
-    //       subheading: "v0.4.20+commit.3155dd80",
-    //     },
-    //     {
-    //       heading: "EVM version",
-    //       subheading: "default",
-    //     },
-    //     {
-    //       heading: "Optimizations",
-    //       subheading: "Enabled",
-    //     },
-    //   ];
-    //   setAddress(
-    //     address.map((object) => {
-    //       return {
-    //         heading: object.heading,
-    //         subheading: object.subheading,
-    //       };
-    //     })
-    //   );
   }, []);
 
   const [address, setAddress] = React.useState({});
@@ -89,14 +49,27 @@ export default function ContractDetails() {
     setOpen(false);
   };
   const hideContract = async () => {
-    let requestData ={
-      id : "61b6ddbcbf43f62ed425c60c"
+    let requestData = {
+      id: contractAddress
     }
-    try{
+    try {
 
-    const response = await ContractsService.hideContract(requestData);
-    console.log(response)
-    } catch(e){console.log(e)}
+      const response = await ContractsService.hideContract(requestData);
+      console.log(response)
+      setHide(false)
+      window.location.reload();
+    } catch (e) { console.log(e) }
+  };
+  const showContract = async () => {
+    let requestData = {
+      id: contractAddress
+    }
+    try {
+      const response = await ContractsService.showContract(requestData);
+      console.log(response)
+      setShowBox(false)
+      window.location.reload();
+    } catch (e) { console.log(e) }
   };
 
   const [renameState, setRenameState] = useState(false);
@@ -106,12 +79,25 @@ export default function ContractDetails() {
   const renameHandleClose = () => {
     setRenameState(false);
   };
+
+  // hide popup box handlers
+
   const [hide, setHide] = useState(false);
   const hideHandleOpen = () => {
     setHide(true);
   };
   const hideHandleClose = () => {
     setHide(false);
+  };
+
+  // show popup box handlers
+
+  const [show, setShowBox] = useState(false);
+  const hideShowOpen = () => {
+    setShowBox(true);
+  };
+  const hideShowClose = () => {
+    setShowBox(false);
   };
   const [remove, setRemoveState] = useState(false);
   const removeHandleOpen = () => {
@@ -127,18 +113,13 @@ export default function ContractDetails() {
     <>
       {/* <Row> */}
       <MainContainer>
-        <Row style={{ display: "flex", justifyContent: "space-between" }}>
-          <TitleDiv>
-            <img
-              alt=""
-              style={{ marginRight: "4px", cursor: "pointer" }}
-              src="/images/back.svg"
-              onClick={backButton}
-            />
-            <Title>Contract Details</Title>
-          </TitleDiv>
-          <Button>View in Explorer</Button>
-        </Row>
+        <SubContainer>
+          <MainHeading>
+            <Heading>Contract Details</Heading>
+            <Button>View in Explorer</Button>
+          </MainHeading>
+        </SubContainer>
+
         <Container>
           <SubHeading style={{ paddingTop: "0.625rem", paddingLeft: "1rem" }}>
             App_Transactions_Validator
@@ -150,12 +131,7 @@ export default function ContractDetails() {
               alignItems: "center",
             }}
           >
-            <Hash
-              type="text"
-              value={value}
-              onChange={(e) => setValues(e.target.value)}
-            />
-            {/* xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c */}
+            {address.address}
             <CopyToClipboard text={value}>
               <CopyImg src="/images/copy.svg" />
             </CopyToClipboard>
@@ -220,7 +196,8 @@ export default function ContractDetails() {
 
                 <Div>
                   <TableHeading>Network</TableHeading>
-                  <TableData>{address.address}</TableData>
+                  <TableData>XDC Mainnet</TableData>
+                  {/* <TableData>{address.address}</TableData> */}
                 </Div>
                 <Div>
                   <TableHeading>Solidity version</TableHeading>
@@ -285,14 +262,25 @@ export default function ContractDetails() {
                   </RowProperty>
                 </PopUpBlock>
                 <PopUpBlock>
-                  {hide && <HideContract hideContract={hideContract} click={hideHandleClose} />}
+                  {hide && (
+                    <HideContract
+                      hideContract={hideContract}
+                      click={hideHandleClose}
+                    />
+                  )}
+                  {show && (
+                    <ShowContract
+                    showContract={showContract}
+                      click={hideHandleClose}
+                    />
+                  )}
                   {address.isHidden ? (
                     <>
-                      <RowProperty onClick={() => hideHandleOpen()}>
+                      <RowProperty onClick={() => hideShowOpen()}>
                         <img alt="" src="/images/hide.svg" />
                       </RowProperty>
                       <RowProperty onClick={() => hideHandleOpen()}>
-                       Hide Contract
+                        Hide Contract
                       </RowProperty>
                     </>
                   ) : (
@@ -334,6 +322,39 @@ function tagDiv() {
     </Row>
   );
 }
+const MainHeading = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  // max-width: 1100px;
+  @media (min-width: 340px) and (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+
+    padding-bottom: 58px;
+  }
+`;
+const SubContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  height: 3.125rem;
+  align-items: center;
+   @media (min-width: 300px) and (max-width: 767px) {
+     padding-top: 47px;
+    padding-bottom: 33px;
+   }
+`;
+const Heading = styled.div`
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #191919;
+  margin-right: 0.625rem;
+   @media (min-width: 300px) and (max-width: 767px) {
+     font-size: 1rem;
+     padding-bottom:10px;
+   }
+`;
 const Verified = styled.div`
   font-size: 1rem;
   font-weight: 600;
@@ -393,6 +414,7 @@ const MainContainer = styled.div`
   padding: 3.125rem;
   height: 100vh;
 `;
+
 const Container = styled.div`
   background-color: #ffffff;
   border-radius: 0.375rem;
@@ -400,20 +422,17 @@ const Container = styled.div`
   margin-top: 0.625rem;
   height: 9.25rem;
 `;
-const TitleDiv = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  max-width: 217px;
-  align-items: center;
-  font-size: 1.5rem;
-  font-weight: 600;
+const TitleDiv = styled.div``;
+const Title = styled.div`
+  @media (min-width: 340px) and (max-width: 768px) {
+    font-size: 1rem;
+  }
 `;
-const Title = styled.div``;
 const SubHeading = styled.div`
   font-size: 1.1rem;
   font-weight: 600;
   color: #102c78;
+  margin-bottom: 10px;
 `;
 
 const Hash = styled.input`
@@ -429,15 +448,15 @@ const DetailsSection = styled.div`
   background-color: #ffffff;
   border-radius: 0.375rem;
   width: 100%;
-  height: 35.313rem;
-  padding: 0.625rem;
+  /* height: 35.313rem; */
+  padding: 0.625rem 0.625rem 1.5rem 0.625rem ;
   margin-top: 1.25rem;
 `;
 const Div = styled.div`
   display: flex;
   flex-flow: row nowrap;
   border-bottom: 0.063rem solid #e3e7eb;
-  padding: 1.25rem;
+  padding: 1.25rem 1.25rem 0.2rem 1.25rem;
 `;
 const TableData = styled.div`
   font-size: 0.875rem;
@@ -445,7 +464,7 @@ const TableData = styled.div`
   color: #191919;
   width: 100%;
   max-width: 9.375rem;
-  font-size: 1.063rem;
+  font-size: 1rem;
   font-weight: 600;
 `;
 const CopyImg = styled.img`
@@ -485,6 +504,7 @@ const RowProperty = styled.div`
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;
+  text-align: center;
 `;
 const TabLister = styled.div`
   display: flex;
@@ -493,9 +513,13 @@ const TabLister = styled.div`
   max-width: 18.125rem;
   margin: 1.563rem 0rem 0.625rem 1.063rem;
   cursor: pointer;
+  @media (min-width: 340px) and (max-width: 768px) {
+    margin: none;
+    max-width: 15.125rem;
+  }
 `;
 const TabView = styled.div`
-  padding: 0.313rem 0.5rem 0.313rem 0.5rem;
+  //
 `;
 const Button = styled.button`
   background-image: url("/images/globe.svg");

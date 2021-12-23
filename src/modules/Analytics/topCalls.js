@@ -8,13 +8,6 @@ export default function TopCalls(props) {
     props.changeExpand(0);
   };
   return (
-    <div>
-      <Column>
-        <Header />
-        <Row
-        // style={{ height: "200vh" }}
-        >
-          {/* <Sidebar /> */}
           <MainContainer>
             <SubContainer>
               <AlignmentContainer>
@@ -73,9 +66,6 @@ export default function TopCalls(props) {
               </GraphContainer>
             </Row>
           </MainContainer>
-        </Row>
-      </Column>
-    </div>
   );
 }
 
