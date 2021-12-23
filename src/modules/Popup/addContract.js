@@ -16,8 +16,21 @@ export default function AddContract(props) {
   const [hideStep, setHideStep] = useState(true);
   const [checkBox, setCheckBox] = useState(false);
   const [address, setAddress] = React.useState("");
+  const [verifyAddress, setVerifyAddress] = React.useState("");
   console.log("address", checkBox);
   console.log(props);
+
+  const checkAddress = async () => {
+    try{
+      const response = await ContractsService.checkAddress(address);
+      if(response)
+        setVerifyAddress(address)
+    }catch(e){
+      console.log(e)
+      utility.apiFailureToast("Invalid contract address")
+    }
+    
+  }
 
   const addContract = async () => {
     try {
@@ -25,11 +38,6 @@ export default function AddContract(props) {
         contractAddress: address,
       };
       const response = await ContractsService.addContract(requestData);
-      console.log(response);
-      // if(error){
-      //   utility.apiFailureToast(error)
-      //   return
-      // }
       if (response.address && response.address === address) {
         utility.apiSuccessToast("Contract added");
         props.click();
@@ -46,7 +54,7 @@ export default function AddContract(props) {
 
   const handleEnterKey = (e) => {
     if (e.key === "Enter") {
-      addContract();
+      checkAddress();
     }
   };
   return (
@@ -92,7 +100,7 @@ export default function AddContract(props) {
                 address <br></br>4. Paste it on the given field below
               </Text>
             )}
-            {address === "" ? (
+            {verifyAddress === "" ? (
               ""
             ) : (
               <ImportBox>

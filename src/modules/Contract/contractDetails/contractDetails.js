@@ -9,6 +9,7 @@ import Remove from "../../Popup/remove";
 
 import { history } from "../../../managers/history";
 import HideContract from "../../Popup/hideContract";
+import ShowContract from './showContract'
 import "react-tabs/style/react-tabs.css";
 import SourceCode from "./sourceCode";
 import ContractsService from "../../../services/contractsService";
@@ -18,14 +19,13 @@ export default function ContractDetails() {
   const handleViewClick = (e) => {
     setActiveButton(e.target.id);
   };
-
+  
+  const [contractAddress , setContractAddress] = React.useState({});
   const getContractById = async () => {
-    // console.log(window.location.pathname);
     let url = window.location.pathname;
     let addressURL = url.split("/");
-    // console.log(addressURL);
     addressURL = addressURL[3];
-    // console.log(addressURL);
+    setContractAddress(addressURL)
     try {
       const response = await ContractsService.getContractsById(addressURL);
       console.log("response", response);
@@ -50,14 +50,26 @@ export default function ContractDetails() {
   };
   const hideContract = async () => {
     let requestData = {
-      id: "61b6ddbcbf43f62ed425c60c",
-    };
-    try {
-      const response = await ContractsService.hideContract(requestData);
-      console.log(response);
-    } catch (e) {
-      console.log(e);
+      id: contractAddress
     }
+    try {
+
+      const response = await ContractsService.hideContract(requestData);
+      console.log(response)
+      setHide(false)
+      window.location.reload();
+    } catch (e) { console.log(e) }
+  };
+  const showContract = async () => {
+    let requestData = {
+      id: contractAddress
+    }
+    try {
+      const response = await ContractsService.showContract(requestData);
+      console.log(response)
+      setShowBox(false)
+      window.location.reload();
+    } catch (e) { console.log(e) }
   };
 
   const [renameState, setRenameState] = useState(false);
@@ -67,12 +79,25 @@ export default function ContractDetails() {
   const renameHandleClose = () => {
     setRenameState(false);
   };
+
+  // hide popup box handlers
+
   const [hide, setHide] = useState(false);
   const hideHandleOpen = () => {
     setHide(true);
   };
   const hideHandleClose = () => {
     setHide(false);
+  };
+
+  // show popup box handlers
+
+  const [show, setShowBox] = useState(false);
+  const hideShowOpen = () => {
+    setShowBox(true);
+  };
+  const hideShowClose = () => {
+    setShowBox(false);
   };
   const [remove, setRemoveState] = useState(false);
   const removeHandleOpen = () => {
@@ -249,7 +274,7 @@ export default function ContractDetails() {
                   )}
                   {address.isHidden ? (
                     <>
-                      <RowProperty onClick={() => hideHandleOpen()}>
+                      <RowProperty onClick={() => hideShowOpen()}>
                         <img alt="" src="/images/hide.svg" />
                       </RowProperty>
                       <RowProperty onClick={() => hideHandleOpen()}>

@@ -34,7 +34,7 @@ div,
 p,
 span,
 label {
-  font-family: "SFProText", "Open Sans", "Helvetica Neue", "Helvetica", "Arial",
+  font-family:'Inter', "SFProText", "Open Sans", "Helvetica Neue", "Helvetica", "Arial",
     "sans-serif" !important;
 }
 
