@@ -6,7 +6,6 @@ import styled from "styled-components";
 export default function Historys() {
   return (
     <MainContainer>
-      {/* <TableContainer> */}
       <DetailBox>
         <NewDiv>
           <RowContainer>

@@ -131,12 +131,7 @@ export default function ContractDetails() {
               alignItems: "center",
             }}
           >
-            <Hash
-              type="text"
-              value={value}
-              onChange={(e) => setValues(e.target.value)}
-            />
-            {/* {address.address} */}
+            {address.address}
             <CopyToClipboard text={value}>
               <CopyImg src="/images/copy.svg" />
             </CopyToClipboard>
@@ -201,7 +196,8 @@ export default function ContractDetails() {
 
                 <Div>
                   <TableHeading>Network</TableHeading>
-                  <TableData>{address.address}</TableData>
+                  <TableData>XDC Mainnet</TableData>
+                  {/* <TableData>{address.address}</TableData> */}
                 </Div>
                 <Div>
                   <TableHeading>Solidity version</TableHeading>
@@ -269,6 +265,12 @@ export default function ContractDetails() {
                   {hide && (
                     <HideContract
                       hideContract={hideContract}
+                      click={hideHandleClose}
+                    />
+                  )}
+                  {show && (
+                    <ShowContract
+                    showContract={showContract}
                       click={hideHandleClose}
                     />
                   )}
@@ -341,9 +343,7 @@ const SubContainer = styled.div`
    @media (min-width: 300px) and (max-width: 767px) {
      padding-top: 47px;
     padding-bottom: 33px;
-   
-
-  
+   }
 `;
 const Heading = styled.div`
   font-size: 1.5rem;
@@ -353,6 +353,7 @@ const Heading = styled.div`
    @media (min-width: 300px) and (max-width: 767px) {
      font-size: 1rem;
      padding-bottom:10px;
+   }
 `;
 const Verified = styled.div`
   font-size: 1rem;
@@ -431,6 +432,7 @@ const SubHeading = styled.div`
   font-size: 1.1rem;
   font-weight: 600;
   color: #102c78;
+  margin-bottom: 10px;
 `;
 
 const Hash = styled.input`
@@ -446,15 +448,15 @@ const DetailsSection = styled.div`
   background-color: #ffffff;
   border-radius: 0.375rem;
   width: 100%;
-  height: 35.313rem;
-  padding: 0.625rem;
+  /* height: 35.313rem; */
+  padding: 0.625rem 0.625rem 1.5rem 0.625rem ;
   margin-top: 1.25rem;
 `;
 const Div = styled.div`
   display: flex;
   flex-flow: row nowrap;
   border-bottom: 0.063rem solid #e3e7eb;
-  padding: 1.25rem;
+  padding: 1.25rem 1.25rem 0.2rem 1.25rem;
 `;
 const TableData = styled.div`
   font-size: 0.875rem;
@@ -502,6 +504,7 @@ const RowProperty = styled.div`
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;
+  text-align: center;
 `;
 const TabLister = styled.div`
   display: flex;
