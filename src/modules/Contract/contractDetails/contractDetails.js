@@ -9,7 +9,7 @@ import Remove from "../../Popup/remove";
 
 import { history } from "../../../managers/history";
 import HideContract from "../../Popup/hideContract";
-import ShowContract from './showContract'
+import ShowContract from "./showContract";
 import "react-tabs/style/react-tabs.css";
 import SourceCode from "./sourceCode";
 import ContractsService from "../../../services/contractsService";
@@ -19,13 +19,13 @@ export default function ContractDetails() {
   const handleViewClick = (e) => {
     setActiveButton(e.target.id);
   };
-  
-  const [contractAddress , setContractAddress] = React.useState({});
+
+  const [contractAddress, setContractAddress] = React.useState({});
   const getContractById = async () => {
     let url = window.location.pathname;
     let addressURL = url.split("/");
     addressURL = addressURL[3];
-    setContractAddress(addressURL)
+    setContractAddress(addressURL);
     try {
       const response = await ContractsService.getContractsById(addressURL);
       console.log("response", response);
@@ -50,26 +50,29 @@ export default function ContractDetails() {
   };
   const hideContract = async () => {
     let requestData = {
-      id: contractAddress
-    }
+      id: contractAddress,
+    };
     try {
-
       const response = await ContractsService.hideContract(requestData);
-      console.log(response)
-      setHide(false)
+      console.log(response);
+      setHide(false);
       window.location.reload();
-    } catch (e) { console.log(e) }
+    } catch (e) {
+      console.log(e);
+    }
   };
   const showContract = async () => {
     let requestData = {
-      id: contractAddress
-    }
+      id: contractAddress,
+    };
     try {
       const response = await ContractsService.showContract(requestData);
-      console.log(response)
-      setShowBox(false)
+      console.log(response);
+      setShowBox(false);
       window.location.reload();
-    } catch (e) { console.log(e) }
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   const [renameState, setRenameState] = useState(false);
@@ -270,7 +273,7 @@ export default function ContractDetails() {
                   )}
                   {show && (
                     <ShowContract
-                    showContract={showContract}
+                      showContract={showContract}
                       click={hideHandleClose}
                     />
                   )}
@@ -340,20 +343,20 @@ const SubContainer = styled.div`
   justify-content: space-between;
   height: 3.125rem;
   align-items: center;
-   @media (min-width: 300px) and (max-width: 767px) {
-     padding-top: 47px;
+  @media (min-width: 300px) and (max-width: 767px) {
+    padding-top: 47px;
     padding-bottom: 33px;
-   }
+  }
 `;
 const Heading = styled.div`
   font-size: 1.5rem;
   font-weight: 600;
   color: #191919;
   margin-right: 0.625rem;
-   @media (min-width: 300px) and (max-width: 767px) {
-     font-size: 1rem;
-     padding-bottom:10px;
-   }
+  @media (min-width: 300px) and (max-width: 767px) {
+    font-size: 1rem;
+    padding-bottom: 10px;
+  }
 `;
 const Verified = styled.div`
   font-size: 1rem;
@@ -449,7 +452,7 @@ const DetailsSection = styled.div`
   border-radius: 0.375rem;
   width: 100%;
   /* height: 35.313rem; */
-  padding: 0.625rem 0.625rem 1.5rem 0.625rem ;
+  padding: 0.625rem 0.625rem 1.5rem 0.625rem;
   margin-top: 1.25rem;
 `;
 const Div = styled.div`
@@ -486,6 +489,7 @@ const PopUp = styled.div`
   width: 100%;
   max-width: 59.375rem;
   font-size: 0.875rem;
+  min-width: 900px;
 `;
 
 const PopUpBlock = styled.div`
@@ -502,7 +506,7 @@ const PopUpBlock = styled.div`
 `;
 const RowProperty = styled.div`
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: row wrap;
   justify-content: center;
   text-align: center;
 `;

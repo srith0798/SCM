@@ -180,7 +180,7 @@ export default function TransactionList(props) {
                   <Row>
                     <ColumnSecond>{data.txn}</ColumnSecond>
 
-                    <ColumnSecond>{data.status}</ColumnSecond>
+                    <ColumnSecond style={{}}>{data.status}</ColumnSecond>
                     <ColumnSecond>{data.function}</ColumnSecond>
                     <ColumnSecond>{data.contracts}</ColumnSecond>
                     <ColumnSecond>{data.from}</ColumnSecond>

@@ -127,7 +127,7 @@ const Div = styled.div`
   border-radius: 0.375rem;
   width: 100%;
   height: 25rem;
-  margin-top: 1.25rem;
+  margin-top: 0.6rem;
   padding: 0.625rem;
 
   @media (min-width: 300px) and (max-width: 768px) {
@@ -160,6 +160,7 @@ const Url = styled.div`
   color: #416be0;
   width: 100%;
   max-width: 15.625rem;
+  margin-left: -5px;
   @media (min-width: 300px) and (max-width: 767px) {
     max-width: 7.625rem;
     width: 100%;

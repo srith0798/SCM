@@ -7,6 +7,7 @@ import Events from "./Events";
 import StateChange from "./StateChange";
 import SubContracts from "./SubContracts";
 import { history } from "../../managers/history";
+import utility from "../../utility";
 
 export default function TransactionDetails() {
   const [activeButton, setActiveButton] = React.useState("Overview");
@@ -18,7 +19,7 @@ export default function TransactionDetails() {
   };
   return (
     <MainContainer>
-      <Row style={{ display: "flex", justifyContent: "space-between" }}>
+      <SubContainer>
         <TitleDiv>
           <img
             alt=""
@@ -29,7 +30,7 @@ export default function TransactionDetails() {
           <Title>Transactions Details</Title>
         </TitleDiv>
         <Button>View in Explorer</Button>
-      </Row>
+      </SubContainer>
 
       <Container>
         <SubHeading style={{ paddingTop: "0.625rem", paddingLeft: "1.25rem" }}>
@@ -42,7 +43,11 @@ export default function TransactionDetails() {
             alignItems: "center",
           }}
         >
-          <Hash>xdcabfe4184e5f9f600fe86d20ffdse2fsfbsgsgsa768b3c</Hash>
+          <Hash>
+            {utility.truncateTxnAddress(
+              "xdcabfe4184e5f9f600fe86d20ffdse2fsfbsgsgsa768b3c"
+            )}
+          </Hash>
           <CopyToClipboard>
             <CopyImg src="/images/copy.svg" />
           </CopyToClipboard>
@@ -322,7 +327,9 @@ const TitleDiv = styled.div`
   font-size: 24px;
   font-weight: 600;
 `;
-const Title = styled.div``;
+const Title = styled.div`
+  white-space: nowrap;
+`;
 const NewContainer = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
   display: flex;
@@ -336,7 +343,7 @@ const SubHead = styled.div`
   font-size: 0.75rem;
 `;
 const CommonDiv = styled.div`
-  border-bottom: 0.031rem #c9d1cb solid;
+  border-bottom: 0.031rem #eaf1ec solid;
   padding: 0.813rem;
 `;
 const MidContainer = styled.div`
@@ -419,7 +426,18 @@ const Button = styled.button`
   white-space: nowrap;
   height: 2.125rem;
   font-size: 0.875rem;
+`;
+const SubContainer = styled.div`
   width: 100%;
+  display: flex;
+  justify-content: space-between;
+  height: 3.125rem;
+  align-items: center;
+  padding-bottom: 15px;
+  @media (min-width: 300px) and (max-width: 767px) {
+    padding-top: 47px;
+    padding-bottom: 33px;
+  }
 `;
 
 const Container = styled.div`
@@ -444,6 +462,7 @@ const SubHeading = styled.div`
   font-size: 0.875rem;
   font-weight: 600;
   color: #102c78;
+  display: flex;
 `;
 
 const CopyImg = styled.img`
@@ -485,6 +504,9 @@ const TabLister = styled.div`
   max-width: 39.125rem;
   margin: 1.563rem 0rem 0.625rem 1.063rem;
   cursor: pointer;
+  @media (min-width: 340px) and (max-width: 768px) {
+    margin: 0px;
+  }
 `;
 const TabView = styled.div`
   padding: 0.313rem 0.5rem 0.313rem 0.5rem;

@@ -158,6 +158,7 @@ const SubContainer = styled.div`
   justify-content: space-between;
   height: 3.125rem;
   align-items: center;
+  padding-bottom: 15px;
   @media (min-width: 300px) and (max-width: 767px) {
     padding-top: 47px;
     padding-bottom: 33px;
