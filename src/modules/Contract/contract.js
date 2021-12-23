@@ -107,6 +107,9 @@ function tagDiv() {
 }
 const IconDiv = styled.div`
   display: flex;
+  @media (min-width: 340px) and (max-width: 768px) {
+    margin-bottom: 22px;
+  }
 `;
 const Tag = styled.div`
   background-color: #eaefff;
@@ -140,13 +143,14 @@ const MainContainer = styled.div`
   height: 100vh;
 `;
 const MainHeading = styled.div`
-display:flex;
-width:100%;
-@media (min-width: 340px) and (max-width: 768px) {
-   display:flex;
-   flex-direction:column;
-   
-   padding-bottom:60px;
+  display: flex;
+  width: 100%;
+  @media (min-width: 340px) and (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+
+    padding-bottom: 58px;
+  }
 `;
 const SubContainer = styled.div`
   width: 100%;
@@ -154,17 +158,20 @@ const SubContainer = styled.div`
   justify-content: space-between;
   height: 3.125rem;
   align-items: center;
-   @media (min-width: 300px) and (max-width: 767px) {
-    padding-top:28px;
-   
-
-  
+  @media (min-width: 300px) and (max-width: 767px) {
+    padding-top: 47px;
+    padding-bottom: 33px;
+  }
 `;
 const Heading = styled.span`
   font-size: 1.5rem;
   font-weight: 600;
   color: #191919;
   margin-right: 0.625rem;
+  @media (min-width: 300px) and (max-width: 767px) {
+    font-size: 1rem;
+    padding-bottom: 10px;
+  }
 `;
 const Button = styled.button`
   background-image: url("/images/Add.svg");
@@ -180,10 +187,10 @@ const Button = styled.button`
   width: 8.125rem;
   height: 2.125rem;
   font-size: 0.875rem;
-   @media (min-width: 340px) and (max-width: 768px) {
- width: 1.225rem;
- font-size:0.1px;
-  
+  @media (min-width: 340px) and (max-width: 768px) {
+    width: 1.225rem;
+    font-size: 0.1px;
+  }
 `;
 const Input = styled.input`
   background: #ffffff 0% 0% no-repeat padding-box;
@@ -201,6 +208,12 @@ const Input = styled.input`
   position: relative;
   border: none;
   outline: none;
+  @media (min-width: 340px) and (max-width: 768px) {
+    padding: 0px;
+    margin-right: 10px;
+    height: 33px;
+    background-image: none;
+  }
 `;
 const TableContainer = styled.div`
   background-color: #ffffff;
@@ -212,7 +225,7 @@ const TableContainer = styled.div`
     
     overflow: scroll;
     width: 100%;
-    height: 381px;
+    height: 281px;
     overflow-y: auto;
     position: relative;
     &::-webkit-scrollbar {
@@ -232,10 +245,9 @@ const ColumnOne = styled.div`
   color: #102c78;
   width: 100%;
   max-width: 18.75rem;
-   @media (min-width: 300px) and (max-width: 767px) {
-    
-    margin-right:60px;
-    
+  @media (min-width: 300px) and (max-width: 767px) {
+    margin-right: 91px;
+  }
 `;
 const ColumnSecond = styled.div`
   font-size: 0.875rem;
