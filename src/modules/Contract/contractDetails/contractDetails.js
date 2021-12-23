@@ -136,7 +136,7 @@ export default function ContractDetails() {
               value={value}
               onChange={(e) => setValues(e.target.value)}
             />
-            {/* xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c */}
+            {/* {address.address} */}
             <CopyToClipboard text={value}>
               <CopyImg src="/images/copy.svg" />
             </CopyToClipboard>

@@ -40,13 +40,9 @@ export default function MainComponent(props) {
   };
 
   return (
-    <div style={{overflow:"auto"}}>
+    <div style={{ overflow: "auto" }}>
       <Column>
-
-        <Row
-        // style={{ height: "300vh" }}
-        >
-          {/* <Sidebar /> */}
+        <Row>
           <MainContainer>
             <SubContainer>
               <MainHeading>Analytics</MainHeading>
@@ -86,13 +82,8 @@ export default function MainComponent(props) {
                 </Box>
               </ClickAwayListener>
             </Container>
-            <Row
-              style={{
-                width: "100%",
 
-                justifyContent: "space-between",
-              }}
-            >
+            <ResponsiveRow>
               <GraphContainer>
                 <SubContainer>
                   <div style={{ display: "flex", alignItems: "center" }}>
@@ -119,7 +110,7 @@ export default function MainComponent(props) {
                 </SubContainer>
                 <Line />
               </GraphContainer>
-              <GraphContainer style={{ marginRight: "0" }}>
+              <GraphContainer>
                 <SubContainer>
                   <div style={{ display: "flex", alignItems: "center" }}>
                     <Head>Gas used overtime</Head>
@@ -146,14 +137,8 @@ export default function MainComponent(props) {
                 </SubContainer>
                 <Line />
               </GraphContainer>
-            </Row>
-            <Row
-              style={{
-                width: "100%",
-
-                justifyContent: "space-between",
-              }}
-            >
+            </ResponsiveRow>
+            <ResponsiveRow>
               <GraphContainer>
                 <SubContainer>
                   <div style={{ display: "flex", alignItems: "center" }}>
@@ -199,7 +184,7 @@ export default function MainComponent(props) {
                   <Network>Mainnet</Network>
                 </Div>
               </GraphContainer>
-              <GraphContainer style={{ marginRight: "0" }}>
+              <GraphContainer>
                 <SubContainer>
                   <div style={{ display: "flex", alignItems: "center" }}>
                     <Head>Active users</Head>
@@ -225,7 +210,7 @@ export default function MainComponent(props) {
                 </SubContainer>
                 <Line />
               </GraphContainer>
-            </Row>
+            </ResponsiveRow>
             <GraphContainer>
               <SubContainer>
                 <div style={{ display: "flex", alignItems: "center" }}>
@@ -277,19 +262,32 @@ export default function MainComponent(props) {
     </div>
   );
 }
+const ResponsiveRow = styled.div`
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  width: 100%;
+  justify-content: space-between;
+  @media (min-width: 300px) and (max-width: 1024px) {
+    display: block;
+  }
+`;
 const MainContainer = styled.div`
   width: 100%;
-  padding-left: 3.125rem;
-  padding-top: 1.563rem;
-  padding-right: 1.563rem;
-  padding-bottom: 1.563rem;
+  padding: 25px 20px 0px 25px;
   background-color: #ecf0f7;
+  @media (min-width: 300px) and (max-width: 1024px) {
+    padding: 12px 15px 0px 15px;
+  }
 `;
 const MainHeading = styled.div`
   text-align: left;
   font-size: 1.5rem;
   font-weight: 600;
   color: #191919;
+  @media (min-width: 300px) and (max-width: 767px) {
+    font-size: 1.2rem;
+  }
 `;
 const SubContainer = styled.div`
   display: flex;
@@ -303,11 +301,18 @@ const Container = styled.div`
   height: auto;
   margin-top: 0.625rem;
   padding: 1.25rem;
+  @media (min-width: 300px) and (max-width: 1024px) {
+    width: 100%;
+    padding: 9px 12px 9px 12px;
+  }
 `;
 const View = styled.div`
   font-size: 1rem;
   font-weight: 600;
   color: #102c78;
+  @media (min-width: 300px) and (max-width: 767px) {
+    font-size: 0.85rem;
+  }
 `;
 const Content = styled.div`
   font-weight: 600;
@@ -315,32 +320,47 @@ const Content = styled.div`
   color: #191919;
   margin-top: 0.625rem;
   padding-bottom: 1.25rem;
+  @media (min-width: 300px) and (max-width: 767px) {
+    font-size: 0.85rem;
+  }
 `;
 
 const GraphContainer = styled.div`
-  width: 100%;
+  width: 49%;
   background: #ffffff 0% 0% no-repeat padding-box;
   border-radius: 0.375rem;
   height: auto;
-
   padding: 1.25rem;
-
-  margin: 1.25rem 1.875rem 1.875rem 0px;
+  margin-top: 2.32rem;
+  @media (min-width: 300px) and (max-width: 1024px) {
+    width: 100%;
+  }
 `;
 const Head = styled.div`
   font-size: 1rem;
   font-weight: 600;
   color: #102c78;
   margin-right: 0.625rem;
+  white-space: nowrap;
+  @media (min-width: 300px) and (max-width: 767px) {
+    font-size: 0.85rem;
+  }
 `;
 const ContractFrom = styled.div`
   width: 100%;
   max-width: 9.375rem;
   color: #102c78;
+
+  @media (min-width: 300px) and (max-width: 767px) {
+    word-break: break-all;
+  }
 `;
 const Network = styled.div`
   width: 100%;
   max-width: 9.375rem;
+  @media (min-width: 300px) and (max-width: 767px) {
+    word-break: break-all;
+  }
 `;
 const Div = styled.div`
   display: flex;
@@ -361,12 +381,19 @@ const DropDown = styled.div`
   width: 100%;
   max-width: 453px;
   position: relative;
+  @media (min-width: 300px) and (max-width: 767px) {
+    font-size: 0.85rem;
+  }
 `;
 const TransactionHash = styled.div`
   font-size: 0.875rem;
   font-weight: 600;
   color: #416be0;
   margin-top: 4px;
+  @media (min-width: 300px) and (max-width: 767px) {
+    font-size: 0.85rem;
+    word-break: break-all;
+  }
 `;
 const Image = styled.img`
   width: 0.75rem;
@@ -379,7 +406,13 @@ const Label = styled.div`
   font-size: 0.75rem;
   font-weight: 600;
   color: #767c93;
+  @media (min-width: 300px) and (max-width: 767px) {
+    font-size: 0.85rem;
+  }
 `;
 const BackImage = styled.img`
   cursor: pointer;
+  @media (min-width: 300px) and (max-width: 1024px) {
+    display: none;
+  }
 `;

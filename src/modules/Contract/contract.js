@@ -222,19 +222,18 @@ const TableContainer = styled.div`
   min-height: 25rem;
   /* height: 25rem; */
   padding: 0.625rem;
-   @media (min-width: 300px) and (max-width: 767px) {
-    
+  @media (min-width: 300px) and (max-width: 767px) {
     overflow: scroll;
     width: 100%;
     height: 281px;
     overflow-y: auto;
     position: relative;
     &::-webkit-scrollbar {
-        width: 10px;
-        border: 0.5px solid blue;
-        outline:none;
+      width: 10px;
+      border: 0.5px solid blue;
+      outline: none;
     }
-    
+  }
 `;
 const Div = styled.div`
   padding: 0.75rem;
@@ -255,12 +254,10 @@ const ColumnSecond = styled.div`
   font-weight: 400;
   color: #191919;
   width: 100%;
+  white-space: nowrap;
   max-width: 18.75rem;
-   @media (min-width: 300px) and (max-width: 767px) {
-    
-  
-  
-    
+  @media (min-width: 300px) and (max-width: 767px) {
+  }
 `;
 const ToolTipIcon = styled.img`
   width: 0.75rem;
