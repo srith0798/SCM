@@ -12,6 +12,7 @@ import ShowContract from "./showContract";
 import "react-tabs/style/react-tabs.css";
 import SourceCode from "./sourceCode";
 import ContractsService from "../../../services/contractsService";
+import utility from "../../../utility";
 
 export default function ContractDetails() {
   const [activeButton, setActiveButton] = React.useState("General");
@@ -129,7 +130,11 @@ export default function ContractDetails() {
               alignItems: "center",
             }}
           >
-            {address.address}
+            <Hash>
+              {utility.truncateTxnAddress(
+                "xdcabfe4184e5f9f600fe86d20ffdse2fsfbsgsgsa768b3c"
+              )}
+            </Hash>
             <CopyToClipboard text={value}>
               <CopyImg src="/images/copy.svg" />
             </CopyToClipboard>
@@ -251,7 +256,12 @@ export default function ContractDetails() {
                 </PopUpBlock>
 
                 <PopUpBlock>
-                  {renameState && <RenameContract address={address} click={renameHandleClose} />}
+                  {renameState && (
+                    <RenameContract
+                      address={address}
+                      click={renameHandleClose}
+                    />
+                  )}
                   <RowProperty onClick={() => renameHandleOpen()}>
                     <img alt="" src="/images/edit.svg" />
                   </RowProperty>
@@ -413,12 +423,22 @@ const MainContainer = styled.div`
   height: 100vh;
 `;
 
+const Hash = styled.div`
+  display: flex;
+  flex-flow: row nowrap;
+  margin-top: 0.625rem;
+  margin-bottom: 10px;
+  // font-weight: 600;
+  border: none;
+  width: 100%;
+  max-width: 24.063rem;
+`;
 const Container = styled.div`
   background-color: #ffffff;
   border-radius: 0.375rem;
   width: 100%;
   margin-top: 0.625rem;
-  height: 9.25rem;
+  height: 8.35rem;
 `;
 
 const SubHeading = styled.div`
@@ -435,6 +455,7 @@ const DetailsSection = styled.div`
   /* height: 35.313rem; */
   padding: 0.625rem 0.625rem 1.5rem 0.625rem;
   margin-top: 1.25rem;
+  overflow-x: scroll;
 `;
 const Div = styled.div`
   display: flex;
@@ -518,7 +539,7 @@ const Button = styled.button`
   border: none;
   border-radius: 0.25rem;
   // width: 100%;
-  max-width: 17.75rem;
+  max-width: 9.75rem;
   white-space: nowrap;
   height: 2.125rem;
   font-size: 0.875rem;

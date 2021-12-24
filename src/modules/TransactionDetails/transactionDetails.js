@@ -6,7 +6,7 @@ import "react-tabs/style/react-tabs.css";
 import Events from "./Events";
 import StateChange from "./StateChange";
 import SubContracts from "./SubContracts";
-import { history } from "../../managers/history";
+
 import utility from "../../utility";
 
 export default function TransactionDetails() {
@@ -14,19 +14,11 @@ export default function TransactionDetails() {
   const handleViewClick = (e) => {
     setActiveButton(e.target.id);
   };
-  const backButton = () => {
-    history.push("/dashboard/transaction-list");
-  };
+
   return (
     <MainContainer>
       <SubContainer>
         <TitleDiv>
-          <img
-            alt=""
-            style={{ marginRight: "0.425rem", cursor: "pointer" }}
-            src="/images/back.svg"
-            onClick={backButton}
-          />
           <Title>Transactions Details</Title>
         </TitleDiv>
         <Button>View in Explorer</Button>
