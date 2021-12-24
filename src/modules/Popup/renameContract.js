@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Dialog from "@mui/material/Dialog";
 import { makeStyles } from "@material-ui/styles";
+import contractsService from "../../services/contractsService";
+import utility from "../../utility";
 
 const useStyles = makeStyles(() => ({
   dialogBox: {
@@ -10,9 +12,25 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-////////popup
 export default function RenameContract(props) {
   const classes = useStyles();
+  const [newName, setNewName] = useState(props.address.contractName || "");
+
+  const renameContract = async () => {
+    const requestData = {
+      id: props.address._id,
+      contractName: newName,
+    };
+    const response = await contractsService.renameContract(requestData);
+    console.log(response)
+    if(response.contractName === newName){
+      props.click()
+      utility.apiSuccessToast("Contract rename successful");
+      window.location.reload();
+    }else{
+      utility.apiFailureToast("Rename failed")
+    }
+  };
   return (
     <div>
       <Dialog classes={{ paper: classes.dialogBox }} open={true}>
@@ -22,12 +40,16 @@ export default function RenameContract(props) {
               <Add>Rename Contract</Add>
               <img alt="" src="/images/XDC-Cross.svg" onClick={props.click} />
             </SubContainer>
-            <Input type="text" />
+            <Input
+              type="text"
+              value={newName}
+              onChange={(e) => setNewName(e.target.value)}
+            />
             <SubContainer
               style={{ width: "100%", maxWidth: "160px", marginTop: "30px" }}
             >
-              <RenameButton>Rename</RenameButton>
-              <CancelButton>Cancel</CancelButton>
+              <RenameButton onClick={renameContract}>Rename</RenameButton>
+              <CancelButton onClick={props.click}>Cancel</CancelButton>
             </SubContainer>
           </Container>
         </MainContainer>

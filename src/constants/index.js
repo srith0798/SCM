@@ -20,6 +20,11 @@ export const httpConstants = {
         WEB: 'web'
     },
     API_END_POINT: {
-        GET_CONTRACTS_LIST: "/contract-list"
+        GET_CONTRACTS_LIST: "/contract-list",
+        ADD_CONTRACT: '/contract',
+        HIDE_CONTRACT : '/hide-contract',
+        SHOW_CONTRACT : '/show-contract',
+        RENAME_CONTRACT : '/contract-name',
+        GET_USER : "/user"
     }
 };

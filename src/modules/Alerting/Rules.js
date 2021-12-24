@@ -92,7 +92,6 @@ export default function Rules() {
                       fontSize: "1rem",
                       paddingBottom: "0.875rem",
                       paddingTop: " 9px",
-                      fontSize: "14px",
                       borderBottom:
                         activeButton === "Destination"
                           ? "0.125rem solid #3163F0"

@@ -7,7 +7,8 @@ export default {
   getContractsById,
   hideContract,
   showContract,
-  checkAddress
+  checkAddress,
+  renameContract
 };
 
 function getHeaders() {
@@ -18,9 +19,9 @@ function getHeaders() {
 }
 
 async function getContractsList(requestData) {
-  // let url = `${process.env.REACT_APP_CONTRACTS_SERVICE_URL}${httpConstants.API_END_POINT.GET_CONTRACTS_LIST}`;
-  // let url = `http://localhost:3001/contract-list`;
-  let url = process.env.REACT_APP_USER_CONTRACT_MICROSERVICE + httpConstants.API_END_POINT.GET_CONTRACTS_LIST ;
+  let url =
+    process.env.REACT_APP_USER_CONTRACT_MICROSERVICE +
+    httpConstants.API_END_POINT.GET_CONTRACTS_LIST;
   console.log("url----", url);
   return httpService(
     httpConstants.METHOD_TYPE.POST,
@@ -44,9 +45,9 @@ async function getContractsList(requestData) {
 }
 
 async function addContract(requestData) {
-  // let url = `${process.env.REACT_APP_CONTRACTS_SERVICE_URL}${httpConstants.API_END_POINT.GET_CONTRACTS_LIST}`;
-  //   let url = `http://localhost:3001/contract`;
-  let url = `http://xdc-scm-elb-dev-18733672.us-east-1.elb.amazonaws.com:3000/contract`;
+  let url =
+    process.env.REACT_APP_USER_CONTRACT_MICROSERVICE +
+    httpConstants.API_END_POINT.ADD_CONTRACT;
   console.log("url----", url);
   return httpService(
     httpConstants.METHOD_TYPE.POST,
@@ -69,10 +70,10 @@ async function addContract(requestData) {
     });
 }
 async function getContractsById(requestData) {
-  // let url = `${process.env.REACT_APP_CONTRACTS_SERVICE_URL}${httpConstants.API_END_POINT.GET_CONTRACTS_LIST}`;
-  //   let url = `http://localhost:3001/contract`;
   let url =
-    `http://localhost:3001/contract?id=` +
+    process.env.REACT_APP_USER_CONTRACT_MICROSERVICE +
+    httpConstants.API_END_POINT.ADD_CONTRACT +
+    `?id=` +
     requestData;
   console.log("url----", url);
   return httpService(
@@ -96,9 +97,9 @@ async function getContractsById(requestData) {
     });
 }
 async function hideContract(requestData) {
-  // let url = `${process.env.REACT_APP_CONTRACTS_SERVICE_URL}${httpConstants.API_END_POINT.GET_CONTRACTS_LIST}`;
-  //   let url = `http://localhost:3001/contract`;
-  let url = `http://xdc-scm-elb-dev-18733672.us-east-1.elb.amazonaws.com:3000/hide-contract`;
+  let url =
+    process.env.REACT_APP_USER_CONTRACT_MICROSERVICE +
+    httpConstants.API_END_POINT.HIDE_CONTRACT;
   console.log("url----", url);
   return httpService(
     httpConstants.METHOD_TYPE.POST,
@@ -123,7 +124,9 @@ async function hideContract(requestData) {
 async function showContract(requestData) {
   // let url = `${process.env.REACT_APP_CONTRACTS_SERVICE_URL}${httpConstants.API_END_POINT.GET_CONTRACTS_LIST}`;
   //   let url = `http://localhost:3001/contract`;
-  let url = `http://xdc-scm-elb-dev-18733672.us-east-1.elb.amazonaws.com:3000/show-contract`;
+  let url =
+    process.env.REACT_APP_USER_CONTRACT_MICROSERVICE +
+    httpConstants.API_END_POINT.SHOW_CONTRACT;
   console.log("url----", url);
   return httpService(
     httpConstants.METHOD_TYPE.POST,
@@ -146,16 +149,31 @@ async function showContract(requestData) {
     });
 }
 async function checkAddress(requestData) {
-  // let url = `${process.env.REACT_APP_CONTRACTS_SERVICE_URL}${httpConstants.API_END_POINT.GET_CONTRACTS_LIST}`;
-  //   let url = `http://localhost:3001/contract`;
-  let url = `http://localhost:3001/check-address?contractAddress=` + requestData;
+  let url =
+    process.env.REACT_APP_USER_CONTRACT_MICROSERVICE +
+    `/check-address?contractAddress=` +
+    requestData;
   console.log("url----", url);
-  return httpService(
-    httpConstants.METHOD_TYPE.GET,
-    getHeaders(),
-    {},
-    url
-  )
+  return httpService(httpConstants.METHOD_TYPE.GET, getHeaders(), {}, url)
+    .then((response) => {
+      if (
+        !response.success ||
+        response.responseCode !== 200 ||
+        !response.responseData ||
+        response.responseData.length === 0
+      )
+        return Promise.reject(response);
+      return Promise.resolve(response.responseData);
+    })
+    .catch(function (err) {
+      return Promise.reject(err);
+    });
+}
+async function renameContract(requestData) {
+  let url =
+    process.env.REACT_APP_USER_CONTRACT_MICROSERVICE + httpConstants.API_END_POINT.RENAME_CONTRACT;
+  console.log("url----", url);
+  return httpService(httpConstants.METHOD_TYPE.PUT, getHeaders(), requestData, url)
     .then((response) => {
       if (
         !response.success ||
