@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { history } from "../../managers/history";
+import utility from "../../utility";
 
 const SidebarContainer = styled.div`
   // width: 100%;
@@ -114,7 +115,7 @@ export default function Sidebar(props) {
     <SidebarContainer>
       <Wrapper
         onClick={redirectToAbout}
-        style={{ marginTop: "4rem" }}
+        style={{ marginTop: "4rem" ,  backgroundColor : utility.isMenuActive("about") ? "#1d3c93" : "" }}
         onMouseOver={() => changeSourceForIcons("about")}
         onMouseOut={() => changeOriginalSourceForIcons("about")}
       >
@@ -122,6 +123,7 @@ export default function Sidebar(props) {
         <Heading>About Xmartly</Heading>
       </Wrapper>
       <Wrapper
+        style={{  backgroundColor : utility.isMenuActive("transaction") ? "#1d3c93" : "" }}
         onClick={redirectToTransaction}
         onMouseOver={() => changeSourceForIcons("Transaction")}
         onMouseOut={() => changeOriginalSourceForIcons("Transaction")}
@@ -130,6 +132,7 @@ export default function Sidebar(props) {
         <Heading>Transactions</Heading>
       </Wrapper>
       <Wrapper
+        style={{  backgroundColor : utility.isMenuActive("contract") ? "#1d3c93" : "" }}
         onClick={redirectToContract}
         onMouseOver={() => changeSourceForIcons("Contracts")}
         onMouseOut={() => changeOriginalSourceForIcons("Contracts")}
@@ -138,6 +141,7 @@ export default function Sidebar(props) {
         <Heading>Contracts</Heading>
       </Wrapper>
       <Wrapper
+        style={{  backgroundColor : utility.isMenuActive("network") ? "#1d3c93" : "" }}
         onClick={redirectToNetwork}
         onMouseOver={() => changeSourceForIcons("Networks")}
         onMouseOut={() => changeOriginalSourceForIcons("Networks")}
@@ -146,6 +150,7 @@ export default function Sidebar(props) {
         <Heading>Networks</Heading>
       </Wrapper>
       <Wrapper
+        style={{  backgroundColor : utility.isMenuActive("analytics") ? "#1d3c93" : "" }}
         onClick={redirectToAnalytics}
         onMouseOver={() => changeSourceForIcons("Analytics")}
         onMouseOut={() => changeOriginalSourceForIcons("Analytics")}
@@ -154,6 +159,7 @@ export default function Sidebar(props) {
         <Heading>Analytics</Heading>
       </Wrapper>
       <Wrapper
+        style={{  backgroundColor : utility.isMenuActive("rules") ? "#1d3c93" : "" }}
         onClick={redirectToAlerting}
         onMouseOver={() => changeSourceForIcons("Alerting")}
         onMouseOut={() => changeOriginalSourceForIcons("Alerting")}

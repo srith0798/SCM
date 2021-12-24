@@ -71,30 +71,21 @@ export default function Sidebar(props) {
   const redirectToAlerting = () => {
     history.push("/dashboard/rules");
   };
-  const redirectToFaqs = () => {
-    history.push("/");
-  };
   const redirectToLogout = () => {
     history.push("/");
   };
   const redirectToAbout = () => {
     history.push("/");
   };
-  const [transactionIcon, setTransactionIcon] = React.useState(
+  const [transactionIcon, setTransactionIcon] = useState(
     "/images/Transactions.svg"
   );
-  const [contractsIcon, setContractsIcon] = React.useState(
+  const [contractsIcon, setContractsIcon] = useState(
     "/images/Transactions.svg"
   );
-  const [networksIcon, setNetworksIcon] = React.useState(
-    "/images/networks.svg"
-  );
-  const [analyticsIcon, setAnalyticsIcon] = React.useState(
-    "/images/Analytics.svg"
-  );
-  const [alertingIcon, setAlertingIcon] = React.useState(
-    "/images/Alerting.svg"
-  );
+  const [networksIcon, setNetworksIcon] = useState("/images/networks.svg");
+  const [analyticsIcon, setAnalyticsIcon] = useState("/images/Analytics.svg");
+  const [alertingIcon, setAlertingIcon] = useState("/images/Alerting.svg");
 
   const changeSourceForIcons = (value) => {
     if (value === "Transaction")
@@ -186,7 +177,4 @@ const CenterDiv = styled.div`
   justify-content: center;
   margin-top: 2rem;
   margin-bottom: 3rem;
-`;
-const Spacing = styled.div`
-  margin-top: 8rem;
 `;

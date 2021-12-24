@@ -11,7 +11,10 @@ const useStyles = makeStyles(() => ({
 
 export default function WalletPopUp(props) {
   const classes = useStyles();
-
+  const connectWallet = () => {
+    if(props.getCurrentUserDetails())
+      props.click()
+  }
   return (
     <div>
       {props.state ? (
@@ -56,7 +59,7 @@ export default function WalletPopUp(props) {
                   <SubTitle>Connect your XDCPay wallet with SmartHub.</SubTitle>
                 </IconContainer>
               </DetailBox>
-              <Button>
+              <Button onClick={() => connectWallet()}>
                 <img
                   style={{ paddingLeft: "30px", marginRight: "15px" }}
                   alt=""

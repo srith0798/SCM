@@ -1,5 +1,4 @@
 import React from "react";
-import { Row } from "simple-flexbox";
 import "react-tabs/style/react-tabs.css";
 import styled from "styled-components";
 

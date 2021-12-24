@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import Utility from "../../utility";
 import HeaderComponent from "../header/header";
@@ -14,6 +14,9 @@ import About from "../aboutScreen/about";
 import Rules from "../Alerting/Rules";
 import AddAlert from "../Alerting/AddAlert";
 import AlertDetails from "../Alerting/AlertDetails";
+import { sessionManager } from "../../managers/sessionManager";
+import UserService from "../../services/userService";
+
 const Container = styled.div`
   height: 100%;
   width: 100%;
@@ -21,38 +24,68 @@ const Container = styled.div`
 
 //Replace Under Development with component once developed-
 const HomeComponent = (props) => {
+  useEffect(() => {
+    // getCurrentUserDetails();
+  }, []);
+  const getCurrentUserDetails = async () => {
+    let user = "";
+    try {
+      user = window.web3.eth.accounts;
+    } catch (e) {
+      console.log(e);
+    }
+    if (user && user.length) {
+      console.log(user);
+      const response = await UserService.addUser({ accountAddress: user[0] });
+      if (response.accountAddress) {
+        sessionManager.setDataInCookies(
+          response.accountAddress,
+          "accountAddress"
+        );
+        sessionManager.setDataInCookies(response.username, "username");
+        sessionManager.setDataInCookies(
+          response.profilePicture,
+          "profilePicture"
+        );
+      }
+      sessionManager.setDataInCookies(true, "isLoggedIn");
+      // await window.web3.eth.getBalance("0x2bb78852ecff61058ad71f23225d6d580f9ad8ef", ((bal) => console.log(bal)))
+    }
+    return true; //required to close the "connect wallet" popup
+  };
   return (
-    <Container>
-      {Utility.isMenuActive("/contract") &&
-        (Utility.isMenuActive("/contract-details") ? (
-          <ContractDetails />
-        ) : (
-          <Contract />
-        ))}
-      {Utility.isMenuActive("/transaction") &&
-        (Utility.isMenuActive("/transaction-details") ? (
-          <TransactionDetails />
-        ) : (
-          <TransactionList />
-        ))}
-      {/* {Utility.isMenuActive("/transaction-details") && <TransactionDetails />} */}
-      {Utility.isMenuActive("/analytics") && <Analytics />}
-
-      {Utility.isMenuActive("/about") && <About />}
-      {Utility.isMenuActive("/rules") && <Rules />}
-      {Utility.isMenuActive("/add-alert") && <AddAlert />}
-      {Utility.isMenuActive("/alert-detail") && <AlertDetails />}
-      {/* {Utility.isMenuActive("/products") &&
-        (Utility.isMenuActive("/add") ? (
-          <AddProductComponent />
-        ) : (
-          <ProductComponent />
-        ))} */}
-
-      {Utility.isMenuActive("/network") && <Network />}
-
-      {/* {Utility.isMenuActive("/settings") && <SettingComponent />} */}
-    </Container>
+    <>
+      {!sessionManager.getDataFromCookies("isLoggedIn") ? (
+        <Container>
+          {Utility.isMenuActive("") && (
+            <About getCurrentUserDetails={getCurrentUserDetails} />
+          )}
+        </Container>
+      ) : (
+        <Container>
+          {Utility.isMenuActive("/contract") &&
+            (Utility.isMenuActive("/contract-details") ? (
+              <ContractDetails />
+            ) : (
+              <Contract />
+            ))}
+          {Utility.isMenuActive("/transaction") &&
+            (Utility.isMenuActive("/transaction-details") ? (
+              <TransactionDetails />
+            ) : (
+              <TransactionList />
+            ))}
+          {Utility.isMenuActive("/about") && (
+            <About getCurrentUserDetails={getCurrentUserDetails} />
+          )}
+          {Utility.isMenuActive("/analytics") && <Analytics />}
+          {Utility.isMenuActive("/rules") && <Rules />}
+          {Utility.isMenuActive("/add-alert") && <AddAlert />}
+          {Utility.isMenuActive("/alert-detail") && <AlertDetails />}
+          {Utility.isMenuActive("/network") && <Network />}
+        </Container>
+      )}
+    </>
   );
 };
 

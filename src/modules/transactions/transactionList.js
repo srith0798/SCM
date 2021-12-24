@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { Column, Row } from "simple-flexbox";
 import LetsGetStarted from "../Popup/letsGetStartedPopUp";
 import Settings from "../Popup/settings";
-import Filter from "../Popup/filter";
 import Box from "@mui/material/Box";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 import { history } from "../../managers/history";
@@ -218,9 +217,9 @@ const ColumnOne = styled.div`
   max-width: 18.75rem;
   white-space: nowrap;
   @media (min-width: 300px) and (max-width: 767px) {
-   
     margin-right: 59px;
     width: 100%;
+  }
 `;
 const TableContainer = styled.div`
   background-color: #ffffff;
@@ -229,23 +228,19 @@ const TableContainer = styled.div`
   height: 25rem;
   padding: 0.625rem;
   margin-top: 1.563rem;
-   @media (min-width: 300px) and (max-width: 767px) {
-   
-
-  
- overflow: scroll;
+  @media (min-width: 300px) and (max-width: 767px) {
+    overflow: scroll;
     width: 100%;
     height: 381px;
     overflow-y: auto;
     position: relative;
     &::-webkit-scrollbar {
-        width: 10px;
-        border: 0.5px solid blue;
-        outline:none;
+      width: 10px;
+      border: 0.5px solid blue;
+      outline: none;
     }
-    
-
     width: 100%;
+  }
 `;
 
 const MainContainer = styled.div`
@@ -265,18 +260,18 @@ const TransactionBox = styled.div`
   justify-content: space-between;
 `;
 const NewDiv = styled.div`
-display:flex;
-@media (min-width: 340px) and (max-width: 768px) {
+  display: flex;
+  @media (min-width: 340px) and (max-width: 768px) {
     margin-left: -3px;
     padding: 2px;
-        
+  }
 `;
 const Transactions = styled.div`
   font-size: 1.5rem;
   font-weight: 600;
   @media (min-width: 360px) and (max-width: 577px) {
-   display:none;
-    
+    display: none;
+  }
 `;
 const TransactionMedia = styled.div`
   display: none;
@@ -312,6 +307,7 @@ const SearchBar = styled.input`
     padding: 5px;
     font-size: 14px;
     background-image:none;
+   }
 
 `;
 const Icons = styled.img`
@@ -350,11 +346,6 @@ const ColumnSecond = styled.div`
   width: 100%;
   max-width: 300px;
 `;
-const Bold = styled.b`
-  color: #191919;
-  font-size: 1.5rem;
-  font-weight: 600;
-`;
 const DropDown = styled.div`
   background: #f5f6fd 0% 0% no-repeat padding-box;
   border: 1px solid #d5e0ff;
@@ -377,6 +368,7 @@ const TransactionHash = styled.div`
   width:100%;
    @media (min-width: 300px) and (max-width: 767px) {
      font-size: 0.575rem;
+   }
 `;
 const Image = styled.img`
   width: 0.75rem;

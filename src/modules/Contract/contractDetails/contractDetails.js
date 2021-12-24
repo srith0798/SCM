@@ -7,7 +7,6 @@ import ContractAbi from "../../Popup/contractAbi";
 import RenameContract from "../../Popup/renameContract";
 import Remove from "../../Popup/remove";
 
-import { history } from "../../../managers/history";
 import HideContract from "../../Popup/hideContract";
 import ShowContract from "./showContract";
 import "react-tabs/style/react-tabs.css";
@@ -39,7 +38,7 @@ export default function ContractDetails() {
   }, []);
 
   const [address, setAddress] = React.useState({});
-  const [value, setValues] = useState("");
+  const [value] = useState("");
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -99,9 +98,7 @@ export default function ContractDetails() {
   const hideShowOpen = () => {
     setShowBox(true);
   };
-  const hideShowClose = () => {
-    setShowBox(false);
-  };
+
   const [remove, setRemoveState] = useState(false);
   const removeHandleOpen = () => {
     setRemoveState(true);
@@ -109,9 +106,7 @@ export default function ContractDetails() {
   const removeHandleClose = () => {
     setRemoveState(false);
   };
-  const backButton = () => {
-    history.push("/dashboard/contract");
-  };
+
   return (
     <>
       {/* <Row> */}
@@ -256,7 +251,7 @@ export default function ContractDetails() {
                 </PopUpBlock>
 
                 <PopUpBlock>
-                  {renameState && <RenameContract click={renameHandleClose} />}
+                  {renameState && <RenameContract address={address} click={renameHandleClose} />}
                   <RowProperty onClick={() => renameHandleOpen()}>
                     <img alt="" src="/images/edit.svg" />
                   </RowProperty>
@@ -425,12 +420,7 @@ const Container = styled.div`
   margin-top: 0.625rem;
   height: 9.25rem;
 `;
-const TitleDiv = styled.div``;
-const Title = styled.div`
-  @media (min-width: 340px) and (max-width: 768px) {
-    font-size: 1rem;
-  }
-`;
+
 const SubHeading = styled.div`
   font-size: 1.1rem;
   font-weight: 600;
@@ -438,15 +428,6 @@ const SubHeading = styled.div`
   margin-bottom: 10px;
 `;
 
-const Hash = styled.input`
-  display: flex;
-  flex-flow: row nowrap;
-  margin-top: 0.625rem;
-  font-weight: 600;
-  border: none;
-  width: 100%;
-  max-width: 24.063rem;
-`;
 const DetailsSection = styled.div`
   background-color: #ffffff;
   border-radius: 0.375rem;
