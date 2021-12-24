@@ -51,10 +51,25 @@ const SpaceBetween = styled.div`
   flex-flow: row nowrap;
   justify-content: space-between;
 `;
+const Button = styled.button`
+  border: 1px solid white;
+  background: transparent;
+  border-radius: 5px;
+  font-size: 14px;
+  color: white;
+  padding: 5px 20px 5px 20px;
+`;
 
-function Header() {
+function Header(props) {
+  console.log(props)
   const [openHumburger, setOpenHumburger] = useState(true);
-
+  const getUserAccountAddress = () => {
+    let user = "";
+    user = sessionManager.getDataFromCookies("accountAddress");
+    if (user) user = utility.truncateTxnAddress(user);
+    console.log(user);
+    return user;
+  };
   return (
     <HeaderContainer>
       <SpaceBetween>
@@ -65,15 +80,17 @@ function Header() {
           />
           <XmartlyLogo src="/images/Logo.svg" />
         </div>
-        <XDCContainer>
-          <div style={{marginRight: "10px"}}>1450 XDC</div>
-          <UserContainer>
-            {utility.truncateTxnAddress(
-              sessionManager.getDataFromCookies("accountAddress")
-            )}
-            <UserLogo src="/images/user-round.png" />
-          </UserContainer>
-        </XDCContainer>
+        {sessionManager.getDataFromCookies("accountAddress") ? (
+          <XDCContainer>
+            <div style={{ marginRight: "10px" }}>1450 XDC</div>
+            <UserContainer>
+              {getUserAccountAddress()}
+              <UserLogo src="/images/user-round.png" />
+            </UserContainer>
+          </XDCContainer>
+        ) : (
+          <Button>Connect Wallet</Button>
+        )}
       </SpaceBetween>
     </HeaderContainer>
   );
