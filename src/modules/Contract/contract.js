@@ -6,7 +6,7 @@ import AddContract from "../Popup/addContract";
 import { history } from "../../managers/history";
 import Tooltip from "@mui/material/Tooltip";
 import ContractsService from "../../services/contractsService";
-
+import ReactPaginate from "react-paginate";
 import utility from "../../utility";
 
 export default function Contract(props) {
@@ -23,17 +23,20 @@ export default function Contract(props) {
     history.push("/dashboard/contract-details/" + id);
   };
 
-  const getContractList = async () => {
+  const getContractList = async (skip = 0, limit = 10) => {
     try {
       const requestData = {
-        skip: 0,
-        limit: 10,
+        skip: skip,
+        limit: limit,
       };
       const response = await ContractsService.getContractsList(requestData);
       setAddress(response.contractList);
     } catch (e) {
       console.log(e);
     }
+  };
+  const changePage = (value) => {
+    getContractList(Math.ceil(value.selected * 5), 5);
   };
 
   React.useEffect(() => {
@@ -93,6 +96,19 @@ export default function Contract(props) {
           );
         })}
       </TableContainer>
+      <PaginationDiv>
+        <ReactPaginate
+          previousLabel={"<"}
+          nextLabel={">"}
+          pageCount={5}
+          breakLabel={"..."}
+          initialPage={0}
+          onPageChange={changePage}
+          containerClassName={"paginationBttns"}
+          disabledClassName={"paginationDisabled"}
+          activeClassName={"paginationActive"}
+        />
+      </PaginationDiv>
     </MainContainer>
   );
 }
@@ -105,6 +121,38 @@ function tagDiv() {
     </Tag>
   );
 }
+
+const PaginationDiv = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 15px;
+  margin-right: 0;
+  & .paginationBttns {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+  }
+  & .paginationBttns a {
+    padding: 7px;
+    font-size: 10px;
+    margin: 6px;
+    border-radius: 5px;
+    border: 1px solid lightgrey;
+    color: skyblue;
+    cursor: pointer;
+  }
+  & .paginationActive a {
+    color: white !important;
+    background: #3163f0;
+  }
+  & .next a {
+    border: none;
+  }
+  & .previous a {
+    border: none;
+  }
+`;
+
 const IconDiv = styled.div`
   display: flex;
   @media (min-width: 340px) and (max-width: 768px) {
@@ -246,12 +294,14 @@ const ColumnOne = styled.div`
   color: #102c78;
   width: 100%;
   max-width: 18.75rem;
+  min-width: 180px;
   @media (min-width: 300px) and (max-width: 767px) {
-    margin-right: 91px;
+    /* margin-right: 91px; */
   }
 `;
 const ColumnSecond = styled.div`
   font-size: 0.875rem;
+  min-width: 180px;
   font-weight: 400;
   color: #191919;
   width: 100%;

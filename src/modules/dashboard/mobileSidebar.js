@@ -58,18 +58,27 @@ export default function Sidebar(props) {
   const [open, setOpen] = useState(false);
   const redirectToTransaction = () => {
     history.push("/dashboard/transaction-list");
+    setOpen(false)
+
   };
   const redirectToContract = () => {
     history.push("/dashboard/contract");
+    setOpen(false)
   };
   const redirectToNetwork = () => {
     history.push("/dashboard/network");
+    setOpen(false)
+
   };
   const redirectToAnalytics = () => {
     history.push("/dashboard/analytics");
+    setOpen(false)
+
   };
   const redirectToAlerting = () => {
     history.push("/dashboard/Alerting");
+    setOpen(false)
+
   };
   const redirectToLogout = () => {
     history.push("/");
