@@ -209,9 +209,12 @@ const Input = styled.input`
   position: relative;
   border: none;
   outline: none;
+  display: flex;
+  width: 100%;
   @media (min-width: 340px) and (max-width: 768px) {
     padding: 0px;
     margin-right: 10px;
+
     height: 33px;
     background-image: none;
   }

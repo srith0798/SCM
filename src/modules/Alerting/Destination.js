@@ -113,7 +113,7 @@ const LastDiv = styled.div`
       border-radius: 8px;
     }
     ::-webkit-scrollbar-thumb {
-      background:#3163f0;
+      background: #3163f0;
       border-radius: 15px;
     }
   }
@@ -184,6 +184,7 @@ const Icon = styled.img`
 `;
 const Img = styled.img`
   width: 1rem;
+  margin-left: 10px;
   @media (min-width: 300px) and (max-width: 768px) {
     margin-right: -49px;
     width: 1rem;

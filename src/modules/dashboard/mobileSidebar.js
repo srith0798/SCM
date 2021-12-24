@@ -69,7 +69,7 @@ export default function Sidebar(props) {
     history.push("/dashboard/analytics");
   };
   const redirectToAlerting = () => {
-    history.push("/dashboard/Alerting");
+    history.push("/dashboard/rules");
   };
   const redirectToFaqs = () => {
     history.push("/");
