@@ -58,18 +58,23 @@ export default function Sidebar(props) {
   const [open, setOpen] = useState(false);
   const redirectToTransaction = () => {
     history.push("/dashboard/transaction-list");
+    setOpen(false);
   };
   const redirectToContract = () => {
     history.push("/dashboard/contract");
+    setOpen(false);
   };
   const redirectToNetwork = () => {
     history.push("/dashboard/network");
+    setOpen(false);
   };
   const redirectToAnalytics = () => {
     history.push("/dashboard/analytics");
+    setOpen(false);
   };
   const redirectToAlerting = () => {
-    history.push("/dashboard/rules");
+    history.push("/dashboard/Alerting");
+    setOpen(false);
   };
   const redirectToLogout = () => {
     history.push("/");
@@ -80,9 +85,7 @@ export default function Sidebar(props) {
   const [transactionIcon, setTransactionIcon] = useState(
     "/images/Transactions.svg"
   );
-  const [contractsIcon, setContractsIcon] = useState(
-    "/images/Transactions.svg"
-  );
+  const [contractsIcon, setContractsIcon] = useState("/images/contracts.svg");
   const [networksIcon, setNetworksIcon] = useState("/images/networks.svg");
   const [analyticsIcon, setAnalyticsIcon] = useState("/images/Analytics.svg");
   const [alertingIcon, setAlertingIcon] = useState("/images/Alerting.svg");

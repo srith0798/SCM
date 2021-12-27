@@ -198,7 +198,6 @@ export default function AddAlert() {
                 <SideLineProvider>
                   <Line></Line>
                   {progress === "ALERT_TYPE" && (
-
                     <MainBoxContainer>
                       <BoxContainer
                         onClick={() => changeProgress("ALERT_TARGET")}

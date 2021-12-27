@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Dialog from "@mui/material/Dialog";
 import { makeStyles } from "@material-ui/styles";
+import ButtonConfirm from "../../common/components/buttonConfirm";
 
 const useStyles = makeStyles(() => ({
   dialogBox: {
@@ -29,8 +30,8 @@ export default function HideContract(props) {
             <SubContainer
               style={{ width: "100%", maxWidth: "200px", marginTop: "30px" }}
             >
-              <HideButton onClick={props.hideContract}>Hide Contract</HideButton>
-              <CancelButton>Cancel</CancelButton>
+              <ButtonConfirm click={props.hideContract} text={"Hide Contract"} />
+              <CancelButton onClick={props.click} >Cancel</CancelButton>
             </SubContainer>
           </Container>
         </MainContainer>
@@ -52,7 +53,6 @@ const Container = styled.div`
   width: 100%;
   background-color: #ffffff;
   max-width: 700px;
-  height: 200px;
   padding: 20px;
 `;
 const SubContainer = styled.div`
