@@ -89,7 +89,7 @@ function Header(props) {
             </UserContainer>
           </XDCContainer>
         ) : (
-          <Button>Connect Wallet</Button>
+          <Button onClick={props.getCurrentUserDetails}>Connect Wallet</Button>
         )}
       </SpaceBetween>
     </HeaderContainer>

@@ -4,6 +4,8 @@ import Dialog from "@mui/material/Dialog";
 import { makeStyles } from "@material-ui/styles";
 import contractsService from "../../services/contractsService";
 import utility from "../../utility";
+import ShowLoader from "../../common/components/showLoader";
+import ButtonConfirm from "../../common/components/buttonConfirm";
 
 const useStyles = makeStyles(() => ({
   dialogBox: {
@@ -15,24 +17,30 @@ const useStyles = makeStyles(() => ({
 export default function RenameContract(props) {
   const classes = useStyles();
   const [newName, setNewName] = useState(props.address.contractName || "");
+  const [loader , setLoader ] = useState(false)
 
   const renameContract = async () => {
     const requestData = {
       id: props.address._id,
       contractName: newName,
     };
+    setLoader(true)
     const response = await contractsService.renameContract(requestData);
+    setLoader(false)
     console.log(response)
     if(response.contractName === newName){
       props.click()
       utility.apiSuccessToast("Contract rename successful");
-      window.location.reload();
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
     }else{
       utility.apiFailureToast("Rename failed")
     }
   };
   return (
     <div>
+      <ShowLoader state={loader} />
       <Dialog classes={{ paper: classes.dialogBox }} open={true}>
         <MainContainer>
           <Container>
@@ -48,7 +56,7 @@ export default function RenameContract(props) {
             <SubContainer
               style={{ width: "100%", maxWidth: "160px", marginTop: "30px" }}
             >
-              <RenameButton onClick={renameContract}>Rename</RenameButton>
+              <ButtonConfirm click={renameContract} text={"Rename"}/>
               <CancelButton onClick={props.click}>Cancel</CancelButton>
             </SubContainer>
           </Container>
@@ -70,7 +78,6 @@ const Container = styled.div`
   width: 100%;
   background-color: #ffffff;
   max-width: 700px;
-  height: 200px;
   padding: 20px;
 `;
 const SubContainer = styled.div`

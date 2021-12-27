@@ -81,7 +81,7 @@ export default function Sidebar(props) {
     "/images/Transactions.svg"
   );
   const [contractsIcon, setContractsIcon] = React.useState(
-    "/images/Transactions.svg"
+    "/images/contracts.svg"
   );
   const [networksIcon, setNetworksIcon] = React.useState(
     "/images/networks.svg"
