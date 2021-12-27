@@ -137,8 +137,12 @@ export default function ContractDetails() {
               alignItems: "center",
             }}
           >
-            {address.address}
-            <CopyToClipboard text={"YES"}>
+            <Hash>
+              {utility.truncateTxnAddress(
+                "xdcabfe4184e5f9f600fe86d20ffdse2fsfbsgsgsa768b3c"
+              )}
+            </Hash>
+            <CopyToClipboard text={value}>
               <CopyImg src="/images/copy.svg" />
             </CopyToClipboard>
           </div>
