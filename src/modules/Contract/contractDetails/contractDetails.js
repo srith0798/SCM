@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-
 import { Row } from "simple-flexbox";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import ContractAbi from "../../Popup/contractAbi";
 import RenameContract from "../../Popup/renameContract";
 import Remove from "../../Popup/remove";
-
+import ShowLoader from "../../../common/components/showLoader";
 import HideContract from "../../Popup/hideContract";
 import ShowContract from "./showContract";
 import "react-tabs/style/react-tabs.css";
@@ -26,11 +25,14 @@ export default function ContractDetails() {
     addressURL = addressURL[3];
     setContractAddress(addressURL);
     try {
+      setLoader(true)
       const response = await ContractsService.getContractsById(addressURL);
+      setLoader(false)
       console.log("response", response);
       setAddress(response);
     } catch (err) {
-      console.log(err);
+      setLoader(false)
+
     }
   };
   React.useEffect(() => {
@@ -40,6 +42,7 @@ export default function ContractDetails() {
   const [address, setAddress] = React.useState({});
   const [value] = useState("");
   const [open, setOpen] = useState(false);
+  const [loader , setLoader ] = useState(false)
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -52,26 +55,30 @@ export default function ContractDetails() {
       id: contractAddress,
     };
     try {
+      setLoader(true)
       const response = await ContractsService.hideContract(requestData);
       console.log(response);
       setHide(false);
       window.location.reload();
     } catch (e) {
-      console.log(e);
+      console.log("Error",e);
     }
+    setLoader(false)
   };
   const showContract = async () => {
     let requestData = {
       id: contractAddress,
     };
     try {
+      setLoader(true)
       const response = await ContractsService.showContract(requestData);
       console.log(response);
       setShowBox(false);
       window.location.reload();
     } catch (e) {
-      console.log(e);
+      console.log("Error",e);
     }
+    setLoader(false)
   };
 
   const [renameState, setRenameState] = useState(false);
@@ -109,6 +116,7 @@ export default function ContractDetails() {
 
   return (
     <>
+    <ShowLoader state={loader} />
       {/* <Row> */}
       <MainContainer>
         <SubContainer>
@@ -130,7 +138,7 @@ export default function ContractDetails() {
             }}
           >
             {address.address}
-            <CopyToClipboard text={value}>
+            <CopyToClipboard text={"YES"}>
               <CopyImg src="/images/copy.svg" />
             </CopyToClipboard>
           </div>
@@ -269,7 +277,7 @@ export default function ContractDetails() {
                   {show && (
                     <ShowContract
                       showContract={showContract}
-                      click={hideHandleClose}
+                      click={() => setShowBox(false)}
                     />
                   )}
                   {address.isHidden ? (
@@ -277,8 +285,8 @@ export default function ContractDetails() {
                       <RowProperty onClick={() => hideShowOpen()}>
                         <img alt="" src="/images/hide.svg" />
                       </RowProperty>
-                      <RowProperty onClick={() => hideHandleOpen()}>
-                        Hide Contract
+                      <RowProperty onClick={() => hideShowOpen()}>
+                        Show Contract
                       </RowProperty>
                     </>
                   ) : (

@@ -1,16 +1,19 @@
 import React from "react";
 import styled from "styled-components";
 import { Row } from "simple-flexbox";
-
+import ShowLoader from "../../common/components/showLoader";
 import AddContract from "../Popup/addContract";
 import { history } from "../../managers/history";
 import Tooltip from "@mui/material/Tooltip";
 import ContractsService from "../../services/contractsService";
-
+import ReactPaginate from "react-paginate";
 import utility from "../../utility";
+import { sessionManager } from "../../managers/sessionManager";
 
 export default function Contract(props) {
   const [open, setOpen] = React.useState(false);
+  const [showPlaceHolder, setShowPlaceHolder] = React.useState(false);
+  const [loader, setLoader] = React.useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -23,17 +26,26 @@ export default function Contract(props) {
     history.push("/dashboard/contract-details/" + id);
   };
 
-  const getContractList = async () => {
+  const getContractList = async (skip = 0, limit = 10) => {
+    let userId = sessionManager.getDataFromCookies("userId");
     try {
       const requestData = {
-        skip: 0,
-        limit: 10,
+        skip: skip,
+        limit: limit,
+        userId: userId,
       };
+      setLoader(true);
       const response = await ContractsService.getContractsList(requestData);
+      setLoader(false);
       setAddress(response.contractList);
+      if (response.contractList.length === 0) setShowPlaceHolder(true);
     } catch (e) {
-      console.log(e);
+      setShowPlaceHolder(true);
+      setLoader(false);
     }
+  };
+  const changePage = (value) => {
+    getContractList(Math.ceil(value.selected * 5), 5);
   };
 
   React.useEffect(() => {
@@ -44,13 +56,15 @@ export default function Contract(props) {
 
   return (
     <MainContainer>
+      <ShowLoader state={loader} top={"33%"} />
       <SubContainer>
         <MainHeading>
           <Heading>Contracts</Heading>
           <Input placeholder="Search by address or name" />
         </MainHeading>
         <IconDiv>
-          <img
+          <RefreshImage
+            onClick={() => getContractList()}
             alt=""
             src="/images/refresh.svg"
             style={{ marginRight: "0.625rem" }}
@@ -77,7 +91,7 @@ export default function Contract(props) {
         </Div>
         {address.map((data, index) => {
           return (
-            <div onClick={() => redirectTODetails(data._id)}>
+            <div onClick={() => redirectTODetails(data._id)} style={{cursor: "pointer"}}>
               <Div>
                 <Row>
                   <ColumnSecond>{data.contractName}</ColumnSecond>
@@ -92,7 +106,26 @@ export default function Contract(props) {
             </div>
           );
         })}
+        {showPlaceHolder && (
+          <PlaceHolderContainer>
+            <PlaceHolderImage src="/images/contracts.svg" />
+            No Contracts Found
+          </PlaceHolderContainer>
+        )}
       </TableContainer>
+      <PaginationDiv>
+        <ReactPaginate
+          previousLabel={"<"}
+          nextLabel={">"}
+          pageCount={5}
+          breakLabel={"..."}
+          initialPage={0}
+          onPageChange={changePage}
+          containerClassName={"paginationBttns"}
+          disabledClassName={"paginationDisabled"}
+          activeClassName={"paginationActive"}
+        />
+      </PaginationDiv>
     </MainContainer>
   );
 }
@@ -105,10 +138,51 @@ function tagDiv() {
     </Tag>
   );
 }
+
+const PaginationDiv = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 15px;
+  margin-right: 0;
+  & .paginationBttns {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+  }
+  & .paginationBttns a {
+    padding: 7px;
+    font-size: 10px;
+    margin: 6px;
+    border-radius: 5px;
+    border: 1px solid lightgrey;
+    color: skyblue;
+    cursor: pointer;
+  }
+  & .paginationActive a {
+    color: white !important;
+    background: #3163f0;
+  }
+  & .next a {
+    border: none;
+  }
+  & .previous a {
+    border: none;
+  }
+`;
+
 const IconDiv = styled.div`
   display: flex;
   @media (min-width: 340px) and (max-width: 768px) {
     margin-bottom: 22px;
+  }
+`;
+const RefreshImage = styled.img`
+cursor: pointer;
+    &:hover {
+    box-shadow: 3px 10px 21px -8px rgb(0 0 0 / 75%);
+-webkit-box-shadow: 3px 10px 21px -8px rgb(0 0 0 / 75%);
+-moz-box-shadow: 3px 10px 21px -8px rgb(0 0 0 / 75%);
+transition: box-shadow 0.3s ease-in-out 0s;
   }
 `;
 const Tag = styled.div`
@@ -246,12 +320,14 @@ const ColumnOne = styled.div`
   color: #102c78;
   width: 100%;
   max-width: 18.75rem;
+  min-width: 180px;
   @media (min-width: 300px) and (max-width: 767px) {
-    margin-right: 91px;
+    /* margin-right: 91px; */
   }
 `;
 const ColumnSecond = styled.div`
   font-size: 0.875rem;
+  min-width: 180px;
   font-weight: 400;
   color: #191919;
   width: 100%;
@@ -264,4 +340,22 @@ const ToolTipIcon = styled.img`
   width: 0.75rem;
   cursor: pointer;
   margin-left: 0.313rem;
+`;
+
+const PlaceHolderContainer = styled.div`
+  display: flex;
+  width: 100%;
+  height: 500px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 50%;
+  font-weight: 600;
+  font-size: 13px;
+`;
+const PlaceHolderImage = styled.img`
+  width: 50px;
+  -webkit-filter: grayscale(60%); /* Safari 6.0 - 9.0 */
+  filter: grayscale(60%);
+  margin-bottom: 20px;
 `;
