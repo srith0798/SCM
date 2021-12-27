@@ -277,7 +277,7 @@ export default function ContractDetails() {
                   {show && (
                     <ShowContract
                       showContract={showContract}
-                      click={hideHandleClose}
+                      click={() => setShowBox(false)}
                     />
                   )}
                   {address.isHidden ? (

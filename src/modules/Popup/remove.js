@@ -2,10 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import Dialog from "@mui/material/Dialog";
 import { makeStyles } from "@material-ui/styles";
+import ButtonConfirm from "../../common/components/buttonConfirm";
 
 const useStyles = makeStyles(() => ({
   dialogBox: {
-    width: "100% !important",
+    width: "50% !important",
   },
 }));
 
@@ -13,12 +14,15 @@ export default function Remove(props) {
   const classes = useStyles();
   return (
     <div>
-      <Dialog classes={{ paper: classes.dialogBox }} open={true}>
+      <Dialog classes={{ paper: classes.dialogBox }} open={true}
+      fullWidth
+      maxWidth="xm"
+      >
         <MainContainer>
           <Container>
-            <SubContainer>
+            <SubContainer style={{justifyContent: "space-between"}}>
               <Add>Remove Contract</Add>
-              <img alt="" src="/images/XDC-Cross.svg" onClick={props.click} />
+              <img alt="" src="/images/XDC-Cross.svg" onClick={props.click} style={{cursor: "pointer"}} />
             </SubContainer>
             <Content>
               Are you sure you wish to remove the contract? This will remove the
@@ -26,10 +30,10 @@ export default function Remove(props) {
               that use this contract.
             </Content>
             <SubContainer
-              style={{ width: "100%", maxWidth: "220px", marginTop: "30px" }}
+              style={{ width: "100%",  marginTop: "30px" }}
             >
-              <RemoveButton>Remove Contract</RemoveButton>
-              <CancelButton>Cancel</CancelButton>
+              <ButtonConfirm text={"Remove Contract"} />
+              <CancelButton onClick={props.click}>Cancel</CancelButton>
             </SubContainer>
           </Container>
         </MainContainer>
@@ -50,13 +54,13 @@ const Container = styled.div`
   border-radius: 6px;
   width: 100%;
   background-color: #ffffff;
-  max-width: 700px;
-  height: 200px;
+  /* max-width: 700px; */
+  /* height: 200px; */
   padding: 20px;
 `;
 const SubContainer = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
 `;
 const Add = styled.div`
   font: normal normal 600 24px/29px Inter;
@@ -75,6 +79,8 @@ const RemoveButton = styled.button`
   border-radius: 4px;
   text-align: center;
   white-space: nowrap;
+  padding : 10px 12px;
+  margin-right: 10px;
 `;
 const CancelButton = styled.button`
   font: normal normal medium 14px/17px Inter;
@@ -83,6 +89,7 @@ const CancelButton = styled.button`
   background-color: #ffffff;
   border: 1px solid #3163f0;
   text-align: center;
+  padding : 10px 12px;
 `;
 const Content = styled.div`
   font: normal normal medium 16px/20px Inter;

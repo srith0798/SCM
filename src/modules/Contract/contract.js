@@ -13,7 +13,7 @@ import { sessionManager } from "../../managers/sessionManager";
 export default function Contract(props) {
   const [open, setOpen] = React.useState(false);
   const [showPlaceHolder, setShowPlaceHolder] = React.useState(false);
-  const [loader , setLoader] = React.useState(false)
+  const [loader, setLoader] = React.useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -34,14 +34,14 @@ export default function Contract(props) {
         limit: limit,
         userId: userId,
       };
-      setLoader(true)
+      setLoader(true);
       const response = await ContractsService.getContractsList(requestData);
-      setLoader(false)
+      setLoader(false);
       setAddress(response.contractList);
       if (response.contractList.length === 0) setShowPlaceHolder(true);
     } catch (e) {
       setShowPlaceHolder(true);
-      setLoader(false)
+      setLoader(false);
     }
   };
   const changePage = (value) => {
@@ -63,7 +63,8 @@ export default function Contract(props) {
           <Input placeholder="Search by address or name" />
         </MainHeading>
         <IconDiv>
-          <img
+          <RefreshImage
+            onClick={() => getContractList()}
             alt=""
             src="/images/refresh.svg"
             style={{ marginRight: "0.625rem" }}
@@ -173,6 +174,15 @@ const IconDiv = styled.div`
   display: flex;
   @media (min-width: 340px) and (max-width: 768px) {
     margin-bottom: 22px;
+  }
+`;
+const RefreshImage = styled.img`
+cursor: pointer;
+    &:hover {
+    box-shadow: 3px 10px 21px -8px rgb(0 0 0 / 75%);
+-webkit-box-shadow: 3px 10px 21px -8px rgb(0 0 0 / 75%);
+-moz-box-shadow: 3px 10px 21px -8px rgb(0 0 0 / 75%);
+transition: box-shadow 0.3s ease-in-out 0s;
   }
 `;
 const Tag = styled.div`

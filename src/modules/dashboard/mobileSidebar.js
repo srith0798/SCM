@@ -90,7 +90,7 @@ export default function Sidebar(props) {
     "/images/Transactions.svg"
   );
   const [contractsIcon, setContractsIcon] = useState(
-    "/images/Transactions.svg"
+    "/images/contracts.svg"
   );
   const [networksIcon, setNetworksIcon] = useState("/images/networks.svg");
   const [analyticsIcon, setAnalyticsIcon] = useState("/images/Analytics.svg");

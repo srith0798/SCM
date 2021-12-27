@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Dialog from "@mui/material/Dialog";
 import { makeStyles } from "@material-ui/styles";
+import ButtonConfirm from "../../../common/components/buttonConfirm";
 
 const useStyles = makeStyles(() => ({
   dialogBox: {
@@ -29,7 +30,7 @@ export default function HideContract(props) {
           <Container>
             <SubContainer>
               <Add>Show Contract</Add>
-              <img alt="" src="/images/XDC-Cross.svg" onClick={props.click} />
+              <img alt="" src="/images/XDC-Cross.svg" onClick={props.click} style={{cursor: "pointer"}}/>
             </SubContainer>
             <Content>
               Are you sure you wish to show this contract in the transaction
@@ -38,8 +39,8 @@ export default function HideContract(props) {
             <SubContainer
               style={{ width: "100%", maxWidth: "200px", marginTop: "30px" }}
             >
-              <HideButton onClick={props.showContract}>Show Contract</HideButton>
-              <CancelButton>Cancel</CancelButton>
+              <ButtonConfirm click={props.showContract} text={"Show Contract"} />
+              <CancelButton onClick={props.click}>Cancel</CancelButton>
             </SubContainer>
           </Container>
         </MainContainer>
@@ -61,7 +62,7 @@ const Container = styled.div`
   width: 100%;
   background-color: #ffffff;
   max-width: 700px;
-  height: 200px;
+  /* height: 200px; */
   padding: 20px;
 `;
 const SubContainer = styled.div`
@@ -85,6 +86,8 @@ const HideButton = styled.button`
   border-radius: 4px;
   text-align: center;
   white-space: nowrap;
+  margin-right: 10px;
+  padding: 8px;
 `;
 const CancelButton = styled.button`
   font: normal normal medium 14px/17px Inter;
@@ -93,6 +96,7 @@ const CancelButton = styled.button`
   background-color: #ffffff;
   border: 1px solid #3163f0;
   text-align: center;
+  padding: 8px;
 `;
 const Content = styled.div`
   font: normal normal medium 16px/20px Inter;

@@ -5,6 +5,7 @@ import { makeStyles } from "@material-ui/styles";
 import contractsService from "../../services/contractsService";
 import utility from "../../utility";
 import ShowLoader from "../../common/components/showLoader";
+import ButtonConfirm from "../../common/components/buttonConfirm";
 
 const useStyles = makeStyles(() => ({
   dialogBox: {
@@ -55,7 +56,7 @@ export default function RenameContract(props) {
             <SubContainer
               style={{ width: "100%", maxWidth: "160px", marginTop: "30px" }}
             >
-              <RenameButton onClick={renameContract}>Rename</RenameButton>
+              <ButtonConfirm click={renameContract} text={"Rename"}/>
               <CancelButton onClick={props.click}>Cancel</CancelButton>
             </SubContainer>
           </Container>
@@ -77,7 +78,6 @@ const Container = styled.div`
   width: 100%;
   background-color: #ffffff;
   max-width: 700px;
-  height: 200px;
   padding: 20px;
 `;
 const SubContainer = styled.div`
