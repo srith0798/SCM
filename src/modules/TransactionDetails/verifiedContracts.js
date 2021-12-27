@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { Row } from "simple-flexbox";
-import Header from "../header/header";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import "react-tabs/style/react-tabs.css";
 import { history } from "../../managers/history";

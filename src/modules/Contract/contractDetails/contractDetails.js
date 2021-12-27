@@ -138,7 +138,7 @@ export default function ContractDetails() {
             }}
           >
             {address.address}
-            <CopyToClipboard text={value}>
+            <CopyToClipboard text={"YES"}>
               <CopyImg src="/images/copy.svg" />
             </CopyToClipboard>
           </div>

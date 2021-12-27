@@ -26,8 +26,9 @@ export default function AddContract(props) {
       if(response)
         setVerifyAddress(address)
     }catch(e){
-      console.log(e)
-      utility.apiFailureToast("Invalid contract address")
+      if (e === "Address already Exists") utility.apiFailureToast(e);
+      console.log(e);
+      utility.apiFailureToast(e)
     }
     
   }
@@ -48,7 +49,7 @@ export default function AddContract(props) {
     } catch (e) {
       if (e === "Address already Exists") utility.apiFailureToast(e);
       console.log(e);
-      // utility.apiFailureToast(e)
+      utility.apiFailureToast(e)
     }
   };
 
@@ -105,7 +106,7 @@ export default function AddContract(props) {
             ) : (
               <ImportBox>
                 <IconImport>
-                  <XDCLogo src="/images/network.svg"></XDCLogo>
+                  <XDCLogo src="/images/network_xdc.svg"></XDCLogo>
                   <BlueLine></BlueLine>
                 </IconImport>
                 <SelectImport>

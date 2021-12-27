@@ -91,7 +91,7 @@ export default function Contract(props) {
         </Div>
         {address.map((data, index) => {
           return (
-            <div onClick={() => redirectTODetails(data._id)}>
+            <div onClick={() => redirectTODetails(data._id)} style={{cursor: "pointer"}}>
               <Div>
                 <Row>
                   <ColumnSecond>{data.contractName}</ColumnSecond>

@@ -2,7 +2,6 @@ import "react-s-alert/dist/s-alert-default.css";
 import { history } from "../managers/history";
 // import Cookies from "universal-cookie";
 import ToastService from "react-material-toast";
-import { render } from "react-dom";
 
 const toast = ToastService.new({
   place: "topRight",
