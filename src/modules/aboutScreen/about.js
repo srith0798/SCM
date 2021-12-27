@@ -30,7 +30,7 @@ export default function About(props) {
                 <img
                   style={{ marginLeft: "0.375rem" }}
                   alt=""
-                  src="/images/questionmark.svg"
+                  src="/images/question-mark.svg"
                 />
               </Button>
             </LeftContainer>
@@ -80,7 +80,13 @@ export default function About(props) {
       </MainContainer>
 
       <div>
-        {!sessionManager.getDataFromCookies("isLoggedIn")  && <WalletPopUp getCurrentUserDetails={props.getCurrentUserDetails} click={() => setState(false)} state={state} />}
+        {!sessionManager.getDataFromCookies("isLoggedIn") && (
+          <WalletPopUp
+            getCurrentUserDetails={props.getCurrentUserDetails}
+            click={() => setState(false)}
+            state={state}
+          />
+        )}
       </div>
     </>
   );
@@ -163,7 +169,6 @@ const Button = styled.button`
   border: none;
   border-radius: 0.25rem;
   margin-top: 1.875rem;
-  height: 3.125rem;
   display: flex;
   font-size: 1rem;
   font-weight: 600;

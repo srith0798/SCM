@@ -39,7 +39,7 @@ export default function Destination() {
           </RowContainer>
         </Div>
 
-        <ColumnOne style={{ paddingBottom: "10px", paddingLeft: "20px" }}>
+        <ColumnOne style={{ paddingBottom: "10px", paddingLeft: "15px" }}>
           Active Destination
         </ColumnOne>
         <LastDiv>

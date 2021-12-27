@@ -214,7 +214,7 @@ export default function MainComponent(props) {
             <GraphContainer>
               <SubContainer>
                 <div style={{ display: "flex", alignItems: "center" }}>
-                  <Head>Top Functions calls</Head>
+                  <Head>Top Function calls</Head>
                   <BackImage
                     src="/images/expand.svg"
                     onClick={() => props.changeExpand(5)}

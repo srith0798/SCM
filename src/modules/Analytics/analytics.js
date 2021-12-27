@@ -9,11 +9,11 @@ export default function Analytics(props) {
 
   const changeExpand = (value) => {
     console.log("value", value);
-    if (value === 1) setGraphName("Transaction over time");
+    if (value === 1) setGraphName("Transactions over time");
     if (value === 2) setGraphName("Gas used overtime");
     if (value === 3) setGraphName("Active users");
     if (value === 4) setGraphName("Top Callers");
-    if (value === 5) setGraphName("Top Functions Calls");
+    if (value === 5) setGraphName("Top Function Calls");
 
     setExpand(value);
   };

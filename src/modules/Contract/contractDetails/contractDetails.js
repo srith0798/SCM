@@ -12,6 +12,7 @@ import "react-tabs/style/react-tabs.css";
 import SourceCode from "./sourceCode";
 import ContractsService from "../../../services/contractsService";
 import utility from "../../../utility";
+import { history } from "../../../managers/history";
 
 export default function ContractDetails() {
   const [activeButton, setActiveButton] = React.useState("General");
@@ -113,6 +114,9 @@ export default function ContractDetails() {
   const removeHandleClose = () => {
     setRemoveState(false);
   };
+  const backButton = () => {
+    history.push("/dashboard/contract");
+  };
 
   return (
     <>
@@ -121,7 +125,16 @@ export default function ContractDetails() {
       <MainContainer>
         <SubContainer>
           <MainHeading>
-            <Heading>Contract Details</Heading>
+            <Heading>
+              {" "}
+              <img
+                alt=""
+                src="/images/back.svg"
+                style={{ marginRight: "2px" }}
+                onClick={() => backButton()}
+              />{" "}
+              Contract Details
+            </Heading>
             <Button>View in Explorer</Button>
           </MainHeading>
         </SubContainer>
@@ -445,7 +458,7 @@ const Container = styled.div`
   border-radius: 0.375rem;
   width: 100%;
   margin-top: 0.625rem;
-  height: 8.35rem;
+  height: 159px;
 `;
 
 const SubHeading = styled.div`

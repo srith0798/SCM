@@ -7,64 +7,69 @@ export default function TopCalls(props) {
     props.changeExpand(0);
   };
   return (
-          <MainContainer>
-            <SubContainer>
-              <AlignmentContainer>
-                <img alt="" src="/images/back.svg" onClick={ClickMe} />
-                <MainHeading>{props.graphName}</MainHeading>
-              </AlignmentContainer>
-              <AlignmentContainer>
-                <ExpandButton>Expand</ExpandButton>
-                <Icon src="/images/refresh.svg" />
-              </AlignmentContainer>
-            </SubContainer>
+    <MainContainer>
+      <SubContainer>
+        <AlignmentContainer>
+          <img
+            style={{ marginRight: "6px" }}
+            alt=""
+            src="/images/back.svg"
+            onClick={ClickMe}
+          />
+          <MainHeading>{props.graphName}</MainHeading>
+        </AlignmentContainer>
+        <AlignmentContainer>
+          <ExpandButton>Expand</ExpandButton>
+          <Icon src="/images/refresh.svg" />
+        </AlignmentContainer>
+      </SubContainer>
 
-            <Row
-              style={{
-                width: "100%",
-                justifyContent: "space-between",
-              }}
-            >
-              <GraphContainer>
-                <FlexEnd>
-                  <select id="cars" className="select">
-                    <option value="volvo" className="select-dropdown">
-                      Last 5 days
-                    </option>
-                    <option value="saab" className="select-dropdown">
-                      Last 7 days
-                    </option>
-                    <option value="mercedes" className="select-dropdown">
-                      Last 15 days
-                    </option>
-                    <option value="audi" className="select-dropdown">
-                      Last 25 days
-                    </option>
-                  </select>
-                </FlexEnd>
-                <Div>
-                  <ContractFrom>Contract from</ContractFrom>
-                  <Network>xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c</Network>
-                </Div>
-                <Div>
-                  <ContractFrom>Network</ContractFrom>
-                  <Network>Mainnet</Network>
-                </Div>
-                <Div>
-                  <ContractFrom>Contract from</ContractFrom>
-                  <Network>xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c</Network>
-                </Div>
-                <Div>
-                  <ContractFrom>Network</ContractFrom>
-                  <Network>Mainnet</Network>
-                </Div>
-                <Div>
-                  <ContractFrom>Network</ContractFrom>
-                  <Network>Mainnet</Network>
-                </Div>
-              </GraphContainer>
-            </Row>
-          </MainContainer>
+      <Row
+        style={{
+          width: "100%",
+          justifyContent: "space-between",
+        }}
+      >
+        <GraphContainer>
+          <FlexEnd>
+            <select id="cars" className="select">
+              <option value="volvo" className="select-dropdown">
+                Last 5 days
+              </option>
+              <option value="saab" className="select-dropdown">
+                Last 7 days
+              </option>
+              <option value="mercedes" className="select-dropdown">
+                Last 15 days
+              </option>
+              <option value="audi" className="select-dropdown">
+                Last 25 days
+              </option>
+            </select>
+          </FlexEnd>
+          <Div>
+            <ContractFrom>Contract from</ContractFrom>
+            <Network>xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c</Network>
+          </Div>
+          <Div>
+            <ContractFrom>Network</ContractFrom>
+            <Network>Mainnet</Network>
+          </Div>
+          <Div>
+            <ContractFrom>Contract from</ContractFrom>
+            <Network>xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c</Network>
+          </Div>
+          <Div>
+            <ContractFrom>Network</ContractFrom>
+            <Network>Mainnet</Network>
+          </Div>
+          <Div>
+            <ContractFrom>Network</ContractFrom>
+            <Network>Mainnet</Network>
+          </Div>
+        </GraphContainer>
+      </Row>
+    </MainContainer>
   );
 }
 

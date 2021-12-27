@@ -6,6 +6,7 @@ import "react-tabs/style/react-tabs.css";
 import Events from "./Events";
 import StateChange from "./StateChange";
 import SubContracts from "./SubContracts";
+import { history } from "../../managers/history";
 
 import utility from "../../utility";
 
@@ -14,12 +15,23 @@ export default function TransactionDetails() {
   const handleViewClick = (e) => {
     setActiveButton(e.target.id);
   };
-
+  const backButton = () => {
+    history.push("/dashboard/transaction-list");
+  };
   return (
     <MainContainer>
       <SubContainer>
         <TitleDiv>
-          <Title>Transactions Details</Title>
+          <Title>
+            {" "}
+            <img
+              alt=""
+              src="/images/back.svg"
+              style={{ marginRight: "2px" }}
+              onClick={() => backButton()}
+            />{" "}
+            Transactions Details
+          </Title>
         </TitleDiv>
         <Button>View in Explorer</Button>
       </SubContainer>
@@ -381,7 +393,7 @@ const MainContainer = styled.div`
   width: 100%;
   padding: 2.125rem;
   display: 100%;
-  overflow-x: scroll;
+  // overflow-x: scroll;
   height: 100vh;
 `;
 
@@ -445,7 +457,7 @@ const SubContainer = styled.div`
   justify-content: space-between;
   height: 3.125rem;
   align-items: center;
-  padding-bottom: 15px;
+  // padding-bottom: 15px;
   @media (min-width: 300px) and (max-width: 485px) {
     flex-direction: column;
   }
@@ -456,16 +468,14 @@ const Container = styled.div`
   border-radius: 0.375rem;
   width: 100%;
   height: 9.2rem;
-  margin-top: 1.25rem;
+  margin-top: 0.5rem;
   width: 100%;
-  @media (min-width: 300px) and (max-width: 767px) {
+  @media (min-width: 300px) and (max-width: 768px) {
     background-color: #ffffff;
     border-radius: 0.375rem;
     width: 100%;
-    height: 8.75rem;
+    height: 8rem;
     margin-top: 1.25rem;
-    /* width: 100%; */
-    display: flex;
     flex-direction: column;
     width: 100%;
   }

@@ -12,9 +12,8 @@ const useStyles = makeStyles(() => ({
 export default function WalletPopUp(props) {
   const classes = useStyles();
   const connectWallet = () => {
-    if(props.getCurrentUserDetails())
-      props.click()
-  }
+    if (props.getCurrentUserDetails()) props.click();
+  };
   return (
     <div>
       {props.state ? (
@@ -35,7 +34,7 @@ export default function WalletPopUp(props) {
                 <IconContainer>
                   <StepsTitle>Step 1</StepsTitle>
                   <img
-                    style={{ width: "50px" }}
+                    style={{ width: "40px" }}
                     alt=""
                     src="/images/XDCinstall.svg"
                   />
@@ -45,7 +44,7 @@ export default function WalletPopUp(props) {
                   </SubTitle>
                 </IconContainer>
                 <IconContainer>
-                  <StepsTitle>Step 1</StepsTitle>
+                  <StepsTitle>Step 2</StepsTitle>
                   <img alt="" src="/images/XDClogin.svg" />
                   <Title>Login to XDCPay</Title>
                   <SubTitle>
@@ -53,7 +52,7 @@ export default function WalletPopUp(props) {
                   </SubTitle>
                 </IconContainer>
                 <IconContainer>
-                  <StepsTitle>Step 1</StepsTitle>
+                  <StepsTitle>Step 3</StepsTitle>
                   <img alt="" src="/images/XDCwallet.svg" />
                   <Title>Connect Wallet</Title>
                   <SubTitle>Connect your XDCPay wallet with SmartHub.</SubTitle>

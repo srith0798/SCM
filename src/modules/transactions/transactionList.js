@@ -212,7 +212,7 @@ const Div = styled.div`
 const ColumnOne = styled.div`
   font-size: 0.875rem;
   font-weight: 600;
-  color: #102C78;
+  color: #102c78;
   width: 100%;
   max-width: 18.75rem;
   white-space: nowrap;
@@ -295,20 +295,19 @@ const SearchBar = styled.input`
   outline: none;
   width: 100%;
   max-width: 261px;
-  font-size:0.775rem;
+  font-size: 0.775rem;
 
   *:focus {
     outline: none;
   }
-   @media (min-width: 300px) and (max-width: 767px) {
-    display:flex;
-        margin-left: -1px;
+  @media (min-width: 300px) and (max-width: 767px) {
+    display: flex;
+    margin-left: -1px;
     margin-right: 8px;
     padding: 5px;
     font-size: 14px;
-    background-image:none;
-   }
-
+    background-image: none;
+  }
 `;
 const Icons = styled.img`
   // margin-right: 0.625rem;
@@ -351,7 +350,7 @@ const DropDown = styled.div`
   border: 1px solid #d5e0ff;
   border-radius: 6px;
   font: normal normal medium 14px/17px Inter;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
   color: #191919;
   height: 89px;
@@ -365,10 +364,10 @@ const TransactionHash = styled.div`
   font-weight: 600;
   color: #416be0;
   margin-top: 0.5rem;
-  width:100%;
-   @media (min-width: 300px) and (max-width: 767px) {
-     font-size: 0.575rem;
-   }
+  width: 100%;
+  @media (min-width: 300px) and (max-width: 767px) {
+    font-size: 0.575rem;
+  }
 `;
 const Image = styled.img`
   width: 0.75rem;

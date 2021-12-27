@@ -15,7 +15,12 @@ export default function FullScreen(props) {
           <MainContainer>
             <SubContainer>
               <AlignmentContainer>
-                <img alt="" src="/images/back.svg" onClick={ClickMe} />
+                <img
+                  style={{ marginRight: "8px" }}
+                  alt=""
+                  src="/images/back.svg"
+                  onClick={ClickMe}
+                />
                 <MainHeading>{props.graphName}</MainHeading>
               </AlignmentContainer>
               <AlignmentContainer>

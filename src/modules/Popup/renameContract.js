@@ -17,25 +17,25 @@ const useStyles = makeStyles(() => ({
 export default function RenameContract(props) {
   const classes = useStyles();
   const [newName, setNewName] = useState(props.address.contractName || "");
-  const [loader , setLoader ] = useState(false)
+  const [loader, setLoader] = useState(false);
 
   const renameContract = async () => {
     const requestData = {
       id: props.address._id,
       contractName: newName,
     };
-    setLoader(true)
+    setLoader(true);
     const response = await contractsService.renameContract(requestData);
-    setLoader(false)
-    console.log(response)
-    if(response.contractName === newName){
-      props.click()
+    setLoader(false);
+    console.log(response);
+    if (response.contractName === newName) {
+      props.click();
       utility.apiSuccessToast("Contract rename successful");
       setTimeout(() => {
         window.location.reload();
       }, 1000);
-    }else{
-      utility.apiFailureToast("Rename failed")
+    } else {
+      utility.apiFailureToast("Rename failed");
     }
   };
   return (
@@ -46,7 +46,6 @@ export default function RenameContract(props) {
           <Container>
             <SubContainer>
               <Add>Rename Contract</Add>
-              <img alt="" src="/images/XDC-Cross.svg" onClick={props.click} />
             </SubContainer>
             <Input
               type="text"
@@ -56,7 +55,7 @@ export default function RenameContract(props) {
             <SubContainer
               style={{ width: "100%", maxWidth: "160px", marginTop: "30px" }}
             >
-              <ButtonConfirm click={renameContract} text={"Rename"}/>
+              <ButtonConfirm click={renameContract} text={"Rename"} />
               <CancelButton onClick={props.click}>Cancel</CancelButton>
             </SubContainer>
           </Container>
@@ -106,15 +105,7 @@ const Input = styled.input`
   background-size: 20px;
   color: #436ce0;
 `;
-const RenameButton = styled.button`
-  font: normal normal medium 14px/17px Inter;
-  letter-spacing: 0px;
-  color: #ffffff;
-  background: #3163f0 0% 0% no-repeat padding-box;
-  border: 0px;
-  border-radius: 4px;
-  text-align: center;
-`;
+
 const CancelButton = styled.button`
   font: normal normal medium 14px/17px Inter;
   color: #3163f0;
