@@ -25,8 +25,7 @@ const Container = styled.div`
 
 //Replace Under Development with component once developed-
 const HomeComponent = (props) => {
-  useEffect(() => {
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <>
@@ -96,13 +95,13 @@ const dashboardComponent = (props) => {
       console.log(e);
     }
     if (user && user.length) {
-      console.log(user);
       const response = await UserService.addUser({ accountAddress: user[0] });
       if (response.accountAddress) {
         sessionManager.setDataInCookies(
           response.accountAddress,
           "accountAddress"
         );
+        sessionManager.setDataInCookies(response._id, "userId");
         sessionManager.setDataInCookies(response.username, "username");
         sessionManager.setDataInCookies(
           response.profilePicture,
@@ -119,12 +118,18 @@ const dashboardComponent = (props) => {
   return (
     <>
       <DashboardContainer>
-        <HeaderComponent {...props} getCurrentUserDetails={getCurrentUserDetails}/>
+        <HeaderComponent
+          {...props}
+          getCurrentUserDetails={getCurrentUserDetails}
+        />
         <HomeContainer>
           <DesktopSideMenu {...props} />
           <MobileSideMenu {...props} />
           <ScrollableDiv>
-            <HomeComponent {...props} getCurrentUserDetails={getCurrentUserDetails}/>
+            <HomeComponent
+              {...props}
+              getCurrentUserDetails={getCurrentUserDetails}
+            />
           </ScrollableDiv>
         </HomeContainer>
       </DashboardContainer>

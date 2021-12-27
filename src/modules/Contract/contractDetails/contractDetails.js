@@ -57,7 +57,7 @@ export default function ContractDetails() {
       setHide(false);
       window.location.reload();
     } catch (e) {
-      console.log(e);
+      console.log("Error",e);
     }
   };
   const showContract = async () => {
@@ -70,7 +70,7 @@ export default function ContractDetails() {
       setShowBox(false);
       window.location.reload();
     } catch (e) {
-      console.log(e);
+      console.log("Error",e);
     }
   };
 
@@ -272,7 +272,7 @@ export default function ContractDetails() {
                       click={hideHandleClose}
                     />
                   )}
-                  {address.isHidden ? (
+                  {!address.isHidden ? (
                     <>
                       <RowProperty onClick={() => hideShowOpen()}>
                         <img alt="" src="/images/hide.svg" />

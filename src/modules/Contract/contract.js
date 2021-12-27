@@ -8,6 +8,7 @@ import Tooltip from "@mui/material/Tooltip";
 import ContractsService from "../../services/contractsService";
 import ReactPaginate from "react-paginate";
 import utility from "../../utility";
+import { sessionManager } from '../../managers/sessionManager'
 
 export default function Contract(props) {
   const [open, setOpen] = React.useState(false);
@@ -24,10 +25,12 @@ export default function Contract(props) {
   };
 
   const getContractList = async (skip = 0, limit = 10) => {
+    let userId = sessionManager.getDataFromCookies("userId");
     try {
       const requestData = {
         skip: skip,
         limit: limit,
+        userId : userId
       };
       const response = await ContractsService.getContractsList(requestData);
       setAddress(response.contractList);
