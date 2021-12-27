@@ -1,17 +1,19 @@
 import React from "react";
 import styled from "styled-components";
 import { Row } from "simple-flexbox";
-
+import ShowLoader from "../../common/components/showLoader";
 import AddContract from "../Popup/addContract";
 import { history } from "../../managers/history";
 import Tooltip from "@mui/material/Tooltip";
 import ContractsService from "../../services/contractsService";
 import ReactPaginate from "react-paginate";
 import utility from "../../utility";
-import { sessionManager } from '../../managers/sessionManager'
+import { sessionManager } from "../../managers/sessionManager";
 
 export default function Contract(props) {
   const [open, setOpen] = React.useState(false);
+  const [showPlaceHolder, setShowPlaceHolder] = React.useState(false);
+  const [loader , setLoader] = React.useState(false)
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -30,12 +32,16 @@ export default function Contract(props) {
       const requestData = {
         skip: skip,
         limit: limit,
-        userId : userId
+        userId: userId,
       };
+      setLoader(true)
       const response = await ContractsService.getContractsList(requestData);
+      setLoader(false)
       setAddress(response.contractList);
+      if (response.contractList.length === 0) setShowPlaceHolder(true);
     } catch (e) {
-      console.log(e);
+      setShowPlaceHolder(true);
+      setLoader(false)
     }
   };
   const changePage = (value) => {
@@ -50,6 +56,7 @@ export default function Contract(props) {
 
   return (
     <MainContainer>
+      <ShowLoader state={loader} top={"33%"} />
       <SubContainer>
         <MainHeading>
           <Heading>Contracts</Heading>
@@ -98,6 +105,12 @@ export default function Contract(props) {
             </div>
           );
         })}
+        {showPlaceHolder && (
+          <PlaceHolderContainer>
+            <PlaceHolderImage src="/images/contracts.svg" />
+            No Contracts Found
+          </PlaceHolderContainer>
+        )}
       </TableContainer>
       <PaginationDiv>
         <ReactPaginate
@@ -317,4 +330,22 @@ const ToolTipIcon = styled.img`
   width: 0.75rem;
   cursor: pointer;
   margin-left: 0.313rem;
+`;
+
+const PlaceHolderContainer = styled.div`
+  display: flex;
+  width: 100%;
+  height: 500px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 50%;
+  font-weight: 600;
+  font-size: 13px;
+`;
+const PlaceHolderImage = styled.img`
+  width: 50px;
+  -webkit-filter: grayscale(60%); /* Safari 6.0 - 9.0 */
+  filter: grayscale(60%);
+  margin-bottom: 20px;
 `;

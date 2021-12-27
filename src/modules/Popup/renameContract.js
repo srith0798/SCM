@@ -4,6 +4,7 @@ import Dialog from "@mui/material/Dialog";
 import { makeStyles } from "@material-ui/styles";
 import contractsService from "../../services/contractsService";
 import utility from "../../utility";
+import ShowLoader from "../../common/components/showLoader";
 
 const useStyles = makeStyles(() => ({
   dialogBox: {
@@ -15,24 +16,30 @@ const useStyles = makeStyles(() => ({
 export default function RenameContract(props) {
   const classes = useStyles();
   const [newName, setNewName] = useState(props.address.contractName || "");
+  const [loader , setLoader ] = useState(false)
 
   const renameContract = async () => {
     const requestData = {
       id: props.address._id,
       contractName: newName,
     };
+    setLoader(true)
     const response = await contractsService.renameContract(requestData);
+    setLoader(false)
     console.log(response)
     if(response.contractName === newName){
       props.click()
       utility.apiSuccessToast("Contract rename successful");
-      window.location.reload();
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
     }else{
       utility.apiFailureToast("Rename failed")
     }
   };
   return (
     <div>
+      <ShowLoader state={loader} />
       <Dialog classes={{ paper: classes.dialogBox }} open={true}>
         <MainContainer>
           <Container>
