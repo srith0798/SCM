@@ -66,6 +66,7 @@ const MainContainer = styled.div`
   width: 100%;
   padding: 50px;
   background-color: #ecf0f7;
+  height: 100vh;
 `;
 const MainHeading = styled.div`
   text-align: left;

@@ -77,6 +77,7 @@ const MainContainer = styled.div`
   width: 100%;
   padding: 50px;
   background-color: #ecf0f7;
+  height: 100vh;
 `;
 const MainHeading = styled.div`
   text-align: left;
@@ -131,6 +132,8 @@ const Icon = styled.img`
 const ContractFrom = styled.div`
   width: 100%;
   max-width: 150px;
+  color: #102c78;
+  font-weight: 600;
 `;
 const Network = styled.div`
   width: 100%;

@@ -90,407 +90,397 @@ export default function AddAlert() {
 
   return (
     <>
-        <MainContainer>
-          <Row>
-            <RowCorrecter>
-              <TitleHead>
-                <img
-                  alt=""
-                  style={{ marginRight: "0.625rem" }}
-                  src="/images/back.svg"
-                  onClick={backButton}
-                />
-                Create Alert
-              </TitleHead>
-            </RowCorrecter>
-          </Row>
-          <Container>
-            <TabLister>
-              <TabView
-                id="Rules"
-                onClick={handleViewClick}
-                style={{
-                  color: activeButton === "Rules" ? "#3163F0" : "#AEB7D0",
-                  display: "flex",
-                  paddingBottom: "0.875rem",
-                  paddingTop: "0.5rem",
-                  fontSize: "14px",
-                  borderBottom:
-                    activeButton === "Rules" ? "2px solid blue" : "",
-                }}
-              >
-                <img
-                  alt=""
-                  style={{ marginRight: "0.375rem" }}
-                  src={
-                    activeButton === "Rules"
-                      ? "/images/rules.svg"
-                      : "/images/rules1.svg"
-                  }
-                />
-                Rules
-              </TabView>
-              <TabView
-                id="History"
-                onClick={handleViewClick}
-                style={{
-                  color: activeButton === "History" ? "#3163F0" : "#AEB7D0",
-                  display: "flex",
-                  paddingBottom: "0.875rem",
-                  paddingTop: "0.5rem",
-                  fontSize: "14px",
-                  borderBottom:
-                    activeButton === "History" ? "0.125rem solid blue" : "",
-                }}
-              >
-                <img
-                  alt=""
-                  style={{ marginRight: "0.375rem" }}
-                  src={
-                    activeButton === "History"
-                      ? "/images/history_blue.svg"
-                      : "/images/history.svg"
-                  }
-                />
-                History
-              </TabView>
-              <TabView
-                id="Destination"
-                onClick={handleViewClick}
-                style={{
-                  color: activeButton === "Destination" ? "#3163F0" : "#AEB7D0",
-                  display: "flex",
-                  paddingBottom: "0.875rem",
-                  paddingTop: "0.5rem",
-                  fontSize: "14px",
-                  borderBottom:
-                    activeButton === "Destination" ? "0.125rem solid blue" : "",
-                }}
-              >
-                <img
-                  alt=""
-                  style={{ marginRight: "5px" }}
-                  src={
-                    activeButton === "Destination"
-                      ? "/images/destination_blue.svg"
-                      : "/images/destination.svg"
-                  }
-                />
-                Destination
-              </TabView>
-            </TabLister>
-            {activeButton === "Rules" && (
-              <div
-                style={{ padding: "20px 0px 0px 10px" }}
-              >
-                <AlertContainer>
-                  {progress === "ALERT_TYPE" ? (
-                    <NumberShowUP>1</NumberShowUP>
-                  ) : (
-                    <TickIcon src="/images/tick-icon.svg" />
-                  )}
-
-                  <ProgressHeader>
-                    <TypeRow> Alert type</TypeRow>
-                    <SelectType>Select a alert triger type</SelectType>
-                  </ProgressHeader>
-                </AlertContainer>
-                <SideLineProvider>
-                  <Line></Line>
-                  {progress === "ALERT_TYPE" && (
-                    <MainBoxContainer>
-                      <BoxContainer
-                        onClick={() => changeProgress("ALERT_TARGET")}
-                        onMouseOver={() =>
-                          changeSourceForIcons("successfulTransaction")
-                        }
-                        onMouseOut={() =>
-                          changeOriginalSourceForIcons("successfulTransaction")
-                        }
-                      >
-                        <img alt="" src={successfulTransaction} />
-                        <Title>Successful Transaction</Title>
-                        <SubTitle>
-                          trigger when Successful Transaction happen
-                        </SubTitle>
-                      </BoxContainer>
-                      <BoxContainer
-                        onClick={() => changeProgress("ALERT_TARGET")}
-                        onMouseOver={() =>
-                          changeSourceForIcons("failedTransaction")
-                        }
-                        onMouseOut={() =>
-                          changeOriginalSourceForIcons("failedTransaction")
-                        }
-                      >
-                        <img alt="" src={failedTransaction} />
-                        <Title>Failed Transaction</Title>
-                        <SubTitle>trigger when Transactions fails</SubTitle>
-                      </BoxContainer>
-                      <BoxContainer
-                        onClick={() => changeProgress("ALERT_TARGET")}
-                        onMouseOver={() =>
-                          changeSourceForIcons("tokenTransfer")
-                        }
-                        onMouseOut={() =>
-                          changeOriginalSourceForIcons("tokenTransfer")
-                        }
-                      >
-                        <img alt="" src={tokenTransfer} />
-                        <Title>XRC-20 Token Transfer </Title>
-                        <SubTitle>
-                          trigger whenever an XRC-20 Token Transfer happen
-                        </SubTitle>
-                      </BoxContainer>
-                      <BoxContainer
-                        onClick={() => changeProgress("ALERT_TARGET")}
-                        onMouseOver={() =>
-                          changeSourceForIcons("transactionValue")
-                        }
-                        onMouseOut={() =>
-                          changeOriginalSourceForIcons("transactionValue")
-                        }
-                      >
-                        <img alt="" src={transactionValue} />
-                        <Title>Transaction Value</Title>
-                        <SubTitle>
-                          trigger whenever transaction value matches
-                        </SubTitle>
-                      </BoxContainer>
-                      <BoxContainer
-                        onClick={() => changeProgress("ALERT_TARGET")}
-                        onMouseOver={() =>
-                          changeSourceForIcons("balanceToken ")
-                        }
-                        onMouseOut={() =>
-                          changeOriginalSourceForIcons("balanceToken")
-                        }
-                      >
-                        <img alt="" src={balanceToken} />
-                        <Title>XDC Balance</Title>
-                        <SubTitle>
-                          trigger when XDC balance falls below certain threshold
-                        </SubTitle>
-                      </BoxContainer>
-
-                      <BoxContainer
-                        onClick={() => changeProgress("ALERT_TARGET")}
-                        onMouseOver={() => changeSourceForIcons("stateChange")}
-                        onMouseOut={() =>
-                          changeOriginalSourceForIcons("stateChange")
-                        }
-                      >
-                        <img alt="" src={stateChange} />
-                        <Title>State Change</Title>
-                        <SubTitle>
-                          trigger whenever stable variable changes
-                        </SubTitle>
-                      </BoxContainer>
-                      <BoxContainer>
-                        <img alt="" src="/images/functioncall.svg" />
-                        <Title>Function call</Title>
-                        <SubTitle>COMMING SOON</SubTitle>
-                      </BoxContainer>
-                    </MainBoxContainer>
-                  )}
-                </SideLineProvider>
-
-                <AlertContainer>
-                  {/* <NumberShowUP>2</NumberShowUP> */}
-                  {progress === "ALERT_TYPE" || progress === "ALERT_TARGET" ? (
-                    <NumberShowUP>2</NumberShowUP>
-                  ) : (
-                    <TickIcon src="/images/tick-icon.svg" />
-                  )}
-
-                  <ProgressHeader>
-                    <TypeRow> Alert target</TypeRow>
-                    <SelectType>
-                      Select a address which alert will be trigger
-                    </SelectType>
-                  </ProgressHeader>
-                </AlertContainer>
-                <SideLineProvider>
-                  <Line></Line>
-                  {progress === "ALERT_TARGET" && (
-
-                    <AlertTargetContainer>
-                      <BoxContainer
-                        onClick={() => changeProgress("PARAMETERS")}
-                        onMouseOver={() => changeSourceForIcons("addressToken")}
-                        onMouseOut={() =>
-                          changeOriginalSourceForIcons("addressToken")
-                        }
-                      >
-                        <img alt="" src={addressToken} />
-                        <Title>Address</Title>
-                        <SubTitle>recieve alert for only one address</SubTitle>
-                      </BoxContainer>
-                      <BoxContainer
-                        onClick={() => changeProgress("PARAMETERS")}
-                        onMouseOver={() =>
-                          changeSourceForIcons("networkAddress")
-                        }
-                        onMouseOut={() =>
-                          changeOriginalSourceForIcons("networkAddress")
-                        }
-                      >
-                        <img alt="" src={networkAddress} />
-                        <Title>Network</Title>
-                        <SubTitle>
-                          recieve alert for deployment on a network
-                        </SubTitle>
-                      </BoxContainer>
-                      <BoxContainer
-                        onClick={() => changeProgress("PARAMETERS")}
-                        onMouseOver={() => changeSourceForIcons("tagAddress")}
-                        onMouseOut={() =>
-                          changeOriginalSourceForIcons("tagAddress")
-                        }
-                      >
-                        <img alt="" src={tagAddress} />
-                        <Title>Tag</Title>
-                        <SubTitle>Recieve alert for every address</SubTitle>
-                      </BoxContainer>
-                    </AlertTargetContainer>
-                  )}
-                </SideLineProvider>
-
-                <AlertContainer>
-                  {progress === "PARAMETERS" ||
-                    progress === "ALERT_TARGET" ||
-                    progress === "ALERT_TYPE" ? (
-                    <NumberShowUP>3</NumberShowUP>
-                  ) : (
-                    <TickIcon src="/images/tick-icon.svg" />
-                  )}
-                  <ProgressHeader>
-                    <TypeRow>Parameters</TypeRow>
-                    <SelectType>Set alert trigger Parameters</SelectType>
-                  </ProgressHeader>
-                </AlertContainer>
-                  <SideLineProvider>
-                    <Line></Line>
-                {progress === "PARAMETERS" && (
-
-                    <AlertTargetContainer style={{flexDirection : "column"}}>
-                      <ParameterContainer>
-                        <FilterSelect>
-                          <option value="filter">Filter by event name</option>
-                        </FilterSelect>
-                      </ParameterContainer>
-                          <ApplyButton
-                            onClick={() => changeProgress("DESTINATION")}
-                          >
-                            Next
-                          </ApplyButton>
-                    </AlertTargetContainer>
+      <MainContainer>
+        <Row>
+          <RowCorrecter>
+            <TitleHead>
+              <img
+                alt=""
+                style={{ marginRight: "0.625rem" }}
+                src="/images/back.svg"
+                onClick={backButton}
+              />
+              Create Alert
+            </TitleHead>
+          </RowCorrecter>
+        </Row>
+        <Container>
+          <TabLister>
+            <TabView
+              id="Rules"
+              onClick={handleViewClick}
+              style={{
+                color: activeButton === "Rules" ? "#3163F0" : "#AEB7D0",
+                display: "flex",
+                paddingBottom: "0.875rem",
+                paddingTop: "0.5rem",
+                fontSize: "14px",
+                borderBottom: activeButton === "Rules" ? "2px solid blue" : "",
+              }}
+            >
+              <img
+                alt=""
+                style={{ marginRight: "0.375rem" }}
+                src={
+                  activeButton === "Rules"
+                    ? "/images/rules.svg"
+                    : "/images/rules1.svg"
+                }
+              />
+              Rules
+            </TabView>
+            <TabView
+              id="History"
+              onClick={handleViewClick}
+              style={{
+                color: activeButton === "History" ? "#3163F0" : "#AEB7D0",
+                display: "flex",
+                paddingBottom: "0.875rem",
+                paddingTop: "0.5rem",
+                fontSize: "14px",
+                borderBottom:
+                  activeButton === "History" ? "0.125rem solid blue" : "",
+              }}
+            >
+              <img
+                alt=""
+                style={{ marginRight: "0.375rem" }}
+                src={
+                  activeButton === "History"
+                    ? "/images/history_blue.svg"
+                    : "/images/history.svg"
+                }
+              />
+              History
+            </TabView>
+            <TabView
+              id="Destination"
+              onClick={handleViewClick}
+              style={{
+                color: activeButton === "Destination" ? "#3163F0" : "#AEB7D0",
+                display: "flex",
+                paddingBottom: "0.875rem",
+                paddingTop: "0.5rem",
+                fontSize: "14px",
+                borderBottom:
+                  activeButton === "Destination" ? "0.125rem solid blue" : "",
+              }}
+            >
+              <img
+                alt=""
+                style={{ marginRight: "5px" }}
+                src={
+                  activeButton === "Destination"
+                    ? "/images/destination_blue.svg"
+                    : "/images/destination.svg"
+                }
+              />
+              Destination
+            </TabView>
+          </TabLister>
+          {activeButton === "Rules" && (
+            <div style={{ padding: "20px 0px 0px 10px" }}>
+              <AlertContainer>
+                {progress === "ALERT_TYPE" ? (
+                  <NumberShowUP>1</NumberShowUP>
+                ) : (
+                  <TickIcon src="/images/tick-icon.svg" />
                 )}
-                  </SideLineProvider>
 
-                <AlertContainer>
-                  <NumberShowUP>4</NumberShowUP>
-                  <ProgressHeader>
-                    <TypeRow>Destination</TypeRow>
-                    <SelectType style={{}}>
-                      Select the destination in which alert notification will be
-                      sent to.
-                    </SelectType>
-                    {progress === "DESTINATION" && (
-                      <DestinationDetail>
-                        <EmailBox>
-                          <EmailDetail>
-                            <Img alt="" src="/images/email.svg" />
-                            Email
-                            <EmailShow>it@supportteam.com</EmailShow>
-                          </EmailDetail>
-
-                          <SliderDiv>
-                            <label class="switch">
-                              <input type="checkbox" />
-                              <span class="slider round"></span>
-                            </label>
-                          </SliderDiv>
-                        </EmailBox>
-                        <EmailBox>
-                          <EmailDetail>
-                            <Img alt="" src="/images/webhook.svg" />
-                            Finance
-                            <EmailShow>https://webhook.site/a0e</EmailShow>
-                          </EmailDetail>
-                          <SliderDiv>
-                            <label class="switch">
-                              <input type="checkbox" />
-                              <span class="slider round"></span>
-                            </label>
-                          </SliderDiv>
-                        </EmailBox>
-
-                        <RowContainer>
-                          <Buttonn>
-                            <img
-                              alt=""
-                              src="/images/slack.svg"
-                              style={{
-                                marginRight: "0.25rem",
-                                width: "1.3rem",
-                              }}
-                            />{" "}
-                            Slack
-                          </Buttonn>
-                          <Buttonn>
-                            <img
-                              alt=""
-                              src="/images/webhook.svg"
-                              style={{
-                                marginRight: "0.25rem",
-                                width: "1.3rem",
-                              }}
-                            />
-                            Webhook
-                          </Buttonn>
-                          <Buttonn>
-                            <img
-                              alt=""
-                              src="/images/email.svg"
-                              style={{
-                                marginRight: "0.25rem",
-                                width: "1.3rem",
-                              }}
-                            />
-                            Email
-                          </Buttonn>
-                        </RowContainer>
-                      </DestinationDetail>
-                    )}
-                  </ProgressHeader>
-                </AlertContainer>
-                {/* <SideLineProvider> */}
+                <ProgressHeader>
+                  <TypeRow> Alert type</TypeRow>
+                  <SelectType>Select a alert triger type</SelectType>
+                </ProgressHeader>
+              </AlertContainer>
+              <SideLineProvider>
                 <Line></Line>
-                <AlertContainer>
-                  <LastContainer>
-                    <ApplyButton onClick={() => changeProgress("Rules")} style={{marginLeft: "0px"}}>
-                      Done
-                    </ApplyButton>
-                    <CancelButton onClick={() => changeProgress("ALERT_TYPE")}>
-                      Cancel
-                    </CancelButton>
-                  </LastContainer>
-                </AlertContainer>
-                {/* </SideLineProvider> */}
-              </div>
-            )}
+                {progress === "ALERT_TYPE" && (
+                  <MainBoxContainer>
+                    <BoxContainer
+                      onClick={() => changeProgress("ALERT_TARGET")}
+                      onMouseOver={() =>
+                        changeSourceForIcons("successfulTransaction")
+                      }
+                      onMouseOut={() =>
+                        changeOriginalSourceForIcons("successfulTransaction")
+                      }
+                    >
+                      <img alt="" src={successfulTransaction} />
+                      <Title>Successful Transaction</Title>
+                      <SubTitle>
+                        trigger when Successful Transaction happen
+                      </SubTitle>
+                    </BoxContainer>
+                    <BoxContainer
+                      onClick={() => changeProgress("ALERT_TARGET")}
+                      onMouseOver={() =>
+                        changeSourceForIcons("failedTransaction")
+                      }
+                      onMouseOut={() =>
+                        changeOriginalSourceForIcons("failedTransaction")
+                      }
+                    >
+                      <img alt="" src={failedTransaction} />
+                      <Title>Failed Transaction</Title>
+                      <SubTitle>trigger when Transactions fails</SubTitle>
+                    </BoxContainer>
+                    <BoxContainer
+                      onClick={() => changeProgress("ALERT_TARGET")}
+                      onMouseOver={() => changeSourceForIcons("tokenTransfer")}
+                      onMouseOut={() =>
+                        changeOriginalSourceForIcons("tokenTransfer")
+                      }
+                    >
+                      <img alt="" src={tokenTransfer} />
+                      <Title>XRC-20 Token Transfer </Title>
+                      <SubTitle>
+                        trigger whenever an XRC-20 Token Transfer happen
+                      </SubTitle>
+                    </BoxContainer>
+                    <BoxContainer
+                      onClick={() => changeProgress("ALERT_TARGET")}
+                      onMouseOver={() =>
+                        changeSourceForIcons("transactionValue")
+                      }
+                      onMouseOut={() =>
+                        changeOriginalSourceForIcons("transactionValue")
+                      }
+                    >
+                      <img alt="" src={transactionValue} />
+                      <Title>Transaction Value</Title>
+                      <SubTitle>
+                        trigger whenever transaction value matches
+                      </SubTitle>
+                    </BoxContainer>
+                    <BoxContainer
+                      onClick={() => changeProgress("ALERT_TARGET")}
+                      onMouseOver={() => changeSourceForIcons("balanceToken ")}
+                      onMouseOut={() =>
+                        changeOriginalSourceForIcons("balanceToken")
+                      }
+                    >
+                      <img alt="" src={balanceToken} />
+                      <Title>XDC Balance</Title>
+                      <SubTitle>
+                        trigger when XDC balance falls below certain threshold
+                      </SubTitle>
+                    </BoxContainer>
 
-            {activeButton === "History" && <Historys />}
-            {activeButton === "Destination" && <Destination />}
-          </Container>
-        </MainContainer>
+                    <BoxContainer
+                      onClick={() => changeProgress("ALERT_TARGET")}
+                      onMouseOver={() => changeSourceForIcons("stateChange")}
+                      onMouseOut={() =>
+                        changeOriginalSourceForIcons("stateChange")
+                      }
+                    >
+                      <img alt="" src={stateChange} />
+                      <Title>State Change</Title>
+                      <SubTitle>
+                        trigger whenever stable variable changes
+                      </SubTitle>
+                    </BoxContainer>
+                    <BoxContainer>
+                      <img alt="" src="/images/functioncall.svg" />
+                      <Title>Function call</Title>
+                      <SubTitle>COMMING SOON</SubTitle>
+                    </BoxContainer>
+                  </MainBoxContainer>
+                )}
+              </SideLineProvider>
+
+              <AlertContainer>
+                {/* <NumberShowUP>2</NumberShowUP> */}
+                {progress === "ALERT_TYPE" || progress === "ALERT_TARGET" ? (
+                  <NumberShowUP>2</NumberShowUP>
+                ) : (
+                  <TickIcon src="/images/tick-icon.svg" />
+                )}
+
+                <ProgressHeader>
+                  <TypeRow> Alert target</TypeRow>
+                  <SelectType>
+                    Select a address which alert will be trigger
+                  </SelectType>
+                </ProgressHeader>
+              </AlertContainer>
+              <SideLineProvider>
+                <Line></Line>
+                {progress === "ALERT_TARGET" && (
+                  <AlertTargetContainer>
+                    <BoxContainer
+                      onClick={() => changeProgress("PARAMETERS")}
+                      onMouseOver={() => changeSourceForIcons("addressToken")}
+                      onMouseOut={() =>
+                        changeOriginalSourceForIcons("addressToken")
+                      }
+                    >
+                      <img alt="" src={addressToken} />
+                      <Title>Address</Title>
+                      <SubTitle>recieve alert for only one address</SubTitle>
+                    </BoxContainer>
+                    <BoxContainer
+                      onClick={() => changeProgress("PARAMETERS")}
+                      onMouseOver={() => changeSourceForIcons("networkAddress")}
+                      onMouseOut={() =>
+                        changeOriginalSourceForIcons("networkAddress")
+                      }
+                    >
+                      <img alt="" src={networkAddress} />
+                      <Title>Network</Title>
+                      <SubTitle>
+                        recieve alert for deployment on a network
+                      </SubTitle>
+                    </BoxContainer>
+                    <BoxContainer
+                      onClick={() => changeProgress("PARAMETERS")}
+                      onMouseOver={() => changeSourceForIcons("tagAddress")}
+                      onMouseOut={() =>
+                        changeOriginalSourceForIcons("tagAddress")
+                      }
+                    >
+                      <img alt="" src={tagAddress} />
+                      <Title>Tag</Title>
+                      <SubTitle>Recieve alert for every address</SubTitle>
+                    </BoxContainer>
+                  </AlertTargetContainer>
+                )}
+              </SideLineProvider>
+
+              <AlertContainer>
+                {progress === "PARAMETERS" ||
+                progress === "ALERT_TARGET" ||
+                progress === "ALERT_TYPE" ? (
+                  <NumberShowUP>3</NumberShowUP>
+                ) : (
+                  <TickIcon src="/images/tick-icon.svg" />
+                )}
+                <ProgressHeader>
+                  <TypeRow>Parameters</TypeRow>
+                  <SelectType>Set alert trigger Parameters</SelectType>
+                </ProgressHeader>
+              </AlertContainer>
+              <SideLineProvider>
+                <Line></Line>
+                {progress === "PARAMETERS" && (
+                  <AlertTargetContainer style={{ flexDirection: "column" }}>
+                    <ParameterContainer>
+                      <FilterSelect>
+                        <option value="filter">Filter by event name</option>
+                      </FilterSelect>
+                    </ParameterContainer>
+                    <ApplyButton onClick={() => changeProgress("DESTINATION")}>
+                      Next
+                    </ApplyButton>
+                  </AlertTargetContainer>
+                )}
+              </SideLineProvider>
+
+              <AlertContainer>
+                <NumberShowUP>4</NumberShowUP>
+                <ProgressHeader>
+                  <TypeRow>Destination</TypeRow>
+                  <SelectType style={{}}>
+                    Select the destination in which alert notification will be
+                    sent to.
+                  </SelectType>
+                  {progress === "DESTINATION" && (
+                    <DestinationDetail>
+                      <EmailBox>
+                        <EmailDetail>
+                          <Img alt="" src="/images/email.svg" />
+                          Email
+                          <EmailShow>it@supportteam.com</EmailShow>
+                        </EmailDetail>
+
+                        <SliderDiv>
+                          <label class="switch">
+                            <input type="checkbox" />
+                            <span class="slider round"></span>
+                          </label>
+                        </SliderDiv>
+                      </EmailBox>
+                      <EmailBox>
+                        <EmailDetail>
+                          <Img alt="" src="/images/webhook.svg" />
+                          Finance
+                          <EmailShow>https://webhook.site/a0e</EmailShow>
+                        </EmailDetail>
+                        <SliderDiv>
+                          <label class="switch">
+                            <input type="checkbox" />
+                            <span class="slider round"></span>
+                          </label>
+                        </SliderDiv>
+                      </EmailBox>
+
+                      <RowContainer>
+                        <Buttonn>
+                          <img
+                            alt=""
+                            src="/images/slack.svg"
+                            style={{
+                              marginRight: "0.25rem",
+                              width: "1.3rem",
+                            }}
+                          />{" "}
+                          Slack
+                        </Buttonn>
+                        <Buttonn>
+                          <img
+                            alt=""
+                            src="/images/webhook.svg"
+                            style={{
+                              marginRight: "0.25rem",
+                              width: "1.3rem",
+                            }}
+                          />
+                          Webhook
+                        </Buttonn>
+                        <Buttonn>
+                          <img
+                            alt=""
+                            src="/images/email.svg"
+                            style={{
+                              marginRight: "0.25rem",
+                              width: "1.3rem",
+                            }}
+                          />
+                          Email
+                        </Buttonn>
+                      </RowContainer>
+                    </DestinationDetail>
+                  )}
+                </ProgressHeader>
+              </AlertContainer>
+              {/* <SideLineProvider> */}
+              <Line></Line>
+              <AlertContainer>
+                <LastContainer>
+                  <ApplyButton
+                    onClick={() => changeProgress("Rules")}
+                    style={{ marginLeft: "0px" }}
+                  >
+                    Done
+                  </ApplyButton>
+                  <CancelButton onClick={() => changeProgress("ALERT_TYPE")}>
+                    Cancel
+                  </CancelButton>
+                </LastContainer>
+              </AlertContainer>
+              {/* </SideLineProvider> */}
+            </div>
+          )}
+
+          {activeButton === "History" && <Historys />}
+          {activeButton === "Destination" && <Destination />}
+        </Container>
+      </MainContainer>
     </>
   );
 }
 const SliderDiv = styled.div``;
 
-const DestinationDetail =  styled.div`
+const DestinationDetail = styled.div`
   margin-bottom: 10px;
   padding: 20px 0 0 0;
 `;
@@ -548,7 +538,7 @@ const LastContainer = styled.div`
   display: flex;
   justify-content: start;
   width: 100%;
-  padding : 20px 0 10px 0;
+  padding: 20px 0 10px 0;
   max-width: 503px;
 `;
 const CancelButton = styled.div`
@@ -568,16 +558,25 @@ const CancelButton = styled.div`
 
   color: #3163f0;
 `;
-const ApplyButton = styled.div`
+const ApplyButton = styled.button`
   width: 68px;
   height: 34px;
   background: #3163f0 0% 0% no-repeat padding-box;
   border-radius: 3px;
   color: #ffffff;
+  font: normal normal medium 14px/17px Inter;
+  letter-spacing: 0px;
+  color: #ffffff;
+  background: #9db5f8 0% 0% no-repeat padding-box;
+  border: 0px;
+  border-radius: 4px;
+  text-align: center;
+  white-space: nowrap;
   padding-top: 6px;
+  padding-bottom: 12px;
   font-size: 14px;
   margin-right: 15px;
-  margin-left : 16px;
+  margin-left: 16px;
   text-align: center;
   cursor: pointer;
 `;
@@ -730,7 +729,7 @@ const ProgressHeader = styled.div`
 const TickIcon = styled.img`
   width: 30px;
   height: 30px;
-`
+`;
 
 const SideLineProvider = styled.div`
   display: flex;
@@ -749,6 +748,7 @@ const NumberShowUP = styled.div`
   border-radius: 50%;
   border: 2px solid #3163f0;
   padding: 0px 0px 0px 8px;
+  background-color: #edf2ff;
 `;
 
 const ParameterContainer = styled.div`

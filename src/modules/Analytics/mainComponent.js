@@ -350,6 +350,7 @@ const ContractFrom = styled.div`
   width: 100%;
   max-width: 9.375rem;
   color: #102c78;
+  font-weight: 600;
 
   @media (min-width: 300px) and (max-width: 767px) {
     word-break: break-all;

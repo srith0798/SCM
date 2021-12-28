@@ -47,7 +47,7 @@ export default function TransactionDetails() {
             )}
           </Hash>
           <CopyToClipboard>
-            <CopyImg src="/images/copy.svg" />
+            <img src="/images/copy.svg" />
           </CopyToClipboard>
           <RedButton>Fail</RedButton>
           <AlertButton>
@@ -57,7 +57,7 @@ export default function TransactionDetails() {
               style={{ width: "15px", cursor: "pointer", marginRight: "6px" }}
               src="/images/addalert.svg"
             />
-            Add Alert
+            Add alert
           </AlertButton>
         </TopContainer>
 
@@ -190,7 +190,7 @@ export default function TransactionDetails() {
                       )}
                     </TransactionNumber>
 
-                    <CopyImg src="/images/copy.svg" />
+                    <CopyToClipboardImg src="/images/copy.svg" />
                   </SubHead>
                 </Row>
               </CommonDiv>
@@ -204,7 +204,7 @@ export default function TransactionDetails() {
                       )}
                     </TransactionNumber>
 
-                    <CopyImg src="/images/copy.svg" />
+                    <CopyToClipboardImg src="/images/copy.svg" />
                   </SubHead>
                 </Row>
               </CommonDiv>
@@ -255,46 +255,78 @@ export default function TransactionDetails() {
                         )}
                       </TransactionNumber>
                     </Hash>
-                    <CopyImg src="/images/copy.svg" />
+                    <CopyToClipboardImg src="/images/copy.svg" />
                   </SubHead>
                 </Row>
               </CommonDiv>
             </MidContainer>
-            <NewContainer>
+            <FunctionContainer>
               <CommonDiv>
                 <Row>
-                  <Heading>Function:</Heading>
-                  <SHead>transfer()</SHead>
+                  <Heading>Function: </Heading>
+                  <SubHeadBlue>transfer()</SubHeadBlue>
                 </Row>
               </CommonDiv>
               <CommonDiv>
                 <Row>
-                  <Heading>Input</Heading>
-                  <SHead>view data </SHead>
+                  <Heading>Input:</Heading>
+                  <SubHeadBlue>
+                    view data{" "}
+                    <img
+                      style={{ marginLeft: "2px" }}
+                      alt
+                      src="/images/Arrrow.svg"
+                    />
+                  </SubHeadBlue>
                 </Row>
               </CommonDiv>
-
-              <ThirdBox>
-                <Row
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <CAllADDs>
-                    Caller Address:
-                    <br />
-                    462482482765
-                  </CAllADDs>
-
-                  <CAllADDs>
-                    Contract Address:
-                    <br />
-                    4752589752
-                  </CAllADDs>
+              <CommonDiv>
+                <Row>
+                  <Heading>Output </Heading>
+                  <SubHeadBlue>
+                    veiw data{" "}
+                    <img
+                      style={{ marginLeft: "2px" }}
+                      alt
+                      src="/images/Arrrow.svg"
+                    />
+                  </SubHeadBlue>
                 </Row>
-              </ThirdBox>
-            </NewContainer>
+              </CommonDiv>
+              <CommonDiv>
+                <Row>
+                  <Heading>Caller Address </Heading>
+                  <Heading>Contact Address </Heading>
+                </Row>
+                <Row>
+                  <SubHeading
+                    style={{ fontWeight: "400", marginRight: "40px" }}
+                  >
+                    xdcabf...a32c99be1768b3c
+                  </SubHeading>
+                  <SubHeading style={{ fontWeight: "400", marginLeft: "38px" }}>
+                    xdcabf...a32c99be1768b3c
+                  </SubHeading>
+                </Row>
+              </CommonDiv>
+            </FunctionContainer>
+            <b>Token Transfer</b>
+            <TokenTransferDiv>
+              <CommonDiv>
+                <Row>
+                  <Heading>From:</Heading>
+                  <SubHeadBlue>xdcabfe4184e5f9.....fsfbsgsgsa768b3</SubHeadBlue>
+                </Row>
+              </CommonDiv>
+              <CommonDiv>
+                <Row>
+                  <Heading>To:</Heading>
+                  <SubHeadBlue>
+                    xdcabfe4184e5f9......2fsfbsgsgsa768b3
+                  </SubHeadBlue>
+                </Row>
+              </CommonDiv>
+            </TokenTransferDiv>
             <b>Stack Trace</b>
             <StackContainer>
               <TextLi>Error Messege:out of gas</TextLi>
@@ -344,23 +376,38 @@ const TitleDiv = styled.div`
 const Title = styled.div`
   white-space: nowrap;
 `;
-const NewContainer = styled.div`
+const FunctionContainer = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
-  display: flex;
   border-radius: 0.375rem;
   opacity: 1;
   margin-top: 1.25rem;
   height: auto;
+  white-space: nowrap;
+  margin-bottom: 20px;
 
   @media (min-width: 300px) and (max-width: 485px) {
     flex-direction: column;
     display: flex;
   }
 `;
+const TokenTransferDiv = styled.div`
+  background: #ffffff 0% 0% no-repeat padding-box;
+  border-radius: 0.375rem;
+  opacity: 1;
+  margin-top: 1.25rem;
+  height: auto;
+  white-space: nowrap;
+  margin-bottom: 20px;
+`;
 
 const SubHead = styled.div`
   font-size: 0.75rem;
   display: flex;
+`;
+const SubHeadBlue = styled.div`
+  font-size: 0.85rem;
+  display: flex;
+  color: #416be0;
 `;
 const CommonDiv = styled.div`
   border-bottom: 0.031rem #eaf1ec solid;
@@ -394,7 +441,7 @@ const MainContainer = styled.div`
   padding: 2.125rem;
   display: 100%;
   // overflow-x: scroll;
-  height: 100vh;
+  height: 200vh;
 `;
 
 const Heading = styled.div`
@@ -411,26 +458,7 @@ const TransactionNumber = styled.div`
 
   font-weight: 600;
 `;
-const ThirdBox = styled.div`
-  text-align: left;
-  padding: 0.625rem;
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: #102c78;
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  max-width: 21rem;
-`;
 
-const CAllADDs = styled.div`
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-between;
-  flex-direction: column;
-  width: 100%;
-  max-width: 21rem;
-`;
 const Button = styled.button`
   background-image: url("/images/globe.svg");
   background-repeat: no-repeat;
@@ -498,13 +526,9 @@ const SubHeading = styled.div`
   display: flex;
 `;
 
-const CopyImg = styled.img`
-  margin-left: 4%;
+const CopyToClipboardImg = styled.img`
+  margin-left: 35px;
   cursor: pointer;
-`;
-
-const SHead = styled.div`
-  color: #416be0;
 `;
 
 const TextLi = styled.div`
@@ -551,7 +575,7 @@ const TabView = styled.div`
   padding: 0.313rem 0.5rem 0.313rem 0.5rem;
   displat: flex;
   @media (min-width: 340px) and (max-width: 768px) {
-    padding-bottom: 1.2rem;
+    // padding-bottom: 1.2rem;
   }
 `;
 const ToolTipIcon = styled.img`
@@ -561,7 +585,7 @@ const ToolTipIcon = styled.img`
 `;
 const RedButton = styled.div`
   color: #ce1a1a;
-  padding: 14px;
+  padding: 0px 0px 0px 18px;
   width: 100%;
   margin-left: 1rem;
   display: flex;
@@ -586,7 +610,7 @@ const AlertButton = styled.div`
   border-radius: 4px;
   opacity: 1;
   color: #3163f0;
-  margin-left: 20px;
+  margin-left: 2px;
   padding-top: 2px;
   padding-left: 8px;
   @media (min-width: 300px) and (max-width: 767px) {
