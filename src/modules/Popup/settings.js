@@ -131,7 +131,6 @@ const MainContainer = styled.div`
 `;
 const Container = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
-
   border-radius: 0.375rem;
   width: 100%;
   background-color: #ffffff;

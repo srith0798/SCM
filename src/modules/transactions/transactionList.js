@@ -296,7 +296,6 @@ const SearchBar = styled.input`
   width: 100%;
   max-width: 261px;
   font-size: 0.775rem;
-
   *:focus {
     outline: none;
   }
@@ -310,7 +309,6 @@ const SearchBar = styled.input`
   }
 `;
 const Icons = styled.img`
-  // margin-right: 0.625rem;
   cursor: pointer;
 `;
 const IconContainer = styled.div`

@@ -47,7 +47,7 @@ export default function TransactionDetails() {
             )}
           </Hash>
           <CopyToClipboard>
-            <img src="/images/copy.svg" />
+            <img alt="" src="/images/copy.svg" />
           </CopyToClipboard>
           <RedButton>Fail</RedButton>
           <AlertButton>
@@ -271,10 +271,10 @@ export default function TransactionDetails() {
                 <Row>
                   <Heading>Input:</Heading>
                   <SubHeadBlue>
-                    view data{" "}
+                    view data
                     <img
                       style={{ marginLeft: "2px" }}
-                      alt
+                      alt=""
                       src="/images/Arrrow.svg"
                     />
                   </SubHeadBlue>
@@ -287,7 +287,7 @@ export default function TransactionDetails() {
                     veiw data{" "}
                     <img
                       style={{ marginLeft: "2px" }}
-                      alt
+                      alt=""
                       src="/images/Arrrow.svg"
                     />
                   </SubHeadBlue>
