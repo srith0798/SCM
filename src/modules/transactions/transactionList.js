@@ -205,9 +205,6 @@ export default function TransactionList(props) {
 const Div = styled.div`
   padding: 0.75rem;
   border-bottom: 1px solid #e3e7eb;
-  
-    // max-width: 200px;
-  }
 `;
 const ColumnOne = styled.div`
   font-size: 0.875rem;
@@ -255,7 +252,6 @@ const MainContainer = styled.div`
 `;
 const TransactionBox = styled.div`
   width: 100%;
-
   display: flex;
   justify-content: space-between;
 `;
