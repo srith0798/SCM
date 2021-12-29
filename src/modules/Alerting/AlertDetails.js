@@ -1,6 +1,5 @@
 import React from "react";
 import { Row } from "simple-flexbox";
-
 import "react-tabs/style/react-tabs.css";
 import styled from "styled-components";
 import { history } from "../../managers/history";
@@ -149,14 +148,12 @@ const Container = styled.div`
   margin-top: 20px;
   padding: 12px;
   @media (min-width: 300px) and (max-width: 768px) {
-   background-color: #ffffff;
+    background-color: #ffffff;
     border-radius: 6px;
     height: 180px;
     height: auto;
-    /* margin-top: 20px; */
     padding: 8px;
     overflow: auto;
-}
   }
 `;
 
@@ -167,16 +164,13 @@ const CommonDiv = styled.div`
 const Heading = styled.div`
   text-align: left;
   font: normal normal 600 14px/17px Inter;
-  letter-spacing: 0px;
   color: #102c78;
-  opacity: 1;
   width: 100%;
   max-width: 260px;
 `;
 const SubHead = styled.div`
   font-size: 13px;
   @media (min-width: 300px) and (max-width: 768px) {
-  
     margin-left:5px;
 `;
 
@@ -200,10 +194,8 @@ const Buttonn = styled.div`
   justify-content: center;
   background: #3163f0 0% 0% no-repeat padding-box;
   border-radius: 4px;
-  opacity: 1;
   text-align: left;
   font: normal normal medium 16px/20px Inter;
-  letter-spacing: 0px;
   color: #ffffff;
   font-size: 14px;
 `;
@@ -219,10 +211,7 @@ const Buttonn2 = styled.div`
   justify-content: center;
   border-radius: 4px;
   text-align: left;
-  font: normal normal medium 16px/20px Inter;
-  letter-spacing: 0px;
   color: #3163f0;
-  opacity: 1;
   font-size: 14px;
 `;
 const TextColor = styled.div`
@@ -230,5 +219,4 @@ const TextColor = styled.div`
   font: normal normal medium 14px/17px Inter;
   letter-spacing: 0px;
   color: #416be0;
-  opacity: 1;
 `;

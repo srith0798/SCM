@@ -284,7 +284,7 @@ export default function TransactionDetails() {
                 <Row>
                   <Heading>Output </Heading>
                   <SubHeadBlue>
-                    veiw data{" "}
+                    veiw data
                     <img
                       style={{ marginLeft: "2px" }}
                       alt=""
@@ -327,12 +327,15 @@ export default function TransactionDetails() {
                 </Row>
               </CommonDiv>
             </TokenTransferDiv>
-            <b>Stack Trace</b>
+            <b>Stack Trace</b> <ToolTipIcon src="/images/tool tip.svg" />
             <StackContainer>
-              <TextLi>Error Messege:out of gas</TextLi>
-              balances[_to] = balances[_to].add(_value);
+              <TextLine>Error Messege:out of gas</TextLine>
+              <img alt="" src="/images/error.svg" /> balances[_to] =
+              balances[_to].add(_value);
               <br />
-              at App_Transactions_Validator.sol in App_Transactions_Validator
+              <div style={{ paddingLeft: "24px" }}>
+                At App_Transactions_Validator.sol in App_Transactions_Validator
+              </div>
             </StackContainer>
             <LastContainer>
               <SearchBar placeholder="Execution trace" />
@@ -340,7 +343,7 @@ export default function TransactionDetails() {
               <img
                 alt=""
                 src="/images/contracts.svg"
-                style={{ width: "1rem" }}
+                style={{ width: "1rem", marginRight: "3px" }}
               />
               transfer in App_Transactions_Validator
             </LastContainer>
@@ -384,7 +387,6 @@ const FunctionContainer = styled.div`
   height: auto;
   white-space: nowrap;
   margin-bottom: 20px;
-
   @media (min-width: 300px) and (max-width: 485px) {
     flex-direction: column;
     display: flex;
@@ -434,13 +436,13 @@ const LastContainer = styled.div`
   margin-top: 1.25rem;
   height: 18.75rem;
   padding: 2rem;
+  font-weight: 600;
 `;
 const MainContainer = styled.div`
   background: #ecf0f7 0% 0% no-repeat padding-box;
   width: 100%;
   padding: 2.125rem;
   display: 100%;
-  // overflow-x: scroll;
   height: 200vh;
 `;
 
@@ -455,7 +457,6 @@ const Heading = styled.div`
 
 const TransactionNumber = styled.div`
   color: #416be0;
-
   font-weight: 600;
 `;
 
@@ -470,7 +471,6 @@ const Button = styled.button`
   color: #3163f0;
   border: none;
   border-radius: 0.25rem;
-  // width: 100%;
   max-width: 17.75rem;
   white-space: nowrap;
   height: 2.125rem;
@@ -485,7 +485,6 @@ const SubContainer = styled.div`
   justify-content: space-between;
   height: 3.125rem;
   align-items: center;
-  // padding-bottom: 15px;
   @media (min-width: 300px) and (max-width: 485px) {
     flex-direction: column;
   }
@@ -514,7 +513,6 @@ const Hash = styled.div`
   flex-flow: row nowrap;
   margin-top: 0.625rem;
   margin-bottom: 10px;
-  // font-weight: 600;
   border: none;
   width: 100%;
   max-width: 24.063rem;
@@ -531,20 +529,21 @@ const CopyToClipboardImg = styled.img`
   cursor: pointer;
 `;
 
-const TextLi = styled.div`
+const TextLine = styled.div`
   text-align: left;
-  letter-spacing: 0rem;
   color: #ce1a1a;
-  opacity: 1;
+  font-weight: 600;
+  padding-left: 24px;
 `;
 const SearchBar = styled.input`
   height: 2.188rem;
   width: 12.5rem;
   border: none;
-  margin-left: 0.938rem;
+  margin-bottom: 1.5rem;
   border-radius: 0.25rem;
   background-image: url("/images/search-icon.svg");
   background-repeat: no-repeat;
+  background-color: #f5f6fd;
   background-position: 0.5rem;
   padding-left: 1.875rem;
   background-size: 0.75rem;
@@ -575,7 +574,6 @@ const TabView = styled.div`
   padding: 0.313rem 0.5rem 0.313rem 0.5rem;
   displat: flex;
   @media (min-width: 340px) and (max-width: 768px) {
-    // padding-bottom: 1.2rem;
   }
 `;
 const ToolTipIcon = styled.img`
@@ -590,7 +588,6 @@ const RedButton = styled.div`
   margin-left: 1rem;
   display: flex;
   align-items: center;
-
   width: 69px;
   height: 25px;
   background: #fde7e7 0% 0% no-repeat padding-box;

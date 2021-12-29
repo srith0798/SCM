@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import { Row, Column } from "simple-flexbox";
 import Line from "./graph";
-// import { history } from "../../managers/history";
 
 export default function FullScreen(props) {
   const ClickMe = () => {
@@ -113,10 +112,6 @@ const FlexEnd = styled.div`
   display: flex;
   justify-content: flex-end;
 `;
-// const Img = styled.img`
-//   margin-right: 10px;
-//   cursor: pointer;
-// `;
 const Icon = styled.img`
   margin-left: 10px;
   cursor: pointer;

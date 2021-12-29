@@ -53,7 +53,6 @@ const Input = styled.input`
   color: #767c93;
   padding: 0.313;
   width: 100%;
-  // margin-top: 1.25rem;
   padding: 8px 0px 8px 11px;
 `;
 const MainContainer = styled.div`
@@ -76,14 +75,10 @@ const SubContainer = styled.div`
   justify-content: space-between;
 `;
 const Add = styled.div`
-  // font: normal normal 600 24px/29px Inter;
   font-size: 1.5rem;
   font-weight: 600;
   color: #303134;
 `;
-// const Img = styled.img`
-//   cursor: pointer;
-// `;
 
 const Button = styled.button`
   font: normal normal medium 14px/17px Inter;

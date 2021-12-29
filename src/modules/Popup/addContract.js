@@ -21,17 +21,15 @@ export default function AddContract(props) {
   console.log(props);
 
   const checkAddress = async () => {
-    try{
+    try {
       const response = await ContractsService.checkAddress(address);
-      if(response)
-        setVerifyAddress(address)
-    }catch(e){
+      if (response) setVerifyAddress(address);
+    } catch (e) {
       if (e === "Address already Exists") utility.apiFailureToast(e);
       console.log(e);
-      utility.apiFailureToast(e)
+      utility.apiFailureToast(e);
     }
-    
-  }
+  };
 
   const addContract = async () => {
     try {
@@ -49,7 +47,7 @@ export default function AddContract(props) {
     } catch (e) {
       if (e === "Address already Exists") utility.apiFailureToast(e);
       console.log(e);
-      utility.apiFailureToast(e)
+      utility.apiFailureToast(e);
     }
   };
 
@@ -67,7 +65,6 @@ export default function AddContract(props) {
               <Add>Add Contract</Add>
               <img alt="" src="/images/XDC-Cross.svg" onClick={props.click} />
             </SubContainer>
-            {/* <ImportFile>Import Public Contracts</ImportFile> */}
             <div
               style={{
                 display: "flex",
@@ -144,7 +141,6 @@ const BlueLine = styled.div`
 `;
 const AddressImport = styled.div`
   color: #436ce0;
-
   margin-left: 5px;
   font-size: 0.8rem;
   font-weight: 600;
@@ -178,12 +174,10 @@ const MainContainer = styled.div`
 `;
 const Container = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
-
   border-radius: 6px;
   width: 100%;
   background-color: #ffffff;
   max-width: 700px;
-
   padding: 20px;
 `;
 const SubContainer = styled.div`
@@ -195,10 +189,6 @@ const Add = styled.div`
   font-size: 1rem;
   font-weight: 600;
 `;
-// const Img = styled.img`
-//   cursor: pointer;
-// `;
-
 const Content = styled.div`
   color: #303134;
   margin-top: 15px;

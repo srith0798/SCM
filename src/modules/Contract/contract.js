@@ -91,7 +91,10 @@ export default function Contract(props) {
         </Div>
         {address.map((data, index) => {
           return (
-            <div onClick={() => redirectTODetails(data._id)} style={{cursor: "pointer"}}>
+            <div
+              onClick={() => redirectTODetails(data._id)}
+              style={{ cursor: "pointer" }}
+            >
               <Div>
                 <Row>
                   <ColumnSecond>{data.contractName}</ColumnSecond>
@@ -177,18 +180,17 @@ const IconDiv = styled.div`
   }
 `;
 const RefreshImage = styled.img`
-cursor: pointer;
-    &:hover {
+  cursor: pointer;
+  &:hover {
     box-shadow: 3px 10px 21px -8px rgb(0 0 0 / 75%);
--webkit-box-shadow: 3px 10px 21px -8px rgb(0 0 0 / 75%);
--moz-box-shadow: 3px 10px 21px -8px rgb(0 0 0 / 75%);
-transition: box-shadow 0.3s ease-in-out 0s;
+    -webkit-box-shadow: 3px 10px 21px -8px rgb(0 0 0 / 75%);
+    -moz-box-shadow: 3px 10px 21px -8px rgb(0 0 0 / 75%);
+    transition: box-shadow 0.3s ease-in-out 0s;
   }
 `;
 const Tag = styled.div`
   background-color: #eaefff;
   border-radius: 3px;
-
   color: #436ce0;
   padding: 2px 2px 2px 25px;
   position: relative;
@@ -222,7 +224,6 @@ const MainHeading = styled.div`
   @media (min-width: 340px) and (max-width: 768px) {
     display: flex;
     flex-direction: column;
-
     padding-bottom: 58px;
   }
 `;
@@ -284,7 +285,6 @@ const Input = styled.input`
   border: none;
   outline: none;
   display: flex;
-  width: 100%;
   @media (min-width: 340px) and (max-width: 768px) {
     padding: 0px;
     margin-right: 10px;
@@ -298,7 +298,6 @@ const TableContainer = styled.div`
   border-radius: 0.375rem;
   width: 100%;
   min-height: 25rem;
-  /* height: 25rem; */
   padding: 0.625rem 0.625rem 1px 0.625rem;
   @media (min-width: 300px) and (max-width: 767px) {
     overflow: scroll;
@@ -325,7 +324,6 @@ const ColumnOne = styled.div`
   max-width: 18.75rem;
   min-width: 180px;
   @media (min-width: 300px) and (max-width: 767px) {
-    /* margin-right: 91px; */
   }
 `;
 const ColumnSecond = styled.div`

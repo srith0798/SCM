@@ -6,7 +6,6 @@ import TopCalls from "./topCalls";
 export default function Analytics(props) {
   const [Expand, setExpand] = React.useState(0);
   const [graphName, setGraphName] = React.useState(0);
-
   const changeExpand = (value) => {
     console.log("value", value);
     if (value === 1) setGraphName("Transactions over time");
@@ -17,7 +16,6 @@ export default function Analytics(props) {
 
     setExpand(value);
   };
-
   return (
     <>
       {Expand === 0 ? <MainComponent changeExpand={changeExpand} /> : ""}

@@ -19,6 +19,7 @@ export default function Events() {
             </FilterSelect>
           </FilterDivision>
         </FilterContainer>
+        <Line></Line>
         <MidContainer>
           <ContentWrapper>
             <MidHeader>Transfer</MidHeader>
@@ -77,6 +78,7 @@ const FilterDivision = styled.div`
   display: flex;
   flex-direction: column;
   padding: 10px;
+  width: 100%;
 `;
 const FilterSelect = styled.select`
   outline: none;
@@ -93,8 +95,13 @@ const HeaderText = styled.div`
   font-size: 16px;
   color: #102c78;
   font-weight: 600;
-
   padding-bottom: 16px;
+`;
+const Line = styled.div`
+  border-bottom: 0.031rem #eaf1ec solid;
+  width: 100%;
+  margin-top: 10px;
+  margin-left: 16px;
 `;
 const MidContainer = styled.div`
   display: flex;
@@ -103,7 +110,7 @@ const MidContainer = styled.div`
 const MidHeader = styled.div`
   font-size: 15px;
   font-weight: 600;
-  padding-top: 18px;
+  padding-top: 25px;
   padding-bottom: 16px;
 `;
 const ContentWrapper = styled.div`

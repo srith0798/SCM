@@ -8,7 +8,7 @@ export default {
   hideContract,
   showContract,
   checkAddress,
-  renameContract
+  renameContract,
 };
 
 function getHeaders() {
@@ -171,9 +171,15 @@ async function checkAddress(requestData) {
 }
 async function renameContract(requestData) {
   let url =
-    process.env.REACT_APP_USER_CONTRACT_MICROSERVICE + httpConstants.API_END_POINT.RENAME_CONTRACT;
+    process.env.REACT_APP_USER_CONTRACT_MICROSERVICE +
+    httpConstants.API_END_POINT.RENAME_CONTRACT;
   console.log("url----", url);
-  return httpService(httpConstants.METHOD_TYPE.PUT, getHeaders(), requestData, url)
+  return httpService(
+    httpConstants.METHOD_TYPE.PUT,
+    getHeaders(),
+    requestData,
+    url
+  )
     .then((response) => {
       if (
         !response.success ||

@@ -117,16 +117,12 @@ const Add = styled.div`
   font-weight: 600;
   color: #303134;
 `;
-// const Img = styled.img`
-//   cursor: pointer;
-// `;
 const Content = styled.div`
   color: #102c78;
   margin-top: 10px;
   font-size: 1rem;
   font-weight: 600;
 `;
-
 const Button = styled.button`
   background: #3163f0 0% 0% no-repeat padding-box;
   border-radius: 4px;
@@ -152,7 +148,6 @@ const Between = styled.div`
   border: 1px solid #d5e0ff;
   border-radius: 6px;
   width: 100%;
-
   max-width: 192px;
   padding: 10px;
   color: #1d3c93;

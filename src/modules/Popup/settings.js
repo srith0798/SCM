@@ -145,7 +145,6 @@ const SubContainer = styled.div`
   margin-right: 5px;
 `;
 const Add = styled.div`
-  // font: normal normal 600 24px/29px Inter;
   font-size: 1.5rem;
   font-weight: 600;
   color: #303134;

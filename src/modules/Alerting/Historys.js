@@ -34,7 +34,6 @@ export default function Historys() {
           </RowData>
         </Div>
       </DetailBox>
-      {/* </TableContainer> */}
     </MainContainer>
   );
 }
@@ -44,7 +43,6 @@ const MainContainer = styled.div`
   opacity: 1;
   margin-top: 1.25rem;
   height: 15.625rem;
-
   overflow-y: hidden;
   @media (min-width: 300px) and (max-width: 767px) {
     width: 100%;
@@ -118,7 +116,6 @@ const ColumnTwo = styled.div`
   font-size: 0.875rem;
   color: #191919;
   font-size: 0.875rem;
-  // font-weight: 600;
   width: 100%;
   max-width: 18.75rem;
 `;

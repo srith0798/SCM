@@ -55,12 +55,9 @@ const MainContainer = styled.div`
 `;
 const Container = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
-
   border-radius: 6px;
   width: 100%;
   background-color: #ffffff;
-  /* max-width: 700px; */
-  /* height: 200px; */
   padding: 20px;
 `;
 const SubContainer = styled.div`
@@ -71,7 +68,6 @@ const Add = styled.div`
   font: normal normal 600 24px/29px Inter;
   color: #303134;
 `;
-
 const CancelButton = styled.button`
   font: normal normal medium 14px/17px Inter;
   color: #3163f0;

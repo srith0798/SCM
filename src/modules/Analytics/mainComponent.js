@@ -16,9 +16,7 @@ export default function MainComponent(props) {
   const handleClickAway = () => {
     setOpen(false);
   };
-  // const FullScreen = () => {
-  //   props.changeExpand(1);
-  // };
+
   const styles = {
     position: "absolute",
     top: 77,

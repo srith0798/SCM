@@ -83,7 +83,6 @@ const CancelButton = styled.div`
   cursor: pointer;
   margin-left: -5px;
   margin-right: -11px;
-
   color: #3163f0;
 `;
 const ButtonA = styled.div`
@@ -130,7 +129,6 @@ const DropDown = styled.div`
   border-radius: 6px;
   font-size: 14px;
   font-weight: 600;
-  // color: #767c93;
   color: #b7b7b7;
   height: 40px;
   padding: 10px;
@@ -149,9 +147,7 @@ const DropDownTwo = styled.div`
   height: 34px;
   padding-left: 9px;
   padding-top: 6px;
-
   width: 160px;
-
   margin-right: 50px;
 `;
 const MainContainer = styled.div`
@@ -184,8 +180,6 @@ const Content = styled.div`
   font-weight: 600;
   color: #303134;
   margin-top: 0.625rem;
-  //   padding: 15px 12px 8px 10px;
-  // padding: 0.938rem 0.75rem 0.5rem 0.625rem;
 `;
 const LastRowBox = styled.div`
   display: flex;
@@ -213,7 +207,6 @@ const NewContainer = styled.div`
 const LastContainer = styled.div`
   display: flex;
   justify-content: end;
-  /* width: 100%; */
   max-width: 503px;
 `;
 const NewContainerOne = styled.div`

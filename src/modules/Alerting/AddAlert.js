@@ -452,7 +452,6 @@ export default function AddAlert() {
                   )}
                 </ProgressHeader>
               </AlertContainer>
-              {/* <SideLineProvider> */}
               <Line></Line>
               <AlertContainer>
                 <LastContainer>
@@ -467,7 +466,6 @@ export default function AddAlert() {
                   </CancelButton>
                 </LastContainer>
               </AlertContainer>
-              {/* </SideLineProvider> */}
             </div>
           )}
 
@@ -495,7 +493,6 @@ const EmailBox = styled.div`
   height: 66px;
   padding: 14px;
   width: 100%;
-  // max-width: 453px;
 `;
 const Buttonn = styled.div`
   width: 6rem;
@@ -509,8 +506,6 @@ const Buttonn = styled.div`
   color: #1d3c93;
   font-size: 0.875rem;
   cursor: pointer;
-  @media (min-width: 300px) and (max-width: 768px) {
-  }
 `;
 const RowContainer = styled.div`
   display: flex;
@@ -522,7 +517,6 @@ const RowContainer = styled.div`
   max-width: 21.25rem;
   margin-bottom: 1.25rem;
   padding-top: 1rem;
-
   @media (min-width: 300px) and (max-width: 768px) {
     max-width: 19.25rem;
   }
@@ -555,7 +549,6 @@ const CancelButton = styled.div`
   cursor: pointer;
   margin-left: -5px;
   margin-right: -11px;
-
   color: #3163f0;
 `;
 const ApplyButton = styled.button`
@@ -564,12 +557,8 @@ const ApplyButton = styled.button`
   background: #3163f0 0% 0% no-repeat padding-box;
   border-radius: 3px;
   color: #ffffff;
-  font: normal normal medium 14px/17px Inter;
-  letter-spacing: 0px;
-  color: #ffffff;
   background: #9db5f8 0% 0% no-repeat padding-box;
   border: 0px;
-  border-radius: 4px;
   text-align: center;
   white-space: nowrap;
   padding-top: 6px;
@@ -577,13 +566,11 @@ const ApplyButton = styled.button`
   font-size: 14px;
   margin-right: 15px;
   margin-left: 16px;
-  text-align: center;
   cursor: pointer;
 `;
 const Title = styled.div`
   font-size: 0.775rem;
   font-weight: 600;
-  // color: #1d3c93;
   width: 100%;
   max-width: 16.25rem;
   padding-top: 10px;
@@ -593,9 +580,7 @@ const Title = styled.div`
 `;
 const SubTitle = styled.div`
   font-size: 0.775rem;
-  // color: #1d3c93;
   width: 100%;
-  /* min-width: 100% */
   max-width: 16.25rem;
   padding-top: 5px;
 `;
@@ -639,10 +624,8 @@ const TabLister = styled.div`
   width: 100%;
   max-width: 21.875rem;
   cursor: pointer;
-  // margin: 25px 0px 10px 17px;
 `;
 const TabView = styled.div`
-  // padding: 0.313rem 0.5rem 0.313rem 0.5rem;
   @media (min-width: 340px) and (max-width: 768px) {
     padding: 1px;
   }
@@ -668,7 +651,6 @@ const SelectType = styled.div`
 
 const BoxContainer = styled.div`
   padding: 0.625rem;
-
   height: 150px;
   margin: 0px 10px 20px 10px;
   width: 215px;
@@ -697,22 +679,12 @@ const MainBoxContainer = styled.div`
   display: flex;
   flex-flow: row wrap;
   margin-left: 16px;
-  /* min-height : 30px; */
   padding: 15px 0px 15px 0px;
-  // justify-content: space-between;
   @media (min-width: 340px) and (max-width: 768px) {
     padding-left: 20px;
   }
 `;
-// const AlertTargetContainer = styled.div`
-//   display: flex;
-//   flex-flow: row nowrap;
-//   justify-content: space-between;
-//   width: 100%;
-//   max-width: 695px;
-//   padding-top: 28px;
-//   margin-left: 16px;
-// `;
+
 const AlertTargetContainer = styled.div`
   display: flex;
   flex-flow: row wrap;

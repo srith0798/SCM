@@ -102,7 +102,6 @@ const MainBoxContainer = styled.div`
   flex-direction: column;
   align-item: center;
   padding: 3.125rem;
-   @media (min-width: 340px) and (max-width: 768px) {
 `;
 const Container = styled.div`
   background-color: #ffffff;
@@ -115,10 +114,8 @@ const Container = styled.div`
   max-width: 1306px;
   @media (min-width: 340px) and (max-width: 768px) {
     flex-direction: column;
-
     padding-right: 30px;
     padding-top: 30px;
-
     padding-left: 46px;
     height: 778px;
   }
@@ -126,15 +123,15 @@ const Container = styled.div`
 const RightContainer = styled.div`
   width: 100%;
   padding: 4.375rem;
-   @media (min-width: 340px) and (max-width: 768px) {
-     padding: 4.375rem;
-         height: 100%;
+  @media (min-width: 340px) and (max-width: 768px) {
+    padding: 4.375rem;
+    height: 100%;
+  }
 `;
 const LeftContainer = styled.div`
   width: 100%;
   padding: 2.5rem;
 `;
-
 const Span = styled.span`
   color: #0089ff;
   white-space: nowrap;
@@ -184,10 +181,6 @@ const VideoBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
- @media (min-width: 340px) and (max-width: 768px) {
-
-
-
 `;
 
 const HeadingContainer = styled.div`
@@ -216,12 +209,10 @@ const SubTitle = styled.div`
   font-size: 1rem;
   color: #4b4b4b;
   margin-top: 0.438rem;
-  // width: 15rem;
 `;
 
 const IconContainer = styled.div`
   padding: 0.625rem;
-  // width: 28.125rem;
   width: 100%;
   height: 150px;
   margin: 0px 10px 20px 10px;

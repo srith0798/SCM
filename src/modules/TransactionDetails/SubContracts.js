@@ -93,7 +93,6 @@ const MainBoxContainer = styled.div`
 `;
 const Title = styled.div`
   font-size: 0.875rem;
-  // font-weight: 600;
   color: #1d3c93;
   margin-bottom: 0.313rem;
 `;

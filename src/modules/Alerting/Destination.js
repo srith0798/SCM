@@ -89,14 +89,12 @@ export default function Destination() {
 const MainContainer = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
   border-radius: 0.375rem;
-  opacity: 1;
   margin-top: 1.25rem;
   height: auto;
 `;
 const Div = styled.div`
   padding-bottom: 0.5rem;
   padding-left: 10px;
-  // border-bottom: 1px solid #e3e7eb;
 `;
 const LastDiv = styled.div`
   overflow-y: hidden;

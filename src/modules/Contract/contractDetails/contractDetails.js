@@ -121,24 +121,22 @@ export default function ContractDetails() {
   return (
     <>
       <ShowLoader state={loader} />
-      {/* <Row> */}
+
       <MainContainer>
         <SubContainer>
           <MainHeading>
             <Heading>
-              {" "}
               <img
                 alt=""
                 src="/images/back.svg"
-                style={{ marginRight: "2px" }}
+                style={{ marginRight: "5px" }}
                 onClick={() => backButton()}
-              />{" "}
+              />
               Contract Details
             </Heading>
             <Button>View in Explorer</Button>
           </MainHeading>
         </SubContainer>
-
         <Container>
           <SubHeading style={{ paddingTop: "0.625rem", paddingLeft: "1rem" }}>
             App_Transactions_Validator
@@ -215,12 +213,9 @@ export default function ContractDetails() {
           {activeButton === "General" && (
             <DetailsSection>
               <div>
-                {/* {address.map((data) => { */}
-
                 <Div>
                   <TableHeading>Network</TableHeading>
                   <TableData>XDC Mainnet</TableData>
-                  {/* <TableData>{address.address}</TableData> */}
                 </Div>
                 <Div>
                   <TableHeading>Solidity version</TableHeading>
@@ -246,8 +241,6 @@ export default function ContractDetails() {
                   <TableHeading>Optimizations</TableHeading>
                   <Enabled>{address.status}</Enabled>
                 </Div>
-
-                {/* })} */}
               </div>
               <PopUp>
                 <PopUpBlock>
@@ -337,7 +330,6 @@ export default function ContractDetails() {
           {activeButton === "Source Code" && <SourceCode />}
         </Container>
       </MainContainer>
-      {/* </Row> */}
     </>
   );
 }
@@ -354,11 +346,9 @@ const MainHeading = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  // max-width: 1100px;
   @media (min-width: 340px) and (max-width: 768px) {
     display: flex;
     flex-direction: column;
-
     padding-bottom: 58px;
   }
 `;
@@ -398,6 +388,7 @@ const FinanceTag = styled.div`
   background-repeat: no-repeat;
   background-position: 0.5rem;
   padding-left: 1.75rem;
+  padding-right: 8px;
   background-size: 0.875rem;
   position: relative;
   background-color: #eaefff;
@@ -408,26 +399,27 @@ const FinanceTag = styled.div`
   white-space: nowrap;
   height: 2.125rem;
   align-items: center;
+  color: #436ce0;
   text-align: center;
   display: flex;
-  font-size: 0.8rem;
+  font-size: 1rem;
+  font-weight: 400;
 `;
 const AddTag = styled.button`
   color: #416be0;
   background: #ffffff 0% 0% no-repeat padding-box;
-  font-size: 0.8rem;
+  font-size: 1rem;
   font-weight: 600;
   border: none;
   outline: none;
   white-space: nowrap;
-  background-image: url("/images/globe.svg");
+  background-image: url("/images/add-icon.svg");
   background-repeat: no-repeat;
   background-position: 0.5rem;
   padding-left: 1.75rem;
   background-size: 0.875rem;
   position: relative;
   background-color: #ffffff;
-
   border: none;
   border-radius: 0.25rem;
   width: 100%;
@@ -448,7 +440,6 @@ const Hash = styled.div`
   flex-flow: row nowrap;
   margin-top: 0.625rem;
   margin-bottom: 10px;
-  // font-weight: 600;
   border: none;
   width: 100%;
   max-width: 24.063rem;
@@ -472,7 +463,6 @@ const DetailsSection = styled.div`
   background-color: #ffffff;
   border-radius: 0.375rem;
   width: 100%;
-  /* height: 35.313rem; */
   padding: 0.625rem 0.625rem 1.5rem 0.625rem;
   margin-top: 1.25rem;
   overflow-x: scroll;
@@ -544,9 +534,7 @@ const TabLister = styled.div`
     max-width: 15.125rem;
   }
 `;
-const TabView = styled.div`
-  //
-`;
+const TabView = styled.div``;
 const Button = styled.button`
   background-image: url("/images/globe.svg");
   background-repeat: no-repeat;
@@ -558,7 +546,6 @@ const Button = styled.button`
   color: #3163f0;
   border: none;
   border-radius: 0.25rem;
-  // width: 100%;
   max-width: 9.75rem;
   white-space: nowrap;
   height: 2.125rem;

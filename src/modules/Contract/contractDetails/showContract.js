@@ -60,7 +60,6 @@ const Container = styled.div`
   width: 100%;
   background-color: #ffffff;
   max-width: 700px;
-  /* height: 200px; */
   padding: 20px;
 `;
 const SubContainer = styled.div`

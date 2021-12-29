@@ -160,23 +160,13 @@ const CenterDiv = styled.div`
 `;
 
 const SidebarContainer = styled.div`
-  // width: 100%;
-  // max-width: 200px;
-
-  // @media (min-width: 300px) and (max-width: 1024px) {
-  //   // display: none;
-  //   position: absolute;
-  //   z-index: 1;
-  // }
   background: #102c78 0% 0% no-repeat padding-box;
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* min-height: 100vh; */
   height: 100%;
   width: 280px;
   padding-top: 15px;
-
   @media (max-width: 768px) {
     display: none;
   }
@@ -185,7 +175,6 @@ const Icon = styled.img`
   cursor: pointer;
   margin-right: 13px;
 `;
-
 const Wrapper = styled.div`
   flex-wrap: wrap;
   cursor: pointer;
