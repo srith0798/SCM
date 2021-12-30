@@ -25,6 +25,7 @@ export default function Graph() {
     const y = event.y;
     setPoints({ ...points, x, y });
   };
+
   const CustomPoint = () => {
     return (
       <g>
@@ -68,7 +69,8 @@ const dataEntry = [
       },
       {
         x: "boat",
-        y: 184,
+
+        y: 225,
       },
       {
         x: "train",
@@ -181,6 +183,7 @@ const GraphSize = styled.div`
   height: 8.75rem;
   width: auto;
   margin-top: 3.19rem;
+  background: transparent;
   @media (max-width: 767px) {
     height: 80px;
   }

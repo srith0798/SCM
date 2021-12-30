@@ -291,6 +291,7 @@ const SubContainer = styled.div`
   display: flex;
   justify-content: space-between;
   margin-top: 1.25rem;
+  padding-left: 5px;
 `;
 const Container = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
@@ -364,7 +365,7 @@ const Network = styled.div`
 const Div = styled.div`
   display: flex;
   flex-flow: row nowrap;
-  border-top: 1px solid rgb(227, 231, 235);
+  border-bottom: 1px solid rgb(227, 231, 235);
   margin-top: 1.25rem;
 `;
 const DropDown = styled.div`
@@ -411,6 +412,7 @@ const Label = styled.div`
 `;
 const BackImage = styled.img`
   cursor: pointer;
+  margin-left: 4px;
   @media (min-width: 300px) and (max-width: 1024px) {
     display: none;
   }

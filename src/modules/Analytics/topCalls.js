@@ -11,7 +11,7 @@ export default function TopCalls(props) {
       <SubContainer>
         <AlignmentContainer>
           <img
-            style={{ marginRight: "6px" }}
+            style={{ marginRight: "8px" }}
             alt=""
             src="/images/back.svg"
             onClick={ClickMe}
@@ -19,7 +19,7 @@ export default function TopCalls(props) {
           <MainHeading>{props.graphName}</MainHeading>
         </AlignmentContainer>
         <AlignmentContainer>
-          <ExpandButton>Expand</ExpandButton>
+          <ExpandButton>Export Data</ExpandButton>
           <Icon src="/images/refresh.svg" />
         </AlignmentContainer>
       </SubContainer>
@@ -105,7 +105,7 @@ const ExpandButton = styled.button`
   background-repeat: no-repeat;
   background-position: 8px;
   padding-left: 26px;
-  background-size: 14px;
+  background-size: 18px;
   position: relative;
   background-color: #ffffff;
   border: none;
@@ -114,7 +114,7 @@ const ExpandButton = styled.button`
   color: #3163f0;
   height: 34px;
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 500;
 `;
 const AlignmentContainer = styled.div`
   display: flex;
@@ -123,6 +123,9 @@ const AlignmentContainer = styled.div`
 const FlexEnd = styled.div`
   display: flex;
   justify-content: flex-end;
+  width: 100%;
+  height: 32px;
+  margin-bottom: 10px;
 `;
 
 const Icon = styled.img`
@@ -142,6 +145,6 @@ const Network = styled.div`
 const Div = styled.div`
   display: flex;
   flex-flow: row nowrap;
-  border-top: 1px solid rgb(227, 231, 235);
-  padding: 10px;
+  border-bottom: 1px solid rgb(227, 231, 235);
+  padding: 10px 0px 3px 8px;
 `;

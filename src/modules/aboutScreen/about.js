@@ -170,6 +170,9 @@ const Button = styled.button`
   font-size: 1rem;
   font-weight: 600;
   white-space: nowrap;
+  @media (min-width: 340px) and (max-width: 790px) {
+    margin-left: 112px;
+  }
 `;
 const VideoBox = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
