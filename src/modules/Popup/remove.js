@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Dialog from "@mui/material/Dialog";
 import { makeStyles } from "@material-ui/styles";
 import ButtonConfirm from "../../common/components/buttonConfirm";
+import ContractService from '../../services/contractsService'
 
 const useStyles = makeStyles(() => ({
   dialogBox: {
@@ -12,6 +13,17 @@ const useStyles = makeStyles(() => ({
 
 export default function Remove(props) {
   const classes = useStyles();
+  console.log(props.contract)
+  const executeRemoveContract = async () => {
+    console.log("HERE")
+    const request = {
+      id : props.contract._id
+    }
+    const response = await ContractService.removeContract(request);
+    console.log(response)
+
+  }
+
   return (
     <div>
       <Dialog
@@ -36,8 +48,10 @@ export default function Remove(props) {
               contract from the transaction listing, and affect all the alerts
               that use this contract.
             </Content>
-            <SubContainer style={{ width: "100%", marginTop: "30px" }}>
-              <ButtonConfirm text={"Remove Contract"} />
+            <SubContainer
+              style={{ width: "100%",  marginTop: "30px" }}
+            >
+              <ButtonConfirm text={"Remove Contract"} click={ executeRemoveContract }/>
               <CancelButton onClick={props.click}>Cancel</CancelButton>
             </SubContainer>
           </Container>
