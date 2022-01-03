@@ -44,6 +44,7 @@ const Heading = styled.div`
   font-weight: 600;
   color: #303134;
   margin-top: 1.25rem;
+  margin-bottom: 0.7rem;
 `;
 const Input = styled.input`
   background: #f0f2fc 0% 0% no-repeat padding-box;
@@ -52,7 +53,7 @@ const Input = styled.input`
   color: #767c93;
   padding: 0.313;
   width: 100%;
-  margin-top: 1.25rem;
+  padding: 8px 0px 8px 11px;
 `;
 const MainContainer = styled.div`
   width: 100%;
@@ -67,30 +68,29 @@ const Container = styled.div`
   background-color: #ffffff;
   max-width: 43.75rem;
   height: auto;
-  padding: 1.25rem;
+  padding: 2rem;
 `;
 const SubContainer = styled.div`
   display: flex;
   justify-content: space-between;
 `;
 const Add = styled.div`
-  // font: normal normal 600 24px/29px Inter;
   font-size: 1.5rem;
   font-weight: 600;
   color: #303134;
 `;
-// const Img = styled.img`
-//   cursor: pointer;
-// `;
 
 const Button = styled.button`
-  text-align: left;
-  // font: normal normal medium 16px/20px Inter;
-  font-size: 1rem;
-  font-weight: 600;
-  background: #9db5f8 0% 0% no-repeat padding-box;
-  border-radius: 0.25rem;
+  font: normal normal medium 14px/17px Inter;
+  letter-spacing: 0px;
   color: #ffffff;
+  background: #9db5f8 0% 0% no-repeat padding-box;
+  border: 0px;
+  border-radius: 4px;
+  text-align: center;
+  white-space: nowrap;
+  padding: 10px 12px;
+  margin-right: 10px;
   margin-top: 1.25rem;
-  border: 0;
+  height: 41px;
 `;

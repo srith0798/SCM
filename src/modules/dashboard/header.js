@@ -4,6 +4,44 @@ import "../../assets/styles/custom.css";
 import { sessionManager } from "../../managers/sessionManager";
 import utility from "../../utility";
 
+function Header(props) {
+  console.log(props);
+  const [openHumburger, setOpenHumburger] = useState(true);
+  const getUserAccountAddress = () => {
+    let user = "";
+    user = sessionManager.getDataFromCookies("accountAddress");
+    if (user) user = utility.truncateTxnAddress(user);
+    console.log(user);
+    return user;
+  };
+  return (
+    <HeaderContainer>
+      <SpaceBetween>
+        <div style={{ display: "flex", marginLeft: "12px" }}>
+          <GridLogo
+            src="/images/Grid.svg"
+            onClick={() => setOpenHumburger(openHumburger)}
+          />
+          <XmartlyLogo src="/images/Logo.svg" />
+        </div>
+        {sessionManager.getDataFromCookies("accountAddress") ? (
+          <XDCContainer>
+            <div style={{ marginRight: "10px" }}>1450 XDC</div>
+            <UserContainer>
+              {getUserAccountAddress()}
+              <UserLogo src="/images/user-round.png" />
+            </UserContainer>
+          </XDCContainer>
+        ) : (
+          <Button onClick={props.getCurrentUserDetails}>Connect Wallet</Button>
+        )}
+      </SpaceBetween>
+    </HeaderContainer>
+  );
+}
+
+export default Header;
+
 const UserLogo = styled.img`
   width: 30px;
   height: 30px;
@@ -59,41 +97,3 @@ const Button = styled.button`
   color: white;
   padding: 5px 20px 5px 20px;
 `;
-
-function Header(props) {
-  console.log(props)
-  const [openHumburger, setOpenHumburger] = useState(true);
-  const getUserAccountAddress = () => {
-    let user = "";
-    user = sessionManager.getDataFromCookies("accountAddress");
-    if (user) user = utility.truncateTxnAddress(user);
-    console.log(user);
-    return user;
-  };
-  return (
-    <HeaderContainer>
-      <SpaceBetween>
-        <div style={{ display: "flex", marginLeft: "12px" }}>
-          <GridLogo
-            src="/images/Grid.svg"
-            onClick={() => setOpenHumburger(openHumburger)}
-          />
-          <XmartlyLogo src="/images/Logo.svg" />
-        </div>
-        {sessionManager.getDataFromCookies("accountAddress") ? (
-          <XDCContainer>
-            <div style={{ marginRight: "10px" }}>1450 XDC</div>
-            <UserContainer>
-              {getUserAccountAddress()}
-              <UserLogo src="/images/user-round.png" />
-            </UserContainer>
-          </XDCContainer>
-        ) : (
-          <Button onClick={props.getCurrentUserDetails}>Connect Wallet</Button>
-        )}
-      </SpaceBetween>
-    </HeaderContainer>
-  );
-}
-
-export default Header;

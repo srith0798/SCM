@@ -131,7 +131,6 @@ const MainContainer = styled.div`
 `;
 const Container = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
-
   border-radius: 0.375rem;
   width: 100%;
   background-color: #ffffff;
@@ -146,7 +145,6 @@ const SubContainer = styled.div`
   margin-right: 5px;
 `;
 const Add = styled.div`
-  // font: normal normal 600 24px/29px Inter;
   font-size: 1.5rem;
   font-weight: 600;
   color: #303134;

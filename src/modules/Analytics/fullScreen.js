@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import { Row, Column } from "simple-flexbox";
 import Line from "./graph";
-// import { history } from "../../managers/history";
 
 export default function FullScreen(props) {
   const ClickMe = () => {
@@ -15,11 +14,16 @@ export default function FullScreen(props) {
           <MainContainer>
             <SubContainer>
               <AlignmentContainer>
-                <img alt="" src="/images/back.svg" onClick={ClickMe} />
+                <img
+                  style={{ marginRight: "8px" }}
+                  alt=""
+                  src="/images/back.svg"
+                  onClick={ClickMe}
+                />
                 <MainHeading>{props.graphName}</MainHeading>
               </AlignmentContainer>
               <AlignmentContainer>
-                <ExpandButton>Expand</ExpandButton>
+                <ExpandButton>Export Data</ExpandButton>
                 <Icon src="/images/refresh.svg" />
               </AlignmentContainer>
             </SubContainer>
@@ -61,6 +65,7 @@ const MainContainer = styled.div`
   width: 100%;
   padding: 50px;
   background-color: #ecf0f7;
+  height: 100vh;
 `;
 const MainHeading = styled.div`
   text-align: left;
@@ -88,12 +93,12 @@ const ExpandButton = styled.button`
   background-repeat: no-repeat;
   background-position: 8px;
   padding-left: 26px;
-  background-size: 14px;
+  background-size: 19px;
   position: relative;
   background-color: #ffffff;
   border: none;
   border-radius: 4px;
-  width: 100%;
+  width: 132px;
   color: #3163f0;
   height: 34px;
   font-size: 1rem;
@@ -106,11 +111,10 @@ const AlignmentContainer = styled.div`
 const FlexEnd = styled.div`
   display: flex;
   justify-content: flex-end;
+  height: 32px;
+  width: 100%;
 `;
-// const Img = styled.img`
-//   margin-right: 10px;
-//   cursor: pointer;
-// `;
+
 const Icon = styled.img`
   margin-left: 10px;
   cursor: pointer;

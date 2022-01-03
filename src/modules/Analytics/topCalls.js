@@ -7,64 +7,69 @@ export default function TopCalls(props) {
     props.changeExpand(0);
   };
   return (
-          <MainContainer>
-            <SubContainer>
-              <AlignmentContainer>
-                <img alt="" src="/images/back.svg" onClick={ClickMe} />
-                <MainHeading>{props.graphName}</MainHeading>
-              </AlignmentContainer>
-              <AlignmentContainer>
-                <ExpandButton>Expand</ExpandButton>
-                <Icon src="/images/refresh.svg" />
-              </AlignmentContainer>
-            </SubContainer>
+    <MainContainer>
+      <SubContainer>
+        <AlignmentContainer>
+          <img
+            style={{ marginRight: "8px" }}
+            alt=""
+            src="/images/back.svg"
+            onClick={ClickMe}
+          />
+          <MainHeading>{props.graphName}</MainHeading>
+        </AlignmentContainer>
+        <AlignmentContainer>
+          <ExpandButton>Export Data</ExpandButton>
+          <Icon src="/images/refresh.svg" />
+        </AlignmentContainer>
+      </SubContainer>
 
-            <Row
-              style={{
-                width: "100%",
-                justifyContent: "space-between",
-              }}
-            >
-              <GraphContainer>
-                <FlexEnd>
-                  <select id="cars" className="select">
-                    <option value="volvo" className="select-dropdown">
-                      Last 5 days
-                    </option>
-                    <option value="saab" className="select-dropdown">
-                      Last 7 days
-                    </option>
-                    <option value="mercedes" className="select-dropdown">
-                      Last 15 days
-                    </option>
-                    <option value="audi" className="select-dropdown">
-                      Last 25 days
-                    </option>
-                  </select>
-                </FlexEnd>
-                <Div>
-                  <ContractFrom>Contract from</ContractFrom>
-                  <Network>xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c</Network>
-                </Div>
-                <Div>
-                  <ContractFrom>Network</ContractFrom>
-                  <Network>Mainnet</Network>
-                </Div>
-                <Div>
-                  <ContractFrom>Contract from</ContractFrom>
-                  <Network>xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c</Network>
-                </Div>
-                <Div>
-                  <ContractFrom>Network</ContractFrom>
-                  <Network>Mainnet</Network>
-                </Div>
-                <Div>
-                  <ContractFrom>Network</ContractFrom>
-                  <Network>Mainnet</Network>
-                </Div>
-              </GraphContainer>
-            </Row>
-          </MainContainer>
+      <Row
+        style={{
+          width: "100%",
+          justifyContent: "space-between",
+        }}
+      >
+        <GraphContainer>
+          <FlexEnd>
+            <select id="cars" className="select">
+              <option value="volvo" className="select-dropdown">
+                Last 5 days
+              </option>
+              <option value="saab" className="select-dropdown">
+                Last 7 days
+              </option>
+              <option value="mercedes" className="select-dropdown">
+                Last 15 days
+              </option>
+              <option value="audi" className="select-dropdown">
+                Last 25 days
+              </option>
+            </select>
+          </FlexEnd>
+          <Div>
+            <ContractFrom>Contract from</ContractFrom>
+            <Network>xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c</Network>
+          </Div>
+          <Div>
+            <ContractFrom>Network</ContractFrom>
+            <Network>Mainnet</Network>
+          </Div>
+          <Div>
+            <ContractFrom>Contract from</ContractFrom>
+            <Network>xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c</Network>
+          </Div>
+          <Div>
+            <ContractFrom>Network</ContractFrom>
+            <Network>Mainnet</Network>
+          </Div>
+          <Div>
+            <ContractFrom>Network</ContractFrom>
+            <Network>Mainnet</Network>
+          </Div>
+        </GraphContainer>
+      </Row>
+    </MainContainer>
   );
 }
 
@@ -72,6 +77,7 @@ const MainContainer = styled.div`
   width: 100%;
   padding: 50px;
   background-color: #ecf0f7;
+  height: 100vh;
 `;
 const MainHeading = styled.div`
   text-align: left;
@@ -99,7 +105,7 @@ const ExpandButton = styled.button`
   background-repeat: no-repeat;
   background-position: 8px;
   padding-left: 26px;
-  background-size: 14px;
+  background-size: 18px;
   position: relative;
   background-color: #ffffff;
   border: none;
@@ -108,7 +114,7 @@ const ExpandButton = styled.button`
   color: #3163f0;
   height: 34px;
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 500;
 `;
 const AlignmentContainer = styled.div`
   display: flex;
@@ -117,6 +123,9 @@ const AlignmentContainer = styled.div`
 const FlexEnd = styled.div`
   display: flex;
   justify-content: flex-end;
+  width: 100%;
+  height: 32px;
+  margin-bottom: 10px;
 `;
 
 const Icon = styled.img`
@@ -126,6 +135,8 @@ const Icon = styled.img`
 const ContractFrom = styled.div`
   width: 100%;
   max-width: 150px;
+  color: #102c78;
+  font-weight: 600;
 `;
 const Network = styled.div`
   width: 100%;
@@ -134,6 +145,6 @@ const Network = styled.div`
 const Div = styled.div`
   display: flex;
   flex-flow: row nowrap;
-  border-top: 1px solid rgb(227, 231, 235);
-  padding: 10px;
+  border-bottom: 1px solid rgb(227, 231, 235);
+  padding: 10px 0px 3px 8px;
 `;

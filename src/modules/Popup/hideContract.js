@@ -11,7 +11,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 export default function HideContract(props) {
-  console.log(props)
+  console.log(props);
 
   const classes = useStyles();
   return (
@@ -30,8 +30,11 @@ export default function HideContract(props) {
             <SubContainer
               style={{ width: "100%", maxWidth: "200px", marginTop: "30px" }}
             >
-              <ButtonConfirm click={props.hideContract} text={"Hide Contract"} />
-              <CancelButton onClick={props.click} >Cancel</CancelButton>
+              <ButtonConfirm
+                click={props.hideContract}
+                text={"Hide Contract"}
+              />
+              <CancelButton onClick={props.click}>Cancel</CancelButton>
             </SubContainer>
           </Container>
         </MainContainer>
@@ -48,7 +51,6 @@ const MainContainer = styled.div`
 `;
 const Container = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
-
   border-radius: 6px;
   width: 100%;
   background-color: #ffffff;
@@ -63,20 +65,7 @@ const Add = styled.div`
   font: normal normal 600 24px/29px Inter;
   color: #303134;
 `;
-// const Img = styled.img`
-//   cursor: pointer;
-// `;
 
-const HideButton = styled.button`
-  font: normal normal medium 14px/17px Inter;
-  letter-spacing: 0px;
-  color: #ffffff;
-  background: #3163f0 0% 0% no-repeat padding-box;
-  border: 0px;
-  border-radius: 4px;
-  text-align: center;
-  white-space: nowrap;
-`;
 const CancelButton = styled.button`
   font: normal normal medium 14px/17px Inter;
   color: #3163f0;
