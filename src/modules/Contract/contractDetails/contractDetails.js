@@ -301,7 +301,7 @@ export default function ContractDetails() {
                   )}
                 </PopUpBlock>
                 <PopUpBlock>
-                  {remove && <Remove click={removeHandleClose} />}
+                  {remove && <Remove click={removeHandleClose} contract={address}/>}
                   <RowProperty onClick={() => removeHandleOpen()}>
                     <img alt="" src="/images/delete.svg" />
                   </RowProperty>

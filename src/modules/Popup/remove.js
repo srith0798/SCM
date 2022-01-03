@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Dialog from "@mui/material/Dialog";
 import { makeStyles } from "@material-ui/styles";
 import ButtonConfirm from "../../common/components/buttonConfirm";
+import ContractService from '../../services/contractsService'
 
 const useStyles = makeStyles(() => ({
   dialogBox: {
@@ -12,6 +13,17 @@ const useStyles = makeStyles(() => ({
 
 export default function Remove(props) {
   const classes = useStyles();
+  console.log(props.contract)
+  const executeRemoveContract = async () => {
+    console.log("HERE")
+    const request = {
+      id : props.contract._id
+    }
+    const response = await ContractService.removeContract(request);
+    console.log(response)
+
+  }
+
   return (
     <div>
       <Dialog classes={{ paper: classes.dialogBox }} open={true}
@@ -32,7 +44,7 @@ export default function Remove(props) {
             <SubContainer
               style={{ width: "100%",  marginTop: "30px" }}
             >
-              <ButtonConfirm text={"Remove Contract"} />
+              <ButtonConfirm text={"Remove Contract"} click={ executeRemoveContract }/>
               <CancelButton onClick={props.click}>Cancel</CancelButton>
             </SubContainer>
           </Container>

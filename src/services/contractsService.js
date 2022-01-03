@@ -8,7 +8,8 @@ export default {
   hideContract,
   showContract,
   checkAddress,
-  renameContract
+  renameContract,
+  removeContract
 };
 
 function getHeaders() {
@@ -169,11 +170,32 @@ async function checkAddress(requestData) {
       return Promise.reject(err);
     });
 }
+
 async function renameContract(requestData) {
   let url =
     process.env.REACT_APP_USER_CONTRACT_MICROSERVICE + httpConstants.API_END_POINT.RENAME_CONTRACT;
   console.log("url----", url);
   return httpService(httpConstants.METHOD_TYPE.PUT, getHeaders(), requestData, url)
+    .then((response) => {
+      if (
+        !response.success ||
+        response.responseCode !== 200 ||
+        !response.responseData ||
+        response.responseData.length === 0
+      )
+        return Promise.reject(response);
+      return Promise.resolve(response.responseData);
+    })
+    .catch(function (err) {
+      return Promise.reject(err);
+    });
+}
+
+async function removeContract(requestData) {
+  let url =
+    process.env.REACT_APP_USER_CONTRACT_MICROSERVICE + httpConstants.API_END_POINT.ADD_CONTRACT;
+  console.log("url----", url);
+  return httpService(httpConstants.METHOD_TYPE.DELETE, getHeaders(), requestData, url)
     .then((response) => {
       if (
         !response.success ||
