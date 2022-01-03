@@ -5,6 +5,7 @@ import styled from "styled-components";
 import Historys from "./Historys";
 import Destination from "./Destination";
 import { history } from "../../managers/history";
+import Tooltip from "@mui/material/Tooltip";
 
 export default function Rules() {
   const [activeButton, setActiveButton] = React.useState("Rules");
@@ -53,7 +54,7 @@ export default function Rules() {
                           ? "/images/rules.svg"
                           : "/images/rules1.svg"
                       }
-                    />
+                    ></img>
                     Rules
                   </TabView>
                   <TabView
@@ -82,6 +83,7 @@ export default function Rules() {
                     />
                     History
                   </TabView>
+
                   <TabView
                     id="Destination"
                     onClick={handleViewClick}
@@ -117,10 +119,30 @@ export default function Rules() {
                 <DetailBox>
                   <NewDiv>
                     <RowData onClick={redirectToAlertDetails}>
-                      <ColumnOne>Contract Name</ColumnOne>
-                      <ColumnOne>Address</ColumnOne>
-                      <ColumnOne>Network</ColumnOne>
-                      <ColumnOne>Alert Type</ColumnOne>
+                      <ColumnOne>
+                        Contract Name
+                        <Tooltip disableFocusListener title="contract Name">
+                          <ToolTipIcon src="/images/tool tip.svg" />
+                        </Tooltip>
+                      </ColumnOne>
+                      <ColumnOne>
+                        Address{" "}
+                        <Tooltip disableFocusListener title="Address">
+                          <ToolTipIcon src="/images/tool tip.svg" />
+                        </Tooltip>
+                      </ColumnOne>
+                      <ColumnOne>
+                        Network{" "}
+                        <Tooltip disableFocusListener title="Network">
+                          <ToolTipIcon src="/images/tool tip.svg" />
+                        </Tooltip>
+                      </ColumnOne>
+                      <ColumnOne>
+                        Alert Type{" "}
+                        <Tooltip disableFocusListener title="Alert Type">
+                          <ToolTipIcon src="/images/tool tip.svg" />
+                        </Tooltip>
+                      </ColumnOne>
                       <ColumnOne></ColumnOne>
                       <ColumnOne></ColumnOne>
                     </RowData>
@@ -135,11 +157,13 @@ export default function Rules() {
                         Enabled
                       </ColumnTwo>
                       <ColumnTwo>
-                        <img
-                          alt=""
-                          src="/images/delete_blue.svg"
-                          style={{ width: "1rem" }}
-                        />
+                        <Tooltip disableFocusListener title="Delete">
+                          <img
+                            alt=""
+                            src="/images/delete_blue.svg"
+                            style={{ width: "1rem" }}
+                          />
+                        </Tooltip>
                       </ColumnTwo>
                     </RowData>
                   </NewDiv>
@@ -155,11 +179,13 @@ export default function Rules() {
                         Enabled
                       </ColumnTwo>
                       <ColumnTwo>
-                        <img
-                          alt=""
-                          src="/images/delete_blue.svg"
-                          style={{ width: "1rem" }}
-                        />
+                        <Tooltip disableFocusListener title="Delete">
+                          <img
+                            alt=""
+                            src="/images/delete_blue.svg"
+                            style={{ width: "1rem" }}
+                          />
+                        </Tooltip>
                       </ColumnTwo>
                     </RowData>
                   </NewDiv>
@@ -224,15 +250,22 @@ const RowData = styled.div`
     column-gap: 84px;
   }
 `;
+const ToolTipIcon = styled.img`
+  width: 0.75rem;
+  cursor: pointer;
+  margin-left: 0.313rem;
+  white-space: nowrap;
+`;
 
 const ColumnOne = styled.div`
   display: flex;
-  flex-flow: column nowrap;
+
   font-size: 0.875rem;
   font-weight: 600;
   color: #102c78;
   width: 100%;
   max-width: 18.75rem;
+  cursor: pointer;
   @media (min-width: 300px) and (max-width: 768px) {
     margin-right: 40px;
   }
@@ -283,6 +316,7 @@ const NewDiv = styled.div`
 const NewDivOne = styled.div`
   border-bottom: 0.063rem solid #e3e7eb;
 `;
+
 const RowCorrecter = styled.div`
   display: flex;
   flex-flow: row nowrap;

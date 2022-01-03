@@ -111,9 +111,15 @@ export default function TransactionList(props) {
 
           <IconContainer>
             {open && <Settings click={handleClose} />}
-            <Icons src="/images/settings.svg" onClick={handleClickOpen} />
-            <Icons src="/images/refresh.svg" />
-            <Icons src="/images/filter.svg" />
+            <Tooltip disableFocusListener title="Settings">
+              <Icons src="/images/settings.svg" onClick={handleClickOpen} />
+            </Tooltip>
+            <Tooltip disableFocusListener title="Refresh">
+              <Icons src="/images/refresh.svg" />
+            </Tooltip>
+            <Tooltip disableFocusListener title="Filter">
+              <Icons src="/images/filter.svg" />
+            </Tooltip>
           </IconContainer>
         </TransactionBox>
 
@@ -158,18 +164,48 @@ export default function TransactionList(props) {
         <TableContainer>
           <Div>
             <Row>
-              <ColumnOne>Tx Hash</ColumnOne>
-              <ColumnOne>Status</ColumnOne>{" "}
               <ColumnOne>
-                Function
-                <Tooltip disableFocusListener title="Add">
+                Tx Hash
+                <Tooltip disableFocusListener title="Txhash">
                   <ToolTipIcon src="/images/tool tip.svg" />
                 </Tooltip>
               </ColumnOne>
-              <ColumnOne>Contracts</ColumnOne>
-              <ColumnOne>Form</ColumnOne>
-              <ColumnOne>To</ColumnOne>
-              <ColumnOne>When</ColumnOne>
+              <ColumnOne>
+                Status
+                <Tooltip disableFocusListener title="Status">
+                  <ToolTipIcon src="/images/tool tip.svg" />
+                </Tooltip>
+              </ColumnOne>
+              <ColumnOne>
+                Function
+                <Tooltip disableFocusListener title="Function">
+                  <ToolTipIcon src="/images/tool tip.svg" />
+                </Tooltip>
+              </ColumnOne>
+              <ColumnOne>
+                Contracts
+                <Tooltip disableFocusListener title="Contracts">
+                  <ToolTipIcon src="/images/tool tip.svg" />
+                </Tooltip>
+              </ColumnOne>
+              <ColumnOne>
+                Form
+                <Tooltip disableFocusListener title="Form">
+                  <ToolTipIcon src="/images/tool tip.svg" />
+                </Tooltip>
+              </ColumnOne>
+              <ColumnOne>
+                To
+                <Tooltip disableFocusListener title="To">
+                  <ToolTipIcon src="/images/tool tip.svg" />
+                </Tooltip>
+              </ColumnOne>
+              <ColumnOne>
+                When
+                <Tooltip disableFocusListener title="When ">
+                  <ToolTipIcon src="/images/tool tip.svg" />
+                </Tooltip>
+              </ColumnOne>
             </Row>
           </Div>
           <div>

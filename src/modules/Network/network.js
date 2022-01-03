@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { Row } from "simple-flexbox";
 import AddNetwork from "../Popup/addNetwork";
+import Tooltip from "@mui/material/Tooltip";
 
 export default function Network(props) {
   const [open, setOpen] = useState(false);
@@ -46,8 +47,18 @@ export default function Network(props) {
       <Div>
         <Container>
           <Row>
-            <ColumnOne>Network</ColumnOne>
-            <UrlHeading>URL</UrlHeading>
+            <ColumnOne>
+              Network
+              <Tooltip disableFocusListener title="Network">
+                <ToolTipIcon src="/images/tool tip.svg" />
+              </Tooltip>
+            </ColumnOne>
+            <UrlHeading>
+              URL
+              <Tooltip disableFocusListener title="URL">
+                <ToolTipIcon src="/images/tool tip.svg" />
+              </Tooltip>
+            </UrlHeading>
           </Row>
         </Container>
         <div>
@@ -170,4 +181,9 @@ const Head = styled.div`
   @media (min-width: 300px) and (max-width: 768px) {
     margin-right: 22px;
   }
+`;
+const ToolTipIcon = styled.img`
+  width: 0.75rem;
+  cursor: pointer;
+  margin-left: 0.5rem;
 `;

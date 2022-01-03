@@ -1,6 +1,7 @@
 import React from "react";
 import "react-tabs/style/react-tabs.css";
 import styled from "styled-components";
+import Tooltip from "@mui/material/Tooltip";
 
 export default function Historys() {
   return (
@@ -8,11 +9,36 @@ export default function Historys() {
       <DetailBox>
         <NewDiv>
           <RowContainer>
-            <ColumnOne>Alert Type</ColumnOne>
-            <ColumnOne>Contract</ColumnOne>
-            <ColumnOne>Tx Hash</ColumnOne>
-            <ColumnOne>Network</ColumnOne>
-            <ColumnOne>When</ColumnOne>
+            <ColumnOne>
+              Alert Type
+              <Tooltip disableFocusListener title="Alert Type">
+                <ToolTipIcon src="/images/tool tip.svg" />
+              </Tooltip>
+            </ColumnOne>
+            <ColumnOne>
+              Contract
+              <Tooltip disableFocusListener title="Contract">
+                <ToolTipIcon src="/images/tool tip.svg" />
+              </Tooltip>
+            </ColumnOne>
+            <ColumnOne>
+              Tx Hash
+              <Tooltip disableFocusListener title="Tx hash">
+                <ToolTipIcon src="/images/tool tip.svg" />
+              </Tooltip>
+            </ColumnOne>
+            <ColumnOne>
+              Network
+              <Tooltip disableFocusListener title="Network">
+                <ToolTipIcon src="/images/tool tip.svg" />
+              </Tooltip>
+            </ColumnOne>
+            <ColumnOne>
+              When
+              <Tooltip disableFocusListener title="when">
+                <ToolTipIcon src="/images/tool tip.svg" />
+              </Tooltip>
+            </ColumnOne>
           </RowContainer>
         </NewDiv>
         <Div>
@@ -96,9 +122,14 @@ const RowContainer = styled.div`
     column-gap: 84px;
   }
 `;
+const ToolTipIcon = styled.img`
+  width: 0.75rem;
+  cursor: pointer;
+  margin-left: 0.313rem;
+  white-space: nowrap;
+`;
 const ColumnOne = styled.div`
   display: flex;
-  flex-flow: column nowrap;
   font-size: 0.875rem;
   font-weight: 600;
   color: #102c78;

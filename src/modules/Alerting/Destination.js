@@ -2,6 +2,7 @@ import React from "react";
 import { Row } from "simple-flexbox";
 import "react-tabs/style/react-tabs.css";
 import styled from "styled-components";
+import Tooltip from "@mui/material/Tooltip";
 
 export default function Destination() {
   return (
@@ -9,7 +10,12 @@ export default function Destination() {
       <MainContainer>
         <Div>
           <Row>
-            <ColumnOne style={{ borderBottom: "none" }}>Destinations</ColumnOne>
+            <ColumnOne style={{ borderBottom: "none" }}>
+              Destinations
+              <Tooltip disableFocusListener title="Destination">
+                <ToolTipIcon src="/images/tool tip.svg" />
+              </Tooltip>
+            </ColumnOne>
           </Row>
           <RowContainer>
             <Buttonn>
@@ -41,6 +47,9 @@ export default function Destination() {
 
         <ColumnOne style={{ paddingBottom: "10px", paddingLeft: "15px" }}>
           Active Destination
+          <Tooltip disableFocusListener title="Active Destination">
+            <ToolTipIcon src="/images/tool tip.svg" />
+          </Tooltip>
         </ColumnOne>
         <LastDiv>
           <Div>
@@ -56,11 +65,13 @@ export default function Destination() {
                 </ColorChanging>
               </ColumnTwo>
               <ColumnTwo>
-                <img
-                  alt=""
-                  src="/images/deletes.svg"
-                  style={{ width: "1.1rem" }}
-                />
+                <Tooltip disableFocusListener title="Delete">
+                  <img
+                    alt=""
+                    src="/images/deletes.svg"
+                    style={{ width: "1.1rem" }}
+                  />
+                </Tooltip>
               </ColumnTwo>
             </RowData>
           </Div>
@@ -77,7 +88,9 @@ export default function Destination() {
                 </ColorChanging>
               </ColumnTwo>
               <ColumnTwo>
-                <Icon src="/images/deletes.svg" style={{ width: "1.1rem" }} />
+                <Tooltip disableFocusListener title="Delete">
+                  <Icon src="/images/deletes.svg" style={{ width: "1.1rem" }} />
+                </Tooltip>
               </ColumnTwo>
             </RowData>
           </Div>
@@ -116,9 +129,14 @@ const LastDiv = styled.div`
     }
   }
 `;
+const ToolTipIcon = styled.img`
+  width: 0.75rem;
+  cursor: pointer;
+  margin-left: 0.313rem;
+  white-space: nowrap;
+`;
 const ColumnOne = styled.div`
   display: flex;
-  flex-flow: column nowrap;
   font-size: 0.875rem;
   font-weight: 600;
   color: #102c78;
@@ -137,6 +155,7 @@ const Buttonn = styled.div`
   justify-content: center;
   color: #1d3c93;
   font-size: 0.875rem;
+  cursor: pointer;
   @media (min-width: 300px) and (max-width: 768px) {
   }
 `;

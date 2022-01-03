@@ -7,7 +7,6 @@ import Events from "./Events";
 import StateChange from "./StateChange";
 import SubContracts from "./SubContracts";
 import { history } from "../../managers/history";
-
 import utility from "../../utility";
 
 export default function TransactionDetails() {
@@ -23,13 +22,12 @@ export default function TransactionDetails() {
       <SubContainer>
         <TitleDiv>
           <Title>
-            {" "}
             <img
               alt=""
               src="/images/back.svg"
               style={{ marginRight: "2px" }}
               onClick={() => backButton()}
-            />{" "}
+            />
             Transactions Details
           </Title>
         </TitleDiv>
@@ -304,9 +302,6 @@ export default function TransactionDetails() {
                   >
                     xdcabf...a32c99be1768b3c
                   </SubHeading>
-                  <SubHeading style={{ fontWeight: "400", marginLeft: "38px" }}>
-                    xdcabf...a32c99be1768b3c
-                  </SubHeading>
                 </Row>
               </CommonDiv>
             </FunctionContainer>
@@ -333,9 +328,9 @@ export default function TransactionDetails() {
               <img alt="" src="/images/error.svg" /> balances[_to] =
               balances[_to].add(_value);
               <br />
-              <div style={{ paddingLeft: "24px" }}>
+              {/* <div style={{ paddingLeft: "24px" }}>
                 At App_Transactions_Validator.sol in App_Transactions_Validator
-              </div>
+              </div> */}
             </StackContainer>
             <LastContainer>
               <SearchBar placeholder="Execution trace" />
@@ -527,6 +522,9 @@ const SubHeading = styled.div`
 const CopyToClipboardImg = styled.img`
   margin-left: 35px;
   cursor: pointer;
+  @media (min-width: 340px) and (max-width: 768px) {
+    margin-left: 3px;
+  }
 `;
 
 const TextLine = styled.div`

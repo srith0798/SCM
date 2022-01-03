@@ -63,12 +63,14 @@ export default function Contract(props) {
           <Input placeholder="Search by address or name" />
         </MainHeading>
         <IconDiv>
-          <RefreshImage
-            onClick={() => getContractList()}
-            alt=""
-            src="/images/refresh.svg"
-            style={{ marginRight: "0.625rem" }}
-          />
+          <Tooltip disableFocusListener title="Refresh">
+            <RefreshImage
+              onClick={() => getContractList()}
+              alt=""
+              src="/images/refresh.svg"
+              style={{ marginRight: "0.625rem" }}
+            />
+          </Tooltip>
           {open && <AddContract click={handleClose} />}
           <Button onClick={handleClickOpen}>Add Contract</Button>
         </IconDiv>
@@ -77,16 +79,36 @@ export default function Contract(props) {
       <TableContainer>
         <Div>
           <Row>
-            <ColumnOne>Contract Name</ColumnOne>
-            <ColumnOne>Address</ColumnOne>
-            <ColumnOne>Network</ColumnOne>
             <ColumnOne>
-              Tag{" "}
-              <Tooltip disableFocusListener title="Add">
+              Contract Name
+              <Tooltip disableFocusListener title="Contract Name">
                 <ToolTipIcon src="/images/tool tip.svg" />
               </Tooltip>
             </ColumnOne>
-            <ColumnOne>Visibility</ColumnOne>
+            <ColumnOne>
+              Address
+              <Tooltip disableFocusListener title="Address">
+                <ToolTipIcon src="/images/tool tip.svg" />
+              </Tooltip>
+            </ColumnOne>
+            <ColumnOne>
+              Network
+              <Tooltip disableFocusListener title="Network">
+                <ToolTipIcon src="/images/tool tip.svg" />
+              </Tooltip>
+            </ColumnOne>
+            <ColumnOne>
+              Tag
+              <Tooltip disableFocusListener title="Tag">
+                <ToolTipIcon src="/images/tool tip.svg" />
+              </Tooltip>
+            </ColumnOne>
+            <ColumnOne>
+              Visibility
+              <Tooltip disableFocusListener title=" Visibility">
+                <ToolTipIcon src="/images/tool tip.svg" />
+              </Tooltip>
+            </ColumnOne>
           </Row>
         </Div>
         {address.map((data, index) => {

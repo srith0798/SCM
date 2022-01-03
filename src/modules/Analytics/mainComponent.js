@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Row, Column } from "simple-flexbox";
 import Line from "./graph";
+import Tooltip from "@mui/material/Tooltip";
 
 import Box from "@mui/material/Box";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
@@ -44,7 +45,9 @@ export default function MainComponent(props) {
           <MainContainer>
             <SubContainer>
               <MainHeading>Analytics</MainHeading>
-              <BackImage src="/images/refresh.svg" />
+              <Tooltip disableFocusListener title="Refresh">
+                <BackImage src="/images/refresh.svg" />
+              </Tooltip>
             </SubContainer>
             <Container>
               <View>View analytics for contract</View>
