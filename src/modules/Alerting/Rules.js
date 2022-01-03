@@ -182,7 +182,6 @@ const TableContainer = styled.div`
   height: 15rem;
   padding: 0.625rem;
   overflow-y: hidden;
-
   @media (min-width: 300px) and (max-width: 700px) {
     width: 100%;
     ::-webkit-scrollbar {
@@ -215,10 +214,8 @@ const Container = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
   border-radius: 0.375rem;
   width: 100%;
-
   background-color: #ffffff;
   padding: 0.5rem;
-
   white-space: nowrap;
 `;
 const RowData = styled.div`
@@ -249,8 +246,6 @@ const ColumnTwo = styled.div`
   max-width: 18.75rem;
   @media (min-width: 300px) and (max-width: 768px) {
     margin-right: 20px;
-    // width: 100%;
-    // max-width: 200px;
   }
 `;
 const MainContainer = styled.div`
@@ -283,11 +278,9 @@ const Button = styled.button`
 const NewDiv = styled.div`
   padding: 0.938rem;
   border-bottom: 0.063rem solid #e3e7eb;
-
   padding-left: 0;
 `;
 const NewDivOne = styled.div`
-  // padding: 0.938rem;
   border-bottom: 0.063rem solid #e3e7eb;
 `;
 const RowCorrecter = styled.div`
@@ -295,7 +288,6 @@ const RowCorrecter = styled.div`
   flex-flow: row nowrap;
   justify-content: space-between;
   width: 100%;
-  // max-width: 75rem;
   margin-bottom: 1.25rem;
 `;
 
@@ -305,7 +297,6 @@ const TabLister = styled.div`
   width: 100%;
   max-width: 21.875rem;
   cursor: pointer;
-  // margin: 25px 0px 10px 17px;
 `;
 const TabView = styled.div`
   padding: 0.313rem 0.5rem 0.313rem 0.5rem;
@@ -314,9 +305,3 @@ const TabView = styled.div`
 `;
 
 const DetailBox = styled.div``;
-//  @media (min-width: 300px) and (max-width: 768px) {
-
-//    overflow: scroll;
-// //     // width: 100%;
-// //     // max-width: 200px;
-// //   }`;

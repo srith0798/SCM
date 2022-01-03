@@ -18,15 +18,9 @@ import { sessionManager } from "../../managers/sessionManager";
 import UserService from "../../services/userService";
 import { history } from "../../managers/history";
 
-const Container = styled.div`
-  height: 100%;
-  width: 100%;
-`;
-
 //Replace Under Development with component once developed-
 const HomeComponent = (props) => {
   useEffect(() => {}, []);
-
   return (
     <>
       {!sessionManager.getDataFromCookies("isLoggedIn") ? (
@@ -62,29 +56,6 @@ const HomeComponent = (props) => {
     </>
   );
 };
-
-const DashboardContainer = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  /* overflow-y: hidden;
-  overflow-x: hidden; */
-  height: 100vh;
-`;
-
-const HomeContainer = styled.div`
-  height: 100%;
-  width: 100%;
-  display: flex;
-  overflow-y: hidden;
-  overflow-x: hidden;
-`;
-const ScrollableDiv = styled.div`
-  height: 100%;
-  width: 100%;
-  display: flex;
-  overflow: auto;
-`;
 
 const dashboardComponent = (props) => {
   const getCurrentUserDetails = async () => {
@@ -137,3 +108,30 @@ const dashboardComponent = (props) => {
   );
 };
 export default dashboardComponent;
+
+const DashboardContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  /* overflow-y: hidden;
+  overflow-x: hidden; */
+  height: 100vh;
+`;
+const Container = styled.div`
+  height: 100%;
+  width: 100%;
+`;
+
+const HomeContainer = styled.div`
+  height: 100%;
+  width: 100%;
+  display: flex;
+  overflow-y: hidden;
+  overflow-x: hidden;
+`;
+const ScrollableDiv = styled.div`
+  height: 100%;
+  width: 100%;
+  display: flex;
+  overflow: auto;
+`;

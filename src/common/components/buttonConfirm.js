@@ -1,12 +1,9 @@
-import React from 'react'
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 export default function ButtonConfirm(props) {
-    return (
-            <RemoveButton onClick={props.click}>{props.text}</RemoveButton>
-    )
+  return <RemoveButton onClick={props.click}>{props.text}</RemoveButton>;
 }
-
 
 const RemoveButton = styled.button`
   font: normal normal medium 14px/17px Inter;
@@ -17,6 +14,6 @@ const RemoveButton = styled.button`
   border-radius: 4px;
   text-align: center;
   white-space: nowrap;
-  padding : 10px 12px;
+  padding: 10px 12px;
   margin-right: 10px;
 `;
