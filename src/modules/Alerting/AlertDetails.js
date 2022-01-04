@@ -150,7 +150,6 @@ const Container = styled.div`
   @media (min-width: 300px) and (max-width: 768px) {
     background-color: #ffffff;
     border-radius: 6px;
-    height: 180px;
     height: auto;
     padding: 8px;
     overflow: auto;

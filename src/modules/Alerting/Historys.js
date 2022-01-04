@@ -11,32 +11,41 @@ export default function Historys() {
           <RowContainer>
             <ColumnOne>
               Alert Type
-              <Tooltip disableFocusListener title="Alert Type">
-                <ToolTipIcon src="/images/tool tip.svg" />
+              <Tooltip disableFocusListener title="Transaction status">
+                <ToolTipIcon src="/images/tool-tip.svg" />
               </Tooltip>
             </ColumnOne>
             <ColumnOne>
               Contract
-              <Tooltip disableFocusListener title="Contract">
-                <ToolTipIcon src="/images/tool tip.svg" />
+              <Tooltip disableFocusListener title="Name of the smart contract">
+                <ToolTipIcon src="/images/tool-tip.svg" />
               </Tooltip>
             </ColumnOne>
             <ColumnOne>
               Tx Hash
-              <Tooltip disableFocusListener title="Tx hash">
-                <ToolTipIcon src="/images/tool tip.svg" />
+              <Tooltip
+                disableFocusListener
+                title="Unique transaction identifier, also known as the Transaction ID"
+              >
+                <ToolTipIcon src="/images/tool-tip.svg" />
               </Tooltip>
             </ColumnOne>
             <ColumnOne>
               Network
-              <Tooltip disableFocusListener title="Network">
-                <ToolTipIcon src="/images/tool tip.svg" />
+              <Tooltip
+                disableFocusListener
+                title="The executing blockchain network"
+              >
+                <ToolTipIcon src="/images/tool-tip.svg" />
               </Tooltip>
             </ColumnOne>
             <ColumnOne>
               When
-              <Tooltip disableFocusListener title="when">
-                <ToolTipIcon src="/images/tool tip.svg" />
+              <Tooltip
+                disableFocusListener
+                title="Date and time of transaction execution"
+              >
+                <ToolTipIcon src="/images/tool-tip.svg" />
               </Tooltip>
             </ColumnOne>
           </RowContainer>

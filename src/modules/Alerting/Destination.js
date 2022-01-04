@@ -12,8 +12,8 @@ export default function Destination() {
           <Row>
             <ColumnOne style={{ borderBottom: "none" }}>
               Destinations
-              <Tooltip disableFocusListener title="Destination">
-                <ToolTipIcon src="/images/tool tip.svg" />
+              <Tooltip disableFocusListener title="Notifications destination">
+                <ToolTipIcon src="/images/tool-tip.svg" />
               </Tooltip>
             </ColumnOne>
           </Row>
@@ -47,8 +47,11 @@ export default function Destination() {
 
         <ColumnOne style={{ paddingBottom: "10px", paddingLeft: "15px" }}>
           Active Destination
-          <Tooltip disableFocusListener title="Active Destination">
-            <ToolTipIcon src="/images/tool tip.svg" />
+          <Tooltip
+            disableFocusListener
+            title="Users' active notifications destination "
+          >
+            <ToolTipIcon src="/images/tool-tip.svg" />
           </Tooltip>
         </ColumnOne>
         <LastDiv>

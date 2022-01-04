@@ -81,32 +81,41 @@ export default function Contract(props) {
           <Row>
             <ColumnOne>
               Contract Name
-              <Tooltip disableFocusListener title="Contract Name">
-                <ToolTipIcon src="/images/tool tip.svg" />
+              <Tooltip disableFocusListener title="Name of the smart contract">
+                <ToolTipIcon src="/images/tool-tip.svg" />
               </Tooltip>
             </ColumnOne>
             <ColumnOne>
               Address
-              <Tooltip disableFocusListener title="Address">
-                <ToolTipIcon src="/images/tool tip.svg" />
+              <Tooltip disableFocusListener title="Wallet address">
+                <ToolTipIcon src="/images/tool-tip.svg" />
               </Tooltip>
             </ColumnOne>
             <ColumnOne>
               Network
-              <Tooltip disableFocusListener title="Network">
-                <ToolTipIcon src="/images/tool tip.svg" />
+              <Tooltip
+                disableFocusListener
+                title="Network on which the contract is executed"
+              >
+                <ToolTipIcon src="/images/tool-tip.svg" />
               </Tooltip>
             </ColumnOne>
             <ColumnOne>
               Tag
-              <Tooltip disableFocusListener title="Tag">
-                <ToolTipIcon src="/images/tool tip.svg" />
+              <Tooltip
+                disableFocusListener
+                title="Tag name associated with the contract"
+              >
+                <ToolTipIcon src="/images/tool-tip.svg" />
               </Tooltip>
             </ColumnOne>
             <ColumnOne>
               Visibility
-              <Tooltip disableFocusListener title=" Visibility">
-                <ToolTipIcon src="/images/tool tip.svg" />
+              <Tooltip
+                disableFocusListener
+                title="Is the contract visible to the users or not"
+              >
+                <ToolTipIcon src="/images/tool-tip.svg" />
               </Tooltip>
             </ColumnOne>
           </Row>

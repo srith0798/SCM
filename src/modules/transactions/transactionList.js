@@ -166,44 +166,56 @@ export default function TransactionList(props) {
             <Row>
               <ColumnOne>
                 Tx Hash
-                <Tooltip disableFocusListener title="Txhash">
-                  <ToolTipIcon src="/images/tool tip.svg" />
+                <Tooltip
+                  disableFocusListener
+                  title="Unique transaction identifier, also known as the Transaction ID"
+                >
+                  <ToolTipIcon src="/images/tool-tip.svg" />
                 </Tooltip>
               </ColumnOne>
               <ColumnOne>
                 Status
-                <Tooltip disableFocusListener title="Status">
-                  <ToolTipIcon src="/images/tool tip.svg" />
+                <Tooltip disableFocusListener title="Token transaction status">
+                  <ToolTipIcon src="/images/tool-tip.svg" />
                 </Tooltip>
               </ColumnOne>
               <ColumnOne>
                 Function
-                <Tooltip disableFocusListener title="Function">
-                  <ToolTipIcon src="/images/tool tip.svg" />
+                <Tooltip
+                  disableFocusListener
+                  title="Smart contract function status"
+                >
+                  <ToolTipIcon src="/images/tool-tip.svg" />
                 </Tooltip>
               </ColumnOne>
               <ColumnOne>
                 Contracts
-                <Tooltip disableFocusListener title="Contracts">
-                  <ToolTipIcon src="/images/tool tip.svg" />
+                <Tooltip
+                  disableFocusListener
+                  title="Name of the smart contract"
+                >
+                  <ToolTipIcon src="/images/tool-tip.svg" />
                 </Tooltip>
               </ColumnOne>
               <ColumnOne>
                 Form
-                <Tooltip disableFocusListener title="Form">
-                  <ToolTipIcon src="/images/tool tip.svg" />
+                <Tooltip disableFocusListener title="Sender’s account">
+                  <ToolTipIcon src="/images/tool-tip.svg" />
                 </Tooltip>
               </ColumnOne>
               <ColumnOne>
                 To
-                <Tooltip disableFocusListener title="To">
-                  <ToolTipIcon src="/images/tool tip.svg" />
+                <Tooltip disableFocusListener title="Receiver’s account">
+                  <ToolTipIcon src="/images/tool-tip.svg" />
                 </Tooltip>
               </ColumnOne>
               <ColumnOne>
                 When
-                <Tooltip disableFocusListener title="When ">
-                  <ToolTipIcon src="/images/tool tip.svg" />
+                <Tooltip
+                  disableFocusListener
+                  title="Date and time of transaction execution"
+                >
+                  <ToolTipIcon src="/images/tool-tip.svg" />
                 </Tooltip>
               </ColumnOne>
             </Row>

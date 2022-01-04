@@ -52,7 +52,7 @@ export default function Rules() {
                       src={
                         activeButton === "Rules"
                           ? "/images/rules.svg"
-                          : "/images/rules1.svg"
+                          : "/images/ruless.svg"
                       }
                     ></img>
                     Rules
@@ -77,7 +77,7 @@ export default function Rules() {
                       style={{ marginRight: "0.375rem" }}
                       src={
                         activeButton === "History"
-                          ? "/images/history_blue.svg"
+                          ? "/images/history-blue.svg"
                           : "/images/history.svg"
                       }
                     />
@@ -105,7 +105,7 @@ export default function Rules() {
                       style={{ marginRight: "5px" }}
                       src={
                         activeButton === "Destination"
-                          ? "/images/destination_blue.svg"
+                          ? "/images/destination-blue.svg"
                           : "/images/destination.svg"
                       }
                     />
@@ -121,26 +121,35 @@ export default function Rules() {
                     <RowData onClick={redirectToAlertDetails}>
                       <ColumnOne>
                         Contract Name
-                        <Tooltip disableFocusListener title="contract Name">
-                          <ToolTipIcon src="/images/tool tip.svg" />
+                        <Tooltip
+                          disableFocusListener
+                          title="Name of the smart contract"
+                        >
+                          <ToolTipIcon src="/images/tool-tip.svg" />
                         </Tooltip>
                       </ColumnOne>
                       <ColumnOne>
-                        Address{" "}
-                        <Tooltip disableFocusListener title="Address">
-                          <ToolTipIcon src="/images/tool tip.svg" />
+                        Address
+                        <Tooltip disableFocusListener title="Wallet address">
+                          <ToolTipIcon src="/images/tool-tip.svg" />
                         </Tooltip>
                       </ColumnOne>
                       <ColumnOne>
-                        Network{" "}
-                        <Tooltip disableFocusListener title="Network">
-                          <ToolTipIcon src="/images/tool tip.svg" />
+                        Network
+                        <Tooltip
+                          disableFocusListener
+                          title="The executing blockchain network"
+                        >
+                          <ToolTipIcon src="/images/tool-tip.svg" />
                         </Tooltip>
                       </ColumnOne>
                       <ColumnOne>
-                        Alert Type{" "}
-                        <Tooltip disableFocusListener title="Alert Type">
-                          <ToolTipIcon src="/images/tool tip.svg" />
+                        Alert Type
+                        <Tooltip
+                          disableFocusListener
+                          title="Transaction status"
+                        >
+                          <ToolTipIcon src="/images/tool-tip.svg" />
                         </Tooltip>
                       </ColumnOne>
                       <ColumnOne></ColumnOne>
@@ -160,7 +169,7 @@ export default function Rules() {
                         <Tooltip disableFocusListener title="Delete">
                           <img
                             alt=""
-                            src="/images/delete_blue.svg"
+                            src="/images/delete-blue.svg"
                             style={{ width: "1rem" }}
                           />
                         </Tooltip>
@@ -182,7 +191,7 @@ export default function Rules() {
                         <Tooltip disableFocusListener title="Delete">
                           <img
                             alt=""
-                            src="/images/delete_blue.svg"
+                            src="/images/delete-blue.svg"
                             style={{ width: "1rem" }}
                           />
                         </Tooltip>
@@ -259,7 +268,6 @@ const ToolTipIcon = styled.img`
 
 const ColumnOne = styled.div`
   display: flex;
-
   font-size: 0.875rem;
   font-weight: 600;
   color: #102c78;

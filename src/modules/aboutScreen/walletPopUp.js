@@ -25,7 +25,7 @@ export default function WalletPopUp(props) {
                   Connect Wallet
                   <CrossIcon
                     alt=""
-                    src="/images/XDC-Cross.svg"
+                    src="/images/xdc-cut.svg"
                     onClick={props.click}
                   />
                 </Add>
@@ -36,7 +36,7 @@ export default function WalletPopUp(props) {
                   <img
                     style={{ width: "40px" }}
                     alt=""
-                    src="/images/XDCinstall.svg"
+                    src="/images/xdc-install.svg"
                   />
                   <Title>Install XDCPay</Title>
                   <SubTitle>
@@ -45,7 +45,7 @@ export default function WalletPopUp(props) {
                 </IconContainer>
                 <IconContainer>
                   <StepsTitle>Step 2</StepsTitle>
-                  <img alt="" src="/images/XDClogin.svg" />
+                  <img alt="" src="/images/xdc-login.svg" />
                   <Title>Login to XDCPay</Title>
                   <SubTitle>
                     Login to you account on XDCPay Chrome extension.
@@ -53,7 +53,7 @@ export default function WalletPopUp(props) {
                 </IconContainer>
                 <IconContainer>
                   <StepsTitle>Step 3</StepsTitle>
-                  <img alt="" src="/images/XDCwallet.svg" />
+                  <img alt="" src="/images/xdc-wallet.svg" />
                   <Title>Connect Wallet</Title>
                   <SubTitle>Connect your XDCPay wallet with SmartHub.</SubTitle>
                 </IconContainer>
@@ -62,7 +62,7 @@ export default function WalletPopUp(props) {
                 <img
                   style={{ paddingLeft: "30px", marginRight: "15px" }}
                   alt=""
-                  src="/images/XDC logo_white.svg"
+                  src="/images/xdc-logo-white.svg"
                 />
                 Connect Wallet
               </Button>
@@ -144,14 +144,9 @@ const MainContainer = styled.div`
 const Container = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
   border-radius: 0.375rem;
-  width: 100%;
-  background-color: #ffffff;
-  max-width: 563px;
   padding: 4px;
   background: #ffffff 0% 0% no-repeat padding-box;
-  border-radius: 0.375rem;
   width: 100%;
-  background-color: #ffffff;
   max-width: 563px;
   align-items: center;
   text-align: center;

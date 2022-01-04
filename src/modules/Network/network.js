@@ -49,14 +49,17 @@ export default function Network(props) {
           <Row>
             <ColumnOne>
               Network
-              <Tooltip disableFocusListener title="Network">
-                <ToolTipIcon src="/images/tool tip.svg" />
+              <Tooltip
+                disableFocusListener
+                title="The blockchain network in use"
+              >
+                <ToolTipIcon src="/images/tool-tip.svg" />
               </Tooltip>
             </ColumnOne>
             <UrlHeading>
               URL
-              <Tooltip disableFocusListener title="URL">
-                <ToolTipIcon src="/images/tool tip.svg" />
+              <Tooltip disableFocusListener title="URL of the network">
+                <ToolTipIcon src="/images/tool-tip.svg" />
               </Tooltip>
             </UrlHeading>
           </Row>

@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { Row } from "simple-flexbox";
 import { sessionManager } from "../../managers/sessionManager";
 import WalletPopUp from "./walletPopUp";
+import Tooltip from "@mui/material/Tooltip";
 
 export default function About(props) {
   const [state, setState] = useState(true);
@@ -19,20 +20,23 @@ export default function About(props) {
                 </DetailBox>
               </Row>
               <DataBox>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                in
+                Easily govern your smart contract deployment with end-to-end
+                lifecycle utility, empowering the entire on-chain critical
+                business logic.
               </DataBox>
-              <Button>
-                Add Your Smart Contract
-                <img
-                  style={{ marginLeft: "0.375rem" }}
-                  alt=""
-                  src="/images/question-mark.svg"
-                />
-              </Button>
+              <Tooltip
+                disableFocusListener
+                title="Click to get started with Xmartly"
+              >
+                <Button>
+                  Add Your Smart Contract
+                  <img
+                    style={{ marginLeft: "0.375rem" }}
+                    alt=""
+                    src="/images/question-mark.svg"
+                  />{" "}
+                </Button>
+              </Tooltip>
             </LeftContainer>
             <RightContainer>
               <VideoBox>
@@ -145,7 +149,7 @@ const IconRow = styled.div`
 const DataBox = styled.div`
   display: flex;
   width: 100%;
-  font-size: 1rem;
+  font-size: 1.2rem;
 `;
 const DetailBox = styled.div`
   width: 100%;

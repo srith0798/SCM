@@ -34,8 +34,6 @@ export default function Graph() {
           r={5}
           strokeWidth={1}
           stroke={2}
-       
-
           cx={points.x}
           cy={points.y}
         />
@@ -122,16 +120,15 @@ const dataEntry = [
       },
     ],
   },
- 
 ];
 
 const ToolTipElement = (props) => {
   return (
     <div>
-      <div className="Tooltip-graph">
+      <TooltipGraph>
         <p className="Tooltip-graph-date">{props.point.data.x}</p>
         <p className="Tooltip-graph-tx">Accounts: {props.point.data.y}</p>
-      </div>
+      </TooltipGraph>
     </div>
   );
 };
@@ -174,7 +171,7 @@ const MyResponsiveLine = ({ data, MouseMovePoint, CustomPoint }) => (
     defs={[
       linearGradientDef("gradientA", [
         { offset: 0, color: "inherit" },
-        { offset: 10, color: "inherit", opacity: 0},
+        { offset: 20, color: "inherit", opacity: 0 },
       ]),
     ]}
     fill={[{ match: "*", id: "gradientA" }]}
@@ -201,4 +198,13 @@ const GraphSize = styled.div`
   @media (max-width: 767px) {
     height: 80px;
   }
+`;
+const TooltipGraph = styled.div`
+  width: 100%;
+  padding: 4px 8px 7px;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+  border: solid 1px #e3e7eb;
+  background-color: #fff;
+  height: 80px;
 `;

@@ -1,6 +1,5 @@
 import React from "react";
 import { Row } from "simple-flexbox";
-
 import "react-tabs/style/react-tabs.css";
 import styled from "styled-components";
 import Historys from "./Historys";
@@ -18,29 +17,31 @@ export default function AddAlert() {
     "/images/Successful transaction_blue.svg"
   );
   const [failedTransaction, setfailedTransaction] = React.useState(
-    "/images/Failed transactionToken.svg"
+    "/images/failed-transaction-blue.svg"
   );
   const [tokenTransfer, settokenTransfer] = React.useState(
-    "/images/XRC token.svg"
+    "/images/xdc-token-blue.svg"
   );
   const [transactionValue, settransactionValue] = React.useState(
-    "/images/XDC logo.svg"
+    "/images/xdc-logo-blue.svg"
   );
   const [balanceToken, setBalanceToken] = React.useState(
-    "/images/XDC logo.svg"
+    "/images/xdc-logo-blue.svg"
   );
   const [stateChange, setstateChange] = React.useState(
-    "/images/state change_blue.svg"
+    "/images/state-change-blue.svg"
   );
 
   // alert target
   const [addressToken, setaddressToken] = React.useState(
-    "/images/address_blue.svg"
+    "/images/address-logo-blue.svg"
   );
   const [networkAddress, setnetworkAddress] = React.useState(
-    "/images/network_logo.svg"
+    "/images/network-logo-blue.svg"
   );
-  const [tagAddress, settagAddress] = React.useState("/images/Tag_logo.svg");
+  const [tagAddress, settagAddress] = React.useState(
+    "/images/tag-logo-blue.svg"
+  );
   const [progress, setProgress] = React.useState("ALERT_TYPE");
   const changeProgress = (value) => {
     setProgress(value);
@@ -51,41 +52,43 @@ export default function AddAlert() {
   //TODO: code needs to be optimized for src change
   const changeSourceForIcons = (value) => {
     if (value === "successfulTransaction")
-      setsuccessfulTransaction("/images/Successful transaction.svg");
+      setsuccessfulTransaction("/images/successful-transaction.svg");
     if (value === "failedTransaction")
-      setfailedTransaction("/images/Failed transaction_white.svg");
+      setfailedTransaction("/images/failed-transaction-white.svg");
     if (value === "tokenTransfer")
-      settokenTransfer("/images/XRCtoken_white.svg");
+      settokenTransfer("/images/xdc-token-white.svg");
     if (value === "transactionValue")
-      settransactionValue("/images/XDC logo_white.svg");
-    if (value === "balanceToken") setBalanceToken("/images/XDC logo_white.svg");
+      settransactionValue("/images/xdc-logo-white.svg");
+    if (value === "balanceToken") setBalanceToken("/images/xdc-logo-white.svg");
     if (value === "stateChange")
-      setstateChange("/images/statechange_white.svg");
+      setstateChange("/images/state-change-white.svg");
     // for alert target tabs
     if (value === "addressToken")
-      setaddressToken("/images/Address_logowhite.svg");
+      setaddressToken("/images/address-logo-white.svg");
     if (value === "networkAddress")
-      setnetworkAddress("/images/networks_white.svg");
-    if (value === "tagAddress") settagAddress("/images/tag_white.svg");
+      setnetworkAddress("/images/network-logo-white.svg");
+    if (value === "tagAddress") settagAddress("/images/tag-logo-white.svg");
   };
 
   const changeOriginalSourceForIcons = (value) => {
     if (value === "successfulTransaction")
-      setsuccessfulTransaction("/images/Successful transaction_blue.svg");
+      setsuccessfulTransaction("/images/successful-transaction-blue.svg");
     if (value === "failedTransaction")
-      setfailedTransaction("/images/Failed transactionToken.svg");
-    if (value === "tokenTransfer") settokenTransfer("/images/XRC token.svg");
+      setfailedTransaction("/images/failed-transaction-blue.svg");
+    if (value === "tokenTransfer")
+      settokenTransfer("/images/xdc-token-blue.svg");
 
     if (value === "transactionValue")
-      settransactionValue("/images/XDC logo.svg");
-    if (value === "balanceToken") setBalanceToken("/images/XDC logo.svg");
+      settransactionValue("/images/xdc-logo-blue.svg");
+    if (value === "balanceToken") setBalanceToken("/images/xdc-logo-blue.svg");
     if (value === "stateChange")
-      setstateChange("/images/state change_blue.svg");
+      setstateChange("/images/state-change-blue.svg");
     // for alert target
-    if (value === "addressToken") setaddressToken("/images/address_blue.svg");
+    if (value === "addressToken")
+      setaddressToken("/images/address-logo-blue.svg");
     if (value === "networkAddress")
-      setnetworkAddress("/images/network_logo.svg");
-    if (value === "tagAddress") settagAddress("/images/Tag_logo.svg");
+      setnetworkAddress("/images/network-logo-blue.svg");
+    if (value === "tagAddress") settagAddress("/images/tag-logo-blue.svg");
   };
 
   return (
@@ -147,7 +150,7 @@ export default function AddAlert() {
                 style={{ marginRight: "0.375rem" }}
                 src={
                   activeButton === "History"
-                    ? "/images/history_blue.svg"
+                    ? "/images/history-blue.svg"
                     : "/images/history.svg"
                 }
               />
@@ -171,7 +174,7 @@ export default function AddAlert() {
                 style={{ marginRight: "5px" }}
                 src={
                   activeButton === "Destination"
-                    ? "/images/destination_blue.svg"
+                    ? "/images/destination-blue.svg"
                     : "/images/destination.svg"
                 }
               />
@@ -557,7 +560,6 @@ const ApplyButton = styled.button`
   background: #3163f0 0% 0% no-repeat padding-box;
   border-radius: 3px;
   color: #ffffff;
-  background: #9db5f8 0% 0% no-repeat padding-box;
   border: 0px;
   text-align: center;
   white-space: nowrap;
