@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Row, Column } from "simple-flexbox";
 import Line from "./graph";
+import Tooltip from "@mui/material/Tooltip";
 
 export default function FullScreen(props) {
   const ClickMe = () => {
@@ -24,7 +25,9 @@ export default function FullScreen(props) {
               </AlignmentContainer>
               <AlignmentContainer>
                 <ExpandButton>Export Data</ExpandButton>
-                <Icon src="/images/refresh.svg" />
+                <Tooltip disableFocusListener title="Refresh">
+                  <Icon src="/images/refresh.svg" />
+                </Tooltip>
               </AlignmentContainer>
             </SubContainer>
 
@@ -111,7 +114,7 @@ const AlignmentContainer = styled.div`
 const FlexEnd = styled.div`
   display: flex;
   justify-content: flex-end;
-  height: 32px;
+  height: 92px;
   width: 100%;
 `;
 

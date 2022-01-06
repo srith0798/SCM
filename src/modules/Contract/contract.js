@@ -14,6 +14,11 @@ export default function Contract(props) {
   const [open, setOpen] = React.useState(false);
   const [showPlaceHolder, setShowPlaceHolder] = React.useState(false);
   const [loader, setLoader] = React.useState(false);
+  const [contractNameToolTip, setcontractNameToolTip] = React.useState(false);
+  const [addressToolTip, setaddressToolTip] = React.useState(false);
+  const [networkToolTip, setnetworkToolTip] = React.useState(false);
+  const [tagToolTip, settagToolTip] = React.useState(false);
+  const [visibilityToolTip, setvisibilityToolTip] = React.useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -63,12 +68,14 @@ export default function Contract(props) {
           <Input placeholder="Search by address or name" />
         </MainHeading>
         <IconDiv>
-          <RefreshImage
-            onClick={() => getContractList()}
-            alt=""
-            src="/images/refresh.svg"
-            style={{ marginRight: "0.625rem" }}
-          />
+          <Tooltip disableFocusListener title="Refresh">
+            <RefreshImage
+              onClick={() => getContractList()}
+              alt=""
+              src="/images/refresh.svg"
+              style={{ marginRight: "0.625rem" }}
+            />
+          </Tooltip>
           {open && <AddContract click={handleClose} />}
           <Button onClick={handleClickOpen}>Add Contract</Button>
         </IconDiv>
@@ -77,16 +84,81 @@ export default function Contract(props) {
       <TableContainer>
         <Div>
           <Row>
-            <ColumnOne>Contract Name</ColumnOne>
-            <ColumnOne>Address</ColumnOne>
-            <ColumnOne>Network</ColumnOne>
             <ColumnOne>
-              Tag{" "}
-              <Tooltip disableFocusListener title="Add">
-                <ToolTipIcon src="/images/tool tip.svg" />
+              Contract Name
+              <Tooltip
+                open={contractNameToolTip}
+                onOpen={() => setcontractNameToolTip(true)}
+                onClose={() => setcontractNameToolTip(false)}
+                disableFocusListener
+                title="Name of the smart contract"
+              >
+                <ToolTipIcon
+                  onClick={() => setcontractNameToolTip(!contractNameToolTip)}
+                  src="/images/tool-tip.svg"
+                />
               </Tooltip>
             </ColumnOne>
-            <ColumnOne>Visibility</ColumnOne>
+            <ColumnOne>
+              Address
+              <Tooltip
+                open={addressToolTip}
+                onOpen={() => setaddressToolTip(true)}
+                onClose={() => setaddressToolTip(false)}
+                disableFocusListener
+                title="Wallet address"
+              >
+                <ToolTipIcon
+                  onClick={() => setaddressToolTip(!addressToolTip)}
+                  src="/images/tool-tip.svg"
+                />
+              </Tooltip>
+            </ColumnOne>
+            <ColumnOne>
+              Network
+              <Tooltip
+                open={networkToolTip}
+                onOpen={() => setnetworkToolTip(true)}
+                onClose={() => setnetworkToolTip(false)}
+                disableFocusListener
+                title="Network on which the contract is executed"
+              >
+                <ToolTipIcon
+                  onClick={() => setnetworkToolTip(!networkToolTip)}
+                  src="/images/tool-tip.svg"
+                />
+              </Tooltip>
+            </ColumnOne>
+            <ColumnOne>
+              Tag
+              <Tooltip
+                open={tagToolTip}
+                onOpen={() => settagToolTip(true)}
+                onClose={() => settagToolTip(false)}
+                disableFocusListener
+                title="Tag name associated with the contract"
+              >
+                <ToolTipIcon
+                  onClick={() => settagToolTip(!tagToolTip)}
+                  src="/images/tool-tip.svg"
+                />
+              </Tooltip>
+            </ColumnOne>
+            <ColumnOne>
+              Visibility
+              <Tooltip
+                open={visibilityToolTip}
+                onOpen={() => setvisibilityToolTip(true)}
+                onClose={() => setvisibilityToolTip(false)}
+                disableFocusListener
+                title="Is the contract visible to the users or not"
+              >
+                <ToolTipIcon
+                  onClick={() => setvisibilityToolTip(!visibilityToolTip)}
+                  src="/images/tool-tip.svg"
+                />
+              </Tooltip>
+            </ColumnOne>
           </Row>
         </Div>
         {address.map((data, index) => {
@@ -137,7 +209,7 @@ function tagDiv() {
   return (
     <Tag>
       Finance
-      <TagImage src="/images/Tag_logo.svg"></TagImage>
+      <TagImage src="/images/tag-logo-blue.svg"></TagImage>
     </Tag>
   );
 }
@@ -175,7 +247,7 @@ const PaginationDiv = styled.div`
 
 const IconDiv = styled.div`
   display: flex;
-  @media (min-width: 340px) and (max-width: 768px) {
+  @media (min-width: 375px) and (max-width: 812px) {
     margin-bottom: 22px;
   }
 `;
@@ -186,6 +258,11 @@ const RefreshImage = styled.img`
     -webkit-box-shadow: 3px 10px 21px -8px rgb(0 0 0 / 75%);
     -moz-box-shadow: 3px 10px 21px -8px rgb(0 0 0 / 75%);
     transition: box-shadow 0.3s ease-in-out 0s;
+  }
+  @media (min-width: 375px) and (max-width: 768px) {
+    margin-right: 0.325rem;
+    margin-top: 28px;
+    margin-left: 3px;
   }
 `;
 const Tag = styled.div`
@@ -215,17 +292,21 @@ const MainContainer = styled.div`
   background-color: #ecf0f7;
   width: 100%;
   height: 100vh;
-  padding: 3.125rem;
+  padding: 2.125rem;
   height: 100vh;
 `;
 const MainHeading = styled.div`
   display: flex;
   width: 100%;
-  @media (min-width: 340px) and (max-width: 768px) {
+  @media (min-width: 570px) and (max-width: 768px) {
     display: flex;
-    flex-direction: column;
-    padding-bottom: 58px;
+    flex-direction: row;
   }
+  // @media (min-width: 570px) {
+  //   display: flex;
+  //   // flex-direction: column;
+  //   // padding-bottom: 58px;
+  // }
 `;
 const SubContainer = styled.div`
   width: 100%;
@@ -234,7 +315,11 @@ const SubContainer = styled.div`
   height: 3.125rem;
   align-items: center;
   padding-bottom: 15px;
-  @media (min-width: 300px) and (max-width: 767px) {
+  @media (max-width: 767px) {
+    padding-top: 47px;
+    padding-bottom: 33px;
+  }
+  @media (min-width: 375px) {
     padding-top: 47px;
     padding-bottom: 33px;
   }
@@ -244,9 +329,14 @@ const Heading = styled.span`
   font-weight: 600;
   color: #191919;
   margin-right: 0.625rem;
-  @media (min-width: 300px) and (max-width: 767px) {
+  @media (max-width: 767px) {
     font-size: 1rem;
-    padding-bottom: 10px;
+    // padding-top: 40px;
+  }
+  @media (min-width: 375px);
+   {
+    font-size: 1.4rem;
+    flex-direction: column;
   }
 `;
 const Button = styled.button`
@@ -263,9 +353,8 @@ const Button = styled.button`
   width: 8.125rem;
   height: 2.125rem;
   font-size: 0.875rem;
-  @media (min-width: 340px) and (max-width: 768px) {
-    width: 1.225rem;
-    font-size: 0.1px;
+  @media (max-width: 768px) {
+    margin-top: 28px;
   }
 `;
 const Input = styled.input`
@@ -285,12 +374,12 @@ const Input = styled.input`
   border: none;
   outline: none;
   display: flex;
-  @media (min-width: 340px) and (max-width: 768px) {
-    padding: 0px;
-    margin-right: 10px;
-
-    height: 33px;
-    background-image: none;
+  (max-width: 768px) {
+    width: min-content;
+    height: 40px;
+  }
+  @media (min-width: 375px) {
+    width: min-content;
   }
 `;
 const TableContainer = styled.div`
@@ -298,17 +387,29 @@ const TableContainer = styled.div`
   border-radius: 0.375rem;
   width: 100%;
   min-height: 25rem;
+  overflow: auto;
   padding: 0.625rem 0.625rem 1px 0.625rem;
   @media (min-width: 300px) and (max-width: 767px) {
     overflow: scroll;
-    width: 100%;
     height: 281px;
     overflow-y: auto;
     position: relative;
-    &::-webkit-scrollbar {
-      width: 10px;
-      border: 0.5px solid blue;
+    width: 100%;
+    ::-webkit-scrollbar {
+      border: 0.5px solid rgb(204, 229, 243);
       outline: none;
+      border-radius: 15px;
+      /* background: #00A58C; */
+    }
+    ::-webkit-scrollbar-track {
+      box-shadow: inset 0 0 1px grey;
+      border-radius: 15px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #3163f0;
+      border-radius: 15px;
+      border: 4px solid transparent;
+      background-clip: content-box;
     }
   }
 `;

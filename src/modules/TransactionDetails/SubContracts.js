@@ -81,6 +81,7 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   text-align: center;
+
           
 `;
 
@@ -90,6 +91,10 @@ const MainBoxContainer = styled.div`
   max-width: 38.625rem;
   width: 100%;
   height: 6.5rem;
+  @media (min-width: 300px) and (max-width: 768px) {
+    flex-direction: column;
+    height: auto;
+  }
 `;
 const Title = styled.div`
   font-size: 0.875rem;

@@ -6,7 +6,7 @@ import { history } from "../../managers/history";
 
 export default function AlertDetails() {
   const backButton = () => {
-    history.push("/dashboard/Alerting");
+    history.push("/dashboard/rules");
   };
   return (
     <MainBoxContainer>
@@ -33,29 +33,29 @@ export default function AlertDetails() {
           <CommonDiv>
             <RowData>
               <Heading>ID</Heading>
-              <SubHead>45fej-46de-41d3-b23a-fhf783</SubHead>
+              <SubHeading>45fej-46de-41d3-b23a-fhf783</SubHeading>
             </RowData>
           </CommonDiv>
           <CommonDiv>
             <RowData>
               <Heading>Name</Heading>
-              <SubHead>
+              <SubHeading>
                 Sucessfull transaction in App_Transactions_Validator
-              </SubHead>
+              </SubHeading>
             </RowData>
           </CommonDiv>
           <CommonDiv>
             <RowData>
               <Heading>Alert Type</Heading>
-              <SubHead>
+              <SubHeading>
                 <TextColor>Sucessfull transaction</TextColor>
-              </SubHead>
+              </SubHeading>
             </RowData>
           </CommonDiv>
           <CommonDiv>
             <RowData>
               <Heading>Target</Heading>
-              <SubHead>App_Transactions_Validator</SubHead>
+              <SubHeading>App_Transactions_Validator</SubHeading>
             </RowData>
           </CommonDiv>
         </Container>
@@ -70,7 +70,7 @@ export default function AlertDetails() {
                 style={{ marginRight: "4px", width: "1rem" }}
               />
               <Heading>Email </Heading>
-              <SubHead>it@supportteam.com</SubHead>
+              <SubHeading>it@supportteam.com</SubHeading>
             </Row>
           </CommonDiv>
           <CommonDiv>
@@ -81,12 +81,12 @@ export default function AlertDetails() {
                 style={{ marginRight: "4px", width: "1rem" }}
               />
               <Heading>Finance</Heading>
-              <SubHead>https:webhook.site/aOe</SubHead>
+              <SubHeading>https:webhook.site/aOe</SubHeading>
             </Row>
           </CommonDiv>
           <RowContainer>
-            <Buttonn style={{ marginRight: "4px" }}>Edit</Buttonn>
-            <Buttonn2 style={{ marginLeft: "4px" }}>Disable</Buttonn2>
+            <EditButton style={{ marginRight: "4px" }}>Edit</EditButton>
+            <DisableButton style={{ marginLeft: "4px" }}>Disable</DisableButton>
           </RowContainer>
         </NewContainer>
       </MainContainer>
@@ -150,7 +150,6 @@ const Container = styled.div`
   @media (min-width: 300px) and (max-width: 768px) {
     background-color: #ffffff;
     border-radius: 6px;
-    height: 180px;
     height: auto;
     padding: 8px;
     overflow: auto;
@@ -168,7 +167,7 @@ const Heading = styled.div`
   width: 100%;
   max-width: 260px;
 `;
-const SubHead = styled.div`
+const SubHeading = styled.div`
   font-size: 13px;
   @media (min-width: 300px) and (max-width: 768px) {
     margin-left:5px;
@@ -184,7 +183,7 @@ const RowContainer = styled.div`
   max-width: 160px;
   padding-top: 10px;
 `;
-const Buttonn = styled.div`
+const EditButton = styled.div`
   top: 548px;
   left: 341px;
   width: 79px;
@@ -199,7 +198,7 @@ const Buttonn = styled.div`
   color: #ffffff;
   font-size: 14px;
 `;
-const Buttonn2 = styled.div`
+const DisableButton = styled.div`
   top: 548px;
   left: 341px;
   width: 79px;

@@ -50,8 +50,29 @@ const ValidatorContainer = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
   border-radius: 6px;
   margin-top: 1.25rem;
-  height: 37.5rem;
+  height: 27.5rem;
   padding: 1.25rem;
+  margin-top: 1.25rem;
+  overflow-y: hidden;
+  @media (min-width: 300px) and (max-width: 767px) {
+    width: 100%;
+    ::-webkit-scrollbar {
+      border: 0.5px solid rgb(204, 229, 243);
+      outline: none;
+      border-radius: 15px;
+      /* background: #00A58C; */
+    }
+    ::-webkit-scrollbar-track {
+      box-shadow: inset 0 0 1px grey;
+      border-radius: 15px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #3163f0;
+      border-radius: 15px;
+      border: 4px solid transparent;
+      background-clip: content-box;
+    }
+  }
 `;
 const TargetButtons = styled.div`
   display: flex;

@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Row, Column } from "simple-flexbox";
 import Line from "./graph";
+import Tooltip from "@mui/material/Tooltip";
 
 import Box from "@mui/material/Box";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
@@ -44,7 +45,9 @@ export default function MainComponent(props) {
           <MainContainer>
             <SubContainer>
               <MainHeading>Analytics</MainHeading>
-              <BackImage src="/images/refresh.svg" />
+              <Tooltip disableFocusListener title="Refresh">
+                <BackImage src="/images/refresh.svg" />
+              </Tooltip>
             </SubContainer>
             <Container>
               <View>View analytics for contract</View>
@@ -85,7 +88,15 @@ export default function MainComponent(props) {
               <GraphContainer>
                 <SubContainer>
                   <div style={{ display: "flex", alignItems: "center" }}>
-                    <Head>Transactions over time</Head>
+                    <Head>
+                      Transactions over time
+                      <Tooltip
+                        disableFocusListener
+                        title="Transaction executed in due course"
+                      >
+                        <ToolTipIcon src="/images/tool-tip.svg" />
+                      </Tooltip>
+                    </Head>
                     <BackImage
                       src="/images/expand.svg"
                       onClick={() => props.changeExpand(1)}
@@ -111,7 +122,15 @@ export default function MainComponent(props) {
               <GraphContainer>
                 <SubContainer>
                   <div style={{ display: "flex", alignItems: "center" }}>
-                    <Head>Gas used overtime</Head>
+                    <Head>
+                      Gas used overtime
+                      <Tooltip
+                        disableFocusListener
+                        title="Amount of gas utilized in the specified time range"
+                      >
+                        <ToolTipIcon src="/images/tool-tip.svg" />
+                      </Tooltip>
+                    </Head>
                     <BackImage
                       src="/images/expand.svg"
                       onClick={() => props.changeExpand(2)}
@@ -140,7 +159,15 @@ export default function MainComponent(props) {
               <GraphContainer>
                 <SubContainer>
                   <div style={{ display: "flex", alignItems: "center" }}>
-                    <Head>Top Callers</Head>
+                    <Head>
+                      Top Callers
+                      <Tooltip
+                        disableFocusListener
+                        title="List of top callers in past days"
+                      >
+                        <ToolTipIcon src="/images/tool-tip.svg" />
+                      </Tooltip>
+                    </Head>
                     <BackImage
                       src="/images/expand.svg"
                       onClick={() => props.changeExpand(4)}
@@ -185,7 +212,15 @@ export default function MainComponent(props) {
               <GraphContainer>
                 <SubContainer>
                   <div style={{ display: "flex", alignItems: "center" }}>
-                    <Head>Active users</Head>
+                    <Head>
+                      Active users
+                      <Tooltip
+                        disableFocusListener
+                        title="Number of active users in the given time range"
+                      >
+                        <ToolTipIcon src="/images/tool-tip.svg" />
+                      </Tooltip>
+                    </Head>
                     <BackImage
                       src="/images/expand.svg"
                       onClick={() => props.changeExpand(3)}
@@ -212,7 +247,12 @@ export default function MainComponent(props) {
             <GraphContainer>
               <SubContainer>
                 <div style={{ display: "flex", alignItems: "center" }}>
-                  <Head>Top Function calls</Head>
+                  <Head>
+                    Top Function calls
+                    <Tooltip disableFocusListener title="URL of the network">
+                      <ToolTipIcon src="/images/tool-tip.svg" />
+                    </Tooltip>
+                  </Head>
                   <BackImage
                     src="/images/expand.svg"
                     onClick={() => props.changeExpand(5)}
@@ -344,6 +384,11 @@ const Head = styled.div`
   @media (min-width: 300px) and (max-width: 767px) {
     font-size: 0.85rem;
   }
+`;
+const ToolTipIcon = styled.img`
+  width: 0.75rem;
+  cursor: pointer;
+  margin-left: 0.5rem;
 `;
 const ContractFrom = styled.div`
   width: 100%;

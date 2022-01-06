@@ -1,6 +1,7 @@
 import React from "react";
 import "react-tabs/style/react-tabs.css";
 import styled from "styled-components";
+import Tooltip from "@mui/material/Tooltip";
 
 export default function Historys() {
   return (
@@ -8,11 +9,45 @@ export default function Historys() {
       <DetailBox>
         <NewDiv>
           <RowContainer>
-            <ColumnOne>Alert Type</ColumnOne>
-            <ColumnOne>Contract</ColumnOne>
-            <ColumnOne>Tx Hash</ColumnOne>
-            <ColumnOne>Network</ColumnOne>
-            <ColumnOne>When</ColumnOne>
+            <ColumnOne>
+              Alert Type
+              <Tooltip disableFocusListener title="Transaction status">
+                <ToolTipIcon src="/images/tool-tip.svg" />
+              </Tooltip>
+            </ColumnOne>
+            <ColumnOne>
+              Contract
+              <Tooltip disableFocusListener title="Name of the smart contract">
+                <ToolTipIcon src="/images/tool-tip.svg" />
+              </Tooltip>
+            </ColumnOne>
+            <ColumnOne>
+              Tx Hash
+              <Tooltip
+                disableFocusListener
+                title="Unique transaction identifier, also known as the Transaction ID"
+              >
+                <ToolTipIcon src="/images/tool-tip.svg" />
+              </Tooltip>
+            </ColumnOne>
+            <ColumnOne>
+              Network
+              <Tooltip
+                disableFocusListener
+                title="The executing blockchain network"
+              >
+                <ToolTipIcon src="/images/tool-tip.svg" />
+              </Tooltip>
+            </ColumnOne>
+            <ColumnOne>
+              When
+              <Tooltip
+                disableFocusListener
+                title="Date and time of transaction execution"
+              >
+                <ToolTipIcon src="/images/tool-tip.svg" />
+              </Tooltip>
+            </ColumnOne>
           </RowContainer>
         </NewDiv>
         <Div>
@@ -47,18 +82,19 @@ const MainContainer = styled.div`
   @media (min-width: 300px) and (max-width: 767px) {
     width: 100%;
     ::-webkit-scrollbar {
-      width: 500px;
       border: 0.5px solid rgb(204, 229, 243);
       outline: none;
+      border-radius: 15px;
+      /* background: #00A58C; */
     }
     ::-webkit-scrollbar-track {
-      box-shadow: inset 0 0 5px grey;
-      border-radius: 2px;
+      box-shadow: inset 0 0 1px grey;
+      border-radius: 15px;
     }
     ::-webkit-scrollbar-thumb {
-      background: rgb(56, 56, 231);
-      width: 1px;
+      background: #3163f0;
       border-radius: 15px;
+      border: 4px solid transparent;
       background-clip: content-box;
     }
   }
@@ -67,22 +103,14 @@ const MainContainer = styled.div`
 const NewDiv = styled.div`
   padding: 0.738rem;
   border-bottom: 0.063rem solid #e3e7eb;
-
-  @media (min-width: 300px) and (max-width: 768px) {
-  }
 `;
 const DetailBox = styled.div`
   display: flex;
   flex-direction: column;
-  @media (min-width: 300px) and (max-width: 768px) {
-    // overflow: scroll;
-  }
 `;
 const Div = styled.div`
   padding: 0.938rem;
   border-bottom: 0.063rem solid #e3e7eb;
-  @media (min-width: 300px) and (max-width: 768px) {
-  }
 `;
 const RowData = styled.div`
   display: flex;
@@ -96,16 +124,21 @@ const RowContainer = styled.div`
     column-gap: 84px;
   }
 `;
+const ToolTipIcon = styled.img`
+  width: 0.75rem;
+  cursor: pointer;
+  margin-left: 0.313rem;
+  white-space: nowrap;
+`;
 const ColumnOne = styled.div`
   display: flex;
-  flex-flow: column nowrap;
   font-size: 0.875rem;
   font-weight: 600;
   color: #102c78;
   width: 100%;
   max-width: 18.75rem;
   @media (min-width: 300px) and (max-width: 768px) {
-    margin-right: 32px;
+    margin-right: 18px;
     margin-left: 5px;
   }
 `;

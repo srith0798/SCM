@@ -31,7 +31,7 @@ export default function Graph() {
       <g>
         <circle
           fill="#3763dd"
-          r={2}
+          r={5}
           strokeWidth={1}
           stroke={2}
           cx={points.x}
@@ -44,8 +44,27 @@ export default function Graph() {
     <GraphSize>
       <MyResponsiveLine
         MouseMovePoint={MouseMovePoint}
+        type="spline"
         data={data}
         CustomPoint={CustomPoint}
+        axisBottom={{
+          orient: "bottom",
+          tickSize: 5,
+          tickPadding: 5,
+          tickRotation: 0,
+          legend: "transportation",
+          legendOffset: 36,
+          legendPosition: "center",
+        }}
+        axisLeft={{
+          orient: "left",
+          tickSize: 5,
+          tickPadding: 5,
+          tickRotation: 0,
+          legend: "count",
+          legendOffset: 40,
+          legendPosition: "center",
+        }}
       />
       <div className="dates">
         <p>{firstDate}</p>
@@ -57,56 +76,47 @@ export default function Graph() {
 const dataEntry = [
   {
     id: "japan",
-    color: "hsl(194, 70%, 50%)",
+    color: "hsl(135, 70%, 50%)",
     data: [
       {
-        x: "plane",
-        y: 165,
+        x: "NETWORK1",
+        y: 151,
       },
       {
-        x: "helicopter",
-        y: 76,
+        x: "NETWORK2",
+        y: 106,
       },
       {
-        x: "boat",
-
-        y: 225,
+        x: "NETWORK3",
+        y: 44,
       },
       {
-        x: "train",
-        y: 99,
+        x: "NETWORK4",
+        y: 264,
       },
       {
-        x: "subway",
-        y: 195,
+        x: "NETWORK5",
+        y: 275,
       },
       {
-        x: "bus",
-        y: 140,
+        x: "NETWORK6",
+        y: 34,
       },
       {
-        x: "car",
-        y: 31,
+        x: "NETWORK7",
+        y: 211,
       },
       {
-        x: "moto",
-        y: 43,
+        x: "NETWORK8",
+        y: 288,
       },
       {
-        x: "bicycle",
-        y: 198,
-      },
-      {
-        x: "horse",
-        y: 293,
-      },
-      {
-        x: "skateboard",
-        y: 8,
+        x: "NETWORK9",
+        y: 86,
       },
       {
         x: "others",
-        y: 279,
+        y: 181,
       },
     ],
   },
@@ -115,23 +125,23 @@ const dataEntry = [
 const ToolTipElement = (props) => {
   return (
     <div>
-      <div className="Tooltip-graph">
+      <TooltipGraph>
         <p className="Tooltip-graph-date">{props.point.data.x}</p>
         <p className="Tooltip-graph-tx">Accounts: {props.point.data.y}</p>
-      </div>
+      </TooltipGraph>
     </div>
   );
 };
 
 const graphProperties = {
-  margin: { top: 5, right: 0, bottom: 0, left: 0 },
+  margin: { top: 10, right: 0, bottom: 0, left: 0 },
   curve: "monotoneX",
   axisTop: null,
-  axisRight: null,
-  axisBottom: null,
-  axisLeft: null,
-  enableGridX: false,
-  enableGridY: true,
+  axisRight: true,
+  axisBottom: true,
+  axisLeft: true,
+  enableGridX: true,
+  enableGridY: false,
   enableSlices: false,
   enablePoints: false,
   enableArea: true,
@@ -139,6 +149,7 @@ const graphProperties = {
   useMesh: true,
   animate: true,
 };
+
 const MyResponsiveLine = ({ data, MouseMovePoint, CustomPoint }) => (
   <ResponsiveLine
     {...graphProperties}
@@ -160,7 +171,7 @@ const MyResponsiveLine = ({ data, MouseMovePoint, CustomPoint }) => (
     defs={[
       linearGradientDef("gradientA", [
         { offset: 0, color: "inherit" },
-        { offset: 100, color: "inherit", opacity: 0 },
+        { offset: 20, color: "inherit", opacity: 0 },
       ]),
     ]}
     fill={[{ match: "*", id: "gradientA" }]}
@@ -180,11 +191,20 @@ const MyResponsiveLine = ({ data, MouseMovePoint, CustomPoint }) => (
 );
 
 const GraphSize = styled.div`
-  height: 8.75rem;
+  height: 9.75rem;
   width: auto;
   margin-top: 3.19rem;
   background: transparent;
   @media (max-width: 767px) {
     height: 80px;
   }
+`;
+const TooltipGraph = styled.div`
+  width: 100%;
+  padding: 4px 8px 7px;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+  border: solid 1px #e3e7eb;
+  background-color: #fff;
+  height: 80px;
 `;

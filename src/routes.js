@@ -32,8 +32,6 @@ class Routes extends BaseComponent {
     return (
       <MuiThemeProvider muiTheme={createMuiTheme()}>
         <Router history={history}>
-          {/* {loader}
-          {this.toast()} */}
           {true ? this.getPrivateRoutes() : this.getPublicRoutes()}
         </Router>
       </MuiThemeProvider>

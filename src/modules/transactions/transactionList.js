@@ -8,7 +8,7 @@ import ClickAwayListener from "@mui/material/ClickAwayListener";
 import { history } from "../../managers/history";
 import Tooltip from "@mui/material/Tooltip";
 
-export default function TransactionList(props) {
+export default function TransactionList() {
   useEffect(() => {}, []);
   const [state, setState] = useState(true);
   const [open, isOpen] = useState(false);
@@ -18,11 +18,13 @@ export default function TransactionList(props) {
   const handleClose = () => {
     isOpen(false);
   };
-
+  const [TxHashToolTip, setTxHashToolTip] = React.useState(false);
+  const [statusToolTip, setstatusToolTip] = React.useState(false);
+  const [functionToolTip, setfunctionToolTip] = React.useState(false);
   React.useEffect(() => {
     let address = [
       {
-        txn: "0xcad1b93a…f617",
+        txn: "0xcb93a…f617",
         status: "Success",
         function: "Transfer",
         contracts: "App_Transactions",
@@ -100,7 +102,6 @@ export default function TransactionList(props) {
   };
   return (
     <>
-      {/* <Row> */}
       <MainContainer>
         <TransactionMedia>Transactions</TransactionMedia>
         <TransactionBox>
@@ -111,9 +112,15 @@ export default function TransactionList(props) {
 
           <IconContainer>
             {open && <Settings click={handleClose} />}
-            <Icons src="/images/settings.svg" onClick={handleClickOpen} />
-            <Icons src="/images/refresh.svg" />
-            <Icons src="/images/filter.svg" />
+            <Tooltip disableFocusListener title="Settings">
+              <Icons src="/images/settings.svg" onClick={handleClickOpen} />
+            </Tooltip>
+            <Tooltip disableFocusListener title="Refresh">
+              <Icons src="/images/refresh.svg" />
+            </Tooltip>
+            <Tooltip disableFocusListener title="Filter">
+              <Icons src="/images/filter.svg" />
+            </Tooltip>
           </IconContainer>
         </TransactionBox>
 
@@ -158,18 +165,84 @@ export default function TransactionList(props) {
         <TableContainer>
           <Div>
             <Row>
-              <ColumnOne>Tx Hash</ColumnOne>
-              <ColumnOne>Status</ColumnOne>{" "}
               <ColumnOne>
-                Function
-                <Tooltip disableFocusListener title="Add">
-                  <ToolTipIcon src="/images/tool tip.svg" />
+                Tx Hash
+                <Tooltip
+                  open={TxHashToolTip}
+                  onOpen={() => setTxHashToolTip(true)}
+                  onClose={() => setTxHashToolTip(false)}
+                  disableFocusListener
+                  title="Unique transaction identifier, also known as the Transaction ID"
+                >
+                  <ToolTipIcon
+                    onClick={() => setTxHashToolTip(!TxHashToolTip)}
+                    src="/images/tool-tip.svg"
+                  />
                 </Tooltip>
               </ColumnOne>
-              <ColumnOne>Contracts</ColumnOne>
-              <ColumnOne>Form</ColumnOne>
-              <ColumnOne>To</ColumnOne>
-              <ColumnOne>When</ColumnOne>
+              <ColumnOne>
+                Status
+                <Tooltip
+                  open={statusToolTip}
+                  onOpen={() => setstatusToolTip(true)}
+                  onClose={() => setstatusToolTip(false)}
+                  disableFocusListener
+                  title="Token transaction status"
+                >
+                  <ToolTipIcon
+                    onClick={() => setstatusToolTip(!statusToolTip)}
+                    src="/images/tool-tip.svg"
+                  />
+                </Tooltip>
+              </ColumnOne>
+              <ColumnOne>
+                Function
+                <Tooltip
+                  open={functionToolTip}
+                  onOpen={() => setfunctionToolTip(true)}
+                  onClose={() => setfunctionToolTip(false)}
+                  disableFocusListener
+                  title="Smart contract function status"
+                >
+                  <ToolTipIcon
+                    onClick={() => setfunctionToolTip(!functionToolTip)}
+                    src="/images/tool-tip.svg"
+                  />
+                </Tooltip>
+              </ColumnOne>
+              <ColumnOne>
+                Contracts
+                <Tooltip
+                  disableFocusListener
+                  title="Name of the smart contract"
+                >
+                  <ToolTipIcon
+                    onClick={() => setstatusToolTip(!statusToolTip)}
+                    src="/images/tool-tip.svg"
+                  />
+                </Tooltip>
+              </ColumnOne>
+              <ColumnOne>
+                Form
+                <Tooltip disableFocusListener title="Sender’s account">
+                  <ToolTipIcon src="/images/tool-tip.svg" />
+                </Tooltip>
+              </ColumnOne>
+              <ColumnOne>
+                To
+                <Tooltip disableFocusListener title="Receiver’s account">
+                  <ToolTipIcon src="/images/tool-tip.svg" />
+                </Tooltip>
+              </ColumnOne>
+              <ColumnOne>
+                When
+                <Tooltip
+                  disableFocusListener
+                  title="Date and time of transaction execution"
+                >
+                  <ToolTipIcon src="/images/tool-tip.svg" />
+                </Tooltip>
+              </ColumnOne>
             </Row>
           </Div>
           <div>
@@ -205,6 +278,8 @@ export default function TransactionList(props) {
 const Div = styled.div`
   padding: 0.75rem;
   border-bottom: 1px solid #e3e7eb;
+  white-space: nowrap;
+  column-gap: 20px;
 `;
 const ColumnOne = styled.div`
   font-size: 0.875rem;
@@ -231,12 +306,22 @@ const TableContainer = styled.div`
     height: 381px;
     overflow-y: auto;
     position: relative;
-    &::-webkit-scrollbar {
-      width: 10px;
-      border: 0.5px solid blue;
+    ::-webkit-scrollbar {
+      border: 0.5px solid rgb(204, 229, 243);
       outline: none;
+      border-radius: 15px;
+      /* background: #00A58C; */
     }
-    width: 100%;
+    ::-webkit-scrollbar-track {
+      box-shadow: inset 0 0 1px grey;
+      border-radius: 15px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #3163f0;
+      border-radius: 15px;
+      border: 4px solid transparent;
+      background-clip: content-box;
+    }
   }
 `;
 

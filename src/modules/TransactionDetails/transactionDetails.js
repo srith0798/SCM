@@ -3,11 +3,10 @@ import styled from "styled-components";
 import { Row } from "simple-flexbox";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import "react-tabs/style/react-tabs.css";
-import Events from "./Events";
-import StateChange from "./StateChange";
-import SubContracts from "./SubContracts";
+import Events from "./events";
+import StateChange from "./stateChange";
+import SubContracts from "./subContracts";
 import { history } from "../../managers/history";
-
 import utility from "../../utility";
 
 export default function TransactionDetails() {
@@ -23,13 +22,12 @@ export default function TransactionDetails() {
       <SubContainer>
         <TitleDiv>
           <Title>
-            {" "}
             <img
               alt=""
               src="/images/back.svg"
               style={{ marginRight: "2px" }}
               onClick={() => backButton()}
-            />{" "}
+            />
             Transactions Details
           </Title>
         </TitleDiv>
@@ -49,9 +47,8 @@ export default function TransactionDetails() {
           <CopyToClipboard>
             <img alt="" src="/images/copy.svg" />
           </CopyToClipboard>
-          <RedButton>Fail</RedButton>
+          <FailButton>Fail</FailButton>
           <AlertButton>
-            {" "}
             <img
               alt=""
               style={{ width: "15px", cursor: "pointer", marginRight: "6px" }}
@@ -129,7 +126,7 @@ export default function TransactionDetails() {
                   : "/images/event_grey.svg"
               }
             />{" "}
-            Events <ToolTipIcon src="/images/tool tip.svg" />
+            Events <ToolTipIcon src="/images/tool-tip.svg" />
           </TabView>
           <TabView
             id="StateChange"
@@ -150,7 +147,7 @@ export default function TransactionDetails() {
               }
             />
             State changes
-            <ToolTipIcon src="/images/tool tip.svg" />
+            <ToolTipIcon src="/images/tool-tip.svg" />
           </TabView>
         </TabLister>
         {activeButton === "Overview" && (
@@ -304,9 +301,6 @@ export default function TransactionDetails() {
                   >
                     xdcabf...a32c99be1768b3c
                   </SubHeading>
-                  <SubHeading style={{ fontWeight: "400", marginLeft: "38px" }}>
-                    xdcabf...a32c99be1768b3c
-                  </SubHeading>
                 </Row>
               </CommonDiv>
             </FunctionContainer>
@@ -327,15 +321,15 @@ export default function TransactionDetails() {
                 </Row>
               </CommonDiv>
             </TokenTransferDiv>
-            <b>Stack Trace</b> <ToolTipIcon src="/images/tool tip.svg" />
+            <b>Stack Trace</b> <ToolTipIcon src="/images/tool-tip.svg" />
             <StackContainer>
               <TextLine>Error Messege:out of gas</TextLine>
               <img alt="" src="/images/error.svg" /> balances[_to] =
               balances[_to].add(_value);
               <br />
-              <div style={{ paddingLeft: "24px" }}>
+              {/* <div style={{ paddingLeft: "24px" }}>
                 At App_Transactions_Validator.sol in App_Transactions_Validator
-              </div>
+              </div> */}
             </StackContainer>
             <LastContainer>
               <SearchBar placeholder="Execution trace" />
@@ -372,12 +366,14 @@ const TitleDiv = styled.div`
   justify-content: space-between;
   width: 100%;
   max-width: 267px;
-  align-items: center;
   font-size: 24px;
   font-weight: 600;
 `;
 const Title = styled.div`
   white-space: nowrap;
+  @media (min-width: 340px) and (max-width: 768px) {
+    align-items: left;
+  }
 `;
 const FunctionContainer = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
@@ -443,7 +439,10 @@ const MainContainer = styled.div`
   width: 100%;
   padding: 2.125rem;
   display: 100%;
-  height: 200vh;
+  height: 230vh;
+  @media (min-width: 340px) and (max-width: 768px) {
+    padding: 1.5rem;
+  }
 `;
 
 const Heading = styled.div`
@@ -453,6 +452,9 @@ const Heading = styled.div`
   color: #102c78;
   width: 100%;
   max-width: 16.25rem;
+  @media (min-width: 340px) and (max-width: 768px) {
+    max-width: 11.25rem;
+  }
 `;
 
 const TransactionNumber = styled.div`
@@ -483,8 +485,8 @@ const SubContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
-  height: 3.125rem;
-  align-items: center;
+  // height: 3.125rem;
+  // align-items: center;
   @media (min-width: 300px) and (max-width: 485px) {
     flex-direction: column;
   }
@@ -527,6 +529,9 @@ const SubHeading = styled.div`
 const CopyToClipboardImg = styled.img`
   margin-left: 35px;
   cursor: pointer;
+  @media (min-width: 340px) and (max-width: 768px) {
+    margin-left: 3px;
+  }
 `;
 
 const TextLine = styled.div`
@@ -581,7 +586,7 @@ const ToolTipIcon = styled.img`
   cursor: pointer;
   margin-left: 0.513rem;
 `;
-const RedButton = styled.div`
+const FailButton = styled.div`
   color: #ce1a1a;
   padding: 0px 0px 0px 18px;
   width: 100%;
@@ -595,6 +600,9 @@ const RedButton = styled.div`
   border-radius: 4px;
   opacity: 1;
   margin-right: 12px;
+  @media (min-width: 300px) and (max-width: 767px) {
+    width: 87px;
+  }
 `;
 const AlertButton = styled.div`
   top: 202px;

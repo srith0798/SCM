@@ -1,10 +1,10 @@
 import React from "react";
-import { Row } from "simple-flexbox";
 import "react-tabs/style/react-tabs.css";
 import styled from "styled-components";
-import Historys from "./Historys";
-import Destination from "./Destination";
+import Historys from "./historys";
+import Destination from "./destination";
 import { history } from "../../managers/history";
+import Tooltip from "@mui/material/Tooltip";
 
 export default function Rules() {
   const [activeButton, setActiveButton] = React.useState("Rules");
@@ -15,162 +15,221 @@ export default function Rules() {
   const redirectToAlertDetails = () => {
     history.push("/dashboard/Alerting/alert-details");
   };
+  // Tooltip
+  const [networkToolTip, setnetworkToolTip] = React.useState(false);
+  const [addressToolTip, setaddressToolTip] = React.useState(false);
+  const [contractNameToolTip, setcontractNameToolTip] = React.useState(false);
+  const [alertTypeToolTip, setalertTypeToolTip] = React.useState(false);
 
   return (
     <>
-      <Row>
-        <MainContainer>
-          <Row>
-            <RowCorrecter>
-              <Title style={{ color: "#191919" }}>Alerting</Title>
-              <Button onClick={() => history.push("/dashboard/add-alert")}>
-                Add Alert
-              </Button>
-            </RowCorrecter>
-          </Row>
-          <Container>
-            <NewDivOne>
-              <Row>
-                <TabLister>
-                  <TabView
-                    id="Rules"
-                    onClick={handleViewClick}
-                    style={{
-                      color: activeButton === "Rules" ? "#3163F0" : "#AEB7D0",
-                      display: "flex",
-                      paddingBottom: "0.875rem",
-                      paddingTop: " 9px",
-                      fontSize: "14px",
-                      borderBottom:
-                        activeButton === "Rules" ? "2px solid #3163F0" : "",
-                    }}
-                  >
-                    <img
-                      alt=""
-                      style={{ marginRight: "0.375rem" }}
-                      src={
-                        activeButton === "Rules"
-                          ? "/images/rules.svg"
-                          : "/images/rules1.svg"
-                      }
-                    />
-                    Rules
-                  </TabView>
-                  <TabView
-                    id="History"
-                    onClick={handleViewClick}
-                    style={{
-                      color: activeButton === "History" ? "#3163F0" : "#AEB7D0",
-                      display: "flex",
-                      paddingBottom: "0.875rem",
-                      paddingTop: " 9px",
-                      fontSize: "14px",
-                      borderBottom:
-                        activeButton === "History"
-                          ? "0.125rem solid #3163F0"
-                          : "",
-                    }}
-                  >
-                    <img
-                      alt=""
-                      style={{ marginRight: "0.375rem" }}
-                      src={
-                        activeButton === "History"
-                          ? "/images/history_blue.svg"
-                          : "/images/history.svg"
-                      }
-                    />
-                    History
-                  </TabView>
-                  <TabView
-                    id="Destination"
-                    onClick={handleViewClick}
-                    style={{
-                      color:
-                        activeButton === "Destination" ? "#3163F0" : "#AEB7D0",
-                      display: "flex",
-                      fontSize: "1rem",
-                      paddingBottom: "0.875rem",
-                      paddingTop: " 9px",
-                      borderBottom:
-                        activeButton === "Destination"
-                          ? "0.125rem solid #3163F0"
-                          : "",
-                    }}
-                  >
-                    <img
-                      alt=""
-                      style={{ marginRight: "5px" }}
-                      src={
-                        activeButton === "Destination"
-                          ? "/images/destination_blue.svg"
-                          : "/images/destination.svg"
-                      }
-                    />
-                    Destination
-                  </TabView>
-                </TabLister>
-              </Row>
-            </NewDivOne>
-            {activeButton === "Rules" && (
-              <TableContainer>
-                <DetailBox>
-                  <NewDiv>
-                    <RowData onClick={redirectToAlertDetails}>
-                      <ColumnOne>Contract Name</ColumnOne>
-                      <ColumnOne>Address</ColumnOne>
-                      <ColumnOne>Network</ColumnOne>
-                      <ColumnOne>Alert Type</ColumnOne>
-                      <ColumnOne></ColumnOne>
-                      <ColumnOne></ColumnOne>
-                    </RowData>
-                  </NewDiv>
-                  <NewDiv>
-                    <RowData onClick={redirectToAlertDetails}>
-                      <ColumnTwo>App_Transactions</ColumnTwo>
-                      <ColumnTwo>xdcabfe…8b3c</ColumnTwo>
-                      <ColumnTwo>XDC Mainnet</ColumnTwo>
-                      <ColumnTwo>Sucessfull</ColumnTwo>
-                      <ColumnTwo style={{ fontSize: "14px", color: "#00A58C" }}>
-                        Enabled
-                      </ColumnTwo>
-                      <ColumnTwo>
-                        <img
-                          alt=""
-                          src="/images/delete_blue.svg"
-                          style={{ width: "1rem" }}
-                        />
-                      </ColumnTwo>
-                    </RowData>
-                  </NewDiv>
-                  <NewDiv>
-                    <RowData onClick={redirectToAlertDetails}>
-                      <ColumnTwo>App_Transactions</ColumnTwo>
-                      <ColumnTwo>xdcabfe…8b3c</ColumnTwo>
-                      <ColumnTwo>XDC Mainnet</ColumnTwo>
-                      <ColumnTwo>Failed </ColumnTwo>
-                      <ColumnTwo
-                        style={{ fontSize: "0.875rem", color: "#00A58C" }}
+      <MainContainer>
+        <TitleContainer>
+          <Title style={{ color: "#191919" }}>Alerting</Title>
+          <Button onClick={() => history.push("/dashboard/add-alert")}>
+            Add Alert
+          </Button>
+        </TitleContainer>
+        <Container>
+          <NewDivOne>
+            <TabLister>
+              <TabView
+                id="Rules"
+                onClick={handleViewClick}
+                style={{
+                  color: activeButton === "Rules" ? "#3163F0" : "#AEB7D0",
+                  display: "flex",
+                  paddingBottom: "0.875rem",
+                  paddingTop: " 9px",
+                  fontSize: "14px",
+                  borderBottom:
+                    activeButton === "Rules" ? "2px solid #3163F0" : "",
+                }}
+              >
+                <img
+                  alt=""
+                  style={{ marginRight: "0.375rem" }}
+                  src={
+                    activeButton === "Rules"
+                      ? "/images/rules.svg"
+                      : "/images/ruless.svg"
+                  }
+                ></img>
+                Rules
+              </TabView>
+              <TabView
+                id="History"
+                onClick={handleViewClick}
+                style={{
+                  color: activeButton === "History" ? "#3163F0" : "#AEB7D0",
+                  display: "flex",
+                  paddingBottom: "0.875rem",
+                  paddingTop: " 9px",
+                  fontSize: "14px",
+                  borderBottom:
+                    activeButton === "History" ? "0.125rem solid #3163F0" : "",
+                }}
+              >
+                <img
+                  alt=""
+                  style={{ marginRight: "0.375rem" }}
+                  src={
+                    activeButton === "History"
+                      ? "/images/history-blue.svg"
+                      : "/images/history.svg"
+                  }
+                />
+                History
+              </TabView>
+
+              <TabView
+                id="Destination"
+                onClick={handleViewClick}
+                style={{
+                  color: activeButton === "Destination" ? "#3163F0" : "#AEB7D0",
+                  display: "flex",
+                  fontSize: "1rem",
+                  paddingBottom: "0.875rem",
+                  paddingTop: " 9px",
+                  borderBottom:
+                    activeButton === "Destination"
+                      ? "0.125rem solid #3163F0"
+                      : "",
+                }}
+              >
+                <img
+                  alt=""
+                  style={{ marginRight: "5px" }}
+                  src={
+                    activeButton === "Destination"
+                      ? "/images/destination-blue.svg"
+                      : "/images/destination.svg"
+                  }
+                />
+                Destination
+              </TabView>
+            </TabLister>
+          </NewDivOne>
+          {activeButton === "Rules" && (
+            <TableContainer>
+              <DetailBox>
+                <NewDiv>
+                  <RowData onClick={redirectToAlertDetails}>
+                    <ColumnOne>
+                      Contract Name
+                      <Tooltip
+                        open={contractNameToolTip}
+                        onOpen={() => setcontractNameToolTip(true)}
+                        onClose={() => setcontractNameToolTip(false)}
+                        disableFocusListener
+                        title="Name of the smart contract"
                       >
-                        Enabled
-                      </ColumnTwo>
-                      <ColumnTwo>
+                        <ToolTipIcon
+                          onClick={() =>
+                            setcontractNameToolTip(!contractNameToolTip)
+                          }
+                          src="/images/tool-tip.svg"
+                        />
+                      </Tooltip>
+                    </ColumnOne>
+                    <ColumnOne>
+                      Address
+                      <Tooltip
+                        open={addressToolTip}
+                        onOpen={() => setaddressToolTip(true)}
+                        onClose={() => setaddressToolTip(false)}
+                        disableFocusListener
+                        title="Wallet address"
+                      >
+                        <ToolTipIcon
+                          onClick={() => setaddressToolTip(!addressToolTip)}
+                          src="/images/tool-tip.svg"
+                        />
+                      </Tooltip>
+                    </ColumnOne>
+                    <ColumnOne>
+                      Network
+                      <Tooltip
+                        open={networkToolTip}
+                        onOpen={() => setnetworkToolTip(true)}
+                        onClose={() => setnetworkToolTip(false)}
+                        disableFocusListener
+                        title="The executing blockchain network"
+                      >
+                        <ToolTipIcon
+                          onClick={() => setnetworkToolTip(!networkToolTip)}
+                          src="/images/tool-tip.svg"
+                        />
+                      </Tooltip>
+                    </ColumnOne>
+                    <ColumnOne>
+                      Alert Type
+                      <Tooltip
+                        open={alertTypeToolTip}
+                        onOpen={() => setalertTypeToolTip(true)}
+                        onClose={() => setalertTypeToolTip(false)}
+                        disableFocusListener
+                        title="Transaction status"
+                      >
+                        <ToolTipIcon
+                          onClick={() => setalertTypeToolTip(!alertTypeToolTip)}
+                          src="/images/tool-tip.svg"
+                        />
+                      </Tooltip>
+                    </ColumnOne>
+                    <ColumnOne></ColumnOne>
+                    <ColumnOne></ColumnOne>
+                  </RowData>
+                </NewDiv>
+                <NewDiv>
+                  <RowData onClick={redirectToAlertDetails}>
+                    <ColumnTwo>App_Transactions</ColumnTwo>
+                    <ColumnTwo>xdcabfe…8b3c</ColumnTwo>
+                    <ColumnTwo>XDC Mainnet</ColumnTwo>
+                    <ColumnTwo>Sucessfull</ColumnTwo>
+                    <ColumnTwo style={{ fontSize: "14px", color: "#00A58C" }}>
+                      Enabled
+                    </ColumnTwo>
+                    <ColumnTwo>
+                      <Tooltip disableFocusListener title="Delete">
                         <img
                           alt=""
-                          src="/images/delete_blue.svg"
+                          src="/images/delete-blue.svg"
                           style={{ width: "1rem" }}
                         />
-                      </ColumnTwo>
-                    </RowData>
-                  </NewDiv>
-                </DetailBox>
-              </TableContainer>
-            )}
-            {activeButton === "History" && <Historys />}
-            {activeButton === "Destination" && <Destination />}
-          </Container>
-        </MainContainer>
-      </Row>
+                      </Tooltip>
+                    </ColumnTwo>
+                  </RowData>
+                </NewDiv>
+                <NewDiv>
+                  <RowData onClick={redirectToAlertDetails}>
+                    <ColumnTwo>App_Transactions</ColumnTwo>
+                    <ColumnTwo>xdcabfe…8b3c</ColumnTwo>
+                    <ColumnTwo>XDC Mainnet</ColumnTwo>
+                    <ColumnTwo>Failed </ColumnTwo>
+                    <ColumnTwo
+                      style={{ fontSize: "0.875rem", color: "#00A58C" }}
+                    >
+                      Enabled
+                    </ColumnTwo>
+                    <ColumnTwo>
+                      <Tooltip disableFocusListener title="Delete">
+                        <img
+                          alt=""
+                          src="/images/delete-blue.svg"
+                          style={{ width: "1rem" }}
+                        />
+                      </Tooltip>
+                    </ColumnTwo>
+                  </RowData>
+                </NewDiv>
+              </DetailBox>
+            </TableContainer>
+          )}
+          {activeButton === "History" && <Historys />}
+          {activeButton === "Destination" && <Destination />}
+        </Container>
+      </MainContainer>
     </>
   );
 }
@@ -188,14 +247,13 @@ const TableContainer = styled.div`
       border: 0.5px solid rgb(204, 229, 243);
       outline: none;
       border-radius: 15px;
-      /* background: #00A58C; */
     }
     ::-webkit-scrollbar-track {
       box-shadow: inset 0 0 1px grey;
       border-radius: 15px;
     }
     ::-webkit-scrollbar-thumb {
-      background: rgb(56, 56, 231);
+      background: #3163f0;
       border-radius: 15px;
       border: 4px solid transparent;
       background-clip: content-box;
@@ -224,17 +282,23 @@ const RowData = styled.div`
     column-gap: 84px;
   }
 `;
+const ToolTipIcon = styled.img`
+  width: 0.75rem;
+  cursor: pointer;
+  margin-left: 0.313rem;
+  white-space: nowrap;
+`;
 
 const ColumnOne = styled.div`
   display: flex;
-  flex-flow: column nowrap;
   font-size: 0.875rem;
   font-weight: 600;
   color: #102c78;
   width: 100%;
   max-width: 18.75rem;
+  cursor: pointer;
   @media (min-width: 300px) and (max-width: 768px) {
-    margin-right: 40px;
+    margin-right: 32px;
   }
 `;
 const ColumnTwo = styled.div`
@@ -283,7 +347,8 @@ const NewDiv = styled.div`
 const NewDivOne = styled.div`
   border-bottom: 0.063rem solid #e3e7eb;
 `;
-const RowCorrecter = styled.div`
+
+const TitleContainer = styled.div`
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
