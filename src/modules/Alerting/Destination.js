@@ -18,30 +18,30 @@ export default function Destination() {
             </ColumnOne>
           </Row>
           <RowContainer>
-            <Buttonn>
+            <Button>
               <img
                 alt=""
                 src="/images/slack.svg"
                 style={{ marginRight: "0.25rem", width: "1.3rem" }}
               />{" "}
               Slack
-            </Buttonn>
-            <Buttonn>
+            </Button>
+            <Button>
               <img
                 alt=""
                 src="/images/webhook.svg"
                 style={{ marginRight: "0.25rem", width: "1.3rem" }}
               />
               Webhook
-            </Buttonn>
-            <Buttonn>
+            </Button>
+            <Button>
               <img
                 alt=""
                 src="/images/email.svg"
                 style={{ marginRight: "0.25rem", width: "1.3rem" }}
               />
               Email
-            </Buttonn>
+            </Button>
           </RowContainer>
         </Div>
 
@@ -118,17 +118,20 @@ const LastDiv = styled.div`
   @media (min-width: 300px) and (max-width: 767px) {
     width: 100%;
     ::-webkit-scrollbar {
-      width: 10px;
       border: 0.5px solid rgb(204, 229, 243);
       outline: none;
+      border-radius: 15px;
+      /* background: #00A58C; */
     }
     ::-webkit-scrollbar-track {
-      box-shadow: inset 0 0 5px grey;
-      border-radius: 8px;
+      box-shadow: inset 0 0 1px grey;
+      border-radius: 15px;
     }
     ::-webkit-scrollbar-thumb {
       background: #3163f0;
       border-radius: 15px;
+      border: 4px solid transparent;
+      background-clip: content-box;
     }
   }
 `;
@@ -147,7 +150,7 @@ const ColumnOne = styled.div`
   margin-bottom: 1.25rem;
   border-bottom: 0.125rem solid #e3e7eb;
 `;
-const Buttonn = styled.div`
+const Button = styled.div`
   width: 6rem;
   height: 2.5rem;
   background: #ffffff 0% 0% no-repeat padding-box;
@@ -159,8 +162,6 @@ const Buttonn = styled.div`
   color: #1d3c93;
   font-size: 0.875rem;
   cursor: pointer;
-  @media (min-width: 300px) and (max-width: 768px) {
-  }
 `;
 const ColumnTwo = styled.div`
   display: flex;
@@ -172,8 +173,6 @@ const ColumnTwo = styled.div`
   width: 100%;
   max-width: 11.25rem;
   margin: 0.25rem;
-  @media (min-width: 300px) and (max-width: 768px) {
-  }
 `;
 const RowData = styled.div`
   display: flex;
@@ -191,8 +190,6 @@ const RowContainer = styled.div`
   width: 100%;
   max-width: 21.25rem;
   margin-bottom: 1.25rem;
-  @media (min-width: 300px) and (max-width: 768px) {
-  }
 `;
 const ColorChanging = styled.text`
   color: #00a58c;

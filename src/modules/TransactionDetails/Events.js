@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-
 export default function Events() {
   return (
     <>
@@ -26,7 +25,7 @@ export default function Events() {
             <HeaderText>App_Transactions_Validator</HeaderText>
             <CodeWrapper>
               &#123; <br />
-              "From": xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c
+              "From": xdcabfe4184e5f9f600fe768b3c
               <br />
               "to"
               <br />
@@ -43,7 +42,7 @@ export default function Events() {
             <HeaderText>App_Transactions_Validator</HeaderText>
             <CodeWrapper>
               &#123; <br />
-              "From": xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c
+              "From": xdcabfe4184e5f9f60061768b3c
               <br />
               "to"
               <br />
@@ -66,6 +65,28 @@ const MainContainer = styled.div`
   flex-direction: column;
   margin: 20px 0 20px 0;
   background-color: white;
+  margin-top: 1.25rem;
+  overflow-y: hidden;
+  @media (min-width: 300px) and (max-width: 767px) {
+    width: 100%;
+    line-height: normal;
+    ::-webkit-scrollbar {
+      border: 0.5px solid rgb(204, 229, 243);
+      outline: none;
+      border-radius: 15px;
+      /* background: #00A58C; */
+    }
+    ::-webkit-scrollbar-track {
+      box-shadow: inset 0 0 1px grey;
+      border-radius: 15px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #3163f0;
+      border-radius: 15px;
+      border: 4px solid transparent;
+      background-clip: content-box;
+    }
+  }
 `;
 
 const FilterContainer = styled.div`
@@ -73,6 +94,9 @@ const FilterContainer = styled.div`
   width: 300px;
   justify-content: space-between;
   margin-left: 10px;
+  @media (min-width: 300px) and (max-width: 767px) {
+    flex-direction: column;
+  }
 `;
 const FilterDivision = styled.div`
   display: flex;
@@ -126,8 +150,7 @@ const InCodeSelect = styled.select`
   outline: none;
   border: none;
   border-radius: 3px;
-  width: 220px;
-  padding: 0px 10px 0px 10px;
+  padding: 0px 00px 0px 10px;
   font-size: 15px;
   height: 25px;
   color: #416be0;

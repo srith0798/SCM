@@ -15,239 +15,236 @@ export default function TransactionDetails() {
   };
   return (
     <>
-      <Header />
-      <Row>
-        <MainContainer>
-          <Row style={{ display: "flex", justifyContent: "space-between" }}>
-            <TitleDiv>
-              <img
-                alt=""
-                style={{ marginRight: "0.425rem", cursor: "pointer" }}
-                src="/images/back.svg"
-                onClick={backButton}
-              />
-              <Title>Transactions Details</Title>
-            </TitleDiv>
-            <Button>View in Explorer</Button>
-          </Row>
+      <MainContainer>
+        <Row style={{ display: "flex", justifyContent: "space-between" }}>
+          <TitleDiv>
+            <img
+              alt=""
+              style={{ marginRight: "0.425rem", cursor: "pointer" }}
+              src="/images/back.svg"
+              onClick={backButton}
+            />
+            <Title>Transactions Details</Title>
+          </TitleDiv>
+          <Button>View in Explorer</Button>
+        </Row>
 
-          <Container>
-            <SubHeading
-              style={{ paddingTop: "0.625rem", paddingLeft: "1.25rem" }}
-            >
-              Txn hash
-            </SubHeading>
-            <div
+        <Container>
+          <SubHeading
+            style={{ paddingTop: "0.625rem", paddingLeft: "1.25rem" }}
+          >
+            Txn hash
+          </SubHeading>
+          <div
+            style={{
+              paddingLeft: "1.25rem",
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            <Hash>xdcabfe4184e5f9f600fe86d20ffdse2fsfbsgsgsa768b3c</Hash>
+            <CopyToClipboard>
+              <CopyImg src="/images/copy.svg" />
+            </CopyToClipboard>
+          </div>
+          <TabLister>
+            <TabView
+              id="Overview"
+              onClick={handleViewClick}
               style={{
-                paddingLeft: "1.25rem",
+                color: activeButton === "Overview" ? "#3163F0" : "#AEB7D0",
                 display: "flex",
-                alignItems: "center",
+                paddingBottom: "0.875rem",
+                borderBottom:
+                  activeButton === "Overview"
+                    ? "0.125rem solid #3163F0"
+                    : "#AEB7D0",
               }}
             >
-              <Hash>xdcabfe4184e5f9f600fe86d20ffdse2fsfbsgsgsa768b3c</Hash>
-              <CopyToClipboard>
-                <CopyImg src="/images/copy.svg" />
-              </CopyToClipboard>
-            </div>
-            <TabLister>
-              <TabView
-                id="Overview"
-                onClick={handleViewClick}
-                style={{
-                  color: activeButton === "Overview" ? "#3163F0" : "#AEB7D0",
-                  display: "flex",
-                  paddingBottom: "0.875rem",
-                  borderBottom:
-                    activeButton === "Overview"
-                      ? "0.125rem solid #3163F0"
-                      : "#AEB7D0",
-                }}
-              >
+              <img
+                alt=""
+                style={{ marginRight: "0.375rem" }}
+                src={
+                  activeButton === "Overview"
+                    ? "/images/overview.svg"
+                    : "/images/overview_grey.svg"
+                }
+              />
+              Overview
+            </TabView>
+            <TabView
+              id="Contracts"
+              onClick={handleViewClick}
+              style={{
+                color: activeButton === "Contracts" ? "#3163F0" : "#AEB7D0",
+                display: "flex",
+                paddingBottom: "0.875rem",
+                borderBottom:
+                  activeButton === "Contracts" ? "0.125rem solid blue" : "",
+              }}
+            >
+              <img
+                alt=""
+                style={{ marginRight: "0.375rem" }}
+                src={
+                  activeButton === "Contracts"
+                    ? "/images/contracts.svg"
+                    : "/images/contract_grey.svg"
+                }
+              />
+              Contracts
+            </TabView>
+            <TabView
+              id="Events"
+              onClick={handleViewClick}
+              style={{
+                color: activeButton === "Events" ? "#3163F0" : "#AEB7D0",
+                display: "flex",
+                paddingBottom: "0.875rem",
+                borderBottom:
+                  activeButton === "Events" ? "0.125rem solid #3163F0" : "",
+              }}
+            >
+              <img
+                alt=""
+                style={{ marginRight: "0.375rem" }}
+                src={
+                  activeButton === "Events"
+                    ? "/images/event_blue.svg"
+                    : "/images/event_grey.svg"
+                }
+              />{" "}
+              Events
+            </TabView>
+            <TabView
+              id="StateChange"
+              onClick={handleViewClick}
+              style={{
+                color: activeButton === "StateChange" ? "#3163F0" : "#AEB7D0",
+                borderBottom:
+                  activeButton === "StateChange"
+                    ? "0.125rem solid #3163F0"
+                    : "",
+              }}
+            >
+              <img
+                alt=""
+                style={{ marginRight: "0.375rem", marginBottom: "4px" }}
+                src={
+                  activeButton === "Events"
+                    ? "/images/statechange_grey.svg"
+                    : "/images/statechange_grey.svg"
+                }
+              />
+              State Change
+            </TabView>
+          </TabLister>{" "}
+        </Container>
+        <BoxContainer>
+          <DetailContainer>
+            <Row>
+              <Heading>Contracts </Heading>
+              <SubHead>App_Transactions_Validator</SubHead>
+            </Row>
+          </DetailContainer>
+          <CommonDiv>
+            <Row>
+              <Heads>
                 <img
                   alt=""
-                  style={{ marginRight: "0.375rem" }}
-                  src={
-                    activeButton === "Overview"
-                      ? "/images/overview.svg"
-                      : "/images/overview_grey.svg"
-                  }
+                  src="/images/contracts.svg"
+                  style={{ width: "1rem" }}
                 />
-                Overview
-              </TabView>
-              <TabView
-                id="Contracts"
-                onClick={handleViewClick}
-                style={{
-                  color: activeButton === "Contracts" ? "#3163F0" : "#AEB7D0",
-                  display: "flex",
-                  paddingBottom: "0.875rem",
-                  borderBottom:
-                    activeButton === "Contracts" ? "0.125rem solid blue" : "",
-                }}
-              >
+                <TextLi>Subcontracts name</TextLi>
+              </Heads>
+            </Row>
+          </CommonDiv>
+          <CommonDiv>
+            <Row>
+              <Head>
                 <img
                   alt=""
-                  style={{ marginRight: "0.375rem" }}
-                  src={
-                    activeButton === "Contracts"
-                      ? "/images/contracts.svg"
-                      : "/images/contract_grey.svg"
-                  }
+                  src="/images/contracts.svg"
+                  style={{ width: "1rem" }}
                 />
-                Contracts
-              </TabView>
-              <TabView
-                id="Events"
-                onClick={handleViewClick}
-                style={{
-                  color: activeButton === "Events" ? "#3163F0" : "#AEB7D0",
-                  display: "flex",
-                  paddingBottom: "0.875rem",
-                  borderBottom:
-                    activeButton === "Events" ? "0.125rem solid #3163F0" : "",
-                }}
-              >
+                Subcontracts name
+              </Head>
+            </Row>
+          </CommonDiv>
+          <CommonDiv>
+            <Row>
+              <Head>
                 <img
                   alt=""
-                  style={{ marginRight: "0.375rem" }}
-                  src={
-                    activeButton === "Events"
-                      ? "/images/event_blue.svg"
-                      : "/images/event_grey.svg"
-                  }
-                />{" "}
-                Events
-              </TabView>
-              <TabView
-                id="StateChange"
-                onClick={handleViewClick}
-                style={{
-                  color: activeButton === "StateChange" ? "#3163F0" : "#AEB7D0",
-                  borderBottom:
-                    activeButton === "StateChange"
-                      ? "0.125rem solid #3163F0"
-                      : "",
-                }}
-              >
-                <img
-                  alt=""
-                  style={{ marginRight: "0.375rem", marginBottom: "4px" }}
-                  src={
-                    activeButton === "Events"
-                      ? "/images/statechange_grey.svg"
-                      : "/images/statechange_grey.svg"
-                  }
+                  src="/images/contracts.svg"
+                  style={{ width: "1rem" }}
                 />
-                State Change
-              </TabView>
-            </TabLister>{" "}
-          </Container>
-          <BoxContainer>
-            <DetailContainer>
-              <Row>
-                <Heading>Contracts </Heading>
-                <SubHead>App_Transactions_Validator</SubHead>
-              </Row>
-            </DetailContainer>
-            <CommonDiv>
-              <Row>
-                <Heads>
-                  <img
-                    alt=""
-                    src="/images/contracts.svg"
-                    style={{ width: "1rem" }}
-                  />
-                  <TextLi>Subcontracts name</TextLi>
-                </Heads>
-              </Row>
-            </CommonDiv>
-            <CommonDiv>
-              <Row>
-                <Head>
-                  <img
-                    alt=""
-                    src="/images/contracts.svg"
-                    style={{ width: "1rem" }}
-                  />
-                  Subcontracts name
-                </Head>
-              </Row>
-            </CommonDiv>
-            <CommonDiv>
-              <Row>
-                <Head>
-                  <img
-                    alt=""
-                    src="/images/contracts.svg"
-                    style={{ width: "1rem" }}
-                  />
-                  Subcontracts name
-                </Head>
-              </Row>
-            </CommonDiv>
-            <CommonDiv>
-              <Row>
-                <Head>
-                  <img
-                    alt=""
-                    src="/images/contracts.svg"
-                    style={{ width: "1rem" }}
-                  />
-                  Subcontracts name
-                </Head>
-              </Row>
-            </CommonDiv>
-            <CommonDiv>
-              <Row>
-                <Head>
-                  <img
-                    alt=""
-                    src="/images/contracts.svg"
-                    style={{ width: "1rem" }}
-                  />
-                  Subcontracts name
-                </Head>
-              </Row>
-            </CommonDiv>
-            <CommonDiv>
-              <Row>
-                <Head>
-                  <img
-                    alt=""
-                    src="/images/contracts.svg"
-                    style={{ width: "1rem" }}
-                  />
-                  Subcontracts name
-                </Head>
-              </Row>
-            </CommonDiv>
-            <CommonDiv>
-              <Row>
-                <Head>
-                  <img
-                    alt=""
-                    src="/images/contracts.svg"
-                    style={{ width: "1rem" }}
-                  />
-                  Subcontracts name
-                </Head>
-              </Row>
-            </CommonDiv>
-            <CommonDiv>
-              <Row>
-                <Head>
-                  <img
-                    alt=""
-                    src="/images/contracts.svg"
-                    style={{ width: "1rem" }}
-                  />
-                  Subcontracts name
-                </Head>
-              </Row>
-            </CommonDiv>
-          </BoxContainer>
-        </MainContainer>
-      </Row>
+                Subcontracts name
+              </Head>
+            </Row>
+          </CommonDiv>
+          <CommonDiv>
+            <Row>
+              <Head>
+                <img
+                  alt=""
+                  src="/images/contracts.svg"
+                  style={{ width: "1rem" }}
+                />
+                Subcontracts name
+              </Head>
+            </Row>
+          </CommonDiv>
+          <CommonDiv>
+            <Row>
+              <Head>
+                <img
+                  alt=""
+                  src="/images/contracts.svg"
+                  style={{ width: "1rem" }}
+                />
+                Subcontracts name
+              </Head>
+            </Row>
+          </CommonDiv>
+          <CommonDiv>
+            <Row>
+              <Head>
+                <img
+                  alt=""
+                  src="/images/contracts.svg"
+                  style={{ width: "1rem" }}
+                />
+                Subcontracts name
+              </Head>
+            </Row>
+          </CommonDiv>
+          <CommonDiv>
+            <Row>
+              <Head>
+                <img
+                  alt=""
+                  src="/images/contracts.svg"
+                  style={{ width: "1rem" }}
+                />
+                Subcontracts name
+              </Head>
+            </Row>
+          </CommonDiv>
+          <CommonDiv>
+            <Row>
+              <Head>
+                <img
+                  alt=""
+                  src="/images/contracts.svg"
+                  style={{ width: "1rem" }}
+                />
+                Subcontracts name
+              </Head>
+            </Row>
+          </CommonDiv>
+        </BoxContainer>
+      </MainContainer>
     </>
   );
 }

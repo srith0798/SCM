@@ -1,11 +1,10 @@
 import React from "react";
 import { Row } from "simple-flexbox";
+import { history } from "../../managers/history";
 import "react-tabs/style/react-tabs.css";
 import styled from "styled-components";
-import Historys from "./Historys";
-import Destination from "./Destination";
-
-import { history } from "../../managers/history";
+import Destination from "./destination";
+import Historys from "./historys";
 
 export default function AddAlert() {
   const [activeButton, setActiveButton] = React.useState("Rules");
@@ -292,7 +291,6 @@ export default function AddAlert() {
               </SideLineProvider>
 
               <AlertContainer>
-                {/* <NumberShowUP>2</NumberShowUP> */}
                 {progress === "ALERT_TYPE" || progress === "ALERT_TARGET" ? (
                   <NumberShowUP>2</NumberShowUP>
                 ) : (
@@ -479,7 +477,6 @@ export default function AddAlert() {
     </>
   );
 }
-const SliderDiv = styled.div``;
 
 const DestinationDetail = styled.div`
   margin-bottom: 10px;
@@ -632,6 +629,7 @@ const TabView = styled.div`
     padding: 1px;
   }
 `;
+const SliderDiv = styled.div``;
 
 const AlertContainer = styled.div`
   display: flex;

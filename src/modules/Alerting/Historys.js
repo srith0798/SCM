@@ -82,18 +82,19 @@ const MainContainer = styled.div`
   @media (min-width: 300px) and (max-width: 767px) {
     width: 100%;
     ::-webkit-scrollbar {
-      width: 500px;
       border: 0.5px solid rgb(204, 229, 243);
       outline: none;
+      border-radius: 15px;
+      /* background: #00A58C; */
     }
     ::-webkit-scrollbar-track {
-      box-shadow: inset 0 0 5px grey;
-      border-radius: 2px;
+      box-shadow: inset 0 0 1px grey;
+      border-radius: 15px;
     }
     ::-webkit-scrollbar-thumb {
-      background: rgb(56, 56, 231);
-      width: 1px;
+      background: #3163f0;
       border-radius: 15px;
+      border: 4px solid transparent;
       background-clip: content-box;
     }
   }
@@ -102,22 +103,14 @@ const MainContainer = styled.div`
 const NewDiv = styled.div`
   padding: 0.738rem;
   border-bottom: 0.063rem solid #e3e7eb;
-
-  @media (min-width: 300px) and (max-width: 768px) {
-  }
 `;
 const DetailBox = styled.div`
   display: flex;
   flex-direction: column;
-  @media (min-width: 300px) and (max-width: 768px) {
-    // overflow: scroll;
-  }
 `;
 const Div = styled.div`
   padding: 0.938rem;
   border-bottom: 0.063rem solid #e3e7eb;
-  @media (min-width: 300px) and (max-width: 768px) {
-  }
 `;
 const RowData = styled.div`
   display: flex;
@@ -145,7 +138,7 @@ const ColumnOne = styled.div`
   width: 100%;
   max-width: 18.75rem;
   @media (min-width: 300px) and (max-width: 768px) {
-    margin-right: 32px;
+    margin-right: 18px;
     margin-left: 5px;
   }
 `;

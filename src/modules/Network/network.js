@@ -4,7 +4,7 @@ import { Row } from "simple-flexbox";
 import AddNetwork from "../Popup/addNetwork";
 import Tooltip from "@mui/material/Tooltip";
 
-export default function Network(props) {
+export default function Network() {
   const [open, setOpen] = useState(false);
   const handleClickOpen = () => {
     setOpen(true);
@@ -32,6 +32,10 @@ export default function Network(props) {
   }, []);
 
   const [address, setAddress] = React.useState([]);
+
+  const [networkToolTip, setnetworkToolTip] = React.useState(false);
+  const [urlToolTip, seturlToolTip] = React.useState(false);
+
   return (
     <MainContainer>
       <SubContainer>
@@ -50,16 +54,31 @@ export default function Network(props) {
             <ColumnOne>
               Network
               <Tooltip
+                open={networkToolTip}
+                onOpen={() => setnetworkToolTip(true)}
+                onClose={() => setnetworkToolTip(false)}
                 disableFocusListener
                 title="The blockchain network in use"
               >
-                <ToolTipIcon src="/images/tool-tip.svg" />
+                <ToolTipIcon
+                  onClick={() => setnetworkToolTip(!networkToolTip)}
+                  src="/images/tool-tip.svg"
+                />
               </Tooltip>
             </ColumnOne>
             <UrlHeading>
               URL
-              <Tooltip disableFocusListener title="URL of the network">
-                <ToolTipIcon src="/images/tool-tip.svg" />
+              <Tooltip
+                open={urlToolTip}
+                onOpen={() => seturlToolTip(true)}
+                onClose={() => seturlToolTip(false)}
+                disableFocusListener
+                title="URL of the network"
+              >
+                <ToolTipIcon
+                  onClick={() => seturlToolTip(!urlToolTip)}
+                  src="/images/tool-tip.svg"
+                />
               </Tooltip>
             </UrlHeading>
           </Row>
@@ -85,7 +104,7 @@ export default function Network(props) {
 const MainContainer = styled.div`
   background-color: #ecf0f7;
   width: 100%;
-  padding: 3.125rem;
+  padding: 2.125rem;
   height: 100vh;
 `;
 const SubContainer = styled.div`
@@ -117,7 +136,7 @@ const UrlHeading = styled.div`
 const Button = styled.button`
   background-image: url("/images/Add.svg");
   background-repeat: no-repeat;
-  background-position: 0.5rem;
+  background-position: 0.3rem;
   padding-left: 1.313rem;
   background-size: 0.875rem;
   position: relative;
@@ -129,9 +148,10 @@ const Button = styled.button`
   height: 2.188rem;
   font-size: 0.875rem;
   @media (min-width: 300px) and (max-width: 768px) {
-    width: 6.125rem;
+    width: 7.125rem;
     height: 2rem;
-    font-size: 0.675rem;
+    font-size: 0.8em;
+    whitespace: rowrap;
   }
 `;
 const Div = styled.div`
@@ -145,6 +165,24 @@ const Div = styled.div`
   @media (min-width: 300px) and (max-width: 768px) {
     height: 400px;
     overflow: scroll;
+    overflow-y: hidden;
+    width: 100%;
+    ::-webkit-scrollbar {
+      border: 0.5px solid rgb(204, 229, 243);
+      outline: none;
+      border-radius: 15px;
+      /* background: #00A58C; */
+    }
+    ::-webkit-scrollbar-track {
+      box-shadow: inset 0 0 1px grey;
+      border-radius: 15px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #3163f0;
+      border-radius: 15px;
+      border: 4px solid transparent;
+      background-clip: content-box;
+    }
   }
 `;
 const Container = styled.div`

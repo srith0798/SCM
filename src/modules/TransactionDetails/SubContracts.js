@@ -93,6 +93,7 @@ const MainBoxContainer = styled.div`
   height: 6.5rem;
   @media (min-width: 300px) and (max-width: 768px) {
     flex-direction: column;
+    height: auto;
   }
 `;
 const Title = styled.div`

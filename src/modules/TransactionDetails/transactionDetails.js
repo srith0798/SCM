@@ -3,9 +3,9 @@ import styled from "styled-components";
 import { Row } from "simple-flexbox";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import "react-tabs/style/react-tabs.css";
-import Events from "./Events";
-import StateChange from "./StateChange";
-import SubContracts from "./SubContracts";
+import Events from "./events";
+import StateChange from "./stateChange";
+import SubContracts from "./subContracts";
 import { history } from "../../managers/history";
 import utility from "../../utility";
 
@@ -47,9 +47,8 @@ export default function TransactionDetails() {
           <CopyToClipboard>
             <img alt="" src="/images/copy.svg" />
           </CopyToClipboard>
-          <RedButton>Fail</RedButton>
+          <FailButton>Fail</FailButton>
           <AlertButton>
-            {" "}
             <img
               alt=""
               style={{ width: "15px", cursor: "pointer", marginRight: "6px" }}
@@ -587,7 +586,7 @@ const ToolTipIcon = styled.img`
   cursor: pointer;
   margin-left: 0.513rem;
 `;
-const RedButton = styled.div`
+const FailButton = styled.div`
   color: #ce1a1a;
   padding: 0px 0px 0px 18px;
   width: 100%;
@@ -601,6 +600,9 @@ const RedButton = styled.div`
   border-radius: 4px;
   opacity: 1;
   margin-right: 12px;
+  @media (min-width: 300px) and (max-width: 767px) {
+    width: 87px;
+  }
 `;
 const AlertButton = styled.div`
   top: 202px;
