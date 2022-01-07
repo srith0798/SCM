@@ -24,7 +24,7 @@ export default function TransactionList() {
   React.useEffect(() => {
     let address = [
       {
-        txn: "0xcb93a…f617",
+        txn: "0xcb93a4c5…f617",
         status: "Success",
         function: "Transfer",
         contracts: "App_Transactions",
@@ -265,7 +265,6 @@ export default function TransactionList() {
           </div>
         </TableContainer>
       </MainContainer>
-      {/* </Row> */}
       <div>
         {false && (
           <LetsGetStarted click={() => setState(false)} state={state} />
@@ -281,18 +280,7 @@ const Div = styled.div`
   white-space: nowrap;
   column-gap: 20px;
 `;
-const ColumnOne = styled.div`
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: #102c78;
-  width: 100%;
-  max-width: 18.75rem;
-  white-space: nowrap;
-  @media (min-width: 300px) and (max-width: 767px) {
-    margin-right: 59px;
-    width: 100%;
-  }
-`;
+
 const TableContainer = styled.div`
   background-color: #ffffff;
   border-radius: 0.375rem;
@@ -300,6 +288,7 @@ const TableContainer = styled.div`
   height: 25rem;
   padding: 0.625rem;
   margin-top: 1.563rem;
+  overflow: auto;
   @media (min-width: 300px) and (max-width: 767px) {
     overflow: scroll;
     width: 100%;
@@ -357,9 +346,9 @@ const Transactions = styled.div`
 const TransactionMedia = styled.div`
   display: none;
   @media (min-width: 360px) and (max-width: 577px) {
-    font-size: 1rem;
+    font-size: 1.3rem;
     padding-bottom: 10px;
-    font-weight: 600;
+    font-weight: 700;
     display: flex;
   }
 `;
@@ -384,9 +373,9 @@ const SearchBar = styled.input`
     display: flex;
     margin-left: -1px;
     margin-right: 8px;
-    padding: 5px;
-    font-size: 14px;
-    background-image: none;
+    // padding: 5px;
+    font-size: 13px;
+    // background-image: none;
   }
 `;
 const Icons = styled.img`
@@ -417,12 +406,26 @@ const Card = styled.div`
   border-radius: 0.25rem;
   padding: 1rem 0rem 2rem 1rem;
 `;
+const ColumnOne = styled.div`
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #102c78;
+  column-gap: 20px;
+  width: 100%;
+  min-width: 200px;
+  white-space: nowrap;
+  @media (min-width: 300px) and (max-width: 767px) {
+    // margin-right: 59px;
+    width: 100%;
+  }
+`;
 const ColumnSecond = styled.div`
   font-size: 0.875rem;
   font-weight: 300;
   color: #191919;
   width: 100%;
-  max-width: 300px;
+  // max-width: 300px;
+  min-width: 200px;
 `;
 const DropDown = styled.div`
   background: #f5f6fd 0% 0% no-repeat padding-box;
@@ -451,7 +454,7 @@ const TransactionHash = styled.div`
 const Image = styled.img`
   width: 0.75rem;
   position: absolute;
-  top: 29px;
+  top: 16px;
   right: 8px;
   cursor: pointer;
 `;

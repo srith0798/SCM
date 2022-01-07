@@ -48,7 +48,7 @@ export default function AddAlert() {
   const backButton = () => {
     history.push("/dashboard/rules");
   };
-  //TODO: code needs to be optimized for src change
+
   const changeSourceForIcons = (value) => {
     if (value === "successfulTransaction")
       setsuccessfulTransaction("/images/successful-transaction.svg");
@@ -289,7 +289,6 @@ export default function AddAlert() {
                   </MainBoxContainer>
                 )}
               </SideLineProvider>
-
               <AlertContainer>
                 {progress === "ALERT_TYPE" || progress === "ALERT_TARGET" ? (
                   <NumberShowUP>2</NumberShowUP>

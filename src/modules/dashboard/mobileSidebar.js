@@ -140,6 +140,10 @@ const Hamburger = styled.img`
   @media (min-width: 769px) {
     display: none;
   }
+  @media (max-width: 375px) {
+    top: 51px;
+    margin: 5px 12px 0px 12px;
+  }
 `;
 const SidebarContainer = styled.div`
   position: absolute;

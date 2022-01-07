@@ -15,7 +15,7 @@ export default function Rules() {
   const redirectToAlertDetails = () => {
     history.push("/dashboard/Alerting/alert-details");
   };
-  // Tooltip
+
   const [networkToolTip, setnetworkToolTip] = React.useState(false);
   const [addressToolTip, setaddressToolTip] = React.useState(false);
   const [contractNameToolTip, setcontractNameToolTip] = React.useState(false);

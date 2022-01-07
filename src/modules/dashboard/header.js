@@ -26,7 +26,7 @@ function Header(props) {
         </div>
         {sessionManager.getDataFromCookies("accountAddress") ? (
           <XDCContainer>
-            <div style={{ marginRight: "10px" }}>1450 XDC</div>
+            <XDCInfo>1450 XDC</XDCInfo>
             <UserContainer>
               {getUserAccountAddress()}
               <UserLogo src="/images/user-round.png" />
@@ -57,6 +57,9 @@ const HeaderContainer = styled.div`
   @media (max-width: 768px) {
     padding-top: 22px;
   }
+  @media (max-width: 375px) {
+    padding-top: 50px;
+  }
 `;
 const XmartlyLogo = styled.img`
   margin-right: 17px;
@@ -83,6 +86,9 @@ const UserContainer = styled.div`
   display: flex;
   align-items: center;
   padding: 0px 10px;
+  @media (max-width: 375px) {
+    display: none;
+  }
 `;
 const SpaceBetween = styled.div`
   display: flex;
@@ -96,4 +102,10 @@ const Button = styled.button`
   font-size: 14px;
   color: white;
   padding: 5px 20px 5px 20px;
+`;
+const XDCInfo = styled.div`
+  margin-right: 10px;
+  @media (max-width: 375px) {
+    display: none;
+  }
 `;
