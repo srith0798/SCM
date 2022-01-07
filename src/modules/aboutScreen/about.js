@@ -106,6 +106,12 @@ const MainBoxContainer = styled.div`
   flex-direction: column;
   align-item: center;
   padding: 3.125rem;
+  @media (min-width: 300px) and (max-width: 700px) {
+    padding: 1.125rem;
+  }
+  @media (max-width: 375px) {
+    padding: 16px;
+  }
 `;
 const Container = styled.div`
   background-color: #ffffff;
@@ -123,13 +129,23 @@ const Container = styled.div`
     padding-left: 46px;
     height: 778px;
   }
+  @media (max-width: 375px) {
+    flex-direction: column;
+    padding-right: 0px;
+    padding-top: 0px;
+    padding-left: 0px;
+    height: auto;
+  }
 `;
 const RightContainer = styled.div`
   width: 100%;
   padding: 4.375rem;
-  @media (min-width: 340px) and (max-width: 768px) {
+  @media (min-width: 340px) and (max-width: 793px) {
     padding: 4.375rem;
     height: 100%;
+  }
+  @media (max-width: 375px) {
+    padding: 30px;
   }
 `;
 const LeftContainer = styled.div`
@@ -145,17 +161,27 @@ const IconRow = styled.div`
   justify-content: space-between;
   max-width: 47.438rem;
   width: 100%;
+  @media (max-width: 375px) {
+    max-width: 47.438rem;
+    flex-direction: column;
+  }
 `;
 const DataBox = styled.div`
   display: flex;
   width: 100%;
   font-size: 1.2rem;
+  @media (max-width: 375px) {
+    font-size: 12px;
+  }
 `;
 const DetailBox = styled.div`
   width: 100%;
   padding-bottom: 0.938rem;
   font-size: 2rem;
   font-weight: 600;
+  @media (max-width: 375px) {
+    font-size: 1.2rem;
+  }
 `;
 
 const Button = styled.button`
@@ -174,8 +200,13 @@ const Button = styled.button`
   font-size: 1rem;
   font-weight: 600;
   white-space: nowrap;
-  @media (min-width: 340px) and (max-width: 790px) {
+  @media (min-width: 340px) and (max-width: 793px) {
     margin-left: 112px;
+  }
+  @media (max-width: 375px) {
+    margin-left: 30px;
+    font-size: 0.6rem;
+    height: 40px;
   }
 `;
 const VideoBox = styled.div`
@@ -188,6 +219,9 @@ const VideoBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  @media (max-width: 375px) {
+    height: 140px;
+  }
 `;
 
 const HeadingContainer = styled.div`
@@ -195,6 +229,11 @@ const HeadingContainer = styled.div`
   font-weight: 600;
   color: #1f1f1f;
   padding: 3.75rem;
+  @media (max-width: 375px) {
+    font-size: 1rem;
+    padding: 0rem;
+    padding-top: 20px;
+  }
 `;
 const GreyContainer = styled.div`
   background-color: none;
@@ -216,6 +255,9 @@ const SubTitle = styled.div`
   font-size: 1rem;
   color: #4b4b4b;
   margin-top: 0.438rem;
+  @media (max-width: 375px) {
+    font-size: 0.9rem;
+  }
 `;
 
 const IconContainer = styled.div`
@@ -231,6 +273,9 @@ const IconContainer = styled.div`
   align-items: center;
   text-align: center;
   cursor: pointer;
+  @media (max-width: 375px) {
+    height: 232px;
+  }
 `;
 const SubHead = styled.div`
   font-size: 1rem;
@@ -238,4 +283,7 @@ const SubHead = styled.div`
   text-align: center;
   width: 100%;
   padding-bottom: 1.25rem;
+  @media (max-width: 375px) {
+    font-size: 0.8rem;
+  }
 `;

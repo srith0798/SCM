@@ -15,7 +15,7 @@ export default function TransactionDetails() {
     setActiveButton(e.target.id);
   };
   const backButton = () => {
-    history.push("/dashboard/transaction-list");
+    history.push("/dashboard/transactionlist");
   };
   return (
     <MainContainer>
@@ -327,9 +327,6 @@ export default function TransactionDetails() {
               <img alt="" src="/images/error.svg" /> balances[_to] =
               balances[_to].add(_value);
               <br />
-              {/* <div style={{ paddingLeft: "24px" }}>
-                At App_Transactions_Validator.sol in App_Transactions_Validator
-              </div> */}
             </StackContainer>
             <LastContainer>
               <SearchBar placeholder="Execution trace" />
@@ -350,11 +347,23 @@ export default function TransactionDetails() {
     </MainContainer>
   );
 }
+
+const MainContainer = styled.div`
+  background: #ecf0f7 0% 0% no-repeat padding-box;
+  width: 100%;
+  padding: 2.125rem;
+  display: 100%;
+  height: 230vh;
+  @media (min-width: 340px) and (max-width: 768px) {
+    padding: 1.5rem;
+  }
+`;
 const TopContainer = styled.div`
   padding-left: 1.25rem;
   display: flex;
   align-items: center;
 `;
+
 const TabImage = styled.img`
   @media (min-width: 300px) and (max-width: 485px) {
     width: 13px;
@@ -434,16 +443,6 @@ const LastContainer = styled.div`
   padding: 2rem;
   font-weight: 600;
 `;
-const MainContainer = styled.div`
-  background: #ecf0f7 0% 0% no-repeat padding-box;
-  width: 100%;
-  padding: 2.125rem;
-  display: 100%;
-  height: 230vh;
-  @media (min-width: 340px) and (max-width: 768px) {
-    padding: 1.5rem;
-  }
-`;
 
 const Heading = styled.div`
   text-align: left;
@@ -485,8 +484,6 @@ const SubContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
-  // height: 3.125rem;
-  // align-items: center;
   @media (min-width: 300px) and (max-width: 485px) {
     flex-direction: column;
   }
@@ -613,7 +610,6 @@ const AlertButton = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
   border: 1px solid #3163f0;
   border-radius: 4px;
-  opacity: 1;
   color: #3163f0;
   margin-left: 2px;
   padding-top: 2px;
