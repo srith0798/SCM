@@ -250,6 +250,9 @@ const IconDiv = styled.div`
   @media (min-width: 375px) and (max-width: 812px) {
     margin-bottom: 22px;
   }
+  @media (max-width: 375px) {
+    margin-bottom: 0px;
+  }
 `;
 const RefreshImage = styled.img`
   cursor: pointer;
@@ -262,6 +265,11 @@ const RefreshImage = styled.img`
   @media (min-width: 375px) and (max-width: 768px) {
     margin-right: 0.325rem;
     margin-top: 28px;
+    margin-left: 3px;
+  }
+  @media (max-width: 375px) {
+    margin-right: 0.325rem;
+    margin-top: 51px;
     margin-left: 3px;
   }
 `;
@@ -294,7 +302,11 @@ const MainContainer = styled.div`
   height: 100vh;
   padding: 2.125rem;
   height: 100vh;
+  @media (max-width: 375px) {
+    padding: 1.2rem;
+  }
 `;
+
 const MainHeading = styled.div`
   display: flex;
   width: 100%;
@@ -302,11 +314,11 @@ const MainHeading = styled.div`
     display: flex;
     flex-direction: row;
   }
-  // @media (min-width: 570px) {
-  //   display: flex;
-  //   // flex-direction: column;
-  //   // padding-bottom: 58px;
-  // }
+  @media (max-width: 375px) {
+    display: flex;
+    flex-direction: column;
+    padding-top: 18px;
+  }
 `;
 const SubContainer = styled.div`
   width: 100%;
@@ -317,26 +329,28 @@ const SubContainer = styled.div`
   padding-bottom: 15px;
   @media (max-width: 767px) {
     padding-top: 47px;
-    padding-bottom: 33px;
+    // padding-bottom: 42px;
   }
   @media (min-width: 375px) {
     padding-top: 47px;
     padding-bottom: 33px;
   }
 `;
-const Heading = styled.span`
+const Heading = styled.div`
   font-size: 1.5rem;
   font-weight: 600;
   color: #191919;
   margin-right: 0.625rem;
-  @media (max-width: 767px) {
-    font-size: 1rem;
+  @media (max-width: 768px) {
+    font-size: 1.2rem;
     // padding-top: 40px;
+    margin-top: 3px;
   }
-  @media (min-width: 375px);
+  @media (max-width: 375px);
    {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     flex-direction: column;
+    margin-bottom: 10px;
   }
 `;
 const Button = styled.button`
@@ -355,6 +369,13 @@ const Button = styled.button`
   font-size: 0.875rem;
   @media (max-width: 768px) {
     margin-top: 28px;
+  }
+  @media (max-width: 375px) {
+    margin-top: 51px;
+    width: 35px;
+    font-size: 0rem;
+    height: 33px;
+    background-position: 0.6rem;
   }
 `;
 const Input = styled.input`
@@ -379,14 +400,14 @@ const Input = styled.input`
     height: 40px;
   }
   @media (min-width: 375px) {
-    width: min-content;
+    width: 223px;
   }
 `;
 const TableContainer = styled.div`
   background-color: #ffffff;
   border-radius: 0.375rem;
   width: 100%;
-  min-height: 25rem;
+  min-height: 20rem;
   overflow: auto;
   padding: 0.625rem 0.625rem 1px 0.625rem;
   @media (min-width: 300px) and (max-width: 767px) {
@@ -411,6 +432,9 @@ const TableContainer = styled.div`
       border: 4px solid transparent;
       background-clip: content-box;
     }
+  }
+  @media (max-width: 375px) {
+    margin-top: 30px;
   }
 `;
 const Div = styled.div`

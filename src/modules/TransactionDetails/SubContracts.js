@@ -65,46 +65,56 @@ const MainContainer = styled.div`
   border-radius: 0.25rem;
   padding: 1.438rem;
   margin-top: 1.25rem;
+  @media (max-width: 375px) {
+    height: 42rem;
+  }
 `;
 const Container = styled.div`
   padding: 10px;
-  width: 1.625rem,
-  height: 13.5rem,       
-  background: #F5F6FD;
-  border: solid #D5E0FF;
+  padding-bottom: 65px;
+  padding-top: 56px;
+  border: solid #d5e0ff;
   outline: none;
-  background: #F5F6FD 0% 0% no-repeat padding-box;
-  border: 1px solid #D5E0FF;
+  background: #f5f6fd 0% 0% no-repeat padding-box;
+  border: 1px solid #d5e0ff;
   border-radius: 6px;
   justify-content: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-
-          
+  @media (max-width: 375px) {
+    padding-bottom: 21px;
+    padding-top: 10px;
+    width: 224px;
+  }
 `;
 
 const MainBoxContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  max-width: 38.625rem;
+  max-width: 40.625rem;
   width: 100%;
   height: 6.5rem;
-  @media (min-width: 300px) and (max-width: 768px) {
+  @media (max-width: 768px) {
+    max-width: 40.625rem;
+  }
+  @media (max-width: 375px) {
+    display: flex;
     flex-direction: column;
-    height: auto;
+    justify-content: space-between;
+    height: 357px;
   }
 `;
 const Title = styled.div`
   font-size: 0.875rem;
   color: #1d3c93;
-  margin-bottom: 0.313rem;
+  margin-bottom: 0.413rem;
 `;
 const SubTitle = styled.div`
   font-size: 0.875rem;
   color: #191919;
-  margin-bottom: 0.313rem;
+  margin-bottom: 0.513rem;
 `;
 const SubTitleTwo = styled.div`
   height: 22px;

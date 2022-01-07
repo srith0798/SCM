@@ -25,13 +25,13 @@ export default function TransactionDetails() {
             <img
               alt=""
               src="/images/back.svg"
-              style={{ marginRight: "2px" }}
+              style={{ marginRight: "8px" }}
               onClick={() => backButton()}
             />
-            Transactions Details
+            Transaction Details
           </Title>
         </TitleDiv>
-        <Button>View in Explorer</Button>
+        <Button>View in explorer</Button>
       </SubContainer>
 
       <Container>
@@ -126,7 +126,7 @@ export default function TransactionDetails() {
                   : "/images/event_grey.svg"
               }
             />{" "}
-            Events <ToolTipIcon src="/images/tool-tip.svg" />
+            Events
           </TabView>
           <TabView
             id="StateChange"
@@ -147,7 +147,6 @@ export default function TransactionDetails() {
               }
             />
             State changes
-            <ToolTipIcon src="/images/tool-tip.svg" />
           </TabView>
         </TabLister>
         {activeButton === "Overview" && (
@@ -232,13 +231,13 @@ export default function TransactionDetails() {
               <CommonDiv>
                 <Row>
                   <Heading>Gas Price</Heading>
-                  <SubHead>72462568294732962 XDC(54253.gwel)</SubHead>
+                  <SubHead>XDC(54253.gwel)</SubHead>
                 </Row>
               </CommonDiv>
               <CommonDiv>
                 <Row>
                   <Heading>Transaction Fee</Heading>
-                  <SubHead>0.2372723762728 XDC</SubHead>
+                  <SubHead>0.237272376272</SubHead>
                 </Row>
               </CommonDiv>
               <CommonDiv>
@@ -293,7 +292,6 @@ export default function TransactionDetails() {
               <CommonDiv>
                 <Row>
                   <Heading>Caller Address </Heading>
-                  <Heading>Contact Address </Heading>
                 </Row>
                 <Row>
                   <SubHeading
@@ -368,6 +366,9 @@ const TabImage = styled.img`
   @media (min-width: 300px) and (max-width: 485px) {
     width: 13px;
   }
+  @media (max-width: 375px) {
+    margin-bottom: 10px;
+  }
 `;
 
 const TitleDiv = styled.div`
@@ -377,6 +378,10 @@ const TitleDiv = styled.div`
   max-width: 267px;
   font-size: 24px;
   font-weight: 600;
+  @media (max-width: 375px) {
+    font-size: 18px;
+    margin-left: 10px;
+  }
 `;
 const Title = styled.div`
   white-space: nowrap;
@@ -410,6 +415,7 @@ const TokenTransferDiv = styled.div`
 const SubHead = styled.div`
   font-size: 0.75rem;
   display: flex;
+  font-weight: 500;
 `;
 const SubHeadBlue = styled.div`
   font-size: 0.85rem;
@@ -423,13 +429,14 @@ const CommonDiv = styled.div`
 const MidContainer = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
   border-radius: 0.375rem;
-  opacity: 1;
   margin-top: 1.25rem;
   height: auto;
-  white-space: nowrap;
+  overflow: auto;
 `;
 const StackContainer = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
+  background-repeat: no-repeat;
+  background-color: #f5f6fd;
   border-radius: 0.375rem;
   padding: 1.875rem;
   margin-top: 1.25rem;
@@ -466,7 +473,7 @@ const Button = styled.button`
   background-repeat: no-repeat;
   background-position: 0.5rem;
   padding-left: 1.75rem;
-  background-size: 0.875rem;
+  background-size: 1rem;
   position: relative;
   background-color: #ffffff;
   color: #3163f0;
@@ -504,6 +511,9 @@ const Container = styled.div`
     margin-top: 1.25rem;
     flex-direction: column;
     width: 100%;
+  }
+  @media (max-width: 375px) {
+    height: 7.4rem;
   }
 `;
 
@@ -562,7 +572,7 @@ const TabLister = styled.div`
   max-width: 39.125rem;
   margin: 1.563rem 0rem 0.625rem 1.063rem;
   cursor: pointer;
-  @media (min-width: 340px) and (max-width: 768px) {
+  @media (max-width: 768px) {
     display: flex;
     justify-content: space-between;
     min-height: 45px;
@@ -570,6 +580,17 @@ const TabLister = styled.div`
     overflow-y: hidden;
     margin: 0rem 0rem 0rem 0rem;
     white-space: nowrap;
+    padding-left: 10px;
+  }
+  @media (max-width: 375px) {
+    display: flex;
+    justify-content: space-between;
+    min-height: 45px;
+    font-size: 0.6rem;
+    overflow-y: hidden;
+    margin: 0rem 0rem 0rem 0rem;
+    white-space: nowrap;
+    padding-left: 0px;
   }
 `;
 const TabView = styled.div`

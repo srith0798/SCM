@@ -86,7 +86,7 @@ const UserContainer = styled.div`
   display: flex;
   align-items: center;
   padding: 0px 10px;
-  @media (max-width: 375px) {
+  @media (max-width: 455px) {
     display: none;
   }
 `;

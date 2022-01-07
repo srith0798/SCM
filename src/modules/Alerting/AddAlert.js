@@ -598,7 +598,7 @@ const MainContainer = styled.div`
   opacity: 1;
   width: 100%;
   padding: 2.5rem;
-  height: 100%;
+  // height: 100%;
   @media (min-width: 300px) and (max-width: 768px) {
     padding: 2.5rem 1.5rem 1.5rem 1.5rem;
   }
@@ -634,6 +634,7 @@ const AlertContainer = styled.div`
   display: flex;
   width: 100%;
   padding: 0px 10px 0px 0px;
+  overflow-x: auto;
 `;
 const TypeRow = styled.div`
   font-size: 0.875rem;
