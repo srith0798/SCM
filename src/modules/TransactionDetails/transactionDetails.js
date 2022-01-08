@@ -321,10 +321,12 @@ export default function TransactionDetails() {
             </TokenTransferDiv>
             <b>Stack Trace</b> <ToolTipIcon src="/images/tool-tip.svg" />
             <StackContainer>
-              <TextLine>Error Messege:out of gas</TextLine>
-              <img alt="" src="/images/error.svg" /> balances[_to] =
-              balances[_to].add(_value);
-              <br />
+              <BackgroundChanger>
+                <TextLine>Error Messege:out of gas</TextLine>
+                <img alt="" src="/images/error.svg" /> balances[_to] =
+                balances[_to].add(_value);
+                <br />
+              </BackgroundChanger>
             </StackContainer>
             <LastContainer>
               <SearchBar placeholder="Execution trace" />
@@ -436,11 +438,24 @@ const MidContainer = styled.div`
 const StackContainer = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
   background-repeat: no-repeat;
-  background-color: #f5f6fd;
+  // background-color: #f5f6fd;
   border-radius: 0.375rem;
   padding: 1.875rem;
   margin-top: 1.25rem;
   height: 9.375rem;
+`;
+const BackgroundChanger = styled.div`
+  width: 1016px;
+  height: 106px;
+  background-repeat: no-repeat;
+  background: #f7f8fd 0% 0% no-repeat padding-box;
+  border-radius: 6px;
+  opacity: 1;
+  padding: 1.875rem;
+  @media (min-width: 300px) and (max-width: 1371px) {
+    width: 100%;
+    padding: 1rem;
+  }
 `;
 const LastContainer = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
@@ -582,7 +597,7 @@ const TabLister = styled.div`
     white-space: nowrap;
     padding-left: 10px;
   }
-  @media (max-width: 375px) {
+  @media (min-width: 320px) and (max-width: 450px) {
     display: flex;
     justify-content: space-between;
     min-height: 45px;
@@ -591,6 +606,13 @@ const TabLister = styled.div`
     margin: 0rem 0rem 0rem 0rem;
     white-space: nowrap;
     padding-left: 0px;
+  }
+
+  @media (min-width: 600px) and (max-width: 923px) {
+    overflow-y: hidden;
+    font-size: 0.8rem;
+    padding-left: 0px;
+    margin: 0rem 0rem 0rem 0rem;
   }
 `;
 const TabView = styled.div`
@@ -635,7 +657,7 @@ const AlertButton = styled.div`
   margin-left: 2px;
   padding-top: 2px;
   padding-left: 8px;
-  @media (min-width: 300px) and (max-width: 767px) {
+  @media (min-width: 300px) and (max-width: 916px) {
     display: none;
   }
 `;

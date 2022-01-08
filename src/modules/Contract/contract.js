@@ -272,6 +272,9 @@ const RefreshImage = styled.img`
     margin-top: 51px;
     margin-left: 3px;
   }
+  @media (min-width: 376px) and (max-width: 432px) {
+    display: none;
+  }
 `;
 const Tag = styled.div`
   background-color: #eaefff;
@@ -377,6 +380,9 @@ const Button = styled.button`
     height: 33px;
     background-position: 0.6rem;
   }
+  @media (min-width: 376px) and (max-width: 584px) {
+    display: none;
+  }
 `;
 const Input = styled.input`
   background: #ffffff 0% 0% no-repeat padding-box;
@@ -411,9 +417,9 @@ const TableContainer = styled.div`
   overflow: auto;
   padding: 0.625rem 0.625rem 1px 0.625rem;
   @media (min-width: 300px) and (max-width: 767px) {
-    overflow: scroll;
-    height: 281px;
-    overflow-y: auto;
+    overflow-y: hidden;
+    overflow-x: auto;
+    height: 420px;
     position: relative;
     width: 100%;
     ::-webkit-scrollbar {
