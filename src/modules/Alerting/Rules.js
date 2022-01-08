@@ -1,8 +1,9 @@
 import React from "react";
 import "react-tabs/style/react-tabs.css";
 import styled from "styled-components";
-import Historys from "./historys";
-import Destination from "./destination";
+import Historys from "../Alerting/Historys";
+import Destination from "../Alerting/Destination";
+
 import { history } from "../../managers/history";
 import Tooltip from "@mui/material/Tooltip";
 
@@ -319,8 +320,8 @@ const MainContainer = styled.div`
   padding: 2.5rem;
   height: 100vh;
   @media (min-width: 340px) and (max-width: 768px) {
-   padding: 38px 20px 20px 20px;
-
+    padding: 38px 20px 20px 20px;
+  }
 `;
 
 const Button = styled.button`
@@ -366,7 +367,8 @@ const TabLister = styled.div`
 const TabView = styled.div`
   padding: 0.313rem 0.5rem 0.313rem 0.5rem;
   @media (min-width: 340px) and (max-width: 768px) {
-   padding: 0rem 0rem 0rem 0rem;
+    padding: 0rem 0rem 0rem 0rem;
+  }
 `;
 
 const DetailBox = styled.div``;

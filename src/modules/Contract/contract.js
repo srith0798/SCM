@@ -333,8 +333,7 @@ const Heading = styled.span`
     font-size: 1rem;
     // padding-top: 40px;
   }
-  @media (min-width: 375px);
-   {
+  @media (min-width: 375px) {
     font-size: 1.4rem;
     flex-direction: column;
   }
@@ -374,7 +373,7 @@ const Input = styled.input`
   border: none;
   outline: none;
   display: flex;
-  (max-width: 768px) {
+  @media (max-width: 768px) {
     width: min-content;
     height: 40px;
   }

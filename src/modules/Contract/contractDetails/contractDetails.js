@@ -13,7 +13,7 @@ import SourceCode from "./sourceCode";
 import ContractsService from "../../../services/contractsService";
 import utility from "../../../utility";
 import { history } from "../../../managers/history";
-
+import AddTags from "../../Popup/addTag";
 export default function ContractDetails() {
   const [activeButton, setActiveButton] = React.useState("General");
   const handleViewClick = (e) => {
@@ -117,7 +117,13 @@ export default function ContractDetails() {
   const backButton = () => {
     history.push("/dashboard/contract");
   };
-
+  const [addTag, setAddTag] = useState(false);
+  const Open = () => {
+    setAddTag(true);
+  };
+  const Close = () => {
+    setAddTag(false);
+  };
   return (
     <>
       <ShowLoader state={loader} />
@@ -227,7 +233,13 @@ export default function ContractDetails() {
                 </Div>
                 <Div>
                   <TableHeading>Tags</TableHeading>
-                  <TableData>{tagDiv()} </TableData>
+                  <TableData>
+                    <Row>
+                      <FinanceTag>Finance</FinanceTag>
+                      {addTag && <AddTags click={Close} />}
+                      <AddTag onClick={() => Open()}>Add Tag</AddTag>
+                    </Row>{" "}
+                  </TableData>
                 </Div>
                 <Div>
                   <TableHeading>Compiler</TableHeading>
@@ -316,7 +328,9 @@ export default function ContractDetails() {
                   )}
                 </PopUpBlock>
                 <PopUpBlock>
-                  {remove && <Remove click={removeHandleClose} contract={address}/>}
+                  {remove && (
+                    <Remove click={removeHandleClose} contract={address} />
+                  )}
                   <RowProperty onClick={() => removeHandleOpen()}>
                     <img alt="" src="/images/delete.svg" />
                   </RowProperty>
@@ -334,14 +348,6 @@ export default function ContractDetails() {
   );
 }
 
-function tagDiv() {
-  return (
-    <Row>
-      <FinanceTag>Finance</FinanceTag>
-      <AddTag>Add Tag</AddTag>
-    </Row>
-  );
-}
 const MainHeading = styled.div`
   display: flex;
   justify-content: space-between;

@@ -3,9 +3,9 @@ import styled from "styled-components";
 import { Row } from "simple-flexbox";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import "react-tabs/style/react-tabs.css";
-import Events from "./events";
-import StateChange from "./stateChange";
-import SubContracts from "./subContracts";
+import Events from "../TransactionDetails/Events";
+import StateChange from "../TransactionDetails/StateChange";
+import SubContracts from "../TransactionDetails/SubContracts";
 import { history } from "../../managers/history";
 import utility from "../../utility";
 
@@ -550,10 +550,10 @@ const SearchBar = styled.input`
   padding-left: 1.875rem;
   background-size: 0.75rem;
   position: relative;
-  &:focus: {
+  /* &:focus: {
     outline: none;
     border: none;
-  }
+  } */
 `;
 const TabLister = styled.div`
   display: flex;
@@ -574,7 +574,7 @@ const TabLister = styled.div`
 `;
 const TabView = styled.div`
   padding: 0.313rem 0.5rem 0.313rem 0.5rem;
-  displat: flex;
+  display: flex;
   @media (min-width: 340px) and (max-width: 768px) {
   }
 `;
