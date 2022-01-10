@@ -302,7 +302,7 @@ export default function TransactionDetails() {
                 </Row>
               </CommonDiv>
             </FunctionContainer>
-            <b>Token Transfer</b>
+            {/* <b>Token Transfer</b> */}
             <TokenTransferDiv>
               <CommonDiv>
                 <Row>
@@ -412,6 +412,7 @@ const TokenTransferDiv = styled.div`
   height: auto;
   white-space: nowrap;
   margin-bottom: 20px;
+  display: none;
 `;
 
 const SubHead = styled.div`

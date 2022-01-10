@@ -163,7 +163,7 @@ export default function TransactionList() {
                     App_Transactions_Validator
                     <br />
                     <TransactionHash>
-                      xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c
+                      xdcabfe4184e5f9f600fe86d20e2a32c99
                     </TransactionHash>
                   </Box>
                 ) : null}

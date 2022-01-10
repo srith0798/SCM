@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import AddNetwork from "../Popup/addNetwork";
+import AddNetwork from "./addNetwork";
 import Tooltip from "@mui/material/Tooltip";
 
 export default function Network() {
