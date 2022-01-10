@@ -9,7 +9,8 @@ export default {
   showContract,
   checkAddress,
   renameContract,
-  removeContract
+  removeContract,
+  addTags,
 };
 
 function getHeaders() {
@@ -199,9 +200,41 @@ async function renameContract(requestData) {
 
 async function removeContract(requestData) {
   let url =
-    process.env.REACT_APP_USER_CONTRACT_MICROSERVICE + httpConstants.API_END_POINT.ADD_CONTRACT;
+    process.env.REACT_APP_USER_CONTRACT_MICROSERVICE +
+    httpConstants.API_END_POINT.ADD_CONTRACT;
   console.log("url----", url);
-  return httpService(httpConstants.METHOD_TYPE.DELETE, getHeaders(), requestData, url)
+  return httpService(
+    httpConstants.METHOD_TYPE.DELETE,
+    getHeaders(),
+    requestData,
+    url
+  )
+    .then((response) => {
+      if (
+        !response.success ||
+        response.responseCode !== 200 ||
+        !response.responseData ||
+        response.responseData.length === 0
+      )
+        return Promise.reject(response);
+      return Promise.resolve(response.responseData);
+    })
+    .catch(function (err) {
+      return Promise.reject(err);
+    });
+}
+
+async function addTags(requestData) {
+  let url =
+    process.env.REACT_APP_USER_CONTRACT_MICROSERVICE +
+    httpConstants.API_END_POINT.ADD_TAGS;
+  console.log("url----", url);
+  return httpService(
+    httpConstants.METHOD_TYPE.POST,
+    getHeaders(),
+    requestData,
+    url
+  )
     .then((response) => {
       if (
         !response.success ||

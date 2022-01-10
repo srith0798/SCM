@@ -63,7 +63,7 @@ export default function AddContract(props) {
           <Container>
             <SubContainer>
               <Add>Add Contract</Add>
-              <img alt="" src="/images/XDC-Cross.svg" onClick={props.click} />
+              <img alt="" src="/images/close.svg" onClick={props.click} />
             </SubContainer>
             <div
               style={{

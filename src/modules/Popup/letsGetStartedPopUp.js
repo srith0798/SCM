@@ -25,7 +25,7 @@ export default function LetsGetStarted(props) {
                 <Add>Get Started</Add>
                 <CrossIcon
                   alt=""
-                  src="/images/XDC-Cross.svg"
+                  src="/images/close.svg"
                   onClick={props.click}
                 />
               </SubContainer>

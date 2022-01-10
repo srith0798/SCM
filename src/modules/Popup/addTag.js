@@ -1,17 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Dialog from "@mui/material/Dialog";
 import { makeStyles } from "@material-ui/styles";
 import ButtonConfirm from "../../common/components/buttonConfirm";
-
+import contractsService from "../../services/contractsService";
 const useStyles = makeStyles(() => ({
   dialogBox: {
     width: "100% !important",
   },
 }));
-
 export default function AddTags(props) {
+  const [input, setInput] = useState([]);
+  console.log("input", input);
   const classes = useStyles();
+
+  const addContractTag = async () => {
+    console.log("abc", props, input);
+    let requestData = {
+      contractId: props.address._id,
+      tags: input,
+    };
+    try {
+      const response = await contractsService.addTags(requestData);
+      console.log(response);
+    } catch (e) {
+      console.log("Error", e);
+    }
+  };
   return (
     <div>
       <Dialog classes={{ paper: classes.dialogBox }} open={true}>
@@ -24,11 +39,16 @@ export default function AddTags(props) {
               Add unique tags to your contracts to help you filter your
               transactions pinpoint key events that happened more easily.
             </Content>
-            <Input type="text" placeholder="E.g. v1.3.37" />
+            <Input
+              type="text"
+              placeholder="E.g. v1.3.37"
+              value={input}
+              onChange={(e) => setInput([e.target.value])}
+            />
             <SubContainer
               style={{ width: "100%", maxWidth: "160px", marginTop: "30px" }}
             >
-              <ButtonConfirm text={"Add Tag"} />
+              <ButtonConfirm text={"Add Tag"} click={addContractTag} />
               <CancelButton onClick={props.click}>Cancel</CancelButton>
             </SubContainer>
           </Container>

@@ -123,7 +123,9 @@ export default function ContractDetails() {
   };
   const Close = () => {
     setAddTag(false);
+    getContractById();
   };
+  // const [tagResponse, setTagResponse] = useState([]);
   return (
     <>
       <ShowLoader state={loader} />
@@ -235,10 +237,14 @@ export default function ContractDetails() {
                   <TableHeading>Tags</TableHeading>
                   <TableData>
                     <Row>
-                      <FinanceTag>Finance</FinanceTag>
-                      {addTag && <AddTags click={Close} />}
+                      {address.tags &&
+                        address.tags.map((tag) => (
+                          <FinanceTag>{tag}</FinanceTag>
+                        ))}
+
+                      {addTag && <AddTags click={Close} address={address} />}
                       <AddTag onClick={() => Open()}>Add Tag</AddTag>
-                    </Row>{" "}
+                    </Row>
                   </TableData>
                 </Div>
                 <Div>
@@ -390,7 +396,7 @@ const Enabled = styled.div`
   color: #00a58c;
 `;
 const FinanceTag = styled.div`
-  background-image: url("/images/Tag_logo.svg");
+  background-image: url("/images/Tag.svg");
   background-repeat: no-repeat;
   background-position: 0.5rem;
   padding-left: 1.75rem;
@@ -410,6 +416,7 @@ const FinanceTag = styled.div`
   display: flex;
   font-size: 1rem;
   font-weight: 400;
+  margin-right: 13px;
 `;
 const AddTag = styled.button`
   color: #416be0;

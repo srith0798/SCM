@@ -21,7 +21,7 @@ export default function Settings(props) {
               <img
                 style={{ cursor: "pointer" }}
                 alt=""
-                src="/images/XDC-Cross.svg"
+                src="/images/close.svg"
                 onClick={props.click}
               />
             </SubContainer>
