@@ -598,9 +598,10 @@ const MainContainer = styled.div`
   opacity: 1;
   width: 100%;
   padding: 2.5rem;
-  // height: 100%;
+  height: 120vh;
   @media (min-width: 300px) and (max-width: 768px) {
     padding: 2.5rem 1.5rem 1.5rem 1.5rem;
+    height: 220vh;
   }
 `;
 const TitleHead = styled.div`
