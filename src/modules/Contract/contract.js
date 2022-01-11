@@ -181,18 +181,18 @@ export default function Contract(props) {
             </div>
           );
         })}
-        {showPlaceHolder && (
+        {/* {showPlaceHolder && (
           <PlaceHolderContainer>
             <PlaceHolderImage src="/images/contracts.svg" />
             No Contracts Found
           </PlaceHolderContainer>
-        )}
+        )} */}
       </TableContainer>
       <PaginationDiv>
         <ReactPaginate
           previousLabel={"<"}
           nextLabel={">"}
-          pageCount={5}
+          pageCount={2}
           breakLabel={"..."}
           initialPage={0}
           onPageChange={changePage}
@@ -474,20 +474,20 @@ const ToolTipIcon = styled.img`
   margin-left: 0.313rem;
 `;
 
-const PlaceHolderContainer = styled.div`
-  display: flex;
-  width: 100%;
-  height: 500px;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  opacity: 50%;
-  font-weight: 600;
-  font-size: 13px;
-`;
-const PlaceHolderImage = styled.img`
-  width: 50px;
-  -webkit-filter: grayscale(60%); /* Safari 6.0 - 9.0 */
-  filter: grayscale(60%);
-  margin-bottom: 20px;
-`;
+// const PlaceHolderContainer = styled.div`
+//   display: flex;
+//   width: 100%;
+//   height: 500px;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: center;
+//   opacity: 50%;
+//   font-weight: 600;
+//   font-size: 13px;
+// `;
+// const PlaceHolderImage = styled.img`
+//   width: 50px;
+//   -webkit-filter: grayscale(60%); /* Safari 6.0 - 9.0 */
+//   filter: grayscale(60%);
+//   margin-bottom: 20px;
+// `;

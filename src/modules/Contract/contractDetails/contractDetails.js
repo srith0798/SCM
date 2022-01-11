@@ -388,7 +388,7 @@ const Enabled = styled.div`
   color: #00a58c;
 `;
 const FinanceTag = styled.div`
-  background-image: url("/images/Tag_logo.svg");
+  background-image: url("/images/tag-logo-blue.svg");
   background-repeat: no-repeat;
   background-position: 0.5rem;
   padding-left: 1.75rem;

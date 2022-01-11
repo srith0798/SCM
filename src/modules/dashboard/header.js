@@ -77,6 +77,7 @@ const XDCContainer = styled.div`
   border-radius: 5px;
   align-items: center;
   padding: 0 0 0 10px;
+  margin-right: 4px;
 `;
 
 const UserContainer = styled.div`
@@ -94,6 +95,8 @@ const SpaceBetween = styled.div`
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
+  padding-bottom: 4px;
+  padding-top: 3px;
 `;
 const Button = styled.button`
   border: 1px solid white;
