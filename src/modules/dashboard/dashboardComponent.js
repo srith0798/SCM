@@ -9,14 +9,10 @@ import Contract from "../Contract/contract";
 import TransactionDetails from "../TransactionDetails/transactionDetails";
 import TransactionList from "../transactions/transactionList";
 import Network from "../Network/network";
-// import Analytics from "../analytics/analytics";
 import Analytics from "../Analytics/analytics";
-
 import About from "../aboutScreen/about";
 import Rules from "../Alerting/Rules";
-// import AddAlert from "../alerting/addAlert";
 import AddAlert from "../Alerting/AddAlert";
-// import AlertDetails from "../alerting/alertDetails";
 import AlertDetails from "../Alerting/AlertDetails";
 import { sessionManager } from "../../managers/sessionManager";
 import UserService from "../../services/userService";
@@ -64,13 +60,16 @@ const HomeComponent = (props) => {
 const dashboardComponent = (props) => {
   const getCurrentUserDetails = async () => {
     let user = "";
+
     try {
       user = window.web3.eth.accounts;
     } catch (e) {
       console.log(e);
     }
+
     if (user && user.length) {
       const response = await UserService.addUser({ accountAddress: user[0] });
+      console.log("responsecookies", response);
       if (response.accountAddress) {
         sessionManager.setDataInCookies(
           response.accountAddress,

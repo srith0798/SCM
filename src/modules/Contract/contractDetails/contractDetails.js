@@ -125,7 +125,6 @@ export default function ContractDetails() {
     setAddTag(false);
     getContractById();
   };
-  // const [tagResponse, setTagResponse] = useState([]);
   return (
     <>
       <ShowLoader state={loader} />
