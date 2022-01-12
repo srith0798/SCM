@@ -11,10 +11,11 @@ import ShowContract from "./showContract";
 import "react-tabs/style/react-tabs.css";
 import SourceCode from "./sourceCode";
 import ContractsService from "../../../services/contractsService";
+
 import utility from "../../../utility";
 import { history } from "../../../managers/history";
 import AddTags from "../../Popup/addTag";
-export default function ContractDetails() {
+export default function ContractDetails(props) {
   const [activeButton, setActiveButton] = React.useState("General");
   const handleViewClick = (e) => {
     setActiveButton(e.target.id);
@@ -41,6 +42,7 @@ export default function ContractDetails() {
   }, []);
 
   const [address, setAddress] = React.useState({});
+
   const [value] = useState("");
   const [open, setOpen] = useState(false);
   const [loader, setLoader] = useState(false);

@@ -18,9 +18,11 @@ function Header(props) {
   const getUserBalance = () => {
     let balance = sessionManager.getDataFromCookies("accountAddress");
     const web3 = new Web3(
-      new Web3.providers.HttpProvider("https://rpc.xinfin.network")
+      // new Web3.providers.HttpProvider("https://rpc.xinfin.network")
+      new Web3.providers.HttpProvider("https://rpc.apothem.network")
     );
-
+    let checkResult = Web3.utils.toChecksumAddress(balance);
+    // console.log(Web3.utils.toChecksumAddress(balance));
     web3.eth.getBalance(balance, function (error, result) {
       if (error) {
         console.log(error);
@@ -46,7 +48,7 @@ function Header(props) {
         </div>
         {sessionManager.getDataFromCookies("accountAddress") ? (
           <XDCContainer>
-            <XDCInfo onClick={() => getUserBalance()}>{getBalance} XDC</XDCInfo>
+            <XDCInfo>{getBalance} XDC</XDCInfo>
             <UserContainer>
               {getUserAccountAddress()}
               <UserLogo src="/images/user-round.png" />

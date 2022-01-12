@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Row } from "simple-flexbox";
 import ShowLoader from "../../common/components/showLoader";
@@ -9,7 +9,7 @@ import ContractsService from "../../services/contractsService";
 import ReactPaginate from "react-paginate";
 import utility from "../../utility";
 import { sessionManager } from "../../managers/sessionManager";
-
+import AddTags from "../Popup/addTag";
 export default function Contract(props) {
   const [open, setOpen] = React.useState(false);
   const [showPlaceHolder, setShowPlaceHolder] = React.useState(false);
@@ -42,7 +42,9 @@ export default function Contract(props) {
       setLoader(true);
       const response = await ContractsService.getContractsList(requestData);
       setLoader(false);
+
       setAddress(response.contractList);
+
       if (response.contractList.length === 0) setShowPlaceHolder(true);
     } catch (e) {
       setShowPlaceHolder(true);
@@ -58,6 +60,15 @@ export default function Contract(props) {
   }, []);
 
   const [address, setAddress] = React.useState([]);
+  console.log("contract", address);
+  const [addTag, setAddTag] = useState(false);
+  const Open = () => {
+    setAddTag(true);
+  };
+  const Close = () => {
+    setAddTag(false);
+    getContractList();
+  };
 
   return (
     <MainContainer>
@@ -163,18 +174,31 @@ export default function Contract(props) {
         </Div>
         {address.map((data, index) => {
           return (
-            <div
-              onClick={() => redirectTODetails(data._id)}
-              style={{ cursor: "pointer" }}
-            >
+            <div style={{ cursor: "pointer" }}>
               <Div>
                 <Row>
-                  <ColumnSecond>{data.contractName}</ColumnSecond>
+                  <ColumnSecond onClick={() => redirectTODetails(data._id)}>
+                    {data.contractName}
+                  </ColumnSecond>
                   <ColumnSecond>
                     {utility.truncateTxnAddress(data.address)}
                   </ColumnSecond>
                   <ColumnSecond>{data.tokenName}</ColumnSecond>
-                  <ColumnSecond>{tagDiv()} </ColumnSecond>
+                  <ColumnSecond style={{ display: "flex" }}>
+                    {address[0].tags &&
+                      address[0].tags.map((tag) => (
+                        <FinanceTag>{tag}</FinanceTag>
+                      ))}
+
+                    {addTag && (
+                      <AddTags
+                        click={Close}
+                        address={address}
+                        contract={true}
+                      />
+                    )}
+                    <AddTag onClick={() => Open()}>Add Tag</AddTag>
+                  </ColumnSecond>
                   <ColumnSecond>{data.status}</ColumnSecond>
                 </Row>
               </Div>
@@ -205,15 +229,50 @@ export default function Contract(props) {
   );
 }
 
-function tagDiv() {
-  return (
-    <Tag>
-      Finance
-      <TagImage src="/images/tag-logo-blue.svg"></TagImage>
-    </Tag>
-  );
-}
+const FinanceTag = styled.div`
+  background-image: url("/images/Tag.svg");
+  background-repeat: no-repeat;
+  background-position: 0.5rem;
+  padding-left: 1.75rem;
+  padding-right: 8px;
+  background-size: 0.875rem;
+  position: relative;
+  background-color: #eaefff;
+  border: 1px solid #eaefff;
+  border-radius: 0.25rem;
 
+  max-width: 17.75rem;
+  white-space: nowrap;
+  height: 2.125rem;
+  align-items: center;
+  color: #436ce0;
+  text-align: center;
+  display: flex;
+  font-size: 1rem;
+  font-weight: 400;
+  margin-right: 13px;
+`;
+const AddTag = styled.button`
+  color: #416be0;
+  background: #ffffff 0% 0% no-repeat padding-box;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  outline: none;
+  white-space: nowrap;
+  background-image: url("/images/add-icon.svg");
+  background-repeat: no-repeat;
+  background-position: 0.5rem;
+  padding-left: 1.75rem;
+  background-size: 0.875rem;
+  position: relative;
+  background-color: #ffffff;
+  border: none;
+  border-radius: 0.25rem;
+  width: 100px;
+  white-space: nowrap;
+  height: 2.125rem;
+`;
 const PaginationDiv = styled.div`
   display: flex;
   justify-content: flex-end;
