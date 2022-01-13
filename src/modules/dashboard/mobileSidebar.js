@@ -55,10 +55,7 @@ export default function Sidebar(props) {
 
   return (
     <>
-      <Hamburger
-        src="/images/overview_grey.svg"
-        onClick={() => setOpen(!open)}
-      />
+      <Hamburger src="/images/hamburger.svg" onClick={() => setOpen(!open)} />
       {open && (
         <SidebarContainer>
           <Wrapper onClick={redirectToAbout} style={{ marginTop: "4rem" }}>
@@ -130,8 +127,8 @@ const CenterDiv = styled.div`
 `;
 
 const Hamburger = styled.img`
-  width: 25px;
-  height: 25px;
+  width: 35px;
+  height: 32px;
   margin: 5px 12px 0px 9px;
   position: absolute;
   left: 123px;

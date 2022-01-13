@@ -22,7 +22,7 @@ export default function HideContract(props) {
               <Add>Show Contract</Add>
               <img
                 alt=""
-                src="/images/XDC-Cross.svg"
+                src="/images/xdc-cut.svg"
                 onClick={props.click}
                 style={{ cursor: "pointer" }}
               />

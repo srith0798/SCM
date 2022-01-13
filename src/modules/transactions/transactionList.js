@@ -475,10 +475,10 @@ const TransactionHash = styled.div`
   }
 `;
 const Image = styled.img`
-  width: 0.75rem;
+  width: 0.95rem;
   position: absolute;
-  top: 16px;
-  right: 8px;
+  top: 29px;
+  right: 39px;
   cursor: pointer;
   @media (max-width: 375px) {
     width: 0.85rem;

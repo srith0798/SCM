@@ -34,7 +34,7 @@ export default function About(props) {
                     style={{ marginLeft: "0.375rem" }}
                     alt=""
                     src="/images/question-mark.svg"
-                  />{" "}
+                  />
                 </Button>
               </Tooltip>
             </LeftContainer>

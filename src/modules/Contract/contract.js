@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Row } from "simple-flexbox";
 import ShowLoader from "../../common/components/showLoader";
@@ -14,6 +14,7 @@ export default function Contract(props) {
   const [open, setOpen] = React.useState(false);
   const [showPlaceHolder, setShowPlaceHolder] = React.useState(false);
   const [loader, setLoader] = React.useState(false);
+
   const [contractNameToolTip, setcontractNameToolTip] = React.useState(false);
   const [addressToolTip, setaddressToolTip] = React.useState(false);
   const [networkToolTip, setnetworkToolTip] = React.useState(false);
@@ -39,6 +40,32 @@ export default function Contract(props) {
         limit: limit,
         userId: userId,
       };
+
+      setLoader(true);
+      const response = await ContractsService.getContractsList(requestData);
+      setLoader(false);
+
+      setAddress(response.contractList);
+      if (response.contractList.length === 0) setShowPlaceHolder(true);
+      else setShowPlaceHolder(false);
+    } catch (e) {
+      setShowPlaceHolder(true);
+      setLoader(false);
+    }
+  };
+
+  const searching = async (searchValue, searchKeys) => {
+    let address = sessionManager.getDataFromCookies("accountAddress");
+    console.log(address);
+    try {
+      let requestData = {
+        searchKeys: searchKeys,
+        address: address,
+        skip: 0,
+        limit: 10,
+      };
+      if (searchValue !== "") requestData["searchValue"] = searchValue;
+
       setLoader(true);
       const response = await ContractsService.getContractsList(requestData);
       setLoader(false);
@@ -49,6 +76,12 @@ export default function Contract(props) {
       setLoader(false);
     }
   };
+  const [input, setInput] = useState();
+  const search = (e) => {
+    setInput(e.target.value);
+    searching(e.target.value, ["address", "status", ""]);
+  };
+
   const changePage = (value) => {
     getContractList(Math.ceil(value.selected * 5), 5);
   };
@@ -65,7 +98,11 @@ export default function Contract(props) {
       <SubContainer>
         <MainHeading>
           <Heading>Contracts</Heading>
-          <Input placeholder="Search by address or name" />
+          <Input
+            onChange={(e) => search(e)}
+            value={input}
+            placeholder="Search by address or name"
+          />
         </MainHeading>
         <IconDiv>
           <Tooltip disableFocusListener title="Refresh">
@@ -181,12 +218,12 @@ export default function Contract(props) {
             </div>
           );
         })}
-        {/* {showPlaceHolder && (
+        {showPlaceHolder && (
           <PlaceHolderContainer>
             <PlaceHolderImage src="/images/contracts.svg" />
             No Contracts Found
           </PlaceHolderContainer>
-        )} */}
+        )}
       </TableContainer>
       <PaginationDiv>
         <ReactPaginate
@@ -474,20 +511,20 @@ const ToolTipIcon = styled.img`
   margin-left: 0.313rem;
 `;
 
-// const PlaceHolderContainer = styled.div`
-//   display: flex;
-//   width: 100%;
-//   height: 500px;
-//   flex-direction: column;
-//   justify-content: center;
-//   align-items: center;
-//   opacity: 50%;
-//   font-weight: 600;
-//   font-size: 13px;
-// `;
-// const PlaceHolderImage = styled.img`
-//   width: 50px;
-//   -webkit-filter: grayscale(60%); /* Safari 6.0 - 9.0 */
-//   filter: grayscale(60%);
-//   margin-bottom: 20px;
-// `;
+const PlaceHolderContainer = styled.div`
+  display: flex;
+  width: 100%;
+  height: 16rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 50%;
+  font-weight: 600;
+  font-size: 13px;
+`;
+const PlaceHolderImage = styled.img`
+  width: 50px;
+  -webkit-filter: grayscale(60%); /* Safari 6.0 - 9.0 */
+  filter: grayscale(60%);
+  margin-bottom: 20px;
+`;
