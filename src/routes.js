@@ -22,6 +22,7 @@ class Routes extends BaseComponent {
       <Switch>
         <Redirect exact from="/" to="/dashboard/about" />
         <Route exact path={"/dashboard"} component={Dashboard} />
+        <Route exact path={"/dashboard"} component={Dashboard} />
         <Route exact path={"/dashboard/:menu"} component={Dashboard} />
         <Route exact path={"/dashboard/:menu/:subMenu"} component={Dashboard} />
         <Redirect exact from="*" to="/" />

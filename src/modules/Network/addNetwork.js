@@ -15,7 +15,9 @@ export default function AddNetwork(props) {
     <div>
       <Dialog classes={{ paper: classes.dialogBox }} open={true}>
         <MainContainer>
-          <Container>
+          <Container
+            style={{ display: "flex", justifyContent: "space-between" }}
+          >
             <SubContainer>
               <Add>Add Network</Add>
               <img alt="" src="/images/XDC-Cross.svg" onClick={props.click} />

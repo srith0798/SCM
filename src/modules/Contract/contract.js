@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Row } from "simple-flexbox";
 import ShowLoader from "../../common/components/showLoader";
@@ -14,6 +14,7 @@ export default function Contract(props) {
   const [open, setOpen] = React.useState(false);
   const [showPlaceHolder, setShowPlaceHolder] = React.useState(false);
   const [loader, setLoader] = React.useState(false);
+
   const [contractNameToolTip, setcontractNameToolTip] = React.useState(false);
   const [addressToolTip, setaddressToolTip] = React.useState(false);
   const [networkToolTip, setnetworkToolTip] = React.useState(false);
@@ -39,6 +40,32 @@ export default function Contract(props) {
         limit: limit,
         userId: userId,
       };
+
+      setLoader(true);
+      const response = await ContractsService.getContractsList(requestData);
+      setLoader(false);
+
+      setAddress(response.contractList);
+      if (response.contractList.length === 0) setShowPlaceHolder(true);
+      else setShowPlaceHolder(false);
+    } catch (e) {
+      setShowPlaceHolder(true);
+      setLoader(false);
+    }
+  };
+
+  const searching = async (searchValue, searchKeys) => {
+    let address = sessionManager.getDataFromCookies("accountAddress");
+    console.log(address);
+    try {
+      let requestData = {
+        searchKeys: searchKeys,
+        address: address,
+        skip: 0,
+        limit: 10,
+      };
+      if (searchValue !== "") requestData["searchValue"] = searchValue;
+
       setLoader(true);
       const response = await ContractsService.getContractsList(requestData);
       setLoader(false);
@@ -49,6 +76,12 @@ export default function Contract(props) {
       setLoader(false);
     }
   };
+  const [input, setInput] = useState();
+  const search = (e) => {
+    setInput(e.target.value);
+    searching(e.target.value, ["address", "status", ""]);
+  };
+
   const changePage = (value) => {
     getContractList(Math.ceil(value.selected * 5), 5);
   };
@@ -65,7 +98,11 @@ export default function Contract(props) {
       <SubContainer>
         <MainHeading>
           <Heading>Contracts</Heading>
-          <Input placeholder="Search by address or name" />
+          <Input
+            onChange={(e) => search(e)}
+            value={input}
+            placeholder="Search by address or name"
+          />
         </MainHeading>
         <IconDiv>
           <Tooltip disableFocusListener title="Refresh">
@@ -192,7 +229,7 @@ export default function Contract(props) {
         <ReactPaginate
           previousLabel={"<"}
           nextLabel={">"}
-          pageCount={5}
+          pageCount={2}
           breakLabel={"..."}
           initialPage={0}
           onPageChange={changePage}
@@ -250,6 +287,9 @@ const IconDiv = styled.div`
   @media (min-width: 375px) and (max-width: 812px) {
     margin-bottom: 22px;
   }
+  @media (max-width: 375px) {
+    margin-bottom: 0px;
+  }
 `;
 const RefreshImage = styled.img`
   cursor: pointer;
@@ -263,6 +303,14 @@ const RefreshImage = styled.img`
     margin-right: 0.325rem;
     margin-top: 28px;
     margin-left: 3px;
+  }
+  @media (max-width: 375px) {
+    margin-right: 0.325rem;
+    margin-top: 51px;
+    margin-left: 3px;
+  }
+  @media (min-width: 376px) and (max-width: 432px) {
+    display: none;
   }
 `;
 const Tag = styled.div`
@@ -294,7 +342,11 @@ const MainContainer = styled.div`
   height: 100vh;
   padding: 2.125rem;
   height: 100vh;
+  @media (max-width: 375px) {
+    padding: 1.2rem;
+  }
 `;
+
 const MainHeading = styled.div`
   display: flex;
   width: 100%;
@@ -302,11 +354,11 @@ const MainHeading = styled.div`
     display: flex;
     flex-direction: row;
   }
-  // @media (min-width: 570px) {
-  //   display: flex;
-  //   // flex-direction: column;
-  //   // padding-bottom: 58px;
-  // }
+  @media (max-width: 375px) {
+    display: flex;
+    flex-direction: column;
+    padding-top: 18px;
+  }
 `;
 const SubContainer = styled.div`
   width: 100%;
@@ -317,26 +369,28 @@ const SubContainer = styled.div`
   padding-bottom: 15px;
   @media (max-width: 767px) {
     padding-top: 47px;
-    padding-bottom: 33px;
+    // padding-bottom: 42px;
   }
   @media (min-width: 375px) {
     padding-top: 47px;
     padding-bottom: 33px;
   }
 `;
-const Heading = styled.span`
+const Heading = styled.div`
   font-size: 1.5rem;
   font-weight: 600;
   color: #191919;
   margin-right: 0.625rem;
-  @media (max-width: 767px) {
-    font-size: 1rem;
+  @media (max-width: 768px) {
+    font-size: 1.2rem;
     // padding-top: 40px;
+    margin-top: 3px;
   }
-  @media (min-width: 375px);
+  @media (max-width: 375px);
    {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     flex-direction: column;
+    margin-bottom: 10px;
   }
 `;
 const Button = styled.button`
@@ -355,6 +409,16 @@ const Button = styled.button`
   font-size: 0.875rem;
   @media (max-width: 768px) {
     margin-top: 28px;
+  }
+  @media (max-width: 375px) {
+    margin-top: 51px;
+    width: 35px;
+    font-size: 0rem;
+    height: 33px;
+    background-position: 0.6rem;
+  }
+  @media (min-width: 376px) and (max-width: 584px) {
+    display: none;
   }
 `;
 const Input = styled.input`
@@ -379,20 +443,20 @@ const Input = styled.input`
     height: 40px;
   }
   @media (min-width: 375px) {
-    width: min-content;
+    width: 223px;
   }
 `;
 const TableContainer = styled.div`
   background-color: #ffffff;
   border-radius: 0.375rem;
   width: 100%;
-  min-height: 25rem;
+  min-height: 20rem;
   overflow: auto;
   padding: 0.625rem 0.625rem 1px 0.625rem;
   @media (min-width: 300px) and (max-width: 767px) {
-    overflow: scroll;
-    height: 281px;
-    overflow-y: auto;
+    overflow-y: hidden;
+    overflow-x: auto;
+    height: 420px;
     position: relative;
     width: 100%;
     ::-webkit-scrollbar {
@@ -411,6 +475,9 @@ const TableContainer = styled.div`
       border: 4px solid transparent;
       background-clip: content-box;
     }
+  }
+  @media (max-width: 375px) {
+    margin-top: 30px;
   }
 `;
 const Div = styled.div`
@@ -447,7 +514,7 @@ const ToolTipIcon = styled.img`
 const PlaceHolderContainer = styled.div`
   display: flex;
   width: 100%;
-  height: 500px;
+  height: 16rem;
   flex-direction: column;
   justify-content: center;
   align-items: center;

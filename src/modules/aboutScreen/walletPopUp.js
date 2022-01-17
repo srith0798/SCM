@@ -6,6 +6,8 @@ import { makeStyles } from "@material-ui/styles";
 const useStyles = makeStyles(() => ({
   dialogBox: {
     width: "100% !important",
+    marginBottom: "275px",
+    marginLeft: "142px",
   },
 }));
 
@@ -30,6 +32,7 @@ export default function WalletPopUp(props) {
                   />
                 </Add>
               </RowContainer>
+              <Line></Line>
               <DetailBox>
                 <IconContainer>
                   <StepsTitle>Step 1</StepsTitle>
@@ -119,6 +122,9 @@ const SubTitle = styled.div`
 
 const IconContainer = styled.div`
   padding: 20px;
+  border: 0.031rem #eaf1ec solid;
+  margin-top: 14px;
+  margin-right: 6px;
 `;
 const CrossIcon = styled.img`
   cursor: pointer;
@@ -133,7 +139,7 @@ const CrossIcon = styled.img`
 `;
 const DetailBox = styled.div`
   display: flex;
-  padding-bottom: 35px;
+  padding-bottom: 18px;
 `;
 const MainContainer = styled.div`
   width: 100%;
@@ -158,10 +164,18 @@ const Add = styled.div`
   color: #303134;
   padding-top: 15px;
   padding-bottom: 5px;
-  border-bottom: 1px solid #d8d8d8;
+
   display: flex;
   justify-content: space-between;
   width: 100%;
+`;
+const Line = styled.div`
+  border-bottom: 0.031rem #eaf1ec solid;
+      margin-top: 10px;
+    width: 596px;
+    margin-left: -20px;
+}
+
 `;
 
 const RowContainer = styled.div`

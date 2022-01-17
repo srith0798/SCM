@@ -121,7 +121,6 @@ export default function ContractDetails() {
   return (
     <>
       <ShowLoader state={loader} />
-
       <MainContainer>
         <SubContainer>
           <MainHeading>
@@ -129,7 +128,7 @@ export default function ContractDetails() {
               <img
                 alt=""
                 src="/images/back.svg"
-                style={{ marginRight: "5px" }}
+                style={{ marginRight: "8px", marginBottom: "3px" }}
                 onClick={() => backButton()}
               />
               Contract Details
@@ -316,7 +315,9 @@ export default function ContractDetails() {
                   )}
                 </PopUpBlock>
                 <PopUpBlock>
-                  {remove && <Remove click={removeHandleClose} contract={address}/>}
+                  {remove && (
+                    <Remove click={removeHandleClose} contract={address} />
+                  )}
                   <RowProperty onClick={() => removeHandleOpen()}>
                     <img alt="" src="/images/delete.svg" />
                   </RowProperty>
@@ -351,6 +352,9 @@ const MainHeading = styled.div`
     flex-direction: column;
     padding-bottom: 58px;
   }
+  @media (max-width: 768px) {
+    padding-bottom: 5px;
+  }
 `;
 const SubContainer = styled.div`
   width: 100%;
@@ -384,7 +388,7 @@ const Enabled = styled.div`
   color: #00a58c;
 `;
 const FinanceTag = styled.div`
-  background-image: url("/images/Tag_logo.svg");
+  background-image: url("/images/tag-logo-blue.svg");
   background-repeat: no-repeat;
   background-position: 0.5rem;
   padding-left: 1.75rem;
@@ -465,7 +469,7 @@ const DetailsSection = styled.div`
   width: 100%;
   padding: 0.625rem 0.625rem 1.5rem 0.625rem;
   margin-top: 1.25rem;
-  overflow-x: scroll;
+  overflow-x: auto;
 `;
 const Div = styled.div`
   display: flex;
@@ -550,4 +554,7 @@ const Button = styled.button`
   white-space: nowrap;
   height: 2.125rem;
   font-size: 0.875rem;
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;

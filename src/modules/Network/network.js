@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Row } from "simple-flexbox";
-import AddNetwork from "../Popup/addNetwork";
+import AddNetwork from "./addNetwork";
 import Tooltip from "@mui/material/Tooltip";
 
 export default function Network() {
@@ -50,48 +49,44 @@ export default function Network() {
       </SubContainer>
       <Div>
         <Container>
-          <Row>
-            <ColumnOne>
-              Network
-              <Tooltip
-                open={networkToolTip}
-                onOpen={() => setnetworkToolTip(true)}
-                onClose={() => setnetworkToolTip(false)}
-                disableFocusListener
-                title="The blockchain network in use"
-              >
-                <ToolTipIcon
-                  onClick={() => setnetworkToolTip(!networkToolTip)}
-                  src="/images/tool-tip.svg"
-                />
-              </Tooltip>
-            </ColumnOne>
-            <UrlHeading>
-              URL
-              <Tooltip
-                open={urlToolTip}
-                onOpen={() => seturlToolTip(true)}
-                onClose={() => seturlToolTip(false)}
-                disableFocusListener
-                title="URL of the network"
-              >
-                <ToolTipIcon
-                  onClick={() => seturlToolTip(!urlToolTip)}
-                  src="/images/tool-tip.svg"
-                />
-              </Tooltip>
-            </UrlHeading>
-          </Row>
+          <ColumnOne>
+            Network
+            <Tooltip
+              open={networkToolTip}
+              onOpen={() => setnetworkToolTip(true)}
+              onClose={() => setnetworkToolTip(false)}
+              disableFocusListener
+              title="The blockchain network in use"
+            >
+              <ToolTipIcon
+                onClick={() => setnetworkToolTip(!networkToolTip)}
+                src="/images/tool-tip.svg"
+              />
+            </Tooltip>
+          </ColumnOne>
+          <UrlHeading>
+            URL
+            <Tooltip
+              open={urlToolTip}
+              onOpen={() => seturlToolTip(true)}
+              onClose={() => seturlToolTip(false)}
+              disableFocusListener
+              title="URL of the network"
+            >
+              <ToolTipIcon
+                onClick={() => seturlToolTip(!urlToolTip)}
+                src="/images/tool-tip.svg"
+              />
+            </Tooltip>
+          </UrlHeading>
         </Container>
         <div>
           {address.map((data, index) => {
             return (
               <Container>
-                <Row style={{ alignItems: "center" }}>
-                  <Icon src="/images/mainnet.svg" />
-                  <Head>Mainnet</Head>
-                  <Url>https://explorer.xinfin.network/</Url>
-                </Row>
+                <Icon src="/images/mainnet.svg" />
+                <Head>Mainnet</Head>
+                <Url>https://explorer.xinfin.network/</Url>
               </Container>
             );
           })}
@@ -106,6 +101,9 @@ const MainContainer = styled.div`
   width: 100%;
   padding: 2.125rem;
   height: 100vh;
+  @media (max-width: 375px) {
+    padding: 3.2rem 1rem 1rem 1rem;
+  }
 `;
 const SubContainer = styled.div`
   width: 100%;
@@ -119,6 +117,9 @@ const Heading = styled.span`
   font-weight: 600;
   color: #191919;
   margin-right: 0.625rem;
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
 `;
 const UrlHeading = styled.div`
   font-size: 0.875rem;
@@ -162,8 +163,8 @@ const Div = styled.div`
   margin-top: 0.6rem;
   padding: 0.625rem;
 
-  @media (min-width: 300px) and (max-width: 768px) {
-    height: 400px;
+  @media (min-width: 300px) and (max-width: 767px) {
+    height: 300px;
     overflow: scroll;
     overflow-y: hidden;
     width: 100%;
@@ -186,8 +187,10 @@ const Div = styled.div`
   }
 `;
 const Container = styled.div`
-  padding: 0.938rem;
+  padding: 0.738rem;
   border-bottom: 0.063rem solid #e3e7eb;
+  white-space: nowrap;
+  display: flex;
 `;
 const ColumnOne = styled.div`
   font-size: 0.875rem;
@@ -197,6 +200,7 @@ const ColumnOne = styled.div`
   max-width: 15.625rem;
   white-space: nowrap;
 `;
+
 const Icon = styled.img`
   width: 1.75rem;
   margin-right: 0.625rem;
@@ -219,9 +223,6 @@ const Head = styled.div`
   width: 100%;
   max-width: 13.438rem;
   white-space: nowrap;
-  @media (min-width: 300px) and (max-width: 768px) {
-    margin-right: 22px;
-  }
 `;
 const ToolTipIcon = styled.img`
   width: 0.75rem;

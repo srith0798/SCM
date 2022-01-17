@@ -25,13 +25,13 @@ export default function TransactionDetails() {
             <img
               alt=""
               src="/images/back.svg"
-              style={{ marginRight: "2px" }}
+              style={{ marginRight: "8px" }}
               onClick={() => backButton()}
             />
-            Transactions Details
+            Transaction Details
           </Title>
         </TitleDiv>
-        <Button>View in Explorer</Button>
+        <Button>View in explorer</Button>
       </SubContainer>
 
       <Container>
@@ -126,7 +126,7 @@ export default function TransactionDetails() {
                   : "/images/event_grey.svg"
               }
             />{" "}
-            Events <ToolTipIcon src="/images/tool-tip.svg" />
+            Events
           </TabView>
           <TabView
             id="StateChange"
@@ -147,7 +147,6 @@ export default function TransactionDetails() {
               }
             />
             State changes
-            <ToolTipIcon src="/images/tool-tip.svg" />
           </TabView>
         </TabLister>
         {activeButton === "Overview" && (
@@ -232,13 +231,13 @@ export default function TransactionDetails() {
               <CommonDiv>
                 <Row>
                   <Heading>Gas Price</Heading>
-                  <SubHead>72462568294732962 XDC(54253.gwel)</SubHead>
+                  <SubHead>XDC(54253.gwel)</SubHead>
                 </Row>
               </CommonDiv>
               <CommonDiv>
                 <Row>
                   <Heading>Transaction Fee</Heading>
-                  <SubHead>0.2372723762728 XDC</SubHead>
+                  <SubHead>0.237272376272</SubHead>
                 </Row>
               </CommonDiv>
               <CommonDiv>
@@ -293,7 +292,6 @@ export default function TransactionDetails() {
               <CommonDiv>
                 <Row>
                   <Heading>Caller Address </Heading>
-                  <Heading>Contact Address </Heading>
                 </Row>
                 <Row>
                   <SubHeading
@@ -304,7 +302,7 @@ export default function TransactionDetails() {
                 </Row>
               </CommonDiv>
             </FunctionContainer>
-            <b>Token Transfer</b>
+            {/* <b>Token Transfer</b> */}
             <TokenTransferDiv>
               <CommonDiv>
                 <Row>
@@ -323,10 +321,12 @@ export default function TransactionDetails() {
             </TokenTransferDiv>
             <b>Stack Trace</b> <ToolTipIcon src="/images/tool-tip.svg" />
             <StackContainer>
-              <TextLine>Error Messege:out of gas</TextLine>
-              <img alt="" src="/images/error.svg" /> balances[_to] =
-              balances[_to].add(_value);
-              <br />
+              <BackgroundChanger>
+                <TextLine>Error Messege:out of gas</TextLine>
+                <img alt="" src="/images/error.svg" /> balances[_to] =
+                balances[_to].add(_value);
+                <br />
+              </BackgroundChanger>
             </StackContainer>
             <LastContainer>
               <SearchBar placeholder="Execution trace" />
@@ -368,6 +368,9 @@ const TabImage = styled.img`
   @media (min-width: 300px) and (max-width: 485px) {
     width: 13px;
   }
+  @media (max-width: 375px) {
+    margin-bottom: 10px;
+  }
 `;
 
 const TitleDiv = styled.div`
@@ -377,6 +380,10 @@ const TitleDiv = styled.div`
   max-width: 267px;
   font-size: 24px;
   font-weight: 600;
+  @media (max-width: 375px) {
+    font-size: 18px;
+    margin-left: 10px;
+  }
 `;
 const Title = styled.div`
   white-space: nowrap;
@@ -405,11 +412,13 @@ const TokenTransferDiv = styled.div`
   height: auto;
   white-space: nowrap;
   margin-bottom: 20px;
+  display: none;
 `;
 
 const SubHead = styled.div`
   font-size: 0.75rem;
   display: flex;
+  font-weight: 500;
 `;
 const SubHeadBlue = styled.div`
   font-size: 0.85rem;
@@ -423,17 +432,31 @@ const CommonDiv = styled.div`
 const MidContainer = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
   border-radius: 0.375rem;
-  opacity: 1;
   margin-top: 1.25rem;
   height: auto;
-  white-space: nowrap;
+  overflow: auto;
 `;
 const StackContainer = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
+  background-repeat: no-repeat;
+  // background-color: #f5f6fd;
   border-radius: 0.375rem;
   padding: 1.875rem;
   margin-top: 1.25rem;
   height: 9.375rem;
+`;
+const BackgroundChanger = styled.div`
+  width: 1016px;
+  height: 106px;
+  background-repeat: no-repeat;
+  background: #f7f8fd 0% 0% no-repeat padding-box;
+  border-radius: 6px;
+  opacity: 1;
+  padding: 1.875rem;
+  @media (min-width: 300px) and (max-width: 1371px) {
+    width: 100%;
+    padding: 1rem;
+  }
 `;
 const LastContainer = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
@@ -466,7 +489,7 @@ const Button = styled.button`
   background-repeat: no-repeat;
   background-position: 0.5rem;
   padding-left: 1.75rem;
-  background-size: 0.875rem;
+  background-size: 1rem;
   position: relative;
   background-color: #ffffff;
   color: #3163f0;
@@ -504,6 +527,9 @@ const Container = styled.div`
     margin-top: 1.25rem;
     flex-direction: column;
     width: 100%;
+  }
+  @media (max-width: 375px) {
+    height: 7.4rem;
   }
 `;
 
@@ -562,7 +588,7 @@ const TabLister = styled.div`
   max-width: 39.125rem;
   margin: 1.563rem 0rem 0.625rem 1.063rem;
   cursor: pointer;
-  @media (min-width: 340px) and (max-width: 768px) {
+  @media (max-width: 768px) {
     display: flex;
     justify-content: space-between;
     min-height: 45px;
@@ -570,6 +596,24 @@ const TabLister = styled.div`
     overflow-y: hidden;
     margin: 0rem 0rem 0rem 0rem;
     white-space: nowrap;
+    padding-left: 10px;
+  }
+  @media (min-width: 320px) and (max-width: 450px) {
+    display: flex;
+    justify-content: space-between;
+    min-height: 45px;
+    font-size: 0.6rem;
+    overflow-y: hidden;
+    margin: 0rem 0rem 0rem 0rem;
+    white-space: nowrap;
+    padding-left: 0px;
+  }
+
+  @media (min-width: 600px) and (max-width: 923px) {
+    overflow-y: hidden;
+    font-size: 0.8rem;
+    padding-left: 0px;
+    margin: 0rem 0rem 0rem 0rem;
   }
 `;
 const TabView = styled.div`
@@ -614,7 +658,7 @@ const AlertButton = styled.div`
   margin-left: 2px;
   padding-top: 2px;
   padding-left: 8px;
-  @media (min-width: 300px) and (max-width: 767px) {
+  @media (min-width: 300px) and (max-width: 916px) {
     display: none;
   }
 `;

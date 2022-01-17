@@ -7,17 +7,26 @@ import Box from "@mui/material/Box";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 import { history } from "../../managers/history";
 import Tooltip from "@mui/material/Tooltip";
+import Filter from "../Popup/filter";
 
 export default function TransactionList() {
   useEffect(() => {}, []);
   const [state, setState] = useState(true);
   const [open, isOpen] = useState(false);
+  const [filterPopupOpen, setfilterPopupOpen] = useState(false);
   const handleClickOpen = () => {
     isOpen(true);
   };
   const handleClose = () => {
     isOpen(false);
   };
+  // const setfilterPopupOpen = () => {
+  //   setfilterPopupOpen(true);
+  // };
+  const filterPopupClose = () => {
+    setfilterPopupOpen(false);
+  };
+
   const [TxHashToolTip, setTxHashToolTip] = React.useState(false);
   const [statusToolTip, setstatusToolTip] = React.useState(false);
   const [functionToolTip, setfunctionToolTip] = React.useState(false);
@@ -118,8 +127,9 @@ export default function TransactionList() {
             <Tooltip disableFocusListener title="Refresh">
               <Icons src="/images/refresh.svg" />
             </Tooltip>
+            {filterPopupOpen && <Filter click={filterPopupClose} />}
             <Tooltip disableFocusListener title="Filter">
-              <Icons src="/images/filter.svg" />
+              <Icons src="/images/filter.svg" onClick={setfilterPopupOpen} />
             </Tooltip>
           </IconContainer>
         </TransactionBox>
@@ -133,9 +143,9 @@ export default function TransactionList() {
             </InstructionText>
 
             <ClickAwayListener onClickAway={handleClickAway}>
-              <Box sx={{ position: "relative" }}>
+              <Box sx={{ position: "relative", marginRight: "14px" }}>
                 <DropDown onClick={handleClick}>
-                  App_Transactions_Validator{" "}
+                  App_Transactions{" "}
                   <img
                     style={{ marginLeft: "0.5rem" }}
                     alt=""
@@ -143,7 +153,7 @@ export default function TransactionList() {
                   />
                   <br />
                   <TransactionHash>
-                    xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c
+                    xdcabfe4184e5f9f600fe86d20e2a32c99
                   </TransactionHash>
                   <Image src="/images/Arrrow.svg" />
                 </DropDown>
@@ -153,7 +163,7 @@ export default function TransactionList() {
                     App_Transactions_Validator
                     <br />
                     <TransactionHash>
-                      xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c
+                      xdcabfe4184e5f9f600fe86d20e2a32c99
                     </TransactionHash>
                   </Box>
                 ) : null}
@@ -252,7 +262,9 @@ export default function TransactionList() {
                   <Row>
                     <ColumnSecond>{data.txn}</ColumnSecond>
 
-                    <ColumnSecond style={{}}>{data.status}</ColumnSecond>
+                    <ColumnSecond style={{ color: "#00A58C" }}>
+                      {data.status}
+                    </ColumnSecond>
                     <ColumnSecond>{data.function}</ColumnSecond>
                     <ColumnSecond>{data.contracts}</ColumnSecond>
                     <ColumnSecond>{data.from}</ColumnSecond>
@@ -385,7 +397,12 @@ const IconContainer = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  max-width: 119px;
+  max-width: 120px;
+  @media (min-width: 300px) and (max-width: 768px) {
+    width: 100%;
+    max-width: 123px;
+    height: 35px;
+  }
 `;
 const Heading = styled.span`
   margin-top: 0.625rem;
@@ -398,7 +415,7 @@ const InstructionText = styled.span`
   color: #191919;
   font-size: 0.9rem;
   font-weight: 600;
-  margin-bottom: 0.725rem;
+  margin-bottom: 0.825rem;
 `;
 const Card = styled.div`
   margin-top: 1.25rem;
@@ -408,20 +425,19 @@ const Card = styled.div`
 `;
 const ColumnOne = styled.div`
   font-size: 0.875rem;
-  font-weight: 600;
+  font-weight: 700;
   color: #102c78;
   column-gap: 20px;
   width: 100%;
   min-width: 200px;
   white-space: nowrap;
   @media (min-width: 300px) and (max-width: 767px) {
-    // margin-right: 59px;
     width: 100%;
   }
 `;
 const ColumnSecond = styled.div`
   font-size: 0.875rem;
-  font-weight: 300;
+  font-weight: 500;
   color: #191919;
   width: 100%;
   // max-width: 300px;
@@ -440,6 +456,9 @@ const DropDown = styled.div`
   width: 100%;
   max-width: 453px;
   position: relative;
+  @media (max-width: 375px) {
+    margin-right: 14px;
+  }
 `;
 const TransactionHash = styled.div`
   font-size: 0.875rem;
@@ -450,13 +469,31 @@ const TransactionHash = styled.div`
   @media (min-width: 300px) and (max-width: 767px) {
     font-size: 0.575rem;
   }
+  @media (max-width: 375px) {
+    font-size: 0.75rem;
+    padding-top: 5px;
+  }
 `;
 const Image = styled.img`
-  width: 0.75rem;
+  width: 0.95rem;
   position: absolute;
-  top: 16px;
-  right: 8px;
+  top: 29px;
+  right: 39px;
   cursor: pointer;
+  @media (max-width: 375px) {
+    width: 0.85rem;
+    position: absolute;
+    top: 32px;
+    right: 16px;
+    cursor: pointer;
+  }
+  @media (max-width: 768px) {
+    width: 0.95rem;
+    position: absolute;
+    top: 29px;
+    right: 23px;
+    cursor: pointer;
+  }
 `;
 const Label = styled.div`
   font-size: 0.75rem;
