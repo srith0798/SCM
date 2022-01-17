@@ -243,7 +243,13 @@ export default function ContractDetails(props) {
                           <FinanceTag>{tag}</FinanceTag>
                         ))}
 
-                      {addTag && <AddTags click={Close} address={address} />}
+                      {addTag && (
+                        <AddTags
+                          click={Close}
+                          address={address}
+                          contract={false}
+                        />
+                      )}
                       <AddTag onClick={() => Open()}>Add Tag</AddTag>
                     </Row>
                   </TableData>

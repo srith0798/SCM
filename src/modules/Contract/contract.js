@@ -51,6 +51,24 @@ export default function Contract(props) {
       setLoader(false);
     }
   };
+  const searching = async (searchValues, searchKeys) => {
+    try {
+      const requestData = {
+        searchValue: searchValues,
+        searchKeys: searchKeys,
+      };
+      setLoader(true);
+      const response = await ContractsService.getContractsList(requestData);
+      setLoader(false);
+
+      setAddress(response.contractList);
+
+      if (response.contractList.length === 0) setShowPlaceHolder(true);
+    } catch (e) {
+      setShowPlaceHolder(true);
+      setLoader(false);
+    }
+  };
   const changePage = (value) => {
     getContractList(Math.ceil(value.selected * 5), 5);
   };
@@ -60,7 +78,7 @@ export default function Contract(props) {
   }, []);
 
   const [address, setAddress] = React.useState([]);
-  console.log("contract", address);
+
   const [addTag, setAddTag] = useState(false);
   const Open = () => {
     setAddTag(true);
@@ -70,13 +88,23 @@ export default function Contract(props) {
     getContractList();
   };
 
+  const [input, setInput] = useState();
+
+  const search = (e) => {
+    setInput(e.target.value);
+    searching(input, ["address"]);
+  };
   return (
     <MainContainer>
       <ShowLoader state={loader} top={"33%"} />
       <SubContainer>
         <MainHeading>
           <Heading>Contracts</Heading>
-          <Input placeholder="Search by address or name" />
+          <Input
+            placeholder="Search by address or name"
+            value={input}
+            onChange={search}
+          />
         </MainHeading>
         <IconDiv>
           <Tooltip disableFocusListener title="Refresh">
@@ -186,9 +214,10 @@ export default function Contract(props) {
                   <ColumnSecond>{data.tokenName}</ColumnSecond>
                   <ColumnSecond style={{ display: "flex" }}>
                     {address[0].tags &&
-                      address[0].tags.map((tag) => (
-                        <FinanceTag>{tag}</FinanceTag>
-                      ))}
+                      address[0].tags.map(
+                        (tag, index) =>
+                          index < 2 && <FinanceTag>{tag}</FinanceTag>
+                      )}
 
                     {addTag && (
                       <AddTags
@@ -197,7 +226,11 @@ export default function Contract(props) {
                         contract={true}
                       />
                     )}
-                    <AddTag onClick={() => Open()}>Add Tag</AddTag>
+                    {data.tags &&
+                      data.tags.length &&
+                      data.tags.length === 0 && (
+                        <AddTag onClick={() => Open()}>Add Tag</AddTag>
+                      )}
                   </ColumnSecond>
                   <ColumnSecond>{data.status}</ColumnSecond>
                 </Row>

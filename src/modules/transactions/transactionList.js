@@ -7,6 +7,9 @@ import Box from "@mui/material/Box";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 import { history } from "../../managers/history";
 import Tooltip from "@mui/material/Tooltip";
+import ContractsService from "../../services/contractsService";
+import { sessionManager } from "../../managers/sessionManager";
+import ShowLoader from "../../common/components/showLoader";
 
 export default function TransactionList() {
   useEffect(() => {}, []);
@@ -21,6 +24,41 @@ export default function TransactionList() {
   const [TxHashToolTip, setTxHashToolTip] = React.useState(false);
   const [statusToolTip, setstatusToolTip] = React.useState(false);
   const [functionToolTip, setfunctionToolTip] = React.useState(false);
+  const [showPlaceHolder, setShowPlaceHolder] = React.useState(false);
+  const [loader, setLoader] = React.useState(false);
+  const [address, setAddress] = React.useState([]);
+  const [contracts, setContracts] = React.useState([]);
+
+  const [selected, setSelected] = React.useState({});
+  // const selectedOne = (address) => {
+  //   console.log("setSelected", address);
+  // };
+  const getContractNames = async (skip = 0, limit = 10) => {
+    let accountAddress = sessionManager.getDataFromCookies("accountAddress");
+    console.log("transactionList", accountAddress);
+    let userId = sessionManager.getDataFromCookies("userId");
+    try {
+      const requestData = {
+        skip: skip,
+        limit: limit,
+        userId: userId,
+      };
+      setLoader(true);
+      const response = await ContractsService.getContractsList(requestData);
+      setLoader(false);
+
+      setContracts(response.contractList);
+      console.log("transactionResponse", response.contractList[0].address);
+
+      if (response.contractList.length === 0) setShowPlaceHolder(true);
+    } catch (e) {
+      setShowPlaceHolder(true);
+      setLoader(false);
+    }
+  };
+  useEffect(() => {
+    getContractNames();
+  }, []);
   React.useEffect(() => {
     let address = [
       {
@@ -67,10 +105,9 @@ export default function TransactionList() {
     );
   }, []);
 
-  const [address, setAddress] = React.useState([]);
   const [isSetOpen, setOpen] = React.useState(false);
 
-  const handleClick = () => {
+  const handleClick = (e) => {
     setOpen((prev) => !prev);
   };
 
@@ -91,7 +128,9 @@ export default function TransactionList() {
     background: "#f5f6fd 0% 0% no-repeat padding-box",
     border: "1px solid #d5e0ff",
     borderRadius: "6px",
-    height: "80px",
+    // height: "80px",
+    overflow: "scroll",
+    height: "200px",
     marginTop: "4px",
     fontSize: "0.875rem",
     fontWeight: "600",
@@ -103,6 +142,8 @@ export default function TransactionList() {
   return (
     <>
       <MainContainer>
+        <ShowLoader state={loader} top={"33%"} />
+
         <TransactionMedia>Transactions</TransactionMedia>
         <TransactionBox>
           <NewDiv>
@@ -116,7 +157,7 @@ export default function TransactionList() {
               <Icons src="/images/settings.svg" onClick={handleClickOpen} />
             </Tooltip>
             <Tooltip disableFocusListener title="Refresh">
-              <Icons src="/images/refresh.svg" />
+              <Icons src="/images/refresh.svg" onClick={getContractNames} />
             </Tooltip>
             <Tooltip disableFocusListener title="Filter">
               <Icons src="/images/filter.svg" />
@@ -127,34 +168,28 @@ export default function TransactionList() {
         <Card>
           <Column>
             <Heading>View Transaction for Contract</Heading>
-            <InstructionText>
-              You can view transactions per contract by using the contract
-              picker below
-            </InstructionText>
+            <InstructionText>You can view transactions per contract by using the contract picker below</InstructionText>
 
             <ClickAwayListener onClickAway={handleClickAway}>
-              <Box sx={{ position: "relative" }}>
+              <Box sx={{ position: "relative" }} selected={selected.address}>
                 <DropDown onClick={handleClick}>
-                  App_Transactions_Validator{" "}
-                  <img
-                    style={{ marginLeft: "0.5rem" }}
-                    alt=""
-                    src="/images/XDCmainnet.svg"
-                  />
+                  App_Transactions_Validator <img style={{ marginLeft: "0.5rem" }} alt="" src="/images/XDCmainnet.svg" />
                   <br />
-                  <TransactionHash>
-                    xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c
-                  </TransactionHash>
+                  <TransactionHash>{selected.address}</TransactionHash>
                   <Image src="/images/Arrrow.svg" />
                 </DropDown>
+
                 {isSetOpen ? (
                   <Box sx={styles}>
-                    <Label>Contract</Label>
-                    App_Transactions_Validator
-                    <br />
-                    <TransactionHash>
-                      xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c
-                    </TransactionHash>
+                    {contracts.length &&
+                      contracts.map((item) => (
+                        <div onClick={() => setSelected(item)}>
+                          <Label>Contract</Label>
+                          App_Transactions_Validator
+                          <br />
+                          <TransactionHash>{item.address}</TransactionHash>
+                        </div>
+                      ))}
                   </Box>
                 ) : null}
               </Box>
@@ -174,10 +209,7 @@ export default function TransactionList() {
                   disableFocusListener
                   title="Unique transaction identifier, also known as the Transaction ID"
                 >
-                  <ToolTipIcon
-                    onClick={() => setTxHashToolTip(!TxHashToolTip)}
-                    src="/images/tool-tip.svg"
-                  />
+                  <ToolTipIcon onClick={() => setTxHashToolTip(!TxHashToolTip)} src="/images/tool-tip.svg" />
                 </Tooltip>
               </ColumnOne>
               <ColumnOne>
@@ -189,10 +221,7 @@ export default function TransactionList() {
                   disableFocusListener
                   title="Token transaction status"
                 >
-                  <ToolTipIcon
-                    onClick={() => setstatusToolTip(!statusToolTip)}
-                    src="/images/tool-tip.svg"
-                  />
+                  <ToolTipIcon onClick={() => setstatusToolTip(!statusToolTip)} src="/images/tool-tip.svg" />
                 </Tooltip>
               </ColumnOne>
               <ColumnOne>
@@ -204,22 +233,13 @@ export default function TransactionList() {
                   disableFocusListener
                   title="Smart contract function status"
                 >
-                  <ToolTipIcon
-                    onClick={() => setfunctionToolTip(!functionToolTip)}
-                    src="/images/tool-tip.svg"
-                  />
+                  <ToolTipIcon onClick={() => setfunctionToolTip(!functionToolTip)} src="/images/tool-tip.svg" />
                 </Tooltip>
               </ColumnOne>
               <ColumnOne>
                 Contracts
-                <Tooltip
-                  disableFocusListener
-                  title="Name of the smart contract"
-                >
-                  <ToolTipIcon
-                    onClick={() => setstatusToolTip(!statusToolTip)}
-                    src="/images/tool-tip.svg"
-                  />
+                <Tooltip disableFocusListener title="Name of the smart contract">
+                  <ToolTipIcon onClick={() => setstatusToolTip(!statusToolTip)} src="/images/tool-tip.svg" />
                 </Tooltip>
               </ColumnOne>
               <ColumnOne>
@@ -236,10 +256,7 @@ export default function TransactionList() {
               </ColumnOne>
               <ColumnOne>
                 When
-                <Tooltip
-                  disableFocusListener
-                  title="Date and time of transaction execution"
-                >
+                <Tooltip disableFocusListener title="Date and time of transaction execution">
                   <ToolTipIcon src="/images/tool-tip.svg" />
                 </Tooltip>
               </ColumnOne>
@@ -248,11 +265,11 @@ export default function TransactionList() {
           <div>
             {address.map((data, index) => {
               return (
-                <Div onClick={redirectToTransactionDetails}>
+                <Div>
                   <Row>
-                    <ColumnSecond>{data.txn}</ColumnSecond>
+                    <ColumnSecond onClick={redirectToTransactionDetails}>{data.txn}</ColumnSecond>
 
-                    <ColumnSecond style={{}}>{data.status}</ColumnSecond>
+                    <ColumnSecond>{data.status}</ColumnSecond>
                     <ColumnSecond>{data.function}</ColumnSecond>
                     <ColumnSecond>{data.contracts}</ColumnSecond>
                     <ColumnSecond>{data.from}</ColumnSecond>
@@ -263,13 +280,15 @@ export default function TransactionList() {
               );
             })}
           </div>
+          {showPlaceHolder && (
+            <PlaceHolderContainer>
+              <PlaceHolderImage src="/images/contracts.svg" />
+              No Contracts Found
+            </PlaceHolderContainer>
+          )}
         </TableContainer>
       </MainContainer>
-      <div>
-        {false && (
-          <LetsGetStarted click={() => setState(false)} state={state} />
-        )}
-      </div>
+      <div>{false && <LetsGetStarted click={() => setState(false)} state={state} />}</div>
     </>
   );
 }
@@ -467,4 +486,21 @@ const ToolTipIcon = styled.img`
   width: 0.75rem;
   cursor: pointer;
   margin-left: 0.5rem;
+`;
+const PlaceHolderContainer = styled.div`
+  display: flex;
+  width: 100%;
+  height: 500px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 50%;
+  font-weight: 600;
+  font-size: 13px;
+`;
+const PlaceHolderImage = styled.img`
+  width: 50px;
+  -webkit-filter: grayscale(60%); /* Safari 6.0 - 9.0 */
+  filter: grayscale(60%);
+  margin-bottom: 20px;
 `;
