@@ -12,7 +12,7 @@ import { sessionManager } from "../../managers/sessionManager";
 import ShowLoader from "../../common/components/showLoader";
 import Filter from "../Popup/filter";
 
-export default function TransactionList() {
+export default function TransactionList(props) {
   useEffect(() => {}, []);
   const [state, setState] = useState(true);
   const [open, isOpen] = useState(false);
@@ -37,7 +37,6 @@ export default function TransactionList() {
   const [loader, setLoader] = React.useState(false);
   const [address, setAddress] = React.useState([]);
   const [contracts, setContracts] = React.useState([]);
-
   const [selected, setSelected] = React.useState({});
 
   const getContractNames = async (skip = 0, limit = 10) => {
@@ -122,6 +121,12 @@ export default function TransactionList() {
   const redirectToTransactionDetails = () => {
     history.push("/dashboard/transaction-details");
   };
+  const handleToggleTransaction = () => {
+    setTransactionHash(!transactionHash);
+  };
+  const [transactionHash, setTransactionHash] = React.useState(handleToggleTransaction);
+  console.log("transa", transactionHash);
+
   return (
     <>
       <MainContainer>
@@ -135,7 +140,14 @@ export default function TransactionList() {
           </NewDiv>
 
           <IconContainer>
-            {open && <Settings click={handleClose} />}
+            {open && (
+              <Settings
+                click={handleClose}
+                transactionHash={transactionHash}
+                setTransactionHash={setTransactionHash}
+                handleToggleTransaction
+              />
+            )}
             <Tooltip disableFocusListener title="Settings">
               <Icons src="/images/settings.svg" onClick={handleClickOpen} />
             </Tooltip>
@@ -184,18 +196,21 @@ export default function TransactionList() {
         <TableContainer>
           <Div>
             <Row>
-              <ColumnOne>
-                Tx Hash
-                <Tooltip
-                  open={TxHashToolTip}
-                  onOpen={() => setTxHashToolTip(true)}
-                  onClose={() => setTxHashToolTip(false)}
-                  disableFocusListener
-                  title="Unique transaction identifier, also known as the Transaction ID"
-                >
-                  <ToolTipIcon onClick={() => setTxHashToolTip(!TxHashToolTip)} src="/images/tool-tip.svg" />
-                </Tooltip>
-              </ColumnOne>
+              {transactionHash && (
+                <ColumnOne>
+                  Tx Hash
+                  <Tooltip
+                    open={TxHashToolTip}
+                    onOpen={() => setTxHashToolTip(true)}
+                    onClose={() => setTxHashToolTip(false)}
+                    disableFocusListener
+                    title="Unique transaction identifier, also known as the Transaction ID"
+                  >
+                    <ToolTipIcon onClick={() => setTxHashToolTip(!TxHashToolTip)} src="/images/tool-tip.svg" />
+                  </Tooltip>
+                </ColumnOne>
+              )}
+
               <ColumnOne>
                 Status
                 <Tooltip
@@ -251,7 +266,7 @@ export default function TransactionList() {
               return (
                 <Div>
                   <Row>
-                    <ColumnSecond onClick={redirectToTransactionDetails}>{data.hash}</ColumnSecond>
+                    {transactionHash && <ColumnSecond onClick={redirectToTransactionDetails}>{data.hash}</ColumnSecond>}
 
                     <ColumnSecond>{data.status}</ColumnSecond>
                     <ColumnSecond>{data.function}</ColumnSecond>

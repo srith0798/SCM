@@ -11,6 +11,32 @@ const useStyles = makeStyles(() => ({
 
 export default function Settings(props) {
   const classes = useStyles();
+
+  // const [status, setStatus] = React.useState(false);
+  // const handleToggleStatus = () => {
+  //   setStatus(!status);
+  // };
+  // const [func, setFunc] = React.useState(false);
+  // const handleToggleFunc = () => {
+  //   setFunc(!func);
+  // };
+  // const [contractDiv, setContractsDiv] = React.useState(false);
+  // const handleToggleContract = () => {
+  //   setContractsDiv(!contractDiv);
+  // };
+  // const [from, setFrom] = React.useState(false);
+  // const handleToggleFrom = () => {
+  //   setFrom(!from);
+  // };
+  // const [to, setTo] = React.useState(false);
+  // const handleToggleTo = () => {
+  //   setTo(!to);
+  // };
+  // const [when, setWhen] = React.useState(false);
+  // const handleToggleWhen = () => {
+  //   setWhen(!when);
+  // };
+
   return (
     <div>
       <Dialog classes={{ paper: classes.dialogBox }} open={true}>
@@ -18,19 +44,11 @@ export default function Settings(props) {
           <Container>
             <SubContainer style={{ padding: "15px 12px 10px 10px" }}>
               <Add>Settings</Add>
-              <img
-                style={{ cursor: "pointer" }}
-                alt=""
-                src="/images/close.svg"
-                onClick={props.click}
-              />
+              <img style={{ cursor: "pointer" }} alt="" src="/images/close.svg" onClick={props.click} />
             </SubContainer>
-            <MainHeading style={{ padding: "15px 12px 10px 10px" }}>
-              Configure Columns
-            </MainHeading>
+            <MainHeading style={{ padding: "15px 12px 10px 10px" }}>Configure Columns</MainHeading>
             <Content>
-              Change the layout of the transactions list and display only the
-              columns and information that is most important to you.
+              Change the layout of the transactions list and display only the columns and information that is most important to you.
             </Content>
             <SubContainer
               style={{
@@ -40,11 +58,11 @@ export default function Settings(props) {
             >
               <Heading>Transaction Hash</Heading>
               <label class="switch">
-                <input type="checkbox" />
+                <input type="checkbox" onChange={props.handleToggleTransaction} checked={props.transactionHash} />
                 <span class="slider round"></span>
               </label>
             </SubContainer>
-            <SubContainer
+            {/* <SubContainer
               style={{
                 borderBottom: "1px solid #d5e0ff",
                 padding: "5px 12px 10px 10px",
@@ -52,7 +70,7 @@ export default function Settings(props) {
             >
               <Heading>Status</Heading>
               <label class="switch">
-                <input type="checkbox" />
+                <input type="checkbox" onChange={handleToggleStatus} checked={status} />
                 <span class="slider round"></span>
               </label>
             </SubContainer>
@@ -64,7 +82,7 @@ export default function Settings(props) {
             >
               <Heading>Function</Heading>
               <label class="switch">
-                <input type="checkbox" />
+                <input type="checkbox" onChange={handleToggleFunc} checked={func} />
                 <span class="slider round"></span>
               </label>
             </SubContainer>
@@ -76,7 +94,7 @@ export default function Settings(props) {
             >
               <Heading>Contracts</Heading>
               <label class="switch">
-                <input type="checkbox" />
+                <input type="checkbox" onChange={handleToggleContract} checked={contractDiv} />
                 <span class="slider round"></span>
               </label>
             </SubContainer>
@@ -88,7 +106,7 @@ export default function Settings(props) {
             >
               <Heading>From</Heading>
               <label class="switch">
-                <input type="checkbox" />
+                <input type="checkbox" onChange={handleToggleFrom} checked={from} />
                 <span class="slider round"></span>
               </label>
             </SubContainer>
@@ -100,7 +118,7 @@ export default function Settings(props) {
             >
               <Heading>Network</Heading>
               <label class="switch">
-                <input type="checkbox" />
+                <input type="checkbox" onChange={handleToggleTo} checked={to} />
                 <span class="slider round"></span>
               </label>
             </SubContainer>
@@ -112,10 +130,10 @@ export default function Settings(props) {
             >
               <Heading>XDC value</Heading>
               <label class="switch">
-                <input type="checkbox" />
+                <input type="checkbox" onChange={handleToggleWhen} checked={when} />
                 <span class="slider round"></span>
               </label>
-            </SubContainer>
+            </SubContainer> */}
           </Container>
         </MainContainer>
       </Dialog>

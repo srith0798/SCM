@@ -17,8 +17,6 @@ export default function AddContract(props) {
   const [checkBox, setCheckBox] = useState(false);
   const [address, setAddress] = React.useState("");
   const [verifyAddress, setVerifyAddress] = React.useState("");
-  console.log("address", checkBox);
-  console.log(props);
 
   const checkAddress = async () => {
     try {
@@ -72,10 +70,7 @@ export default function AddContract(props) {
                 justifyContent: "space-between",
               }}
             >
-              <Content>
-                You can import contracts that have been verified publicly on
-                XDC.
-              </Content>
+              <Content>You can import contracts that have been verified publicly on XDC.</Content>
 
               <HideSteps
                 onClick={() => {
@@ -94,8 +89,7 @@ export default function AddContract(props) {
             {hideStep && (
               <Text>
                 1. Go to XDC Explorer <br></br>
-                2. Check for an verified contract <br></br> 3. Copy contract
-                address <br></br>4. Paste it on the given field below
+                2. Check for an verified contract <br></br> 3. Copy contract address <br></br>4. Paste it on the given field below
               </Text>
             )}
             {verifyAddress === "" ? (
@@ -107,10 +101,7 @@ export default function AddContract(props) {
                   <BlueLine></BlueLine>
                 </IconImport>
                 <SelectImport>
-                  <CheckBox
-                    type="checkbox"
-                    onChange={(e) => setCheckBox(e.target.checked)}
-                  />
+                  <CheckBox type="checkbox" onChange={(e) => setCheckBox(e.target.checked)} />
                   <AddressImport>{address}</AddressImport>
                 </SelectImport>
               </ImportBox>

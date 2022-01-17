@@ -12,7 +12,7 @@ import Network from "../Network/network";
 import Analytics from "../Analytics/analytics";
 import About from "../aboutScreen/about";
 import Rules from "../Alerting/Rules";
-import AddAlert from "../Alerting/AddAlert";
+import AddAlert from "../Alerting/addAlert";
 import AlertDetails from "../Alerting/alertDetails";
 import { sessionManager } from "../../managers/sessionManager";
 import UserService from "../../services/userService";
