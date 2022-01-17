@@ -13,7 +13,7 @@ import Analytics from "../Analytics/analytics";
 import About from "../aboutScreen/about";
 import Rules from "../Alerting/Rules";
 import AddAlert from "../Alerting/AddAlert";
-import AlertDetails from "../Alerting/AlertDetails";
+import AlertDetails from "../Alerting/alertDetails";
 import { sessionManager } from "../../managers/sessionManager";
 import UserService from "../../services/userService";
 import { history } from "../../managers/history";
@@ -25,28 +25,15 @@ const HomeComponent = (props) => {
     <>
       {!sessionManager.getDataFromCookies("isLoggedIn") ? (
         <Container>
-          {Utility.isMenuActive("/about") && (
-            <About getCurrentUserDetails={props.getCurrentUserDetails} />
-          )}
+          {Utility.isMenuActive("/about") && <About getCurrentUserDetails={props.getCurrentUserDetails} />}
           {Utility.isMenuActive("/") && <ConnectWallets />}
         </Container>
       ) : (
         <Container>
-          {Utility.isMenuActive("/contract") &&
-            (Utility.isMenuActive("/contract-details") ? (
-              <ContractDetails />
-            ) : (
-              <Contract />
-            ))}
+          {Utility.isMenuActive("/contract") && (Utility.isMenuActive("/contract-details") ? <ContractDetails /> : <Contract />)}
           {Utility.isMenuActive("/transaction") &&
-            (Utility.isMenuActive("/transaction-details") ? (
-              <TransactionDetails />
-            ) : (
-              <TransactionList />
-            ))}
-          {Utility.isMenuActive("/about") && (
-            <About getCurrentUserDetails={props.getCurrentUserDetails} />
-          )}
+            (Utility.isMenuActive("/transaction-details") ? <TransactionDetails /> : <TransactionList />)}
+          {Utility.isMenuActive("/about") && <About getCurrentUserDetails={props.getCurrentUserDetails} />}
           {Utility.isMenuActive("/analytics") && <Analytics />}
           {Utility.isMenuActive("/rules") && <Rules />}
           {Utility.isMenuActive("/add-alert") && <AddAlert />}
@@ -72,16 +59,10 @@ const dashboardComponent = (props) => {
       const response = await UserService.addUser({ accountAddress: user[0] });
       console.log("responsecookies", response);
       if (response.accountAddress) {
-        sessionManager.setDataInCookies(
-          response.accountAddress,
-          "accountAddress"
-        );
+        sessionManager.setDataInCookies(response.accountAddress, "accountAddress");
         sessionManager.setDataInCookies(response._id, "userId");
         sessionManager.setDataInCookies(response.username, "username");
-        sessionManager.setDataInCookies(
-          response.profilePicture,
-          "profilePicture"
-        );
+        sessionManager.setDataInCookies(response.profilePicture, "profilePicture");
       }
       sessionManager.setDataInCookies(true, "isLoggedIn");
       history.push("/dashboard/about");
@@ -93,18 +74,12 @@ const dashboardComponent = (props) => {
   return (
     <>
       <DashboardContainer>
-        <HeaderComponent
-          {...props}
-          getCurrentUserDetails={getCurrentUserDetails}
-        />
+        <HeaderComponent {...props} getCurrentUserDetails={getCurrentUserDetails} />
         <HomeContainer>
           <DesktopSideMenu {...props} />
           <MobileSideMenu {...props} />
           <ScrollableDiv>
-            <HomeComponent
-              {...props}
-              getCurrentUserDetails={getCurrentUserDetails}
-            />
+            <HomeComponent {...props} getCurrentUserDetails={getCurrentUserDetails} />
           </ScrollableDiv>
         </HomeContainer>
       </DashboardContainer>
