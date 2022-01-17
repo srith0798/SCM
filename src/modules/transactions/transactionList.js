@@ -39,12 +39,9 @@ export default function TransactionList() {
   const [contracts, setContracts] = React.useState([]);
 
   const [selected, setSelected] = React.useState({});
-  // const selectedOne = (address) => {
-  //   console.log("setSelected", address);
-  // };
+
   const getContractNames = async (skip = 0, limit = 10) => {
     let accountAddress = sessionManager.getDataFromCookies("accountAddress");
-    console.log("transactionList", accountAddress);
     let userId = sessionManager.getDataFromCookies("userId");
     try {
       const requestData = {
@@ -57,7 +54,6 @@ export default function TransactionList() {
       setLoader(false);
 
       setContracts(response.contractList);
-      console.log("transactionResponse", response.contractList[0].address);
 
       if (response.contractList.length === 0) setShowPlaceHolder(true);
     } catch (e) {
@@ -65,53 +61,32 @@ export default function TransactionList() {
       setLoader(false);
     }
   };
+
+  const getTransaction = async (skip = 0, limit = 24) => {
+    let accountAddress = sessionManager.getDataFromCookies("accountAddress");
+
+    try {
+      const requestData = {
+        skip: skip,
+        limit: limit,
+      };
+      setLoader(true);
+      const response = await ContractsService.getTransactionsList(requestData);
+      setLoader(false);
+
+      setAddress(response.transactionList);
+      console.log("transactionlistResponse", response.transactionList[0]);
+
+      if (response.contractList.length === 0) setShowPlaceHolder(true);
+    } catch (e) {
+      setShowPlaceHolder(true);
+      setLoader(false);
+    }
+  };
+
   useEffect(() => {
     getContractNames();
-  }, []);
-  React.useEffect(() => {
-    let address = [
-      {
-        txn: "0xcb93a4c5…f617",
-        status: "Success",
-        function: "Transfer",
-        contracts: "App_Transactions",
-        from: "0x63Ac0CA1…f617",
-        to: "0x63Ac0CA1…f617",
-        when: "2 minutes ago",
-      },
-      {
-        txn: "0x1822a4c5…2ca8",
-        status: "Success",
-        function: "Transfer",
-        contracts: "App_Transactions",
-        from: "0x63Ac0CA1…f617",
-        to: "0x63Ac0CA1…f617",
-        when: "2 minutes ago",
-      },
-      {
-        txn: "0x1822a4c5…2ca8",
-        status: "Success",
-        function: "Transfer",
-        contracts: "App_Transactions",
-        from: "0x63Ac0CA1…f617",
-        to: "0x63Ac0CA1…f617",
-        when: "2 minutes ago",
-      },
-    ];
-
-    setAddress(
-      address.map((object) => {
-        return {
-          txn: object.txn,
-          status: object.status,
-          function: object.function,
-          contracts: object.contracts,
-          from: object.from,
-          to: object.to,
-          when: object.when,
-        };
-      })
-    );
+    getTransaction();
   }, []);
 
   const [isSetOpen, setOpen] = React.useState(false);
@@ -137,7 +112,6 @@ export default function TransactionList() {
     background: "#f5f6fd 0% 0% no-repeat padding-box",
     border: "1px solid #d5e0ff",
     borderRadius: "6px",
-    // height: "80px",
     overflow: "scroll",
     height: "200px",
     marginTop: "4px",
@@ -166,7 +140,7 @@ export default function TransactionList() {
               <Icons src="/images/settings.svg" onClick={handleClickOpen} />
             </Tooltip>
             <Tooltip disableFocusListener title="Refresh">
-              <Icons src="/images/refresh.svg" onClick={getContractNames} />
+              <Icons src="/images/refresh.svg" onClick={getTransaction} />
             </Tooltip>
             {filterPopupOpen && <Filter click={filterPopupClose} />}
             <Tooltip disableFocusListener title="Filter">
@@ -277,14 +251,14 @@ export default function TransactionList() {
               return (
                 <Div>
                   <Row>
-                    <ColumnSecond onClick={redirectToTransactionDetails}>{data.txn}</ColumnSecond>
+                    <ColumnSecond onClick={redirectToTransactionDetails}>{data.hash}</ColumnSecond>
 
                     <ColumnSecond>{data.status}</ColumnSecond>
                     <ColumnSecond>{data.function}</ColumnSecond>
                     <ColumnSecond>{data.contracts}</ColumnSecond>
                     <ColumnSecond>{data.from}</ColumnSecond>
                     <ColumnSecond>{data.to}</ColumnSecond>
-                    <ColumnSecond>{data.when}</ColumnSecond>
+                    <ColumnSecond>{data.createdOn}</ColumnSecond>
                   </Row>
                 </Div>
               );

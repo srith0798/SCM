@@ -54,36 +54,18 @@ export default function Contract(props) {
     }
   };
 
-  const searching = async (searchValue, searchKeys) => {
-    let address = sessionManager.getDataFromCookies("accountAddress");
-    console.log(address);
-    try {
-      let requestData = {
-        searchKeys: searchKeys,
-        address: address,
-        skip: 0,
-        limit: 10,
-      };
-      if (searchValue !== "") requestData["searchValue"] = searchValue;
-
-      setLoader(true);
-      const response = await ContractsService.getContractsList(requestData);
-      setLoader(false);
-
-      setAddress(response.contractList);
-
-      if (response.contractList.length === 0) setShowPlaceHolder(true);
-    } catch (e) {
-      setShowPlaceHolder(true);
-      setLoader(false);
-    }
-  };
-  // const searching = async (searchValues, searchKeys) => {
+  // const searching = async (searchValue, searchKeys) => {
+  //   let address = sessionManager.getDataFromCookies("accountAddress");
+  //   console.log(address);
   //   try {
-  //     const requestData = {
-  //       searchValue: searchValues,
+  //     let requestData = {
   //       searchKeys: searchKeys,
+  //       address: address,
+  //       skip: 0,
+  //       limit: 10,
   //     };
+  //     if (searchValue !== "") requestData["searchValue"] = searchValue;
+
   //     setLoader(true);
   //     const response = await ContractsService.getContractsList(requestData);
   //     setLoader(false);
@@ -96,6 +78,24 @@ export default function Contract(props) {
   //     setLoader(false);
   //   }
   // };
+  const searching = async (searchValues, searchKeys) => {
+    try {
+      const requestData = {
+        searchValue: searchValues,
+        searchKeys: searchKeys,
+      };
+      setLoader(true);
+      const response = await ContractsService.getContractsList(requestData);
+      setLoader(false);
+
+      setAddress(response.contractList);
+
+      if (response.contractList.length === 0) setShowPlaceHolder(true);
+    } catch (e) {
+      setShowPlaceHolder(true);
+      setLoader(false);
+    }
+  };
   const [input, setInput] = useState();
   const search = (e) => {
     setInput(e.target.value);
