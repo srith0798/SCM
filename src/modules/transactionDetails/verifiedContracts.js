@@ -114,7 +114,7 @@ export default function TransactionDetails() {
                     : "/images/event_grey.svg"
                 }
               />{" "}
-              Events
+              EventsDetails
             </TabView>
             <TabView
               id="StateChange"

@@ -34,8 +34,8 @@ export default function Sidebar(props) {
   );
   const [contractsIcon, setContractsIcon] = useState("/images/contracts.svg");
   const [networksIcon, setNetworksIcon] = useState("/images/networks.svg");
-  const [analyticsIcon, setAnalyticsIcon] = useState("/images/Analytics.svg");
-  const [alertingIcon, setAlertingIcon] = useState("/images/Alerting.svg");
+  const [analyticsIcon, setAnalyticsIcon] = useState("/images/analytics.svg");
+  const [alertingIcon, setAlertingIcon] = useState("/images/alerting.svg");
 
   const changeSourceForIcons = (value) => {
     if (value === "Transaction")
@@ -43,14 +43,14 @@ export default function Sidebar(props) {
     if (value === "Contracts") setContractsIcon("/images/contracts_white.svg");
     if (value === "Networks") setNetworksIcon("/images/networks_white.svg");
     if (value === "Analytics") setAnalyticsIcon("/images/Analytics_white.svg");
-    if (value === "Alerting") setAlertingIcon("/images/Alerting_white.svg");
+    if (value === "alerting") setAlertingIcon("/images/Alerting_white.svg");
   };
   const changeOriginalSourceForIcons = (value) => {
     if (value === "Transaction") setTransactionIcon("/images/Transactions.svg");
     if (value === "Networks") setNetworksIcon("/images/networks.svg");
     if (value === "Contracts") setContractsIcon("/images/contracts.svg");
-    if (value === "Analytics") setAnalyticsIcon("/images/Analytics.svg");
-    if (value === "Alerting") setAlertingIcon("/images/Alerting.svg");
+    if (value === "Analytics") setAnalyticsIcon("/images/analytics.svg");
+    if (value === "alerting") setAlertingIcon("/images/alerting.svg");
   };
 
   return (
@@ -96,8 +96,8 @@ export default function Sidebar(props) {
           </Wrapper>
           <Wrapper
             onClick={redirectToAlerting}
-            onMouseOver={() => changeSourceForIcons("Alerting")}
-            onMouseOut={() => changeOriginalSourceForIcons("Alerting")}
+            onMouseOver={() => changeSourceForIcons("alerting")}
+            onMouseOut={() => changeOriginalSourceForIcons("alerting")}
           >
             <Icon src={alertingIcon} />
             <Heading>Alerting</Heading>

@@ -3,37 +3,55 @@ import styled from "styled-components";
 import Dialog from "@mui/material/Dialog";
 import { makeStyles } from "@material-ui/styles";
 import ButtonConfirm from "../../common/components/buttonConfirm";
+import ContractService from '../../services/contractsService'
 
 const useStyles = makeStyles(() => ({
   dialogBox: {
-    width: "100% !important",
+    width: "50% !important",
   },
 }));
 
-export default function HideContract(props) {
-  console.log(props);
-
+export default function Remove(props) {
   const classes = useStyles();
+  console.log(props.contract)
+  const executeRemoveContract = async () => {
+    console.log("HERE")
+    const request = {
+      id : props.contract._id
+    }
+    const response = await ContractService.removeContract(request);
+    console.log(response)
+
+  }
+
   return (
     <div>
-      <Dialog classes={{ paper: classes.dialogBox }} open={true}>
+      <Dialog
+        classes={{ paper: classes.dialogBox }}
+        open={true}
+        fullWidth
+        maxWidth="xm"
+      >
         <MainContainer>
           <Container>
-            <SubContainer>
-              <Add>Hide Contract</Add>
-              <img alt="" src="/images/XDC-Cross.svg" onClick={props.click} />
+            <SubContainer style={{ justifyContent: "space-between" }}>
+              <Add>Remove Contract</Add>
+              <img
+                alt=""
+                src="/images/XDC-Cross.svg"
+                onClick={props.click}
+                style={{ cursor: "pointer" }}
+              />
             </SubContainer>
             <Content>
-              Are you sure you wish to hide this contract from the transaction
-              listing?
+              Are you sure you wish to remove the contract? This will remove the
+              contract from the transaction listing, and affect all the alerts
+              that use this contract.
             </Content>
             <SubContainer
-              style={{ width: "100%", maxWidth: "200px", marginTop: "30px" }}
+              style={{ width: "100%",  marginTop: "30px" }}
             >
-              <ButtonConfirm
-                click={props.hideContract}
-                text={"Hide Contract"}
-              />
+              <ButtonConfirm text={"Remove contract"} click={ executeRemoveContract }/>
               <CancelButton onClick={props.click}>Cancel</CancelButton>
             </SubContainer>
           </Container>
@@ -54,18 +72,16 @@ const Container = styled.div`
   border-radius: 6px;
   width: 100%;
   background-color: #ffffff;
-  max-width: 700px;
   padding: 20px;
 `;
 const SubContainer = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
 `;
 const Add = styled.div`
   font: normal normal 600 24px/29px Inter;
   color: #303134;
 `;
-
 const CancelButton = styled.button`
   font: normal normal medium 14px/17px Inter;
   color: #3163f0;
@@ -73,6 +89,7 @@ const CancelButton = styled.button`
   background-color: #ffffff;
   border: 1px solid #3163f0;
   text-align: center;
+  padding: 10px 12px;
 `;
 const Content = styled.div`
   font: normal normal medium 16px/20px Inter;
