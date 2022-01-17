@@ -108,6 +108,7 @@ const XDCContainer = styled.div`
   border-radius: 5px;
   align-items: center;
   padding: 0 0 0 10px;
+  margin-right: 4px;
 `;
 
 const UserContainer = styled.div`
@@ -117,7 +118,7 @@ const UserContainer = styled.div`
   display: flex;
   align-items: center;
   padding: 0px 10px;
-  @media (max-width: 375px) {
+  @media (max-width: 455px) {
     display: none;
   }
 `;
@@ -125,6 +126,8 @@ const SpaceBetween = styled.div`
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
+  padding-bottom: 4px;
+  padding-top: 3px;
 `;
 const Button = styled.button`
   border: 1px solid white;

@@ -34,7 +34,7 @@ export default function About(props) {
                     style={{ marginLeft: "0.375rem" }}
                     alt=""
                     src="/images/question-mark.svg"
-                  />{" "}
+                  />
                 </Button>
               </Tooltip>
             </LeftContainer>
@@ -112,6 +112,15 @@ const MainBoxContainer = styled.div`
   @media (max-width: 375px) {
     padding: 16px;
   }
+  @media (max-width: 782px) {
+    padding-top: 20px;
+  }
+  @media (max-width: 797px) {
+    padding: 16px;
+  }
+  @media (max-width: 800px) {
+    padding: 16px;
+  }
 `;
 const Container = styled.div`
   background-color: #ffffff;
@@ -135,6 +144,9 @@ const Container = styled.div`
     padding-top: 0px;
     padding-left: 0px;
     height: auto;
+  }
+  @media (max-width: 800px) {
+    flex-direction: column;
   }
 `;
 const RightContainer = styled.div`
@@ -204,6 +216,11 @@ const Button = styled.button`
     margin-left: 112px;
   }
   @media (max-width: 375px) {
+    margin-left: 30px;
+    font-size: 0.6rem;
+    height: 40px;
+  }
+  @media (max-width: 456px) {
     margin-left: 30px;
     font-size: 0.6rem;
     height: 40px;

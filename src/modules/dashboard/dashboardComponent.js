@@ -17,7 +17,7 @@ import AlertDetails from "../Alerting/AlertDetails";
 import { sessionManager } from "../../managers/sessionManager";
 import UserService from "../../services/userService";
 import { history } from "../../managers/history";
-
+import ConnectWallets from "./connectWallets";
 //Replace Under Development with component once developed-
 const HomeComponent = (props) => {
   useEffect(() => {}, []);
@@ -25,9 +25,10 @@ const HomeComponent = (props) => {
     <>
       {!sessionManager.getDataFromCookies("isLoggedIn") ? (
         <Container>
-          {Utility.isMenuActive("") && (
+          {Utility.isMenuActive("/about") && (
             <About getCurrentUserDetails={props.getCurrentUserDetails} />
           )}
+          {Utility.isMenuActive("/") && <ConnectWallets />}
         </Container>
       ) : (
         <Container>

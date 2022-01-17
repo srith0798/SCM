@@ -136,6 +136,7 @@ const MidHeader = styled.div`
   font-weight: 600;
   padding-top: 25px;
   padding-bottom: 16px;
+  color: #191919;
 `;
 const ContentWrapper = styled.div`
   margin-left: 20px;

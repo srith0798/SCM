@@ -10,17 +10,26 @@ import Tooltip from "@mui/material/Tooltip";
 import ContractsService from "../../services/contractsService";
 import { sessionManager } from "../../managers/sessionManager";
 import ShowLoader from "../../common/components/showLoader";
+import Filter from "../Popup/filter";
 
 export default function TransactionList() {
   useEffect(() => {}, []);
   const [state, setState] = useState(true);
   const [open, isOpen] = useState(false);
+  const [filterPopupOpen, setfilterPopupOpen] = useState(false);
   const handleClickOpen = () => {
     isOpen(true);
   };
   const handleClose = () => {
     isOpen(false);
   };
+  // const setfilterPopupOpen = () => {
+  //   setfilterPopupOpen(true);
+  // };
+  const filterPopupClose = () => {
+    setfilterPopupOpen(false);
+  };
+
   const [TxHashToolTip, setTxHashToolTip] = React.useState(false);
   const [statusToolTip, setstatusToolTip] = React.useState(false);
   const [functionToolTip, setfunctionToolTip] = React.useState(false);
@@ -159,8 +168,9 @@ export default function TransactionList() {
             <Tooltip disableFocusListener title="Refresh">
               <Icons src="/images/refresh.svg" onClick={getContractNames} />
             </Tooltip>
+            {filterPopupOpen && <Filter click={filterPopupClose} />}
             <Tooltip disableFocusListener title="Filter">
-              <Icons src="/images/filter.svg" />
+              <Icons src="/images/filter.svg" onClick={setfilterPopupOpen} />
             </Tooltip>
           </IconContainer>
         </TransactionBox>
@@ -404,7 +414,12 @@ const IconContainer = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  max-width: 119px;
+  max-width: 120px;
+  @media (min-width: 300px) and (max-width: 768px) {
+    width: 100%;
+    max-width: 123px;
+    height: 35px;
+  }
 `;
 const Heading = styled.span`
   margin-top: 0.625rem;
@@ -417,7 +432,7 @@ const InstructionText = styled.span`
   color: #191919;
   font-size: 0.9rem;
   font-weight: 600;
-  margin-bottom: 0.725rem;
+  margin-bottom: 0.825rem;
 `;
 const Card = styled.div`
   margin-top: 1.25rem;
@@ -427,20 +442,19 @@ const Card = styled.div`
 `;
 const ColumnOne = styled.div`
   font-size: 0.875rem;
-  font-weight: 600;
+  font-weight: 700;
   color: #102c78;
   column-gap: 20px;
   width: 100%;
   min-width: 200px;
   white-space: nowrap;
   @media (min-width: 300px) and (max-width: 767px) {
-    // margin-right: 59px;
     width: 100%;
   }
 `;
 const ColumnSecond = styled.div`
   font-size: 0.875rem;
-  font-weight: 300;
+  font-weight: 500;
   color: #191919;
   width: 100%;
   // max-width: 300px;
@@ -459,6 +473,9 @@ const DropDown = styled.div`
   width: 100%;
   max-width: 453px;
   position: relative;
+  @media (max-width: 375px) {
+    margin-right: 14px;
+  }
 `;
 const TransactionHash = styled.div`
   font-size: 0.875rem;
@@ -469,13 +486,31 @@ const TransactionHash = styled.div`
   @media (min-width: 300px) and (max-width: 767px) {
     font-size: 0.575rem;
   }
+  @media (max-width: 375px) {
+    font-size: 0.75rem;
+    padding-top: 5px;
+  }
 `;
 const Image = styled.img`
-  width: 0.75rem;
+  width: 0.95rem;
   position: absolute;
-  top: 16px;
-  right: 8px;
+  top: 29px;
+  right: 39px;
   cursor: pointer;
+  @media (max-width: 375px) {
+    width: 0.85rem;
+    position: absolute;
+    top: 32px;
+    right: 16px;
+    cursor: pointer;
+  }
+  @media (max-width: 768px) {
+    width: 0.95rem;
+    position: absolute;
+    top: 29px;
+    right: 23px;
+    cursor: pointer;
+  }
 `;
 const Label = styled.div`
   font-size: 0.75rem;
