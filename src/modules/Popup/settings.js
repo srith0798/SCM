@@ -11,32 +11,7 @@ const useStyles = makeStyles(() => ({
 
 export default function Settings(props) {
   const classes = useStyles();
-
-  // const [status, setStatus] = React.useState(false);
-  // const handleToggleStatus = () => {
-  //   setStatus(!status);
-  // };
-  // const [func, setFunc] = React.useState(false);
-  // const handleToggleFunc = () => {
-  //   setFunc(!func);
-  // };
-  // const [contractDiv, setContractsDiv] = React.useState(false);
-  // const handleToggleContract = () => {
-  //   setContractsDiv(!contractDiv);
-  // };
-  // const [from, setFrom] = React.useState(false);
-  // const handleToggleFrom = () => {
-  //   setFrom(!from);
-  // };
-  // const [to, setTo] = React.useState(false);
-  // const handleToggleTo = () => {
-  //   setTo(!to);
-  // };
-  // const [when, setWhen] = React.useState(false);
-  // const handleToggleWhen = () => {
-  //   setWhen(!when);
-  // };
-
+  console.log("props", props.toggle);
   return (
     <div>
       <Dialog classes={{ paper: classes.dialogBox }} open={true}>
@@ -58,11 +33,15 @@ export default function Settings(props) {
             >
               <Heading>Transaction Hash</Heading>
               <label class="switch">
-                <input type="checkbox" onChange={props.handleToggleTransaction} checked={props.transactionHash} />
+                <input
+                  type="checkbox"
+                  onChange={(event) => props.setToggle({ ...props.toggle, transactionHash: event.target.checked })}
+                  checked={props.toggle.transactionHash}
+                />
                 <span class="slider round"></span>
               </label>
             </SubContainer>
-            {/* <SubContainer
+            <SubContainer
               style={{
                 borderBottom: "1px solid #d5e0ff",
                 padding: "5px 12px 10px 10px",
@@ -70,7 +49,11 @@ export default function Settings(props) {
             >
               <Heading>Status</Heading>
               <label class="switch">
-                <input type="checkbox" onChange={handleToggleStatus} checked={status} />
+                <input
+                  type="checkbox"
+                  onChange={(event) => props.setToggle({ ...props.toggle, status: event.target.checked })}
+                  checked={props.toggle.status}
+                />
                 <span class="slider round"></span>
               </label>
             </SubContainer>
@@ -82,7 +65,11 @@ export default function Settings(props) {
             >
               <Heading>Function</Heading>
               <label class="switch">
-                <input type="checkbox" onChange={handleToggleFunc} checked={func} />
+                <input
+                  type="checkbox"
+                  onChange={(event) => props.setToggle({ ...props.toggle, function: event.target.checked })}
+                  checked={props.toggle.function}
+                />
                 <span class="slider round"></span>
               </label>
             </SubContainer>
@@ -94,7 +81,11 @@ export default function Settings(props) {
             >
               <Heading>Contracts</Heading>
               <label class="switch">
-                <input type="checkbox" onChange={handleToggleContract} checked={contractDiv} />
+                <input
+                  type="checkbox"
+                  onChange={(event) => props.setToggle({ ...props.toggle, contracts: event.target.checked })}
+                  checked={props.toggle.contracts}
+                />
                 <span class="slider round"></span>
               </label>
             </SubContainer>
@@ -106,7 +97,11 @@ export default function Settings(props) {
             >
               <Heading>From</Heading>
               <label class="switch">
-                <input type="checkbox" onChange={handleToggleFrom} checked={from} />
+                <input
+                  type="checkbox"
+                  onChange={(event) => props.setToggle({ ...props.toggle, from: event.target.checked })}
+                  checked={props.toggle.from}
+                />
                 <span class="slider round"></span>
               </label>
             </SubContainer>
@@ -116,9 +111,13 @@ export default function Settings(props) {
                 padding: "5px 12px 10px 10px",
               }}
             >
-              <Heading>Network</Heading>
+              <Heading>To</Heading>
               <label class="switch">
-                <input type="checkbox" onChange={handleToggleTo} checked={to} />
+                <input
+                  type="checkbox"
+                  onChange={(event) => props.setToggle({ ...props.toggle, to: event.target.checked })}
+                  checked={props.toggle.to}
+                />
                 <span class="slider round"></span>
               </label>
             </SubContainer>
@@ -128,12 +127,16 @@ export default function Settings(props) {
                 padding: "5px 12px 10px 10px",
               }}
             >
-              <Heading>XDC value</Heading>
+              <Heading>When</Heading>
               <label class="switch">
-                <input type="checkbox" onChange={handleToggleWhen} checked={when} />
+                <input
+                  type="checkbox"
+                  onChange={(event) => props.setToggle({ ...props.toggle, when: event.target.checked })}
+                  checked={props.toggle.when}
+                />
                 <span class="slider round"></span>
               </label>
-            </SubContainer> */}
+            </SubContainer>
           </Container>
         </MainContainer>
       </Dialog>

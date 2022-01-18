@@ -11,6 +11,7 @@ import ContractsService from "../../services/contractsService";
 import { sessionManager } from "../../managers/sessionManager";
 import ShowLoader from "../../common/components/showLoader";
 import Filter from "../Popup/filter";
+import utility from "../../utility";
 
 export default function TransactionList(props) {
   useEffect(() => {}, []);
@@ -62,8 +63,6 @@ export default function TransactionList(props) {
   };
 
   const getTransaction = async (skip = 0, limit = 24) => {
-    let accountAddress = sessionManager.getDataFromCookies("accountAddress");
-
     try {
       const requestData = {
         skip: skip,
@@ -100,7 +99,7 @@ export default function TransactionList(props) {
 
   const styles = {
     position: "absolute",
-    top: 77,
+    top: 90,
     right: 0,
     left: 0,
     zIndex: 1,
@@ -121,12 +120,16 @@ export default function TransactionList(props) {
   const redirectToTransactionDetails = () => {
     history.push("/dashboard/transaction-details");
   };
-  const handleToggleTransaction = () => {
-    setTransactionHash(!transactionHash);
-  };
-  const [transactionHash, setTransactionHash] = React.useState(handleToggleTransaction);
-  console.log("transa", transactionHash);
 
+  const [toggle, setToggle] = React.useState({
+    transactionHash: true,
+    status: true,
+    contracts: true,
+    function: true,
+    from: true,
+    to: true,
+    when: true,
+  });
   return (
     <>
       <MainContainer>
@@ -140,14 +143,7 @@ export default function TransactionList(props) {
           </NewDiv>
 
           <IconContainer>
-            {open && (
-              <Settings
-                click={handleClose}
-                transactionHash={transactionHash}
-                setTransactionHash={setTransactionHash}
-                handleToggleTransaction
-              />
-            )}
+            {open && <Settings click={handleClose} setToggle={setToggle} toggle={toggle} />}
             <Tooltip disableFocusListener title="Settings">
               <Icons src="/images/settings.svg" onClick={handleClickOpen} />
             </Tooltip>
@@ -196,7 +192,7 @@ export default function TransactionList(props) {
         <TableContainer>
           <Div>
             <Row>
-              {transactionHash && (
+              {toggle.transactionHash && (
                 <ColumnOne>
                   Tx Hash
                   <Tooltip
@@ -210,55 +206,66 @@ export default function TransactionList(props) {
                   </Tooltip>
                 </ColumnOne>
               )}
-
-              <ColumnOne>
-                Status
-                <Tooltip
-                  open={statusToolTip}
-                  onOpen={() => setstatusToolTip(true)}
-                  onClose={() => setstatusToolTip(false)}
-                  disableFocusListener
-                  title="Token transaction status"
-                >
-                  <ToolTipIcon onClick={() => setstatusToolTip(!statusToolTip)} src="/images/tool-tip.svg" />
-                </Tooltip>
-              </ColumnOne>
-              <ColumnOne>
-                Function
-                <Tooltip
-                  open={functionToolTip}
-                  onOpen={() => setfunctionToolTip(true)}
-                  onClose={() => setfunctionToolTip(false)}
-                  disableFocusListener
-                  title="Smart contract function status"
-                >
-                  <ToolTipIcon onClick={() => setfunctionToolTip(!functionToolTip)} src="/images/tool-tip.svg" />
-                </Tooltip>
-              </ColumnOne>
-              <ColumnOne>
-                Contracts
-                <Tooltip disableFocusListener title="Name of the smart contract">
-                  <ToolTipIcon onClick={() => setstatusToolTip(!statusToolTip)} src="/images/tool-tip.svg" />
-                </Tooltip>
-              </ColumnOne>
-              <ColumnOne>
-                Form
-                <Tooltip disableFocusListener title="Sender’s account">
-                  <ToolTipIcon src="/images/tool-tip.svg" />
-                </Tooltip>
-              </ColumnOne>
-              <ColumnOne>
-                To
-                <Tooltip disableFocusListener title="Receiver’s account">
-                  <ToolTipIcon src="/images/tool-tip.svg" />
-                </Tooltip>
-              </ColumnOne>
-              <ColumnOne>
-                When
-                <Tooltip disableFocusListener title="Date and time of transaction execution">
-                  <ToolTipIcon src="/images/tool-tip.svg" />
-                </Tooltip>
-              </ColumnOne>
+              {toggle.status && (
+                <ColumnOne>
+                  Status
+                  <Tooltip
+                    open={statusToolTip}
+                    onOpen={() => setstatusToolTip(true)}
+                    onClose={() => setstatusToolTip(false)}
+                    disableFocusListener
+                    title="Token transaction status"
+                  >
+                    <ToolTipIcon onClick={() => setstatusToolTip(!statusToolTip)} src="/images/tool-tip.svg" />
+                  </Tooltip>
+                </ColumnOne>
+              )}
+              {toggle.function && (
+                <ColumnOne>
+                  Function
+                  <Tooltip
+                    open={functionToolTip}
+                    onOpen={() => setfunctionToolTip(true)}
+                    onClose={() => setfunctionToolTip(false)}
+                    disableFocusListener
+                    title="Smart contract function status"
+                  >
+                    <ToolTipIcon onClick={() => setfunctionToolTip(!functionToolTip)} src="/images/tool-tip.svg" />
+                  </Tooltip>
+                </ColumnOne>
+              )}
+              {toggle.contracts && (
+                <ColumnOne>
+                  Contracts
+                  <Tooltip disableFocusListener title="Name of the smart contract">
+                    <ToolTipIcon onClick={() => setstatusToolTip(!statusToolTip)} src="/images/tool-tip.svg" />
+                  </Tooltip>
+                </ColumnOne>
+              )}
+              {toggle.from && (
+                <ColumnOne>
+                  Form
+                  <Tooltip disableFocusListener title="Sender’s account">
+                    <ToolTipIcon src="/images/tool-tip.svg" />
+                  </Tooltip>
+                </ColumnOne>
+              )}
+              {toggle.to && (
+                <ColumnOne>
+                  To
+                  <Tooltip disableFocusListener title="Receiver’s account">
+                    <ToolTipIcon src="/images/tool-tip.svg" />
+                  </Tooltip>
+                </ColumnOne>
+              )}
+              {toggle.when && (
+                <ColumnOne>
+                  When
+                  <Tooltip disableFocusListener title="Date and time of transaction execution">
+                    <ToolTipIcon src="/images/tool-tip.svg" />
+                  </Tooltip>
+                </ColumnOne>
+              )}
             </Row>
           </Div>
           <div>
@@ -266,14 +273,16 @@ export default function TransactionList(props) {
               return (
                 <Div>
                   <Row>
-                    {transactionHash && <ColumnSecond onClick={redirectToTransactionDetails}>{data.hash}</ColumnSecond>}
+                    {toggle.transactionHash && (
+                      <ColumnSecond onClick={redirectToTransactionDetails}>{utility.truncateTxnAddress(data.hash)}</ColumnSecond>
+                    )}
+                    {toggle.status && <ColumnSecond>{data.status}</ColumnSecond>}
 
-                    <ColumnSecond>{data.status}</ColumnSecond>
-                    <ColumnSecond>{data.function}</ColumnSecond>
-                    <ColumnSecond>{data.contracts}</ColumnSecond>
-                    <ColumnSecond>{data.from}</ColumnSecond>
-                    <ColumnSecond>{data.to}</ColumnSecond>
-                    <ColumnSecond>{data.createdOn}</ColumnSecond>
+                    {toggle.function && <ColumnSecond>{data.function}</ColumnSecond>}
+                    {toggle.contracts && <ColumnSecond>{data.contracts}</ColumnSecond>}
+                    {toggle.from && <ColumnSecond>{utility.truncateTxnAddress(data.from)}</ColumnSecond>}
+                    {toggle.to && <ColumnSecond>{utility.truncateTxnAddress(data.to)}</ColumnSecond>}
+                    {toggle.when && <ColumnSecond>{data.createdOn}</ColumnSecond>}
                   </Row>
                 </Div>
               );

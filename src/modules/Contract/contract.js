@@ -83,6 +83,8 @@ export default function Contract(props) {
       const requestData = {
         searchValue: searchValues,
         searchKeys: searchKeys,
+        skip: 0,
+        limit: 10,
       };
       setLoader(true);
       const response = await ContractsService.getContractsList(requestData);
