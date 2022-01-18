@@ -25,5 +25,6 @@ export const httpConstants = {
     SHOW_CONTRACT: "/show-contract",
     RENAME_CONTRACT: "/contract-name",
     GET_USER: "/user",
+    GET_TRANSACTION_LIST: "/get-transaction",
   },
 };

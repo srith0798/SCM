@@ -17,6 +17,7 @@ export default function TransactionList() {
   const handleClickOpen = () => {
     isOpen(true);
   };
+
   const handleClose = () => {
     isOpen(false);
   };
