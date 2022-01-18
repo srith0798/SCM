@@ -1,8 +1,8 @@
 import React from "react";
 import "react-tabs/style/react-tabs.css";
 import styled from "styled-components";
-import Historys from "../Alerting/historys";
-import Destination from "../Alerting/destination";
+import Historys from "./historys";
+import Destination from "./destination";
 
 import { history } from "../../managers/history";
 import Tooltip from "@mui/material/Tooltip";
@@ -14,7 +14,7 @@ export default function Rules() {
     setActiveButton(e.target.id);
   };
   const redirectToAlertDetails = () => {
-    history.push("/dashboard/Alerting/alert-details");
+    history.push("/dashboard/alerting/alert-details");
   };
 
   const [networkToolTip, setnetworkToolTip] = React.useState(false);

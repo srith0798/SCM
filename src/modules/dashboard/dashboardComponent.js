@@ -4,6 +4,7 @@ import Utility from "../../utility";
 import HeaderComponent from "./header";
 import DesktopSideMenu from "./sidebar";
 import MobileSideMenu from "./mobileSidebar";
+
 import ContractDetails from "../Contract/contractDetails/contractDetails";
 import Contract from "../Contract/contract";
 import TransactionDetails from "../TransactionDetails/transactionDetails";
@@ -11,9 +12,9 @@ import TransactionList from "../transactions/transactionList";
 import Network from "../Network/network";
 import Analytics from "../Analytics/analytics";
 import About from "../aboutScreen/about";
-import Rules from "../Alerting/Rules";
-import AddAlert from "../Alerting/addAlert";
-import AlertDetails from "../Alerting/alertDetails";
+import Rules from "../alerting/rules";
+import AddAlert from "../alerting/addAlert";
+import AlertDetails from "../alerting/alertDetails";
 import { sessionManager } from "../../managers/sessionManager";
 import UserService from "../../services/userService";
 import { history } from "../../managers/history";
@@ -26,7 +27,7 @@ const HomeComponent = (props) => {
       {!sessionManager.getDataFromCookies("isLoggedIn") ? (
         <Container>
           {Utility.isMenuActive("/about") && <About getCurrentUserDetails={props.getCurrentUserDetails} />}
-          {Utility.isMenuActive("/") && <ConnectWallets />}
+          {Utility.isMenuActive("/") && <ConnectWallets getCurrentUserDetails={props.getCurrentUserDetails} />}
         </Container>
       ) : (
         <Container>

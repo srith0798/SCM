@@ -32,7 +32,7 @@ export default function HideContract(props) {
             >
               <ButtonConfirm
                 click={props.hideContract}
-                text={"Hide Contract"}
+                text={"Hide contract"}
               />
               <CancelButton onClick={props.click}>Cancel</CancelButton>
             </SubContainer>

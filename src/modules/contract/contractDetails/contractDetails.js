@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { Row } from "simple-flexbox";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import ContractAbi from "../../Popup/contractAbi";
-import RenameContract from "../../Popup/renameContract";
-import Remove from "../../Popup/remove";
+import ContractAbi from "../../popup/contractAbi";
+import RenameContract from "../../popup/renameContract";
+import Remove from "../../popup/remove";
 import ShowLoader from "../../../common/components/showLoader";
-import HideContract from "../../Popup/hideContract";
+import HideContract from "../../popup/hideContract";
 import ShowContract from "./showContract";
 import "react-tabs/style/react-tabs.css";
 import SourceCode from "./sourceCode";
@@ -14,7 +14,7 @@ import ContractsService from "../../../services/contractsService";
 
 import utility from "../../../utility";
 import { history } from "../../../managers/history";
-import AddTags from "../../Popup/addTag";
+import AddTags from "../../popup/addTag";
 export default function ContractDetails(props) {
   const [activeButton, setActiveButton] = React.useState("General");
   const handleViewClick = (e) => {

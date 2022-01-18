@@ -42,10 +42,10 @@ export default function Sidebar(props) {
     "/images/networks.svg"
   );
   const [analyticsIcon, setAnalyticsIcon] = React.useState(
-    "/images/Analytics.svg"
+    "/images/analytics.svg"
   );
   const [alertingIcon, setAlertingIcon] = React.useState(
-    "/images/Alerting.svg"
+    "/images/alerting.svg"
   );
 
   const changeSourceForIcons = (value) => {
@@ -55,15 +55,15 @@ export default function Sidebar(props) {
     if (value === "Contracts") setContractsIcon("/images/contracts_white.svg");
     if (value === "Networks") setNetworksIcon("/images/networks_white.svg");
     if (value === "Analytics") setAnalyticsIcon("/images/Analytics_white.svg");
-    if (value === "Alerting") setAlertingIcon("/images/Alerting_white.svg");
+    if (value === "alerting") setAlertingIcon("/images/Alerting_white.svg");
   };
   const changeOriginalSourceForIcons = (value) => {
     if (value === "about") setAboutIcon("/images/abouticon_blue.svg");
     if (value === "Transaction") setTransactionIcon("/images/Transactions.svg");
     if (value === "Networks") setNetworksIcon("/images/networks.svg");
     if (value === "Contracts") setContractsIcon("/images/contracts.svg");
-    if (value === "Analytics") setAnalyticsIcon("/images/Analytics.svg");
-    if (value === "Alerting") setAlertingIcon("/images/Alerting.svg");
+    if (value === "Analytics") setAnalyticsIcon("/images/analytics.svg");
+    if (value === "alerting") setAlertingIcon("/images/alerting.svg");
   };
 
   return (
@@ -129,8 +129,8 @@ export default function Sidebar(props) {
           backgroundColor: utility.isMenuActive("rules") ? "#1d3c93" : "",
         }}
         onClick={redirectToAlerting}
-        onMouseOver={() => changeSourceForIcons("Alerting")}
-        onMouseOut={() => changeOriginalSourceForIcons("Alerting")}
+        onMouseOver={() => changeSourceForIcons("alerting")}
+        onMouseOut={() => changeOriginalSourceForIcons("alerting")}
       >
         <Icon src={alertingIcon} />
         <Heading>Alerting</Heading>

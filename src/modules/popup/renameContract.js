@@ -30,7 +30,7 @@ export default function RenameContract(props) {
     console.log(response);
     if (response.contractName === newName) {
       props.click();
-      utility.apiSuccessToast("Contract rename successful");
+      utility.apiSuccessToast("contract rename successful");
       setTimeout(() => {
         window.location.reload();
       }, 1000);
