@@ -22,12 +22,7 @@ export default function TransactionDetails() {
       <SubContainer>
         <TitleDiv>
           <Title>
-            <img
-              alt=""
-              src="/images/back.svg"
-              style={{ marginRight: "8px" }}
-              onClick={() => backButton()}
-            />
+            <img alt="" src="/images/back.svg" style={{ marginRight: "8px" }} onClick={() => backButton()} />
             Transaction Details
           </Title>
         </TitleDiv>
@@ -35,25 +30,15 @@ export default function TransactionDetails() {
       </SubContainer>
 
       <Container>
-        <SubHeading style={{ paddingTop: "0.625rem", paddingLeft: "1.25rem" }}>
-          Txn hash
-        </SubHeading>
+        <SubHeading style={{ paddingTop: "0.625rem", paddingLeft: "1.25rem" }}>Txn hash</SubHeading>
         <TopContainer>
-          <Hash>
-            {utility.truncateTxnAddress(
-              "xdcabfe4184e5f9f600fe86d20ffdse2fsfbsgsgsa768b3c"
-            )}
-          </Hash>
+          <Hash>{utility.truncateTxnAddress("xdcabfe4184e5f9f600fe86d20ffdse2fsfbsgsgsa768b3c")}</Hash>
           <CopyToClipboard>
             <img alt="" src="/images/copy.svg" />
           </CopyToClipboard>
           <FailButton>Fail</FailButton>
           <AlertButton>
-            <img
-              alt=""
-              style={{ width: "15px", cursor: "pointer", marginRight: "6px" }}
-              src="/images/addalert.svg"
-            />
+            <img alt="" style={{ width: "15px", cursor: "pointer", marginRight: "6px" }} src="/images/addalert.svg" />
             Add alert
           </AlertButton>
         </TopContainer>
@@ -67,20 +52,13 @@ export default function TransactionDetails() {
               display: "flex",
               paddingBottom: "0.875rem",
               paddingLeft: "10px",
-              borderBottom:
-                activeButton === "Overview"
-                  ? "0.225rem solid #3163F0"
-                  : "#AEB7D0",
+              borderBottom: activeButton === "Overview" ? "0.225rem solid #3163F0" : "#AEB7D0",
             }}
           >
             <TabImage
               alt=""
               style={{ marginRight: "0.375rem" }}
-              src={
-                activeButton === "Overview"
-                  ? "/images/overview.svg"
-                  : "/images/overview_grey.svg"
-              }
+              src={activeButton === "Overview" ? "/images/overview.svg" : "/images/overview_grey.svg"}
             />
             Overview
           </TabView>
@@ -91,18 +69,13 @@ export default function TransactionDetails() {
               color: activeButton === "Contracts" ? "#3163F0" : "#AEB7D0",
               display: "flex",
               paddingBottom: "1rem",
-              borderBottom:
-                activeButton === "Contracts" ? "0.225rem solid #3163F0" : "",
+              borderBottom: activeButton === "Contracts" ? "0.225rem solid #3163F0" : "",
             }}
           >
             <TabImage
               alt=""
               style={{ marginRight: "0.375rem" }}
-              src={
-                activeButton === "Contracts"
-                  ? "/images/Contract_blue.svg"
-                  : "/images/contract_grey.svg"
-              }
+              src={activeButton === "Contracts" ? "/images/Contract_blue.svg" : "/images/contract_grey.svg"}
             />
             Contracts
           </TabView>
@@ -113,18 +86,13 @@ export default function TransactionDetails() {
               color: activeButton === "EventsDetails" ? "#3163F0" : "#AEB7D0",
               display: "flex",
               paddingBottom: "1rem",
-              borderBottom:
-                activeButton === "EventsDetails" ? "0.225rem solid #3163F0" : "",
+              borderBottom: activeButton === "EventsDetails" ? "0.225rem solid #3163F0" : "",
             }}
           >
             <TabImage
               alt=""
               style={{ marginRight: "0.375rem" }}
-              src={
-                activeButton === "EventsDetails"
-                  ? "/images/event_blue.svg"
-                  : "/images/event_grey.svg"
-              }
+              src={activeButton === "EventsDetails" ? "/images/event_blue.svg" : "/images/event_grey.svg"}
             />{" "}
             EventsDetails
           </TabView>
@@ -133,18 +101,13 @@ export default function TransactionDetails() {
             onClick={handleViewClick}
             style={{
               color: activeButton === "StateChange" ? "#3163F0" : "#AEB7D0",
-              borderBottom:
-                activeButton === "StateChange" ? "0.225rem solid #3163F0" : "",
+              borderBottom: activeButton === "StateChange" ? "0.225rem solid #3163F0" : "",
             }}
           >
             <TabImage
               alt=""
               style={{ marginRight: "0.375rem", marginBottom: "4px" }}
-              src={
-                activeButton === "StateChange"
-                  ? "/images/statechange_blue.svg"
-                  : "/images/statechange_grey.svg"
-              }
+              src={activeButton === "StateChange" ? "/images/statechange_blue.svg" : "/images/statechange_grey.svg"}
             />
             State changes
           </TabView>
@@ -180,11 +143,7 @@ export default function TransactionDetails() {
                 <Row>
                   <Heading>From</Heading>
                   <SubHead style={{ display: "flex", alignItems: "center" }}>
-                    <TransactionNumber>
-                      {utility.truncateTxnAddress(
-                        "xdcabfe4184e5f9f600fe86d20ffdse2fsfbsgsgsa768b3c"
-                      )}
-                    </TransactionNumber>
+                    <TransactionNumber>{utility.truncateTxnAddress("xdcabfe4184e5f9f600fe86d20ffdse2fsfbsgsgsa768b3c")}</TransactionNumber>
 
                     <CopyToClipboardImg src="/images/copy.svg" />
                   </SubHead>
@@ -194,11 +153,7 @@ export default function TransactionDetails() {
                 <Row>
                   <Heading>To</Heading>
                   <SubHead>
-                    <TransactionNumber>
-                      {utility.truncateTxnAddress(
-                        "xdcabfe4184e5f9f600fe86d20ffdse2fsfbsgsgsa768b3c"
-                      )}
-                    </TransactionNumber>
+                    <TransactionNumber>{utility.truncateTxnAddress("xdcabfe4184e5f9f600fe86d20ffdse2fsfbsgsgsa768b3c")}</TransactionNumber>
 
                     <CopyToClipboardImg src="/images/copy.svg" />
                   </SubHead>
@@ -246,9 +201,7 @@ export default function TransactionDetails() {
                   <SubHead>
                     <Hash>
                       <TransactionNumber>
-                        {utility.truncateTxnAddress(
-                          "xdcabfe4184e5f9f600fe86d20ffdse2fsfbsgsgsa768b3c"
-                        )}
+                        {utility.truncateTxnAddress("xdcabfe4184e5f9f600fe86d20ffdse2fsfbsgsgsa768b3c")}
                       </TransactionNumber>
                     </Hash>
                     <CopyToClipboardImg src="/images/copy.svg" />
@@ -268,11 +221,7 @@ export default function TransactionDetails() {
                   <Heading>Input:</Heading>
                   <SubHeadBlue>
                     view data
-                    <img
-                      style={{ marginLeft: "2px" }}
-                      alt=""
-                      src="/images/Arrrow.svg"
-                    />
+                    <img style={{ marginLeft: "2px" }} alt="" src="/images/Arrrow.svg" />
                   </SubHeadBlue>
                 </Row>
               </CommonDiv>
@@ -281,11 +230,7 @@ export default function TransactionDetails() {
                   <Heading>Output </Heading>
                   <SubHeadBlue>
                     veiw data
-                    <img
-                      style={{ marginLeft: "2px" }}
-                      alt=""
-                      src="/images/Arrrow.svg"
-                    />
+                    <img style={{ marginLeft: "2px" }} alt="" src="/images/Arrrow.svg" />
                   </SubHeadBlue>
                 </Row>
               </CommonDiv>
@@ -294,11 +239,7 @@ export default function TransactionDetails() {
                   <Heading>Caller Address </Heading>
                 </Row>
                 <Row>
-                  <SubHeading
-                    style={{ fontWeight: "400", marginRight: "40px" }}
-                  >
-                    xdcabf...a32c99be1768b3c
-                  </SubHeading>
+                  <SubHeading style={{ fontWeight: "400", marginRight: "40px" }}>xdcabf...a32c99be1768b3c</SubHeading>
                 </Row>
               </CommonDiv>
             </FunctionContainer>
@@ -313,9 +254,7 @@ export default function TransactionDetails() {
               <CommonDiv>
                 <Row>
                   <Heading>To:</Heading>
-                  <SubHeadBlue>
-                    xdcabfe4184e5f9......2fsfbsgsgsa768b3
-                  </SubHeadBlue>
+                  <SubHeadBlue>xdcabfe4184e5f9......2fsfbsgsgsa768b3</SubHeadBlue>
                 </Row>
               </CommonDiv>
             </TokenTransferDiv>
@@ -323,19 +262,14 @@ export default function TransactionDetails() {
             <StackContainer>
               <BackgroundChanger>
                 <TextLine>Error Messege:out of gas</TextLine>
-                <img alt="" src="/images/error.svg" /> balances[_to] =
-                balances[_to].add(_value);
+                <img alt="" src="/images/error.svg" /> balances[_to] = balances[_to].add(_value);
                 <br />
               </BackgroundChanger>
             </StackContainer>
             <LastContainer>
               <SearchBar placeholder="Execution trace" />
               <br />
-              <img
-                alt=""
-                src="/images/contracts.svg"
-                style={{ width: "1rem", marginRight: "3px" }}
-              />
+              <img alt="" src="/images/contracts.svg" style={{ width: "1rem", marginRight: "3px" }} />
               transfer in App_Transactions_Validator
             </LastContainer>
           </div>
@@ -576,10 +510,10 @@ const SearchBar = styled.input`
   padding-left: 1.875rem;
   background-size: 0.75rem;
   position: relative;
-  &:focus: {
+  /* &:focus: {
     outline: none;
     border: none;
-  }
+  } */
 `;
 const TabLister = styled.div`
   display: flex;
@@ -618,7 +552,7 @@ const TabLister = styled.div`
 `;
 const TabView = styled.div`
   padding: 0.313rem 0.5rem 0.313rem 0.5rem;
-  displat: flex;
+  display: flex;
   @media (min-width: 340px) and (max-width: 768px) {
   }
 `;

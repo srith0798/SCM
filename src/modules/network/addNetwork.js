@@ -20,7 +20,7 @@ export default function AddNetwork(props) {
           >
             <SubContainer>
               <Add>Add Network</Add>
-              <img alt="" src="/images/XDC-Cross.svg" onClick={props.click} />
+              <img alt="" src="/images/close.svg" onClick={props.click} />
             </SubContainer>
 
             <Heading>Network name</Heading>

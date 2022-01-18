@@ -3,13 +3,14 @@ import styled from "styled-components";
 import { Row } from "simple-flexbox";
 import ShowLoader from "../../common/components/showLoader";
 import AddContract from "../popup/addContract";
+
 import { history } from "../../managers/history";
 import Tooltip from "@mui/material/Tooltip";
 import ContractsService from "../../services/contractsService";
 import ReactPaginate from "react-paginate";
 import utility from "../../utility";
 import { sessionManager } from "../../managers/sessionManager";
-
+import AddTags from "../popup/addTag";
 export default function Contract(props) {
   const [open, setOpen] = React.useState(false);
   const [showPlaceHolder, setShowPlaceHolder] = React.useState(false);
@@ -54,22 +55,44 @@ export default function Contract(props) {
     }
   };
 
-  const searching = async (searchValue, searchKeys) => {
-    let address = sessionManager.getDataFromCookies("accountAddress");
-    console.log(address);
+  // const searching = async (searchValue, searchKeys) => {
+  //   let address = sessionManager.getDataFromCookies("accountAddress");
+  //   console.log(address);
+  //   try {
+  //     let requestData = {
+  //       searchKeys: searchKeys,
+  //       address: address,
+  //       skip: 0,
+  //       limit: 10,
+  //     };
+  //     if (searchValue !== "") requestData["searchValue"] = searchValue;
+
+  //     setLoader(true);
+  //     const response = await ContractsService.getContractsList(requestData);
+  //     setLoader(false);
+
+  //     setAddress(response.contractList);
+
+  //     if (response.contractList.length === 0) setShowPlaceHolder(true);
+  //   } catch (e) {
+  //     setShowPlaceHolder(true);
+  //     setLoader(false);
+  //   }
+  // };
+  const searching = async (searchValues, searchKeys) => {
     try {
-      let requestData = {
+      const requestData = {
+        searchValue: searchValues,
         searchKeys: searchKeys,
-        address: address,
         skip: 0,
         limit: 10,
       };
-      if (searchValue !== "") requestData["searchValue"] = searchValue;
-
       setLoader(true);
       const response = await ContractsService.getContractsList(requestData);
       setLoader(false);
+
       setAddress(response.contractList);
+
       if (response.contractList.length === 0) setShowPlaceHolder(true);
     } catch (e) {
       setShowPlaceHolder(true);
@@ -92,26 +115,32 @@ export default function Contract(props) {
 
   const [address, setAddress] = React.useState([]);
 
+  const [addTag, setAddTag] = useState(false);
+  const Open = () => {
+    setAddTag(true);
+  };
+  const Close = () => {
+    setAddTag(false);
+    getContractList();
+  };
+
+  // const [input, setInput] = useState();
+
+  // const search = (e) => {
+  //   setInput(e.target.value);
+  //   searching(input, ["address"]);
+  // };
   return (
     <MainContainer>
       <ShowLoader state={loader} top={"33%"} />
       <SubContainer>
         <MainHeading>
           <Heading>Contracts</Heading>
-          <Input
-            onChange={(e) => search(e)}
-            value={input}
-            placeholder="Search by address or name"
-          />
+          <Input placeholder="Search by address or name" value={input} onChange={search} />
         </MainHeading>
         <IconDiv>
           <Tooltip disableFocusListener title="Refresh">
-            <RefreshImage
-              onClick={() => getContractList()}
-              alt=""
-              src="/images/refresh.svg"
-              style={{ marginRight: "0.625rem" }}
-            />
+            <RefreshImage onClick={() => getContractList()} alt="" src="/images/refresh.svg" style={{ marginRight: "0.625rem" }} />
           </Tooltip>
           {open && <AddContract click={handleClose} />}
           <Button onClick={handleClickOpen}>Add Contract</Button>
@@ -130,10 +159,7 @@ export default function Contract(props) {
                 disableFocusListener
                 title="Name of the smart contract"
               >
-                <ToolTipIcon
-                  onClick={() => setcontractNameToolTip(!contractNameToolTip)}
-                  src="/images/tool-tip.svg"
-                />
+                <ToolTipIcon onClick={() => setcontractNameToolTip(!contractNameToolTip)} src="/images/tool-tip.svg" />
               </Tooltip>
             </ColumnOne>
             <ColumnOne>
@@ -145,10 +171,7 @@ export default function Contract(props) {
                 disableFocusListener
                 title="Wallet address"
               >
-                <ToolTipIcon
-                  onClick={() => setaddressToolTip(!addressToolTip)}
-                  src="/images/tool-tip.svg"
-                />
+                <ToolTipIcon onClick={() => setaddressToolTip(!addressToolTip)} src="/images/tool-tip.svg" />
               </Tooltip>
             </ColumnOne>
             <ColumnOne>
@@ -160,10 +183,7 @@ export default function Contract(props) {
                 disableFocusListener
                 title="Network on which the contract is executed"
               >
-                <ToolTipIcon
-                  onClick={() => setnetworkToolTip(!networkToolTip)}
-                  src="/images/tool-tip.svg"
-                />
+                <ToolTipIcon onClick={() => setnetworkToolTip(!networkToolTip)} src="/images/tool-tip.svg" />
               </Tooltip>
             </ColumnOne>
             <ColumnOne>
@@ -175,10 +195,7 @@ export default function Contract(props) {
                 disableFocusListener
                 title="Tag name associated with the contract"
               >
-                <ToolTipIcon
-                  onClick={() => settagToolTip(!tagToolTip)}
-                  src="/images/tool-tip.svg"
-                />
+                <ToolTipIcon onClick={() => settagToolTip(!tagToolTip)} src="/images/tool-tip.svg" />
               </Tooltip>
             </ColumnOne>
             <ColumnOne>
@@ -190,28 +207,25 @@ export default function Contract(props) {
                 disableFocusListener
                 title="Is the contract visible to the users or not"
               >
-                <ToolTipIcon
-                  onClick={() => setvisibilityToolTip(!visibilityToolTip)}
-                  src="/images/tool-tip.svg"
-                />
+                <ToolTipIcon onClick={() => setvisibilityToolTip(!visibilityToolTip)} src="/images/tool-tip.svg" />
               </Tooltip>
             </ColumnOne>
           </Row>
         </Div>
         {address.map((data, index) => {
           return (
-            <div
-              onClick={() => redirectTODetails(data._id)}
-              style={{ cursor: "pointer" }}
-            >
+            <div style={{ cursor: "pointer" }}>
               <Div>
                 <Row>
-                  <ColumnSecond>{data.contractName}</ColumnSecond>
-                  <ColumnSecond>
-                    {utility.truncateTxnAddress(data.address)}
-                  </ColumnSecond>
+                  <ColumnSecond onClick={() => redirectTODetails(data._id)}>{data.contractName}</ColumnSecond>
+                  <ColumnSecond>{utility.truncateTxnAddress(data.address)}</ColumnSecond>
                   <ColumnSecond>{data.tokenName}</ColumnSecond>
-                  <ColumnSecond>{tagDiv()} </ColumnSecond>
+                  <ColumnSecond style={{ display: "flex" }}>
+                    {address[0].tags && address[0].tags.map((tag, index) => index < 2 && <FinanceTag>{tag}</FinanceTag>)}
+
+                    {addTag && <AddTags click={Close} address={address} contract={true} />}
+                    {data.tags && data.tags.length && data.tags.length === 0 && <AddTag onClick={() => Open()}>Add Tag</AddTag>}
+                  </ColumnSecond>
                   <ColumnSecond>{data.status}</ColumnSecond>
                 </Row>
               </Div>
@@ -242,15 +256,50 @@ export default function Contract(props) {
   );
 }
 
-function tagDiv() {
-  return (
-    <Tag>
-      Finance
-      <TagImage src="/images/tag-logo-blue.svg"></TagImage>
-    </Tag>
-  );
-}
+const FinanceTag = styled.div`
+  background-image: url("/images/Tag.svg");
+  background-repeat: no-repeat;
+  background-position: 0.5rem;
+  padding-left: 1.75rem;
+  padding-right: 8px;
+  background-size: 0.875rem;
+  position: relative;
+  background-color: #eaefff;
+  border: 1px solid #eaefff;
+  border-radius: 0.25rem;
 
+  max-width: 17.75rem;
+  white-space: nowrap;
+  height: 2.125rem;
+  align-items: center;
+  color: #436ce0;
+  text-align: center;
+  display: flex;
+  font-size: 1rem;
+  font-weight: 400;
+  margin-right: 13px;
+`;
+const AddTag = styled.button`
+  color: #416be0;
+  background: #ffffff 0% 0% no-repeat padding-box;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  outline: none;
+  white-space: nowrap;
+  background-image: url("/images/add-icon.svg");
+  background-repeat: no-repeat;
+  background-position: 0.5rem;
+  padding-left: 1.75rem;
+  background-size: 0.875rem;
+  position: relative;
+  background-color: #ffffff;
+  border: none;
+  border-radius: 0.25rem;
+  width: 100px;
+  white-space: nowrap;
+  height: 2.125rem;
+`;
 const PaginationDiv = styled.div`
   display: flex;
   justify-content: flex-end;
@@ -386,9 +435,8 @@ const Heading = styled.div`
     // padding-top: 40px;
     margin-top: 3px;
   }
-  @media (max-width: 375px);
-   {
-    font-size: 1.2rem;
+  @media (min-width: 375px) {
+    font-size: 1.4rem;
     flex-direction: column;
     margin-bottom: 10px;
   }
@@ -438,7 +486,7 @@ const Input = styled.input`
   border: none;
   outline: none;
   display: flex;
-  (max-width: 768px) {
+  @media (max-width: 768px) {
     width: min-content;
     height: 40px;
   }

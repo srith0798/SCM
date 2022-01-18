@@ -21,7 +21,7 @@ export default function HideContract(props) {
           <Container>
             <SubContainer>
               <Add>Hide Contract</Add>
-              <img alt="" src="/images/XDC-Cross.svg" onClick={props.click} />
+              <img alt="" src="/images/close.svg" onClick={props.click} />
             </SubContainer>
             <Content>
               Are you sure you wish to hide this contract from the transaction

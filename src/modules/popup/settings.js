@@ -11,6 +11,7 @@ const useStyles = makeStyles(() => ({
 
 export default function Settings(props) {
   const classes = useStyles();
+  console.log("props", props.toggle);
   return (
     <div>
       <Dialog classes={{ paper: classes.dialogBox }} open={true}>
@@ -18,19 +19,11 @@ export default function Settings(props) {
           <Container>
             <SubContainer style={{ padding: "15px 12px 10px 10px" }}>
               <Add>Settings</Add>
-              <img
-                style={{ cursor: "pointer" }}
-                alt=""
-                src="/images/XDC-Cross.svg"
-                onClick={props.click}
-              />
+              <img style={{ cursor: "pointer" }} alt="" src="/images/close.svg" onClick={props.click} />
             </SubContainer>
-            <MainHeading style={{ padding: "15px 12px 10px 10px" }}>
-              Configure Columns
-            </MainHeading>
+            <MainHeading style={{ padding: "15px 12px 10px 10px" }}>Configure Columns</MainHeading>
             <Content>
-              Change the layout of the transactions list and display only the
-              columns and information that is most important to you.
+              Change the layout of the transactions list and display only the columns and information that is most important to you.
             </Content>
             <SubContainer
               style={{
@@ -40,7 +33,11 @@ export default function Settings(props) {
             >
               <Heading>Transaction Hash</Heading>
               <label class="switch">
-                <input type="checkbox" />
+                <input
+                  type="checkbox"
+                  onChange={(event) => props.setToggle({ ...props.toggle, transactionHash: event.target.checked })}
+                  checked={props.toggle.transactionHash}
+                />
                 <span class="slider round"></span>
               </label>
             </SubContainer>
@@ -52,7 +49,11 @@ export default function Settings(props) {
             >
               <Heading>Status</Heading>
               <label class="switch">
-                <input type="checkbox" />
+                <input
+                  type="checkbox"
+                  onChange={(event) => props.setToggle({ ...props.toggle, status: event.target.checked })}
+                  checked={props.toggle.status}
+                />
                 <span class="slider round"></span>
               </label>
             </SubContainer>
@@ -64,7 +65,11 @@ export default function Settings(props) {
             >
               <Heading>Function</Heading>
               <label class="switch">
-                <input type="checkbox" />
+                <input
+                  type="checkbox"
+                  onChange={(event) => props.setToggle({ ...props.toggle, function: event.target.checked })}
+                  checked={props.toggle.function}
+                />
                 <span class="slider round"></span>
               </label>
             </SubContainer>
@@ -76,7 +81,11 @@ export default function Settings(props) {
             >
               <Heading>Contracts</Heading>
               <label class="switch">
-                <input type="checkbox" />
+                <input
+                  type="checkbox"
+                  onChange={(event) => props.setToggle({ ...props.toggle, contracts: event.target.checked })}
+                  checked={props.toggle.contracts}
+                />
                 <span class="slider round"></span>
               </label>
             </SubContainer>
@@ -88,7 +97,11 @@ export default function Settings(props) {
             >
               <Heading>From</Heading>
               <label class="switch">
-                <input type="checkbox" />
+                <input
+                  type="checkbox"
+                  onChange={(event) => props.setToggle({ ...props.toggle, from: event.target.checked })}
+                  checked={props.toggle.from}
+                />
                 <span class="slider round"></span>
               </label>
             </SubContainer>
@@ -98,9 +111,13 @@ export default function Settings(props) {
                 padding: "5px 12px 10px 10px",
               }}
             >
-              <Heading>Network</Heading>
+              <Heading>To</Heading>
               <label class="switch">
-                <input type="checkbox" />
+                <input
+                  type="checkbox"
+                  onChange={(event) => props.setToggle({ ...props.toggle, to: event.target.checked })}
+                  checked={props.toggle.to}
+                />
                 <span class="slider round"></span>
               </label>
             </SubContainer>
@@ -110,9 +127,13 @@ export default function Settings(props) {
                 padding: "5px 12px 10px 10px",
               }}
             >
-              <Heading>XDC value</Heading>
+              <Heading>When</Heading>
               <label class="switch">
-                <input type="checkbox" />
+                <input
+                  type="checkbox"
+                  onChange={(event) => props.setToggle({ ...props.toggle, when: event.target.checked })}
+                  checked={props.toggle.when}
+                />
                 <span class="slider round"></span>
               </label>
             </SubContainer>

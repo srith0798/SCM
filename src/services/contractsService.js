@@ -10,7 +10,8 @@ export default {
   checkAddress,
   renameContract,
   removeContract,
-  getTransactionList,
+  addTags,
+  getTransactionsList,
 };
 
 function getHeaders() {
@@ -21,23 +22,11 @@ function getHeaders() {
 }
 
 async function getContractsList(requestData) {
-  let url =
-    process.env.REACT_APP_USER_CONTRACT_MICROSERVICE +
-    httpConstants.API_END_POINT.GET_CONTRACTS_LIST;
+  let url = process.env.REACT_APP_USER_CONTRACT_MICROSERVICE + httpConstants.API_END_POINT.GET_CONTRACTS_LIST;
   console.log("url----", url);
-  return httpService(
-    httpConstants.METHOD_TYPE.POST,
-    getHeaders(),
-    requestData,
-    url
-  )
+  return httpService(httpConstants.METHOD_TYPE.POST, getHeaders(), requestData, url)
     .then((response) => {
-      if (
-        !response.success ||
-        response.responseCode !== 200 ||
-        !response.responseData ||
-        response.responseData.length === 0
-      )
+      if (!response.success || response.responseCode !== 200 || !response.responseData || response.responseData.length === 0)
         return Promise.reject(response);
       return Promise.resolve(response.responseData);
     })
@@ -47,23 +36,11 @@ async function getContractsList(requestData) {
 }
 
 async function addContract(requestData) {
-  let url =
-    process.env.REACT_APP_USER_CONTRACT_MICROSERVICE +
-    httpConstants.API_END_POINT.ADD_CONTRACT;
+  let url = process.env.REACT_APP_USER_CONTRACT_MICROSERVICE + httpConstants.API_END_POINT.ADD_CONTRACT;
   console.log("url----", url);
-  return httpService(
-    httpConstants.METHOD_TYPE.POST,
-    getHeaders(),
-    requestData,
-    url
-  )
+  return httpService(httpConstants.METHOD_TYPE.POST, getHeaders(), requestData, url)
     .then((response) => {
-      if (
-        !response.success ||
-        response.responseCode !== 200 ||
-        !response.responseData ||
-        response.responseData.length === 0
-      )
+      if (!response.success || response.responseCode !== 200 || !response.responseData || response.responseData.length === 0)
         return Promise.reject(response);
       return Promise.resolve(response.responseData);
     })
@@ -72,25 +49,11 @@ async function addContract(requestData) {
     });
 }
 async function getContractsById(requestData) {
-  let url =
-    process.env.REACT_APP_USER_CONTRACT_MICROSERVICE +
-    httpConstants.API_END_POINT.ADD_CONTRACT +
-    `?id=` +
-    requestData;
+  let url = process.env.REACT_APP_USER_CONTRACT_MICROSERVICE + httpConstants.API_END_POINT.ADD_CONTRACT + `?id=` + requestData;
   console.log("url----", url);
-  return httpService(
-    httpConstants.METHOD_TYPE.GET,
-    getHeaders(),
-    requestData,
-    url
-  )
+  return httpService(httpConstants.METHOD_TYPE.GET, getHeaders(), requestData, url)
     .then((response) => {
-      if (
-        !response.success ||
-        response.responseCode !== 200 ||
-        !response.responseData ||
-        response.responseData.length === 0
-      )
+      if (!response.success || response.responseCode !== 200 || !response.responseData || response.responseData.length === 0)
         return Promise.reject(response);
       return Promise.resolve(response.responseData);
     })
@@ -99,23 +62,11 @@ async function getContractsById(requestData) {
     });
 }
 async function hideContract(requestData) {
-  let url =
-    process.env.REACT_APP_USER_CONTRACT_MICROSERVICE +
-    httpConstants.API_END_POINT.HIDE_CONTRACT;
+  let url = process.env.REACT_APP_USER_CONTRACT_MICROSERVICE + httpConstants.API_END_POINT.HIDE_CONTRACT;
   console.log("url----", url);
-  return httpService(
-    httpConstants.METHOD_TYPE.POST,
-    getHeaders(),
-    requestData,
-    url
-  )
+  return httpService(httpConstants.METHOD_TYPE.POST, getHeaders(), requestData, url)
     .then((response) => {
-      if (
-        !response.success ||
-        response.responseCode !== 200 ||
-        !response.responseData ||
-        response.responseData.length === 0
-      )
+      if (!response.success || response.responseCode !== 200 || !response.responseData || response.responseData.length === 0)
         return Promise.reject(response);
       return Promise.resolve(response.responseData);
     })
@@ -126,23 +77,11 @@ async function hideContract(requestData) {
 async function showContract(requestData) {
   // let url = `${process.env.REACT_APP_CONTRACTS_SERVICE_URL}${httpConstants.API_END_POINT.GET_CONTRACTS_LIST}`;
   //   let url = `http://localhost:3001/contract`;
-  let url =
-    process.env.REACT_APP_USER_CONTRACT_MICROSERVICE +
-    httpConstants.API_END_POINT.SHOW_CONTRACT;
+  let url = process.env.REACT_APP_USER_CONTRACT_MICROSERVICE + httpConstants.API_END_POINT.SHOW_CONTRACT;
   console.log("url----", url);
-  return httpService(
-    httpConstants.METHOD_TYPE.POST,
-    getHeaders(),
-    requestData,
-    url
-  )
+  return httpService(httpConstants.METHOD_TYPE.POST, getHeaders(), requestData, url)
     .then((response) => {
-      if (
-        !response.success ||
-        response.responseCode !== 200 ||
-        !response.responseData ||
-        response.responseData.length === 0
-      )
+      if (!response.success || response.responseCode !== 200 || !response.responseData || response.responseData.length === 0)
         return Promise.reject(response);
       return Promise.resolve(response.responseData);
     })
@@ -151,19 +90,11 @@ async function showContract(requestData) {
     });
 }
 async function checkAddress(requestData) {
-  let url =
-    process.env.REACT_APP_USER_CONTRACT_MICROSERVICE +
-    `/check-address?contractAddress=` +
-    requestData;
+  let url = process.env.REACT_APP_USER_CONTRACT_MICROSERVICE + `/check-address?contractAddress=` + requestData;
   console.log("url----", url);
   return httpService(httpConstants.METHOD_TYPE.GET, getHeaders(), {}, url)
     .then((response) => {
-      if (
-        !response.success ||
-        response.responseCode !== 200 ||
-        !response.responseData ||
-        response.responseData.length === 0
-      )
+      if (!response.success || response.responseCode !== 200 || !response.responseData || response.responseData.length === 0)
         return Promise.reject(response);
       return Promise.resolve(response.responseData);
     })
@@ -173,23 +104,11 @@ async function checkAddress(requestData) {
 }
 
 async function renameContract(requestData) {
-  let url =
-    process.env.REACT_APP_USER_CONTRACT_MICROSERVICE +
-    httpConstants.API_END_POINT.RENAME_CONTRACT;
+  let url = process.env.REACT_APP_USER_CONTRACT_MICROSERVICE + httpConstants.API_END_POINT.RENAME_CONTRACT;
   console.log("url----", url);
-  return httpService(
-    httpConstants.METHOD_TYPE.PUT,
-    getHeaders(),
-    requestData,
-    url
-  )
+  return httpService(httpConstants.METHOD_TYPE.PUT, getHeaders(), requestData, url)
     .then((response) => {
-      if (
-        !response.success ||
-        response.responseCode !== 200 ||
-        !response.responseData ||
-        response.responseData.length === 0
-      )
+      if (!response.success || response.responseCode !== 200 || !response.responseData || response.responseData.length === 0)
         return Promise.reject(response);
       return Promise.resolve(response.responseData);
     })
@@ -199,23 +118,38 @@ async function renameContract(requestData) {
 }
 
 async function removeContract(requestData) {
-  let url =
-    process.env.REACT_APP_USER_CONTRACT_MICROSERVICE +
-    httpConstants.API_END_POINT.ADD_CONTRACT;
+  let url = process.env.REACT_APP_USER_CONTRACT_MICROSERVICE + httpConstants.API_END_POINT.ADD_CONTRACT;
   console.log("url----", url);
-  return httpService(
-    httpConstants.METHOD_TYPE.DELETE,
-    getHeaders(),
-    requestData,
-    url
-  )
+  return httpService(httpConstants.METHOD_TYPE.DELETE, getHeaders(), requestData, url)
     .then((response) => {
-      if (
-        !response.success ||
-        response.responseCode !== 200 ||
-        !response.responseData ||
-        response.responseData.length === 0
-      )
+      if (!response.success || response.responseCode !== 200 || !response.responseData || response.responseData.length === 0)
+        return Promise.reject(response);
+      return Promise.resolve(response.responseData);
+    })
+    .catch(function (err) {
+      return Promise.reject(err);
+    });
+}
+
+async function addTags(requestData) {
+  let url = process.env.REACT_APP_USER_CONTRACT_MICROSERVICE + httpConstants.API_END_POINT.ADD_TAGS;
+  console.log("url----", url);
+  return httpService(httpConstants.METHOD_TYPE.POST, getHeaders(), requestData, url)
+    .then((response) => {
+      if (!response.success || response.responseCode !== 200 || !response.responseData || response.responseData.length === 0)
+        return Promise.reject(response);
+      return Promise.resolve(response.responseData);
+    })
+    .catch(function (err) {
+      return Promise.reject(err);
+    });
+}
+async function getTransactionsList(requestData) {
+  let url = process.env.REACT_APP_USER_TRANSACTION_MICROSERVICE + httpConstants.API_END_POINT.GET_TRANSACTIONS_LIST;
+  console.log("url----", url);
+  return httpService(httpConstants.METHOD_TYPE.POST, getHeaders(), requestData, url)
+    .then((response) => {
+      if (!response.success || response.responseCode !== 200 || !response.responseData || response.responseData.length === 0)
         return Promise.reject(response);
       return Promise.resolve(response.responseData);
     })
@@ -225,23 +159,11 @@ async function removeContract(requestData) {
 }
 
 async function getTransactionList(requestData) {
-  let url =
-    process.env.REACT_APP_USER_CONTRACT_MICROSERVICE +
-    httpConstants.API_END_POINT.GET_TRANSACTION_LIST;
+  let url = process.env.REACT_APP_USER_CONTRACT_MICROSERVICE + httpConstants.API_END_POINT.GET_TRANSACTION_LIST;
   console.log("url----", url);
-  return httpService(
-    httpConstants.METHOD_TYPE.POST,
-    getHeaders(),
-    requestData,
-    url
-  )
+  return httpService(httpConstants.METHOD_TYPE.POST, getHeaders(), requestData, url)
     .then((response) => {
-      if (
-        !response.success ||
-        response.responseCode !== 200 ||
-        !response.responseData ||
-        response.responseData.length === 0
-      )
+      if (!response.success || response.responseCode !== 200 || !response.responseData || response.responseData.length === 0)
         return Promise.reject(response);
       return Promise.resolve(response.responseData);
     })

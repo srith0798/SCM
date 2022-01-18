@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import "../../assets/styles/custom.css";
 import { sessionManager } from "../../managers/sessionManager";
 import utility from "../../utility";
+const Web3 = require("web3");
 
 function Header(props) {
   console.log(props);
@@ -11,22 +12,52 @@ function Header(props) {
     let user = "";
     user = sessionManager.getDataFromCookies("accountAddress");
     if (user) user = utility.truncateTxnAddress(user);
-    console.log(user);
+    console.log("user", user);
     return user;
   };
+  const getUserBalance = () => {
+    let balance = sessionManager.getDataFromCookies("accountAddress");
+    console.log("webaccount", balance);
+    const web3 = new Web3(
+      // new Web3.providers.HttpProvider("https://rpc.xinfin.network")
+      new Web3.providers.HttpProvider("https://rpc.apothem.network")
+    );
+    let checkResult = Web3.utils.toChecksumAddress(balance);
+    if (checkResult)
+      // let fixed = Math.round(checkResult * 100000) / 100000;
+      // console.log(Web3.utils.toChecksumAddress(balance));
+      web3.eth.getBalance(checkResult, function (error, result) {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log(result);
+          let num = Number(result / 1000000000000000000);
+
+          // console.log("fixed", num.toFixed(1));
+          getSetBalance(num.toFixed(2));
+        }
+      });
+  };
+  const [getBalance, getSetBalance] = useState("");
+  useEffect(() => {
+    getUserBalance();
+  }, []);
   return (
     <HeaderContainer>
       <SpaceBetween>
         <div style={{ display: "flex", marginLeft: "12px" }}>
-          <GridLogo
-            src="/images/Grid.svg"
-            onClick={() => setOpenHumburger(openHumburger)}
-          />
+          <GridLogo src="/images/Grid.svg" onClick={() => setOpenHumburger(openHumburger)} />
           <XmartlyLogo src="/images/Logo.svg" />
         </div>
         {sessionManager.getDataFromCookies("accountAddress") ? (
           <XDCContainer>
-            <XDCInfo>1450 XDC</XDCInfo>
+            <XDCInfo
+              onClick={() => {
+                getUserBalance();
+              }}
+            >
+              {getBalance} XDC
+            </XDCInfo>
             <UserContainer>
               {getUserAccountAddress()}
               <UserLogo src="/images/user-round.png" />
@@ -106,8 +137,13 @@ const Button = styled.button`
   color: white;
   padding: 5px 20px 5px 20px;
 `;
-const XDCInfo = styled.div`
-  margin-right: 10px;
+const XDCInfo = styled.button`
+  margin-right: 30px;
+  background: #324988;
+  display: flex;
+  color: white;
+  border: none;
+  outline: none;
   @media (max-width: 375px) {
     display: none;
   }

@@ -4,13 +4,13 @@ import Utility from "../../utility";
 import HeaderComponent from "./header";
 import DesktopSideMenu from "./sidebar";
 import MobileSideMenu from "./mobileSidebar";
-// import ContractDetails from "../contract/contractDetails/contractDetails";
+
 import ContractDetails from "../Contract/contractDetails/contractDetails";
 import Contract from "../Contract/contract";
-import TransactionDetails from "../transactionDetails/transactionDetails";
+import TransactionDetails from "../TransactionDetails/transactionDetails";
 import TransactionList from "../transactions/transactionList";
-import Network from "../network/network";
-import Analytics from "../analytics/analytics";
+import Network from "../Network/network";
+import Analytics from "../Analytics/analytics";
 import About from "../aboutScreen/about";
 import Rules from "../alerting/rules";
 import AddAlert from "../alerting/addAlert";
@@ -26,32 +26,15 @@ const HomeComponent = (props) => {
     <>
       {!sessionManager.getDataFromCookies("isLoggedIn") ? (
         <Container>
-          {Utility.isMenuActive("/about") && (
-            <About getCurrentUserDetails={props.getCurrentUserDetails} />
-          )}
-          {Utility.isMenuActive("/") && (
-            <ConnectWallets
-              getCurrentUserDetails={props.getCurrentUserDetails}
-            />
-          )}
+          {Utility.isMenuActive("/about") && <About getCurrentUserDetails={props.getCurrentUserDetails} />}
+          {Utility.isMenuActive("/") && <ConnectWallets getCurrentUserDetails={props.getCurrentUserDetails} />}
         </Container>
       ) : (
         <Container>
-          {Utility.isMenuActive("/contract") &&
-            (Utility.isMenuActive("/contract-details") ? (
-              <ContractDetails />
-            ) : (
-              <Contract />
-            ))}
+          {Utility.isMenuActive("/contract") && (Utility.isMenuActive("/contract-details") ? <ContractDetails /> : <Contract />)}
           {Utility.isMenuActive("/transaction") &&
-            (Utility.isMenuActive("/transaction-details") ? (
-              <TransactionDetails />
-            ) : (
-              <TransactionList />
-            ))}
-          {Utility.isMenuActive("/about") && (
-            <About getCurrentUserDetails={props.getCurrentUserDetails} />
-          )}
+            (Utility.isMenuActive("/transaction-details") ? <TransactionDetails /> : <TransactionList />)}
+          {Utility.isMenuActive("/about") && <About getCurrentUserDetails={props.getCurrentUserDetails} />}
           {Utility.isMenuActive("/analytics") && <Analytics />}
           {Utility.isMenuActive("/rules") && <Rules />}
           {Utility.isMenuActive("/add-alert") && <AddAlert />}
@@ -66,24 +49,21 @@ const HomeComponent = (props) => {
 const dashboardComponent = (props) => {
   const getCurrentUserDetails = async () => {
     let user = "";
+
     try {
       user = window.web3.eth.accounts;
     } catch (e) {
       console.log(e);
     }
+
     if (user && user.length) {
       const response = await UserService.addUser({ accountAddress: user[0] });
+      console.log("responsecookies", response);
       if (response.accountAddress) {
-        sessionManager.setDataInCookies(
-          response.accountAddress,
-          "accountAddress"
-        );
+        sessionManager.setDataInCookies(response.accountAddress, "accountAddress");
         sessionManager.setDataInCookies(response._id, "userId");
         sessionManager.setDataInCookies(response.username, "username");
-        sessionManager.setDataInCookies(
-          response.profilePicture,
-          "profilePicture"
-        );
+        sessionManager.setDataInCookies(response.profilePicture, "profilePicture");
       }
       sessionManager.setDataInCookies(true, "isLoggedIn");
       history.push("/dashboard/about");
@@ -95,18 +75,12 @@ const dashboardComponent = (props) => {
   return (
     <>
       <DashboardContainer>
-        <HeaderComponent
-          {...props}
-          getCurrentUserDetails={getCurrentUserDetails}
-        />
+        <HeaderComponent {...props} getCurrentUserDetails={getCurrentUserDetails} />
         <HomeContainer>
           <DesktopSideMenu {...props} />
           <MobileSideMenu {...props} />
           <ScrollableDiv>
-            <HomeComponent
-              {...props}
-              getCurrentUserDetails={getCurrentUserDetails}
-            />
+            <HomeComponent {...props} getCurrentUserDetails={getCurrentUserDetails} />
           </ScrollableDiv>
         </HomeContainer>
       </DashboardContainer>

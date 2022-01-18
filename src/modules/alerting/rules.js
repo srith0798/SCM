@@ -3,6 +3,7 @@ import "react-tabs/style/react-tabs.css";
 import styled from "styled-components";
 import Historys from "./historys";
 import Destination from "./destination";
+
 import { history } from "../../managers/history";
 import Tooltip from "@mui/material/Tooltip";
 
@@ -26,9 +27,7 @@ export default function Rules() {
       <MainContainer>
         <TitleContainer>
           <Title style={{ color: "#191919" }}>Alerting</Title>
-          <Button onClick={() => history.push("/dashboard/add-alert")}>
-            Add Alert
-          </Button>
+          <Button onClick={() => history.push("/dashboard/add-alert")}>Add Alert</Button>
         </TitleContainer>
         <Container>
           <NewDivOne>
@@ -42,18 +41,13 @@ export default function Rules() {
                   paddingBottom: "0.875rem",
                   paddingTop: " 9px",
                   fontSize: "14px",
-                  borderBottom:
-                    activeButton === "Rules" ? "2px solid #3163F0" : "",
+                  borderBottom: activeButton === "Rules" ? "2px solid #3163F0" : "",
                 }}
               >
                 <img
                   alt=""
                   style={{ marginRight: "0.375rem" }}
-                  src={
-                    activeButton === "Rules"
-                      ? "/images/rules.svg"
-                      : "/images/ruless.svg"
-                  }
+                  src={activeButton === "Rules" ? "/images/rules.svg" : "/images/ruless.svg"}
                 ></img>
                 Rules
               </TabView>
@@ -66,18 +60,13 @@ export default function Rules() {
                   paddingBottom: "0.875rem",
                   paddingTop: " 9px",
                   fontSize: "14px",
-                  borderBottom:
-                    activeButton === "History" ? "0.125rem solid #3163F0" : "",
+                  borderBottom: activeButton === "History" ? "0.125rem solid #3163F0" : "",
                 }}
               >
                 <img
                   alt=""
                   style={{ marginRight: "0.375rem" }}
-                  src={
-                    activeButton === "History"
-                      ? "/images/history-blue.svg"
-                      : "/images/history.svg"
-                  }
+                  src={activeButton === "History" ? "/images/history-blue.svg" : "/images/history.svg"}
                 />
                 History
               </TabView>
@@ -91,20 +80,13 @@ export default function Rules() {
                   fontSize: "1rem",
                   paddingBottom: "0.875rem",
                   paddingTop: " 9px",
-                  borderBottom:
-                    activeButton === "Destination"
-                      ? "0.125rem solid #3163F0"
-                      : "",
+                  borderBottom: activeButton === "Destination" ? "0.125rem solid #3163F0" : "",
                 }}
               >
                 <img
                   alt=""
                   style={{ marginRight: "5px" }}
-                  src={
-                    activeButton === "Destination"
-                      ? "/images/destination-blue.svg"
-                      : "/images/destination.svg"
-                  }
+                  src={activeButton === "Destination" ? "/images/destination-blue.svg" : "/images/destination.svg"}
                 />
                 Destination
               </TabView>
@@ -124,12 +106,7 @@ export default function Rules() {
                         disableFocusListener
                         title="Name of the smart contract"
                       >
-                        <ToolTipIcon
-                          onClick={() =>
-                            setcontractNameToolTip(!contractNameToolTip)
-                          }
-                          src="/images/tool-tip.svg"
-                        />
+                        <ToolTipIcon onClick={() => setcontractNameToolTip(!contractNameToolTip)} src="/images/tool-tip.svg" />
                       </Tooltip>
                     </ColumnOne>
                     <ColumnOne>
@@ -141,10 +118,7 @@ export default function Rules() {
                         disableFocusListener
                         title="Wallet address"
                       >
-                        <ToolTipIcon
-                          onClick={() => setaddressToolTip(!addressToolTip)}
-                          src="/images/tool-tip.svg"
-                        />
+                        <ToolTipIcon onClick={() => setaddressToolTip(!addressToolTip)} src="/images/tool-tip.svg" />
                       </Tooltip>
                     </ColumnOne>
                     <ColumnOne>
@@ -156,10 +130,7 @@ export default function Rules() {
                         disableFocusListener
                         title="The executing blockchain network"
                       >
-                        <ToolTipIcon
-                          onClick={() => setnetworkToolTip(!networkToolTip)}
-                          src="/images/tool-tip.svg"
-                        />
+                        <ToolTipIcon onClick={() => setnetworkToolTip(!networkToolTip)} src="/images/tool-tip.svg" />
                       </Tooltip>
                     </ColumnOne>
                     <ColumnOne>
@@ -171,10 +142,7 @@ export default function Rules() {
                         disableFocusListener
                         title="Transaction status"
                       >
-                        <ToolTipIcon
-                          onClick={() => setalertTypeToolTip(!alertTypeToolTip)}
-                          src="/images/tool-tip.svg"
-                        />
+                        <ToolTipIcon onClick={() => setalertTypeToolTip(!alertTypeToolTip)} src="/images/tool-tip.svg" />
                       </Tooltip>
                     </ColumnOne>
                     <ColumnOne></ColumnOne>
@@ -187,16 +155,10 @@ export default function Rules() {
                     <ColumnTwo>xdcabfe…8b3c</ColumnTwo>
                     <ColumnTwo>XDC Mainnet</ColumnTwo>
                     <ColumnTwo>Sucessfull</ColumnTwo>
-                    <ColumnTwo style={{ fontSize: "14px", color: "#00A58C" }}>
-                      Enabled
-                    </ColumnTwo>
+                    <ColumnTwo style={{ fontSize: "14px", color: "#00A58C" }}>Enabled</ColumnTwo>
                     <ColumnTwo>
                       <Tooltip disableFocusListener title="Delete">
-                        <img
-                          alt=""
-                          src="/images/delete-blue.svg"
-                          style={{ width: "1rem" }}
-                        />
+                        <img alt="" src="/images/delete-blue.svg" style={{ width: "1rem" }} />
                       </Tooltip>
                     </ColumnTwo>
                   </RowData>
@@ -207,18 +169,10 @@ export default function Rules() {
                     <ColumnTwo>xdcabfe…8b3c</ColumnTwo>
                     <ColumnTwo>XDC Mainnet</ColumnTwo>
                     <ColumnTwo>Failed </ColumnTwo>
-                    <ColumnTwo
-                      style={{ fontSize: "0.875rem", color: "#00A58C" }}
-                    >
-                      Enabled
-                    </ColumnTwo>
+                    <ColumnTwo style={{ fontSize: "0.875rem", color: "#00A58C" }}>Enabled</ColumnTwo>
                     <ColumnTwo>
                       <Tooltip disableFocusListener title="Delete">
-                        <img
-                          alt=""
-                          src="/images/delete-blue.svg"
-                          style={{ width: "1rem" }}
-                        />
+                        <img alt="" src="/images/delete-blue.svg" style={{ width: "1rem" }} />
                       </Tooltip>
                     </ColumnTwo>
                   </RowData>
@@ -319,8 +273,8 @@ const MainContainer = styled.div`
   padding: 2.5rem;
   height: 100vh;
   @media (min-width: 340px) and (max-width: 768px) {
-   padding: 38px 20px 20px 20px;
-
+    padding: 38px 20px 20px 20px;
+  }
 `;
 
 const Button = styled.button`
@@ -366,7 +320,8 @@ const TabLister = styled.div`
 const TabView = styled.div`
   padding: 0.313rem 0.5rem 0.313rem 0.5rem;
   @media (min-width: 340px) and (max-width: 768px) {
-   padding: 0rem 0rem 0rem 0rem;
+    padding: 0rem 0rem 0rem 0rem;
+  }
 `;
 
 const DetailBox = styled.div``;

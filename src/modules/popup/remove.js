@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Dialog from "@mui/material/Dialog";
 import { makeStyles } from "@material-ui/styles";
 import ButtonConfirm from "../../common/components/buttonConfirm";
-import ContractService from '../../services/contractsService'
+import ContractService from "../../services/contractsService";
 
 const useStyles = makeStyles(() => ({
   dialogBox: {
@@ -13,45 +13,36 @@ const useStyles = makeStyles(() => ({
 
 export default function Remove(props) {
   const classes = useStyles();
-  console.log(props.contract)
+  console.log(props.contract);
   const executeRemoveContract = async () => {
-    console.log("HERE")
+    console.log("HERE");
     const request = {
-      id : props.contract._id
-    }
+      id: props.contract._id,
+    };
     const response = await ContractService.removeContract(request);
-    console.log(response)
-
-  }
+    console.log(response);
+  };
 
   return (
     <div>
-      <Dialog
-        classes={{ paper: classes.dialogBox }}
-        open={true}
-        fullWidth
-        maxWidth="xm"
-      >
+      <Dialog classes={{ paper: classes.dialogBox }} open={true} fullWidth maxWidth="xm">
         <MainContainer>
           <Container>
             <SubContainer style={{ justifyContent: "space-between" }}>
               <Add>Remove Contract</Add>
-              <img
+              {/* <img
                 alt=""
-                src="/images/XDC-Cross.svg"
+                src="/images/close.svg"
                 onClick={props.click}
                 style={{ cursor: "pointer" }}
-              />
+              /> */}
             </SubContainer>
             <Content>
-              Are you sure you wish to remove the contract? This will remove the
-              contract from the transaction listing, and affect all the alerts
-              that use this contract.
+              Are you sure you wish to remove the contract? This will remove the contract from the transaction listing, and affect all the
+              alerts that use this contract.
             </Content>
-            <SubContainer
-              style={{ width: "100%",  marginTop: "30px" }}
-            >
-              <ButtonConfirm text={"Remove contract"} click={ executeRemoveContract }/>
+            <SubContainer style={{ width: "100%", marginTop: "30px" }}>
+              <ButtonConfirm text={"Remove contract"} click={executeRemoveContract} />
               <CancelButton onClick={props.click}>Cancel</CancelButton>
             </SubContainer>
           </Container>
