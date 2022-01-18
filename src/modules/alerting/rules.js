@@ -13,7 +13,7 @@ export default function Rules() {
     setActiveButton(e.target.id);
   };
   const redirectToAlertDetails = () => {
-    history.push("/dashboard/Alerting/alert-details");
+    history.push("/dashboard/alerting/alert-details");
   };
 
   const [networkToolTip, setnetworkToolTip] = React.useState(false);

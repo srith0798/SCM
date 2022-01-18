@@ -4,6 +4,7 @@ import Utility from "../../utility";
 import HeaderComponent from "./header";
 import DesktopSideMenu from "./sidebar";
 import MobileSideMenu from "./mobileSidebar";
+// import ContractDetails from "../contract/contractDetails/contractDetails";
 import ContractDetails from "../Contract/contractDetails/contractDetails";
 import Contract from "../Contract/contract";
 import TransactionDetails from "../transactionDetails/transactionDetails";
@@ -28,7 +29,11 @@ const HomeComponent = (props) => {
           {Utility.isMenuActive("/about") && (
             <About getCurrentUserDetails={props.getCurrentUserDetails} />
           )}
-          {Utility.isMenuActive("/") && <ConnectWallets />}
+          {Utility.isMenuActive("/") && (
+            <ConnectWallets
+              getCurrentUserDetails={props.getCurrentUserDetails}
+            />
+          )}
         </Container>
       ) : (
         <Container>

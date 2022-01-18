@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Row } from "simple-flexbox";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import "react-tabs/style/react-tabs.css";
-import Events from "./events";
+import EventsDetails from "./eventsDetails";
 import StateChange from "./stateChange";
 import SubContracts from "./subContracts";
 import { history } from "../../managers/history";
@@ -110,23 +110,23 @@ export default function TransactionDetails() {
             id="Events"
             onClick={handleViewClick}
             style={{
-              color: activeButton === "Events" ? "#3163F0" : "#AEB7D0",
+              color: activeButton === "EventsDetails" ? "#3163F0" : "#AEB7D0",
               display: "flex",
               paddingBottom: "1rem",
               borderBottom:
-                activeButton === "Events" ? "0.225rem solid #3163F0" : "",
+                activeButton === "EventsDetails" ? "0.225rem solid #3163F0" : "",
             }}
           >
             <TabImage
               alt=""
               style={{ marginRight: "0.375rem" }}
               src={
-                activeButton === "Events"
+                activeButton === "EventsDetails"
                   ? "/images/event_blue.svg"
                   : "/images/event_grey.svg"
               }
             />{" "}
-            Events
+            EventsDetails
           </TabView>
           <TabView
             id="StateChange"
@@ -341,7 +341,7 @@ export default function TransactionDetails() {
           </div>
         )}
         {activeButton === "Contracts" && <SubContracts />}
-        {activeButton === "Events" && <Events />}
+        {activeButton === "EventsDetails" && <EventsDetails />}
         {activeButton === "StateChange" && <StateChange />}
       </Container>
     </MainContainer>
