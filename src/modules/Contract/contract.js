@@ -491,8 +491,6 @@ const ColumnOne = styled.div`
   width: 100%;
   max-width: 18.75rem;
   min-width: 180px;
-  @media (min-width: 300px) and (max-width: 767px) {
-  }
 `;
 const ColumnSecond = styled.div`
   font-size: 0.875rem;
@@ -502,8 +500,6 @@ const ColumnSecond = styled.div`
   width: 100%;
   white-space: nowrap;
   max-width: 18.75rem;
-  @media (min-width: 300px) and (max-width: 767px) {
-  }
 `;
 const ToolTipIcon = styled.img`
   width: 0.75rem;

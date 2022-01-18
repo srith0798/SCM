@@ -8,6 +8,8 @@ import ClickAwayListener from "@mui/material/ClickAwayListener";
 import { history } from "../../managers/history";
 import Tooltip from "@mui/material/Tooltip";
 import Filter from "../Popup/filter";
+import { sessionManager } from "../../managers/sessionManager";
+import ContractsService from "../../services/contractsService";
 
 export default function TransactionList() {
   useEffect(() => {}, []);
@@ -17,6 +19,9 @@ export default function TransactionList() {
   const handleClickOpen = () => {
     isOpen(true);
   };
+
+  const [setShowPlaceHolder] = React.useState(false);
+  const [setLoader] = React.useState(false);
   const handleClose = () => {
     isOpen(false);
   };
@@ -26,6 +31,30 @@ export default function TransactionList() {
   const filterPopupClose = () => {
     setfilterPopupOpen(false);
   };
+
+  const getTransactionList = async (skip = 0, limit = 10) => {
+    let userId = sessionManager.getDataFromCookies("userId");
+    try {
+      const requestData = {
+        skip: skip,
+        limit: limit,
+        userId: userId,
+      };
+
+      setLoader(true);
+      const response = await ContractsService.getTransactionList(requestData);
+
+      setAddress(response.contractList);
+      if (response.contractList.length === 0) setShowPlaceHolder(true);
+      else setShowPlaceHolder(false);
+    } catch (e) {
+      setShowPlaceHolder(true);
+      setLoader(false);
+    }
+  };
+  React.useEffect(() => {
+    getTransactionList();
+  });
 
   const [TxHashToolTip, setTxHashToolTip] = React.useState(false);
   const [statusToolTip, setstatusToolTip] = React.useState(false);
