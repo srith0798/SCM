@@ -136,11 +136,20 @@ export default function Contract(props) {
       <SubContainer>
         <MainHeading>
           <Heading>Contracts</Heading>
-          <Input placeholder="Search by address or name" value={input} onChange={search} />
+          <Input
+            placeholder="Search by address or name"
+            value={input}
+            onChange={search}
+          />
         </MainHeading>
         <IconDiv>
           <Tooltip disableFocusListener title="Refresh">
-            <RefreshImage onClick={() => getContractList()} alt="" src="/images/refresh.svg" style={{ marginRight: "0.625rem" }} />
+            <RefreshImage
+              onClick={() => getContractList()}
+              alt=""
+              src="/images/refresh.svg"
+              style={{ marginRight: "0.625rem" }}
+            />
           </Tooltip>
           {open && <AddContract click={handleClose} />}
           <Button onClick={handleClickOpen}>Add Contract</Button>
@@ -159,7 +168,10 @@ export default function Contract(props) {
                 disableFocusListener
                 title="Name of the smart contract"
               >
-                <ToolTipIcon onClick={() => setcontractNameToolTip(!contractNameToolTip)} src="/images/tool-tip.svg" />
+                <ToolTipIcon
+                  onClick={() => setcontractNameToolTip(!contractNameToolTip)}
+                  src="/images/tool-tip.svg"
+                />
               </Tooltip>
             </ColumnOne>
             <ColumnOne>
@@ -171,7 +183,10 @@ export default function Contract(props) {
                 disableFocusListener
                 title="Wallet address"
               >
-                <ToolTipIcon onClick={() => setaddressToolTip(!addressToolTip)} src="/images/tool-tip.svg" />
+                <ToolTipIcon
+                  onClick={() => setaddressToolTip(!addressToolTip)}
+                  src="/images/tool-tip.svg"
+                />
               </Tooltip>
             </ColumnOne>
             <ColumnOne>
@@ -183,7 +198,10 @@ export default function Contract(props) {
                 disableFocusListener
                 title="Network on which the contract is executed"
               >
-                <ToolTipIcon onClick={() => setnetworkToolTip(!networkToolTip)} src="/images/tool-tip.svg" />
+                <ToolTipIcon
+                  onClick={() => setnetworkToolTip(!networkToolTip)}
+                  src="/images/tool-tip.svg"
+                />
               </Tooltip>
             </ColumnOne>
             <ColumnOne>
@@ -195,7 +213,10 @@ export default function Contract(props) {
                 disableFocusListener
                 title="Tag name associated with the contract"
               >
-                <ToolTipIcon onClick={() => settagToolTip(!tagToolTip)} src="/images/tool-tip.svg" />
+                <ToolTipIcon
+                  onClick={() => settagToolTip(!tagToolTip)}
+                  src="/images/tool-tip.svg"
+                />
               </Tooltip>
             </ColumnOne>
             <ColumnOne>
@@ -207,7 +228,10 @@ export default function Contract(props) {
                 disableFocusListener
                 title="Is the contract visible to the users or not"
               >
-                <ToolTipIcon onClick={() => setvisibilityToolTip(!visibilityToolTip)} src="/images/tool-tip.svg" />
+                <ToolTipIcon
+                  onClick={() => setvisibilityToolTip(!visibilityToolTip)}
+                  src="/images/tool-tip.svg"
+                />
               </Tooltip>
             </ColumnOne>
           </Row>
@@ -217,14 +241,32 @@ export default function Contract(props) {
             <div style={{ cursor: "pointer" }}>
               <Div>
                 <Row>
-                  <ColumnSecond onClick={() => redirectTODetails(data._id)}>{data.contractName}</ColumnSecond>
-                  <ColumnSecond>{utility.truncateTxnAddress(data.address)}</ColumnSecond>
+                  <ColumnSecond onClick={() => redirectTODetails(data._id)}>
+                    {data.contractName}
+                  </ColumnSecond>
+                  <ColumnSecond>
+                    {utility.truncateTxnAddress(data.address)}
+                  </ColumnSecond>
                   <ColumnSecond>{data.tokenName}</ColumnSecond>
                   <ColumnSecond style={{ display: "flex" }}>
-                    {address[0].tags && address[0].tags.map((tag, index) => index < 2 && <FinanceTag>{tag}</FinanceTag>)}
+                    {address[0].tags &&
+                      address[0].tags.map(
+                        (tag, index) =>
+                          index < 2 && <FinanceTag>{tag}</FinanceTag>
+                      )}
 
-                    {addTag && <AddTags click={Close} address={address} contract={true} />}
-                    {data.tags && data.tags.length && data.tags.length === 0 && <AddTag onClick={() => Open()}>Add Tag</AddTag>}
+                    {addTag && (
+                      <AddTags
+                        click={Close}
+                        address={address}
+                        contract={true}
+                      />
+                    )}
+                    {data.tags &&
+                      data.tags.length &&
+                      data.tags.length === 0 && (
+                        <AddTag onClick={() => Open()}>Add Tag</AddTag>
+                      )}
                   </ColumnSecond>
                   <ColumnSecond>{data.status}</ColumnSecond>
                 </Row>
