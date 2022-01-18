@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Column, Row } from "simple-flexbox";
-import LetsGetStarted from "../Popup/letsGetStartedPopUp";
-import Settings from "../Popup/settings";
+import LetsGetStarted from "../popup/letsGetStartedPopUp";
+import Settings from "../popup/settings";
 import Box from "@mui/material/Box";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 import { history } from "../../managers/history";
 import Tooltip from "@mui/material/Tooltip";
-import Filter from "../Popup/filter";
+import Filter from "../popup/filter";
 
 export default function TransactionList() {
   useEffect(() => {}, []);
