@@ -27,5 +27,6 @@ export const httpConstants = {
     GET_USER: "/user",
     ADD_TAGS: "/tags",
     GET_TRANSACTIONS_LIST: "/get-transaction",
+    REMOVE_TAG: "/tags",
   },
 };

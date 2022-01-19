@@ -12,6 +12,7 @@ export default {
   removeContract,
   addTags,
   getTransactionsList,
+  removeTags,
 };
 
 function getHeaders() {
@@ -158,10 +159,10 @@ async function getTransactionsList(requestData) {
     });
 }
 
-async function getTransactionList(requestData) {
-  let url = process.env.REACT_APP_USER_CONTRACT_MICROSERVICE + httpConstants.API_END_POINT.GET_TRANSACTION_LIST;
+async function removeTags(requestData) {
+  let url = process.env.REACT_APP_USER_CONTRACT_MICROSERVICE + httpConstants.API_END_POINT.REMOVE_TAG;
   console.log("url----", url);
-  return httpService(httpConstants.METHOD_TYPE.POST, getHeaders(), requestData, url)
+  return httpService(httpConstants.METHOD_TYPE.DELETE, getHeaders(), requestData, url)
     .then((response) => {
       if (!response.success || response.responseCode !== 200 || !response.responseData || response.responseData.length === 0)
         return Promise.reject(response);

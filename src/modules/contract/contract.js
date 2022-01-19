@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { Row } from "simple-flexbox";
 import ShowLoader from "../../common/components/showLoader";
 import AddContract from "../popup/addContract";
-
 import { history } from "../../managers/history";
 import Tooltip from "@mui/material/Tooltip";
 import ContractsService from "../../services/contractsService";
@@ -11,6 +10,7 @@ import ReactPaginate from "react-paginate";
 import utility from "../../utility";
 import { sessionManager } from "../../managers/sessionManager";
 import AddTags from "../popup/addTag";
+
 export default function Contract(props) {
   const [open, setOpen] = React.useState(false);
   const [showPlaceHolder, setShowPlaceHolder] = React.useState(false);
@@ -55,30 +55,6 @@ export default function Contract(props) {
     }
   };
 
-  // const searching = async (searchValue, searchKeys) => {
-  //   let address = sessionManager.getDataFromCookies("accountAddress");
-  //   console.log(address);
-  //   try {
-  //     let requestData = {
-  //       searchKeys: searchKeys,
-  //       address: address,
-  //       skip: 0,
-  //       limit: 10,
-  //     };
-  //     if (searchValue !== "") requestData["searchValue"] = searchValue;
-
-  //     setLoader(true);
-  //     const response = await ContractsService.getContractsList(requestData);
-  //     setLoader(false);
-
-  //     setAddress(response.contractList);
-
-  //     if (response.contractList.length === 0) setShowPlaceHolder(true);
-  //   } catch (e) {
-  //     setShowPlaceHolder(true);
-  //     setLoader(false);
-  //   }
-  // };
   const searching = async (searchValues, searchKeys) => {
     try {
       const requestData = {
@@ -90,9 +66,7 @@ export default function Contract(props) {
       setLoader(true);
       const response = await ContractsService.getContractsList(requestData);
       setLoader(false);
-
       setAddress(response.contractList);
-
       if (response.contractList.length === 0) setShowPlaceHolder(true);
     } catch (e) {
       setShowPlaceHolder(true);
@@ -124,12 +98,6 @@ export default function Contract(props) {
     getContractList();
   };
 
-  // const [input, setInput] = useState();
-
-  // const search = (e) => {
-  //   setInput(e.target.value);
-  //   searching(input, ["address"]);
-  // };
   return (
     <MainContainer>
       <ShowLoader state={loader} top={"33%"} />
@@ -221,10 +189,10 @@ export default function Contract(props) {
                   <ColumnSecond>{utility.truncateTxnAddress(data.address)}</ColumnSecond>
                   <ColumnSecond>{data.tokenName}</ColumnSecond>
                   <ColumnSecond style={{ display: "flex" }}>
-                    {address[0].tags && address[0].tags.map((tag, index) => index < 2 && <FinanceTag>{tag}</FinanceTag>)}
+                    {address[0].tags && address[0].tags.map((tag, index) => index <= 1 && <FinanceTag>{tag}</FinanceTag>)}
 
                     {addTag && <AddTags click={Close} address={address} contract={true} />}
-                    {data.tags && data.tags.length && data.tags.length === 0 && <AddTag onClick={() => Open()}>Add Tag</AddTag>}
+                    {data.tags && data.tags.length === 0 && <AddTag onClick={() => Open()}>Add Tag</AddTag>}
                   </ColumnSecond>
                   <ColumnSecond>{data.status}</ColumnSecond>
                 </Row>
@@ -361,28 +329,6 @@ const RefreshImage = styled.img`
   @media (min-width: 376px) and (max-width: 432px) {
     display: none;
   }
-`;
-const Tag = styled.div`
-  background-color: #eaefff;
-  border-radius: 3px;
-  color: #436ce0;
-  padding: 2px 2px 2px 25px;
-  position: relative;
-  cursor: pointer;
-  width: 100%;
-  max-width: 100px;
-  @media (min-width: 340px) and (max-width: 768px) {
-    padding: 2px 14px 2px 25px;
-    margin-right: 56px;
-    margin-left: 36px;
-  }
-`;
-
-const TagImage = styled.img`
-  position: absolute;
-  width: 12px;
-  left: 5px;
-  top: 7px;
 `;
 
 const MainContainer = styled.div`

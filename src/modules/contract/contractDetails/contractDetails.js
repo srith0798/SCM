@@ -15,6 +15,7 @@ import ContractsService from "../../../services/contractsService";
 import utility from "../../../utility";
 import { history } from "../../../managers/history";
 import AddTags from "../../popup/addTag";
+import RemoveTag from "./removeTag";
 export default function ContractDetails(props) {
   const [activeButton, setActiveButton] = React.useState("General");
   const handleViewClick = (e) => {
@@ -68,10 +69,12 @@ export default function ContractDetails(props) {
     }
     setLoader(false);
   };
+  console.log("contractAddress", contractAddress);
   const showContract = async () => {
     let requestData = {
       id: contractAddress,
     };
+
     try {
       setLoader(true);
       const response = await ContractsService.showContract(requestData);
@@ -126,6 +129,13 @@ export default function ContractDetails(props) {
   const Close = () => {
     setAddTag(false);
     getContractById();
+  };
+  const [removeTagImage, setRemoveTagImage] = useState();
+  const [removeTag, setRemoveTag] = useState(false);
+  const [tagStore, setTagStore] = useState("");
+  const removeTagOpen = (tag) => {
+    setRemoveTag(true);
+    setTagStore(tag);
   };
   return (
     <>
@@ -214,7 +224,32 @@ export default function ContractDetails(props) {
                   <TableHeading>Tags</TableHeading>
                   <TableData>
                     <Row>
-                      {address.tags && address.tags.map((tag) => <FinanceTag>{tag}</FinanceTag>)}
+                      {address.tags &&
+                        address.tags.map((tag, index) => (
+                          <>
+                            {console.log("abc", tag, index)}
+                            <FinanceTag onClick={() => removeTagOpen(tag)}>
+                              <ImageTag
+                                removeTagImage={removeTagImage}
+                                index={index}
+                                address={address}
+                                onMouseOver={() => setRemoveTagImage(index)}
+                                onMouseOut={() => setRemoveTagImage(-1)}
+                              />
+                              {tag}
+                            </FinanceTag>
+                          </>
+                        ))}
+                      {removeTag ? (
+                        <RemoveTag
+                          click={() => setRemoveTag(false)}
+                          contractAddress={contractAddress}
+                          tag={tagStore}
+                          getContractById={getContractById}
+                        />
+                      ) : (
+                        ""
+                      )}
 
                       {addTag && <AddTags click={Close} address={address} contract={false} />}
                       <AddTag onClick={() => Open()}>Add Tag</AddTag>
@@ -348,27 +383,40 @@ const Enabled = styled.div`
   color: #00a58c;
 `;
 const FinanceTag = styled.div`
-  background-image: url("/images/Tag.svg");
-  background-repeat: no-repeat;
-  background-position: 0.5rem;
-  padding-left: 1.75rem;
-  padding-right: 8px;
-  background-size: 0.875rem;
+  display: flex;
+  background: #ecf0ff 0% 0% no-repeat padding-box;
+  border: 1px solid #eaefff;
+  border-radius: 4px;
+  width: 100%;
+  padding: 10px;
+  height: 30px;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  margin-right: 9px;
+`;
+const ImageTag = styled.div`
+  background-image: ${(props) => (props.removeTagImage == props.index ? `url("/images/close.svg")` : `url("/images/Tag.svg")`)};
+
+  background-position: left;
+  background-size: 13px;
   position: relative;
   background-color: #eaefff;
   border: 1px solid #eaefff;
   border-radius: 0.25rem;
   width: 100%;
-  max-width: 17.75rem;
+
   white-space: nowrap;
-  height: 2.125rem;
+  height: 30px;
+
   align-items: center;
   color: #436ce0;
   text-align: center;
   display: flex;
   font-size: 1rem;
   font-weight: 400;
-  margin-right: 13px;
+
+  background-repeat: no-repeat;
 `;
 const AddTag = styled.button`
   color: #416be0;
@@ -387,8 +435,6 @@ const AddTag = styled.button`
   background-color: #ffffff;
   border: none;
   border-radius: 0.25rem;
-  width: 100%;
-  max-width: 17.75rem;
   white-space: nowrap;
   height: 2.125rem;
 `;
@@ -443,7 +489,7 @@ const TableData = styled.div`
   font-weight: 600;
   color: #191919;
   width: 100%;
-  max-width: 9.375rem;
+  /* max-width: 9.375rem; */
   font-size: 1rem;
   font-weight: 600;
 `;

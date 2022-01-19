@@ -1,51 +1,48 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import Dialog from "@mui/material/Dialog";
 import { makeStyles } from "@material-ui/styles";
-import ButtonConfirm from "../../common/components/buttonConfirm";
-import contractsService from "../../services/contractsService";
+import contractsService from "../../../services/contractsService";
+import ButtonConfirm from "../../../common/components/buttonConfirm";
+
 const useStyles = makeStyles(() => ({
   dialogBox: {
     width: "100% !important",
   },
 }));
-export default function AddTags(props) {
-  const [input, setInput] = useState([]);
 
-  const classes = useStyles();
-
-  const addContractTag = async () => {
-    console.log("i am add cntract", props.address[0]._id);
-    console.log("i am add cntract", props.address);
-
+export default function RemoveTag(props) {
+  const removeTags = async () => {
     let requestData = {
-      contractId: props.contract ? props.address[0]._id : props.address._id,
-      tags: input,
+      contractId: props.contractAddress,
+      tags: [props.tag],
     };
 
     try {
-      const response = await contractsService.addTags(requestData);
-      console.log(response);
+      const response = await contractsService.removeTags(requestData);
+      console.log("removeResponse", response);
     } catch (e) {
       console.log("Error", e);
     }
   };
-
+  const classes = useStyles();
+  const Close = () => {
+    props.click();
+    props.getContractById();
+  };
   return (
     <div>
       <Dialog classes={{ paper: classes.dialogBox }} open={true}>
         <MainContainer>
           <Container>
             <SubContainer>
-              <Add>Add Tag to the selected contract</Add>
+              <Add>Remove tag from contract</Add>
             </SubContainer>
-            <Content>
-              Add unique tags to your contracts to help you filter your transactions pinpoint key events that happened more easily.
-            </Content>
-            <Input type="text" placeholder="E.g. v1.3.37" value={input} onChange={(e) => setInput([e.target.value])} />
+            <Content>Are you sure you want to remove this tag from the contract?</Content>
+
             <SubContainer style={{ width: "100%", maxWidth: "160px", marginTop: "30px" }}>
-              <ButtonConfirm text={"Add Tag"} click={addContractTag} />
-              <CancelButton onClick={props.click}>Cancel</CancelButton>
+              <ButtonConfirm text={"Remove"} click={removeTags} />
+              <CancelButton onClick={() => Close()}>Cancel</CancelButton>
             </SubContainer>
           </Container>
         </MainContainer>
@@ -74,20 +71,6 @@ const SubContainer = styled.div`
 const Add = styled.div`
   font: normal normal 600 24px/29px Inter;
   color: #303134;
-`;
-const Input = styled.input`
-  background: #f0f2fc 0% 0% no-repeat padding-box;
-  padding: 7px;
-  border: 0px;
-  width: 100%;
-  max-width: 636px;
-  margin-top: 30px;
-  background-image: url("/images/Tag.svg");
-  background-repeat: no-repeat;
-  background-position: 8px;
-  padding-left: 35px;
-  background-size: 13px;
-  color: #436ce0;
 `;
 
 const CancelButton = styled.button`
