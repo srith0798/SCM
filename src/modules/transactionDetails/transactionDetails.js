@@ -128,22 +128,22 @@ export default function TransactionDetails() {
                   : "/images/event_grey.svg"
               }
             />
-            EventsDetails
+            Events
           </TabView>
           <TabView
-            id="StateChanges"
+            id="StateChange"
             onClick={handleViewClick}
             style={{
-              color: activeButton === "StateChanges" ? "#3163F0" : "#AEB7D0",
+              color: activeButton === "StateChange" ? "#3163F0" : "#AEB7D0",
               borderBottom:
-                activeButton === "StateChanges" ? "0.225rem solid #3163F0" : "",
+                activeButton === "StateChange" ? "0.225rem solid #3163F0" : "",
             }}
           >
             <TabImage
               alt=""
               style={{ marginRight: "0.375rem", marginBottom: "4px" }}
               src={
-                activeButton === "StateChanges"
+                activeButton === "StateChange"
                   ? "/images/statechange_blue.svg"
                   : "/images/statechange_grey.svg"
               }
@@ -357,7 +357,7 @@ const MainContainer = styled.div`
   display: 100%;
   height: 230vh;
   @media (min-width: 340px) and (max-width: 768px) {
-    padding: 1.5rem;
+    padding: 1rem;
   }
 `;
 const TopContainer = styled.div`
@@ -509,6 +509,10 @@ const SubContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
+  height: 3.125rem;
+  align-items: center;
+  padding-bottom: 15px;
+
   @media (min-width: 300px) and (max-width: 485px) {
     flex-direction: column;
   }
@@ -621,8 +625,7 @@ const TabLister = styled.div`
 const TabView = styled.div`
   padding: 0.313rem 0.5rem 0.313rem 0.5rem;
   display: flex;
-  @media (min-width: 340px) and (max-width: 768px) {
-  }
+  padding-bottom: 1.2rem;
 `;
 const ToolTipIcon = styled.img`
   width: 0.75rem;

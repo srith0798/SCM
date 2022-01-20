@@ -134,14 +134,21 @@ export default function ContractDetails(props) {
         <SubContainer>
           <MainHeading>
             <Heading>
-              <img alt="" src="/images/back.svg" style={{ marginRight: "8px", marginBottom: "3px" }} onClick={() => backButton()} />
+              <img
+                alt=""
+                src="/images/back.svg"
+                style={{ marginRight: "8px", marginBottom: "3px" }}
+                onClick={() => backButton()}
+              />
               Contract Details
             </Heading>
             <Button>View in Explorer</Button>
           </MainHeading>
         </SubContainer>
         <Container>
-          <SubHeading style={{ paddingTop: "0.625rem", paddingLeft: "1rem" }}>App_Transactions_Validator</SubHeading>
+          <SubHeading style={{ paddingTop: "0.625rem", paddingLeft: "1rem" }}>
+            App_Transactions_Validator
+          </SubHeading>
           <div
             style={{
               paddingLeft: "1.25rem",
@@ -149,7 +156,11 @@ export default function ContractDetails(props) {
               alignItems: "center",
             }}
           >
-            <Hash>{utility.truncateTxnAddress("xdcabfe4184e5f9f600fe86d20ffdse2fsfbsgsgsa768b3c")}</Hash>
+            <Hash>
+              {utility.truncateTxnAddress(
+                "xdcabfe4184e5f9f600fe86d20ffdse2fsfbsgsgsa768b3c"
+              )}
+            </Hash>
             <CopyToClipboard text={value}>
               <CopyImg src="/images/copy.svg" />
             </CopyToClipboard>
@@ -165,13 +176,20 @@ export default function ContractDetails(props) {
                 paddingBottom: "0.875rem",
                 paddingright: "16px",
                 alignItems: "center",
-                borderBottom: activeButton === "General" ? "0.125rem solid #3163F0" : "#AEB7D0",
+                borderBottom:
+                  activeButton === "General"
+                    ? "0.125rem solid #3163F0"
+                    : "#AEB7D0",
               }}
             >
               <img
                 alt=""
                 style={{ marginRight: "0.375rem" }}
-                src={activeButton === "General" ? "/images/genrl.svg" : "/images/general_grey.svg"}
+                src={
+                  activeButton === "General"
+                    ? "/images/genrl.svg"
+                    : "/images/general_grey.svg"
+                }
               />
               General
             </TabView>
@@ -184,13 +202,18 @@ export default function ContractDetails(props) {
                 paddingBottom: "0.875rem",
                 paddingright: "16px",
                 alignItems: "center",
-                borderBottom: activeButton === "Source Code" ? "0.125rem solid blue" : "",
+                borderBottom:
+                  activeButton === "Source Code" ? "0.125rem solid blue" : "",
               }}
             >
               <img
                 alt=""
                 style={{ marginRight: "0.375rem" }}
-                src={activeButton === "Source Code" ? "/images/source code_blue.svg" : "/images/source code_grey.svg"}
+                src={
+                  activeButton === "Source Code"
+                    ? "/images/source code_blue.svg"
+                    : "/images/source code_grey.svg"
+                }
               />
               Source Code
             </TabView>
@@ -214,9 +237,18 @@ export default function ContractDetails(props) {
                   <TableHeading>Tags</TableHeading>
                   <TableData>
                     <Row>
-                      {address.tags && address.tags.map((tag) => <FinanceTag>{tag}</FinanceTag>)}
+                      {address.tags &&
+                        address.tags.map((tag) => (
+                          <FinanceTag>{tag}</FinanceTag>
+                        ))}
 
-                      {addTag && <AddTags click={Close} address={address} contract={false} />}
+                      {addTag && (
+                        <AddTags
+                          click={Close}
+                          address={address}
+                          contract={false}
+                        />
+                      )}
                       <AddTag onClick={() => Open()}>Add Tag</AddTag>
                     </Row>
                   </TableData>
@@ -261,37 +293,62 @@ export default function ContractDetails(props) {
                 </PopUpBlock>
 
                 <PopUpBlock>
-                  {renameState && <RenameContract address={address} click={renameHandleClose} />}
+                  {renameState && (
+                    <RenameContract
+                      address={address}
+                      click={renameHandleClose}
+                    />
+                  )}
                   <RowProperty onClick={() => renameHandleOpen()}>
                     <img alt="" src="/images/edit.svg" />
                   </RowProperty>
-                  <RowProperty onClick={() => renameHandleOpen()}>Rename Contract</RowProperty>
+                  <RowProperty onClick={() => renameHandleOpen()}>
+                    Rename Contract
+                  </RowProperty>
                 </PopUpBlock>
                 <PopUpBlock>
-                  {hide && <HideContract hideContract={hideContract} click={hideHandleClose} />}
-                  {show && <ShowContract showContract={showContract} click={() => setShowBox(false)} />}
+                  {hide && (
+                    <HideContract
+                      hideContract={hideContract}
+                      click={hideHandleClose}
+                    />
+                  )}
+                  {show && (
+                    <ShowContract
+                      showContract={showContract}
+                      click={() => setShowBox(false)}
+                    />
+                  )}
                   {address.isHidden ? (
                     <>
                       <RowProperty onClick={() => hideShowOpen()}>
                         <img alt="" src="/images/hide.svg" />
                       </RowProperty>
-                      <RowProperty onClick={() => hideShowOpen()}>Show Contract</RowProperty>
+                      <RowProperty onClick={() => hideShowOpen()}>
+                        Show Contract
+                      </RowProperty>
                     </>
                   ) : (
                     <>
                       <RowProperty onClick={() => hideHandleOpen()}>
                         <img alt="" src="/images/hide.svg" />
                       </RowProperty>
-                      <RowProperty onClick={() => hideHandleOpen()}>Hide Contract</RowProperty>
+                      <RowProperty onClick={() => hideHandleOpen()}>
+                        Hide Contract
+                      </RowProperty>
                     </>
                   )}
                 </PopUpBlock>
                 <PopUpBlock>
-                  {remove && <Remove click={removeHandleClose} contract={address} />}
+                  {remove && (
+                    <Remove click={removeHandleClose} contract={address} />
+                  )}
                   <RowProperty onClick={() => removeHandleOpen()}>
                     <img alt="" src="/images/delete.svg" />
                   </RowProperty>
-                  <RowProperty onClick={() => removeHandleOpen()}>Remove Contract</RowProperty>
+                  <RowProperty onClick={() => removeHandleOpen()}>
+                    Remove Contract
+                  </RowProperty>
                 </PopUpBlock>
               </PopUp>
             </DetailsSection>
@@ -398,6 +455,9 @@ const MainContainer = styled.div`
   width: 100%;
   padding: 3.125rem;
   height: 100vh;
+  @media (min-width: 300px) and (max-width: 768px) {
+    padding: 1rem;
+  }
 `;
 
 const Hash = styled.div`

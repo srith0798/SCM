@@ -156,7 +156,11 @@ export default function TransactionList(props) {
               <Icons src="/images/settings.svg" onClick={handleClickOpen} />
             </Tooltip>
             <Tooltip disableFocusListener title="Refresh">
-              <Icons src="/images/refresh.svg" onClick={getTransaction} />
+              <Icons
+                onClick={() => getTransaction()}
+                src="/images/refresh.svg"
+                // onClick={getTransaction}
+              />
             </Tooltip>
             {filterPopupOpen && <Filter click={filterPopupClose} />}
             <Tooltip disableFocusListener title="Filter">
@@ -174,7 +178,14 @@ export default function TransactionList(props) {
             </InstructionText>
 
             <ClickAwayListener onClickAway={handleClickAway}>
-              <Box sx={{ position: "relative" }} selected={selected.address}>
+              <Box
+                sx={{
+                  position: "relative",
+                  marginRight: "15px;",
+                  wordBreak: "break-all",
+                }}
+                selected={selected.address}
+              >
                 <DropDown onClick={handleClick}>
                   App_Transactions_Validator{" "}
                   <img
@@ -307,11 +318,13 @@ export default function TransactionList(props) {
               return (
                 <Div>
                   <Row>
-                    {toggle.transactionHash && (
-                      <ColumnSecond onClick={redirectToTransactionDetails}>
-                        {utility.truncateTxnAddress(data.hash)}
-                      </ColumnSecond>
-                    )}
+                    <BackgroundChangerTxhash>
+                      {toggle.transactionHash && (
+                        <ColumnSecond onClick={redirectToTransactionDetails}>
+                          {utility.truncateTxnAddress(data.hash)}
+                        </ColumnSecond>
+                      )}
+                    </BackgroundChangerTxhash>
                     {toggle.status && (
                       <ColumnSecond>{data.status}</ColumnSecond>
                     )}
@@ -322,16 +335,20 @@ export default function TransactionList(props) {
                     {toggle.contracts && (
                       <ColumnSecond>{data.contracts}</ColumnSecond>
                     )}
-                    {toggle.from && (
-                      <ColumnSecond>
-                        {utility.truncateTxnAddress(data.from)}
-                      </ColumnSecond>
-                    )}
-                    {toggle.to && (
-                      <ColumnSecond>
-                        {utility.truncateTxnAddress(data.to)}
-                      </ColumnSecond>
-                    )}
+                    <BackgroundChangerFrom>
+                      {toggle.from && (
+                        <ColumnSecond>
+                          {utility.truncateTxnAddress(data.from)}
+                        </ColumnSecond>
+                      )}
+                    </BackgroundChangerFrom>
+                    <BackgroundChangerTo>
+                      {toggle.to && (
+                        <ColumnSecond>
+                          {utility.truncateTxnAddress(data.to)}
+                        </ColumnSecond>
+                      )}
+                    </BackgroundChangerTo>
                     {toggle.when && (
                       <ColumnSecond>{data.createdOn}</ColumnSecond>
                     )}
@@ -340,12 +357,12 @@ export default function TransactionList(props) {
               );
             })}
           </div>
-          {showPlaceHolder && (
+          {/* {showPlaceHolder && (
             <PlaceHolderContainer>
               <PlaceHolderImage src="/images/contracts.svg" />
               No Contracts Found
             </PlaceHolderContainer>
-          )}
+          )} */}
         </TableContainer>
       </MainContainer>
       <div>
@@ -372,6 +389,23 @@ const TableContainer = styled.div`
   padding: 0.625rem;
   margin-top: 1.563rem;
   overflow: auto;
+      ::-webkit-scrollbar {
+      border: 0.5px solid rgb(204, 229, 243);
+      outline: none;
+      border-radius: 15px;
+      /* background: #00A58C; */
+    }
+    ::-webkit-scrollbar-track {
+      box-shadow: inset 0 0 1px grey;
+      border-radius: 15px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #3163f0;
+      border-radius: 15px;
+      border: 4px solid transparent;
+      background-clip: content-box;
+    }
+  }
   @media (min-width: 300px) and (max-width: 767px) {
     overflow: scroll;
     width: 100%;
@@ -511,8 +545,59 @@ const ColumnSecond = styled.div`
   font-weight: 500;
   color: #191919;
   width: 100%;
+  // background-repeat: no-repeat;
+  // background: #eaefff 0% 0% no-repeat padding-box;
   // max-width: 300px;
   min-width: 200px;
+`;
+const BackgroundChangerFrom = styled.div`
+  width: 110px;
+  height: auto;
+  // margin-left: 20px;
+  background-repeat: no-repeat;
+  background: #eaefff 0% 0% no-repeat padding-box;
+  border-radius: 6px;
+  opacity: 1;
+
+  @media (min-width: 300px) and (max-width: 1371px) {
+    margin-left: 22px;
+    background-repeat: no-repeat;
+    background: #eaefff 0% 0% no-repeat padding-box;
+    border-radius: 6px;
+    opacity: 1;
+    margin-right: 89px;
+  }
+`;
+const BackgroundChangerTxhash = styled.div`
+  width: 59%;
+  height: auto;
+  background-repeat: no-repeat;
+  background: #eaefff 0% 0% no-repeat padding-box;
+  border-radius: 6px;
+  opacity: 1;
+
+  @media (min-width: 300px) and (max-width: 1371px) {
+    margin-left: 0px;
+    background-repeat: no-repeat;
+    background: #eaefff 0% 0% no-repeat padding-box;
+    border-radius: 6px;
+    opacity: 1;
+    margin-right: 16px;
+  }
+`;
+const BackgroundChangerTo = styled.div`
+  width: 100%;
+  height: auto;
+  background-repeat: no-repeat;
+  background: #eaefff 0% 0% no-repeat padding-box;
+  border-radius: 6px;
+  opacity: 1;
+  margin-left: 88px;
+
+  @media (min-width: 300px) and (max-width: 1371px) {
+    // width: 100%;
+    // padding: 1rem;
+  }
 `;
 const DropDown = styled.div`
   background: #f5f6fd 0% 0% no-repeat padding-box;
@@ -529,6 +614,7 @@ const DropDown = styled.div`
   position: relative;
   @media (max-width: 375px) {
     margin-right: 14px;
+    height: auto;
   }
 `;
 const TransactionHash = styled.div`
@@ -541,7 +627,7 @@ const TransactionHash = styled.div`
     font-size: 0.575rem;
   }
   @media (max-width: 375px) {
-    font-size: 0.75rem;
+    font-size: 0.55rem;
     padding-top: 5px;
   }
 `;

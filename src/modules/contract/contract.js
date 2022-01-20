@@ -404,28 +404,28 @@ const RefreshImage = styled.img`
     display: none;
   }
 `;
-const Tag = styled.div`
-  background-color: #eaefff;
-  border-radius: 3px;
-  color: #436ce0;
-  padding: 2px 2px 2px 25px;
-  position: relative;
-  cursor: pointer;
-  width: 100%;
-  max-width: 100px;
-  @media (min-width: 340px) and (max-width: 768px) {
-    padding: 2px 14px 2px 25px;
-    margin-right: 56px;
-    margin-left: 36px;
-  }
-`;
+// const Tag = styled.div`
+//   background-color: #eaefff;
+//   border-radius: 3px;
+//   color: #436ce0;
+//   padding: 2px 2px 2px 25px;
+//   position: relative;
+//   cursor: pointer;
+//   width: 100%;
+//   max-width: 100px;
+//   @media (min-width: 340px) and (max-width: 768px) {
+//     padding: 2px 14px 2px 25px;
+//     margin-right: 56px;
+//     margin-left: 36px;
+//   }
+// `;
 
-const TagImage = styled.img`
-  position: absolute;
-  width: 12px;
-  left: 5px;
-  top: 7px;
-`;
+// const TagImage = styled.img`
+//   position: absolute;
+//   width: 12px;
+//   left: 5px;
+//   top: 7px;
+// `;
 
 const MainContainer = styled.div`
   background-color: #ecf0f7;

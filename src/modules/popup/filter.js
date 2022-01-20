@@ -48,7 +48,7 @@ export default function Filter(props) {
             </NewContainer>
             <LastContainer>
               <ApplyButton>Apply</ApplyButton>
-              <CancelButton onClick={props.closePopup}>Cancel</CancelButton>
+              <CancelButton onClick={props.click}>Cancel</CancelButton>
             </LastContainer>
           </Container>
         </MainContainer>
