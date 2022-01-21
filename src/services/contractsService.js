@@ -13,6 +13,8 @@ export default {
   addTags,
   getTransactionsList,
   removeTags,
+  addNetworks,
+  getNetworksLists,
 };
 
 function getHeaders() {
@@ -163,6 +165,36 @@ async function removeTags(requestData) {
   let url = process.env.REACT_APP_USER_CONTRACT_MICROSERVICE + httpConstants.API_END_POINT.REMOVE_TAG;
   console.log("url----", url);
   return httpService(httpConstants.METHOD_TYPE.DELETE, getHeaders(), requestData, url)
+    .then((response) => {
+      if (!response.success || response.responseCode !== 200 || !response.responseData || response.responseData.length === 0)
+        return Promise.reject(response);
+      return Promise.resolve(response.responseData);
+    })
+    .catch(function (err) {
+      return Promise.reject(err);
+    });
+}
+async function addNetworks(requestData) {
+  // let url = process.env.REACT_APP_USER_CONTRACT_MICROSERVICE + httpConstants.API_END_POINT.ADD_NETWORK;
+  let url = `http://localhost:3001/add-network`;
+
+  console.log("url----", url);
+  return httpService(httpConstants.METHOD_TYPE.POST, getHeaders(), requestData, url)
+    .then((response) => {
+      if (!response.success || response.responseCode !== 200 || !response.responseData || response.responseData.length === 0)
+        return Promise.reject(response);
+      return Promise.resolve(response.responseData);
+    })
+    .catch(function (err) {
+      return Promise.reject(err);
+    });
+}
+async function getNetworksLists(requestData) {
+  // let url = process.env.REACT_APP_USER_CONTRACT_MICROSERVICE + httpConstants.API_END_POINT.GET_NETWORK_LIST;
+  let url = `http://localhost:3001/get-network`;
+
+  console.log("url----", url);
+  return httpService(httpConstants.METHOD_TYPE.POST, getHeaders(), requestData, url)
     .then((response) => {
       if (!response.success || response.responseCode !== 200 || !response.responseData || response.responseData.length === 0)
         return Promise.reject(response);

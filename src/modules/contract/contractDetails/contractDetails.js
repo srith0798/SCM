@@ -222,11 +222,12 @@ export default function ContractDetails(props) {
                 </Div>
                 <Div>
                   <TableHeading>Tags</TableHeading>
+
                   <TableData>
                     <Row>
                       {address.tags &&
                         address.tags.map((tag, index) => (
-                          <>
+                          <div>
                             {console.log("abc", tag, index)}
                             <FinanceTag onClick={() => removeTagOpen(tag)}>
                               <ImageTag
@@ -238,7 +239,7 @@ export default function ContractDetails(props) {
                               />
                               {tag}
                             </FinanceTag>
-                          </>
+                          </div>
                         ))}
                       {removeTag ? (
                         <RemoveTag

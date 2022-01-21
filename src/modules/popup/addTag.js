@@ -15,9 +15,6 @@ export default function AddTags(props) {
   const classes = useStyles();
 
   const addContractTag = async () => {
-    console.log("i am add cntract", props.address[0]._id);
-    console.log("i am add cntract", props.address);
-
     let requestData = {
       contractId: props.contract ? props.address[0]._id : props.address._id,
       tags: input,

@@ -15,7 +15,6 @@ export default function Contract(props) {
   const [open, setOpen] = React.useState(false);
   const [showPlaceHolder, setShowPlaceHolder] = React.useState(false);
   const [loader, setLoader] = React.useState(false);
-
   const [contractNameToolTip, setcontractNameToolTip] = React.useState(false);
   const [addressToolTip, setaddressToolTip] = React.useState(false);
   const [networkToolTip, setnetworkToolTip] = React.useState(false);

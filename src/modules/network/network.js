@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import AddNetwork from "./addNetwork";
 import Tooltip from "@mui/material/Tooltip";
+import contractsService from "../../services/contractsService";
+import utility from "../../utility";
+import { sessionManager } from "../../managers/sessionManager";
+import ShowLoader from "../../common/components/showLoader";
 
 export default function Network() {
   const [open, setOpen] = useState(false);
@@ -13,30 +17,38 @@ export default function Network() {
     setOpen(false);
   };
   React.useEffect(() => {
-    let address = [
-      {
-        network: "App_Transactions_Validator",
-        url: "https://explorer.xinfin.network/",
-      },
-    ];
-
-    setAddress(
-      address.map((object) => {
-        return {
-          network: object.network,
-          url: object.url,
-        };
-      })
-    );
+    getNetworkList();
   }, []);
 
   const [address, setAddress] = React.useState([]);
-
+  const [showPlaceHolder, setShowPlaceHolder] = React.useState(false);
+  const [loader, setLoader] = React.useState(false);
   const [networkToolTip, setnetworkToolTip] = React.useState(false);
   const [urlToolTip, seturlToolTip] = React.useState(false);
 
+  const getNetworkList = async (skip = 0, limit = 10) => {
+    try {
+      const requestData = {
+        skip: skip,
+        limit: limit,
+      };
+
+      setLoader(true);
+      const response = await contractsService.getNetworksLists(requestData);
+      setLoader(false);
+
+      setAddress(response.networkList);
+      console.log("networkList", response.networkList[0]);
+      if (response.networkList.length === 0) setShowPlaceHolder(true);
+      else setShowPlaceHolder(false);
+    } catch (e) {
+      setShowPlaceHolder(true);
+      setLoader(false);
+    }
+  };
   return (
     <MainContainer>
+      <ShowLoader state={loader} top={"33%"} />
       <SubContainer>
         <div>
           <Heading>Networks</Heading>
@@ -58,10 +70,7 @@ export default function Network() {
               disableFocusListener
               title="The blockchain network in use"
             >
-              <ToolTipIcon
-                onClick={() => setnetworkToolTip(!networkToolTip)}
-                src="/images/tool-tip.svg"
-              />
+              <ToolTipIcon onClick={() => setnetworkToolTip(!networkToolTip)} src="/images/tool-tip.svg" />
             </Tooltip>
           </ColumnOne>
           <UrlHeading>
@@ -73,10 +82,7 @@ export default function Network() {
               disableFocusListener
               title="URL of the network"
             >
-              <ToolTipIcon
-                onClick={() => seturlToolTip(!urlToolTip)}
-                src="/images/tool-tip.svg"
-              />
+              <ToolTipIcon onClick={() => seturlToolTip(!urlToolTip)} src="/images/tool-tip.svg" />
             </Tooltip>
           </UrlHeading>
         </Container>
@@ -84,13 +90,19 @@ export default function Network() {
           {address.map((data, index) => {
             return (
               <Container>
-                <Icon src="/images/mainnet.svg" />
-                <Head>Mainnet</Head>
-                <Url>https://explorer.xinfin.network/</Url>
+                {/* <Icon src="/images/mainnet.svg" /> */}
+                <Head>{data.networkName}</Head>
+                <Url>{data.newRpcUrl}</Url>
               </Container>
             );
           })}
         </div>
+        {/* {showPlaceHolder && (
+          <PlaceHolderContainer>
+            <PlaceHolderImage src="/images/contracts.svg" />
+            No Contracts Found
+          </PlaceHolderContainer>
+        )} */}
       </Div>
     </MainContainer>
   );
@@ -228,4 +240,22 @@ const ToolTipIcon = styled.img`
   width: 0.75rem;
   cursor: pointer;
   margin-left: 0.5rem;
+`;
+
+const PlaceHolderContainer = styled.div`
+  display: flex;
+  width: 100%;
+  height: 16rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 50%;
+  font-weight: 600;
+  font-size: 13px;
+`;
+const PlaceHolderImage = styled.img`
+  width: 50px;
+  -webkit-filter: grayscale(60%); /* Safari 6.0 - 9.0 */
+  filter: grayscale(60%);
+  margin-bottom: 20px;
 `;
