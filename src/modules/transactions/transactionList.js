@@ -36,7 +36,7 @@ export default function TransactionList(props) {
   const [TxHashToolTip, setTxHashToolTip] = React.useState(false);
   const [statusToolTip, setstatusToolTip] = React.useState(false);
   const [functionToolTip, setfunctionToolTip] = React.useState(false);
-  const [showPlaceHolder, setShowPlaceHolder] = React.useState(false);
+  const [, setShowPlaceHolder] = React.useState(false);
   const [loader, setLoader] = React.useState(false);
   const [address, setAddress] = React.useState([]);
   const [contracts, setContracts] = React.useState([]);
@@ -112,7 +112,7 @@ export default function TransactionList(props) {
     background: "#f5f6fd 0% 0% no-repeat padding-box",
     border: "1px solid #d5e0ff",
     borderRadius: "6px",
-    overflow: "scroll",
+    overflowY: "auto",
     height: "200px",
     marginTop: "4px",
     fontSize: "0.875rem",
@@ -385,10 +385,10 @@ const TableContainer = styled.div`
   background-color: #ffffff;
   border-radius: 0.375rem;
   width: 100%;
-  height: 25rem;
+  height: 35rem;
   padding: 0.625rem;
   margin-top: 1.563rem;
-  overflow: auto;
+  overflow-y: hidden;
       ::-webkit-scrollbar {
       border: 0.5px solid rgb(204, 229, 243);
       outline: none;
@@ -407,10 +407,10 @@ const TableContainer = styled.div`
     }
   }
   @media (min-width: 300px) and (max-width: 767px) {
-    overflow: scroll;
+    overflow-y: hidden;
     width: 100%;
-    height: 381px;
-    overflow-y: auto;
+    height: 581px;
+    
     position: relative;
     ::-webkit-scrollbar {
       border: 0.5px solid rgb(204, 229, 243);
@@ -456,15 +456,18 @@ const NewDiv = styled.div`
 const Transactions = styled.div`
   font-size: 1.5rem;
   font-weight: 600;
+  color: #191919;
   @media (min-width: 360px) and (max-width: 577px) {
     display: none;
   }
 `;
 const TransactionMedia = styled.div`
   display: none;
+
   @media (min-width: 360px) and (max-width: 577px) {
     font-size: 1.3rem;
     padding-bottom: 10px;
+    color: #191919;
     font-weight: 700;
     display: flex;
   }
@@ -553,19 +556,16 @@ const ColumnSecond = styled.div`
 const BackgroundChangerFrom = styled.div`
   width: 110px;
   height: auto;
-  // margin-left: 20px;
-  background-repeat: no-repeat;
   background: #eaefff 0% 0% no-repeat padding-box;
   border-radius: 6px;
-  opacity: 1;
 
   @media (min-width: 300px) and (max-width: 1371px) {
-    margin-left: 22px;
+    // margin-left: 22px;
     background-repeat: no-repeat;
     background: #eaefff 0% 0% no-repeat padding-box;
     border-radius: 6px;
     opacity: 1;
-    margin-right: 89px;
+    // margin-right: 89px;
   }
 `;
 const BackgroundChangerTxhash = styled.div`
@@ -582,7 +582,7 @@ const BackgroundChangerTxhash = styled.div`
     background: #eaefff 0% 0% no-repeat padding-box;
     border-radius: 6px;
     opacity: 1;
-    margin-right: 16px;
+    // margin-right: 16px;
   }
 `;
 const BackgroundChangerTo = styled.div`
@@ -592,7 +592,7 @@ const BackgroundChangerTo = styled.div`
   background: #eaefff 0% 0% no-repeat padding-box;
   border-radius: 6px;
   opacity: 1;
-  margin-left: 88px;
+  // margin-left: 88px;
 
   @media (min-width: 300px) and (max-width: 1371px) {
     // width: 100%;
@@ -662,20 +662,20 @@ const ToolTipIcon = styled.img`
   cursor: pointer;
   margin-left: 0.5rem;
 `;
-const PlaceHolderContainer = styled.div`
-  display: flex;
-  width: 100%;
-  height: 500px;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  opacity: 50%;
-  font-weight: 600;
-  font-size: 13px;
-`;
-const PlaceHolderImage = styled.img`
-  width: 50px;
-  -webkit-filter: grayscale(60%); /* Safari 6.0 - 9.0 */
-  filter: grayscale(60%);
-  margin-bottom: 20px;
-`;
+// const PlaceHolderContainer = styled.div`
+//   display: flex;
+//   width: 100%;
+//   height: 500px;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: center;
+//   opacity: 50%;
+//   font-weight: 600;
+//   font-size: 13px;
+// `;
+// const PlaceHolderImage = styled.img`
+//   width: 50px;
+//   -webkit-filter: grayscale(60%); /* Safari 6.0 - 9.   */
+//   filter: grayscale(60%);
+//   margin-bottom: 20px;
+// `;

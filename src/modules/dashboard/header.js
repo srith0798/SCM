@@ -46,7 +46,10 @@ function Header(props) {
     <HeaderContainer>
       <SpaceBetween>
         <div style={{ display: "flex", marginLeft: "12px" }}>
-          <GridLogo src="/images/Grid.svg" onClick={() => setOpenHumburger(openHumburger)} />
+          <GridLogo
+            src="/images/Grid.svg"
+            onClick={() => setOpenHumburger(openHumburger)}
+          />
           <XmartlyLogo src="/images/Logo.svg" />
         </div>
         {sessionManager.getDataFromCookies("accountAddress") ? (

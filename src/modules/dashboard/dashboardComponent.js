@@ -19,6 +19,8 @@ import { sessionManager } from "../../managers/sessionManager";
 import UserService from "../../services/userService";
 import { history } from "../../managers/history";
 import ConnectWallets from "./connectWallets";
+import Footer from "./Footer";
+
 //Replace Under Development with component once developed-
 const HomeComponent = (props) => {
   useEffect(() => {}, []);
@@ -113,6 +115,7 @@ const dashboardComponent = (props) => {
           </ScrollableDiv>
         </HomeContainer>
       </DashboardContainer>
+      <Footer />
     </>
   );
 };
