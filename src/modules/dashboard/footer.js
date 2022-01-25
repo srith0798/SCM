@@ -147,10 +147,7 @@ function Footer() {
       <ColumnContainer>
         <Column>
           <FooterImg src="/images/smarthub.svg" alt="" />
-          <Text>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit Ut quis
-            maximus augue.
-          </Text>
+          <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit Ut quis maximus augue.</Text>
         </Column>
         <SecondColumn>
           <SubColOne>

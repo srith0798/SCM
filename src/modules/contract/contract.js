@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { Row } from "simple-flexbox";
 import ShowLoader from "../../common/components/showLoader";
 import AddContract from "../popup/addContract";
-
 import { history } from "../../managers/history";
 import Tooltip from "@mui/material/Tooltip";
 import ContractsService from "../../services/contractsService";
@@ -11,11 +10,11 @@ import ReactPaginate from "react-paginate";
 import utility from "../../utility";
 import { sessionManager } from "../../managers/sessionManager";
 import AddTags from "../popup/addTag";
+
 export default function Contract(props) {
   const [open, setOpen] = React.useState(false);
   const [showPlaceHolder, setShowPlaceHolder] = React.useState(false);
   const [loader, setLoader] = React.useState(false);
-
   const [contractNameToolTip, setcontractNameToolTip] = React.useState(false);
   const [addressToolTip, setaddressToolTip] = React.useState(false);
   const [networkToolTip, setnetworkToolTip] = React.useState(false);
@@ -55,30 +54,6 @@ export default function Contract(props) {
     }
   };
 
-  // const searching = async (searchValue, searchKeys) => {
-  //   let address = sessionManager.getDataFromCookies("accountAddress");
-  //   console.log(address);
-  //   try {
-  //     let requestData = {
-  //       searchKeys: searchKeys,
-  //       address: address,
-  //       skip: 0,
-  //       limit: 10,
-  //     };
-  //     if (searchValue !== "") requestData["searchValue"] = searchValue;
-
-  //     setLoader(true);
-  //     const response = await ContractsService.getContractsList(requestData);
-  //     setLoader(false);
-
-  //     setAddress(response.contractList);
-
-  //     if (response.contractList.length === 0) setShowPlaceHolder(true);
-  //   } catch (e) {
-  //     setShowPlaceHolder(true);
-  //     setLoader(false);
-  //   }
-  // };
   const searching = async (searchValues, searchKeys) => {
     try {
       const requestData = {
@@ -90,9 +65,7 @@ export default function Contract(props) {
       setLoader(true);
       const response = await ContractsService.getContractsList(requestData);
       setLoader(false);
-
       setAddress(response.contractList);
-
       if (response.contractList.length === 0) setShowPlaceHolder(true);
     } catch (e) {
       setShowPlaceHolder(true);
@@ -124,32 +97,17 @@ export default function Contract(props) {
     getContractList();
   };
 
-  // const [input, setInput] = useState();
-
-  // const search = (e) => {
-  //   setInput(e.target.value);
-  //   searching(input, ["address"]);
-  // };
   return (
     <MainContainer>
       <ShowLoader state={loader} top={"33%"} />
       <SubContainer>
         <MainHeading>
           <Heading>Contracts</Heading>
-          <Input
-            placeholder="Search by address or name"
-            value={input}
-            onChange={search}
-          />
+          <Input placeholder="Search by address or name" value={input} onChange={search} />
         </MainHeading>
         <IconDiv>
           <Tooltip disableFocusListener title="Refresh">
-            <RefreshImage
-              onClick={() => getContractList()}
-              alt=""
-              src="/images/refresh.svg"
-              style={{ marginRight: "0.625rem" }}
-            />
+            <RefreshImage onClick={() => getContractList()} alt="" src="/images/refresh.svg" style={{ marginRight: "0.625rem" }} />
           </Tooltip>
           {open && <AddContract click={handleClose} />}
           <Button onClick={handleClickOpen}>Add Contract</Button>
@@ -168,10 +126,7 @@ export default function Contract(props) {
                 disableFocusListener
                 title="Name of the smart contract"
               >
-                <ToolTipIcon
-                  onClick={() => setcontractNameToolTip(!contractNameToolTip)}
-                  src="/images/tool-tip.svg"
-                />
+                <ToolTipIcon onClick={() => setcontractNameToolTip(!contractNameToolTip)} src="/images/tool-tip.svg" />
               </Tooltip>
             </ColumnOne>
             <ColumnOne>
@@ -183,10 +138,7 @@ export default function Contract(props) {
                 disableFocusListener
                 title="Wallet address"
               >
-                <ToolTipIcon
-                  onClick={() => setaddressToolTip(!addressToolTip)}
-                  src="/images/tool-tip.svg"
-                />
+                <ToolTipIcon onClick={() => setaddressToolTip(!addressToolTip)} src="/images/tool-tip.svg" />
               </Tooltip>
             </ColumnOne>
             <ColumnOne>
@@ -198,10 +150,7 @@ export default function Contract(props) {
                 disableFocusListener
                 title="Network on which the contract is executed"
               >
-                <ToolTipIcon
-                  onClick={() => setnetworkToolTip(!networkToolTip)}
-                  src="/images/tool-tip.svg"
-                />
+                <ToolTipIcon onClick={() => setnetworkToolTip(!networkToolTip)} src="/images/tool-tip.svg" />
               </Tooltip>
             </ColumnOne>
             <ColumnOne>
@@ -213,10 +162,7 @@ export default function Contract(props) {
                 disableFocusListener
                 title="Tag name associated with the contract"
               >
-                <ToolTipIcon
-                  onClick={() => settagToolTip(!tagToolTip)}
-                  src="/images/tool-tip.svg"
-                />
+                <ToolTipIcon onClick={() => settagToolTip(!tagToolTip)} src="/images/tool-tip.svg" />
               </Tooltip>
             </ColumnOne>
             <ColumnOne>
@@ -228,10 +174,7 @@ export default function Contract(props) {
                 disableFocusListener
                 title="Is the contract visible to the users or not"
               >
-                <ToolTipIcon
-                  onClick={() => setvisibilityToolTip(!visibilityToolTip)}
-                  src="/images/tool-tip.svg"
-                />
+                <ToolTipIcon onClick={() => setvisibilityToolTip(!visibilityToolTip)} src="/images/tool-tip.svg" />
               </Tooltip>
             </ColumnOne>
           </Row>
@@ -241,32 +184,14 @@ export default function Contract(props) {
             <div style={{ cursor: "pointer" }}>
               <Div>
                 <Row>
-                  <ColumnSecond onClick={() => redirectTODetails(data._id)}>
-                    {data.contractName}
-                  </ColumnSecond>
-                  <ColumnSecond>
-                    {utility.truncateTxnAddress(data.address)}
-                  </ColumnSecond>
+                  <ColumnSecond onClick={() => redirectTODetails(data._id)}>{data.contractName}</ColumnSecond>
+                  <ColumnSecond>{utility.truncateTxnAddress(data.address)}</ColumnSecond>
                   <ColumnSecond>{data.tokenName}</ColumnSecond>
                   <ColumnSecond style={{ display: "flex" }}>
-                    {address[0].tags &&
-                      address[0].tags.map(
-                        (tag, index) =>
-                          index < 2 && <FinanceTag>{tag}</FinanceTag>
-                      )}
+                    {address[0].tags && address[0].tags.map((tag, index) => index <= 1 && <FinanceTag>{tag}</FinanceTag>)}
 
-                    {addTag && (
-                      <AddTags
-                        click={Close}
-                        address={address}
-                        contract={true}
-                      />
-                    )}
-                    {data.tags &&
-                      data.tags.length &&
-                      data.tags.length === 0 && (
-                        <AddTag onClick={() => Open()}>Add Tag</AddTag>
-                      )}
+                    {addTag && <AddTags click={Close} address={address} contract={true} />}
+                    {data.tags && data.tags.length === 0 && <AddTag onClick={() => Open()}>Add Tag</AddTag>}
                   </ColumnSecond>
                   <ColumnSecond>{data.status}</ColumnSecond>
                 </Row>
@@ -404,28 +329,6 @@ const RefreshImage = styled.img`
     display: none;
   }
 `;
-// const Tag = styled.div`
-//   background-color: #eaefff;
-//   border-radius: 3px;
-//   color: #436ce0;
-//   padding: 2px 2px 2px 25px;
-//   position: relative;
-//   cursor: pointer;
-//   width: 100%;
-//   max-width: 100px;
-//   @media (min-width: 340px) and (max-width: 768px) {
-//     padding: 2px 14px 2px 25px;
-//     margin-right: 56px;
-//     margin-left: 36px;
-//   }
-// `;
-
-// const TagImage = styled.img`
-//   position: absolute;
-//   width: 12px;
-//   left: 5px;
-//   top: 7px;
-// `;
 
 const MainContainer = styled.div`
   background-color: #ecf0f7;

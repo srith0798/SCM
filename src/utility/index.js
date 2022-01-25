@@ -63,7 +63,7 @@ function apiSuccessToast(msg) {
 function truncateTxnAddress(address) {
   const start = address.slice(0, 7);
   const end = address.slice(-5);
-  console.log(start, end);
+  // console.log(start, end);
   return start + "..." + end;
 }
 

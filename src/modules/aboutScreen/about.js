@@ -5,8 +5,8 @@ import { Row } from "simple-flexbox";
 import { sessionManager } from "../../managers/sessionManager";
 import WalletPopUp from "./walletPopUp";
 import Tooltip from "@mui/material/Tooltip";
-import Footer from "../dashboard/Footer";
 
+import Footer from "../dashboard/Footer";
 export default function About(props) {
   const [state, setState] = useState(true);
   return (
@@ -21,31 +21,19 @@ export default function About(props) {
                 </DetailBox>
               </Row>
               <DataBox>
-                Easily govern your smart contract deployment with end-to-end
-                lifecycle utility, empowering the entire on-chain critical
+                Easily govern your smart contract deployment with end-to-end lifecycle utility, empowering the entire on-chain critical
                 business logic.
               </DataBox>
-              <Tooltip
-                disableFocusListener
-                title="Click to get started with Xmartly"
-              >
+              <Tooltip disableFocusListener title="Click to get started with Xmartly">
                 <Button>
                   Add Your Smart Contract
-                  <img
-                    style={{ marginLeft: "0.375rem" }}
-                    alt=""
-                    src="/images/question-mark.svg"
-                  />
+                  <img style={{ marginLeft: "0.375rem" }} alt="" src="/images/question-mark.svg" />
                 </Button>
               </Tooltip>
             </LeftContainer>
             <RightContainer>
               <VideoBox>
-                <img
-                  style={{ width: "3.75rem", height: "3.75rem" }}
-                  alt=""
-                  src="/images/play.svg"
-                />
+                <img style={{ width: "3.75rem", height: "3.75rem" }} alt="" src="/images/play.svg" />
               </VideoBox>
             </RightContainer>
           </Container>
@@ -59,25 +47,17 @@ export default function About(props) {
               <IconContainer>
                 <img alt="" src="/images/manage contracts.svg" />
                 <Title>Manage Contracts</Title>
-                <SubTitle>
-                  You can add and manage any contract deployed on XDC Network.
-                </SubTitle>
+                <SubTitle>You can add and manage any contract deployed on XDC Network.</SubTitle>
               </IconContainer>
               <IconContainer>
                 <img alt="" src="/images/analyticsicon.svg" />
                 <Title>Analytics</Title>
-                <SubTitle>
-                  View analytics like number of transactions, gas fee etc for
-                  the added contract.
-                </SubTitle>
+                <SubTitle>View analytics like number of transactions, gas fee etc for the added contract.</SubTitle>
               </IconContainer>
               <IconContainer>
                 <img alt="" src="/images/set alerts.svg" />
                 <Title>Set Alerts</Title>
-                <SubTitle>
-                  You can set different types of alert for you contracts,
-                  without missing any information
-                </SubTitle>
+                <SubTitle>You can set different types of alert for you contracts, without missing any information</SubTitle>
               </IconContainer>
             </IconRow>
           </GreyContainer>
@@ -87,11 +67,7 @@ export default function About(props) {
 
       <div>
         {!sessionManager.getDataFromCookies("isLoggedIn") && (
-          <WalletPopUp
-            getCurrentUserDetails={props.getCurrentUserDetails}
-            click={() => setState(false)}
-            state={state}
-          />
+          <WalletPopUp getCurrentUserDetails={props.getCurrentUserDetails} click={() => setState(false)} state={state} />
         )}
       </div>
     </>
