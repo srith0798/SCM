@@ -26,9 +26,7 @@ export default function TransactionList(props) {
   const handleClose = () => {
     isOpen(false);
   };
-  // const setfilterPopupOpen = () => {
-  //   setfilterPopupOpen(true);
-  // };
+
   const filterPopupClose = () => {
     setfilterPopupOpen(false);
   };
@@ -335,13 +333,13 @@ export default function TransactionList(props) {
                     {toggle.contracts && (
                       <ColumnSecond>{data.contracts}</ColumnSecond>
                     )}
-                    <BackgroundChangerFrom>
+                    <BackgroundChangerTxhash>
                       {toggle.from && (
                         <ColumnSecond>
                           {utility.truncateTxnAddress(data.from)}
                         </ColumnSecond>
                       )}
-                    </BackgroundChangerFrom>
+                    </BackgroundChangerTxhash>
                     <BackgroundChangerTo>
                       {toggle.to && (
                         <ColumnSecond>
@@ -553,21 +551,7 @@ const ColumnSecond = styled.div`
   // max-width: 300px;
   min-width: 200px;
 `;
-const BackgroundChangerFrom = styled.div`
-  width: 110px;
-  height: auto;
-  background: #eaefff 0% 0% no-repeat padding-box;
-  border-radius: 6px;
 
-  @media (min-width: 300px) and (max-width: 1371px) {
-    // margin-left: 22px;
-    background-repeat: no-repeat;
-    background: #eaefff 0% 0% no-repeat padding-box;
-    border-radius: 6px;
-    opacity: 1;
-    // margin-right: 89px;
-  }
-`;
 const BackgroundChangerTxhash = styled.div`
   width: 59%;
   height: auto;
@@ -582,7 +566,6 @@ const BackgroundChangerTxhash = styled.div`
     background: #eaefff 0% 0% no-repeat padding-box;
     border-radius: 6px;
     opacity: 1;
-    // margin-right: 16px;
   }
 `;
 const BackgroundChangerTo = styled.div`
@@ -592,7 +575,6 @@ const BackgroundChangerTo = styled.div`
   background: #eaefff 0% 0% no-repeat padding-box;
   border-radius: 6px;
   opacity: 1;
-  // margin-left: 88px;
 
   @media (min-width: 300px) and (max-width: 1371px) {
     // width: 100%;

@@ -9,9 +9,12 @@ const FooterContainer = styled.div`
   background: #102c78 0% 0% no-repeat padding-box;
   opacity: 1;
   @media screen and (min-width: 375px) and (max-width: 425px) {
-    width: 375px;
+    width: 100%;
     height: 745px;
     min-height: 745px;
+  }
+  @media (min-width: 1024px) {
+    display: none;
   }
 `;
 const ColumnContainer = styled.div`

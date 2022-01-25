@@ -5,7 +5,7 @@ import { Row } from "simple-flexbox";
 import { sessionManager } from "../../managers/sessionManager";
 import WalletPopUp from "./walletPopUp";
 import Tooltip from "@mui/material/Tooltip";
-// import Footer from "../dashboard/footer";
+import Footer from "../dashboard/Footer";
 
 export default function About(props) {
   const [state, setState] = useState(true);
@@ -83,6 +83,7 @@ export default function About(props) {
           </GreyContainer>
         </MainBoxContainer>
       </MainContainer>
+      <Footer />
 
       <div>
         {!sessionManager.getDataFromCookies("isLoggedIn") && (
