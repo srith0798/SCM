@@ -25,22 +25,37 @@ export default function WalletPopUp(props) {
               <RowContainer>
                 <Add>
                   Connect Wallet
-                  <CrossIcon alt="" src="/images/xdc-cut.svg" onClick={props.click} />
+                  <CrossIcon
+                    alt=""
+                    src="/images/xdc-cut.svg"
+                    onClick={props.click}
+                  />
                 </Add>
               </RowContainer>
               <Line></Line>
               <DetailBox>
                 <IconContainer>
                   <StepsTitle>Step 1</StepsTitle>
-                  <img style={{ width: "40px" }} alt="" src="/images/xdc-install.svg" />
+                  <img
+                    style={{ width: "40px" }}
+                    alt=""
+                    src="/images/xdc-install.svg"
+                  />
                   <Title>Install XDCPay</Title>
-                  <SubTitle>Install XDCPay Chrome extension from here.</SubTitle>
+                  <SubTitle>
+                    Install XDCPay Chrome extension from{" "}
+                    <p>
+                      <a href="mailto:someone@example.com">here</a>
+                    </p>
+                  </SubTitle>
                 </IconContainer>
                 <IconContainer>
                   <StepsTitle>Step 2</StepsTitle>
                   <img alt="" src="/images/xdc-login.svg" />
                   <Title>Login to XDCPay</Title>
-                  <SubTitle>Login to you account on XDCPay Chrome extension.</SubTitle>
+                  <SubTitle>
+                    Login to you account on XDCPay Chrome extension.
+                  </SubTitle>
                 </IconContainer>
                 <IconContainer>
                   <StepsTitle>Step 3</StepsTitle>
@@ -50,7 +65,11 @@ export default function WalletPopUp(props) {
                 </IconContainer>
               </DetailBox>
               <Button onClick={() => connectWallet()}>
-                <img style={{ paddingLeft: "30px", marginRight: "15px" }} alt="" src="/images/xdc-logo-white.svg" />
+                <img
+                  style={{ paddingLeft: "30px", marginRight: "15px" }}
+                  alt=""
+                  src="/images/xdc-logo-white.svg"
+                />
                 Connect Wallet
               </Button>
             </Container>
@@ -123,7 +142,7 @@ const CrossIcon = styled.img`
 `;
 const DetailBox = styled.div`
   display: flex;
-  padding-bottom: 18px;
+  // padding-bottom: 18px;
 `;
 const MainContainer = styled.div`
   width: 100%;
