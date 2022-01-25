@@ -207,69 +207,42 @@ export default function ContractDetails(props) {
           </TabLister>
           {activeButton === "General" && (
             <DetailsSection>
-              <div>
-                <Div>
-                  <TableHeading>Network</TableHeading>
-                  <TableData>XDC Mainnet</TableData>
-                </Div>
-                <Div>
-                  <TableHeading>Solidity version</TableHeading>
-                  <TableData>{address.blockNumber}</TableData>
-                </Div>
-                <Div>
-                  <TableHeading>Verification</TableHeading>
-                  <Verified>{address.status}</Verified>
-                </Div>
-                <Div>
-                  <TableHeading>Tags</TableHeading>
+              <Div>
+                <TableHeading>Network</TableHeading>
+                <TableData>XDC Mainnet</TableData>
+              </Div>
+              <Div>
+                <TableHeading>Solidity version</TableHeading>
+                <SolidityData>{address.blockNumber}</SolidityData>
+              </Div>
+              <Div>
+                <TableHeading>Verification</TableHeading>
+                <Verified>{address.status}</Verified>
+              </Div>
+              <Div>
+                <TableHeading>Tags</TableHeading>
+                <TagData>
+                  <Row>
+                    {address.tags && address.tags.map((tag) => <FinanceTag>{tag}</FinanceTag>)}
 
-                  <TableData>
-                    <Row>
-                      {address.tags &&
-                        address.tags.map((tag, index) => (
-                          <div>
-                            {console.log("abc", tag, index)}
-                            <FinanceTag onClick={() => removeTagOpen(tag)}>
-                              <ImageTag
-                                removeTagImage={removeTagImage}
-                                index={index}
-                                address={address}
-                                onMouseOver={() => setRemoveTagImage(index)}
-                                onMouseOut={() => setRemoveTagImage(-1)}
-                              />
-                              {tag}
-                            </FinanceTag>
-                          </div>
-                        ))}
-                      {removeTag ? (
-                        <RemoveTag
-                          click={() => setRemoveTag(false)}
-                          contractAddress={contractAddress}
-                          tag={tagStore}
-                          getContractById={getContractById}
-                        />
-                      ) : (
-                        ""
-                      )}
+                    {addTag && <AddTags click={Close} address={address} contract={false} />}
+                    <AddTag onClick={() => Open()}>Add Tag</AddTag>
+                  </Row>
+                </TagData>
+              </Div>
+              <Div>
+                <TableHeading>Compiler</TableHeading>
+                <TableData>{address.blockNumber}</TableData>
+              </Div>
+              <Div>
+                <TableHeading>EVM version</TableHeading>
+                <EvmData>{address.blockNumber}</EvmData>
+              </Div>
+              <Div>
+                <TableHeading>Optimizations</TableHeading>
+                <Enabled>{address.status}</Enabled>
+              </Div>
 
-                      {addTag && <AddTags click={Close} address={address} contract={false} />}
-                      <AddTag onClick={() => Open()}>Add Tag</AddTag>
-                    </Row>
-                  </TableData>
-                </Div>
-                <Div>
-                  <TableHeading>Compiler</TableHeading>
-                  <TableData>{address.blockNumber}</TableData>
-                </Div>
-                <Div>
-                  <TableHeading>EVM version</TableHeading>
-                  <TableData>{address.blockNumber}</TableData>
-                </Div>
-                <Div>
-                  <TableHeading>Optimizations</TableHeading>
-                  <Enabled>{address.status}</Enabled>
-                </Div>
-              </div>
               <PopUp>
                 <PopUpBlock>
                   <RowProperty>
@@ -369,7 +342,7 @@ const Heading = styled.div`
   color: #191919;
   margin-right: 0.625rem;
   @media (min-width: 300px) and (max-width: 767px) {
-    font-size: 1rem;
+    font-size: 1.3rem;
     padding-bottom: 10px;
   }
 `;
@@ -377,11 +350,17 @@ const Verified = styled.div`
   font-size: 1rem;
   font-weight: 600;
   color: #00a58c;
+  @media (min-width: 320px) and (max-width: 768px) {
+    margin-left: -23px;
+  }
 `;
 const Enabled = styled.div`
   font-size: 1rem;
   font-weight: 600;
   color: #00a58c;
+  @media (min-width: 320px) and (max-width: 768px) {
+    margin-left: -38px;
+  }
 `;
 const FinanceTag = styled.div`
   display: flex;
@@ -445,6 +424,9 @@ const MainContainer = styled.div`
   width: 100%;
   padding: 3.125rem;
   height: 100vh;
+  @media (min-width: 320px) and (max-width: 768px) {
+    padding: 1rem;
+  }
 `;
 
 const Hash = styled.div`
@@ -478,12 +460,38 @@ const DetailsSection = styled.div`
   padding: 0.625rem 0.625rem 1.5rem 0.625rem;
   margin-top: 1.25rem;
   overflow-x: auto;
+  @media (min-width: 300px) and (max-width: 768px) {
+    height: 485px;
+    overflow: scroll;
+    overflow-y: hidden;
+    width: 100%;
+    ::-webkit-scrollbar {
+      border: 0.5px solid rgb(204, 229, 243);
+      outline: none;
+      border-radius: 15px;
+      /* background: #00A58C; */
+    }
+    ::-webkit-scrollbar-track {
+      box-shadow: inset 0 0 1px grey;
+      border-radius: 15px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #3163f0;
+      border-radius: 15px;
+      border: 4px solid transparent;
+      background-clip: content-box;
+    }
+  }
 `;
 const Div = styled.div`
   display: flex;
   flex-flow: row nowrap;
   border-bottom: 0.063rem solid #e3e7eb;
   padding: 1.25rem 1.25rem 0.2rem 1.25rem;
+  @media (min-width: 340px) and (max-width: 768px) {
+    column-gap: 200px;
+    white-space: nowrap;
+  }
 `;
 const TableData = styled.div`
   font-size: 0.875rem;
@@ -494,8 +502,44 @@ const TableData = styled.div`
   font-size: 1rem;
   font-weight: 600;
 `;
+const SolidityData = styled.div`
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #191919;
+  width: 100%;
+  max-width: 9.375rem;
+  font-size: 1rem;
+  font-weight: 600;
+  @media (min-width: 340px) and (max-width: 768px) {
+    margin-left: -46px;
+  }
+`;
+const TagData = styled.div`
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #191919;
+  width: 100%;
+  max-width: 9.375rem;
+  font-size: 1rem;
+  font-weight: 600;
+  @media (min-width: 340px) and (max-width: 768px) {
+    margin-left: 14px;
+  }
+`;
+const EvmData = styled.div`
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #191919;
+  width: 100%;
+  max-width: 9.375rem;
+  font-size: 1rem;
+  font-weight: 600;
+  @media (min-width: 340px) and (max-width: 768px) {
+    margin-left: -22px;
+  }
+`;
 const CopyImg = styled.img`
-  margin-left: 9%;
+  margin-left: -12%;
   cursor: pointer;
 `;
 const TableHeading = styled.div`

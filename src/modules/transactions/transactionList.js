@@ -28,9 +28,7 @@ export default function TransactionList(props) {
   const handleClose = () => {
     isOpen(false);
   };
-  // const setfilterPopupOpen = () => {
-  //   setfilterPopupOpen(true);
-  // };
+
   const filterPopupClose = () => {
     setfilterPopupOpen(false);
   };
@@ -38,7 +36,7 @@ export default function TransactionList(props) {
   const [TxHashToolTip, setTxHashToolTip] = React.useState(false);
   const [statusToolTip, setstatusToolTip] = React.useState(false);
   const [functionToolTip, setfunctionToolTip] = React.useState(false);
-  const [showPlaceHolder, setShowPlaceHolder] = React.useState(false);
+  const [, setShowPlaceHolder] = React.useState(false);
   const [loader, setLoader] = React.useState(false);
   const [address, setAddress] = React.useState([]);
   const [contracts, setContracts] = React.useState([]);
@@ -138,7 +136,7 @@ export default function TransactionList(props) {
     background: "#f5f6fd 0% 0% no-repeat padding-box",
     border: "1px solid #d5e0ff",
     borderRadius: "6px",
-    overflow: "scroll",
+    overflowY: "auto",
     height: "200px",
     marginTop: "4px",
     fontSize: "0.875rem",
@@ -178,7 +176,11 @@ export default function TransactionList(props) {
               <Icons src="/images/settings.svg" onClick={handleClickOpen} />
             </Tooltip>
             <Tooltip disableFocusListener title="Refresh">
-              <Icons src="/images/refresh.svg" onClick={getTransaction} />
+              <Icons
+                onClick={() => getTransaction()}
+                src="/images/refresh.svg"
+                // onClick={getTransaction}
+              />
             </Tooltip>
             {filterPopupOpen && <Filter click={filterPopupClose} />}
             <Tooltip disableFocusListener title="Filter">
@@ -193,7 +195,14 @@ export default function TransactionList(props) {
             <InstructionText>You can view transactions per contract by using the contract picker below</InstructionText>
 
             <ClickAwayListener onClickAway={handleClickAway}>
-              <Box sx={{ position: "relative" }} selected={selected.address}>
+              <Box
+                sx={{
+                  position: "relative",
+                  marginRight: "15px;",
+                  wordBreak: "break-all",
+                }}
+                selected={selected.address}
+              >
                 <DropDown onClick={handleClick}>
                   App_Transactions_Validator <img style={{ marginLeft: "0.5rem" }} alt="" src="/images/XDCmainnet.svg" />
                   <br />
@@ -303,31 +312,33 @@ export default function TransactionList(props) {
               return (
                 <Div>
                   <Row>
-                    {toggle.transactionHash && (
-                      <ColumnSecond onClick={redirectToTransactionDetails}>{utility.truncateTxnAddress(data.hash)}</ColumnSecond>
-                    )}
+                    <BackgroundChangerTxhash>
+                      {toggle.transactionHash && (
+                        <ColumnSecond onClick={redirectToTransactionDetails}>{utility.truncateTxnAddress(data.hash)}</ColumnSecond>
+                      )}
+                    </BackgroundChangerTxhash>
                     {toggle.status && <ColumnSecond>{data.status}</ColumnSecond>}
 
                     {toggle.function && <ColumnSecond>{data.function}</ColumnSecond>}
                     {toggle.contracts && <ColumnSecond>{data.contracts}</ColumnSecond>}
-                    {toggle.from && <ColumnSecond>{utility.truncateTxnAddress(data.from)}</ColumnSecond>}
-                    {toggle.to && <ColumnSecond>{utility.truncateTxnAddress(data.to)}</ColumnSecond>}
-                    {toggle.when && (
-                      <ColumnSecond>
-                        <Moment toNow>{data.createdOn}</Moment>
-                      </ColumnSecond>
-                    )}
+                    <BackgroundChangerTxhash>
+                      {toggle.from && <ColumnSecond>{utility.truncateTxnAddress(data.from)}</ColumnSecond>}
+                    </BackgroundChangerTxhash>
+                    <BackgroundChangerTo>
+                      {toggle.to && <ColumnSecond>{utility.truncateTxnAddress(data.to)}</ColumnSecond>}
+                    </BackgroundChangerTo>
+                    {toggle.when && <ColumnSecond>{data.createdOn}</ColumnSecond>}
                   </Row>
                 </Div>
               );
             })}
           </div>
-          {showPlaceHolder && (
+          {/* {showPlaceHolder && (
             <PlaceHolderContainer>
               <PlaceHolderImage src="/images/contracts.svg" />
               No Contracts Found
             </PlaceHolderContainer>
-          )}
+          )} */}
         </TableContainer>
         <PaginationDiv>
           <ReactPaginate
@@ -359,15 +370,32 @@ const TableContainer = styled.div`
   background-color: #ffffff;
   border-radius: 0.375rem;
   width: 100%;
-  height: 25rem;
+  height: 35rem;
   padding: 0.625rem;
   margin-top: 1.563rem;
-  overflow: auto;
+  overflow-y: hidden;
+  ::-webkit-scrollbar {
+    border: 0.5px solid rgb(204, 229, 243);
+    outline: none;
+    border-radius: 15px;
+    /* background: #00A58C; */
+  }
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 1px grey;
+    border-radius: 15px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #3163f0;
+    border-radius: 15px;
+    border: 4px solid transparent;
+    background-clip: content-box;
+  }
+
   @media (min-width: 300px) and (max-width: 767px) {
-    overflow: scroll;
+    overflow-y: hidden;
     width: 100%;
-    height: 381px;
-    overflow-y: auto;
+    height: 581px;
+
     position: relative;
     ::-webkit-scrollbar {
       border: 0.5px solid rgb(204, 229, 243);
@@ -442,15 +470,18 @@ const NewDiv = styled.div`
 const Transactions = styled.div`
   font-size: 1.5rem;
   font-weight: 600;
+  color: #191919;
   @media (min-width: 360px) and (max-width: 577px) {
     display: none;
   }
 `;
 const TransactionMedia = styled.div`
   display: none;
+
   @media (min-width: 360px) and (max-width: 577px) {
     font-size: 1.3rem;
     padding-bottom: 10px;
+    color: #191919;
     font-weight: 700;
     display: flex;
   }
@@ -531,8 +562,40 @@ const ColumnSecond = styled.div`
   font-weight: 500;
   color: #191919;
   width: 100%;
+  // background-repeat: no-repeat;
+  // background: #eaefff 0% 0% no-repeat padding-box;
   // max-width: 300px;
   min-width: 200px;
+`;
+
+const BackgroundChangerTxhash = styled.div`
+  width: 59%;
+  height: auto;
+  background-repeat: no-repeat;
+  background: #eaefff 0% 0% no-repeat padding-box;
+  border-radius: 6px;
+  opacity: 1;
+
+  @media (min-width: 300px) and (max-width: 1371px) {
+    margin-left: 0px;
+    background-repeat: no-repeat;
+    background: #eaefff 0% 0% no-repeat padding-box;
+    border-radius: 6px;
+    opacity: 1;
+  }
+`;
+const BackgroundChangerTo = styled.div`
+  width: 100%;
+  height: auto;
+  background-repeat: no-repeat;
+  background: #eaefff 0% 0% no-repeat padding-box;
+  border-radius: 6px;
+  opacity: 1;
+
+  @media (min-width: 300px) and (max-width: 1371px) {
+    // width: 100%;
+    // padding: 1rem;
+  }
 `;
 const DropDown = styled.div`
   background: #f5f6fd 0% 0% no-repeat padding-box;
@@ -549,6 +612,7 @@ const DropDown = styled.div`
   position: relative;
   @media (max-width: 375px) {
     margin-right: 14px;
+    height: auto;
   }
 `;
 const TransactionHash = styled.div`
@@ -561,7 +625,7 @@ const TransactionHash = styled.div`
     font-size: 0.575rem;
   }
   @media (max-width: 375px) {
-    font-size: 0.75rem;
+    font-size: 0.55rem;
     padding-top: 5px;
   }
 `;
@@ -596,20 +660,20 @@ const ToolTipIcon = styled.img`
   cursor: pointer;
   margin-left: 0.5rem;
 `;
-const PlaceHolderContainer = styled.div`
-  display: flex;
-  width: 100%;
-  height: 500px;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  opacity: 50%;
-  font-weight: 600;
-  font-size: 13px;
-`;
-const PlaceHolderImage = styled.img`
-  width: 50px;
-  -webkit-filter: grayscale(60%); /* Safari 6.0 - 9.0 */
-  filter: grayscale(60%);
-  margin-bottom: 20px;
-`;
+// const PlaceHolderContainer = styled.div`
+//   display: flex;
+//   width: 100%;
+//   height: 500px;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: center;
+//   opacity: 50%;
+//   font-weight: 600;
+//   font-size: 13px;
+// `;
+// const PlaceHolderImage = styled.img`
+//   width: 50px;
+//   -webkit-filter: grayscale(60%); /* Safari 6.0 - 9.   */
+//   filter: grayscale(60%);
+//   margin-bottom: 20px;
+// `;

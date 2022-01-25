@@ -435,7 +435,7 @@ const TransactionHash = styled.div`
   color: #416be0;
   margin-top: 4px;
   @media (min-width: 300px) and (max-width: 767px) {
-    font-size: 0.85rem;
+    font-size: 0.7rem;
     word-break: break-all;
   }
 `;

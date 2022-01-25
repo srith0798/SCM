@@ -7,10 +7,10 @@ import MobileSideMenu from "./mobileSidebar";
 
 import ContractDetails from "../Contract/contractDetails/contractDetails";
 import Contract from "../Contract/contract";
-import TransactionDetails from "../TransactionDetails/transactionDetails";
+import TransactionDetails from "../transactionDetails/transactionDetails";
 import TransactionList from "../transactions/transactionList";
-import Network from "../Network/network";
-import Analytics from "../Analytics/analytics";
+import Network from "../network/network";
+import Analytics from "../analytics/analytics";
 import About from "../aboutScreen/about";
 import Rules from "../alerting/rules";
 import AddAlert from "../alerting/addAlert";
@@ -19,6 +19,7 @@ import { sessionManager } from "../../managers/sessionManager";
 import UserService from "../../services/userService";
 import { history } from "../../managers/history";
 import ConnectWallets from "./connectWallets";
+
 //Replace Under Development with component once developed-
 const HomeComponent = (props) => {
   useEffect(() => {}, []);

@@ -6,6 +6,7 @@ import { sessionManager } from "../../managers/sessionManager";
 import WalletPopUp from "./walletPopUp";
 import Tooltip from "@mui/material/Tooltip";
 
+import Footer from "../dashboard/Footer";
 export default function About(props) {
   const [state, setState] = useState(true);
   return (
@@ -20,31 +21,19 @@ export default function About(props) {
                 </DetailBox>
               </Row>
               <DataBox>
-                Easily govern your smart contract deployment with end-to-end
-                lifecycle utility, empowering the entire on-chain critical
+                Easily govern your smart contract deployment with end-to-end lifecycle utility, empowering the entire on-chain critical
                 business logic.
               </DataBox>
-              <Tooltip
-                disableFocusListener
-                title="Click to get started with Xmartly"
-              >
+              <Tooltip disableFocusListener title="Click to get started with Xmartly">
                 <Button>
                   Add Your Smart Contract
-                  <img
-                    style={{ marginLeft: "0.375rem" }}
-                    alt=""
-                    src="/images/question-mark.svg"
-                  />
+                  <img style={{ marginLeft: "0.375rem" }} alt="" src="/images/question-mark.svg" />
                 </Button>
               </Tooltip>
             </LeftContainer>
             <RightContainer>
               <VideoBox>
-                <img
-                  style={{ width: "3.75rem", height: "3.75rem" }}
-                  alt=""
-                  src="/images/play.svg"
-                />
+                <img style={{ width: "3.75rem", height: "3.75rem" }} alt="" src="/images/play.svg" />
               </VideoBox>
             </RightContainer>
           </Container>
@@ -58,38 +47,27 @@ export default function About(props) {
               <IconContainer>
                 <img alt="" src="/images/manage contracts.svg" />
                 <Title>Manage Contracts</Title>
-                <SubTitle>
-                  You can add and manage any contract deployed on XDC Network.
-                </SubTitle>
+                <SubTitle>You can add and manage any contract deployed on XDC Network.</SubTitle>
               </IconContainer>
               <IconContainer>
                 <img alt="" src="/images/analyticsicon.svg" />
                 <Title>Analytics</Title>
-                <SubTitle>
-                  View analytics like number of transactions, gas fee etc for
-                  the added contract.
-                </SubTitle>
+                <SubTitle>View analytics like number of transactions, gas fee etc for the added contract.</SubTitle>
               </IconContainer>
               <IconContainer>
                 <img alt="" src="/images/set alerts.svg" />
                 <Title>Set Alerts</Title>
-                <SubTitle>
-                  You can set different types of alert for you contracts,
-                  without missing any information
-                </SubTitle>
+                <SubTitle>You can set different types of alert for you contracts, without missing any information</SubTitle>
               </IconContainer>
             </IconRow>
           </GreyContainer>
         </MainBoxContainer>
       </MainContainer>
+      <Footer />
 
       <div>
         {!sessionManager.getDataFromCookies("isLoggedIn") && (
-          <WalletPopUp
-            getCurrentUserDetails={props.getCurrentUserDetails}
-            click={() => setState(false)}
-            state={state}
-          />
+          <WalletPopUp getCurrentUserDetails={props.getCurrentUserDetails} click={() => setState(false)} state={state} />
         )}
       </div>
     </>
@@ -112,14 +90,14 @@ const MainBoxContainer = styled.div`
   @media (max-width: 375px) {
     padding: 16px;
   }
-  @media (max-width: 782px) {
-    padding-top: 20px;
+  @media (max-width: 768px) {
+    padding: 30px;
   }
   @media (max-width: 797px) {
     padding: 16px;
   }
   @media (max-width: 800px) {
-    padding: 16px;
+    padding: 32px;
   }
 `;
 const Container = styled.div`
@@ -138,7 +116,7 @@ const Container = styled.div`
     padding-left: 46px;
     height: 778px;
   }
-  @media (max-width: 375px) {
+  @media (min-width: 300px) and (max-width: 414px) {
     flex-direction: column;
     padding-right: 0px;
     padding-top: 0px;
@@ -156,7 +134,7 @@ const RightContainer = styled.div`
     padding: 4.375rem;
     height: 100%;
   }
-  @media (max-width: 375px) {
+  @media (min-width: 300px) and (max-width: 414px) {
     padding: 30px;
   }
 `;
@@ -173,7 +151,7 @@ const IconRow = styled.div`
   justify-content: space-between;
   max-width: 47.438rem;
   width: 100%;
-  @media (max-width: 375px) {
+  @media (min-width: 300px) and (max-width: 414px) {
     max-width: 47.438rem;
     flex-direction: column;
   }
@@ -182,8 +160,11 @@ const DataBox = styled.div`
   display: flex;
   width: 100%;
   font-size: 1.2rem;
-  @media (max-width: 375px) {
-    font-size: 12px;
+  @media (min-width: 300px) and (max-width: 414px) {
+    font-size: 14px;
+  }
+  @media (max-width: 768px) {
+    text-align: center;
   }
 `;
 const DetailBox = styled.div`
@@ -191,8 +172,12 @@ const DetailBox = styled.div`
   padding-bottom: 0.938rem;
   font-size: 2rem;
   font-weight: 600;
-  @media (max-width: 375px) {
+  @media (min-width: 300px) and (max-width: 414px) {
     font-size: 1.2rem;
+  }
+
+  @media (max-width: 768px) {
+    text-align: center;
   }
 `;
 
@@ -215,7 +200,7 @@ const Button = styled.button`
   @media (min-width: 340px) and (max-width: 793px) {
     margin-left: 112px;
   }
-  @media (max-width: 375px) {
+  @media (min-width: 300px) and (max-width: 414px) {
     margin-left: 30px;
     font-size: 0.6rem;
     height: 40px;
@@ -224,6 +209,10 @@ const Button = styled.button`
     margin-left: 30px;
     font-size: 0.6rem;
     height: 40px;
+  }
+
+  @media (max-width: 768px) {
+    display: none;
   }
 `;
 const VideoBox = styled.div`
@@ -236,7 +225,7 @@ const VideoBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  @media (max-width: 375px) {
+  @media (min-width: 300px) and (max-width: 414px) {
     height: 140px;
   }
 `;
@@ -246,7 +235,7 @@ const HeadingContainer = styled.div`
   font-weight: 600;
   color: #1f1f1f;
   padding: 3.75rem;
-  @media (max-width: 375px) {
+  @media (min-width: 300px) and (max-width: 414px) {
     font-size: 1rem;
     padding: 0rem;
     padding-top: 20px;
@@ -272,7 +261,7 @@ const SubTitle = styled.div`
   font-size: 1rem;
   color: #4b4b4b;
   margin-top: 0.438rem;
-  @media (max-width: 375px) {
+  @media (min-width: 300px) and (max-width: 414px) {
     font-size: 0.9rem;
   }
 `;
@@ -290,7 +279,7 @@ const IconContainer = styled.div`
   align-items: center;
   text-align: center;
   cursor: pointer;
-  @media (max-width: 375px) {
+  @media (min-width: 300px) and (max-width: 414px) {
     height: 232px;
   }
 `;
@@ -300,7 +289,7 @@ const SubHead = styled.div`
   text-align: center;
   width: 100%;
   padding-bottom: 1.25rem;
-  @media (max-width: 375px) {
+  @media (min-width: 300px) and (max-width: 414px) {
     font-size: 0.8rem;
   }
 `;
