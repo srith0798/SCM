@@ -5,12 +5,12 @@ import HeaderComponent from "./header";
 import DesktopSideMenu from "./sidebar";
 import MobileSideMenu from "./mobileSidebar";
 
-import ContractDetails from "../Contract/contractDetails/contractDetails";
-import Contract from "../Contract/contract";
-import TransactionDetails from "../TransactionDetails/transactionDetails";
+import ContractDetails from "../contract/contractDetails/contractDetails";
+import Contract from "../contract/contract";
+import TransactionDetails from "../transactionDetails/transactionDetails";
 import TransactionList from "../transactions/transactionList";
-import Network from "../Network/network";
-import Analytics from "../Analytics/analytics";
+import Network from "../network/network";
+import Analytics from "../analytics/analytics";
 import About from "../aboutScreen/about";
 import Rules from "../alerting/rules";
 import AddAlert from "../alerting/addAlert";
