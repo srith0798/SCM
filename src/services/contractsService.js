@@ -39,7 +39,7 @@ async function getContractsList(requestData) {
 }
 
 async function addContract(requestData) {
-  let url = process.env.REACT_APP_USER_CONTRACT_MICROSERVICE + httpConstants.API_END_POINT.ADD_CONTRACT;
+  let url = process.env.REACT_APP_USER_CONTRACT_MICROSERVICE  + httpConstants.API_END_POINT.ADD_CONTRACT;
   console.log("url----", url);
   return httpService(httpConstants.METHOD_TYPE.POST, getHeaders(), requestData, url)
     .then((response) => {
