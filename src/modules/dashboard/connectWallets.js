@@ -14,7 +14,10 @@ export default function ConnectWallets(props) {
           <DetailBox>
             You are not connected to XDCPay please connect XDCPay and start
             creating alerts for your contracts. If you are not having XDCPay
-            download it from here
+            download it from{" "}
+            <p>
+              <a href="mailto:someone@example.com">here</a>
+            </p>
           </DetailBox>
           <Button onClick={() => ConnectWallet()}>
             <img

@@ -492,7 +492,7 @@ const SearchBar = styled.input`
     margin-left: -1px;
     margin-right: 8px;
     // padding: 5px;
-    font-size: 13px;
+    font-size: 12px;
     // background-image: none;
   }
 `;

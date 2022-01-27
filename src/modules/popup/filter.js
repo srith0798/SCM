@@ -32,11 +32,11 @@ export default function Filter(props) {
               <Content>Network</Content>
               <DropDown>
                 Select Network
-                <img
-                  style={{ marginLeft: "208px", cursor: "pointer" }}
+                <ImgDropDown
+                  img
                   alt=""
                   src="/images/drop down.svg"
-                />
+                ></ImgDropDown>
               </DropDown>
             </NewContainerOne>
             <NewContainer style={{ paddingBottom: "20px" }}>
@@ -68,6 +68,12 @@ const ApplyButton = styled.div`
   margin-right: 15px;
   text-align: center;
   cursor: pointer;
+`;
+const ImgDropDown = styled.div`
+  margin-left: 208px;
+  cursor: pointer;
+  @media (min-width: 300px) and (max-width: 414px) {
+  }
 `;
 const CancelButton = styled.div`
   top: 432px;
@@ -173,6 +179,10 @@ const Add = styled.div`
   padding-top: 15px;
   padding-bottom: 40px;
   margin-left: -12px;
+  @media (min-width: 300px) and (max-width: 414px) {
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
 `;
 
 const Content = styled.div`
@@ -203,11 +213,18 @@ const NewContainer = styled.div`
   width: 100%;
   max-width: 3 00px;
   padding-bottom: 20px;
+  @media (min-width: 300px) and (max-width: 414px) {
+    flex-direction: column;
+  }
 `;
 const LastContainer = styled.div`
   display: flex;
   justify-content: end;
   max-width: 503px;
+  @media (min-width: 300px) and (max-width: 414px) {
+    justify-content: start;
+    margin-top: -18px;
+  }
 `;
 const NewContainerOne = styled.div`
   display: flex;
@@ -215,4 +232,7 @@ const NewContainerOne = styled.div`
   width: 100%;
   max-width: 515px;
   padding-bottom: 20px;
+  @media (min-width: 300px) and (max-width: 414px) {
+    flex-direction: column;
+  }
 `;

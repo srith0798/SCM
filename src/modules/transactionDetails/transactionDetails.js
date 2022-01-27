@@ -392,6 +392,12 @@ const Title = styled.div`
   @media (min-width: 340px) and (max-width: 768px) {
     align-items: left;
   }
+  @media (max-width: 414px) {
+    margin-left: -53px;
+  }
+  @media (max-width: 375px) {
+    margin-left: -41px;
+  }
 `;
 const FunctionContainer = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
