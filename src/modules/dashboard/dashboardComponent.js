@@ -19,6 +19,7 @@ import { sessionManager } from "../../managers/sessionManager";
 import UserService from "../../services/userService";
 import { history } from "../../managers/history";
 import ConnectWallets from "./connectWallets";
+
 //Replace Under Development with component once developed-
 const HomeComponent = (props) => {
   useEffect(() => {}, []);
