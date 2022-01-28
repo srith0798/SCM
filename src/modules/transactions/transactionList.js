@@ -41,6 +41,7 @@ export default function TransactionList(props) {
   const [address, setAddress] = React.useState([]);
   const [contracts, setContracts] = React.useState([]);
   const [selected, setSelected] = React.useState({});
+  const [page, setPage] = React.useState(1);
 
   const getContractNames = async (skip = 0, limit = 10) => {
     let userId = sessionManager.getDataFromCookies("userId");
@@ -74,15 +75,22 @@ export default function TransactionList(props) {
       setLoader(false);
 
       setAddress(response.transactionList);
-      // console.log("transactionlistResponse", response.transactionList[0]);
-
-      if (response.transactionList.length === 0) setShowPlaceHolder(true);
-      else setShowPlaceHolder(false);
+      let pageCount = response.totalCount;
+      let temp = parseInt(pageCount / 10);
+      console.log("temp", temp);
+      if(pageCount % 10 === 0){
+        setPage(parseInt(pageCount / 10))
+      }
+      else{
+        setPage(parseInt(pageCount / 10)+1)
+        console.log("setPage", page);
+      }
     } catch (e) {
       setShowPlaceHolder(true);
       setLoader(false);
     }
   };
+  console.log("contrac", address);
 
   const searchTransaction = async (searchValues, searchKeys) => {
     try {
@@ -111,7 +119,7 @@ export default function TransactionList(props) {
   useEffect(() => {
     getContractNames();
     getTransaction();
-  }, []);
+  }, [input]);
 
   const [isSetOpen, setOpen] = React.useState(false);
 
@@ -147,7 +155,7 @@ export default function TransactionList(props) {
     history.push("/dashboard/transaction-details");
   };
   const changePage = (value) => {
-    getTransaction(Math.ceil(value.selected * 5), 5);
+    getTransaction(Math.ceil(value.selected * 10), 10);
   };
   const [toggle, setToggle] = React.useState({
     transactionHash: true,
@@ -310,6 +318,7 @@ export default function TransactionList(props) {
           <div>
             {address.map((data, index) => {
               return (
+
                 <Div>
                   <Row>
                     <BackgroundChangerTxhash>
@@ -344,7 +353,7 @@ export default function TransactionList(props) {
           <ReactPaginate
             previousLabel={"<"}
             nextLabel={">"}
-            pageCount={3}
+            pageCount={page}
             breakLabel={"..."}
             initialPage={0}
             onPageChange={changePage}
