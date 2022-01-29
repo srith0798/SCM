@@ -10,9 +10,11 @@ import Tooltip from "@mui/material/Tooltip";
 import ContractsService from "../../services/contractsService";
 import { sessionManager } from "../../managers/sessionManager";
 import ShowLoader from "../../common/components/showLoader";
-
 import utility from "../../utility";
 import Filter from "../popup/filter";
+import Moment from "react-moment";
+import "moment-timezone";
+import ReactPaginate from "react-paginate";
 
 export default function TransactionList(props) {
   useEffect(() => {}, []);
@@ -41,7 +43,6 @@ export default function TransactionList(props) {
   const [selected, setSelected] = React.useState({});
 
   const getContractNames = async (skip = 0, limit = 10) => {
-    // let accountAddress = sessionManager.getDataFromCookies("accountAddress");
     let userId = sessionManager.getDataFromCookies("userId");
     try {
       const requestData = {
@@ -62,7 +63,7 @@ export default function TransactionList(props) {
     }
   };
 
-  const getTransaction = async (skip = 0, limit = 24) => {
+  const getTransaction = async (skip = 0, limit = 10) => {
     try {
       const requestData = {
         skip: skip,
@@ -73,15 +74,40 @@ export default function TransactionList(props) {
       setLoader(false);
 
       setAddress(response.transactionList);
-      console.log("transactionlistResponse", response.transactionList[0]);
+      // console.log("transactionlistResponse", response.transactionList[0]);
 
-      if (response.contractList.length === 0) setShowPlaceHolder(true);
+      if (response.transactionList.length === 0) setShowPlaceHolder(true);
+      else setShowPlaceHolder(false);
     } catch (e) {
       setShowPlaceHolder(true);
       setLoader(false);
     }
   };
 
+  const searchTransaction = async (searchValues, searchKeys) => {
+    try {
+      const requestData = {
+        searchValue: searchValues,
+        searchKeys: searchKeys,
+        skip: 0,
+        limit: 10,
+      };
+      setLoader(true);
+      const response = await ContractsService.getTransactionsList(requestData);
+      setLoader(false);
+      setAddress(response.transactionList);
+
+      if (response.transactionList.length === 0) setShowPlaceHolder(true);
+    } catch (e) {
+      setShowPlaceHolder(true);
+      setLoader(false);
+    }
+  };
+  const [input, setInput] = useState();
+  const search = (event) => {
+    setInput(event.target.value);
+    searchTransaction(event.target.value, ["hash"]);
+  };
   useEffect(() => {
     getContractNames();
     getTransaction();
@@ -120,7 +146,9 @@ export default function TransactionList(props) {
   const redirectToTransactionDetails = () => {
     history.push("/dashboard/transaction-details");
   };
-
+  const changePage = (value) => {
+    getTransaction(Math.ceil(value.selected * 5), 5);
+  };
   const [toggle, setToggle] = React.useState({
     transactionHash: true,
     status: true,
@@ -139,7 +167,11 @@ export default function TransactionList(props) {
         <TransactionBox>
           <NewDiv>
             <Transactions>Transactions</Transactions>
-            <SearchBar placeholder="Search by status or name" />
+            <SearchBar
+              placeholder="Search by status or name"
+              onChange={search}
+              value={input}
+            />
           </NewDiv>
 
           <IconContainer>
@@ -362,6 +394,19 @@ export default function TransactionList(props) {
             </PlaceHolderContainer>
           )} */}
         </TableContainer>
+        <PaginationDiv>
+          <ReactPaginate
+            previousLabel={"<"}
+            nextLabel={">"}
+            pageCount={3}
+            breakLabel={"..."}
+            initialPage={0}
+            onPageChange={changePage}
+            containerClassName={"paginationBttns"}
+            disabledClassName={"paginationDisabled"}
+            activeClassName={"paginationActive"}
+          />
+        </PaginationDiv>
       </MainContainer>
       <div>
         {false && (
@@ -387,28 +432,28 @@ const TableContainer = styled.div`
   padding: 0.625rem;
   margin-top: 1.563rem;
   overflow-y: hidden;
-      ::-webkit-scrollbar {
-      border: 0.5px solid rgb(204, 229, 243);
-      outline: none;
-      border-radius: 15px;
-      /* background: #00A58C; */
-    }
-    ::-webkit-scrollbar-track {
-      box-shadow: inset 0 0 1px grey;
-      border-radius: 15px;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: #3163f0;
-      border-radius: 15px;
-      border: 4px solid transparent;
-      background-clip: content-box;
-    }
+  ::-webkit-scrollbar {
+    border: 0.5px solid rgb(204, 229, 243);
+    outline: none;
+    border-radius: 15px;
+    /* background: #00A58C; */
   }
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 1px grey;
+    border-radius: 15px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #3163f0;
+    border-radius: 15px;
+    border: 4px solid transparent;
+    background-clip: content-box;
+  }
+
   @media (min-width: 300px) and (max-width: 767px) {
     overflow-y: hidden;
     width: 100%;
     height: 581px;
-    
+
     position: relative;
     ::-webkit-scrollbar {
       border: 0.5px solid rgb(204, 229, 243);
@@ -428,7 +473,36 @@ const TableContainer = styled.div`
     }
   }
 `;
-
+const PaginationDiv = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 15px;
+  margin-right: 0;
+  & .paginationBttns {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+  }
+  & .paginationBttns a {
+    padding: 7px;
+    font-size: 10px;
+    margin: 6px;
+    border-radius: 5px;
+    border: 1px solid lightgrey;
+    color: skyblue;
+    cursor: pointer;
+  }
+  & .paginationActive a {
+    color: white !important;
+    background: #3163f0;
+  }
+  & .next a {
+    border: none;
+  }
+  & .previous a {
+    border: none;
+  }
+`;
 const MainContainer = styled.div`
   background: #ecf0f7 0% 0% no-repeat padding-box;
   opacity: 1;

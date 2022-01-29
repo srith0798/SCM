@@ -8,7 +8,7 @@ export default function Sidebar(props) {
     history.push("/dashboard/about");
   };
   const redirectToTransaction = () => {
-    history.push("/dashboard/transaction-list");
+    history.push("/dashboard/transaction");
   };
   const redirectToContract = () => {
     history.push("/dashboard/contract");
@@ -20,7 +20,7 @@ export default function Sidebar(props) {
     history.push("/dashboard/analytics");
   };
   const redirectToAlerting = () => {
-    history.push("/dashboard/rules");
+    history.push("/dashboard/alerting");
   };
   const redirectToFaqs = () => {
     history.push("/");

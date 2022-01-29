@@ -22,6 +22,7 @@ const utility = {
   // isPasswordValid,
   isEmpty,
   isMenuActive,
+  parseResponse
 };
 export default utility;
 
@@ -29,6 +30,13 @@ export const dispatchAction = (type, data) => {
   return (dispatch) => dispatch({ type, data });
 };
 
+function parseResponse(promise) {
+  return promise
+    .then((data) => {
+      return [null, data];
+    })
+    .catch((err) => [err]);
+}
 function trackEvent(event, eventData) {
   // try {
   //     if (!eventData)
@@ -63,7 +71,7 @@ function apiSuccessToast(msg) {
 function truncateTxnAddress(address) {
   const start = address.slice(0, 7);
   const end = address.slice(-5);
-  console.log(start, end);
+  // console.log(start, end);
   return start + "..." + end;
 }
 

@@ -141,7 +141,7 @@ const XDCIcon = styled.img`
   opacity: 1;
 `;
 
-function Footer() {
+function FooterComponent() {
   return (
     <FooterContainer>
       <ColumnContainer>
@@ -195,4 +195,4 @@ function Footer() {
   );
 }
 
-export default Footer;
+export default FooterComponent;

@@ -4,6 +4,8 @@ import ContractsService from "../../services/contractsService";
 import Dialog from "@mui/material/Dialog";
 import utility from "../../utility";
 import { makeStyles } from "@material-ui/styles";
+import { sessionManager } from "../../managers/sessionManager";
+import ShowLoader from "../../common/components/showLoader";
 
 const useStyles = makeStyles(() => ({
   dialogBox: {
@@ -17,36 +19,38 @@ export default function AddContract(props) {
   const [checkBox, setCheckBox] = useState(false);
   const [address, setAddress] = React.useState("");
   const [verifyAddress, setVerifyAddress] = React.useState("");
+  const [loader ,setLoader] = React.useState(false)
 
   const checkAddress = async () => {
-    try {
-      const response = await ContractsService.checkAddress(address);
-      if (response) setVerifyAddress(address);
-    } catch (e) {
-      if (e === "Address already Exists") utility.apiFailureToast(e);
-      console.log(e);
-      utility.apiFailureToast(e);
-    }
+      setLoader(true)
+      const [error] = await utility.parseResponse(ContractsService.checkAddress(address));
+      setLoader(false)
+      if(error){
+        utility.apiFailureToast(error);
+        return;
+      }
+      setVerifyAddress(address);
   };
 
   const addContract = async () => {
-    try {
-      let requestData = {
+      let userId = sessionManager.getDataFromCookies("userId")
+         let requestData = {
         contractAddress: address,
+        userId:userId
       };
-      const response = await ContractsService.addContract(requestData);
-      if (response.address && response.address === address) {
+      setLoader(true)
+      const [error ,response] = await utility.parseResponse(ContractsService.addContract(requestData));
+      setLoader(false)
+      if(error){
+        utility.apiFailureToast(error);
+        return;
+      }
+      if (response) {
         utility.apiSuccessToast("Contract added");
         props.click();
-        props.reloadData();
-      } else {
-        utility.apiFailureToast("Contract not found");
-      }
-    } catch (e) {
-      if (e === "Address already Exists") utility.apiFailureToast(e);
-      console.log(e);
-      utility.apiFailureToast(e);
-    }
+        props.getContractList();
+        // props.reloadData();
+      } 
   };
 
   const handleEnterKey = (e) => {
@@ -56,6 +60,7 @@ export default function AddContract(props) {
   };
   return (
     <div>
+      <ShowLoader state={loader} top={"33%"} />
       <Dialog classes={{ paper: classes.dialogBox }} open>
         <MainContainer>
           <Container>

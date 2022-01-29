@@ -5,8 +5,9 @@ import { Row } from "simple-flexbox";
 import { sessionManager } from "../../managers/sessionManager";
 import WalletPopUp from "./walletPopUp";
 import Tooltip from "@mui/material/Tooltip";
-import Footer from "../dashboard/Footer";
+// import Footer from "../dashboard/footerComponent";
 import ReactPlayer from "react-player";
+import FooterComponent from "../dashboard/footerComponent";
 
 export default function About(props) {
   const [state, setState] = useState(true);
@@ -95,7 +96,7 @@ export default function About(props) {
           </GreyContainer>
         </MainBoxContainer>
       </MainContainer>
-      <Footer />
+      <FooterComponent />
 
       <div>
         {!sessionManager.getDataFromCookies("isLoggedIn") && (
@@ -129,11 +130,8 @@ const MainBoxContainer = styled.div`
   @media (max-width: 768px) {
     padding: 30px;
   }
-  @media (max-width: 797px) {
+  @media (min-width: 768px) and (max-width: 1024px) {
     padding: 16px;
-  }
-  @media (max-width: 800px) {
-    padding: 32px;
   }
 `;
 const Container = styled.div`
@@ -166,8 +164,8 @@ const Container = styled.div`
 const RightContainer = styled.div`
   width: 100%;
   padding: 4.375rem;
-  @media (min-width: 340px) and (max-width: 793px) {
-    padding: 5.375rem;
+  @media (min-width: 340px) and (max-width: 803px) {
+    padding: 0.375rem 5rem 7rem 5rem;
     height: 100%;
   }
   @media (min-width: 300px) and (max-width: 414px) {
@@ -177,6 +175,9 @@ const RightContainer = styled.div`
 const LeftContainer = styled.div`
   width: 100%;
   padding: 2.5rem;
+  // @media (min-width: 768px) and (max-width: 1024px) {
+  //   padding: 1rem;
+  // }
 `;
 const Span = styled.span`
   color: #0089ff;
