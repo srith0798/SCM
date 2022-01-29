@@ -176,7 +176,7 @@ async function removeTags(requestData) {
 }
 async function addNetworks(requestData) {
   // let url = process.env.REACT_APP_USER_CONTRACT_MICROSERVICE + httpConstants.API_END_POINT.ADD_NETWORK;
-  let url = `http://localhost:3001/add-network`;
+  let url = `http://xdc-scm-elb-dev-18733672.us-east-1.elb.amazonaws.com:3002/add-network`;
 
   console.log("url----", url);
   return httpService(httpConstants.METHOD_TYPE.POST, getHeaders(), requestData, url)
@@ -191,7 +191,7 @@ async function addNetworks(requestData) {
 }
 async function getNetworksLists(requestData) {
   // let url = process.env.REACT_APP_USER_CONTRACT_MICROSERVICE + httpConstants.API_END_POINT.GET_NETWORK_LIST;
-  let url = `http://localhost:3001/get-network`;
+  let url = `http://xdc-scm-elb-dev-18733672.us-east-1.elb.amazonaws.com:3002/get-network`;
 
   console.log("url----", url);
   return httpService(httpConstants.METHOD_TYPE.POST, getHeaders(), requestData, url)

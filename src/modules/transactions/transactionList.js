@@ -17,20 +17,23 @@ import "moment-timezone";
 import ReactPaginate from "react-paginate";
 
 export default function TransactionList(props) {
-  useEffect(() => {}, []);
+  
   const [state, setState] = useState(true);
+  const [filterData, setFilterData] = React.useState(1);
   const [open, isOpen] = useState(false);
   const [filterPopupOpen, setfilterPopupOpen] = useState(false);
+
   const handleClickOpen = () => {
     isOpen(true);
   };
-
+  
   const handleClose = () => {
     isOpen(false);
   };
 
-  const filterPopupClose = () => {
+  const filterPopupClose = (data) => {
     setfilterPopupOpen(false);
+    setFilterData(data);
   };
 
   const [TxHashToolTip, setTxHashToolTip] = React.useState(false);
@@ -39,9 +42,11 @@ export default function TransactionList(props) {
   const [, setShowPlaceHolder] = React.useState(false);
   const [loader, setLoader] = React.useState(false);
   const [address, setAddress] = React.useState([]);
+  const [searchRow, setSearchRow] = React.useState([]);
   const [contracts, setContracts] = React.useState([]);
   const [selected, setSelected] = React.useState({});
   const [page, setPage] = React.useState(1);
+  const [valueCheck, setValueCheck] = React.useState(0);
 
   const getContractNames = async (skip = 0, limit = 10) => {
     let userId = sessionManager.getDataFromCookies("userId");
@@ -73,25 +78,33 @@ export default function TransactionList(props) {
       setLoader(true);
       const response = await ContractsService.getTransactionsList(requestData);
       setLoader(false);
-
-      setAddress(response.transactionList);
+      if(filterData === 1) {
+        setAddress(response.transactionList);
+      }
+      else if(filterData === 2){
+        const filteredRows = response.transactionList.filter((row) => {
+          return row.status === true;
+        });
+        setAddress(filteredRows);
+      }
+      else if(filterData === 3){
+        const filteredRows = response.transactionList.filter((row) => {
+          return row.status === false;
+        });
+        setAddress(filteredRows);
+      }
       let pageCount = response.totalCount;
-      let temp = parseInt(pageCount / 10);
-      console.log("temp", temp);
       if(pageCount % 10 === 0){
         setPage(parseInt(pageCount / 10))
       }
       else{
         setPage(parseInt(pageCount / 10)+1)
-        console.log("setPage", page);
       }
     } catch (e) {
       setShowPlaceHolder(true);
       setLoader(false);
     }
   };
-  console.log("contrac", address);
-
   const searchTransaction = async (searchValues, searchKeys) => {
     try {
       const requestData = {
@@ -103,7 +116,7 @@ export default function TransactionList(props) {
       setLoader(true);
       const response = await ContractsService.getTransactionsList(requestData);
       setLoader(false);
-      setAddress(response.transactionList);
+      setSearchRow(response.transactionList);
 
       if (response.transactionList.length === 0) setShowPlaceHolder(true);
     } catch (e) {
@@ -111,18 +124,17 @@ export default function TransactionList(props) {
       setLoader(false);
     }
   };
-  const [input, setInput] = useState();
+  const [input, setInput] = useState('');
   const search = (event) => {
     setInput(event.target.value);
     searchTransaction(event.target.value, ["hash"]);
   };
   useEffect(() => {
     getContractNames();
-    getTransaction();
-  }, [input]);
+    getTransaction(Math.ceil(valueCheck* 10), 10);
+  }, [filterData]);
 
   const [isSetOpen, setOpen] = React.useState(false);
-
   const handleClick = (e) => {
     setOpen((prev) => !prev);
   };
@@ -130,6 +142,7 @@ export default function TransactionList(props) {
   const handleClickAway = () => {
     setOpen(false);
   };
+
 
   const styles = {
     position: "absolute",
@@ -155,6 +168,7 @@ export default function TransactionList(props) {
     history.push("/dashboard/transaction-details");
   };
   const changePage = (value) => {
+    setValueCheck(value.selected);
     getTransaction(Math.ceil(value.selected * 10), 10);
   };
   const [toggle, setToggle] = React.useState({
@@ -190,7 +204,7 @@ export default function TransactionList(props) {
                 // onClick={getTransaction}
               />
             </Tooltip>
-            {filterPopupOpen && <Filter click={filterPopupClose} />}
+            {filterPopupOpen && <Filter click={filterPopupClose}/>}
             <Tooltip disableFocusListener title="Filter">
               <Icons src="/images/filter.svg" onClick={setfilterPopupOpen} />
             </Tooltip>
@@ -316,7 +330,7 @@ export default function TransactionList(props) {
             </Row>
           </Div>
           <div>
-            {address.map((data, index) => {
+            {(input === '' ? address : searchRow).map((data, index) => {
               return (
 
                 <Div>
