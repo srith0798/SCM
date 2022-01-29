@@ -12,7 +12,6 @@ import { sessionManager } from "../../managers/sessionManager";
 import ShowLoader from "../../common/components/showLoader";
 import utility from "../../utility";
 import Filter from "../popup/filter";
-import Moment from "react-moment";
 import "moment-timezone";
 import ReactPaginate from "react-paginate";
 
@@ -144,7 +143,7 @@ export default function TransactionList(props) {
     color: "#191919",
   };
   const redirectToTransactionDetails = () => {
-    history.push("/dashboard/transaction-details");
+    history.push("/dashboard/Transaction-details");
   };
   const changePage = (value) => {
     getTransaction(Math.ceil(value.selected * 5), 5);

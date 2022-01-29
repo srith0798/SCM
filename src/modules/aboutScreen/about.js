@@ -5,7 +5,6 @@ import { Row } from "simple-flexbox";
 import { sessionManager } from "../../managers/sessionManager";
 import WalletPopUp from "./walletPopUp";
 import Tooltip from "@mui/material/Tooltip";
-// import Footer from "../dashboard/footerComponent";
 import ReactPlayer from "react-player";
 import FooterComponent from "../dashboard/footerComponent";
 

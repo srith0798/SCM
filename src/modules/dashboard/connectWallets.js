@@ -1,7 +1,7 @@
 import React from "react";
 import "react-tabs/style/react-tabs.css";
 import styled from "styled-components";
-import { useHistory, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 export default function ConnectWallets(props) {
   const location = useLocation();

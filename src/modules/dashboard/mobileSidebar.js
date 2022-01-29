@@ -5,23 +5,23 @@ import { history } from "../../managers/history";
 export default function Sidebar(props) {
   const [open, setOpen] = useState(false);
   const redirectToTransaction = () => {
-    history.push("/dashboard/transaction-list");
+    history.push("/dashboard/Transactions");
     setOpen(false);
   };
   const redirectToContract = () => {
-    history.push("/dashboard/contract");
+    history.push("/dashboard/Contracts");
     setOpen(false);
   };
   const redirectToNetwork = () => {
-    history.push("/dashboard/network");
+    history.push("/dashboard/Networks");
     setOpen(false);
   };
   const redirectToAnalytics = () => {
-    history.push("/dashboard/analytics");
+    history.push("/dashboard/Analytics");
     setOpen(false);
   };
   const redirectToAlerting = () => {
-    history.push("/dashboard/rules");
+    history.push("/dashboard/Alerting/rules");
   };
   const redirectToLogout = () => {
     history.push("/");

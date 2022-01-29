@@ -8,19 +8,19 @@ export default function Sidebar(props) {
     history.push("/dashboard/about");
   };
   const redirectToTransaction = () => {
-    history.push("/dashboard/transaction");
+    history.push("/dashboard/Transactions");
   };
   const redirectToContract = () => {
-    history.push("/dashboard/contract");
+    history.push("/dashboard/Contracts");
   };
   const redirectToNetwork = () => {
-    history.push("/dashboard/network");
+    history.push("/dashboard/Networks");
   };
   const redirectToAnalytics = () => {
-    history.push("/dashboard/analytics");
+    history.push("/dashboard/Analytics");
   };
   const redirectToAlerting = () => {
-    history.push("/dashboard/alerting");
+    history.push("/dashboard/Alerting/rules");
   };
   const redirectToFaqs = () => {
     history.push("/");
@@ -82,7 +82,7 @@ export default function Sidebar(props) {
       </Wrapper>
       <Wrapper
         style={{
-          backgroundColor: utility.isMenuActive("transaction") ? "#1d3c93" : "",
+          backgroundColor: utility.isMenuActive("Transaction") ? "#1d3c93" : "",
         }}
         onClick={redirectToTransaction}
         onMouseOver={() => changeSourceForIcons("Transaction")}
@@ -93,7 +93,7 @@ export default function Sidebar(props) {
       </Wrapper>
       <Wrapper
         style={{
-          backgroundColor: utility.isMenuActive("contract") ? "#1d3c93" : "",
+          backgroundColor: utility.isMenuActive("Contract") ? "#1d3c93" : "",
         }}
         onClick={redirectToContract}
         onMouseOver={() => changeSourceForIcons("Contracts")}
@@ -104,7 +104,7 @@ export default function Sidebar(props) {
       </Wrapper>
       <Wrapper
         style={{
-          backgroundColor: utility.isMenuActive("network") ? "#1d3c93" : "",
+          backgroundColor: utility.isMenuActive("Network") ? "#1d3c93" : "",
         }}
         onClick={redirectToNetwork}
         onMouseOver={() => changeSourceForIcons("Networks")}
@@ -115,7 +115,7 @@ export default function Sidebar(props) {
       </Wrapper>
       <Wrapper
         style={{
-          backgroundColor: utility.isMenuActive("analytics") ? "#1d3c93" : "",
+          backgroundColor: utility.isMenuActive("Analytics") ? "#1d3c93" : "",
         }}
         onClick={redirectToAnalytics}
         onMouseOver={() => changeSourceForIcons("Analytics")}
