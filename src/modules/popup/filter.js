@@ -6,6 +6,7 @@ import { makeStyles } from "@material-ui/styles";
 const useStyles = makeStyles(() => ({
   dialogBox: {
     width: "100% !important",
+    bottom: 20,
   },
 }));
 
@@ -68,6 +69,10 @@ const ApplyButton = styled.div`
   margin-right: 15px;
   text-align: center;
   cursor: pointer;
+
+  @media (min-width: 300px) and (max-width: 414px) {
+    margin-left: 67px;
+  }
 `;
 const ImgDropDown = styled.div`
   margin-left: 208px;
@@ -142,6 +147,9 @@ const DropDown = styled.div`
   height: 34px;
   padding-top: 5px;
   position: relative;
+  @media (min-width: 300px) and (max-width: 414px) {
+    width: 290px;
+  }
 `;
 const DropDownTwo = styled.div`
   background: #f5f6fd 0% 0% no-repeat padding-box;
@@ -189,7 +197,7 @@ const Content = styled.div`
   font-size: 1rem;
   font-weight: 600;
   color: #303134;
-  margin-top: 0.625rem;
+  margin-bottom: 8px;
 `;
 const LastRowBox = styled.div`
   display: flex;
@@ -206,6 +214,9 @@ const RowBoxOne = styled.div`
 `;
 const RowContainer = styled.div`
   padding: 18px 14px 12px 12px;
+  @media (min-width: 300px) and (max-width: 414px) {
+    padding: 10px 14px 12px 12px;
+  }
 `;
 const NewContainer = styled.div`
   display: flex;

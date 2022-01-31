@@ -74,6 +74,11 @@ const Div = styled.div`
   text-align: center;
   justify-content: center;
   font-size: 25px;
+  @media (min-width: 340px) and (max-width: 768px) {
+    width: 100%;
+
+    height: 100%;
+  }
 `;
 
 const MainContainer = styled.div`
@@ -83,9 +88,9 @@ const MainContainer = styled.div`
   padding: 3.5rem;
   height: 100vh;
   @media (min-width: 340px) and (max-width: 768px) {
-   padding: 38px 20px 20px 20px;
-   height: 100vh;
-
+    padding: 38px 20px 20px 20px;
+    height: 100vh;
+  }
 `;
 const Button = styled.button`
   background-repeat: no-repeat;
@@ -110,4 +115,7 @@ const DetailBox = styled.div`
   padding-top: 15px;
 
   width: 422px;
+  @media (min-width: 340px) and (max-width: 768px) {
+    width: 100%;
+  }
 `;
