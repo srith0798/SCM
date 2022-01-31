@@ -78,21 +78,7 @@ export default function TransactionList(props) {
       setLoader(true);
       const response = await ContractsService.getTransactionsList(requestData);
       setLoader(false);
-      if(filterData === 1) {
-        setAddress(response.transactionList);
-      }
-      else if(filterData === 2){
-        const filteredRows = response.transactionList.filter((row) => {
-          return row.status === true;
-        });
-        setAddress(filteredRows);
-      }
-      else if(filterData === 3){
-        const filteredRows = response.transactionList.filter((row) => {
-          return row.status === false;
-        });
-        setAddress(filteredRows);
-      }
+      setAddress(response.transactionList);
       let pageCount = response.totalCount;
       if(pageCount % 10 === 0){
         setPage(parseInt(pageCount / 10))
@@ -131,8 +117,8 @@ export default function TransactionList(props) {
   };
   useEffect(() => {
     getContractNames();
-    getTransaction(Math.ceil(valueCheck* 10), 10);
-  }, [filterData]);
+    getTransaction();
+  }, []);
 
   const [isSetOpen, setOpen] = React.useState(false);
   const handleClick = (e) => {
