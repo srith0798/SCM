@@ -36,7 +36,7 @@ export default function TransactionList(props) {
   const [TxHashToolTip, setTxHashToolTip] = React.useState(false);
   const [statusToolTip, setstatusToolTip] = React.useState(false);
   const [functionToolTip, setfunctionToolTip] = React.useState(false);
-  const [, setShowPlaceHolder] = React.useState(false);
+  const [showPlaceHolder, setShowPlaceHolder] = React.useState(false);
   const [loader, setLoader] = React.useState(false);
   const [address, setAddress] = React.useState([]);
   const [contracts, setContracts] = React.useState([]);
@@ -147,7 +147,7 @@ export default function TransactionList(props) {
     history.push("/dashboard/transaction-details");
   };
   const changePage = (value) => {
-    getTransaction(Math.ceil(value.selected * 5), 5);
+    getTransaction(Math.ceil(value.selected * 10), 10);
   };
   const [toggle, setToggle] = React.useState({
     transactionHash: true,
@@ -176,11 +176,7 @@ export default function TransactionList(props) {
               <Icons src="/images/settings.svg" onClick={handleClickOpen} />
             </Tooltip>
             <Tooltip disableFocusListener title="Refresh">
-              <Icons
-                onClick={() => getTransaction()}
-                src="/images/refresh.svg"
-                // onClick={getTransaction}
-              />
+              <Icons onClick={() => getTransaction()} src="/images/refresh.svg" />
             </Tooltip>
             {filterPopupOpen && <Filter click={filterPopupClose} />}
             <Tooltip disableFocusListener title="Filter">
@@ -327,24 +323,29 @@ export default function TransactionList(props) {
                     <BackgroundChangerTo>
                       {toggle.to && <ColumnSecond>{utility.truncateTxnAddress(data.to)}</ColumnSecond>}
                     </BackgroundChangerTo>
-                    {toggle.when && <ColumnSecond>{data.createdOn}</ColumnSecond>}
+                    {toggle.when && (
+                      <ColumnSecond>
+                        {" "}
+                        <Moment toNow>{data.createdOn}</Moment>
+                      </ColumnSecond>
+                    )}
                   </Row>
                 </Div>
               );
             })}
           </div>
-          {/* {showPlaceHolder && (
+          {showPlaceHolder && (
             <PlaceHolderContainer>
               <PlaceHolderImage src="/images/contracts.svg" />
               No Contracts Found
             </PlaceHolderContainer>
-          )} */}
+          )}
         </TableContainer>
         <PaginationDiv>
           <ReactPaginate
             previousLabel={"<"}
             nextLabel={">"}
-            pageCount={3}
+            pageCount={2}
             breakLabel={"..."}
             initialPage={0}
             onPageChange={changePage}
@@ -660,20 +661,20 @@ const ToolTipIcon = styled.img`
   cursor: pointer;
   margin-left: 0.5rem;
 `;
-// const PlaceHolderContainer = styled.div`
-//   display: flex;
-//   width: 100%;
-//   height: 500px;
-//   flex-direction: column;
-//   justify-content: center;
-//   align-items: center;
-//   opacity: 50%;
-//   font-weight: 600;
-//   font-size: 13px;
-// `;
-// const PlaceHolderImage = styled.img`
-//   width: 50px;
-//   -webkit-filter: grayscale(60%); /* Safari 6.0 - 9.   */
-//   filter: grayscale(60%);
-//   margin-bottom: 20px;
-// `;
+const PlaceHolderContainer = styled.div`
+  display: flex;
+  width: 100%;
+  height: 500px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 50%;
+  font-weight: 600;
+  font-size: 13px;
+`;
+const PlaceHolderImage = styled.img`
+  width: 50px;
+  -webkit-filter: grayscale(60%); /* Safari 6.0 - 9.   */
+  filter: grayscale(60%);
+  margin-bottom: 20px;
+`;

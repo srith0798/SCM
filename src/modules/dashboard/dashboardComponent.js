@@ -4,7 +4,6 @@ import Utility from "../../utility";
 import HeaderComponent from "./header";
 import DesktopSideMenu from "./sidebar";
 import MobileSideMenu from "./mobileSidebar";
-
 import ContractDetails from "../Contract/contractDetails/contractDetails";
 import Contract from "../Contract/contract";
 import TransactionDetails from "../transactionDetails/transactionDetails";
