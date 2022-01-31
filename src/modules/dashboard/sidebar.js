@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { history } from "../../managers/history";
 import utility from "../../utility";
+import { sessionManager } from "../../managers/sessionManager";
 
 export default function Sidebar(props) {
   const redirectToAbout = () => {
@@ -25,8 +26,14 @@ export default function Sidebar(props) {
   const redirectToFaqs = () => {
     history.push("/");
   };
+
   const redirectToLogout = () => {
-    history.push("/");
+    sessionManager.removeDataFromCookies("isLoggedIn");
+    sessionManager.removeDataFromCookies("accountAddress");
+    sessionManager.removeDataFromCookies("userId");
+    sessionManager.removeDataFromCookies("username");
+    sessionManager.removeDataFromCookies("profilePicture");
+    window.location.href = "http://localhost:3000/dashboard/about";
   };
 
   const [aboutIcon, setAboutIcon] = React.useState(

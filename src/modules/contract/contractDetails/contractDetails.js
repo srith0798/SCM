@@ -130,13 +130,13 @@ export default function ContractDetails(props) {
     setAddTag(false);
     getContractById();
   };
-  const [removeTagImage, setRemoveTagImage] = useState();
-  const [removeTag, setRemoveTag] = useState(false);
-  const [tagStore, setTagStore] = useState("");
-  const removeTagOpen = (tag) => {
-    setRemoveTag(true);
-    setTagStore(tag);
-  };
+  // const [removeTagImage, setRemoveTagImage] = useState();
+  // const [removeTag, setRemoveTag] = useState(false);
+  // const [tagStore, setTagStore] = useState("");
+  // const removeTagOpen = (tag) => {
+  //   setRemoveTag(true);
+  //   setTagStore(tag);
+  // };
   return (
     <>
       <ShowLoader state={loader} />
@@ -432,7 +432,7 @@ const FinanceTag = styled.div`
 `;
 const ImageTag = styled.div`
   background-image: ${(props) =>
-    props.removeTagImage == props.index
+    props.removeTagImage === props.index
       ? `url("/images/close.svg")`
       : `url("/images/Tag.svg")`};
 
