@@ -108,6 +108,7 @@ export default function TransactionList(props) {
       setLoader(false);
     }
   };
+
   const [input, setInput] = useState("");
   const search = (event) => {
     setInput(event.target.value);
@@ -163,6 +164,40 @@ export default function TransactionList(props) {
     to: true,
     when: true,
   });
+  /////searchFilter
+
+  const [select, setSelect] = React.useState(1);
+  console.log(select, "select");
+  const [fromInput, setFromInput] = React.useState([]);
+
+  const [toInput, setToInput] = React.useState([]);
+  const [filterResponse, setFilterResponse] = React.useState({});
+
+  const filterSearch = async () => {
+    try {
+      if (select === 2 || select === 3) {
+        setFilterResponse({
+          skip: 0,
+          limit: 10,
+          // from: fromInput,
+          // to: toInput,
+          status: select === 2 ? true : select === 3 ? false : "",
+        });
+      } else {
+        setFilterResponse({
+          skip: 0,
+          limit: 10,
+        });
+      }
+
+      const response = await ContractsService.getTransactionsList(filterResponse);
+
+      setAddress(response.transactionList);
+      console.log("response", response.transactionList);
+    } catch (e) {
+      console.log(e);
+    }
+  };
   return (
     <>
       <MainContainer>
@@ -183,7 +218,18 @@ export default function TransactionList(props) {
             <Tooltip disableFocusListener title="Refresh">
               <Icons onClick={() => getTransaction()} src="/images/refresh.svg" />
             </Tooltip>
-            {filterPopupOpen && <Filter click={filterPopupClose} />}
+            {filterPopupOpen && (
+              <Filter
+                click={filterPopupClose}
+                select={select}
+                filterSearch={filterSearch}
+                setSelect={setSelect}
+                fromInput={fromInput}
+                setFromInput={setFromInput}
+                toInput={toInput}
+                setToInput={setToInput}
+              />
+            )}
             <Tooltip disableFocusListener title="Filter">
               <Icons src="/images/filter.svg" onClick={setfilterPopupOpen} />
             </Tooltip>
@@ -284,7 +330,7 @@ export default function TransactionList(props) {
               )}
               {toggle.from && (
                 <ColumnOne>
-                  Form
+                  From
                   <Tooltip disableFocusListener title="Sender’s account">
                     <ToolTipIcon src="/images/tool-tip.svg" />
                   </Tooltip>

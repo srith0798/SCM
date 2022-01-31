@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Dialog from "@mui/material/Dialog";
 import { makeStyles } from "@material-ui/styles";
-
+import ContractsService from "../../services/contractsService";
 const useStyles = makeStyles(() => ({
   dialogBox: {
     width: "100% !important",
@@ -11,8 +11,12 @@ const useStyles = makeStyles(() => ({
 
 export default function Filter(props) {
   const classes = useStyles();
-  const [select, setSelect] = React.useState(1);
-  
+
+  const Close = () => {
+    props.click();
+    // props.filterSearch();
+  };
+
   return (
     <div>
       <Dialog classes={{ paper: classes.dialogBox }} open={true}>
@@ -24,32 +28,41 @@ export default function Filter(props) {
             <NewContainer>
               <Content>Status</Content>
               <RowBoxOne>
-                <ButtonA tag={select} onClick={()=> setSelect(1)}>All</ButtonA>
-                <ButtonB tag={select} onClick={()=> setSelect(2)}>Success</ButtonB>
-                <ButtonC tag={select} onClick={()=> setSelect(3)}>Fail</ButtonC>
+                <ButtonA tag={props.select} onClick={() => props.setSelect(1)}>
+                  All
+                </ButtonA>
+                <ButtonB tag={props.select} onClick={() => props.setSelect(2)}>
+                  Success
+                </ButtonB>
+                <ButtonC tag={props.select} onClick={() => props.setSelect(3)}>
+                  Fail
+                </ButtonC>
               </RowBoxOne>
             </NewContainer>
             <NewContainerOne>
               <Content>Network</Content>
-              <DropDown>
-                Select Network
-                <img
-                  style={{ marginLeft: "208px", cursor: "pointer" }}
-                  alt=""
-                  src="/images/drop down.svg"
-                />
-              </DropDown>
+
+              <select className="select-filter">
+                <option className="options-select" value="network">
+                  https://rpc.xinfin.network
+                </option>
+                <option className="options-select" value="network">
+                  https://rpc.apothem.network
+                </option>
+              </select>
             </NewContainerOne>
+
             <NewContainer style={{ paddingBottom: "20px" }}>
               <Content>Date Range</Content>
-              <LastRowBox>
-                <DropDownTwo>From</DropDownTwo>
-                <DropDownTwo>To</DropDownTwo>
-              </LastRowBox>
+
+              <InputDiv>
+                <Input placeholder="From" onChange={(e) => props.setFromInput([e.target.value])} value={props.fromInput} />
+                <Input placeholder="To" onChange={(e) => props.setToInput([e.target.value])} value={props.toInput} />
+              </InputDiv>
             </NewContainer>
             <LastContainer>
-              <ApplyButton onClick={()=> props.click(select)}>Apply</ApplyButton>
-              <CancelButton onClick={props.click}>Cancel</CancelButton>
+              <ApplyButton onClick={() => props.filterSearch()}>Apply</ApplyButton>
+              <CancelButton onClick={() => Close()}>Cancel</CancelButton>
             </LastContainer>
           </Container>
         </MainContainer>
@@ -90,12 +103,12 @@ const ButtonA = styled.div`
   width: 38px;
   height: 34px;
   background: #ffffff 0% 0% no-repeat padding-box;
-  border: ${(props) => (props.tag === 1 ? "1px solid #3163f0": "1px solid #d9d9d9")};
+  border: ${(props) => (props.tag === 1 ? "1px solid #3163f0" : "1px solid #d9d9d9")};
   border-radius: 6px;
   padding-top: 4px;
   margin-right: 20px;
   text-align: center;
-  color: ${(props) => (props.tag === 1 ? "#3062ef": "#303134")};
+  color: ${(props) => (props.tag === 1 ? "#3062ef" : "#303134")};
   text-size: 14px;
   cursor: pointer;
 `;
@@ -104,44 +117,31 @@ const ButtonB = styled.div`
   text-size: 14px;
   height: 34px;
   background: #ffffff 0% 0% no-repeat padding-box;
-  border: ${(props) => (props.tag === 2 ? "1px solid #3163f0": "1px solid #d9d9d9")};
+  border: ${(props) => (props.tag === 2 ? "1px solid #3163f0" : "1px solid #d9d9d9")};
   border-radius: 6px;
   opacity: 1;
   padding-top: 4px;
   margin-right: 20px;
   text-align: center;
   cursor: pointer;
-  color: ${(props) => (props.tag === 2 ? "#3062ef": "#303134")};
+  color: ${(props) => (props.tag === 2 ? "#3062ef" : "#303134")};
 `;
 const ButtonC = styled.div`
   width: 78px;
   height: 34px;
   background: #ffffff 0% 0% no-repeat padding-box;
-  border: ${(props) => (props.tag === 3 ? "1px solid #3163f0": "1px solid #d9d9d9")};
-  /* border: 1px solid #d9d9d9; */
+  border: ${(props) => (props.tag === 3 ? "1px solid #3163f0" : "1px solid #d9d9d9")};
+
   border-radius: 6px;
   opacity: 1;
   padding-top: 4px;
   text-align: center;
   text-size: 14px;
   cursor: pointer;
-  color: ${(props) => (props.tag === 3 ? "#3062ef": "#303134")};
+  color: ${(props) => (props.tag === 3 ? "#3062ef" : "#303134")};
 `;
-const DropDown = styled.div`
-  background: #f5f6fd 0% 0% no-repeat padding-box;
-  border: 1px solid #d5e0ff;
-  border-radius: 6px;
-  font-size: 14px;
-  font-weight: 600;
-  color: #b7b7b7;
-  height: 40px;
-  padding: 10px;
-  width: 352px;
-  height: 34px;
-  padding-top: 5px;
-  position: relative;
-`;
-const DropDownTwo = styled.div`
+
+const Input = styled.input`
   background: #f5f6fd 0% 0% no-repeat padding-box;
   border: 1px solid #d5e0ff;
   border-radius: 6px;
@@ -150,9 +150,11 @@ const DropDownTwo = styled.div`
   color: #b7b7b7;
   height: 34px;
   padding-left: 9px;
-  padding-top: 6px;
-  width: 160px;
-  margin-right: 50px;
+  margin-left: 17px;
+  width: 40%;
+`;
+const InputDiv = styled.div`
+  margin-left: 58px;
 `;
 const MainContainer = styled.div`
   width: 100%;
@@ -184,14 +186,9 @@ const Content = styled.div`
   font-weight: 600;
   color: #303134;
   margin-top: 0.625rem;
+  white-space: nowrap;
 `;
-const LastRowBox = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  max-width: 400px;
-  padding-bottom: 10px;
-`;
+
 const RowBoxOne = styled.div`
   display: flex;
   justify-content: start;
