@@ -13,8 +13,8 @@ export default function Network() {
     setOpen(true);
   };
 
-  const handleClose = () => {
-    setOpen(false);
+  const handleClose = (val) => {
+    setOpen(val);
   };
   React.useEffect(() => {
     getNetworkList();
@@ -36,9 +36,7 @@ export default function Network() {
       setLoader(true);
       const response = await contractsService.getNetworksLists(requestData);
       setLoader(false);
-
       setAddress(response.networkList);
-      console.log("networkList", response.networkList[0]);
       if (response.networkList.length === 0) setShowPlaceHolder(true);
       else setShowPlaceHolder(false);
     } catch (e) {
@@ -88,6 +86,7 @@ export default function Network() {
         </Container>
         <div>
           {address.map((data, index) => {
+            console.log("dadada", data.networkName);
             return (
               <Container>
                 {/* <Icon src="/images/mainnet.svg" /> */}

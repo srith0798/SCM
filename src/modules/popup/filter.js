@@ -11,7 +11,8 @@ const useStyles = makeStyles(() => ({
 
 export default function Filter(props) {
   const classes = useStyles();
-
+  const [select, setSelect] = React.useState(1);
+  
   return (
     <div>
       <Dialog classes={{ paper: classes.dialogBox }} open={true}>
@@ -23,9 +24,9 @@ export default function Filter(props) {
             <NewContainer>
               <Content>Status</Content>
               <RowBoxOne>
-                <ButtonA>All</ButtonA>
-                <ButtonB>Success</ButtonB>
-                <ButtonC>Fail</ButtonC>
+                <ButtonA tag={select} onClick={()=> setSelect(1)}>All</ButtonA>
+                <ButtonB tag={select} onClick={()=> setSelect(2)}>Success</ButtonB>
+                <ButtonC tag={select} onClick={()=> setSelect(3)}>Fail</ButtonC>
               </RowBoxOne>
             </NewContainer>
             <NewContainerOne>
@@ -47,7 +48,7 @@ export default function Filter(props) {
               </LastRowBox>
             </NewContainer>
             <LastContainer>
-              <ApplyButton>Apply</ApplyButton>
+              <ApplyButton onClick={()=> props.click(select)}>Apply</ApplyButton>
               <CancelButton onClick={props.click}>Cancel</CancelButton>
             </LastContainer>
           </Container>
@@ -89,12 +90,12 @@ const ButtonA = styled.div`
   width: 38px;
   height: 34px;
   background: #ffffff 0% 0% no-repeat padding-box;
-  border: 1px solid #3163f0;
+  border: ${(props) => (props.tag === 1 ? "1px solid #3163f0": "1px solid #d9d9d9")};
   border-radius: 6px;
   padding-top: 4px;
   margin-right: 20px;
   text-align: center;
-  color: #3062ef;
+  color: ${(props) => (props.tag === 1 ? "#3062ef": "#303134")};
   text-size: 14px;
   cursor: pointer;
 `;
@@ -103,25 +104,28 @@ const ButtonB = styled.div`
   text-size: 14px;
   height: 34px;
   background: #ffffff 0% 0% no-repeat padding-box;
-  border: 1px solid #d9d9d9;
+  border: ${(props) => (props.tag === 2 ? "1px solid #3163f0": "1px solid #d9d9d9")};
   border-radius: 6px;
   opacity: 1;
   padding-top: 4px;
   margin-right: 20px;
   text-align: center;
   cursor: pointer;
+  color: ${(props) => (props.tag === 2 ? "#3062ef": "#303134")};
 `;
 const ButtonC = styled.div`
   width: 78px;
   height: 34px;
   background: #ffffff 0% 0% no-repeat padding-box;
-  border: 1px solid #d9d9d9;
+  border: ${(props) => (props.tag === 3 ? "1px solid #3163f0": "1px solid #d9d9d9")};
+  /* border: 1px solid #d9d9d9; */
   border-radius: 6px;
   opacity: 1;
   padding-top: 4px;
   text-align: center;
   text-size: 14px;
   cursor: pointer;
+  color: ${(props) => (props.tag === 3 ? "#3062ef": "#303134")};
 `;
 const DropDown = styled.div`
   background: #f5f6fd 0% 0% no-repeat padding-box;

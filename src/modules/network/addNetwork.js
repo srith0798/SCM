@@ -41,9 +41,8 @@ export default function AddNetwork(props) {
           <Container>
             <SubContainer>
               <Add>Add Network</Add>
-              <img alt="" src="/images/close.svg" onClick={props.click} />
+              <img alt="" src="/images/close.svg" onClick={()=> props.click(false)} />
             </SubContainer>
-
             <Heading>Network name</Heading>
             <Input type="text" placeholder="Name" onChange={(e) => setNetworkName(e.target.value)} value={networkName} />
             <Heading>New RPC URL</Heading>
@@ -55,7 +54,7 @@ export default function AddNetwork(props) {
             <Input type="text" placeholder="Symbol" onChange={(e) => setCurrencySymbol(e.target.value)} value={currencySymbol} />
             <Heading>Block explorer (optional)</Heading>
             <Input type="text" placeholder="Explorer" onChange={(e) => setBlockExplorer(e.target.value)} value={blockExplorer} />
-            <Button onClick={() => addNetwork()}>Add network</Button>
+            <Button onClick={()=> {props.click(false); addNetwork();}}>Add network</Button>
           </Container>
         </MainContainer>
       </Dialog>

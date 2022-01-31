@@ -109,7 +109,7 @@ export default function Contract(props) {
           <Tooltip disableFocusListener title="Refresh">
             <RefreshImage onClick={() => getContractList()} alt="" src="/images/refresh.svg" style={{ marginRight: "0.625rem" }} />
           </Tooltip>
-          {open && <AddContract click={handleClose} />}
+          {open && <AddContract click={handleClose} getContractList = {getContractList}/>}
           <Button onClick={handleClickOpen}>Add Contract</Button>
         </IconDiv>
       </SubContainer>
@@ -183,17 +183,17 @@ export default function Contract(props) {
           return (
             <div style={{ cursor: "pointer" }}>
               <Div>
-                <Row>
-                  <ColumnSecond onClick={() => redirectTODetails(data._id)}>{data.contractName}</ColumnSecond>
+                <Row onClick={() => redirectTODetails(data._id)}>
+                  <ColumnSecond>{data.contractName}</ColumnSecond>
                   <ColumnSecond>{utility.truncateTxnAddress(data.address)}</ColumnSecond>
-                  <ColumnSecond>{data.tokenName}</ColumnSecond>
+                  <ColumnSecond>{data?.network}</ColumnSecond>
                   <ColumnSecond style={{ display: "flex" }}>
                     {address[0].tags && address[0].tags.map((tag, index) => index <= 1 && <FinanceTag>{tag}</FinanceTag>)}
 
                     {addTag && <AddTags click={Close} address={address} contract={true} />}
                     {data.tags && data.tags.length === 0 && <AddTag onClick={() => Open()}>Add Tag</AddTag>}
                   </ColumnSecond>
-                  <ColumnSecond>{data.status}</ColumnSecond>
+                  <ColumnSecond>{data.isHidden  ? "Hidden": "Visible"}</ColumnSecond>
                 </Row>
               </Div>
             </div>

@@ -22,6 +22,7 @@ const utility = {
   // isPasswordValid,
   isEmpty,
   isMenuActive,
+  parseResponse
 };
 export default utility;
 
@@ -29,6 +30,13 @@ export const dispatchAction = (type, data) => {
   return (dispatch) => dispatch({ type, data });
 };
 
+function parseResponse(promise) {
+  return promise
+    .then((data) => {
+      return [null, data];
+    })
+    .catch((err) => [err]);
+}
 function trackEvent(event, eventData) {
   // try {
   //     if (!eventData)
