@@ -17,7 +17,6 @@ import "moment-timezone";
 import ReactPaginate from "react-paginate";
 
 export default function TransactionList(props) {
-  
   const [state, setState] = useState(true);
   const [filterData, setFilterData] = React.useState(1);
   const [open, isOpen] = useState(false);
@@ -26,7 +25,7 @@ export default function TransactionList(props) {
   const handleClickOpen = () => {
     isOpen(true);
   };
-  
+
   const handleClose = () => {
     isOpen(false);
   };
@@ -39,7 +38,7 @@ export default function TransactionList(props) {
   const [TxHashToolTip, setTxHashToolTip] = React.useState(false);
   const [statusToolTip, setstatusToolTip] = React.useState(false);
   const [functionToolTip, setfunctionToolTip] = React.useState(false);
-  const [, setShowPlaceHolder] = React.useState(false);
+  const [showPlaceHolder, setShowPlaceHolder] = React.useState(false);
   const [loader, setLoader] = React.useState(false);
   const [address, setAddress] = React.useState([]);
   const [searchRow, setSearchRow] = React.useState([]);
@@ -80,11 +79,10 @@ export default function TransactionList(props) {
       setLoader(false);
       setAddress(response.transactionList);
       let pageCount = response.totalCount;
-      if(pageCount % 10 === 0){
-        setPage(parseInt(pageCount / 10))
-      }
-      else{
-        setPage(parseInt(pageCount / 10)+1)
+      if (pageCount % 10 === 0) {
+        setPage(parseInt(pageCount / 10));
+      } else {
+        setPage(parseInt(pageCount / 10) + 1);
       }
     } catch (e) {
       setShowPlaceHolder(true);
@@ -110,15 +108,12 @@ export default function TransactionList(props) {
       setLoader(false);
     }
   };
-  const [input, setInput] = useState('');
+
+  const [input, setInput] = useState("");
   const search = (event) => {
     setInput(event.target.value);
     searchTransaction(event.target.value, ["hash"]);
   };
-  useEffect(() => {
-    getContractNames();
-    getTransaction();
-  }, []);
 
   const [isSetOpen, setOpen] = React.useState(false);
   const handleClick = (e) => {
@@ -128,7 +123,6 @@ export default function TransactionList(props) {
   const handleClickAway = () => {
     setOpen(false);
   };
-
 
   const styles = {
     position: "absolute",
@@ -166,6 +160,47 @@ export default function TransactionList(props) {
     to: true,
     when: true,
   });
+  /////searchFilter
+
+  const [select, setSelect] = React.useState(1);
+
+  const [fromInput, setFromInput] = React.useState([]);
+
+  const [toInput, setToInput] = React.useState([]);
+
+  const [filterResponse, setFilterResponse] = React.useState({});
+  useEffect(() => {
+    getContractNames();
+    getTransaction();
+  }, [select]);
+  const [selectDrop, setSelectDrop] = React.useState([]);
+
+  const filterSearch = async () => {
+    try {
+      if (select === 2 || select === 3) {
+        setFilterResponse({
+          skip: 0,
+          limit: 10,
+          status: select === 2 ? true : select === 3 ? false : "",
+          // from: fromInput,
+          // to: toInput,
+          // network: selectDrop,
+        });
+      } else {
+        setFilterResponse({
+          skip: 0,
+          limit: 10,
+        });
+      }
+
+      const response = await ContractsService.getTransactionsList(filterResponse);
+
+      setAddress(response.transactionList);
+      console.log("response", response.transactionList);
+    } catch (e) {
+      console.log(e);
+    }
+  };
   return (
     <>
       <MainContainer>
@@ -184,13 +219,22 @@ export default function TransactionList(props) {
               <Icons src="/images/settings.svg" onClick={handleClickOpen} />
             </Tooltip>
             <Tooltip disableFocusListener title="Refresh">
-              <Icons
-                onClick={() => getTransaction()}
-                src="/images/refresh.svg"
-                // onClick={getTransaction}
-              />
+              <Icons onClick={() => getTransaction()} src="/images/refresh.svg" />
             </Tooltip>
-            {filterPopupOpen && <Filter click={filterPopupClose}/>}
+            {filterPopupOpen && (
+              <Filter
+                click={filterPopupClose}
+                select={select}
+                filterSearch={filterSearch}
+                setSelect={setSelect}
+                fromInput={fromInput}
+                setFromInput={setFromInput}
+                toInput={toInput}
+                setToInput={setToInput}
+                selectDrop={selectDrop}
+                setSelectDrop={setSelectDrop}
+              />
+            )}
             <Tooltip disableFocusListener title="Filter">
               <Icons src="/images/filter.svg" onClick={setfilterPopupOpen} />
             </Tooltip>
@@ -291,7 +335,7 @@ export default function TransactionList(props) {
               )}
               {toggle.from && (
                 <ColumnOne>
-                  Form
+                  From
                   <Tooltip disableFocusListener title="Sender’s account">
                     <ToolTipIcon src="/images/tool-tip.svg" />
                   </Tooltip>
@@ -316,9 +360,8 @@ export default function TransactionList(props) {
             </Row>
           </Div>
           <div>
-            {(input === '' ? address : searchRow).map((data, index) => {
+            {(input === "" ? address : searchRow).map((data, index) => {
               return (
-
                 <Div>
                   <Row>
                     <BackgroundChangerTxhash>
@@ -336,7 +379,12 @@ export default function TransactionList(props) {
                     <BackgroundChangerTo>
                       {toggle.to && <ColumnSecond>{utility.truncateTxnAddress(data.to)}</ColumnSecond>}
                     </BackgroundChangerTo>
-                    {toggle.when && <ColumnSecond>{data.createdOn}</ColumnSecond>}
+                    {toggle.when && (
+                      <ColumnSecond>
+                        {" "}
+                        <Moment toNow>{data.createdOn}</Moment>
+                      </ColumnSecond>
+                    )}
                   </Row>
                 </Div>
               );
@@ -529,6 +577,7 @@ const IconContainer = styled.div`
   justify-content: space-between;
   width: 100%;
   max-width: 120px;
+  cursor: pointer;
   @media (min-width: 300px) and (max-width: 768px) {
     width: 100%;
     max-width: 123px;
@@ -669,20 +718,20 @@ const ToolTipIcon = styled.img`
   cursor: pointer;
   margin-left: 0.5rem;
 `;
-// const PlaceHolderContainer = styled.div`
-//   display: flex;
-//   width: 100%;
-//   height: 500px;
-//   flex-direction: column;
-//   justify-content: center;
-//   align-items: center;
-//   opacity: 50%;
-//   font-weight: 600;
-//   font-size: 13px;
-// `;
-// const PlaceHolderImage = styled.img`
-//   width: 50px;
-//   -webkit-filter: grayscale(60%); /* Safari 6.0 - 9.   */
-//   filter: grayscale(60%);
-//   margin-bottom: 20px;
-// `;
+const PlaceHolderContainer = styled.div`
+  display: flex;
+  width: 100%;
+  height: 500px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 50%;
+  font-weight: 600;
+  font-size: 13px;
+`;
+const PlaceHolderImage = styled.img`
+  width: 50px;
+  -webkit-filter: grayscale(60%); /* Safari 6.0 - 9.   */
+  filter: grayscale(60%);
+  margin-bottom: 20px;
+`;

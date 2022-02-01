@@ -134,8 +134,8 @@ export default function ContractDetails(props) {
     setTagStore(tag);
   };
   let name = "";
-  if(address.address!== undefined){
-  name = address.address
+  if (address.address !== undefined) {
+    name = address.address;
   }
   return (
     <>
@@ -222,40 +222,38 @@ export default function ContractDetails(props) {
               <Div>
                 <TableHeading>Tags</TableHeading>
                 <TableData>
-                     <Row>
-                       {address.tags &&
-                         address.tags.map((tag, index) => (
+                  <Row>
+                    {address.tags &&
+                      address.tags.map((tag, index) => (
+                        <div>
+                          {console.log("abc", tag, index)}
+                          <FinanceTag onClick={() => removeTagOpen(tag)}>
+                            <ImageTag
+                              removeTagImage={removeTagImage}
+                              index={index}
+                              address={address}
+                              onMouseOver={() => setRemoveTagImage(index)}
+                              onMouseOut={() => setRemoveTagImage(-1)}
+                            />
+                            {tag}
+                          </FinanceTag>
+                        </div>
+                      ))}
+                    {removeTag ? (
+                      <RemoveTag
+                        click={() => setRemoveTag(false)}
+                        contractAddress={contractAddress}
+                        tag={tagStore}
+                        getContractById={getContractById}
+                      />
+                    ) : (
+                      ""
+                    )}
 
-                         <div>
-                             {console.log("abc", tag, index)}
-                             <FinanceTag onClick={() => removeTagOpen(tag)}>
-                               <ImageTag
-                                 removeTagImage={removeTagImage}
-                                 index={index}
-                                 address={address}
-                                 onMouseOver={() => setRemoveTagImage(index)}
-                                 onMouseOut={() => setRemoveTagImage(-1)}
-                               />
-                               {tag}
-                             </FinanceTag>
-
-                         </div>
-                         ))}
-                       {removeTag ? (
-                         <RemoveTag
-                           click={() => setRemoveTag(false)}
-                           contractAddress={contractAddress}
-                           tag={tagStore}
-                           getContractById={getContractById}
-                         />
-                       ) : (
-                         ""
-                       )}
- 
-                       {addTag && <AddTags click={Close} address={address} contract={false} />}
-                       <AddTag onClick={() => Open()}>Add Tag</AddTag>
-                     </Row>
-                   </TableData>
+                    {addTag && <AddTags click={Close} address={address} contract={false} />}
+                    <AddTag onClick={() => Open()}>Add Tag</AddTag>
+                  </Row>
+                </TableData>
               </Div>
               <Div>
                 <TableHeading>Compiler</TableHeading>

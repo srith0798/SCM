@@ -109,7 +109,7 @@ export default function Contract(props) {
           <Tooltip disableFocusListener title="Refresh">
             <RefreshImage onClick={() => getContractList()} alt="" src="/images/refresh.svg" style={{ marginRight: "0.625rem" }} />
           </Tooltip>
-          {open && <AddContract click={handleClose} getContractList = {getContractList}/>}
+          {open && <AddContract click={handleClose} getContractList={getContractList} />}
           <Button onClick={handleClickOpen}>Add Contract</Button>
         </IconDiv>
       </SubContainer>
@@ -192,7 +192,7 @@ export default function Contract(props) {
                     {addTag && <AddTags click={Close} address={address} contract={true} />}
                     {data.tags && data.tags.length === 0 && <AddTag onClick={() => Open()}>Add Tag</AddTag>}
                   </ColumnSecond>
-                  <ColumnSecond>{data.isHidden  ? "Hidden": "Visible"}</ColumnSecond>
+                  <ColumnSecond>{data.isHidden ? "Hidden" : "Visible"}</ColumnSecond>
                 </Row>
               </Div>
             </div>
