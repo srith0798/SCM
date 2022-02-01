@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Dialog from "@mui/material/Dialog";
 import { makeStyles } from "@material-ui/styles";
-import ContractsService from "../../services/contractsService";
+
 const useStyles = makeStyles(() => ({
   dialogBox: {
     width: "100% !important",
@@ -14,7 +14,7 @@ export default function Filter(props) {
 
   const Close = () => {
     props.click();
-    // props.filterSearch();
+    props.filterSearch();
   };
 
   return (
@@ -42,13 +42,9 @@ export default function Filter(props) {
             <NewContainerOne>
               <Content>Network</Content>
 
-              <select className="select-filter">
-                <option className="options-select" value="network">
-                  https://rpc.xinfin.network
-                </option>
-                <option className="options-select" value="network">
-                  https://rpc.apothem.network
-                </option>
+              <select className="select-filter" onChange={(e) => props.setSelectDrop([e.target.value])} value={props.selectDrop}>
+                <option className="options-select">https://rpc.xinfin.network</option>
+                <option className="options-select">https://rpc.apothem.network</option>
               </select>
             </NewContainerOne>
 
@@ -56,8 +52,8 @@ export default function Filter(props) {
               <Content>Date Range</Content>
 
               <InputDiv>
-                <Input placeholder="From" onChange={(e) => props.setFromInput([e.target.value])} value={props.fromInput} />
-                <Input placeholder="To" onChange={(e) => props.setToInput([e.target.value])} value={props.toInput} />
+                <Input placeholder="From" type="date" onChange={(e) => props.setFromInput([e.target.value])} value={props.fromInput} />
+                <Input placeholder="To" type="date" onChange={(e) => props.setToInput([e.target.value])} value={props.toInput} />
               </InputDiv>
             </NewContainer>
             <LastContainer>

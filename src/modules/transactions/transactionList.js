@@ -114,10 +114,6 @@ export default function TransactionList(props) {
     setInput(event.target.value);
     searchTransaction(event.target.value, ["hash"]);
   };
-  useEffect(() => {
-    getContractNames();
-    getTransaction();
-  }, []);
 
   const [isSetOpen, setOpen] = React.useState(false);
   const handleClick = (e) => {
@@ -167,11 +163,17 @@ export default function TransactionList(props) {
   /////searchFilter
 
   const [select, setSelect] = React.useState(1);
-  console.log(select, "select");
+
   const [fromInput, setFromInput] = React.useState([]);
 
   const [toInput, setToInput] = React.useState([]);
+
   const [filterResponse, setFilterResponse] = React.useState({});
+  useEffect(() => {
+    getContractNames();
+    getTransaction();
+  }, [select]);
+  const [selectDrop, setSelectDrop] = React.useState([]);
 
   const filterSearch = async () => {
     try {
@@ -179,9 +181,10 @@ export default function TransactionList(props) {
         setFilterResponse({
           skip: 0,
           limit: 10,
+          status: select === 2 ? true : select === 3 ? false : "",
           // from: fromInput,
           // to: toInput,
-          status: select === 2 ? true : select === 3 ? false : "",
+          // network: selectDrop,
         });
       } else {
         setFilterResponse({
@@ -228,6 +231,8 @@ export default function TransactionList(props) {
                 setFromInput={setFromInput}
                 toInput={toInput}
                 setToInput={setToInput}
+                selectDrop={selectDrop}
+                setSelectDrop={setSelectDrop}
               />
             )}
             <Tooltip disableFocusListener title="Filter">
@@ -385,12 +390,12 @@ export default function TransactionList(props) {
               );
             })}
           </div>
-          {showPlaceHolder && (
+          {/* {showPlaceHolder && (
             <PlaceHolderContainer>
               <PlaceHolderImage src="/images/contracts.svg" />
               No Contracts Found
             </PlaceHolderContainer>
-          )}
+          )} */}
         </TableContainer>
         <PaginationDiv>
           <ReactPaginate
@@ -572,6 +577,7 @@ const IconContainer = styled.div`
   justify-content: space-between;
   width: 100%;
   max-width: 120px;
+  cursor: pointer;
   @media (min-width: 300px) and (max-width: 768px) {
     width: 100%;
     max-width: 123px;
