@@ -175,7 +175,7 @@ async function removeTags(requestData) {
     });
 }
 async function addNetworks(requestData) {
-  let url = process.env.REACT_APP_USER_CONTRACT_MICROSERVICE_2 + httpConstants.API_END_POINT.ADD_NETWORK;
+  let url = process.env.REACT_APP_USER_CONTRACT_MICROSERVICE + httpConstants.API_END_POINT.ADD_NETWORK;
 
   console.log("url----", url);
   return httpService(httpConstants.METHOD_TYPE.POST, getHeaders(), requestData, url)
@@ -189,7 +189,7 @@ async function addNetworks(requestData) {
     });
 }
 async function getNetworksLists(requestData) {
-  let url = process.env.REACT_APP_USER_CONTRACT_MICROSERVICE_2 + httpConstants.API_END_POINT.GET_NETWORK_LIST;
+  let url = process.env.REACT_APP_USER_CONTRACT_MICROSERVICE + httpConstants.API_END_POINT.GET_NETWORK_LIST;
 
   console.log("url----", url);
   return httpService(httpConstants.METHOD_TYPE.POST, getHeaders(), requestData, url)
