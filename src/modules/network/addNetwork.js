@@ -54,7 +54,7 @@ export default function AddNetwork(props) {
             <Input type="text" placeholder="Symbol" onChange={(e) => setCurrencySymbol(e.target.value)} value={currencySymbol} />
             <Heading>Block explorer (optional)</Heading>
             <Input type="text" placeholder="Explorer" onChange={(e) => setBlockExplorer(e.target.value)} value={blockExplorer} />
-            <Button onClick={()=> {props.click(false); addNetwork();}}>Add network</Button>
+            <Button onClick={()=>  addNetwork()}>Add network</Button>
           </Container>
         </MainContainer>
       </Dialog>
