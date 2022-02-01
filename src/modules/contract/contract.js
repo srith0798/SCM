@@ -44,7 +44,7 @@ export default function Contract(props) {
       setLoader(true);
       const response = await ContractsService.getContractsList(requestData);
       setLoader(false);
-
+      console.log("resss", response);
       setAddress(response.contractList);
       if (response.contractList.length === 0) setShowPlaceHolder(true);
       else setShowPlaceHolder(false);
@@ -189,7 +189,6 @@ export default function Contract(props) {
                   <ColumnSecond>{data?.network}</ColumnSecond>
                   <ColumnSecond style={{ display: "flex" }}>
                     {address[0].tags && address[0].tags.map((tag, index) => index <= 1 && <FinanceTag>{tag}</FinanceTag>)}
-
                     {addTag && <AddTags click={Close} address={address} contract={true} />}
                     {data.tags && data.tags.length === 0 && <AddTag onClick={() => Open()}>Add Tag</AddTag>}
                   </ColumnSecond>

@@ -23,6 +23,7 @@ export default function ContractDetails(props) {
   };
 
   const [contractAddress, setContractAddress] = React.useState({});
+  const [address, setAddress] = React.useState({});
   const getContractById = async () => {
     let url = window.location.pathname;
     let addressURL = url.split("/");
@@ -32,7 +33,6 @@ export default function ContractDetails(props) {
       setLoader(true);
       const response = await ContractsService.getContractsById(addressURL);
       setLoader(false);
-      console.log("response", response);
       setAddress(response);
     } catch (err) {
       setLoader(false);
@@ -42,9 +42,6 @@ export default function ContractDetails(props) {
     getContractById();
   }, []);
 
-  const [address, setAddress] = React.useState({});
-
-  const [value, setValue] = useState("");
   const [open, setOpen] = useState(false);
   const [loader, setLoader] = useState(false);
 
@@ -69,7 +66,6 @@ export default function ContractDetails(props) {
     }
     setLoader(false);
   };
-  console.log("contractAddress", contractAddress);
   const showContract = async () => {
     let requestData = {
       id: contractAddress,
@@ -137,7 +133,10 @@ export default function ContractDetails(props) {
     setRemoveTag(true);
     setTagStore(tag);
   };
-
+  let name = "";
+  if (address.address !== undefined) {
+    name = address.address;
+  }
   return (
     <>
       <ShowLoader state={loader} />
@@ -160,8 +159,8 @@ export default function ContractDetails(props) {
               alignItems: "center",
             }}
           >
-            <Hash>{utility.truncateTxnAddress("gfhgfffjgjhjghgjhhkjhjkhkjhkjhk")}</Hash>
-            <CopyToClipboard text={value}>
+            <Hash>{utility.truncateTxnAddress(name)}</Hash>
+            <CopyToClipboard text={name}>
               <CopyImg src="/images/copy.svg" />
             </CopyToClipboard>
           </div>
@@ -222,7 +221,6 @@ export default function ContractDetails(props) {
               </Div>
               <Div>
                 <TableHeading>Tags</TableHeading>
-
                 <TableData>
                   <Row>
                     {address.tags &&
