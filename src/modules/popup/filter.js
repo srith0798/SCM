@@ -146,11 +146,12 @@ const Input = styled.input`
   color: #b7b7b7;
   height: 34px;
   padding-left: 9px;
-  margin-left: 17px;
-  width: 40%;
+
+  margin-left: 18px;
+  width: 44%;
 `;
 const InputDiv = styled.div`
-  margin-left: 58px;
+  margin-right: 42px;
 `;
 const MainContainer = styled.div`
   width: 100%;

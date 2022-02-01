@@ -44,7 +44,7 @@ export default function ContractDetails(props) {
 
   const [address, setAddress] = React.useState({});
 
-  const [value] = useState("");
+  const [value, setValue] = useState("");
   const [open, setOpen] = useState(false);
   const [loader, setLoader] = useState(false);
 
@@ -137,6 +137,7 @@ export default function ContractDetails(props) {
     setRemoveTag(true);
     setTagStore(tag);
   };
+
   return (
     <>
       <ShowLoader state={loader} />
@@ -159,7 +160,7 @@ export default function ContractDetails(props) {
               alignItems: "center",
             }}
           >
-            <Hash>{utility.truncateTxnAddress("xdcabfe4184e5f9f600fe86d20ffdse2fsfbsgsgsa768b3c")}</Hash>
+            <Hash>{utility.truncateTxnAddress("gfhgfffjgjhjghgjhhkjhjkhkjhkjhk")}</Hash>
             <CopyToClipboard text={value}>
               <CopyImg src="/images/copy.svg" />
             </CopyToClipboard>
@@ -221,14 +222,40 @@ export default function ContractDetails(props) {
               </Div>
               <Div>
                 <TableHeading>Tags</TableHeading>
-                <TagData>
+
+                <TableData>
                   <Row>
-                    {address.tags && address.tags.map((tag) => <FinanceTag>{tag}</FinanceTag>)}
+                    {address.tags &&
+                      address.tags.map((tag, index) => (
+                        <div>
+                          {console.log("abc", tag, index)}
+                          <FinanceTag onClick={() => removeTagOpen(tag)}>
+                            <ImageTag
+                              removeTagImage={removeTagImage}
+                              index={index}
+                              address={address}
+                              onMouseOver={() => setRemoveTagImage(index)}
+                              onMouseOut={() => setRemoveTagImage(-1)}
+                            />
+                            {tag}
+                          </FinanceTag>
+                        </div>
+                      ))}
+                    {removeTag ? (
+                      <RemoveTag
+                        click={() => setRemoveTag(false)}
+                        contractAddress={contractAddress}
+                        tag={tagStore}
+                        getContractById={getContractById}
+                      />
+                    ) : (
+                      ""
+                    )}
 
                     {addTag && <AddTags click={Close} address={address} contract={false} />}
                     <AddTag onClick={() => Open()}>Add Tag</AddTag>
                   </Row>
-                </TagData>
+                </TableData>
               </Div>
               <Div>
                 <TableHeading>Compiler</TableHeading>
