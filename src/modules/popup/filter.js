@@ -131,7 +131,6 @@ const CancelButton = styled.div`
   margin-right: -11px;
   color: #3163f0;
   @media (min-width: 300px) and (max-width: 414px) {
-    // margin-left: 67px;
     height: 27px;
     width: 116px;
     padding-top: 2px;
@@ -287,6 +286,8 @@ const Content = styled.div`
   white-space: nowrap;
   @media (min-width: 300px) and (max-width: 414px) {
     padding-bottom: 10px;
+    font-size: 14px;
+    font-weight: 500;
   }
 `;
 
