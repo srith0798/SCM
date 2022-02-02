@@ -6,12 +6,18 @@ import { makeStyles } from "@material-ui/styles";
 const useStyles = makeStyles(() => ({
   dialogBox: {
     width: "100% !important",
-    bottom: 20,
+    bottom: "100px",
+    height: "387px",
   },
 }));
 
 export default function Filter(props) {
   const classes = useStyles();
+
+  const Close = () => {
+    props.click();
+    props.filterSearch();
+  };
 
   return (
     <div>
@@ -20,36 +26,67 @@ export default function Filter(props) {
           <Container>
             <RowContainer>
               <Add>Filter Transactions</Add>
+              <img
+                style={{ cursor: "pointer" }}
+                alt=""
+                src="/images/close.svg"
+                onClick={props.click}
+              />
             </RowContainer>
-            <NewContainer>
+            <NewContainerStatus>
               <Content>Status</Content>
               <RowBoxOne>
-                <ButtonA>All</ButtonA>
-                <ButtonB>Success</ButtonB>
-                <ButtonC>Fail</ButtonC>
+                <ButtonA tag={props.select} onClick={() => props.setSelect(1)}>
+                  All
+                </ButtonA>
+                <ButtonB tag={props.select} onClick={() => props.setSelect(2)}>
+                  Success
+                </ButtonB>
+                <ButtonC tag={props.select} onClick={() => props.setSelect(3)}>
+                  Failed
+                </ButtonC>
               </RowBoxOne>
-            </NewContainer>
+            </NewContainerStatus>
             <NewContainerOne>
               <Content>Network</Content>
-              <DropDown>
-                Select Network
-                <ImgDropDown
-                  img
-                  alt=""
-                  src="/images/drop down.svg"
-                ></ImgDropDown>
-              </DropDown>
+
+              <select
+                className="select-filter"
+                onChange={(e) => props.setSelectDrop([e.target.value])}
+                value={props.selectDrop}
+              >
+                <option className="options-select">
+                  https://rpc.xinfin.network
+                </option>
+                <option className="options-select">
+                  https://rpc.apothem.network
+                </option>
+              </select>
             </NewContainerOne>
+
             <NewContainer style={{ paddingBottom: "20px" }}>
               <Content>Date Range</Content>
-              <LastRowBox>
-                <DropDownTwo>From</DropDownTwo>
-                <DropDownTwo>To</DropDownTwo>
-              </LastRowBox>
+
+              <InputDiv>
+                <Input
+                  placeholder="From"
+                  type="date"
+                  onChange={(e) => props.setFromInput([e.target.value])}
+                  value={props.fromInput}
+                />
+                <Input
+                  placeholder="To"
+                  type="date"
+                  onChange={(e) => props.setToInput([e.target.value])}
+                  value={props.toInput}
+                />
+              </InputDiv>
             </NewContainer>
             <LastContainer>
-              <ApplyButton>Apply</ApplyButton>
-              <CancelButton onClick={props.click}>Cancel</CancelButton>
+              <ApplyButton onClick={() => props.filterSearch()}>
+                Apply
+              </ApplyButton>
+              <CancelButton onClick={() => Close()}>Cancel</CancelButton>
             </LastContainer>
           </Container>
         </MainContainer>
@@ -71,15 +108,13 @@ const ApplyButton = styled.div`
   cursor: pointer;
 
   @media (min-width: 300px) and (max-width: 414px) {
-    margin-left: 67px;
+    margin-left: 30px;
+    height: 27px;
+    width: 116px;
+    padding-top: 2px;
   }
 `;
-const ImgDropDown = styled.div`
-  margin-left: 208px;
-  cursor: pointer;
-  @media (min-width: 300px) and (max-width: 414px) {
-  }
-`;
+
 const CancelButton = styled.div`
   top: 432px;
   left: 1179px;
@@ -95,63 +130,102 @@ const CancelButton = styled.div`
   margin-left: -5px;
   margin-right: -11px;
   color: #3163f0;
+  @media (min-width: 300px) and (max-width: 414px) {
+    // margin-left: 67px;
+    height: 27px;
+    width: 116px;
+    padding-top: 2px;
+  }
 `;
 const ButtonA = styled.div`
   width: 38px;
   height: 34px;
   background: #ffffff 0% 0% no-repeat padding-box;
-  border: 1px solid #3163f0;
+  border: ${(props) =>
+    props.tag === 1 ? "1px solid #3163f0" : "1px solid #d9d9d9"};
   border-radius: 6px;
   padding-top: 4px;
   margin-right: 20px;
   text-align: center;
-  color: #3062ef;
+  color: ${(props) => (props.tag === 1 ? "#3062ef" : "#303134")};
   text-size: 14px;
   cursor: pointer;
+  @media (min-width: 300px) and (max-width: 414px) {
+    width: 44px;
+    height: 24px;
+    background: #ffffff 0% 0% no-repeat padding-box;
+    border: ${(props) =>
+      props.tag === 1 ? "1px solid #3163f0" : "1px solid #d9d9d9"};
+    border-radius: 6px;
+    padding: 0px;
+    margin-right: 15px;
+    text-align: center;
+    color: ${(props) => (props.tag === 1 ? "#3062ef" : "#303134")};
+    text-size: 14px;
+    cursor: pointer;
+  }
 `;
 const ButtonB = styled.div`
   width: 78px;
   text-size: 14px;
   height: 34px;
   background: #ffffff 0% 0% no-repeat padding-box;
-  border: 1px solid #d9d9d9;
+  border: ${(props) =>
+    props.tag === 2 ? "1px solid #3163f0" : "1px solid #d9d9d9"};
   border-radius: 6px;
   opacity: 1;
   padding-top: 4px;
   margin-right: 20px;
   text-align: center;
   cursor: pointer;
+  color: ${(props) => (props.tag === 2 ? "#3062ef" : "#303134")};
+  @media (min-width: 300px) and (max-width: 414px) {
+    width: 78px;
+    text-size: 14px;
+    height: 24px;
+    background: #ffffff 0% 0% no-repeat padding-box;
+    border: ${(props) =>
+      props.tag === 2 ? "1px solid #3163f0" : "1px solid #d9d9d9"};
+    border-radius: 6px;
+    opacity: 1;
+    padding: 0px;
+    margin-right: 15px;
+    text-align: center;
+    cursor: pointer;
+  }
 `;
 const ButtonC = styled.div`
   width: 78px;
   height: 34px;
   background: #ffffff 0% 0% no-repeat padding-box;
-  border: 1px solid #d9d9d9;
+  border: ${(props) =>
+    props.tag === 3 ? "1px solid #3163f0" : "1px solid #d9d9d9"};
+
   border-radius: 6px;
   opacity: 1;
   padding-top: 4px;
   text-align: center;
   text-size: 14px;
   cursor: pointer;
-`;
-const DropDown = styled.div`
-  background: #f5f6fd 0% 0% no-repeat padding-box;
-  border: 1px solid #d5e0ff;
-  border-radius: 6px;
-  font-size: 14px;
-  font-weight: 600;
-  color: #b7b7b7;
-  height: 40px;
-  padding: 10px;
-  width: 352px;
-  height: 34px;
-  padding-top: 5px;
-  position: relative;
+  color: ${(props) => (props.tag === 3 ? "#3062ef" : "#303134")};
   @media (min-width: 300px) and (max-width: 414px) {
-    width: 290px;
+    width: 68px;
+    height: 24px;
+    background: #ffffff 0% 0% no-repeat padding-box;
+    border: ${(props) =>
+      props.tag === 3 ? "1px solid #3163f0" : "1px solid #d9d9d9"};
+
+    border-radius: 6px;
+    opacity: 1;
+    padding: 0px;
+    text-align: center;
+    text-size: 14px;
+    cursor: pointer;
+    color: ${(props) => (props.tag === 3 ? "#3062ef" : "#303134")};
   }
 `;
-const DropDownTwo = styled.div`
+
+const Input = styled.input`
   background: #f5f6fd 0% 0% no-repeat padding-box;
   border: 1px solid #d5e0ff;
   border-radius: 6px;
@@ -160,9 +234,22 @@ const DropDownTwo = styled.div`
   color: #b7b7b7;
   height: 34px;
   padding-left: 9px;
-  padding-top: 6px;
-  width: 160px;
-  margin-right: 50px;
+
+  margin-left: 18px;
+  width: 44%;
+  @media (min-width: 300px) and (max-width: 414px) {
+    margin-left: 0px;
+    margin-right: 20px;
+    width: 50%;
+  }
+`;
+const InputDiv = styled.div`
+  margin-right: 42px;
+  padding-bottom: 15px;
+  @media (min-width: 300px) and (max-width: 414px) {
+    display: flex;
+    padding-bottom: 30px;
+  }
 `;
 const MainContainer = styled.div`
   width: 100%;
@@ -197,25 +284,33 @@ const Content = styled.div`
   font-size: 1rem;
   font-weight: 600;
   color: #303134;
-  margin-bottom: 8px;
+  white-space: nowrap;
+  @media (min-width: 300px) and (max-width: 414px) {
+    padding-bottom: 10px;
+  }
 `;
-const LastRowBox = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  max-width: 400px;
-  padding-bottom: 10px;
-`;
+
 const RowBoxOne = styled.div`
   display: flex;
   justify-content: start;
   width: 100%;
   max-width: 400px;
+  @media (min-width: 300px) and (max-width: 414px) {
+    max-width: 240px;
+  }
 `;
 const RowContainer = styled.div`
   padding: 18px 14px 12px 12px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 536px;
   @media (min-width: 300px) and (max-width: 414px) {
-    padding: 10px 14px 12px 12px;
+    padding: 25px 9px 28px 12px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 306px;
   }
 `;
 const NewContainer = styled.div`
@@ -226,6 +321,18 @@ const NewContainer = styled.div`
   padding-bottom: 20px;
   @media (min-width: 300px) and (max-width: 414px) {
     flex-direction: column;
+    display: flex;
+  }
+`;
+const NewContainerStatus = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 3 00px;
+  padding-bottom: 20px;
+  @media (min-width: 300px) and (max-width: 414px) {
+    // flex-direction: column;
+    // display: flex;
   }
 `;
 const LastContainer = styled.div`
@@ -241,9 +348,10 @@ const NewContainerOne = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  max-width: 515px;
+  max-width: 460px;
   padding-bottom: 20px;
   @media (min-width: 300px) and (max-width: 414px) {
     flex-direction: column;
+    // display: flex;
   }
 `;

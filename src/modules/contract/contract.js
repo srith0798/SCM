@@ -44,7 +44,7 @@ export default function Contract(props) {
       setLoader(true);
       const response = await ContractsService.getContractsList(requestData);
       setLoader(false);
-
+      console.log("resss", response);
       setAddress(response.contractList);
       if (response.contractList.length === 0) setShowPlaceHolder(true);
       else setShowPlaceHolder(false);
@@ -212,19 +212,20 @@ export default function Contract(props) {
           return (
             <div style={{ cursor: "pointer" }}>
               <Div>
-                <Row onClick={() => redirectTODetails(data._id)}>
-                  <ColumnSecond>{data.contractName}</ColumnSecond>
+                <Row>
+                  <ColumnSecond onClick={() => redirectTODetails(data._id)}>
+                    {data.contractName}
+                  </ColumnSecond>
                   <ColumnSecond>
                     {utility.truncateTxnAddress(data.address)}
                   </ColumnSecond>
-                  <ColumnSecond>{data && data.network}</ColumnSecond>
+                  <ColumnSecond>{data.network}</ColumnSecond>
                   <ColumnSecond style={{ display: "flex" }}>
                     {address[0].tags &&
                       address[0].tags.map(
                         (tag, index) =>
                           index <= 1 && <FinanceTag>{tag}</FinanceTag>
                       )}
-
                     {addTag && (
                       <AddTags
                         click={Close}

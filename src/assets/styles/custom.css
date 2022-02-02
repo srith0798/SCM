@@ -413,7 +413,30 @@ input:checked + .slider:before {
 }
 
     
-    /* ::-webkit-scrollbar-thumb:hover {
-      background: red;
-    } */
   
+.select-filter{
+    background: #f5f6fd 0% 0% no-repeat padding-box;
+    border: 1px solid #d5e0ff;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #b7b7b7;
+    height: 34px;
+    padding-left: 9px;
+    width: 100%;
+    max-width: 299px;
+    outline:none;  }
+
+.options-select{
+      background: #f5f6fd 0% 0% no-repeat padding-box;
+      border: 1px solid #d5e0ff;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #b7b7b7;
+      height: 34px;
+      padding-left: 9px;
+      width: 100%;
+      max-width: 352px;
+      outline:none;  
+    }

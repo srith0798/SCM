@@ -15,7 +15,7 @@ import ContractsService from "../../../services/contractsService";
 import utility from "../../../utility";
 import { history } from "../../../managers/history";
 import AddTags from "../../popup/addTag";
-
+import RemoveTag from "./removeTag";
 export default function ContractDetails(props) {
   const [activeButton, setActiveButton] = React.useState("General");
   const handleViewClick = (e) => {
@@ -23,6 +23,7 @@ export default function ContractDetails(props) {
   };
 
   const [contractAddress, setContractAddress] = React.useState({});
+  const [address, setAddress] = React.useState({});
   const getContractById = async () => {
     let url = window.location.pathname;
     let addressURL = url.split("/");
@@ -32,7 +33,6 @@ export default function ContractDetails(props) {
       setLoader(true);
       const response = await ContractsService.getContractsById(addressURL);
       setLoader(false);
-      console.log("response", response);
       setAddress(response);
     } catch (err) {
       setLoader(false);
@@ -42,9 +42,6 @@ export default function ContractDetails(props) {
     getContractById();
   }, []);
 
-  const [address, setAddress] = React.useState({});
-
-  const [value] = useState("");
   const [open, setOpen] = useState(false);
   const [loader, setLoader] = useState(false);
 
@@ -69,7 +66,6 @@ export default function ContractDetails(props) {
     }
     setLoader(false);
   };
-  console.log("contractAddress", contractAddress);
   const showContract = async () => {
     let requestData = {
       id: contractAddress,
@@ -130,13 +126,17 @@ export default function ContractDetails(props) {
     setAddTag(false);
     getContractById();
   };
-  // const [removeTagImage, setRemoveTagImage] = useState();
-  // const [removeTag, setRemoveTag] = useState(false);
-  // const [tagStore, setTagStore] = useState("");
-  // const removeTagOpen = (tag) => {
-  //   setRemoveTag(true);
-  //   setTagStore(tag);
-  // };
+  const [removeTagImage, setRemoveTagImage] = useState();
+  const [removeTag, setRemoveTag] = useState(false);
+  const [tagStore, setTagStore] = useState("");
+  const removeTagOpen = (tag) => {
+    setRemoveTag(true);
+    setTagStore(tag);
+  };
+  let name = "";
+  if (address.address !== undefined) {
+    name = address.address;
+  }
   return (
     <>
       <ShowLoader state={loader} />
@@ -166,12 +166,8 @@ export default function ContractDetails(props) {
               alignItems: "center",
             }}
           >
-            <Hash>
-              {utility.truncateTxnAddress(
-                "xdcabfe4184e5f9f600fe86d20ffdse2fsfbsgsgsa768b3c"
-              )}
-            </Hash>
-            <CopyToClipboard text={value}>
+            <Hash>{utility.truncateTxnAddress(name)}</Hash>
+            <CopyToClipboard text={name}>
               <CopyImg src="/images/copy.svg" />
             </CopyToClipboard>
           </div>
@@ -244,10 +240,34 @@ export default function ContractDetails(props) {
               </Div>
               <Div>
                 <TableHeading>Tags</TableHeading>
-                <TagData>
+                <TableData>
                   <Row>
                     {address.tags &&
-                      address.tags.map((tag) => <FinanceTag>{tag}</FinanceTag>)}
+                      address.tags.map((tag, index) => (
+                        <div>
+                          {console.log("abc", tag, index)}
+                          <FinanceTag onClick={() => removeTagOpen(tag)}>
+                            <ImageTag
+                              removeTagImage={removeTagImage}
+                              index={index}
+                              address={address}
+                              onMouseOver={() => setRemoveTagImage(index)}
+                              onMouseOut={() => setRemoveTagImage(-1)}
+                            />
+                            {tag}
+                          </FinanceTag>
+                        </div>
+                      ))}
+                    {removeTag ? (
+                      <RemoveTag
+                        click={() => setRemoveTag(false)}
+                        contractAddress={contractAddress}
+                        tag={tagStore}
+                        getContractById={getContractById}
+                      />
+                    ) : (
+                      ""
+                    )}
 
                     {addTag && (
                       <AddTags
@@ -258,7 +278,7 @@ export default function ContractDetails(props) {
                     )}
                     <AddTag onClick={() => Open()}>Add Tag</AddTag>
                   </Row>
-                </TagData>
+                </TableData>
               </Div>
               <Div>
                 <TableHeading>Compiler</TableHeading>
@@ -432,7 +452,7 @@ const FinanceTag = styled.div`
 `;
 const ImageTag = styled.div`
   background-image: ${(props) =>
-    props.removeTagImage === props.index
+    props.removeTagImage == props.index
       ? `url("/images/close.svg")`
       : `url("/images/Tag.svg")`};
 

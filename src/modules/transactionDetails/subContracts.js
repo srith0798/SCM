@@ -65,7 +65,7 @@ const MainContainer = styled.div`
   border-radius: 0.25rem;
   padding: 1.438rem;
   margin-top: 1.25rem;
-  @media (max-width: 375px) {
+  @media (min-width: 300px) and (max-width: 414px) {
     height: 42rem;
   }
 `;
@@ -83,7 +83,7 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   text-align: center;
-  @media (max-width: 375px) {
+  @media (min-width: 300px) and (max-width: 414px) {
     padding-bottom: 21px;
     padding-top: 10px;
     width: 224px;
@@ -99,7 +99,7 @@ const MainBoxContainer = styled.div`
   @media (max-width: 768px) {
     max-width: 40.625rem;
   }
-  @media (max-width: 375px) {
+  @media (min-width: 300px) and (max-width: 414px) {
     display: flex;
     flex-direction: column;
     justify-content: space-between;

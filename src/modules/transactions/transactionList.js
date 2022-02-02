@@ -13,13 +13,15 @@ import ShowLoader from "../../common/components/showLoader";
 import utility from "../../utility";
 import Filter from "../popup/filter";
 import "moment-timezone";
+import Moment from "react-moment";
 import ReactPaginate from "react-paginate";
 
 export default function TransactionList(props) {
-  useEffect(() => {}, []);
   const [state, setState] = useState(true);
+  const [filterData, setFilterData] = React.useState(1);
   const [open, isOpen] = useState(false);
   const [filterPopupOpen, setfilterPopupOpen] = useState(false);
+
   const handleClickOpen = () => {
     isOpen(true);
   };
@@ -28,18 +30,22 @@ export default function TransactionList(props) {
     isOpen(false);
   };
 
-  const filterPopupClose = () => {
+  const filterPopupClose = (data) => {
     setfilterPopupOpen(false);
+    setFilterData(data);
   };
 
   const [TxHashToolTip, setTxHashToolTip] = React.useState(false);
   const [statusToolTip, setstatusToolTip] = React.useState(false);
   const [functionToolTip, setfunctionToolTip] = React.useState(false);
-  const [, setShowPlaceHolder] = React.useState(false);
+  const [showPlaceHolder, setShowPlaceHolder] = React.useState(false);
   const [loader, setLoader] = React.useState(false);
   const [address, setAddress] = React.useState([]);
+  const [searchRow, setSearchRow] = React.useState([]);
   const [contracts, setContracts] = React.useState([]);
   const [selected, setSelected] = React.useState({});
+  const [page, setPage] = React.useState(1);
+  const [valueCheck, setValueCheck] = React.useState(0);
 
   const getContractNames = async (skip = 0, limit = 10) => {
     let userId = sessionManager.getDataFromCookies("userId");
@@ -71,18 +77,18 @@ export default function TransactionList(props) {
       setLoader(true);
       const response = await ContractsService.getTransactionsList(requestData);
       setLoader(false);
-
       setAddress(response.transactionList);
-      // console.log("transactionlistResponse", response.transactionList[0]);
-
-      if (response.transactionList.length === 0) setShowPlaceHolder(true);
-      else setShowPlaceHolder(false);
+      let pageCount = response.totalCount;
+      if (pageCount % 10 === 0) {
+        setPage(parseInt(pageCount / 10));
+      } else {
+        setPage(parseInt(pageCount / 10) + 1);
+      }
     } catch (e) {
       setShowPlaceHolder(true);
       setLoader(false);
     }
   };
-
   const searchTransaction = async (searchValues, searchKeys) => {
     try {
       const requestData = {
@@ -94,7 +100,7 @@ export default function TransactionList(props) {
       setLoader(true);
       const response = await ContractsService.getTransactionsList(requestData);
       setLoader(false);
-      setAddress(response.transactionList);
+      setSearchRow(response.transactionList);
 
       if (response.transactionList.length === 0) setShowPlaceHolder(true);
     } catch (e) {
@@ -102,18 +108,14 @@ export default function TransactionList(props) {
       setLoader(false);
     }
   };
-  const [input, setInput] = useState();
+
+  const [input, setInput] = useState("");
   const search = (event) => {
     setInput(event.target.value);
     searchTransaction(event.target.value, ["hash"]);
   };
-  useEffect(() => {
-    getContractNames();
-    getTransaction();
-  }, []);
 
   const [isSetOpen, setOpen] = React.useState(false);
-
   const handleClick = (e) => {
     setOpen((prev) => !prev);
   };
@@ -146,7 +148,8 @@ export default function TransactionList(props) {
     history.push("/dashboard/Transaction-details");
   };
   const changePage = (value) => {
-    getTransaction(Math.ceil(value.selected * 5), 5);
+    setValueCheck(value.selected);
+    getTransaction(Math.ceil(value.selected * 10), 10);
   };
   const [toggle, setToggle] = React.useState({
     transactionHash: true,
@@ -157,6 +160,49 @@ export default function TransactionList(props) {
     to: true,
     when: true,
   });
+  /////searchFilter
+
+  const [select, setSelect] = React.useState(1);
+
+  const [fromInput, setFromInput] = React.useState([]);
+
+  const [toInput, setToInput] = React.useState([]);
+
+  const [filterResponse, setFilterResponse] = React.useState({});
+  useEffect(() => {
+    getContractNames();
+    getTransaction();
+  }, [select]);
+  const [selectDrop, setSelectDrop] = React.useState([]);
+
+  const filterSearch = async () => {
+    try {
+      if (select === 2 || select === 3) {
+        setFilterResponse({
+          skip: 0,
+          limit: 10,
+          status: select === 2 ? true : select === 3 ? false : "",
+          // from: fromInput,
+          // to: toInput,
+          // network: selectDrop,
+        });
+      } else {
+        setFilterResponse({
+          skip: 0,
+          limit: 10,
+        });
+      }
+
+      const response = await ContractsService.getTransactionsList(
+        filterResponse
+      );
+
+      setAddress(response.transactionList);
+      console.log("response", response.transactionList);
+    } catch (e) {
+      console.log(e);
+    }
+  };
   return (
     <>
       <MainContainer>
@@ -188,10 +234,22 @@ export default function TransactionList(props) {
               <Icons
                 onClick={() => getTransaction()}
                 src="/images/refresh.svg"
-                // onClick={getTransaction}
               />
             </Tooltip>
-            {filterPopupOpen && <Filter click={filterPopupClose} />}
+            {filterPopupOpen && (
+              <Filter
+                click={filterPopupClose}
+                select={select}
+                filterSearch={filterSearch}
+                setSelect={setSelect}
+                fromInput={fromInput}
+                setFromInput={setFromInput}
+                toInput={toInput}
+                setToInput={setToInput}
+                selectDrop={selectDrop}
+                setSelectDrop={setSelectDrop}
+              />
+            )}
             <Tooltip disableFocusListener title="Filter">
               <Icons src="/images/filter.svg" onClick={setfilterPopupOpen} />
             </Tooltip>
@@ -247,7 +305,7 @@ export default function TransactionList(props) {
 
         <TableContainer>
           <Div>
-            <Row>
+            <RowData>
               {toggle.transactionHash && (
                 <ColumnOne>
                   Tx Hash
@@ -315,7 +373,7 @@ export default function TransactionList(props) {
               )}
               {toggle.from && (
                 <ColumnOne>
-                  Form
+                  From
                   <Tooltip disableFocusListener title="Sender’s account">
                     <ToolTipIcon src="/images/tool-tip.svg" />
                   </Tooltip>
@@ -340,20 +398,21 @@ export default function TransactionList(props) {
                   </Tooltip>
                 </ColumnOne>
               )}
-            </Row>
+            </RowData>
           </Div>
           <div>
-            {address.map((data, index) => {
+            {(input === "" ? address : searchRow).map((data, index) => {
               return (
                 <Div>
-                  <Row>
-                    <BackgroundChangerTxhash>
-                      {toggle.transactionHash && (
-                        <ColumnSecond onClick={redirectToTransactionDetails}>
+                  <RowData>
+                    {toggle.transactionHash && (
+                      <ColumnSecond onClick={redirectToTransactionDetails}>
+                        <BackgroundChangerTxhash>
                           {utility.truncateTxnAddress(data.hash)}
-                        </ColumnSecond>
-                      )}
-                    </BackgroundChangerTxhash>
+                        </BackgroundChangerTxhash>
+                      </ColumnSecond>
+                    )}
+
                     {toggle.status && (
                       <ColumnSecond>{data.status}</ColumnSecond>
                     )}
@@ -364,24 +423,29 @@ export default function TransactionList(props) {
                     {toggle.contracts && (
                       <ColumnSecond>{data.contracts}</ColumnSecond>
                     )}
-                    <BackgroundChangerTxhash>
-                      {toggle.from && (
-                        <ColumnSecond>
+
+                    {toggle.from && (
+                      <ColumnSecond>
+                        <BackgroundChangerFrom>
                           {utility.truncateTxnAddress(data.from)}
-                        </ColumnSecond>
-                      )}
-                    </BackgroundChangerTxhash>
-                    <BackgroundChangerTo>
-                      {toggle.to && (
-                        <ColumnSecond>
-                          {utility.truncateTxnAddress(data.to)}
-                        </ColumnSecond>
-                      )}
-                    </BackgroundChangerTo>
-                    {toggle.when && (
-                      <ColumnSecond>{data.createdOn}</ColumnSecond>
+                        </BackgroundChangerFrom>
+                      </ColumnSecond>
                     )}
-                  </Row>
+
+                    {toggle.to && (
+                      <ColumnSecond>
+                        <BackgroundChangerTo>
+                          {utility.truncateTxnAddress(data.to)}
+                        </BackgroundChangerTo>
+                      </ColumnSecond>
+                    )}
+
+                    {toggle.when && (
+                      <ColumnSecond>
+                        <Moment toNow>{data.createdOn}</Moment>
+                      </ColumnSecond>
+                    )}
+                  </RowData>
                 </Div>
               );
             })}
@@ -397,7 +461,7 @@ export default function TransactionList(props) {
           <ReactPaginate
             previousLabel={"<"}
             nextLabel={">"}
-            pageCount={3}
+            pageCount={page}
             breakLabel={"..."}
             initialPage={0}
             onPageChange={changePage}
@@ -421,6 +485,15 @@ const Div = styled.div`
   border-bottom: 1px solid #e3e7eb;
   white-space: nowrap;
   column-gap: 20px;
+  width: fit-content;
+`;
+const RowData = styled.div`
+  display: flex;
+  flex-direction: row;
+  column-gap: 24px;
+  @media (min-width: 300px) and (max-width: 768px) {
+    column-gap: 36px;
+  }
 `;
 
 const TableContainer = styled.div`
@@ -577,6 +650,7 @@ const IconContainer = styled.div`
   justify-content: space-between;
   width: 100%;
   max-width: 120px;
+  cursor: pointer;
   @media (min-width: 300px) and (max-width: 768px) {
     width: 100%;
     max-width: 123px;
@@ -619,14 +693,11 @@ const ColumnSecond = styled.div`
   font-weight: 500;
   color: #191919;
   width: 100%;
-  // background-repeat: no-repeat;
-  // background: #eaefff 0% 0% no-repeat padding-box;
-  // max-width: 300px;
   min-width: 200px;
 `;
 
 const BackgroundChangerTxhash = styled.div`
-  width: 59%;
+  width: fit-content;
   height: auto;
   background-repeat: no-repeat;
   background: #eaefff 0% 0% no-repeat padding-box;
@@ -642,7 +713,20 @@ const BackgroundChangerTxhash = styled.div`
   }
 `;
 const BackgroundChangerTo = styled.div`
-  width: 100%;
+  width: fit-content;
+  height: auto;
+  background-repeat: no-repeat;
+  background: #eaefff 0% 0% no-repeat padding-box;
+  border-radius: 6px;
+  opacity: 1;
+
+  @media (min-width: 300px) and (max-width: 1371px) {
+    // width: 100%;
+    // padding: 1rem;
+  }
+`;
+const BackgroundChangerFrom = styled.div`
+  width: fit-content;
   height: auto;
   background-repeat: no-repeat;
   background: #eaefff 0% 0% no-repeat padding-box;
@@ -717,20 +801,20 @@ const ToolTipIcon = styled.img`
   cursor: pointer;
   margin-left: 0.5rem;
 `;
-// const PlaceHolderContainer = styled.div`
-//   display: flex;
-//   width: 100%;
-//   height: 500px;
-//   flex-direction: column;
-//   justify-content: center;
-//   align-items: center;
-//   opacity: 50%;
-//   font-weight: 600;
-//   font-size: 13px;
-// `;
-// const PlaceHolderImage = styled.img`
-//   width: 50px;
-//   -webkit-filter: grayscale(60%); /* Safari 6.0 - 9.   */
-//   filter: grayscale(60%);
-//   margin-bottom: 20px;
-// `;
+const PlaceHolderContainer = styled.div`
+  display: flex;
+  width: 100%;
+  height: 500px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 50%;
+  font-weight: 600;
+  font-size: 13px;
+`;
+const PlaceHolderImage = styled.img`
+  width: 50px;
+  -webkit-filter: grayscale(60%); /* Safari 6.0 - 9.   */
+  filter: grayscale(60%);
+  margin-bottom: 20px;
+`;

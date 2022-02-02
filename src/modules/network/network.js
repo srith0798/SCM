@@ -11,8 +11,8 @@ export default function Network() {
     setOpen(true);
   };
 
-  const handleClose = () => {
-    setOpen(false);
+  const handleClose = (val) => {
+    setOpen(val);
   };
   React.useEffect(() => {
     getNetworkList();
@@ -34,9 +34,7 @@ export default function Network() {
       setLoader(true);
       const response = await contractsService.getNetworksLists(requestData);
       setLoader(false);
-
       setAddress(response.networkList);
-      console.log("networkList", response.networkList[0]);
       if (response.networkList.length === 0) setShowPlaceHolder(true);
       else setShowPlaceHolder(false);
     } catch (e) {
@@ -92,8 +90,9 @@ export default function Network() {
         </Container>
         <div>
           {address.map((data, index) => {
+            console.log("dadada", data.networkName);
             return (
-              <Container>
+              <Container style={{ columnGap: "36px" }}>
                 {/* <Icon src="/images/mainnet.svg" /> */}
                 <Head>{data.networkName}</Head>
                 <Url>{data.newRpcUrl}</Url>
@@ -153,7 +152,7 @@ const UrlHeading = styled.div`
 const Button = styled.button`
   background-image: url("/images/Add.svg");
   background-repeat: no-repeat;
-  background-position: 0.3rem;
+  background-position: 0.5rem;
   padding-left: 1.313rem;
   background-size: 0.875rem;
   position: relative;
