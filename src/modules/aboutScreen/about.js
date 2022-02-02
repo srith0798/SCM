@@ -274,6 +274,7 @@ const HeadingContainer = styled.div`
   @media (min-width: 300px) and (max-width: 414px) {
     font-size: 1rem;
     padding: 0rem;
+    white-space: nowrap;
     padding-top: 20px;
   }
 `;
