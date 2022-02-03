@@ -38,7 +38,7 @@ const HomeComponent = (props) => {
       ) : (
         <Container>
           {Utility.isMenuActive("/Contract") &&
-            (Utility.isMenuActive("/contract-details") ? (
+            (Utility.isMenuActive("/Contract-details") ? (
               <ContractDetails />
             ) : (
               <Contract />

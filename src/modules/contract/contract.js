@@ -29,7 +29,7 @@ export default function Contract(props) {
     setOpen(false);
   };
   const redirectTODetails = (id) => {
-    history.push("/dashboard/contract-details/" + id);
+    history.push("/dashboard/Contract-details/" + id);
   };
 
   const getContractList = async (skip = 0, limit = 10) => {

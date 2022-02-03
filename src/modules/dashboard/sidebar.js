@@ -9,16 +9,16 @@ export default function Sidebar(props) {
     history.push("/dashboard/about");
   };
   const redirectToTransaction = () => {
-    history.push("/dashboard/Transactions");
+    history.push("/dashboard/Transactions/transaction-list");
   };
   const redirectToContract = () => {
-    history.push("/dashboard/Contracts");
+    history.push("/dashboard/Contracts/contract");
   };
   const redirectToNetwork = () => {
-    history.push("/dashboard/Networks");
+    history.push("/dashboard/Networks/network");
   };
   const redirectToAnalytics = () => {
-    history.push("/dashboard/Analytics");
+    history.push("/dashboard/Analytics/analytics");
   };
   const redirectToAlerting = () => {
     history.push("/dashboard/Alerting/rules");
@@ -100,7 +100,7 @@ export default function Sidebar(props) {
       </Wrapper>
       <Wrapper
         style={{
-          backgroundColor: utility.isMenuActive("Contract") ? "#1d3c93" : "",
+          backgroundColor: utility.isMenuActive("contract") ? "#1d3c93" : "",
         }}
         onClick={redirectToContract}
         onMouseOver={() => changeSourceForIcons("Contracts")}

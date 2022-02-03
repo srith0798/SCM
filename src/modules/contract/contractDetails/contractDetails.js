@@ -16,6 +16,7 @@ import utility from "../../../utility";
 import { history } from "../../../managers/history";
 import AddTags from "../../popup/addTag";
 import RemoveTag from "./removeTag";
+
 export default function ContractDetails(props) {
   const [activeButton, setActiveButton] = React.useState("General");
   const handleViewClick = (e) => {
@@ -116,7 +117,7 @@ export default function ContractDetails(props) {
     setRemoveState(false);
   };
   const backButton = () => {
-    history.push("/dashboard/contract");
+    history.push("/dashboard/Contracts");
   };
   const [addTag, setAddTag] = useState(false);
   const Open = () => {
@@ -226,72 +227,74 @@ export default function ContractDetails(props) {
           </TabLister>
           {activeButton === "General" && (
             <DetailsSection>
-              <Div>
-                <TableHeading>Network</TableHeading>
-                <TableData>XDC Mainnet</TableData>
-              </Div>
-              <Div>
-                <TableHeading>Solidity version</TableHeading>
-                <SolidityData>{address.blockNumber}</SolidityData>
-              </Div>
-              <Div>
-                <TableHeading>Verification</TableHeading>
-                <Verified>{address.status}</Verified>
-              </Div>
-              <Div>
-                <TableHeading>Tags</TableHeading>
-                <TableData>
-                  <Row>
-                    {address.tags &&
-                      address.tags.map((tag, index) => (
-                        <div>
-                          {console.log("abc", tag, index)}
-                          <FinanceTag onClick={() => removeTagOpen(tag)}>
-                            <ImageTag
-                              removeTagImage={removeTagImage}
-                              index={index}
-                              address={address}
-                              onMouseOver={() => setRemoveTagImage(index)}
-                              onMouseOut={() => setRemoveTagImage(-1)}
-                            />
-                            {tag}
-                          </FinanceTag>
-                        </div>
-                      ))}
-                    {removeTag ? (
-                      <RemoveTag
-                        click={() => setRemoveTag(false)}
-                        contractAddress={contractAddress}
-                        tag={tagStore}
-                        getContractById={getContractById}
-                      />
-                    ) : (
-                      ""
-                    )}
+              <div>
+                <Div>
+                  <TableHeading>Network</TableHeading>
+                  <TableData>XDC Mainnet</TableData>
+                </Div>
+                <Div>
+                  <TableHeading>Solidity version</TableHeading>
+                  <SolidityData>{address.blockNumber}</SolidityData>
+                </Div>
+                <Div>
+                  <TableHeading>Verification</TableHeading>
+                  <Verified>{address.status}</Verified>
+                </Div>
+                <Div>
+                  <TableHeading>Tags</TableHeading>
+                  <TableData>
+                    <Row>
+                      {address.tags &&
+                        address.tags.map((tag, index) => (
+                          <div>
+                            {console.log("abc", tag, index)}
+                            <FinanceTag onClick={() => removeTagOpen(tag)}>
+                              <ImageTag
+                                removeTagImage={removeTagImage}
+                                index={index}
+                                address={address}
+                                onMouseOver={() => setRemoveTagImage(index)}
+                                onMouseOut={() => setRemoveTagImage(-1)}
+                              />
+                              {tag}
+                            </FinanceTag>
+                          </div>
+                        ))}
+                      {removeTag ? (
+                        <RemoveTag
+                          click={() => setRemoveTag(false)}
+                          contractAddress={contractAddress}
+                          tag={tagStore}
+                          getContractById={getContractById}
+                        />
+                      ) : (
+                        ""
+                      )}
 
-                    {addTag && (
-                      <AddTags
-                        click={Close}
-                        address={address}
-                        contract={false}
-                      />
-                    )}
-                    <AddTag onClick={() => Open()}>Add Tag</AddTag>
-                  </Row>
-                </TableData>
-              </Div>
-              <Div>
-                <TableHeading>Compiler</TableHeading>
-                <TableData>{address.blockNumber}</TableData>
-              </Div>
-              <Div>
-                <TableHeading>EVM version</TableHeading>
-                <EvmData>{address.blockNumber}</EvmData>
-              </Div>
-              <Div>
-                <TableHeading>Optimizations</TableHeading>
-                <Enabled>{address.status}</Enabled>
-              </Div>
+                      {addTag && (
+                        <AddTags
+                          click={Close}
+                          address={address}
+                          contract={false}
+                        />
+                      )}
+                      <AddTag onClick={() => Open()}>Add Tag</AddTag>
+                    </Row>
+                  </TableData>
+                </Div>
+                <Div>
+                  <TableHeading>Compiler</TableHeading>
+                  <TableData>{address.blockNumber}</TableData>
+                </Div>
+                <Div>
+                  <TableHeading>EVM version</TableHeading>
+                  <EvmData>{address.blockNumber}</EvmData>
+                </Div>
+                <Div>
+                  <TableHeading>Optimizations</TableHeading>
+                  <Enabled>{address.status}</Enabled>
+                </Div>
+              </div>
 
               <PopUp>
                 <PopUpBlock>
@@ -425,16 +428,16 @@ const Verified = styled.div`
   font-size: 1rem;
   font-weight: 600;
   color: #00a58c;
+  margin-right: 83px;
   @media (min-width: 320px) and (max-width: 768px) {
-    margin-left: -23px;
   }
 `;
 const Enabled = styled.div`
   font-size: 1rem;
   font-weight: 600;
   color: #00a58c;
+  margin-right: 83px;
   @media (min-width: 320px) and (max-width: 768px) {
-    margin-left: -38px;
   }
 `;
 const FinanceTag = styled.div`
@@ -563,13 +566,13 @@ const DetailsSection = styled.div`
 `;
 const Div = styled.div`
   display: flex;
-  flex-flow: row nowrap;
+  // flex-flow: row nowrap;
   border-bottom: 0.063rem solid #e3e7eb;
   padding: 1.25rem 1.25rem 0.2rem 1.25rem;
-  @media (min-width: 340px) and (max-width: 768px) {
-    column-gap: 200px;
-    white-space: nowrap;
-  }
+  // @media (min-width: 340px) and (max-width: 768px) {
+  //   column-gap: 200px;
+  //   white-space: nowrap;
+  // }
 `;
 const TableData = styled.div`
   font-size: 0.875rem;
@@ -579,6 +582,7 @@ const TableData = styled.div`
   /* max-width: 9.375rem; */
   font-size: 1rem;
   font-weight: 600;
+  margin-right: 6px;
 `;
 const SolidityData = styled.div`
   font-size: 0.875rem;
@@ -588,8 +592,8 @@ const SolidityData = styled.div`
   max-width: 9.375rem;
   font-size: 1rem;
   font-weight: 600;
-  @media (min-width: 340px) and (max-width: 768px) {
-    margin-left: -46px;
+  @media (max-width: 768px) {
+    margin-right: 13px;
   }
 `;
 const TagData = styled.div`
@@ -605,15 +609,13 @@ const TagData = styled.div`
   }
 `;
 const EvmData = styled.div`
-  font-size: 0.875rem;
-  font-weight: 600;
   color: #191919;
   width: 100%;
   max-width: 9.375rem;
   font-size: 1rem;
   font-weight: 600;
-  @media (min-width: 340px) and (max-width: 768px) {
-    margin-left: -22px;
+  @media (max-width: 414px) {
+    margin-right: 12px;
   }
 `;
 const CopyImg = styled.img`
