@@ -227,74 +227,72 @@ export default function ContractDetails(props) {
           </TabLister>
           {activeButton === "General" && (
             <DetailsSection>
-              <div>
-                <Div>
-                  <TableHeading>Network</TableHeading>
-                  <TableData>XDC Mainnet</TableData>
-                </Div>
-                <Div>
-                  <TableHeading>Solidity version</TableHeading>
-                  <SolidityData>{address.blockNumber}</SolidityData>
-                </Div>
-                <Div>
-                  <TableHeading>Verification</TableHeading>
-                  <Verified>{address.status}</Verified>
-                </Div>
-                <Div>
-                  <TableHeading>Tags</TableHeading>
-                  <TableData>
-                    <Row>
-                      {address.tags &&
-                        address.tags.map((tag, index) => (
-                          <div>
-                            {console.log("abc", tag, index)}
-                            <FinanceTag onClick={() => removeTagOpen(tag)}>
-                              <ImageTag
-                                removeTagImage={removeTagImage}
-                                index={index}
-                                address={address}
-                                onMouseOver={() => setRemoveTagImage(index)}
-                                onMouseOut={() => setRemoveTagImage(-1)}
-                              />
-                              {tag}
-                            </FinanceTag>
-                          </div>
-                        ))}
-                      {removeTag ? (
-                        <RemoveTag
-                          click={() => setRemoveTag(false)}
-                          contractAddress={contractAddress}
-                          tag={tagStore}
-                          getContractById={getContractById}
-                        />
-                      ) : (
-                        ""
-                      )}
+              <Div>
+                <TableHeading>Network</TableHeading>
+                <TableData>XDC Mainnet</TableData>
+              </Div>
+              <Div>
+                <TableHeading>Solidity version</TableHeading>
+                <SolidityData>{address.blockNumber}</SolidityData>
+              </Div>
+              <Div>
+                <TableHeading>Verification</TableHeading>
+                <Verified>{address.status}</Verified>
+              </Div>
+              <Div>
+                <TableHeading>Tags</TableHeading>
+                <TableData>
+                  <Row>
+                    {address.tags &&
+                      address.tags.map((tag, index) => (
+                        <div>
+                          {console.log("abc", tag, index)}
+                          <FinanceTag onClick={() => removeTagOpen(tag)}>
+                            <ImageTag
+                              removeTagImage={removeTagImage}
+                              index={index}
+                              address={address}
+                              onMouseOver={() => setRemoveTagImage(index)}
+                              onMouseOut={() => setRemoveTagImage(-1)}
+                            />
+                            {tag}
+                          </FinanceTag>
+                        </div>
+                      ))}
+                    {removeTag ? (
+                      <RemoveTag
+                        click={() => setRemoveTag(false)}
+                        contractAddress={contractAddress}
+                        tag={tagStore}
+                        getContractById={getContractById}
+                      />
+                    ) : (
+                      ""
+                    )}
 
-                      {addTag && (
-                        <AddTags
-                          click={Close}
-                          address={address}
-                          contract={false}
-                        />
-                      )}
-                      <AddTag onClick={() => Open()}>Add Tag</AddTag>
-                    </Row>
-                  </TableData>
-                </Div>
-                <Div>
-                  <TableHeading>Compiler</TableHeading>
-                  <TableData>{address.blockNumber}</TableData>
-                </Div>
-                <Div>
-                  <TableHeading>EVM version</TableHeading>
-                  <EvmData>{address.blockNumber}</EvmData>
-                </Div>
-                <Div>
-                  <TableHeading>Optimizations</TableHeading>
-                  <Enabled>{address.status}</Enabled>
-                </Div>
-              </div>
+                    {addTag && (
+                      <AddTags
+                        click={Close}
+                        address={address}
+                        contract={false}
+                      />
+                    )}
+                    <AddTag onClick={() => Open()}>Add Tag</AddTag>
+                  </Row>
+                </TableData>
+              </Div>
+              <Div>
+                <TableHeading>Compiler</TableHeading>
+                <TableData>{address.blockNumber}</TableData>
+              </Div>
+              <Div>
+                <TableHeading>EVM version</TableHeading>
+                <EvmData>{address.blockNumber}</EvmData>
+              </Div>
+              <Div>
+                <TableHeading>Optimizations</TableHeading>
+                <Enabled>{address.status}</Enabled>
+              </Div>
 
               <PopUp>
                 <PopUpBlock>
@@ -566,13 +564,12 @@ const DetailsSection = styled.div`
 `;
 const Div = styled.div`
   display: flex;
-  // flex-flow: row nowrap;
   border-bottom: 0.063rem solid #e3e7eb;
   padding: 1.25rem 1.25rem 0.2rem 1.25rem;
-  // @media (min-width: 340px) and (max-width: 768px) {
-  //   column-gap: 200px;
-  //   white-space: nowrap;
-  // }
+  @media (min-width: 375px) and (max-width: 1200px) {
+    border-bottom: 0.063rem solid #e3e7eb;
+    width: 1000px;
+  }
 `;
 const TableData = styled.div`
   font-size: 0.875rem;

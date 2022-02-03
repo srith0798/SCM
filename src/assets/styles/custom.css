@@ -34,8 +34,8 @@ div,
 p,
 span,
 label {
-  font-family:'Inter', "SFProText", "Open Sans", "Helvetica Neue", "Helvetica", "Arial",
-    "sans-serif" !important;
+  font-family: "Inter", "SFProText", "Open Sans", "Helvetica Neue", "Helvetica",
+    "Arial", "sans-serif" !important;
 }
 
 input:focus {
@@ -399,8 +399,7 @@ input:checked + .slider:before {
   outline: none;
   white-space: nowrap;
   padding-left: 5px;
-  height:32px;
-  
+  height: 32px;
 }
 .select-dropdown {
   border: 1px solid #b2c5fa;
@@ -409,12 +408,24 @@ input:checked + .slider:before {
   font-weight: 600;
   color: #303134;
   padding-left: 5px;
-  height:32px;
+  height: 32px;
 }
 
-    
-  
-.select-filter{
+.select-filter {
+  background: #f5f6fd 0% 0% no-repeat padding-box;
+  border: 1px solid #d5e0ff;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #b7b7b7;
+  height: 34px;
+  padding-left: 9px;
+  width: 100%;
+  max-width: 352px;
+  outline: none;
+}
+@media (min-width: 300px) and (max-width: 414px) {
+  .select-filter {
     background: #f5f6fd 0% 0% no-repeat padding-box;
     border: 1px solid #d5e0ff;
     border-radius: 6px;
@@ -425,18 +436,19 @@ input:checked + .slider:before {
     padding-left: 9px;
     width: 100%;
     max-width: 299px;
-    outline:none;  }
+  }
+}
 
-.options-select{
-      background: #f5f6fd 0% 0% no-repeat padding-box;
-      border: 1px solid #d5e0ff;
-      border-radius: 6px;
-      font-size: 14px;
-      font-weight: 600;
-      color: #b7b7b7;
-      height: 34px;
-      padding-left: 9px;
-      width: 100%;
-      max-width: 352px;
-      outline:none;  
-    }
+.options-select {
+  background: #f5f6fd 0% 0% no-repeat padding-box;
+  border: 1px solid #d5e0ff;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #b7b7b7;
+  height: 34px;
+  padding-left: 9px;
+  width: 100%;
+  max-width: 352px;
+  outline: none;
+}

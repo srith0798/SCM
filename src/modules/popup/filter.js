@@ -349,10 +349,13 @@ const NewContainerOne = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  max-width: 460px;
+  max-width: 512px;
   padding-bottom: 20px;
   @media (min-width: 300px) and (max-width: 414px) {
     flex-direction: column;
-    // display: flex;
+    max-width: 460px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
   }
 `;

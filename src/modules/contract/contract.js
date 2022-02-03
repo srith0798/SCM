@@ -346,10 +346,10 @@ const PaginationDiv = styled.div`
 
 const IconDiv = styled.div`
   display: flex;
-  @media (min-width: 375px) and (max-width: 812px) {
-    margin-bottom: 22px;
+  @media (max-width: 768px) {
+    margin-bottom: 26px;
   }
-  @media (max-width: 375px) {
+  @media (max-width: 414px) {
     margin-bottom: 0px;
   }
 `;
@@ -366,7 +366,7 @@ const RefreshImage = styled.img`
     margin-top: 28px;
     margin-left: 3px;
   }
-  @media (max-width: 375px) {
+  @media (max-width: 414px) {
     margin-right: 0.325rem;
     margin-top: 51px;
     margin-left: 3px;
@@ -382,7 +382,7 @@ const MainContainer = styled.div`
   height: 100vh;
   padding: 2.125rem;
   height: 100vh;
-  @media (max-width: 375px) {
+  @media (max-width: 414px) {
     padding: 1.2rem;
   }
 `;
@@ -394,10 +394,10 @@ const MainHeading = styled.div`
     display: flex;
     flex-direction: row;
   }
-  @media (max-width: 375px) {
+  @media (max-width: 414px) {
     display: flex;
     flex-direction: column;
-    padding-top: 18px;
+    padding-top: 7px;
   }
 `;
 const SubContainer = styled.div`
@@ -411,7 +411,7 @@ const SubContainer = styled.div`
     padding-top: 47px;
     // padding-bottom: 42px;
   }
-  @media (min-width: 375px) {
+  @media (min-width: 300px) {
     padding-top: 47px;
     padding-bottom: 33px;
   }
@@ -475,11 +475,12 @@ const Input = styled.input`
   background-size: 0.75rem;
   position: relative;
   border: none;
+  height: 38px;
   outline: none;
   display: flex;
-  @media (max-width: 768px) {
+  @media (max-width: 767px) {
     width: min-content;
-    height: 40px;
+    height: 37px;
   }
   @media (min-width: 375px) {
     width: 223px;
@@ -522,6 +523,7 @@ const TableContainer = styled.div`
 const Div = styled.div`
   padding: 0.75rem;
   border-bottom: 0.063rem solid #e3e7eb;
+  width: 1232px;
 `;
 const ColumnOne = styled.div`
   font-size: 0.875rem;

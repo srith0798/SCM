@@ -8,7 +8,8 @@ export default function ConnectWallets(props) {
   console.log();
 
   const ConnectWallet = () => {
-    if (props.getCurrentUserDetails()) props.click();
+    props.getCurrentUserDetails();
+    // props.click();
   };
   return (
     <>
