@@ -525,7 +525,9 @@ const TableContainer = styled.div`
 const Div = styled.div`
   padding: 0.75rem;
   border-bottom: 0.063rem solid #e3e7eb;
-  width: 1232px;
+  @media (min-width: 300px) and (max-width: 1200px) {
+    width: 1232px;
+  }
 `;
 const ColumnOne = styled.div`
   font-size: 0.875rem;
