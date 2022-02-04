@@ -15,7 +15,7 @@ export default function TransactionDetails() {
     setActiveButton(e.target.id);
   };
   const backButton = () => {
-    history.push("/dashboard/transactionlist");
+    history.push("/dashboard/Transactions");
   };
   return (
     <MainContainer>
@@ -65,7 +65,7 @@ export default function TransactionDetails() {
             style={{
               color: activeButton === "Overview" ? "#3163F0" : "#AEB7D0",
               display: "flex",
-              paddingBottom: "0.875rem",
+              paddingBottom: "1rem",
               paddingLeft: "10px",
               borderBottom:
                 activeButton === "Overview"
@@ -135,13 +135,15 @@ export default function TransactionDetails() {
             onClick={handleViewClick}
             style={{
               color: activeButton === "StateChange" ? "#3163F0" : "#AEB7D0",
+              display: "flex",
+              paddingBottom: "1rem",
               borderBottom:
                 activeButton === "StateChange" ? "0.225rem solid #3163F0" : "",
             }}
           >
             <TabImage
               alt=""
-              style={{ marginRight: "0.375rem", marginBottom: "4px" }}
+              style={{ marginRight: "0.375rem" }}
               src={
                 activeButton === "StateChange"
                   ? "/images/statechange_blue.svg"
@@ -367,11 +369,9 @@ const TopContainer = styled.div`
 `;
 
 const TabImage = styled.img`
-  @media (min-width: 300px) and (max-width: 485px) {
+  @media (min-width: 300px) and (max-width: 414px) {
     width: 13px;
-  }
-  @media (max-width: 375px) {
-    margin-bottom: 10px;
+    margin-bottom: 5px;
   }
 `;
 
@@ -391,6 +391,12 @@ const Title = styled.div`
   white-space: nowrap;
   @media (min-width: 340px) and (max-width: 768px) {
     align-items: left;
+  }
+  @media (max-width: 414px) {
+    margin-left: -53px;
+  }
+  @media (max-width: 375px) {
+    margin-left: -41px;
   }
 `;
 const FunctionContainer = styled.div`
@@ -604,7 +610,7 @@ const TabLister = styled.div`
     white-space: nowrap;
     padding-left: 10px;
   }
-  @media (min-width: 320px) and (max-width: 450px) {
+  @media (min-width: 320px) and (max-width: 414px) {
     display: flex;
     justify-content: space-between;
     min-height: 45px;
@@ -626,6 +632,10 @@ const TabView = styled.div`
   padding: 0.313rem 0.5rem 0.313rem 0.5rem;
   display: flex;
   padding-bottom: 1.2rem;
+  @media (min-width: 320px) and (max-width: 414px) {
+    padding: 1rem 0.5rem 0.313rem 0.5rem;
+    padding-bottom: 1.2rem;
+  }
 `;
 const ToolTipIcon = styled.img`
   width: 0.75rem;

@@ -12,8 +12,8 @@ import { sessionManager } from "../../managers/sessionManager";
 import ShowLoader from "../../common/components/showLoader";
 import utility from "../../utility";
 import Filter from "../popup/filter";
-import Moment from "react-moment";
 import "moment-timezone";
+import Moment from "react-moment";
 import ReactPaginate from "react-paginate";
 
 export default function TransactionList(props) {
@@ -145,7 +145,7 @@ export default function TransactionList(props) {
     color: "#191919",
   };
   const redirectToTransactionDetails = () => {
-    history.push("/dashboard/transaction-details");
+    history.push("/dashboard/Transaction-details");
   };
   const changePage = (value) => {
     setValueCheck(value.selected);
@@ -193,7 +193,9 @@ export default function TransactionList(props) {
         });
       }
 
-      const response = await ContractsService.getTransactionsList(filterResponse);
+      const response = await ContractsService.getTransactionsList(
+        filterResponse
+      );
 
       setAddress(response.transactionList);
       console.log("response", response.transactionList);
@@ -210,16 +212,29 @@ export default function TransactionList(props) {
         <TransactionBox>
           <NewDiv>
             <Transactions>Transactions</Transactions>
-            <SearchBar placeholder="Search by status or name" onChange={search} value={input} />
+            <SearchBar
+              placeholder="Search by status or name"
+              onChange={search}
+              value={input}
+            />
           </NewDiv>
 
           <IconContainer>
-            {open && <Settings click={handleClose} setToggle={setToggle} toggle={toggle} />}
+            {open && (
+              <Settings
+                click={handleClose}
+                setToggle={setToggle}
+                toggle={toggle}
+              />
+            )}
             <Tooltip disableFocusListener title="Settings">
               <Icons src="/images/settings.svg" onClick={handleClickOpen} />
             </Tooltip>
             <Tooltip disableFocusListener title="Refresh">
-              <Icons onClick={() => getTransaction()} src="/images/refresh.svg" />
+              <Icons
+                onClick={() => getTransaction()}
+                src="/images/refresh.svg"
+              />
             </Tooltip>
             {filterPopupOpen && (
               <Filter
@@ -244,7 +259,10 @@ export default function TransactionList(props) {
         <Card>
           <Column>
             <Heading>View Transaction for Contract</Heading>
-            <InstructionText>You can view transactions per contract by using the contract picker below</InstructionText>
+            <InstructionText>
+              You can view transactions per contract by using the contract
+              picker below
+            </InstructionText>
 
             <ClickAwayListener onClickAway={handleClickAway}>
               <Box
@@ -256,7 +274,12 @@ export default function TransactionList(props) {
                 selected={selected.address}
               >
                 <DropDown onClick={handleClick}>
-                  App_Transactions_Validator <img style={{ marginLeft: "0.5rem" }} alt="" src="/images/XDCmainnet.svg" />
+                  App_Transactions_Validator{" "}
+                  <img
+                    style={{ marginLeft: "0.5rem" }}
+                    alt=""
+                    src="/images/XDCmainnet.svg"
+                  />
                   <br />
                   <TransactionHash>{selected.address}</TransactionHash>
                   <Image src="/images/Arrrow.svg" />
@@ -282,7 +305,7 @@ export default function TransactionList(props) {
 
         <TableContainer>
           <Div>
-            <Row>
+            <RowData>
               {toggle.transactionHash && (
                 <ColumnOne>
                   Tx Hash
@@ -293,7 +316,10 @@ export default function TransactionList(props) {
                     disableFocusListener
                     title="Unique transaction identifier, also known as the Transaction ID"
                   >
-                    <ToolTipIcon onClick={() => setTxHashToolTip(!TxHashToolTip)} src="/images/tool-tip.svg" />
+                    <ToolTipIcon
+                      onClick={() => setTxHashToolTip(!TxHashToolTip)}
+                      src="/images/tool-tip.svg"
+                    />
                   </Tooltip>
                 </ColumnOne>
               )}
@@ -307,7 +333,10 @@ export default function TransactionList(props) {
                     disableFocusListener
                     title="Token transaction status"
                   >
-                    <ToolTipIcon onClick={() => setstatusToolTip(!statusToolTip)} src="/images/tool-tip.svg" />
+                    <ToolTipIcon
+                      onClick={() => setstatusToolTip(!statusToolTip)}
+                      src="/images/tool-tip.svg"
+                    />
                   </Tooltip>
                 </ColumnOne>
               )}
@@ -321,15 +350,24 @@ export default function TransactionList(props) {
                     disableFocusListener
                     title="Smart contract function status"
                   >
-                    <ToolTipIcon onClick={() => setfunctionToolTip(!functionToolTip)} src="/images/tool-tip.svg" />
+                    <ToolTipIcon
+                      onClick={() => setfunctionToolTip(!functionToolTip)}
+                      src="/images/tool-tip.svg"
+                    />
                   </Tooltip>
                 </ColumnOne>
               )}
               {toggle.contracts && (
                 <ColumnOne>
                   Contracts
-                  <Tooltip disableFocusListener title="Name of the smart contract">
-                    <ToolTipIcon onClick={() => setstatusToolTip(!statusToolTip)} src="/images/tool-tip.svg" />
+                  <Tooltip
+                    disableFocusListener
+                    title="Name of the smart contract"
+                  >
+                    <ToolTipIcon
+                      onClick={() => setstatusToolTip(!statusToolTip)}
+                      src="/images/tool-tip.svg"
+                    />
                   </Tooltip>
                 </ColumnOne>
               )}
@@ -352,40 +390,62 @@ export default function TransactionList(props) {
               {toggle.when && (
                 <ColumnOne>
                   When
-                  <Tooltip disableFocusListener title="Date and time of transaction execution">
+                  <Tooltip
+                    disableFocusListener
+                    title="Date and time of transaction execution"
+                  >
                     <ToolTipIcon src="/images/tool-tip.svg" />
                   </Tooltip>
                 </ColumnOne>
               )}
-            </Row>
+            </RowData>
           </Div>
           <div>
             {(input === "" ? address : searchRow).map((data, index) => {
               return (
                 <Div>
-                  <Row>
-                    <BackgroundChangerTxhash>
-                      {toggle.transactionHash && (
-                        <ColumnSecond onClick={redirectToTransactionDetails}>{utility.truncateTxnAddress(data.hash)}</ColumnSecond>
-                      )}
-                    </BackgroundChangerTxhash>
-                    {toggle.status && <ColumnSecond>{data.status}</ColumnSecond>}
+                  <RowData>
+                    {toggle.transactionHash && (
+                      <ColumnSecond onClick={redirectToTransactionDetails}>
+                        <BackgroundChangerTxhash>
+                          {utility.truncateTxnAddress(data.hash)}
+                        </BackgroundChangerTxhash>
+                      </ColumnSecond>
+                    )}
 
-                    {toggle.function && <ColumnSecond>{data.function}</ColumnSecond>}
-                    {toggle.contracts && <ColumnSecond>{data.contracts}</ColumnSecond>}
-                    <BackgroundChangerTxhash>
-                      {toggle.from && <ColumnSecond>{utility.truncateTxnAddress(data.from)}</ColumnSecond>}
-                    </BackgroundChangerTxhash>
-                    <BackgroundChangerTo>
-                      {toggle.to && <ColumnSecond>{utility.truncateTxnAddress(data.to)}</ColumnSecond>}
-                    </BackgroundChangerTo>
+                    {toggle.status && (
+                      <ColumnSecond>{data.status}</ColumnSecond>
+                    )}
+
+                    {toggle.function && (
+                      <ColumnSecond>{data.function}</ColumnSecond>
+                    )}
+                    {toggle.contracts && (
+                      <ColumnSecond>{data.contracts}</ColumnSecond>
+                    )}
+
+                    {toggle.from && (
+                      <ColumnSecond>
+                        <BackgroundChangerFrom>
+                          {utility.truncateTxnAddress(data.from)}
+                        </BackgroundChangerFrom>
+                      </ColumnSecond>
+                    )}
+
+                    {toggle.to && (
+                      <ColumnSecond>
+                        <BackgroundChangerTo>
+                          {utility.truncateTxnAddress(data.to)}
+                        </BackgroundChangerTo>
+                      </ColumnSecond>
+                    )}
+
                     {toggle.when && (
                       <ColumnSecond>
-                        {" "}
                         <Moment toNow>{data.createdOn}</Moment>
                       </ColumnSecond>
                     )}
-                  </Row>
+                  </RowData>
                 </Div>
               );
             })}
@@ -411,7 +471,11 @@ export default function TransactionList(props) {
           />
         </PaginationDiv>
       </MainContainer>
-      <div>{false && <LetsGetStarted click={() => setState(false)} state={state} />}</div>
+      <div>
+        {false && (
+          <LetsGetStarted click={() => setState(false)} state={state} />
+        )}
+      </div>
     </>
   );
 }
@@ -421,6 +485,15 @@ const Div = styled.div`
   border-bottom: 1px solid #e3e7eb;
   white-space: nowrap;
   column-gap: 20px;
+  width: fit-content;
+`;
+const RowData = styled.div`
+  display: flex;
+  flex-direction: row;
+  column-gap: 24px;
+  @media (min-width: 300px) and (max-width: 768px) {
+    column-gap: 36px;
+  }
 `;
 
 const TableContainer = styled.div`
@@ -565,7 +638,7 @@ const SearchBar = styled.input`
     margin-left: -1px;
     margin-right: 8px;
     // padding: 5px;
-    font-size: 13px;
+    font-size: 12px;
     // background-image: none;
   }
 `;
@@ -620,14 +693,11 @@ const ColumnSecond = styled.div`
   font-weight: 500;
   color: #191919;
   width: 100%;
-  // background-repeat: no-repeat;
-  // background: #eaefff 0% 0% no-repeat padding-box;
-  // max-width: 300px;
   min-width: 200px;
 `;
 
 const BackgroundChangerTxhash = styled.div`
-  width: 59%;
+  width: fit-content;
   height: auto;
   background-repeat: no-repeat;
   background: #eaefff 0% 0% no-repeat padding-box;
@@ -643,7 +713,20 @@ const BackgroundChangerTxhash = styled.div`
   }
 `;
 const BackgroundChangerTo = styled.div`
-  width: 100%;
+  width: fit-content;
+  height: auto;
+  background-repeat: no-repeat;
+  background: #eaefff 0% 0% no-repeat padding-box;
+  border-radius: 6px;
+  opacity: 1;
+
+  @media (min-width: 300px) and (max-width: 1371px) {
+    // width: 100%;
+    // padding: 1rem;
+  }
+`;
+const BackgroundChangerFrom = styled.div`
+  width: fit-content;
   height: auto;
   background-repeat: no-repeat;
   background: #eaefff 0% 0% no-repeat padding-box;

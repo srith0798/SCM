@@ -5,7 +5,10 @@ import { Row } from "simple-flexbox";
 import { sessionManager } from "../../managers/sessionManager";
 import WalletPopUp from "./walletPopUp";
 import Tooltip from "@mui/material/Tooltip";
-import Footer from "../dashboard/footer";
+// import ReactPlayer from "react-player";
+
+import FooterComponent from "../dashboard/footerComponent";
+import ReactPlayer from "react-player";
 
 export default function About(props) {
   const [state, setState] = useState(true);
@@ -21,20 +24,43 @@ export default function About(props) {
                 </DetailBox>
               </Row>
               <DataBox>
-                Easily govern your smart contract deployment with end-to-end lifecycle utility, empowering the entire on-chain critical
+                Easily govern your smart contract deployment with end-to-end
+                lifecycle utility, empowering the entire on-chain critical
                 business logic.
               </DataBox>
-              <Tooltip disableFocusListener title="Click to get started with Xmartly">
+              <Tooltip
+                disableFocusListener
+                title="Click to get started with Xmartly"
+              >
                 <Button>
                   Add Your Smart Contract
-                  <img style={{ marginLeft: "0.375rem" }} alt="" src="/images/question-mark.svg" />
+                  <img
+                    style={{ marginLeft: "0.375rem" }}
+                    alt=""
+                    src="/images/question-mark.svg"
+                  />
                 </Button>
               </Tooltip>
             </LeftContainer>
             <RightContainer>
               <VideoBox>
-                <img style={{ width: "3.75rem", height: "3.75rem" }} alt="" src="/images/play.svg" />
+                <ReactPlayer
+                  url="https://www.youtube.com/watch?v=qfXJKTkXzD8"
+                  controls
+                  width="100%"
+                  height="100%"
+                />
               </VideoBox>
+              <SmartButton>
+                Add Your Smart Contract
+                <img
+                  style={{
+                    marginLeft: "4px",
+                  }}
+                  alt=""
+                  src="/images/question-mark.svg"
+                />
+              </SmartButton>
             </RightContainer>
           </Container>
 
@@ -47,27 +73,39 @@ export default function About(props) {
               <IconContainer>
                 <img alt="" src="/images/manage contracts.svg" />
                 <Title>Manage Contracts</Title>
-                <SubTitle>You can add and manage any contract deployed on XDC Network.</SubTitle>
+                <SubTitle>
+                  You can add and manage any contract deployed on XDC Network.
+                </SubTitle>
               </IconContainer>
               <IconContainer>
                 <img alt="" src="/images/analyticsicon.svg" />
                 <Title>Analytics</Title>
-                <SubTitle>View analytics like number of transactions, gas fee etc for the added contract.</SubTitle>
+                <SubTitle>
+                  View analytics like number of transactions, gas fee etc for
+                  the added contract.
+                </SubTitle>
               </IconContainer>
               <IconContainer>
                 <img alt="" src="/images/set alerts.svg" />
                 <Title>Set Alerts</Title>
-                <SubTitle>You can set different types of alert for you contracts, without missing any information</SubTitle>
+                <SubTitle>
+                  You can set different types of alert for you contracts,
+                  without missing any information
+                </SubTitle>
               </IconContainer>
             </IconRow>
           </GreyContainer>
         </MainBoxContainer>
       </MainContainer>
-      <Footer />
+      <FooterComponent />
 
       <div>
         {!sessionManager.getDataFromCookies("isLoggedIn") && (
-          <WalletPopUp getCurrentUserDetails={props.getCurrentUserDetails} click={() => setState(false)} state={state} />
+          <WalletPopUp
+            getCurrentUserDetails={props.getCurrentUserDetails}
+            click={() => setState(false)}
+            state={state}
+          />
         )}
       </div>
     </>
@@ -93,11 +131,8 @@ const MainBoxContainer = styled.div`
   @media (max-width: 768px) {
     padding: 30px;
   }
-  @media (max-width: 797px) {
+  @media (min-width: 768px) and (max-width: 1024px) {
     padding: 16px;
-  }
-  @media (max-width: 800px) {
-    padding: 32px;
   }
 `;
 const Container = styled.div`
@@ -130,8 +165,8 @@ const Container = styled.div`
 const RightContainer = styled.div`
   width: 100%;
   padding: 4.375rem;
-  @media (min-width: 340px) and (max-width: 793px) {
-    padding: 4.375rem;
+  @media (min-width: 340px) and (max-width: 803px) {
+    padding: 0.375rem 5rem 7rem 5rem;
     height: 100%;
   }
   @media (min-width: 300px) and (max-width: 414px) {
@@ -141,6 +176,9 @@ const RightContainer = styled.div`
 const LeftContainer = styled.div`
   width: 100%;
   padding: 2.5rem;
+  // @media (min-width: 768px) and (max-width: 1024px) {
+  //   padding: 1rem;
+  // }
 `;
 const Span = styled.span`
   color: #0089ff;
@@ -238,12 +276,13 @@ const HeadingContainer = styled.div`
   @media (min-width: 300px) and (max-width: 414px) {
     font-size: 1rem;
     padding: 0rem;
+    white-space: nowrap;
     padding-top: 20px;
   }
 `;
 const GreyContainer = styled.div`
   background-color: none;
-  padding-bottom: 1.25rem;
+  padding-bottom: 2.25rem;
   display: flex;
   flex-direction: column;
   align-self: center;
@@ -291,5 +330,47 @@ const SubHead = styled.div`
   padding-bottom: 1.25rem;
   @media (min-width: 300px) and (max-width: 414px) {
     font-size: 0.8rem;
+  }
+`;
+const SmartButton = styled.div`
+  background-repeat: no-repeat;
+  background-position: 0.5rem;
+  padding: 0.875rem;
+  item-align: center;
+  background-size: 0.875rem;
+  position: relative;
+  background-color: #3163f0;
+  color: #ffffff;
+  border: none;
+  border-radius: 0.25rem;
+  margin-top: 1.875rem;
+  display: flex;
+  font-size: 1rem;
+  font-weight: 600;
+  white-space: nowrap;
+  @media (min-width: 340px) and (max-width: 793px) {
+    margin-left: 102px;
+    margin-right: 101px;
+    margin-top: 21px;
+  }
+  @media (max-width: 414px) {
+    margin-left: 30px;
+    font-size: 0.6rem;
+    height: 40px;
+    margin-right: 64px;
+    margin-left: 61px;
+    width: 162px;
+  }
+
+  @media (max-width: 375px) {
+    margin-left: 30px;
+    font-size: 0.6rem;
+    height: 40px;
+    margin-right: 64px;
+    margin-left: 44px;
+    width: 162px;
+  }
+  @media (min-width: 769px) {
+    display: none;
   }
 `;

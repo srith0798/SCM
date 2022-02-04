@@ -63,7 +63,7 @@ function Header(props) {
             </XDCInfo>
             <UserContainer>
               {getUserAccountAddress()}
-              <UserLogo src="/images/user-round.png" />
+              <UserLogo src="/images/profile.svg" />
             </UserContainer>
           </XDCContainer>
         ) : (
@@ -105,7 +105,7 @@ const GridLogo = styled.img`
   }
 `;
 const XDCContainer = styled.div`
-  background: #324988;
+  background: #3e579a;
   display: flex;
   color: white;
   border-radius: 5px;
@@ -116,12 +116,13 @@ const XDCContainer = styled.div`
 
 const UserContainer = styled.div`
   width: 190px;
-  background: #3e579a;
+  background: #324988;
   border-radius: 5px;
   display: flex;
   align-items: center;
   padding: 0px 10px;
-  @media (max-width: 455px) {
+
+  @media (max-width: 500px) {
     display: none;
   }
 `;
@@ -142,12 +143,12 @@ const Button = styled.button`
 `;
 const XDCInfo = styled.button`
   margin-right: 30px;
-  background: #324988;
+  background: #3e579a;
   display: flex;
   color: white;
   border: none;
   outline: none;
-  @media (max-width: 375px) {
+  @media (max-width: 374px) {
     display: none;
   }
 `;

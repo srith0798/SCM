@@ -4,7 +4,7 @@ import styled from "styled-components";
 const FooterContainer = styled.div`
   z-index: 1;
   width: 100%;
-  height: 100%;
+  height: 50%;
   min-height: 569px;
   background: #102c78 0% 0% no-repeat padding-box;
   opacity: 1;
@@ -141,13 +141,16 @@ const XDCIcon = styled.img`
   opacity: 1;
 `;
 
-function Footer() {
+function FooterComponent() {
   return (
     <FooterContainer>
       <ColumnContainer>
         <Column>
           <FooterImg src="/images/smarthub.svg" alt="" />
-          <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit Ut quis maximus augue.</Text>
+          <Text>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit Ut quis
+            maximus augue.
+          </Text>
         </Column>
         <SecondColumn>
           <SubColOne>
@@ -192,4 +195,4 @@ function Footer() {
   );
 }
 
-export default Footer;
+export default FooterComponent;

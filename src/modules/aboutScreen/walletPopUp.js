@@ -7,7 +7,7 @@ const useStyles = makeStyles(() => ({
   dialogBox: {
     width: "100% !important",
     marginBottom: "275px",
-    marginLeft: "142px",
+    // marginLeft: "142px",
   },
 }));
 
@@ -45,7 +45,9 @@ export default function WalletPopUp(props) {
                   <SubTitle>
                     Install XDCPay Chrome extension from{" "}
                     <p>
-                      <a href="mailto:someone@example.com">here</a>
+                      <a href="https://chrome.google.com/webstore/detail/xdcpay/bocpokimicclpaiekenaeelehdjllofo?hl=en-GB">
+                        here
+                      </a>
                     </p>
                   </SubTitle>
                 </IconContainer>

@@ -3,8 +3,6 @@ import styled from "styled-components";
 import AddNetwork from "./addNetwork";
 import Tooltip from "@mui/material/Tooltip";
 import contractsService from "../../services/contractsService";
-import utility from "../../utility";
-import { sessionManager } from "../../managers/sessionManager";
 import ShowLoader from "../../common/components/showLoader";
 
 export default function Network() {
@@ -21,7 +19,7 @@ export default function Network() {
   }, []);
 
   const [address, setAddress] = React.useState([]);
-  const [showPlaceHolder, setShowPlaceHolder] = React.useState(false);
+  const [, setShowPlaceHolder] = React.useState(false);
   const [loader, setLoader] = React.useState(false);
   const [networkToolTip, setnetworkToolTip] = React.useState(false);
   const [urlToolTip, seturlToolTip] = React.useState(false);
@@ -68,7 +66,10 @@ export default function Network() {
               disableFocusListener
               title="The blockchain network in use"
             >
-              <ToolTipIcon onClick={() => setnetworkToolTip(!networkToolTip)} src="/images/tool-tip.svg" />
+              <ToolTipIcon
+                onClick={() => setnetworkToolTip(!networkToolTip)}
+                src="/images/tool-tip.svg"
+              />
             </Tooltip>
           </ColumnOne>
           <UrlHeading>
@@ -80,7 +81,10 @@ export default function Network() {
               disableFocusListener
               title="URL of the network"
             >
-              <ToolTipIcon onClick={() => seturlToolTip(!urlToolTip)} src="/images/tool-tip.svg" />
+              <ToolTipIcon
+                onClick={() => seturlToolTip(!urlToolTip)}
+                src="/images/tool-tip.svg"
+              />
             </Tooltip>
           </UrlHeading>
         </Container>
@@ -88,7 +92,7 @@ export default function Network() {
           {address.map((data, index) => {
             console.log("dadada", data.networkName);
             return (
-              <Container>
+              <Container style={{ columnGap: "36px" }}>
                 {/* <Icon src="/images/mainnet.svg" /> */}
                 <Head>{data.networkName}</Head>
                 <Url>{data.newRpcUrl}</Url>
@@ -148,7 +152,7 @@ const UrlHeading = styled.div`
 const Button = styled.button`
   background-image: url("/images/Add.svg");
   background-repeat: no-repeat;
-  background-position: 0.3rem;
+  background-position: 0.5rem;
   padding-left: 1.313rem;
   background-size: 0.875rem;
   position: relative;
@@ -212,10 +216,6 @@ const ColumnOne = styled.div`
   white-space: nowrap;
 `;
 
-const Icon = styled.img`
-  width: 1.75rem;
-  margin-right: 0.625rem;
-`;
 const Url = styled.div`
   font-size: 0.875rem;
   color: #416be0;
@@ -239,22 +239,4 @@ const ToolTipIcon = styled.img`
   width: 0.75rem;
   cursor: pointer;
   margin-left: 0.5rem;
-`;
-
-const PlaceHolderContainer = styled.div`
-  display: flex;
-  width: 100%;
-  height: 16rem;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  opacity: 50%;
-  font-weight: 600;
-  font-size: 13px;
-`;
-const PlaceHolderImage = styled.img`
-  width: 50px;
-  -webkit-filter: grayscale(60%); /* Safari 6.0 - 9.0 */
-  filter: grayscale(60%);
-  margin-bottom: 20px;
 `;

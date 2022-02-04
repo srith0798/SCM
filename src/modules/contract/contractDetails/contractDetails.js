@@ -16,6 +16,7 @@ import utility from "../../../utility";
 import { history } from "../../../managers/history";
 import AddTags from "../../popup/addTag";
 import RemoveTag from "./removeTag";
+
 export default function ContractDetails(props) {
   const [activeButton, setActiveButton] = React.useState("General");
   const handleViewClick = (e) => {
@@ -116,7 +117,7 @@ export default function ContractDetails(props) {
     setRemoveState(false);
   };
   const backButton = () => {
-    history.push("/dashboard/contract");
+    history.push("/dashboard/Contracts");
   };
   const [addTag, setAddTag] = useState(false);
   const Open = () => {
@@ -144,14 +145,21 @@ export default function ContractDetails(props) {
         <SubContainer>
           <MainHeading>
             <Heading>
-              <img alt="" src="/images/back.svg" style={{ marginRight: "8px", marginBottom: "3px" }} onClick={() => backButton()} />
+              <img
+                alt=""
+                src="/images/back.svg"
+                style={{ marginRight: "8px", marginBottom: "3px" }}
+                onClick={() => backButton()}
+              />
               Contract Details
             </Heading>
             <Button>View in Explorer</Button>
           </MainHeading>
         </SubContainer>
         <Container>
-          <SubHeading style={{ paddingTop: "0.625rem", paddingLeft: "1rem" }}>App_Transactions_Validator</SubHeading>
+          <SubHeading style={{ paddingTop: "0.625rem", paddingLeft: "1rem" }}>
+            App_Transactions_Validator
+          </SubHeading>
           <div
             style={{
               paddingLeft: "1.25rem",
@@ -175,13 +183,20 @@ export default function ContractDetails(props) {
                 paddingBottom: "0.875rem",
                 paddingright: "16px",
                 alignItems: "center",
-                borderBottom: activeButton === "General" ? "0.125rem solid #3163F0" : "#AEB7D0",
+                borderBottom:
+                  activeButton === "General"
+                    ? "0.125rem solid #3163F0"
+                    : "#AEB7D0",
               }}
             >
               <img
                 alt=""
                 style={{ marginRight: "0.375rem" }}
-                src={activeButton === "General" ? "/images/genrl.svg" : "/images/general_grey.svg"}
+                src={
+                  activeButton === "General"
+                    ? "/images/genrl.svg"
+                    : "/images/general_grey.svg"
+                }
               />
               General
             </TabView>
@@ -194,13 +209,18 @@ export default function ContractDetails(props) {
                 paddingBottom: "0.875rem",
                 paddingright: "16px",
                 alignItems: "center",
-                borderBottom: activeButton === "Source Code" ? "0.125rem solid blue" : "",
+                borderBottom:
+                  activeButton === "Source Code" ? "0.125rem solid blue" : "",
               }}
             >
               <img
                 alt=""
                 style={{ marginRight: "0.375rem" }}
-                src={activeButton === "Source Code" ? "/images/source code_blue.svg" : "/images/source code_grey.svg"}
+                src={
+                  activeButton === "Source Code"
+                    ? "/images/source code_blue.svg"
+                    : "/images/source code_grey.svg"
+                }
               />
               Source Code
             </TabView>
@@ -250,7 +270,13 @@ export default function ContractDetails(props) {
                       ""
                     )}
 
-                    {addTag && <AddTags click={Close} address={address} contract={false} />}
+                    {addTag && (
+                      <AddTags
+                        click={Close}
+                        address={address}
+                        contract={false}
+                      />
+                    )}
                     <AddTag onClick={() => Open()}>Add Tag</AddTag>
                   </Row>
                 </TableData>
@@ -295,37 +321,62 @@ export default function ContractDetails(props) {
                 </PopUpBlock>
 
                 <PopUpBlock>
-                  {renameState && <RenameContract address={address} click={renameHandleClose} />}
+                  {renameState && (
+                    <RenameContract
+                      address={address}
+                      click={renameHandleClose}
+                    />
+                  )}
                   <RowProperty onClick={() => renameHandleOpen()}>
                     <img alt="" src="/images/edit.svg" />
                   </RowProperty>
-                  <RowProperty onClick={() => renameHandleOpen()}>Rename Contract</RowProperty>
+                  <RowProperty onClick={() => renameHandleOpen()}>
+                    Rename Contract
+                  </RowProperty>
                 </PopUpBlock>
                 <PopUpBlock>
-                  {hide && <HideContract hideContract={hideContract} click={hideHandleClose} />}
-                  {show && <ShowContract showContract={showContract} click={() => setShowBox(false)} />}
+                  {hide && (
+                    <HideContract
+                      hideContract={hideContract}
+                      click={hideHandleClose}
+                    />
+                  )}
+                  {show && (
+                    <ShowContract
+                      showContract={showContract}
+                      click={() => setShowBox(false)}
+                    />
+                  )}
                   {address.isHidden ? (
                     <>
                       <RowProperty onClick={() => hideShowOpen()}>
                         <img alt="" src="/images/hide.svg" />
                       </RowProperty>
-                      <RowProperty onClick={() => hideShowOpen()}>Show Contract</RowProperty>
+                      <RowProperty onClick={() => hideShowOpen()}>
+                        Show Contract
+                      </RowProperty>
                     </>
                   ) : (
                     <>
                       <RowProperty onClick={() => hideHandleOpen()}>
                         <img alt="" src="/images/hide.svg" />
                       </RowProperty>
-                      <RowProperty onClick={() => hideHandleOpen()}>Hide Contract</RowProperty>
+                      <RowProperty onClick={() => hideHandleOpen()}>
+                        Hide Contract
+                      </RowProperty>
                     </>
                   )}
                 </PopUpBlock>
                 <PopUpBlock>
-                  {remove && <Remove click={removeHandleClose} contract={address} />}
+                  {remove && (
+                    <Remove click={removeHandleClose} contract={address} />
+                  )}
                   <RowProperty onClick={() => removeHandleOpen()}>
                     <img alt="" src="/images/delete.svg" />
                   </RowProperty>
-                  <RowProperty onClick={() => removeHandleOpen()}>Remove Contract</RowProperty>
+                  <RowProperty onClick={() => removeHandleOpen()}>
+                    Remove Contract
+                  </RowProperty>
                 </PopUpBlock>
               </PopUp>
             </DetailsSection>
@@ -375,16 +426,16 @@ const Verified = styled.div`
   font-size: 1rem;
   font-weight: 600;
   color: #00a58c;
+  margin-right: 83px;
   @media (min-width: 320px) and (max-width: 768px) {
-    margin-left: -23px;
   }
 `;
 const Enabled = styled.div`
   font-size: 1rem;
   font-weight: 600;
   color: #00a58c;
+  margin-right: 83px;
   @media (min-width: 320px) and (max-width: 768px) {
-    margin-left: -38px;
   }
 `;
 const FinanceTag = styled.div`
@@ -401,7 +452,10 @@ const FinanceTag = styled.div`
   margin-right: 9px;
 `;
 const ImageTag = styled.div`
-  background-image: ${(props) => (props.removeTagImage == props.index ? `url("/images/close.svg")` : `url("/images/Tag.svg")`)};
+  background-image: ${(props) =>
+    props.removeTagImage == props.index
+      ? `url("/images/close.svg")`
+      : `url("/images/Tag.svg")`};
 
   background-position: left;
   background-size: 13px;
@@ -510,12 +564,11 @@ const DetailsSection = styled.div`
 `;
 const Div = styled.div`
   display: flex;
-  flex-flow: row nowrap;
   border-bottom: 0.063rem solid #e3e7eb;
   padding: 1.25rem 1.25rem 0.2rem 1.25rem;
-  @media (min-width: 340px) and (max-width: 768px) {
-    column-gap: 200px;
-    white-space: nowrap;
+  @media (min-width: 375px) and (max-width: 1200px) {
+    border-bottom: 0.063rem solid #e3e7eb;
+    width: 1000px;
   }
 `;
 const TableData = styled.div`
@@ -526,6 +579,7 @@ const TableData = styled.div`
   /* max-width: 9.375rem; */
   font-size: 1rem;
   font-weight: 600;
+  margin-right: 6px;
 `;
 const SolidityData = styled.div`
   font-size: 0.875rem;
@@ -535,8 +589,8 @@ const SolidityData = styled.div`
   max-width: 9.375rem;
   font-size: 1rem;
   font-weight: 600;
-  @media (min-width: 340px) and (max-width: 768px) {
-    margin-left: -46px;
+  @media (max-width: 768px) {
+    margin-right: 13px;
   }
 `;
 const TagData = styled.div`
@@ -552,15 +606,13 @@ const TagData = styled.div`
   }
 `;
 const EvmData = styled.div`
-  font-size: 0.875rem;
-  font-weight: 600;
   color: #191919;
   width: 100%;
   max-width: 9.375rem;
   font-size: 1rem;
   font-weight: 600;
-  @media (min-width: 340px) and (max-width: 768px) {
-    margin-left: -22px;
+  @media (max-width: 414px) {
+    margin-right: 12px;
   }
 `;
 const CopyImg = styled.img`

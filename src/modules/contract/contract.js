@@ -29,7 +29,7 @@ export default function Contract(props) {
     setOpen(false);
   };
   const redirectTODetails = (id) => {
-    history.push("/dashboard/contract-details/" + id);
+    history.push("/dashboard/Contract-details/" + id);
   };
 
   const getContractList = async (skip = 0, limit = 10) => {
@@ -103,13 +103,27 @@ export default function Contract(props) {
       <SubContainer>
         <MainHeading>
           <Heading>Contracts</Heading>
-          <Input placeholder="Search by address or name" value={input} onChange={search} />
+          <Input
+            placeholder="Search by address or name"
+            value={input}
+            onChange={search}
+          />
         </MainHeading>
         <IconDiv>
           <Tooltip disableFocusListener title="Refresh">
-            <RefreshImage onClick={() => getContractList()} alt="" src="/images/refresh.svg" style={{ marginRight: "0.625rem" }} />
+            <RefreshImage
+              onClick={() => getContractList()}
+              alt=""
+              src="/images/refresh.svg"
+              style={{ marginRight: "0.625rem" }}
+            />
           </Tooltip>
-          {open && <AddContract click={handleClose} getContractList={getContractList} />}
+          {open && (
+            <AddContract
+              click={handleClose}
+              getContractList={getContractList}
+            />
+          )}
           <Button onClick={handleClickOpen}>Add Contract</Button>
         </IconDiv>
       </SubContainer>
@@ -126,7 +140,10 @@ export default function Contract(props) {
                 disableFocusListener
                 title="Name of the smart contract"
               >
-                <ToolTipIcon onClick={() => setcontractNameToolTip(!contractNameToolTip)} src="/images/tool-tip.svg" />
+                <ToolTipIcon
+                  onClick={() => setcontractNameToolTip(!contractNameToolTip)}
+                  src="/images/tool-tip.svg"
+                />
               </Tooltip>
             </ColumnOne>
             <ColumnOne>
@@ -138,7 +155,10 @@ export default function Contract(props) {
                 disableFocusListener
                 title="Wallet address"
               >
-                <ToolTipIcon onClick={() => setaddressToolTip(!addressToolTip)} src="/images/tool-tip.svg" />
+                <ToolTipIcon
+                  onClick={() => setaddressToolTip(!addressToolTip)}
+                  src="/images/tool-tip.svg"
+                />
               </Tooltip>
             </ColumnOne>
             <ColumnOne>
@@ -150,7 +170,10 @@ export default function Contract(props) {
                 disableFocusListener
                 title="Network on which the contract is executed"
               >
-                <ToolTipIcon onClick={() => setnetworkToolTip(!networkToolTip)} src="/images/tool-tip.svg" />
+                <ToolTipIcon
+                  onClick={() => setnetworkToolTip(!networkToolTip)}
+                  src="/images/tool-tip.svg"
+                />
               </Tooltip>
             </ColumnOne>
             <ColumnOne>
@@ -162,7 +185,10 @@ export default function Contract(props) {
                 disableFocusListener
                 title="Tag name associated with the contract"
               >
-                <ToolTipIcon onClick={() => settagToolTip(!tagToolTip)} src="/images/tool-tip.svg" />
+                <ToolTipIcon
+                  onClick={() => settagToolTip(!tagToolTip)}
+                  src="/images/tool-tip.svg"
+                />
               </Tooltip>
             </ColumnOne>
             <ColumnOne>
@@ -174,7 +200,10 @@ export default function Contract(props) {
                 disableFocusListener
                 title="Is the contract visible to the users or not"
               >
-                <ToolTipIcon onClick={() => setvisibilityToolTip(!visibilityToolTip)} src="/images/tool-tip.svg" />
+                <ToolTipIcon
+                  onClick={() => setvisibilityToolTip(!visibilityToolTip)}
+                  src="/images/tool-tip.svg"
+                />
               </Tooltip>
             </ColumnOne>
           </Row>
@@ -184,15 +213,33 @@ export default function Contract(props) {
             <div style={{ cursor: "pointer" }}>
               <Div>
                 <Row>
-                  <ColumnSecond onClick={() => redirectTODetails(data._id)}>{data.contractName}</ColumnSecond>
-                  <ColumnSecond>{utility.truncateTxnAddress(data.address)}</ColumnSecond>
-                  <ColumnSecond>{data?.network}</ColumnSecond>
-                  <ColumnSecond style={{ display: "flex" }}>
-                    {address[0].tags && address[0].tags.map((tag, index) => index <= 1 && <FinanceTag>{tag}</FinanceTag>)}
-                    {addTag && <AddTags click={Close} address={address} contract={true} />}
-                    {data.tags && data.tags.length === 0 && <AddTag onClick={() => Open()}>Add Tag</AddTag>}
+                  <ColumnSecond onClick={() => redirectTODetails(data._id)}>
+                    {data.contractName}
                   </ColumnSecond>
-                  <ColumnSecond>{data.isHidden ? "Hidden" : "Visible"}</ColumnSecond>
+                  <ColumnSecond>
+                    {utility.truncateTxnAddress(data.address)}
+                  </ColumnSecond>
+                  <ColumnSecond>{data.network}</ColumnSecond>
+                  <ColumnSecond style={{ display: "flex" }}>
+                    {address[0].tags &&
+                      address[0].tags.map(
+                        (tag, index) =>
+                          index <= 1 && <FinanceTag>{tag}</FinanceTag>
+                      )}
+                    {addTag && (
+                      <AddTags
+                        click={Close}
+                        address={address}
+                        contract={true}
+                      />
+                    )}
+                    {data.tags && data.tags.length === 0 && (
+                      <AddTag onClick={() => Open()}>Add Tag</AddTag>
+                    )}
+                  </ColumnSecond>
+                  <ColumnSecond>
+                    {data.isHidden ? "Hidden" : "Visible"}
+                  </ColumnSecond>
                 </Row>
               </Div>
             </div>
@@ -299,10 +346,10 @@ const PaginationDiv = styled.div`
 
 const IconDiv = styled.div`
   display: flex;
-  @media (min-width: 375px) and (max-width: 812px) {
-    margin-bottom: 22px;
+  @media (max-width: 768px) {
+    margin-bottom: 26px;
   }
-  @media (max-width: 375px) {
+  @media (max-width: 414px) {
     margin-bottom: 0px;
   }
 `;
@@ -319,7 +366,7 @@ const RefreshImage = styled.img`
     margin-top: 28px;
     margin-left: 3px;
   }
-  @media (max-width: 375px) {
+  @media (max-width: 414px) {
     margin-right: 0.325rem;
     margin-top: 51px;
     margin-left: 3px;
@@ -335,22 +382,22 @@ const MainContainer = styled.div`
   height: 100vh;
   padding: 2.125rem;
   height: 100vh;
-  @media (max-width: 375px) {
+  @media (max-width: 414px) {
     padding: 1.2rem;
   }
 `;
 
 const MainHeading = styled.div`
   display: flex;
-  width: 100%;
+
   @media (min-width: 570px) and (max-width: 768px) {
     display: flex;
     flex-direction: row;
   }
-  @media (max-width: 375px) {
+  @media (max-width: 414px) {
     display: flex;
     flex-direction: column;
-    padding-top: 18px;
+    padding-top: 7px;
   }
 `;
 const SubContainer = styled.div`
@@ -364,7 +411,7 @@ const SubContainer = styled.div`
     padding-top: 47px;
     // padding-bottom: 42px;
   }
-  @media (min-width: 375px) {
+  @media (min-width: 300px) {
     padding-top: 47px;
     padding-bottom: 33px;
   }
@@ -428,11 +475,12 @@ const Input = styled.input`
   background-size: 0.75rem;
   position: relative;
   border: none;
+  height: 38px;
   outline: none;
   display: flex;
-  @media (max-width: 768px) {
+  @media (max-width: 767px) {
     width: min-content;
-    height: 40px;
+    height: 37px;
   }
   @media (min-width: 375px) {
     width: 223px;
@@ -449,6 +497,8 @@ const TableContainer = styled.div`
     overflow-y: hidden;
     overflow-x: auto;
     height: 420px;
+    margin-top: 20px;
+
     position: relative;
     width: 100%;
     ::-webkit-scrollbar {
@@ -475,6 +525,9 @@ const TableContainer = styled.div`
 const Div = styled.div`
   padding: 0.75rem;
   border-bottom: 0.063rem solid #e3e7eb;
+  @media (min-width: 300px) and (max-width: 1200px) {
+    width: 1232px;
+  }
 `;
 const ColumnOne = styled.div`
   font-size: 0.875rem;
