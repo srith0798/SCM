@@ -389,7 +389,7 @@ const MainContainer = styled.div`
 
 const MainHeading = styled.div`
   display: flex;
-  width: 100%;
+
   @media (min-width: 570px) and (max-width: 768px) {
     display: flex;
     flex-direction: row;
@@ -497,6 +497,8 @@ const TableContainer = styled.div`
     overflow-y: hidden;
     overflow-x: auto;
     height: 420px;
+    margin-top: 20px;
+
     position: relative;
     width: 100%;
     ::-webkit-scrollbar {
