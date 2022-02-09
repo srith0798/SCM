@@ -168,7 +168,6 @@ export default function TransactionList(props) {
 
   const [toInput, setToInput] = React.useState([]);
 
-  const [filterResponse, setFilterResponse] = React.useState({});
   useEffect(() => {
     getContractNames();
     getTransaction();
@@ -176,26 +175,26 @@ export default function TransactionList(props) {
   const [selectDrop, setSelectDrop] = React.useState([]);
 
   const filterSearch = async () => {
+    let requestData = {
+      skip: 0,
+      limit: 10,
+      status: "",
+      // from: fromInput,
+      // to: toInput,
+      // network: selectDrop,
+    };
+    switch (select) {
+      case 2:
+        requestData.status = true;
+        break;
+      case 3:
+        requestData.status = false;
+        break;
+      default:
+        return requestData;
+    }
     try {
-      if (select === 2 || select === 3) {
-        setFilterResponse({
-          skip: 0,
-          limit: 10,
-          status: select === 2 ? true : select === 3 ? false : "",
-          // from: fromInput,
-          // to: toInput,
-          // network: selectDrop,
-        });
-      } else {
-        setFilterResponse({
-          skip: 0,
-          limit: 10,
-        });
-      }
-
-      const response = await ContractsService.getTransactionsList(
-        filterResponse
-      );
+      const response = await ContractsService.getTransactionsList(requestData);
 
       setAddress(response.transactionList);
       console.log("response", response.transactionList);
@@ -212,29 +211,16 @@ export default function TransactionList(props) {
         <TransactionBox>
           <NewDiv>
             <Transactions>Transactions</Transactions>
-            <SearchBar
-              placeholder="Search by status or name"
-              onChange={search}
-              value={input}
-            />
+            <SearchBar placeholder="Search by status or name" onChange={search} value={input} />
           </NewDiv>
 
           <IconContainer>
-            {open && (
-              <Settings
-                click={handleClose}
-                setToggle={setToggle}
-                toggle={toggle}
-              />
-            )}
+            {open && <Settings click={handleClose} setToggle={setToggle} toggle={toggle} />}
             <Tooltip disableFocusListener title="Settings">
               <Icons src="/images/settings.svg" onClick={handleClickOpen} />
             </Tooltip>
             <Tooltip disableFocusListener title="Refresh">
-              <Icons
-                onClick={() => getTransaction()}
-                src="/images/refresh.svg"
-              />
+              <Icons onClick={() => getTransaction()} src="/images/refresh.svg" />
             </Tooltip>
             {filterPopupOpen && (
               <Filter
@@ -259,10 +245,7 @@ export default function TransactionList(props) {
         <Card>
           <Column>
             <Heading>View Transaction for Contract</Heading>
-            <InstructionText>
-              You can view transactions per contract by using the contract
-              picker below
-            </InstructionText>
+            <InstructionText>You can view transactions per contract by using the contract picker below</InstructionText>
 
             <ClickAwayListener onClickAway={handleClickAway}>
               <Box
@@ -274,12 +257,7 @@ export default function TransactionList(props) {
                 selected={selected.address}
               >
                 <DropDown onClick={handleClick}>
-                  App_Transactions_Validator{" "}
-                  <img
-                    style={{ marginLeft: "0.5rem" }}
-                    alt=""
-                    src="/images/XDCmainnet.svg"
-                  />
+                  App_Transactions_Validator <img style={{ marginLeft: "0.5rem" }} alt="" src="/images/XDCmainnet.svg" />
                   <br />
                   <TransactionHash>{selected.address}</TransactionHash>
                   <Image src="/images/Arrrow.svg" />
@@ -316,10 +294,7 @@ export default function TransactionList(props) {
                     disableFocusListener
                     title="Unique transaction identifier, also known as the Transaction ID"
                   >
-                    <ToolTipIcon
-                      onClick={() => setTxHashToolTip(!TxHashToolTip)}
-                      src="/images/tool-tip.svg"
-                    />
+                    <ToolTipIcon onClick={() => setTxHashToolTip(!TxHashToolTip)} src="/images/tool-tip.svg" />
                   </Tooltip>
                 </ColumnOne>
               )}
@@ -333,10 +308,7 @@ export default function TransactionList(props) {
                     disableFocusListener
                     title="Token transaction status"
                   >
-                    <ToolTipIcon
-                      onClick={() => setstatusToolTip(!statusToolTip)}
-                      src="/images/tool-tip.svg"
-                    />
+                    <ToolTipIcon onClick={() => setstatusToolTip(!statusToolTip)} src="/images/tool-tip.svg" />
                   </Tooltip>
                 </ColumnOne>
               )}
@@ -350,24 +322,15 @@ export default function TransactionList(props) {
                     disableFocusListener
                     title="Smart contract function status"
                   >
-                    <ToolTipIcon
-                      onClick={() => setfunctionToolTip(!functionToolTip)}
-                      src="/images/tool-tip.svg"
-                    />
+                    <ToolTipIcon onClick={() => setfunctionToolTip(!functionToolTip)} src="/images/tool-tip.svg" />
                   </Tooltip>
                 </ColumnOne>
               )}
               {toggle.contracts && (
                 <ColumnOne>
                   Contracts
-                  <Tooltip
-                    disableFocusListener
-                    title="Name of the smart contract"
-                  >
-                    <ToolTipIcon
-                      onClick={() => setstatusToolTip(!statusToolTip)}
-                      src="/images/tool-tip.svg"
-                    />
+                  <Tooltip disableFocusListener title="Name of the smart contract">
+                    <ToolTipIcon onClick={() => setstatusToolTip(!statusToolTip)} src="/images/tool-tip.svg" />
                   </Tooltip>
                 </ColumnOne>
               )}
@@ -390,10 +353,7 @@ export default function TransactionList(props) {
               {toggle.when && (
                 <ColumnOne>
                   When
-                  <Tooltip
-                    disableFocusListener
-                    title="Date and time of transaction execution"
-                  >
+                  <Tooltip disableFocusListener title="Date and time of transaction execution">
                     <ToolTipIcon src="/images/tool-tip.svg" />
                   </Tooltip>
                 </ColumnOne>
@@ -407,36 +367,24 @@ export default function TransactionList(props) {
                   <RowData>
                     {toggle.transactionHash && (
                       <ColumnSecond onClick={redirectToTransactionDetails}>
-                        <BackgroundChangerTxhash>
-                          {utility.truncateTxnAddress(data.hash)}
-                        </BackgroundChangerTxhash>
+                        <BackgroundChangerTxhash>{utility.truncateTxnAddress(data.hash)}</BackgroundChangerTxhash>
                       </ColumnSecond>
                     )}
 
-                    {toggle.status && (
-                      <ColumnSecond>{data.status}</ColumnSecond>
-                    )}
+                    {toggle.status && <ColumnSecond>{data.status}</ColumnSecond>}
 
-                    {toggle.function && (
-                      <ColumnSecond>{data.function}</ColumnSecond>
-                    )}
-                    {toggle.contracts && (
-                      <ColumnSecond>{data.contracts}</ColumnSecond>
-                    )}
+                    {toggle.function && <ColumnSecond>{data.function}</ColumnSecond>}
+                    {toggle.contracts && <ColumnSecond>{data.contracts}</ColumnSecond>}
 
                     {toggle.from && (
                       <ColumnSecond>
-                        <BackgroundChangerFrom>
-                          {utility.truncateTxnAddress(data.from)}
-                        </BackgroundChangerFrom>
+                        <BackgroundChangerFrom>{utility.truncateTxnAddress(data.from)}</BackgroundChangerFrom>
                       </ColumnSecond>
                     )}
 
                     {toggle.to && (
                       <ColumnSecond>
-                        <BackgroundChangerTo>
-                          {utility.truncateTxnAddress(data.to)}
-                        </BackgroundChangerTo>
+                        <BackgroundChangerTo>{utility.truncateTxnAddress(data.to)}</BackgroundChangerTo>
                       </ColumnSecond>
                     )}
 
@@ -471,11 +419,7 @@ export default function TransactionList(props) {
           />
         </PaginationDiv>
       </MainContainer>
-      <div>
-        {false && (
-          <LetsGetStarted click={() => setState(false)} state={state} />
-        )}
-      </div>
+      <div>{false && <LetsGetStarted click={() => setState(false)} state={state} />}</div>
     </>
   );
 }
