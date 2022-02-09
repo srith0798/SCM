@@ -174,7 +174,7 @@ const Div = styled.div`
   background-color: #ffffff;
   border-radius: 0.375rem;
   width: 100%;
-  height: 25rem;
+  height: auto;
   margin-top: 0.6rem;
   padding: 0.625rem;
 
