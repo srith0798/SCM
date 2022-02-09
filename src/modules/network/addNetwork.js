@@ -41,7 +41,11 @@ export default function AddNetwork(props) {
     props.getNetworkList();
   };
   const addNetworksDetails = () => {
-    networkUrlValidation();
+    console.log("networkUrlValidation", networkUrlValidation());
+    if (networkUrlValidation() !== undefined && !networkUrlValidation()) {
+      utility.apiFailureToast("Invalid RPC endpoint");
+      return;
+    }
     addNetwork();
   };
   const networkUrlValidation = () => {
@@ -49,17 +53,25 @@ export default function AddNetwork(props) {
       const web3 = new Web3(new Web3.providers.HttpProvider(newRpcUrl));
       web3.eth.getBlockNumber((err, res) => {
         if (err) {
-          utility.apiFailureToast("Invalid RPC endpoint");
+          // utility.apiFailureToast("Invalid RPC endpoint");
+          console("one");
+          return false;
         } else {
           setNewRpcUrl(newRpcUrl);
-          utility.apiSuccessToast("Network Added successfully");
+          console.log("two");
+          // utility.apiSuccessToast("Network Added successfully");
+          return true;
         }
       });
     } else {
       if (!newRpcUrl.startsWith("http")) {
-        utility.apiFailureToast("URIs require the appropriate HTTP/HTTPS prefix.");
+        // utility.apiFailureToast("URIs require the appropriate HTTP/HTTPS prefix.");
+        console.log("threee");
+        return false;
       } else {
-        utility.apiFailureToast("Invalid RPC URI");
+        // utility.apiFailureToast("Invalid RPC URI");
+        console.log("four");
+        return false;
       }
     }
   };
