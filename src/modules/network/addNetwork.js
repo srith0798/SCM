@@ -3,15 +3,17 @@ import styled from "styled-components";
 import Dialog from "@mui/material/Dialog";
 import { makeStyles } from "@material-ui/styles";
 import contractsService from "../../services/contractsService";
-
+import utility from "../../utility";
+const validUrl = require("valid-url");
+const Web3 = require("web3");
 const useStyles = makeStyles(() => ({
   dialogBox: {
     width: "100% !important",
   },
 }));
-
 export default function AddNetwork(props) {
   const classes = useStyles();
+  const [loader, setLoader] = React.useState(false);
   const addNetwork = async () => {
     let requestData = {
       networkName: networkName,
@@ -20,9 +22,10 @@ export default function AddNetwork(props) {
       currencySymbol: currencySymbol,
       blockExplorer: blockExplorer,
     };
-
+    setLoader(true);
     try {
       const response = await contractsService.addNetworks(requestData);
+      setLoader(false);
       console.log(response);
     } catch (e) {
       console.log("Error", e);
@@ -33,7 +36,46 @@ export default function AddNetwork(props) {
   const [chainId, setChainId] = React.useState("");
   const [currencySymbol, setCurrencySymbol] = React.useState("");
   const [blockExplorer, setBlockExplorer] = React.useState("");
-
+  const load = () => {
+    props.click(false);
+    props.getNetworkList();
+  };
+  const addNetworksDetails = () => {
+    console.log("networkUrlValidation", networkUrlValidation());
+    if (networkUrlValidation() !== undefined && !networkUrlValidation()) {
+      utility.apiFailureToast("Invalid RPC endpoint");
+      return;
+    }
+    addNetwork();
+  };
+  const networkUrlValidation = () => {
+    if (validUrl.isWebUri(newRpcUrl)) {
+      const web3 = new Web3(new Web3.providers.HttpProvider(newRpcUrl));
+      web3.eth.getBlockNumber((err, res) => {
+        if (err) {
+          utility.apiFailureToast("Invalid RPC endpoint");
+          console("one");
+          return false;
+        } else {
+          setNewRpcUrl(newRpcUrl);
+          console.log("two");
+          utility.apiSuccessToast("Network Added successfully");
+          return true;
+        }
+      });
+    }
+     else {
+      if (!newRpcUrl.startsWith("http")) {
+        utility.apiFailureToast("URIs require the appropriate HTTP/HTTPS prefix.");
+        console.log("threee");
+        return false;
+      } else {
+        utility.apiFailureToast("Invalid RPC URI");
+        console.log("four");
+        return false;
+      }
+    }
+  };
   return (
     <div>
       <Dialog classes={{ paper: classes.dialogBox }} open={true}>
@@ -41,7 +83,7 @@ export default function AddNetwork(props) {
           <Container>
             <SubContainer>
               <Add>Add Network</Add>
-              <img alt="" src="/images/close.svg" onClick={()=> props.click(false)} />
+              <img alt="" src="/images/close.svg" onClick={() => load()} />
             </SubContainer>
             <Heading>Network name</Heading>
             <Input type="text" placeholder="Name" onChange={(e) => setNetworkName(e.target.value)} value={networkName} />
@@ -54,7 +96,7 @@ export default function AddNetwork(props) {
             <Input type="text" placeholder="Symbol" onChange={(e) => setCurrencySymbol(e.target.value)} value={currencySymbol} />
             <Heading>Block explorer (optional)</Heading>
             <Input type="text" placeholder="Explorer" onChange={(e) => setBlockExplorer(e.target.value)} value={blockExplorer} />
-            <Button onClick={()=>  addNetwork()}>Add network</Button>
+            <Button onClick={() => addNetworksDetails()}>Add network</Button>
           </Container>
         </MainContainer>
       </Dialog>

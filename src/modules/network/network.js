@@ -19,12 +19,12 @@ export default function Network() {
   }, []);
 
   const [address, setAddress] = React.useState([]);
-  const [, setShowPlaceHolder] = React.useState(false);
+  const [showPlaceHolder, setShowPlaceHolder] = React.useState(false);
   const [loader, setLoader] = React.useState(false);
   const [networkToolTip, setnetworkToolTip] = React.useState(false);
   const [urlToolTip, seturlToolTip] = React.useState(false);
 
-  const getNetworkList = async (skip = 0, limit = 10) => {
+  const getNetworkList = async (skip = 0, limit = 20) => {
     try {
       const requestData = {
         skip: skip,
@@ -50,7 +50,7 @@ export default function Network() {
           <Heading>Networks</Heading>
         </div>
         <div style={{ display: "flex" }}>
-          {open && <AddNetwork click={handleClose} />}
+          {open && <AddNetwork click={handleClose} getNetworkList={getNetworkList} />}
 
           <Button onClick={handleClickOpen}>Add Network</Button>
         </div>
@@ -66,10 +66,7 @@ export default function Network() {
               disableFocusListener
               title="The blockchain network in use"
             >
-              <ToolTipIcon
-                onClick={() => setnetworkToolTip(!networkToolTip)}
-                src="/images/tool-tip.svg"
-              />
+              <ToolTipIcon onClick={() => setnetworkToolTip(!networkToolTip)} src="/images/tool-tip.svg" />
             </Tooltip>
           </ColumnOne>
           <UrlHeading>
@@ -81,16 +78,12 @@ export default function Network() {
               disableFocusListener
               title="URL of the network"
             >
-              <ToolTipIcon
-                onClick={() => seturlToolTip(!urlToolTip)}
-                src="/images/tool-tip.svg"
-              />
+              <ToolTipIcon onClick={() => seturlToolTip(!urlToolTip)} src="/images/tool-tip.svg" />
             </Tooltip>
           </UrlHeading>
         </Container>
         <div>
           {address.map((data, index) => {
-            console.log("dadada", data.networkName);
             return (
               <Container style={{ columnGap: "36px" }}>
                 {/* <Icon src="/images/mainnet.svg" /> */}
@@ -174,7 +167,7 @@ const Div = styled.div`
   background-color: #ffffff;
   border-radius: 0.375rem;
   width: 100%;
-  height: 25rem;
+  height: auto;
   margin-top: 0.6rem;
   padding: 0.625rem;
 
