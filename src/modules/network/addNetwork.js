@@ -33,7 +33,7 @@ export default function AddNetwork(props) {
   };
   const [networkName, setNetworkName] = React.useState("");
   const [newRpcUrl, setNewRpcUrl] = React.useState("");
-  const [chainId, setChainId] = React.useState("");
+  const [chainId, setChainId] = React.useState(0);
   const [currencySymbol, setCurrencySymbol] = React.useState("");
   const [blockExplorer, setBlockExplorer] = React.useState("");
   const load = () => {
@@ -46,35 +46,47 @@ export default function AddNetwork(props) {
       utility.apiFailureToast("Invalid RPC endpoint");
       return;
     }
+
     addNetwork();
   };
-  const networkUrlValidation = () => {
+
+  async function networkUrlValidation() {
     if (validUrl.isWebUri(newRpcUrl)) {
       const web3 = new Web3(new Web3.providers.HttpProvider(newRpcUrl));
+      const networkChainId = await web3.eth.getChainId();
+      console.log("chain", networkChainId);
       web3.eth.getBlockNumber((err, res) => {
         if (err) {
-          // utility.apiFailureToast("Invalid RPC endpoint");
+          utility.apiFailureToast("Invalid RPC endpoint");
           console("one");
           return false;
+        }
+        if (networkChainId != chainId) {
+          console.log("ChainId", chainId);
+          console.log("networkChainId", networkChainId);
+          utility.apiFailureToast("Invalid chainId");
         } else {
           setNewRpcUrl(newRpcUrl);
           console.log("two");
-          // utility.apiSuccessToast("Network Added successfully");
+          utility.apiSuccessToast("Network Added successfully");
           return true;
         }
       });
     } else {
       if (!newRpcUrl.startsWith("http")) {
-        // utility.apiFailureToast("URIs require the appropriate HTTP/HTTPS prefix.");
+        utility.apiFailureToast(
+          "URIs require the appropriate HTTP/HTTPS prefix."
+        );
         console.log("threee");
         return false;
       } else {
-        // utility.apiFailureToast("Invalid RPC URI");
+        utility.apiFailureToast("Invalid RPC URI");
         console.log("four");
         return false;
       }
     }
-  };
+  }
+
   return (
     <div>
       <Dialog classes={{ paper: classes.dialogBox }} open={true}>
@@ -85,17 +97,49 @@ export default function AddNetwork(props) {
               <img alt="" src="/images/close.svg" onClick={() => load()} />
             </SubContainer>
             <Heading>Network name</Heading>
-            <Input type="text" placeholder="Name" onChange={(e) => setNetworkName(e.target.value)} value={networkName} />
+            <Input
+              type="text"
+              placeholder="Name"
+              onChange={(e) => setNetworkName(e.target.value)}
+              value={networkName}
+            />
             <Heading>New RPC URL</Heading>
-            <Input type="text" placeholder="URL" onChange={(e) => setNewRpcUrl(e.target.value)} value={newRpcUrl} />
+            <Input
+              type="text"
+              placeholder="URL"
+              onChange={(e) => setNewRpcUrl(e.target.value)}
+              value={newRpcUrl}
+            />
 
             <Heading>Chain ID</Heading>
-            <Input type="text" placeholder="ID" onChange={(e) => setChainId(e.target.value)} value={chainId} />
+            <Input
+              type="number"
+              // placeholder="ID"
+              onChange={(e) => setChainId(e.target.value)}
+              value={chainId}
+            />
             <Heading>Currency symbol (optional)</Heading>
-            <Input type="text" placeholder="Symbol" onChange={(e) => setCurrencySymbol(e.target.value)} value={currencySymbol} />
+            <Input
+              type="text"
+              placeholder="Symbol"
+              onChange={(e) => setCurrencySymbol(e.target.value)}
+              value={currencySymbol}
+            />
             <Heading>Block explorer (optional)</Heading>
-            <Input type="text" placeholder="Explorer" onChange={(e) => setBlockExplorer(e.target.value)} value={blockExplorer} />
-            <Button onClick={() => addNetworksDetails()}>Add network</Button>
+            <Input
+              type="text"
+              placeholder="Explorer"
+              onChange={(e) => setBlockExplorer(e.target.value)}
+              value={blockExplorer}
+            />
+            <Button
+              onClick={() => {
+                addNetworksDetails();
+                load();
+              }}
+            >
+              Add network
+            </Button>
           </Container>
         </MainContainer>
       </Dialog>

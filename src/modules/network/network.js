@@ -50,7 +50,9 @@ export default function Network() {
           <Heading>Networks</Heading>
         </div>
         <div style={{ display: "flex" }}>
-          {open && <AddNetwork click={handleClose} getNetworkList={getNetworkList} />}
+          {open && (
+            <AddNetwork click={handleClose} getNetworkList={getNetworkList} />
+          )}
 
           <Button onClick={handleClickOpen}>Add Network</Button>
         </div>
@@ -66,7 +68,10 @@ export default function Network() {
               disableFocusListener
               title="The blockchain network in use"
             >
-              <ToolTipIcon onClick={() => setnetworkToolTip(!networkToolTip)} src="/images/tool-tip.svg" />
+              <ToolTipIcon
+                onClick={() => setnetworkToolTip(!networkToolTip)}
+                src="/images/tool-tip.svg"
+              />
             </Tooltip>
           </ColumnOne>
           <UrlHeading>
@@ -78,18 +83,21 @@ export default function Network() {
               disableFocusListener
               title="URL of the network"
             >
-              <ToolTipIcon onClick={() => seturlToolTip(!urlToolTip)} src="/images/tool-tip.svg" />
+              <ToolTipIcon
+                onClick={() => seturlToolTip(!urlToolTip)}
+                src="/images/tool-tip.svg"
+              />
             </Tooltip>
           </UrlHeading>
         </Container>
         <div>
           {address.map((data, index) => {
             return (
-              <Container style={{ columnGap: "36px" }}>
+              <ContainerBox style={{ columnGap: "36px" }}>
                 {/* <Icon src="/images/mainnet.svg" /> */}
                 <Head>{data.networkName}</Head>
                 <Url>{data.newRpcUrl}</Url>
-              </Container>
+              </ContainerBox>
             );
           })}
         </div>
@@ -195,6 +203,12 @@ const Div = styled.div`
   }
 `;
 const Container = styled.div`
+  padding: 0.738rem;
+  border-bottom: 0.063rem solid #e3e7eb;
+  white-space: nowrap;
+  display: flex;
+`;
+const ContainerBox = styled.div`
   padding: 0.738rem;
   border-bottom: 0.063rem solid #e3e7eb;
   white-space: nowrap;
