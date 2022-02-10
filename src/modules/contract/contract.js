@@ -13,13 +13,14 @@ import AddTags from "../popup/addTag";
 
 export default function Contract(props) {
   const [open, setOpen] = React.useState(false);
-  const [showPlaceHolder, setShowPlaceHolder] = React.useState(false);
   const [loader, setLoader] = React.useState(false);
   const [contractNameToolTip, setcontractNameToolTip] = React.useState(false);
   const [addressToolTip, setaddressToolTip] = React.useState(false);
   const [networkToolTip, setnetworkToolTip] = React.useState(false);
   const [tagToolTip, settagToolTip] = React.useState(false);
   const [visibilityToolTip, setvisibilityToolTip] = React.useState(false);
+  const [address, setAddress] = React.useState([]);
+  const [searchRow, setSearchRow] = React.useState([]);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -44,38 +45,34 @@ export default function Contract(props) {
       setLoader(true);
       const response = await ContractsService.getContractsList(requestData);
       setLoader(false);
-      console.log("resss", response);
       setAddress(response.contractList);
-      if (response.contractList.length === 0) setShowPlaceHolder(true);
-      else setShowPlaceHolder(false);
     } catch (e) {
-      setShowPlaceHolder(true);
       setLoader(false);
     }
   };
 
   const searching = async (searchValues, searchKeys) => {
+    let userId = sessionManager.getDataFromCookies("userId");
     try {
       const requestData = {
         searchValue: searchValues,
         searchKeys: searchKeys,
         skip: 0,
         limit: 10,
+        userId: userId
       };
       setLoader(true);
       const response = await ContractsService.getContractsList(requestData);
       setLoader(false);
-      setAddress(response.contractList);
-      if (response.contractList.length === 0) setShowPlaceHolder(true);
+      setSearchRow(response.contractList);
     } catch (e) {
-      setShowPlaceHolder(true);
       setLoader(false);
     }
   };
-  const [input, setInput] = useState();
+  const [input, setInput] = useState("");
   const search = (e) => {
     setInput(e.target.value);
-    searching(e.target.value, ["address", "status", ""]);
+    searching(e.target.value, ["address"]);
   };
 
   const changePage = (value) => {
@@ -86,7 +83,7 @@ export default function Contract(props) {
     getContractList();
   }, []);
 
-  const [address, setAddress] = React.useState([]);
+  
 
   const [addTag, setAddTag] = useState(false);
   const Open = () => {
@@ -208,49 +205,30 @@ export default function Contract(props) {
             </ColumnOne>
           </Row>
         </Div>
-        {address.map((data, index) => {
+        {(input === "" ? address : searchRow).map((data, index) => {
           return (
             <div style={{ cursor: "pointer" }}>
               <Div>
-                <Row>
-                  <ColumnSecond onClick={() => redirectTODetails(data._id)}>
-                    {data.contractName}
-                  </ColumnSecond>
-                  <ColumnSecond>
-                    {utility.truncateTxnAddress(data.address)}
-                  </ColumnSecond>
-                  <ColumnSecond>{data.network}</ColumnSecond>
+                <Row onClick={() => redirectTODetails(data._id)}>
+                  <ColumnSecond>{data.contractName}</ColumnSecond>
+                  <ColumnSecond>{utility.truncateTxnAddress(data.address)}</ColumnSecond>
+                  <ColumnSecond>{data?.network}</ColumnSecond>
                   <ColumnSecond style={{ display: "flex" }}>
-                    {address[0].tags &&
-                      address[0].tags.map(
-                        (tag, index) =>
-                          index <= 1 && <FinanceTag>{tag}</FinanceTag>
-                      )}
-                    {addTag && (
-                      <AddTags
-                        click={Close}
-                        address={address}
-                        contract={true}
-                      />
-                    )}
-                    {data.tags && data.tags.length === 0 && (
-                      <AddTag onClick={() => Open()}>Add Tag</AddTag>
-                    )}
-                  </ColumnSecond>
-                  <ColumnSecond>
-                    {data.isHidden ? "Hidden" : "Visible"}
+                    {address[0].tags && address[0].tags.map((tag, index) => index <= 1 && <FinanceTag>{tag}</FinanceTag>)}
+
+                    {addTag && <AddTags click={Close} address={address} contract={true} />}
+                    {data.tags && data.tags.length === 0 && <AddTag onClick={() => Open()}>Add Tag</AddTag>}
                   </ColumnSecond>
                 </Row>
               </Div>
             </div>
           );
         })}
-        {showPlaceHolder && (
-          <PlaceHolderContainer>
-            <PlaceHolderImage src="/images/contracts.svg" />
-            No Contracts Found
-          </PlaceHolderContainer>
-        )}
+        {/* {(address.length === 0 || searchRow.length === 0 ? <PlaceHolderContainer>
+              <PlaceHolderImage src="/images/contracts.svg" />
+              No contract found
+            </PlaceHolderContainer> : "" )
+          } */}
       </TableContainer>
       <PaginationDiv>
         <ReactPaginate
