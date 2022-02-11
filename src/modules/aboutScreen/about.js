@@ -142,7 +142,7 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-self: center;
-  height: 500px;
+  height: 468px;
   max-width: 1306px;
   @media (min-width: 340px) and (max-width: 768px) {
     flex-direction: column;
@@ -175,10 +175,7 @@ const RightContainer = styled.div`
 `;
 const LeftContainer = styled.div`
   width: 100%;
-  padding: 2.5rem;
-  // @media (min-width: 768px) and (max-width: 1024px) {
-  //   padding: 1rem;
-  // }
+  padding: 5rem;
 `;
 const Span = styled.span`
   color: #0089ff;

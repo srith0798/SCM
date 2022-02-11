@@ -33,6 +33,7 @@ export default function Network() {
 
       setLoader(true);
       const response = await contractsService.getNetworksLists(requestData);
+      console.log("getNetworksLists", response);
       setLoader(false);
       setAddress(response.networkList);
       if (response.networkList.length === 0) setShowPlaceHolder(true);

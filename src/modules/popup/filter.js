@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Dialog from "@mui/material/Dialog";
 import { makeStyles } from "@material-ui/styles";
+import contractsService from "../../services/contractsService";
 
 const useStyles = makeStyles(() => ({
   dialogBox: {
@@ -13,12 +14,37 @@ const useStyles = makeStyles(() => ({
 
 export default function Filter(props) {
   const classes = useStyles();
+  const [loader, setLoader] = React.useState(false);
+  const [address, setAddress] = React.useState([]);
+  const [showPlaceHolder, setShowPlaceHolder] = React.useState(false);
+
+  React.useEffect(() => {
+    getNetworkList();
+  }, []);
 
   const Close = () => {
     props.click();
     props.filterSearch();
   };
+  const getNetworkList = async (skip = 0, limit = 20) => {
+    try {
+      const requestData = {
+        skip: skip,
+        limit: limit,
+      };
 
+      setLoader(true);
+      const response = await contractsService.getNetworksLists(requestData);
+      console.log("response", response.networkList);
+      setLoader(false);
+      setAddress(response.networkList);
+      if (response.networkList.length === 0) setShowPlaceHolder(true);
+      else setShowPlaceHolder(false);
+    } catch (e) {
+      setShowPlaceHolder(true);
+      setLoader(false);
+    }
+  };
   return (
     <div>
       <Dialog classes={{ paper: classes.dialogBox }} open={true}>
@@ -26,12 +52,6 @@ export default function Filter(props) {
           <Container>
             <RowContainer>
               <Add>Filter Transactions</Add>
-              <img
-                style={{ cursor: "pointer" }}
-                alt=""
-                src="/images/close.svg"
-                onClick={props.click}
-              />
             </RowContainer>
             <NewContainerStatus>
               <Content>Status</Content>
@@ -55,12 +75,14 @@ export default function Filter(props) {
                 onChange={(e) => props.setSelectDrop([e.target.value])}
                 value={props.selectDrop}
               >
-                <option className="options-select">
+                {/* <option className="options-select">
                   https://rpc.xinfin.network
                 </option>
                 <option className="options-select">
                   https://rpc.apothem.network
-                </option>
+                </option> */}
+                {address &&
+                  address.map((items) => <option>{items.newRpcUrl}</option>)}
               </select>
             </NewContainerOne>
 

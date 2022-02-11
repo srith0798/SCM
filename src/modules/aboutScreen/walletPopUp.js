@@ -7,7 +7,6 @@ const useStyles = makeStyles(() => ({
   dialogBox: {
     width: "100% !important",
     marginBottom: "275px",
-    // marginLeft: "142px",
   },
 }));
 
