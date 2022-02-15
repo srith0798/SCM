@@ -72,6 +72,7 @@ export default function Filter(props) {
 
               <select
                 className="select-filter"
+                placeholder="select network"
                 onChange={(e) => props.setSelectDrop([e.target.value])}
                 value={props.selectDrop}
               >
@@ -81,6 +82,7 @@ export default function Filter(props) {
                 <option className="options-select">
                   https://rpc.apothem.network
                 </option> */}
+
                 {address &&
                   address.map((items) => <option>{items.newRpcUrl}</option>)}
               </select>
@@ -125,7 +127,7 @@ const ApplyButton = styled.div`
   color: #ffffff;
   padding-top: 6px;
   font-size: 14px;
-  margin-right: 15px;
+  margin-right: 28px;
   text-align: center;
   cursor: pointer;
 
@@ -361,7 +363,7 @@ const NewContainerStatus = styled.div`
 const LastContainer = styled.div`
   display: flex;
   justify-content: end;
-  max-width: 503px;
+  max-width: 498px;
   @media (min-width: 300px) and (max-width: 414px) {
     justify-content: start;
     margin-top: -18px;

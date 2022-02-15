@@ -14,6 +14,8 @@ const useStyles = makeStyles(() => ({
 export default function AddNetwork(props) {
   const classes = useStyles();
   const [loader, setLoader] = React.useState(false);
+  const [isPresent, setisPresent] = React.useState(false);
+
   const addNetwork = async () => {
     let requestData = {
       networkName: networkName,
@@ -31,6 +33,24 @@ export default function AddNetwork(props) {
       console.log("Error", e);
     }
   };
+  const getNetworksLists = async (skip = 0, limit) => {
+    try {
+      const requestData = {
+        skip: skip,
+        limit: limit,
+      };
+
+      setLoader(true);
+      const response = await contractsService.getNetworksLists(requestData);
+      console.log("response", response.networkList);
+      response.map(
+        (contract) => console.log("contract", contract)
+        // contract.newRpcUrl === newRpcUrl ? setisPresent(true) : ""
+      );
+    } catch (e) {
+      console.log("Error in networklist", e);
+    }
+  };
   const [networkName, setNetworkName] = React.useState("");
   const [newRpcUrl, setNewRpcUrl] = React.useState("");
   const [chainId, setChainId] = React.useState(0);
@@ -40,14 +60,22 @@ export default function AddNetwork(props) {
     props.click(false);
     props.getNetworkList();
   };
-  const addNetworksDetails = () => {
+  const addNetworksDetails = async () => {
     console.log("networkUrlValidation", networkUrlValidation());
-    if (networkUrlValidation() !== undefined && !networkUrlValidation()) {
-      utility.apiFailureToast("Invalid RPC endpoint");
-      return;
-    }
 
-    addNetwork();
+    await getNetworksLists();
+    console.log("present", isPresent);
+    setTimeout(() => {
+      if (isPresent) {
+        if (networkUrlValidation() !== undefined && !networkUrlValidation()) {
+          utility.apiFailureToast("Invalid RPC endpoint");
+          return;
+        }
+      } else {
+        addNetwork();
+        setisPresent(false);
+      }
+    }, 2000);
   };
 
   async function networkUrlValidation() {
@@ -191,13 +219,13 @@ const Button = styled.button`
   font: normal normal medium 14px/17px Inter;
   letter-spacing: 0px;
   color: #ffffff;
-  background: #9db5f8 0% 0% no-repeat padding-box;
+  background: #3163f0 0% 0% no-repeat padding-box;
   border: 0px;
   border-radius: 4px;
   text-align: center;
   white-space: nowrap;
-  padding: 10px 12px;
+  padding: 6px 12px;
   margin-right: 10px;
   margin-top: 1.25rem;
-  height: 41px;
+  height: 35px;
 `;
