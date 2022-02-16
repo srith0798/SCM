@@ -22,7 +22,11 @@ export default function ConnectWallets(props) {
             creating alerts for your contracts. If you are not having XDCPay
             download it from{" "}
             <p>
-              <a href="https://chrome.google.com/webstore/detail/xdcpay/bocpokimicclpaiekenaeelehdjllofo?hl=en-GB">
+              <a
+                href="https://chrome.google.com/webstore/detail/xdcpay/bocpokimicclpaiekenaeelehdjllofo?hl=en-GB"
+                target="blank"
+                rel="noreferrer"
+              >
                 here
               </a>
             </p>

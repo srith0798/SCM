@@ -33,7 +33,8 @@ export default function Sidebar(props) {
     sessionManager.removeDataFromCookies("userId");
     sessionManager.removeDataFromCookies("username");
     sessionManager.removeDataFromCookies("profilePicture");
-    window.location.href = "http://localhost:3000/dashboard/about";
+    window.location.href =
+      "http://xdc-scm-elb-dev-18733672.us-east-1.elb.amazonaws.com/dashboard/about";
   };
 
   const [aboutIcon, setAboutIcon] = React.useState(
@@ -148,10 +149,12 @@ export default function Sidebar(props) {
         <Heading>FAQs</Heading>
       </Wrapper>
 
-      <Wrapper onClick={redirectToLogout}>
-        <Icon src="/images/Log out.svg" />
-        <Heading>Logout</Heading>
-      </Wrapper>
+      {sessionManager.getDataFromCookies("isLoggedIn") && (
+        <WrapperLogout onClick={redirectToLogout}>
+          <Icon src="/images/Log out.svg" />
+          <Heading>Logout</Heading>
+        </WrapperLogout>
+      )}
       <CenterDiv>
         <img alt="" src="/images/Group 12.svg" />
       </CenterDiv>
@@ -183,6 +186,17 @@ const Icon = styled.img`
   margin-right: 13px;
 `;
 const Wrapper = styled.div`
+  flex-wrap: wrap;
+  cursor: pointer;
+  width: 100%;
+  max-width: 240px;
+  white-space: nowrap;
+  padding: 23px;
+  &:hover {
+    background: #1d3c93;
+  }
+`;
+const WrapperLogout = styled.div`
   flex-wrap: wrap;
   cursor: pointer;
   width: 100%;

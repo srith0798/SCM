@@ -82,94 +82,183 @@ export default function MainComponent(props) {
                 </Box>
               </ClickAwayListener>
             </Container>
+            <ScrollableDiv>
+              <ResponsiveRow>
+                <GraphContainer>
+                  <SubContainer>
+                    <div style={{ display: "flex", alignItems: "center" }}>
+                      <Head>
+                        Transactions over time
+                        <Tooltip
+                          disableFocusListener
+                          title="Transaction executed in due course"
+                        >
+                          <ToolTipIcon src="/images/tool-tip.svg" />
+                        </Tooltip>
+                      </Head>
+                      <BackImage
+                        src="/images/expand.svg"
+                        onClick={() => props.changeExpand(1)}
+                      />
+                    </div>
+                    <select id="cars" className="select">
+                      <option value="volvo" className="select-dropdown">
+                        Last 5 days
+                      </option>
+                      <option value="saab" className="select-dropdown">
+                        Last 7 days
+                      </option>
+                      <option value="mercedes" className="select-dropdown">
+                        Last 15 days
+                      </option>
+                      <option value="audi" className="select-dropdown">
+                        Last 25 days
+                      </option>
+                    </select>
+                  </SubContainer>
+                  <Line />
+                </GraphContainer>
+                <GraphContainer>
+                  <SubContainer>
+                    <div style={{ display: "flex", alignItems: "center" }}>
+                      <Head>
+                        Gas used overtime
+                        <Tooltip
+                          disableFocusListener
+                          title="Amount of gas utilized in the specified time range"
+                        >
+                          <ToolTipIcon src="/images/tool-tip.svg" />
+                        </Tooltip>
+                      </Head>
+                      <BackImage
+                        src="/images/expand.svg"
+                        onClick={() => props.changeExpand(2)}
+                      />
+                    </div>
 
-            <ResponsiveRow>
+                    <select id="cars" className="select">
+                      <option value="volvo" className="select-dropdown">
+                        Last 5 days
+                      </option>
+                      <option value="saab" className="select-dropdown">
+                        Last 7 days
+                      </option>
+                      <option value="mercedes" className="select-dropdown">
+                        Last 15 days
+                      </option>
+                      <option value="audi" className="select-dropdown">
+                        Last 25 days
+                      </option>
+                    </select>
+                  </SubContainer>
+                  <Line />
+                </GraphContainer>
+              </ResponsiveRow>
+              <ResponsiveRow>
+                <GraphContainer>
+                  <SubContainer>
+                    <div style={{ display: "flex", alignItems: "center" }}>
+                      <Head>
+                        Top Callers
+                        <Tooltip
+                          disableFocusListener
+                          title="List of top callers in past days"
+                        >
+                          <ToolTipIcon src="/images/tool-tip.svg" />
+                        </Tooltip>
+                      </Head>
+                      <BackImage
+                        src="/images/expand.svg"
+                        onClick={() => props.changeExpand(4)}
+                      />
+                    </div>
+                    <select id="cars" className="select">
+                      <option value="volvo" className="select-dropdown">
+                        Last 5 days
+                      </option>
+                      <option value="saab" className="select-dropdown">
+                        Last 7 days
+                      </option>
+                      <option value="mercedes" className="select-dropdown">
+                        Last 15 days
+                      </option>
+                      <option value="audi" className="select-dropdown">
+                        Last 25 days
+                      </option>
+                    </select>
+                  </SubContainer>
+                  <Div>
+                    <ContractFrom>Contract from</ContractFrom>
+                    <Network>
+                      xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c
+                    </Network>
+                  </Div>
+                  <Div>
+                    <ContractFrom>Network</ContractFrom>
+                    <Network>Mainnet</Network>
+                  </Div>
+                  <Div>
+                    <ContractFrom>Contract from</ContractFrom>
+                    <Network>
+                      xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c
+                    </Network>
+                  </Div>
+                  <Div>
+                    <ContractFrom>Network</ContractFrom>
+                    <Network>Mainnet</Network>
+                  </Div>
+                  <Div>
+                    <ContractFrom>Network</ContractFrom>
+                    <Network>Mainnet</Network>
+                  </Div>
+                </GraphContainer>
+                <GraphContainer>
+                  <SubContainer>
+                    <div style={{ display: "flex", alignItems: "center" }}>
+                      <Head>
+                        Active users
+                        <Tooltip
+                          disableFocusListener
+                          title="Number of active users in the given time range"
+                        >
+                          <ToolTipIcon src="/images/tool-tip.svg" />
+                        </Tooltip>
+                      </Head>
+                      <BackImage
+                        src="/images/expand.svg"
+                        onClick={() => props.changeExpand(3)}
+                      />
+                    </div>
+                    <select id="cars" className="select">
+                      <option value="volvo" className="select-dropdown">
+                        Last 5 days
+                      </option>
+                      <option value="saab" className="select-dropdown">
+                        Last 7 days
+                      </option>
+                      <option value="mercedes" className="select-dropdown">
+                        Last 15 days
+                      </option>
+                      <option value="audi" className="select-dropdown">
+                        Last 25 days
+                      </option>
+                    </select>
+                  </SubContainer>
+                  <Line />
+                </GraphContainer>
+              </ResponsiveRow>
               <GraphContainer>
                 <SubContainer>
                   <div style={{ display: "flex", alignItems: "center" }}>
                     <Head>
-                      Transactions over time
-                      <Tooltip
-                        disableFocusListener
-                        title="Transaction executed in due course"
-                      >
+                      Top Function calls
+                      <Tooltip disableFocusListener title="URL of the network">
                         <ToolTipIcon src="/images/tool-tip.svg" />
                       </Tooltip>
                     </Head>
                     <BackImage
                       src="/images/expand.svg"
-                      onClick={() => props.changeExpand(1)}
-                    />
-                  </div>
-                  <select id="cars" className="select">
-                    <option value="volvo" className="select-dropdown">
-                      Last 5 days
-                    </option>
-                    <option value="saab" className="select-dropdown">
-                      Last 7 days
-                    </option>
-                    <option value="mercedes" className="select-dropdown">
-                      Last 15 days
-                    </option>
-                    <option value="audi" className="select-dropdown">
-                      Last 25 days
-                    </option>
-                  </select>
-                </SubContainer>
-                <Line />
-              </GraphContainer>
-              <GraphContainer>
-                <SubContainer>
-                  <div style={{ display: "flex", alignItems: "center" }}>
-                    <Head>
-                      Gas used overtime
-                      <Tooltip
-                        disableFocusListener
-                        title="Amount of gas utilized in the specified time range"
-                      >
-                        <ToolTipIcon src="/images/tool-tip.svg" />
-                      </Tooltip>
-                    </Head>
-                    <BackImage
-                      src="/images/expand.svg"
-                      onClick={() => props.changeExpand(2)}
-                    />
-                  </div>
-
-                  <select id="cars" className="select">
-                    <option value="volvo" className="select-dropdown">
-                      Last 5 days
-                    </option>
-                    <option value="saab" className="select-dropdown">
-                      Last 7 days
-                    </option>
-                    <option value="mercedes" className="select-dropdown">
-                      Last 15 days
-                    </option>
-                    <option value="audi" className="select-dropdown">
-                      Last 25 days
-                    </option>
-                  </select>
-                </SubContainer>
-                <Line />
-              </GraphContainer>
-            </ResponsiveRow>
-            <ResponsiveRow>
-              <GraphContainer>
-                <SubContainer>
-                  <div style={{ display: "flex", alignItems: "center" }}>
-                    <Head>
-                      Top Callers
-                      <Tooltip
-                        disableFocusListener
-                        title="List of top callers in past days"
-                      >
-                        <ToolTipIcon src="/images/tool-tip.svg" />
-                      </Tooltip>
-                    </Head>
-                    <BackImage
-                      src="/images/expand.svg"
-                      onClick={() => props.changeExpand(4)}
+                      onClick={() => props.changeExpand(5)}
                     />
                   </div>
                   <select id="cars" className="select">
@@ -208,91 +297,7 @@ export default function MainComponent(props) {
                   <Network>Mainnet</Network>
                 </Div>
               </GraphContainer>
-              <GraphContainer>
-                <SubContainer>
-                  <div style={{ display: "flex", alignItems: "center" }}>
-                    <Head>
-                      Active users
-                      <Tooltip
-                        disableFocusListener
-                        title="Number of active users in the given time range"
-                      >
-                        <ToolTipIcon src="/images/tool-tip.svg" />
-                      </Tooltip>
-                    </Head>
-                    <BackImage
-                      src="/images/expand.svg"
-                      onClick={() => props.changeExpand(3)}
-                    />
-                  </div>
-                  <select id="cars" className="select">
-                    <option value="volvo" className="select-dropdown">
-                      Last 5 days
-                    </option>
-                    <option value="saab" className="select-dropdown">
-                      Last 7 days
-                    </option>
-                    <option value="mercedes" className="select-dropdown">
-                      Last 15 days
-                    </option>
-                    <option value="audi" className="select-dropdown">
-                      Last 25 days
-                    </option>
-                  </select>
-                </SubContainer>
-                <Line />
-              </GraphContainer>
-            </ResponsiveRow>
-            <GraphContainer>
-              <SubContainer>
-                <div style={{ display: "flex", alignItems: "center" }}>
-                  <Head>
-                    Top Function calls
-                    <Tooltip disableFocusListener title="URL of the network">
-                      <ToolTipIcon src="/images/tool-tip.svg" />
-                    </Tooltip>
-                  </Head>
-                  <BackImage
-                    src="/images/expand.svg"
-                    onClick={() => props.changeExpand(5)}
-                  />
-                </div>
-                <select id="cars" className="select">
-                  <option value="volvo" className="select-dropdown">
-                    Last 5 days
-                  </option>
-                  <option value="saab" className="select-dropdown">
-                    Last 7 days
-                  </option>
-                  <option value="mercedes" className="select-dropdown">
-                    Last 15 days
-                  </option>
-                  <option value="audi" className="select-dropdown">
-                    Last 25 days
-                  </option>
-                </select>
-              </SubContainer>
-              <Div>
-                <ContractFrom>Contract from</ContractFrom>
-                <Network>xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c</Network>
-              </Div>
-              <Div>
-                <ContractFrom>Network</ContractFrom>
-                <Network>Mainnet</Network>
-              </Div>
-              <Div>
-                <ContractFrom>Contract from</ContractFrom>
-                <Network>xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c</Network>
-              </Div>
-              <Div>
-                <ContractFrom>Network</ContractFrom>
-                <Network>Mainnet</Network>
-              </Div>
-              <Div>
-                <ContractFrom>Network</ContractFrom>
-                <Network>Mainnet</Network>
-              </Div>
-            </GraphContainer>
+            </ScrollableDiv>
           </MainContainer>
         </Row>
       </Column>
@@ -373,6 +378,10 @@ const GraphContainer = styled.div`
   @media (min-width: 300px) and (max-width: 1024px) {
     width: 100%;
   }
+`;
+const ScrollableDiv = styled.div`
+  overflow: auto;
+  height: 739px;
 `;
 const Head = styled.div`
   font-size: 1rem;
