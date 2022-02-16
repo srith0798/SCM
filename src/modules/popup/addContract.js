@@ -50,7 +50,7 @@ export default function AddContract(props) {
         props.click();
         props.getContractList();
         // props.reloadData();
-      } 
+      }
   };
 
   const handleEnterKey = (e) => {
@@ -113,7 +113,6 @@ export default function AddContract(props) {
             )}
             <Button
               onClick={addContract}
-              disabled={address.trim().length >= 0 && !checkBox ? true : false}
               style={{ backgroundColor: address === "" ? "#9DB5F8" : "" }}
             >
               Import Contracts

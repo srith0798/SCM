@@ -100,7 +100,8 @@ export default function AddNetwork(props) {
           return true;
         }
       });
-    } else {
+    }
+     else {
       if (!newRpcUrl.startsWith("http")) {
         utility.apiFailureToast(
           "URIs require the appropriate HTTP/HTTPS prefix."
