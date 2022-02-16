@@ -33,7 +33,8 @@ export default function Sidebar(props) {
     sessionManager.removeDataFromCookies("userId");
     sessionManager.removeDataFromCookies("username");
     sessionManager.removeDataFromCookies("profilePicture");
-    window.location.href = "http://localhost:3000/dashboard/about";
+    window.location.href =
+      "http://xdc-scm-elb-dev-18733672.us-east-1.elb.amazonaws.com/dashboard/about";
   };
 
   const [aboutIcon, setAboutIcon] = React.useState(
