@@ -29,7 +29,8 @@ const HomeComponent = (props) => {
           {Utility.isMenuActive("/about") && (
             <About getCurrentUserDetails={props.getCurrentUserDetails} />
           )}
-          {Utility.isMenuActive("/") && (
+
+          {!Utility.isMenuActive("/about") && (
             <ConnectWallets
               getCurrentUserDetails={props.getCurrentUserDetails}
             />

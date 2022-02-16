@@ -50,7 +50,7 @@ export default function Contract(props) {
       if (pageCount % 10 === 0) {
         setPage(parseInt(pageCount / 10));
       } else {
-        setPage(parseInt(pageCount / 10) + 1);
+        setPage(parseInt(pageCount / 10));
       }
       if (response.contractList.length === 0) setShowPlaceHolder(true);
       else setShowPlaceHolder(false);
