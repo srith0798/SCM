@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Column, Row } from "simple-flexbox";
+import { Column } from "simple-flexbox";
 import LetsGetStarted from "../popup/letsGetStartedPopUp";
 import Settings from "../popup/settings";
 import Box from "@mui/material/Box";
@@ -211,16 +211,29 @@ export default function TransactionList(props) {
         <TransactionBox>
           <NewDiv>
             <Transactions>Transactions</Transactions>
-            <SearchBar placeholder="Search by status or name" onChange={search} value={input} />
+            <SearchBar
+              placeholder="Search by status or name"
+              onChange={search}
+              value={input}
+            />
           </NewDiv>
 
           <IconContainer>
-            {open && <Settings click={handleClose} setToggle={setToggle} toggle={toggle} />}
+            {open && (
+              <Settings
+                click={handleClose}
+                setToggle={setToggle}
+                toggle={toggle}
+              />
+            )}
             <Tooltip disableFocusListener title="Settings">
               <Icons src="/images/settings.svg" onClick={handleClickOpen} />
             </Tooltip>
             <Tooltip disableFocusListener title="Refresh">
-              <Icons onClick={() => getTransaction()} src="/images/refresh.svg" />
+              <Icons
+                onClick={() => getTransaction()}
+                src="/images/refresh.svg"
+              />
             </Tooltip>
             {filterPopupOpen && (
               <Filter
@@ -245,7 +258,10 @@ export default function TransactionList(props) {
         <Card>
           <Column>
             <Heading>View Transaction for Contract</Heading>
-            <InstructionText>You can view transactions per contract by using the contract picker below</InstructionText>
+            <InstructionText>
+              You can view transactions per contract by using the contract
+              picker below
+            </InstructionText>
 
             <ClickAwayListener onClickAway={handleClickAway}>
               <Box
@@ -257,7 +273,12 @@ export default function TransactionList(props) {
                 selected={selected.address}
               >
                 <DropDown onClick={handleClick}>
-                  App_Transactions_Validator <img style={{ marginLeft: "0.5rem" }} alt="" src="/images/XDCmainnet.svg" />
+                  App_Transactions_Validator{" "}
+                  <img
+                    style={{ marginLeft: "0.5rem" }}
+                    alt=""
+                    src="/images/XDCmainnet.svg"
+                  />
                   <br />
                   <TransactionHash>{selected.address}</TransactionHash>
                   <Image src="/images/Arrrow.svg" />
@@ -294,7 +315,10 @@ export default function TransactionList(props) {
                     disableFocusListener
                     title="Unique transaction identifier, also known as the Transaction ID"
                   >
-                    <ToolTipIcon onClick={() => setTxHashToolTip(!TxHashToolTip)} src="/images/tool-tip.svg" />
+                    <ToolTipIcon
+                      onClick={() => setTxHashToolTip(!TxHashToolTip)}
+                      src="/images/tool-tip.svg"
+                    />
                   </Tooltip>
                 </ColumnOne>
               )}
@@ -308,7 +332,10 @@ export default function TransactionList(props) {
                     disableFocusListener
                     title="Token transaction status"
                   >
-                    <ToolTipIcon onClick={() => setstatusToolTip(!statusToolTip)} src="/images/tool-tip.svg" />
+                    <ToolTipIcon
+                      onClick={() => setstatusToolTip(!statusToolTip)}
+                      src="/images/tool-tip.svg"
+                    />
                   </Tooltip>
                 </ColumnOne>
               )}
@@ -322,15 +349,24 @@ export default function TransactionList(props) {
                     disableFocusListener
                     title="Smart contract function status"
                   >
-                    <ToolTipIcon onClick={() => setfunctionToolTip(!functionToolTip)} src="/images/tool-tip.svg" />
+                    <ToolTipIcon
+                      onClick={() => setfunctionToolTip(!functionToolTip)}
+                      src="/images/tool-tip.svg"
+                    />
                   </Tooltip>
                 </ColumnOne>
               )}
               {toggle.contracts && (
                 <ColumnOne>
                   Contracts
-                  <Tooltip disableFocusListener title="Name of the smart contract">
-                    <ToolTipIcon onClick={() => setstatusToolTip(!statusToolTip)} src="/images/tool-tip.svg" />
+                  <Tooltip
+                    disableFocusListener
+                    title="Name of the smart contract"
+                  >
+                    <ToolTipIcon
+                      onClick={() => setstatusToolTip(!statusToolTip)}
+                      src="/images/tool-tip.svg"
+                    />
                   </Tooltip>
                 </ColumnOne>
               )}
@@ -353,7 +389,10 @@ export default function TransactionList(props) {
               {toggle.when && (
                 <ColumnOne>
                   When
-                  <Tooltip disableFocusListener title="Date and time of transaction execution">
+                  <Tooltip
+                    disableFocusListener
+                    title="Date and time of transaction execution"
+                  >
                     <ToolTipIcon src="/images/tool-tip.svg" />
                   </Tooltip>
                 </ColumnOne>
@@ -367,24 +406,36 @@ export default function TransactionList(props) {
                   <RowData>
                     {toggle.transactionHash && (
                       <ColumnSecond onClick={redirectToTransactionDetails}>
-                        <BackgroundChangerTxhash>{utility.truncateTxnAddress(data.hash)}</BackgroundChangerTxhash>
+                        <BackgroundChangerTxhash>
+                          {utility.truncateTxnAddress(data.hash)}
+                        </BackgroundChangerTxhash>
                       </ColumnSecond>
                     )}
 
-                    {toggle.status && <ColumnSecond>{data.status}</ColumnSecond>}
+                    {toggle.status && (
+                      <ColumnSecond>{data.status}</ColumnSecond>
+                    )}
 
-                    {toggle.function && <ColumnSecond>{data.function}</ColumnSecond>}
-                    {toggle.contracts && <ColumnSecond>{data.contracts}</ColumnSecond>}
+                    {toggle.function && (
+                      <ColumnSecond>{data.function}</ColumnSecond>
+                    )}
+                    {toggle.contracts && (
+                      <ColumnSecond>{data.contracts}</ColumnSecond>
+                    )}
 
                     {toggle.from && (
                       <ColumnSecond>
-                        <BackgroundChangerFrom>{utility.truncateTxnAddress(data.from)}</BackgroundChangerFrom>
+                        <BackgroundChangerFrom>
+                          {utility.truncateTxnAddress(data.from)}
+                        </BackgroundChangerFrom>
                       </ColumnSecond>
                     )}
 
                     {toggle.to && (
                       <ColumnSecond>
-                        <BackgroundChangerTo>{utility.truncateTxnAddress(data.to)}</BackgroundChangerTo>
+                        <BackgroundChangerTo>
+                          {utility.truncateTxnAddress(data.to)}
+                        </BackgroundChangerTo>
                       </ColumnSecond>
                     )}
 
@@ -419,7 +470,11 @@ export default function TransactionList(props) {
           />
         </PaginationDiv>
       </MainContainer>
-      <div>{false && <LetsGetStarted click={() => setState(false)} state={state} />}</div>
+      <div>
+        {false && (
+          <LetsGetStarted click={() => setState(false)} state={state} />
+        )}
+      </div>
     </>
   );
 }
@@ -524,7 +579,7 @@ const MainContainer = styled.div`
   opacity: 1;
   width: 100%;
   padding: 3.125rem;
-  height: 120vh;
+  height: 110vh;
   @media (min-width: 340px) and (max-width: 768px) {
     padding: 3.125rem 1.5rem 1.5rem 1.5rem;
   }
@@ -626,7 +681,7 @@ const ColumnOne = styled.div`
   color: #102c78;
   column-gap: 20px;
   width: 100%;
-  min-width: 200px;
+  min-width: 200.5px;
   white-space: nowrap;
   @media (min-width: 300px) and (max-width: 767px) {
     width: 100%;
@@ -647,6 +702,7 @@ const BackgroundChangerTxhash = styled.div`
   background: #eaefff 0% 0% no-repeat padding-box;
   border-radius: 6px;
   opacity: 1;
+  padding: 1px 6px 1px 4px;
 
   @media (min-width: 300px) and (max-width: 1371px) {
     margin-left: 0px;
@@ -663,6 +719,7 @@ const BackgroundChangerTo = styled.div`
   background: #eaefff 0% 0% no-repeat padding-box;
   border-radius: 6px;
   opacity: 1;
+  padding: 1px 6px 1px 4px;
 
   @media (min-width: 300px) and (max-width: 1371px) {
     // width: 100%;
@@ -676,6 +733,7 @@ const BackgroundChangerFrom = styled.div`
   background: #eaefff 0% 0% no-repeat padding-box;
   border-radius: 6px;
   opacity: 1;
+  padding: 1px 6px 1px 4px;
 
   @media (min-width: 300px) and (max-width: 1371px) {
     // width: 100%;

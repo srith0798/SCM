@@ -8,8 +8,11 @@ import StateChange from "./stateChange";
 import SubContracts from "./subContracts";
 import { history } from "../../managers/history";
 import utility from "../../utility";
+import Tooltip from "@mui/material/Tooltip";
 
 export default function TransactionDetails() {
+  const [eventToolTip, seteventToolTip] = React.useState(false);
+  const [statusToolTip, setstatusToolTip] = React.useState(false);
   const [activeButton, setActiveButton] = React.useState("Overview");
   const handleViewClick = (e) => {
     setActiveButton(e.target.id);
@@ -41,7 +44,7 @@ export default function TransactionDetails() {
         <TopContainer>
           <Hash>
             {utility.truncateTxnAddress(
-              "xdcabfe4184e5f9f600fe86d20ffdse2fsfbsgsgsa768b3c"
+              "0x1822a4c5b699f8c2653062033b86aceea234d804dd5358c"
             )}
           </Hash>
           <CopyToClipboard>
@@ -129,6 +132,18 @@ export default function TransactionDetails() {
               }
             />
             Events
+            <Tooltip
+              open={eventToolTip}
+              onOpen={() => seteventToolTip(true)}
+              onClose={() => seteventToolTip(false)}
+              disableFocusListener
+              title="events details"
+            >
+              <ToolTipIcon
+                onClick={() => seteventToolTip(!eventToolTip)}
+                src="/images/tool-tip.svg"
+              />
+            </Tooltip>
           </TabView>
           <TabView
             id="StateChange"
@@ -137,6 +152,7 @@ export default function TransactionDetails() {
               color: activeButton === "StateChange" ? "#3163F0" : "#AEB7D0",
               display: "flex",
               paddingBottom: "1rem",
+              whiteSpace: "nowrap",
               borderBottom:
                 activeButton === "StateChange" ? "0.225rem solid #3163F0" : "",
             }}
@@ -150,204 +166,189 @@ export default function TransactionDetails() {
                   : "/images/statechange_grey.svg"
               }
             />
-            StateChanges
+            State changes
+            <Tooltip
+              open={statusToolTip}
+              onOpen={() => setstatusToolTip(true)}
+              onClose={() => setstatusToolTip(false)}
+              disableFocusListener
+              title="state Change details"
+            >
+              <ToolTipIcon
+                onClick={() => setstatusToolTip(!statusToolTip)}
+                src="/images/tool-tip.svg"
+              />
+            </Tooltip>
           </TabView>
         </TabLister>
-        {activeButton === "Overview" && (
-          <div>
-            <MidContainer>
-              <CommonDiv>
-                <Row>
-                  <Heading>Network</Heading>
-                  <SubHead>XDC mainnet</SubHead>
-                </Row>
-              </CommonDiv>
-              <CommonDiv>
-                <Row>
-                  <Heading>Error</Heading>
-                  <SubHead>Out of Gas</SubHead>
-                </Row>
-              </CommonDiv>
-              <CommonDiv>
-                <Row>
-                  <Heading>Block</Heading>
-                  <SubHead>365474(2456block)</SubHead>
-                </Row>
-              </CommonDiv>
-              <CommonDiv>
-                <Row>
-                  <Heading>Transactions index</Heading>
-                  <SubHead>5</SubHead>
-                </Row>
-              </CommonDiv>
-              <CommonDiv>
-                <Row>
-                  <Heading>From</Heading>
-                  <SubHead style={{ display: "flex", alignItems: "center" }}>
-                    <TransactionNumber>
-                      {utility.truncateTxnAddress(
-                        "xdcabfe4184e5f9f600fe86d20ffdse2fsfbsgsgsa768b3c"
-                      )}
-                    </TransactionNumber>
-
-                    <CopyToClipboardImg src="/images/copy.svg" />
-                  </SubHead>
-                </Row>
-              </CommonDiv>
-              <CommonDiv>
-                <Row>
-                  <Heading>To</Heading>
-                  <SubHead>
-                    <TransactionNumber>
-                      {utility.truncateTxnAddress(
-                        "xdcabfe4184e5f9f600fe86d20ffdse2fsfbsgsgsa768b3c"
-                      )}
-                    </TransactionNumber>
-
-                    <CopyToClipboardImg src="/images/copy.svg" />
-                  </SubHead>
-                </Row>
-              </CommonDiv>
-              <CommonDiv>
-                <Row>
-                  <Heading>Timestamp</Heading>
-                  <SubHead>213 322 adhfb</SubHead>
-                </Row>
-              </CommonDiv>
-              <CommonDiv>
-                <Row>
-                  <Heading>Value</Heading>
-                  <SubHead> 10 XDC</SubHead>
-                </Row>
-              </CommonDiv>
-              <CommonDiv>
-                <Row>
-                  <Heading>Nonce</Heading>
-                  <SubHead>453</SubHead>
-                </Row>
-              </CommonDiv>
-              <CommonDiv>
-                <Row>
-                  <Heading>Gas Used</Heading>
-                  <SubHead>60,500(100%)</SubHead>
-                </Row>
-              </CommonDiv>
-              <CommonDiv>
-                <Row>
-                  <Heading>Gas Price</Heading>
-                  <SubHead>XDC(54253.gwel)</SubHead>
-                </Row>
-              </CommonDiv>
-              <CommonDiv>
-                <Row>
-                  <Heading>Transaction Fee</Heading>
-                  <SubHead>0.237272376272</SubHead>
-                </Row>
-              </CommonDiv>
-              <CommonDiv>
-                <Row>
-                  <Heading>Raw input</Heading>
-                  <SubHead>
-                    <Hash>
-                      <TransactionNumber>
-                        {utility.truncateTxnAddress(
-                          "xdcabfe4184e5f9f600fe86d20ffdse2fsfbsgsgsa768b3c"
-                        )}
-                      </TransactionNumber>
-                    </Hash>
-                    <CopyToClipboardImg src="/images/copy.svg" />
-                  </SubHead>
-                </Row>
-              </CommonDiv>
-            </MidContainer>
-            <FunctionContainer>
-              <CommonDiv>
-                <Row>
-                  <Heading>Function: </Heading>
-                  <SubHeadBlue>transfer()</SubHeadBlue>
-                </Row>
-              </CommonDiv>
-              <CommonDiv>
-                <Row>
-                  <Heading>Input:</Heading>
-                  <SubHeadBlue>
-                    view data
-                    <img
-                      style={{ marginLeft: "2px" }}
-                      alt=""
-                      src="/images/Arrrow.svg"
-                    />
-                  </SubHeadBlue>
-                </Row>
-              </CommonDiv>
-              <CommonDiv>
-                <Row>
-                  <Heading>Output </Heading>
-                  <SubHeadBlue>
-                    veiw data
-                    <img
-                      style={{ marginLeft: "2px" }}
-                      alt=""
-                      src="/images/Arrrow.svg"
-                    />
-                  </SubHeadBlue>
-                </Row>
-              </CommonDiv>
-              <CommonDiv>
-                <Row>
-                  <Heading>Caller Address </Heading>
-                </Row>
-                <Row>
-                  <SubHeading
-                    style={{ fontWeight: "400", marginRight: "40px" }}
-                  >
-                    xdcabf...a32c99be1768b3c
-                  </SubHeading>
-                </Row>
-              </CommonDiv>
-            </FunctionContainer>
-            {/* <b>Token Transfer</b> */}
-            <TokenTransferDiv>
-              <CommonDiv>
-                <Row>
-                  <Heading>From:</Heading>
-                  <SubHeadBlue>xdcabfe4184e5f9.....fsfbsgsgsa768b3</SubHeadBlue>
-                </Row>
-              </CommonDiv>
-              <CommonDiv>
-                <Row>
-                  <Heading>To:</Heading>
-                  <SubHeadBlue>
-                    xdcabfe4184e5f9......2fsfbsgsgsa768b3
-                  </SubHeadBlue>
-                </Row>
-              </CommonDiv>
-            </TokenTransferDiv>
-            <b>Stack Trace</b> <ToolTipIcon src="/images/tool-tip.svg" />
-            <StackContainer>
-              <BackgroundChanger>
-                <TextLine>Error Messege:out of gas</TextLine>
-                <img alt="" src="/images/error.svg" /> balances[_to] =
-                balances[_to].add(_value);
-                <br />
-              </BackgroundChanger>
-            </StackContainer>
-            <LastContainer>
-              <SearchBar placeholder="Execution trace" />
-              <br />
-              <img
-                alt=""
-                src="/images/contracts.svg"
-                style={{ width: "1rem", marginRight: "3px" }}
-              />
-              transfer in App_Transactions_Validator
-            </LastContainer>
-          </div>
-        )}
-        {activeButton === "Contracts" && <SubContracts />}
-        {activeButton === "EventsDetails" && <EventsDetails />}
-        {activeButton === "StateChange" && <StateChange />}
       </Container>
+      {activeButton === "Overview" && (
+        <ScrollableDiv>
+          <MidContainer>
+            <CommonDiv>
+              <Row>
+                <Heading>Network</Heading>
+                <SubHead>XDC mainnet</SubHead>
+              </Row>
+            </CommonDiv>
+            <CommonDiv>
+              <Row>
+                <Heading>Error</Heading>
+                <SubHead>Out of Gas</SubHead>
+              </Row>
+            </CommonDiv>
+            <CommonDivBlock>
+              <Heading>Block</Heading>
+              <SubHead>36585614 (358349 block confirmation)</SubHead>
+            </CommonDivBlock>
+            <CommonDiv>
+              <Row>
+                <Heading>Transactions index</Heading>
+                <SubHead>5</SubHead>
+              </Row>
+            </CommonDiv>
+            <CommonDivFrom>
+              <Heading>From</Heading>
+              <SubHead>
+                <TransactionNumber>
+                  xdc2113d5d4d7427123be37319dcee7dc52d3f8c2a9
+                </TransactionNumber>
+
+                <CopyToClipboardImg src="/images/copy.svg" />
+              </SubHead>
+            </CommonDivFrom>
+            <CommonDivTo>
+              <Heading>To</Heading>
+              <SubHead>
+                <TransactionNumber>
+                  xdc2113d5d4d7427123be37319dcee7dc52d3f8c2a9
+                </TransactionNumber>
+
+                <CopyToClipboardImg src="/images/copy.svg" />
+              </SubHead>
+            </CommonDivTo>
+            <TimeStampDiv>
+              <Heading>Timestamp</Heading>
+              <SubHead>03 mins ago (Oct-27-2021 11:58:44 PM +UTC)</SubHead>
+            </TimeStampDiv>
+            <CommonDiv>
+              <Row>
+                <Heading>Value</Heading>
+                <SubHead> 10 XDC</SubHead>
+              </Row>
+            </CommonDiv>
+            <CommonDiv>
+              <Row>
+                <Heading>Nonce</Heading>
+                <SubHead>453</SubHead>
+              </Row>
+            </CommonDiv>
+            <CommonDiv>
+              <Row>
+                <Heading>Gas Used</Heading>
+                <SubHead>60,052 (100%)</SubHead>
+              </Row>
+            </CommonDiv>
+            <GasPriceDiv>
+              <Heading>Gas Price</Heading>
+              <SubHead>0.000000000842346544 XDC (0.842346544 Gwei)</SubHead>
+            </GasPriceDiv>
+            <FeeDiv>
+              <Heading>Transaction Fee</Heading>
+              <SubHead>0.000119580201654524 XDC</SubHead>
+            </FeeDiv>
+            <RawInputDiv>
+              <Heading>Raw input</Heading>
+              <SubHead>
+                <TransactionNumber>
+                  xdc2113d5d4d7427123be37319dcee7dc52d3f8c2a9
+                </TransactionNumber>
+                <CopyToClipboardImg src="/images/copy.svg" />
+              </SubHead>
+            </RawInputDiv>
+          </MidContainer>
+          <FunctionContainer>
+            <CommonDiv>
+              <Row>
+                <Heading>Function: </Heading>
+                <SubHeadBlue>transfer()</SubHeadBlue>
+              </Row>
+            </CommonDiv>
+            <CommonDiv>
+              <Row>
+                <Heading>Input:</Heading>
+                <SubHeadBlue>
+                  view data
+                  <img
+                    style={{ marginLeft: "2px" }}
+                    alt=""
+                    src="/images/Arrrow.svg"
+                  />
+                </SubHeadBlue>
+              </Row>
+            </CommonDiv>
+            <CommonDiv>
+              <Row>
+                <Heading>Output </Heading>
+                <SubHeadBlue>
+                  veiw data
+                  <img
+                    style={{ marginLeft: "2px" }}
+                    alt=""
+                    src="/images/Arrrow.svg"
+                  />
+                </SubHeadBlue>
+              </Row>
+            </CommonDiv>
+            <CommonDiv>
+              <Row>
+                <Heading>Caller Address </Heading>
+              </Row>
+              <Row>
+                <SubHeading style={{ fontWeight: "400", marginRight: "40px" }}>
+                  xdcabf...a32c99be1768b3c
+                </SubHeading>
+              </Row>
+            </CommonDiv>
+          </FunctionContainer>
+          <TokenTransferDiv>
+            <CommonDiv>
+              <Row>
+                <Heading>From:</Heading>
+                <SubHeadBlue>xdcabfe4184e5f9.....fsfbsgsgsa768b3</SubHeadBlue>
+              </Row>
+            </CommonDiv>
+            <CommonDiv>
+              <Row>
+                <Heading>To:</Heading>
+                <SubHeadBlue>xdcabfe4184e5f9......2fsfbsgsgsa768b3</SubHeadBlue>
+              </Row>
+            </CommonDiv>
+          </TokenTransferDiv>
+          <b>Stack Trace</b> <ToolTipIcon src="/images/tool-tip.svg" />
+          <StackContainer>
+            <BackgroundChanger>
+              <TextLine>Error Messege:out of gas</TextLine>
+              <img alt="" src="/images/error.svg" /> balances[_to] =
+              balances[_to].add(_value);
+              <br />
+            </BackgroundChanger>
+          </StackContainer>
+          <LastContainer>
+            <SearchBar placeholder="Execution trace" />
+            <br />
+            <img
+              alt=""
+              src="/images/contracts.svg"
+              style={{ width: "1rem", marginRight: "3px" }}
+            />
+            transfer in App_Transactions_Validator
+          </LastContainer>
+        </ScrollableDiv>
+      )}
+      {activeButton === "Contracts" && <SubContracts />}
+      {activeButton === "EventsDetails" && <EventsDetails />}
+      {activeButton === "StateChange" && <StateChange />}
     </MainContainer>
   );
 }
@@ -357,7 +358,7 @@ const MainContainer = styled.div`
   width: 100%;
   padding: 2.125rem;
   display: 100%;
-  height: 230vh;
+  height: auto;
   @media (min-width: 340px) and (max-width: 768px) {
     padding: 1rem;
   }
@@ -424,9 +425,14 @@ const TokenTransferDiv = styled.div`
 `;
 
 const SubHead = styled.div`
-  font-size: 0.75rem;
+  font-size: 14px;
   display: flex;
   font-weight: 500;
+  justify-content: space-between;
+  width: 100%;
+  // overflow: hidden;
+  max-width: 354px;
+  white-space: nowrap;
 `;
 const SubHeadBlue = styled.div`
   font-size: 0.85rem;
@@ -436,6 +442,75 @@ const SubHeadBlue = styled.div`
 const CommonDiv = styled.div`
   border-bottom: 0.031rem #eaf1ec solid;
   padding: 0.813rem;
+`;
+const TimeStampDiv = styled.div`
+  border-bottom: 0.031rem #eaf1ec solid;
+  padding: 0.813rem;
+  display: flex;
+  @media (min-width: 300px) and (max-width: 767px) {
+    display: flex;
+    column-gap: 104px;
+  }
+`;
+const CommonDivBlock = styled.div`
+  border-bottom: 0.031rem #eaf1ec solid;
+  padding: 0.813rem;
+  display: flex;
+  @media (min-width: 300px) and (max-width: 767px) {
+    display: flex;
+    column-gap: 138px;
+  }
+`;
+const FeeDiv = styled.div`
+  border-bottom: 0.031rem #eaf1ec solid;
+  padding: 0.813rem;
+  display: flex;
+  white-space: nowrap;
+  @media (min-width: 300px) and (max-width: 767px) {
+    display: flex;
+    white-space: nowrap;
+    column-gap: 69px;
+  }
+`;
+const CommonDivFrom = styled.div`
+  border-bottom: 0.031rem #eaf1ec solid;
+  padding: 0.813rem;
+  display: flex;
+  @media (min-width: 300px) and (max-width: 767px) {
+    display: flex;
+    column-gap: 143px;
+  }
+`;
+const RawInputDiv = styled.div`
+  border-bottom: 0.031rem #eaf1ec solid;
+  padding: 0.813rem;
+  display: flex;
+  white-space: nowrap;
+  @media (min-width: 300px) and (max-width: 767px) {
+    display: flex;
+    white-space: nowrap;
+    column-gap: 108px;
+  }
+`;
+const GasPriceDiv = styled.div`
+  border-bottom: 0.031rem #eaf1ec solid;
+  padding: 0.813rem;
+  display: flex;
+  white-space: nowrap;
+  @media (min-width: 300px) and (max-width: 767px) {
+    display: flex;
+    white-space: nowrap;
+    column-gap: 114px;
+  }
+`;
+const CommonDivTo = styled.div`
+  border-bottom: 0.031rem #eaf1ec solid;
+  padding: 0.813rem;
+  display: flex;
+  @media (min-width: 300px) and (max-width: 767px) {
+    display: flex;
+    column-gap: 162px;
+  }
 `;
 const MidContainer = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
@@ -523,6 +598,10 @@ const SubContainer = styled.div`
     flex-direction: column;
   }
 `;
+const ScrollableDiv = styled.div`
+  overflow: auto;
+  height: 760px;
+`;
 
 const Container = styled.div`
   background-color: #ffffff;
@@ -531,6 +610,7 @@ const Container = styled.div`
   height: 9.2rem;
   margin-top: 0.5rem;
   width: 100%;
+  overflow: hidden;
   @media (min-width: 300px) and (max-width: 768px) {
     background-color: #ffffff;
     border-radius: 0.375rem;
@@ -552,7 +632,7 @@ const Hash = styled.div`
   margin-bottom: 10px;
   border: none;
   width: 100%;
-  max-width: 24.063rem;
+  max-width: 30.063rem;
 `;
 const SubHeading = styled.div`
   font-size: 0.875rem;
@@ -562,10 +642,10 @@ const SubHeading = styled.div`
 `;
 
 const CopyToClipboardImg = styled.img`
-  margin-left: 35px;
+  margin-left: 90px;
   cursor: pointer;
   @media (min-width: 340px) and (max-width: 768px) {
-    margin-left: 3px;
+    margin-left: 10px;
   }
 `;
 
@@ -641,6 +721,9 @@ const ToolTipIcon = styled.img`
   width: 0.75rem;
   cursor: pointer;
   margin-left: 0.513rem;
+  @media (min-width: 300px) and (max-width: 767px) {
+    margin-bottom: 6px;
+  }
 `;
 const FailButton = styled.div`
   color: #ce1a1a;

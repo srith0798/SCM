@@ -5,8 +5,6 @@ import { Row } from "simple-flexbox";
 import { sessionManager } from "../../managers/sessionManager";
 import WalletPopUp from "./walletPopUp";
 import Tooltip from "@mui/material/Tooltip";
-// import ReactPlayer from "react-player";
-
 import FooterComponent from "../dashboard/footerComponent";
 import ReactPlayer from "react-player";
 
@@ -66,7 +64,7 @@ export default function About(props) {
 
           <GreyContainer>
             <HeadingContainer>
-              Introducing the Smart Contracts -by XDC
+              Introducing the Smart Contracts - by XDC
               <SubHead>Add smart contract and managing them</SubHead>
             </HeadingContainer>
             <IconRow>
@@ -121,7 +119,7 @@ const MainBoxContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-item: center;
-  padding: 3.125rem;
+  padding: 4.125rem;
   @media (min-width: 300px) and (max-width: 700px) {
     padding: 1.125rem;
   }
@@ -142,7 +140,7 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-self: center;
-  height: 500px;
+  height: 468px;
   max-width: 1306px;
   @media (min-width: 340px) and (max-width: 768px) {
     flex-direction: column;
@@ -164,7 +162,7 @@ const Container = styled.div`
 `;
 const RightContainer = styled.div`
   width: 100%;
-  padding: 4.375rem;
+  padding: 4.7rem;
   @media (min-width: 340px) and (max-width: 803px) {
     padding: 0.375rem 5rem 7rem 5rem;
     height: 100%;
@@ -175,10 +173,7 @@ const RightContainer = styled.div`
 `;
 const LeftContainer = styled.div`
   width: 100%;
-  padding: 2.5rem;
-  // @media (min-width: 768px) and (max-width: 1024px) {
-  //   padding: 1rem;
-  // }
+  padding: 3.9rem;
 `;
 const Span = styled.span`
   color: #0089ff;

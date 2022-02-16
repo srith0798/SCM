@@ -103,13 +103,27 @@ export default function Contract(props) {
       <SubContainer>
         <MainHeading>
           <Heading>Contracts</Heading>
-          <Input placeholder="Search by address or name" value={input} onChange={search} />
+          <Input
+            placeholder="Search by address or name"
+            value={input}
+            onChange={search}
+          />
         </MainHeading>
         <IconDiv>
           <Tooltip disableFocusListener title="Refresh">
-            <RefreshImage onClick={() => getContractList()} alt="" src="/images/refresh.svg" style={{ marginRight: "0.625rem" }} />
+            <RefreshImage
+              onClick={() => getContractList()}
+              alt=""
+              src="/images/refresh.svg"
+              style={{ marginRight: "0.625rem" }}
+            />
           </Tooltip>
-          {open && <AddContract click={handleClose} getContractList={getContractList} />}
+          {open && (
+            <AddContract
+              click={handleClose}
+              getContractList={getContractList}
+            />
+          )}
           <Button onClick={handleClickOpen}>Add Contract</Button>
         </IconDiv>
       </SubContainer>
@@ -126,7 +140,10 @@ export default function Contract(props) {
                 disableFocusListener
                 title="Name of the smart contract"
               >
-                <ToolTipIcon onClick={() => setcontractNameToolTip(!contractNameToolTip)} src="/images/tool-tip.svg" />
+                <ToolTipIcon
+                  onClick={() => setcontractNameToolTip(!contractNameToolTip)}
+                  src="/images/tool-tip.svg"
+                />
               </Tooltip>
             </ColumnOne>
             <ColumnOne>
@@ -138,7 +155,10 @@ export default function Contract(props) {
                 disableFocusListener
                 title="Wallet address"
               >
-                <ToolTipIcon onClick={() => setaddressToolTip(!addressToolTip)} src="/images/tool-tip.svg" />
+                <ToolTipIcon
+                  onClick={() => setaddressToolTip(!addressToolTip)}
+                  src="/images/tool-tip.svg"
+                />
               </Tooltip>
             </ColumnOne>
             <ColumnOne>
@@ -150,7 +170,10 @@ export default function Contract(props) {
                 disableFocusListener
                 title="Network on which the contract is executed"
               >
-                <ToolTipIcon onClick={() => setnetworkToolTip(!networkToolTip)} src="/images/tool-tip.svg" />
+                <ToolTipIcon
+                  onClick={() => setnetworkToolTip(!networkToolTip)}
+                  src="/images/tool-tip.svg"
+                />
               </Tooltip>
             </ColumnOne>
             <ColumnOne>
@@ -162,7 +185,10 @@ export default function Contract(props) {
                 disableFocusListener
                 title="Tag name associated with the contract"
               >
-                <ToolTipIcon onClick={() => settagToolTip(!tagToolTip)} src="/images/tool-tip.svg" />
+                <ToolTipIcon
+                  onClick={() => settagToolTip(!tagToolTip)}
+                  src="/images/tool-tip.svg"
+                />
               </Tooltip>
             </ColumnOne>
             <ColumnOne>
@@ -174,7 +200,10 @@ export default function Contract(props) {
                 disableFocusListener
                 title="Is the contract visible to the users or not"
               >
-                <ToolTipIcon onClick={() => setvisibilityToolTip(!visibilityToolTip)} src="/images/tool-tip.svg" />
+                <ToolTipIcon
+                  onClick={() => setvisibilityToolTip(!visibilityToolTip)}
+                  src="/images/tool-tip.svg"
+                />
               </Tooltip>
             </ColumnOne>
           </Row>
@@ -184,16 +213,36 @@ export default function Contract(props) {
             <div style={{ cursor: "pointer" }}>
               <Div>
                 <Row>
-                  <ColumnSecond onClick={() => redirectTODetails(data._id)}>{data.contractName}</ColumnSecond>
-                  <ColumnSecond>{utility.truncateTxnAddress(data.address)}</ColumnSecond>
-
-                  <ColumnSecond>{data.network ? "Apothem" : "Mainnet"}</ColumnSecond>
-                  <ColumnSecond style={{ display: "flex" }}>
-                    {address[index].tags && address[index].tags.map((tag, index) => index <= 0 && <FinanceTag>{tag}</FinanceTag>)}
-                    {addTag && <AddTags click={Close} address={address} contract={true} />}
-                    {data.tags && data.tags.length === 0 && <AddTag onClick={() => Open()}>Add Tag</AddTag>}
+                  <ColumnSecond onClick={() => redirectTODetails(data._id)}>
+                    {data.contractName}
                   </ColumnSecond>
-                  <ColumnSecond>{data.isHidden ? "Hidden" : "Visible"}</ColumnSecond>
+                  <ColumnSecond>
+                    {utility.truncateTxnAddress(data.address)}
+                  </ColumnSecond>
+
+                  <ColumnSecond>
+                    {data.network ? "Apothem" : "Mainnet"}
+                  </ColumnSecond>
+                  <ColumnSecond style={{ display: "flex" }}>
+                    {address[index].tags &&
+                      address[index].tags.map(
+                        (tag, index) =>
+                          index <= 0 && <FinanceTag>{tag}</FinanceTag>
+                      )}
+                    {addTag && (
+                      <AddTags
+                        click={Close}
+                        address={address}
+                        contract={true}
+                      />
+                    )}
+                    {data.tags && data.tags.length === 0 && (
+                      <AddTag onClick={() => Open()}>Add Tag</AddTag>
+                    )}
+                  </ColumnSecond>
+                  <ColumnSecond>
+                    {data.isHidden ? "Hidden" : "Visible"}
+                  </ColumnSecond>
                 </Row>
               </Div>
             </div>
@@ -325,7 +374,7 @@ const RefreshImage = styled.img`
     margin-top: 51px;
     margin-left: 3px;
   }
-  @media (min-width: 376px) and (max-width: 432px) {
+  @media (min-width: 376px) and (max-width: 413px) {
     display: none;
   }
 `;
@@ -410,7 +459,14 @@ const Button = styled.button`
     height: 33px;
     background-position: 0.6rem;
   }
-  @media (min-width: 376px) and (max-width: 584px) {
+  @media (max-width: 414px) {
+    margin-top: 51px;
+    width: 35px;
+    font-size: 0rem;
+    height: 33px;
+    background-position: 0.6rem;
+  }
+  @media (min-width: 376px) and (max-width: 413px) {
     display: none;
   }
 `;
