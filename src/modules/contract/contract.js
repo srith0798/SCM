@@ -20,7 +20,7 @@ export default function Contract(props) {
   const [networkToolTip, setnetworkToolTip] = React.useState(false);
   const [tagToolTip, settagToolTip] = React.useState(false);
   const [visibilityToolTip, setvisibilityToolTip] = React.useState(false);
-
+  const [page, setPage] = React.useState(1);
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -46,6 +46,12 @@ export default function Contract(props) {
       setLoader(false);
       console.log("resss", response);
       setAddress(response.contractList);
+      let pageCount = response.totalCount;
+      if (pageCount % 10 === 0) {
+        setPage(parseInt(pageCount / 10));
+      } else {
+        setPage(parseInt(pageCount / 10) + 1);
+      }
       if (response.contractList.length === 0) setShowPlaceHolder(true);
       else setShowPlaceHolder(false);
     } catch (e) {
@@ -79,7 +85,7 @@ export default function Contract(props) {
   };
 
   const changePage = (value) => {
-    getContractList(Math.ceil(value.selected * 5), 5);
+    getContractList(Math.ceil(value.selected * 10), 10);
   };
 
   React.useEffect(() => {
@@ -259,7 +265,7 @@ export default function Contract(props) {
         <ReactPaginate
           previousLabel={"<"}
           nextLabel={">"}
-          pageCount={2}
+          pageCount={page}
           breakLabel={"..."}
           initialPage={0}
           onPageChange={changePage}

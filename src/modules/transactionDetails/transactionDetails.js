@@ -13,6 +13,8 @@ import Tooltip from "@mui/material/Tooltip";
 export default function TransactionDetails() {
   const [eventToolTip, seteventToolTip] = React.useState(false);
   const [statusToolTip, setstatusToolTip] = React.useState(false);
+  const [copyToolTip, setcopyToolTip] = React.useState(false);
+
   const [activeButton, setActiveButton] = React.useState("Overview");
   const handleViewClick = (e) => {
     setActiveButton(e.target.id);
@@ -47,8 +49,13 @@ export default function TransactionDetails() {
               "0x1822a4c5b699f8c2653062033b86aceea234d804dd5358c"
             )}
           </Hash>
-          <CopyToClipboard>
-            <img alt="" src="/images/copy.svg" />
+          <CopyToClipboard
+            text={"0x1822a4c5b699f8c2653062033b86aceea234d804dd5358c"}
+            onCopy={() => setcopyToolTip(true)}
+          >
+            <Tooltip title={copyToolTip ? "copied" : "copy to clipboard"}>
+              <CopyToClipboardImg src="/images/copy.svg" />
+            </Tooltip>
           </CopyToClipboard>
           <FailButton>Fail</FailButton>
           <AlertButton>
@@ -213,8 +220,17 @@ export default function TransactionDetails() {
                 <TransactionNumber>
                   xdc2113d5d4d7427123be37319dcee7dc52d3f8c2a9
                 </TransactionNumber>
-
-                <CopyToClipboardImg src="/images/copy.svg" />
+                <CopyToClipboard
+                  text={"xdc2113d5d4d7427123be37319dcee7dc52d3f8c2a9"}
+                  onCopy={() => setcopyToolTip(true)}
+                >
+                  <Tooltip title={copyToolTip ? "copied" : "copy to clipboard"}>
+                    <CopyToClipboardImg
+                      // onClick={() => setcopyToolTip(true)}
+                      src="/images/copy.svg"
+                    />
+                  </Tooltip>
+                </CopyToClipboard>
               </SubHead>
             </CommonDivFrom>
             <CommonDivTo>
@@ -223,8 +239,14 @@ export default function TransactionDetails() {
                 <TransactionNumber>
                   xdc2113d5d4d7427123be37319dcee7dc52d3f8c2a9
                 </TransactionNumber>
-
-                <CopyToClipboardImg src="/images/copy.svg" />
+                <CopyToClipboard
+                  text={"xdc2113d5d4d7427123be37319dcee7dc52d3f8c2a9"}
+                  onCopy={() => setcopyToolTip(true)}
+                >
+                  <Tooltip title={copyToolTip ? "copied" : "copy to clipboard"}>
+                    <CopyToClipboardImg src="/images/copy.svg" />
+                  </Tooltip>
+                </CopyToClipboard>
               </SubHead>
             </CommonDivTo>
             <TimeStampDiv>
@@ -261,9 +283,16 @@ export default function TransactionDetails() {
               <Heading>Raw input</Heading>
               <SubHead>
                 <TransactionNumber>
-                  xdc2113d5d4d7427123be37319dcee7dc52d3f8c2a9
+                  0x01173a740000000000…f28e0b4fae4a3bfee7dc52
                 </TransactionNumber>
-                <CopyToClipboardImg src="/images/copy.svg" />
+                <CopyToClipboard
+                  text={" 0x01173a740000000000…f28e0b4fae4a3bfee7dc52"}
+                  onCopy={() => setcopyToolTip(true)}
+                >
+                  <Tooltip title={copyToolTip ? "copied" : "copy to clipboard"}>
+                    <CopyToClipboardImg src="/images/copy.svg" />
+                  </Tooltip>
+                </CopyToClipboard>
               </SubHead>
             </RawInputDiv>
           </MidContainer>
