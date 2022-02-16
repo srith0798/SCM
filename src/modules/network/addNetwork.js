@@ -14,6 +14,8 @@ const useStyles = makeStyles(() => ({
 export default function AddNetwork(props) {
   const classes = useStyles();
   const [loader, setLoader] = React.useState(false);
+  const [isPresent, setisPresent] = React.useState(false);
+
   const addNetwork = async () => {
     let requestData = {
       networkName: networkName,
@@ -31,50 +33,88 @@ export default function AddNetwork(props) {
       console.log("Error", e);
     }
   };
+  const getNetworksLists = async (skip = 0, limit) => {
+    try {
+      const requestData = {
+        skip: skip,
+        limit: limit,
+      };
+
+      setLoader(true);
+      const response = await contractsService.getNetworksLists(requestData);
+      console.log("response", response.networkList);
+      response.map(
+        (contract) => console.log("contract", contract)
+        // contract.newRpcUrl === newRpcUrl ? setisPresent(true) : ""
+      );
+    } catch (e) {
+      console.log("Error in networklist", e);
+    }
+  };
   const [networkName, setNetworkName] = React.useState("");
   const [newRpcUrl, setNewRpcUrl] = React.useState("");
-  const [chainId, setChainId] = React.useState("");
+  const [chainId, setChainId] = React.useState(0);
   const [currencySymbol, setCurrencySymbol] = React.useState("");
   const [blockExplorer, setBlockExplorer] = React.useState("");
   const load = () => {
     props.click(false);
     props.getNetworkList();
   };
-  const addNetworksDetails = () => {
+  const addNetworksDetails = async () => {
     console.log("networkUrlValidation", networkUrlValidation());
-    if (networkUrlValidation() !== undefined && !networkUrlValidation()) {
-      utility.apiFailureToast("Invalid RPC endpoint");
-      return;
-    }
-    addNetwork();
+
+    await getNetworksLists();
+    console.log("present", isPresent);
+    setTimeout(() => {
+      if (isPresent) {
+        if (networkUrlValidation() !== undefined && !networkUrlValidation()) {
+          utility.apiFailureToast("Invalid RPC endpoint");
+          return;
+        }
+      } else {
+        addNetwork();
+        setisPresent(false);
+      }
+    }, 2000);
   };
-  const networkUrlValidation = () => {
+
+  async function networkUrlValidation() {
     if (validUrl.isWebUri(newRpcUrl)) {
       const web3 = new Web3(new Web3.providers.HttpProvider(newRpcUrl));
+      const networkChainId = await web3.eth.getChainId();
+      console.log("chain", networkChainId);
       web3.eth.getBlockNumber((err, res) => {
         if (err) {
-          // utility.apiFailureToast("Invalid RPC endpoint");
+          utility.apiFailureToast("Invalid RPC endpoint");
           console("one");
           return false;
+        }
+        if (networkChainId != chainId) {
+          console.log("ChainId", chainId);
+          console.log("networkChainId", networkChainId);
+          utility.apiFailureToast("Invalid chainId");
         } else {
           setNewRpcUrl(newRpcUrl);
           console.log("two");
-          // utility.apiSuccessToast("Network Added successfully");
+          utility.apiSuccessToast("Network Added successfully");
           return true;
         }
       });
     } else {
       if (!newRpcUrl.startsWith("http")) {
-        // utility.apiFailureToast("URIs require the appropriate HTTP/HTTPS prefix.");
+        utility.apiFailureToast(
+          "URIs require the appropriate HTTP/HTTPS prefix."
+        );
         console.log("threee");
         return false;
       } else {
-        // utility.apiFailureToast("Invalid RPC URI");
+        utility.apiFailureToast("Invalid RPC URI");
         console.log("four");
         return false;
       }
     }
-  };
+  }
+
   return (
     <div>
       <Dialog classes={{ paper: classes.dialogBox }} open={true}>
@@ -85,17 +125,49 @@ export default function AddNetwork(props) {
               <img alt="" src="/images/close.svg" onClick={() => load()} />
             </SubContainer>
             <Heading>Network name</Heading>
-            <Input type="text" placeholder="Name" onChange={(e) => setNetworkName(e.target.value)} value={networkName} />
+            <Input
+              type="text"
+              placeholder="Name"
+              onChange={(e) => setNetworkName(e.target.value)}
+              value={networkName}
+            />
             <Heading>New RPC URL</Heading>
-            <Input type="text" placeholder="URL" onChange={(e) => setNewRpcUrl(e.target.value)} value={newRpcUrl} />
+            <Input
+              type="text"
+              placeholder="URL"
+              onChange={(e) => setNewRpcUrl(e.target.value)}
+              value={newRpcUrl}
+            />
 
             <Heading>Chain ID</Heading>
-            <Input type="text" placeholder="ID" onChange={(e) => setChainId(e.target.value)} value={chainId} />
+            <Input
+              type="number"
+              // placeholder="ID"
+              onChange={(e) => setChainId(e.target.value)}
+              value={chainId}
+            />
             <Heading>Currency symbol (optional)</Heading>
-            <Input type="text" placeholder="Symbol" onChange={(e) => setCurrencySymbol(e.target.value)} value={currencySymbol} />
+            <Input
+              type="text"
+              placeholder="Symbol"
+              onChange={(e) => setCurrencySymbol(e.target.value)}
+              value={currencySymbol}
+            />
             <Heading>Block explorer (optional)</Heading>
-            <Input type="text" placeholder="Explorer" onChange={(e) => setBlockExplorer(e.target.value)} value={blockExplorer} />
-            <Button onClick={() => addNetworksDetails()}>Add network</Button>
+            <Input
+              type="text"
+              placeholder="Explorer"
+              onChange={(e) => setBlockExplorer(e.target.value)}
+              value={blockExplorer}
+            />
+            <Button
+              onClick={() => {
+                addNetworksDetails();
+                load();
+              }}
+            >
+              Add network
+            </Button>
           </Container>
         </MainContainer>
       </Dialog>
@@ -147,13 +219,13 @@ const Button = styled.button`
   font: normal normal medium 14px/17px Inter;
   letter-spacing: 0px;
   color: #ffffff;
-  background: #9db5f8 0% 0% no-repeat padding-box;
+  background: #3163f0 0% 0% no-repeat padding-box;
   border: 0px;
   border-radius: 4px;
   text-align: center;
   white-space: nowrap;
-  padding: 10px 12px;
+  padding: 6px 12px;
   margin-right: 10px;
   margin-top: 1.25rem;
-  height: 41px;
+  height: 35px;
 `;
