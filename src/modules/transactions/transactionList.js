@@ -46,7 +46,7 @@ export default function TransactionList(props) {
   const [selected, setSelected] = React.useState("");
   const [page, setPage] = React.useState(1);
   const [valueCheck, setValueCheck] = React.useState(0);
-  
+
   const getContractNames = async (skip = 0, limit = 10) => {
     let userId = sessionManager.getDataFromCookies("userId");
     try {
@@ -60,15 +60,13 @@ export default function TransactionList(props) {
       setLoader(false);
 
       setContracts(response.contractList);
-      setSelected(response.contractList[0].address)
+      setSelected(response.contractList[0].address);
       if (response.contractList.length === 0) setShowPlaceHolder(true);
     } catch (e) {
       setShowPlaceHolder(true);
       setLoader(false);
     }
   };
-
-  console.log("dfxdx", selected);
 
   const getTransaction = async (skip = 0, limit = 10) => {
     try {
@@ -464,8 +462,8 @@ export default function TransactionList(props) {
         </TableContainer>
         <PaginationDiv>
           <ReactPaginate
-            previousLabel={"<"}
-            nextLabel={">"}
+            previousLabel={"<-"}
+            nextLabel={"->"}
             pageCount={page}
             breakLabel={"..."}
             initialPage={0}
@@ -509,22 +507,22 @@ const TableContainer = styled.div`
   padding: 0.625rem;
   margin-top: 1.563rem;
   overflow-y: hidden;
-  ::-webkit-scrollbar {
-    border: 0.5px solid rgb(204, 229, 243);
-    outline: none;
-    border-radius: 15px;
-    /* background: #00A58C; */
-  }
-  ::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 1px grey;
-    border-radius: 15px;
-  }
-  ::-webkit-scrollbar-thumb {
-    background: #3163f0;
-    border-radius: 15px;
-    border: 4px solid transparent;
-    background-clip: content-box;
-  }
+  // ::-webkit-scrollbar {
+  //   border: 0.5px solid rgb(204, 229, 243);
+  //   outline: none;
+  //   border-radius: 15px;
+  //   /* background: #00A58C; */
+  // }
+  // ::-webkit-scrollbar-track {
+  //   box-shadow: inset 0 0 1px grey;
+  //   border-radius: 15px;
+  // }
+  // ::-webkit-scrollbar-thumb {
+  //   background: #3163f0;
+  //   border-radius: 15px;
+  //   border: 4px solid transparent;
+  //   background-clip: content-box;
+  // }
 
   @media (min-width: 300px) and (max-width: 767px) {
     overflow-y: hidden;

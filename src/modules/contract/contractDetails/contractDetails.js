@@ -23,7 +23,6 @@ export default function ContractDetails(props) {
   const handleViewClick = (e) => {
     setActiveButton(e.target.id);
   };
-  console.log("props", props);
   const [copyToolTip, setcopyToolTip] = React.useState(false);
   const [contractAddress, setContractAddress] = React.useState({});
   const [address, setAddress] = React.useState({});
@@ -61,7 +60,7 @@ export default function ContractDetails(props) {
     try {
       setLoader(true);
       const response = await ContractsService.hideContract(requestData);
-      console.log(response);
+      console.log();
       setHide(false);
       window.location.reload();
     } catch (e) {
@@ -119,7 +118,7 @@ export default function ContractDetails(props) {
     setRemoveState(false);
   };
   const backButton = () => {
-    history.push("/dashboard/Contracts");
+    history.push("/dashboard/contracts");
   };
   const [addTag, setAddTag] = useState(false);
   const Open = () => {

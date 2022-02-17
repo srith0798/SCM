@@ -22,6 +22,7 @@ export default function Contract(props) {
   const [page, setPage] = React.useState(1);
   const [address, setAddress] = React.useState([]);
   const [searchRow, setSearchRow] = React.useState([]);
+  const [showplaceholder, setShowPlaceHolder] = React.useState([]);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -31,7 +32,7 @@ export default function Contract(props) {
     setOpen(false);
   };
   const redirectTODetails = (id) => {
-    history.push("/dashboard/Contract-details/" + id);
+    history.push("/contract-details" + id);
   };
 
   const getContractList = async (skip = 0, limit = 10) => {
