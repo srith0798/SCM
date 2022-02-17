@@ -9,17 +9,33 @@ import SubContracts from "./subContracts";
 import { history } from "../../managers/history";
 import utility from "../../utility";
 import Tooltip from "@mui/material/Tooltip";
+import ContractsService from "../../services/contractsService";
 
 export default function TransactionDetails() {
   const [eventToolTip, seteventToolTip] = React.useState(false);
   const [statusToolTip, setstatusToolTip] = React.useState(false);
+  const [row, setRow] = React.useState([]);
   const [activeButton, setActiveButton] = React.useState("Overview");
   const handleViewClick = (e) => {
     setActiveButton(e.target.id);
   };
   const backButton = () => {
-    history.push("/dashboard/Transactions");
+    history.push("/transactions");
   };
+  const searchTransaction = async (searchValues, searchKeys) => {
+    try {
+      const requestData = {
+        searchValue: searchValues,
+        searchKeys: searchKeys,
+        skip: 0,
+        limit: 1,
+      };
+      const response = await ContractsService.getTransactionsList(requestData);
+      setRow(response.transactionList);
+    } catch (e) {
+    }
+  };
+
   return (
     <MainContainer>
       <SubContainer>

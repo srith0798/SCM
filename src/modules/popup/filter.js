@@ -35,7 +35,6 @@ export default function Filter(props) {
 
       setLoader(true);
       const response = await contractsService.getNetworksLists(requestData);
-      console.log("response", response.networkList);
       setLoader(false);
       setAddress(response.networkList);
       if (response.networkList.length === 0) setShowPlaceHolder(true);

@@ -216,6 +216,9 @@ input:focus {
 .z-index-100 {
   z-index: 100;
 }
+::-webkit-scrollbar {
+  display: none;
+}
 
 .text-transform-capitalize {
   text-transform: capitalize !important;
