@@ -80,7 +80,7 @@ export default function AddNetwork(props) {
           utility.apiFailureToast("Invalid chainId");
         } else {
           setNewRpcUrl(newRpcUrl);
-          utility.apiSuccessToast("Network Added successfully");
+
           return true;
         }
       });
