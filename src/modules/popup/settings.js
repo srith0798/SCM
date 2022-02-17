@@ -6,6 +6,8 @@ import { makeStyles } from "@material-ui/styles";
 const useStyles = makeStyles(() => ({
   dialogBox: {
     width: "100% !important",
+    maxWidth: "700px",
+    height: "700px",
   },
 }));
 
@@ -19,15 +21,23 @@ export default function Settings(props) {
           <Container>
             <SubContainer style={{ padding: "15px 12px 10px 10px" }}>
               <Add>Settings</Add>
-              <img style={{ cursor: "pointer" }} alt="" src="/images/close.svg" onClick={props.click} />
+              <img
+                style={{ cursor: "pointer" }}
+                alt=""
+                src="/images/close.svg"
+                onClick={props.click}
+              />
             </SubContainer>
-            <MainHeading style={{ padding: "15px 12px 10px 10px" }}>Configure Columns</MainHeading>
+            <MainHeading style={{ padding: "15px 12px 10px 10px" }}>
+              Configure Columns
+            </MainHeading>
+            <BorderDiv></BorderDiv>
             <Content>
-              Change the layout of the transactions list and display only the columns and information that is most important to you.
+              Change the layout of the transactions list and display only the
+              columns and information that is most important to you.
             </Content>
             <SubContainer
               style={{
-                borderBottom: "1px solid #d5e0ff",
                 padding: "15px 12px 10px 10px",
               }}
             >
@@ -35,15 +45,20 @@ export default function Settings(props) {
               <label class="switch">
                 <input
                   type="checkbox"
-                  onChange={(event) => props.setToggle({ ...props.toggle, transactionHash: event.target.checked })}
+                  onChange={(event) =>
+                    props.setToggle({
+                      ...props.toggle,
+                      transactionHash: event.target.checked,
+                    })
+                  }
                   checked={props.toggle.transactionHash}
                 />
                 <span class="slider round"></span>
               </label>
             </SubContainer>
+            <BorderDiv></BorderDiv>
             <SubContainer
               style={{
-                borderBottom: "1px solid #d5e0ff",
                 padding: "5px 12px 10px 10px",
               }}
             >
@@ -51,15 +66,20 @@ export default function Settings(props) {
               <label class="switch">
                 <input
                   type="checkbox"
-                  onChange={(event) => props.setToggle({ ...props.toggle, status: event.target.checked })}
+                  onChange={(event) =>
+                    props.setToggle({
+                      ...props.toggle,
+                      status: event.target.checked,
+                    })
+                  }
                   checked={props.toggle.status}
                 />
                 <span class="slider round"></span>
               </label>
             </SubContainer>
+            <BorderDiv></BorderDiv>
             <SubContainer
               style={{
-                borderBottom: "1px solid #d5e0ff",
                 padding: "5px 12px 10px 10px",
               }}
             >
@@ -67,15 +87,20 @@ export default function Settings(props) {
               <label class="switch">
                 <input
                   type="checkbox"
-                  onChange={(event) => props.setToggle({ ...props.toggle, function: event.target.checked })}
+                  onChange={(event) =>
+                    props.setToggle({
+                      ...props.toggle,
+                      function: event.target.checked,
+                    })
+                  }
                   checked={props.toggle.function}
                 />
                 <span class="slider round"></span>
               </label>
             </SubContainer>
+            <BorderDiv></BorderDiv>
             <SubContainer
               style={{
-                borderBottom: "1px solid #d5e0ff",
                 padding: "5px 12px 10px 10px",
               }}
             >
@@ -83,15 +108,20 @@ export default function Settings(props) {
               <label class="switch">
                 <input
                   type="checkbox"
-                  onChange={(event) => props.setToggle({ ...props.toggle, contracts: event.target.checked })}
+                  onChange={(event) =>
+                    props.setToggle({
+                      ...props.toggle,
+                      contracts: event.target.checked,
+                    })
+                  }
                   checked={props.toggle.contracts}
                 />
                 <span class="slider round"></span>
               </label>
             </SubContainer>
+            <BorderDiv></BorderDiv>
             <SubContainer
               style={{
-                borderBottom: "1px solid #d5e0ff",
                 padding: "5px 12px 10px 10px",
               }}
             >
@@ -99,15 +129,20 @@ export default function Settings(props) {
               <label class="switch">
                 <input
                   type="checkbox"
-                  onChange={(event) => props.setToggle({ ...props.toggle, from: event.target.checked })}
+                  onChange={(event) =>
+                    props.setToggle({
+                      ...props.toggle,
+                      from: event.target.checked,
+                    })
+                  }
                   checked={props.toggle.from}
                 />
                 <span class="slider round"></span>
               </label>
             </SubContainer>
+            <BorderDiv></BorderDiv>
             <SubContainer
               style={{
-                borderBottom: "1px solid #d5e0ff",
                 padding: "5px 12px 10px 10px",
               }}
             >
@@ -115,15 +150,20 @@ export default function Settings(props) {
               <label class="switch">
                 <input
                   type="checkbox"
-                  onChange={(event) => props.setToggle({ ...props.toggle, to: event.target.checked })}
+                  onChange={(event) =>
+                    props.setToggle({
+                      ...props.toggle,
+                      to: event.target.checked,
+                    })
+                  }
                   checked={props.toggle.to}
                 />
                 <span class="slider round"></span>
               </label>
             </SubContainer>
+            <BorderDiv></BorderDiv>
             <SubContainer
               style={{
-                borderBottom: "1px solid #d5e0ff",
                 padding: "5px 12px 10px 10px",
               }}
             >
@@ -131,12 +171,18 @@ export default function Settings(props) {
               <label class="switch">
                 <input
                   type="checkbox"
-                  onChange={(event) => props.setToggle({ ...props.toggle, when: event.target.checked })}
+                  onChange={(event) =>
+                    props.setToggle({
+                      ...props.toggle,
+                      when: event.target.checked,
+                    })
+                  }
                   checked={props.toggle.when}
                 />
                 <span class="slider round"></span>
               </label>
             </SubContainer>
+            <BorderDiv></BorderDiv>
           </Container>
         </MainContainer>
       </Dialog>
@@ -149,6 +195,8 @@ const MainContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 23px;
+  overflow: hidden;
 `;
 const Container = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
@@ -176,8 +224,13 @@ const MainHeading = styled.div`
   font-size: 1rem;
   font-weight: 600;
   color: #102c78;
-  border-bottom: 1px solid rgb(213, 224, 255);
+
   margin-left: 9px;
+`;
+const BorderDiv = styled.div`
+  border-bottom: 1px solid #ededed;
+  width: 700px;
+  margin-left: -23px;
 `;
 const Content = styled.div`
   font-size: 1rem;

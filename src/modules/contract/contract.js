@@ -19,8 +19,10 @@ export default function Contract(props) {
   const [networkToolTip, setnetworkToolTip] = React.useState(false);
   const [tagToolTip, settagToolTip] = React.useState(false);
   const [visibilityToolTip, setvisibilityToolTip] = React.useState(false);
+  const [page, setPage] = React.useState(1);
   const [address, setAddress] = React.useState([]);
   const [searchRow, setSearchRow] = React.useState([]);
+  const [showplaceholder, setShowPlaceHolder] = React.useState([]);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -46,6 +48,14 @@ export default function Contract(props) {
       const response = await ContractsService.getContractsList(requestData);
       setLoader(false);
       setAddress(response.contractList);
+      let pageCount = response.totalCount;
+      if (pageCount % 10 === 0) {
+        setPage(parseInt(pageCount / 10));
+      } else {
+        setPage(parseInt(pageCount / 10));
+      }
+      if (response.contractList.length === 0) setShowPlaceHolder(true);
+      else setShowPlaceHolder(false);
     } catch (e) {
       setLoader(false);
     }
@@ -59,7 +69,7 @@ export default function Contract(props) {
         searchKeys: searchKeys,
         skip: 0,
         limit: 10,
-        userId: userId
+        userId: userId,
       };
       setLoader(true);
       const response = await ContractsService.getContractsList(requestData);
@@ -76,14 +86,12 @@ export default function Contract(props) {
   };
 
   const changePage = (value) => {
-    getContractList(Math.ceil(value.selected * 5), 5);
+    getContractList(Math.ceil(value.selected * 10), 10);
   };
 
   React.useEffect(() => {
     getContractList();
   }, []);
-
-  
 
   const [addTag, setAddTag] = useState(false);
   const Open = () => {
@@ -255,7 +263,7 @@ export default function Contract(props) {
         <ReactPaginate
           previousLabel={"<"}
           nextLabel={">"}
-          pageCount={2}
+          pageCount={page}
           breakLabel={"..."}
           initialPage={0}
           onPageChange={changePage}

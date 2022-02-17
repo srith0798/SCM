@@ -28,10 +28,7 @@ export default function AddNetwork(props) {
     try {
       const response = await contractsService.addNetworks(requestData);
       setLoader(false);
-      console.log(response);
-    } catch (e) {
-      console.log("Error", e);
-    }
+    } catch (e) {}
   };
   const getNetworksLists = async (skip = 0, limit) => {
     try {
@@ -42,14 +39,9 @@ export default function AddNetwork(props) {
 
       setLoader(true);
       const response = await contractsService.getNetworksLists(requestData);
-      console.log("response", response.networkList);
-      response.map(
-        (contract) => console.log("contract", contract)
-        // contract.newRpcUrl === newRpcUrl ? setisPresent(true) : ""
-      );
-    } catch (e) {
-      console.log("Error in networklist", e);
-    }
+
+      response.map((contract) => console.log("contract", contract));
+    } catch (e) {}
   };
   const [networkName, setNetworkName] = React.useState("");
   const [newRpcUrl, setNewRpcUrl] = React.useState("");
@@ -61,10 +53,7 @@ export default function AddNetwork(props) {
     props.getNetworkList();
   };
   const addNetworksDetails = async () => {
-    console.log("networkUrlValidation", networkUrlValidation());
-
     await getNetworksLists();
-    console.log("present", isPresent);
     setTimeout(() => {
       if (isPresent) {
         if (networkUrlValidation() !== undefined && !networkUrlValidation()) {
@@ -82,35 +71,27 @@ export default function AddNetwork(props) {
     if (validUrl.isWebUri(newRpcUrl)) {
       const web3 = new Web3(new Web3.providers.HttpProvider(newRpcUrl));
       const networkChainId = await web3.eth.getChainId();
-      console.log("chain", networkChainId);
       web3.eth.getBlockNumber((err, res) => {
         if (err) {
           utility.apiFailureToast("Invalid RPC endpoint");
-          console("one");
           return false;
         }
         if (networkChainId != chainId) {
-          console.log("ChainId", chainId);
-          console.log("networkChainId", networkChainId);
           utility.apiFailureToast("Invalid chainId");
         } else {
           setNewRpcUrl(newRpcUrl);
-          console.log("two");
-          utility.apiSuccessToast("Network Added successfully");
+
           return true;
         }
       });
-    }
-     else {
+    } else {
       if (!newRpcUrl.startsWith("http")) {
         utility.apiFailureToast(
           "URIs require the appropriate HTTP/HTTPS prefix."
         );
-        console.log("threee");
         return false;
       } else {
         utility.apiFailureToast("Invalid RPC URI");
-        console.log("four");
         return false;
       }
     }

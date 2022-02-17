@@ -11,6 +11,7 @@ import ShowContract from "./showContract";
 import "react-tabs/style/react-tabs.css";
 import SourceCode from "./sourceCode";
 import ContractsService from "../../../services/contractsService";
+import Tooltip from "@mui/material/Tooltip";
 
 import utility from "../../../utility";
 import { history } from "../../../managers/history";
@@ -22,7 +23,7 @@ export default function ContractDetails(props) {
   const handleViewClick = (e) => {
     setActiveButton(e.target.id);
   };
-
+  const [copyToolTip, setcopyToolTip] = React.useState(false);
   const [contractAddress, setContractAddress] = React.useState({});
   const [address, setAddress] = React.useState({});
   const getContractById = async () => {
@@ -157,8 +158,8 @@ export default function ContractDetails(props) {
           </MainHeading>
         </SubContainer>
         <Container>
-          <SubHeading style={{ paddingTop: "0.625rem", paddingLeft: "1rem" }}>
-            App_Transactions_Validator
+          <SubHeading style={{ paddingTop: "1rem", paddingLeft: "1rem" }}>
+            {address.contractName}
           </SubHeading>
           <div
             style={{
@@ -168,8 +169,10 @@ export default function ContractDetails(props) {
             }}
           >
             <Hash>{utility.truncateTxnAddress(name)}</Hash>
-            <CopyToClipboard text={name}>
-              <CopyImg src="/images/copy.svg" />
+            <CopyToClipboard text={name} onCopy={() => setcopyToolTip(true)}>
+              <Tooltip title={copyToolTip ? "copied" : "copy to clipboard"}>
+                <CopyImg src="/images/copy.svg" />
+              </Tooltip>
             </CopyToClipboard>
           </div>
 

@@ -14,7 +14,8 @@ import ContractsService from "../../services/contractsService";
 export default function TransactionDetails() {
   const [eventToolTip, seteventToolTip] = React.useState(false);
   const [statusToolTip, setstatusToolTip] = React.useState(false);
-  const [row, setRow] = React.useState([]);
+  const [copyToolTip, setcopyToolTip] = React.useState(false);
+
   const [activeButton, setActiveButton] = React.useState("Overview");
   const handleViewClick = (e) => {
     setActiveButton(e.target.id);
@@ -31,7 +32,7 @@ export default function TransactionDetails() {
         limit: 1,
       };
       const response = await ContractsService.getTransactionsList(requestData);
-      setRow(response.transactionList);
+      // setRow(response.transactionList);
     } catch (e) {
     }
   };
@@ -58,19 +59,34 @@ export default function TransactionDetails() {
           Txn hash
         </SubHeading>
         <TopContainer>
-          <Hash>
+          <HashMobile>
             {utility.truncateTxnAddress(
-              "0x1822a4c5b699f8c2653062033b86aceea234d804dd5358c"
+              "0x1822a4c5b699f8c2653062033b86aceea234d804dd536cfab6b75af669a2ca8"
             )}
-          </Hash>
-          <CopyToClipboard>
-            <img alt="" src="/images/copy.svg" />
+          </HashMobile>
+          <HashDesktop>
+            0x1822a4c5b699f8c2653062033b86aceea234d804dd536cfab6b75af669a2ca8
+          </HashDesktop>
+          <CopyToClipboard
+            text={
+              "0x1822a4c5b699f8c2653062033b86aceea234d804dd536cfab6b75af669a2ca8"
+            }
+            onCopy={() => setcopyToolTip(true)}
+          >
+            <Tooltip title={copyToolTip ? "copied" : "copy to clipboard"}>
+              <CopyToClipboardImg src="/images/copy.svg" />
+            </Tooltip>
           </CopyToClipboard>
           <FailButton>Fail</FailButton>
           <AlertButton>
             <img
               alt=""
-              style={{ width: "15px", cursor: "pointer", marginRight: "6px" }}
+              style={{
+                width: "15px",
+                cursor: "pointer",
+                marginRight: "6px",
+                marginBottom: "3px",
+              }}
               src="/images/addalert.svg"
             />
             Add alert
@@ -229,8 +245,17 @@ export default function TransactionDetails() {
                 <TransactionNumber>
                   xdc2113d5d4d7427123be37319dcee7dc52d3f8c2a9
                 </TransactionNumber>
-
-                <CopyToClipboardImg src="/images/copy.svg" />
+                <CopyToClipboard
+                  text={"xdc2113d5d4d7427123be37319dcee7dc52d3f8c2a9"}
+                  onCopy={() => setcopyToolTip(true)}
+                >
+                  <Tooltip title={copyToolTip ? "copied" : "copy to clipboard"}>
+                    <CopyToClipboardImg
+                      // onClick={() => setcopyToolTip(true)}
+                      src="/images/copy.svg"
+                    />
+                  </Tooltip>
+                </CopyToClipboard>
               </SubHead>
             </CommonDivFrom>
             <CommonDivTo>
@@ -239,8 +264,14 @@ export default function TransactionDetails() {
                 <TransactionNumber>
                   xdc2113d5d4d7427123be37319dcee7dc52d3f8c2a9
                 </TransactionNumber>
-
-                <CopyToClipboardImg src="/images/copy.svg" />
+                <CopyToClipboard
+                  text={"xdc2113d5d4d7427123be37319dcee7dc52d3f8c2a9"}
+                  onCopy={() => setcopyToolTip(true)}
+                >
+                  <Tooltip title={copyToolTip ? "copied" : "copy to clipboard"}>
+                    <CopyToClipboardImg src="/images/copy.svg" />
+                  </Tooltip>
+                </CopyToClipboard>
               </SubHead>
             </CommonDivTo>
             <TimeStampDiv>
@@ -277,9 +308,16 @@ export default function TransactionDetails() {
               <Heading>Raw input</Heading>
               <SubHead>
                 <TransactionNumber>
-                  xdc2113d5d4d7427123be37319dcee7dc52d3f8c2a9
+                  0x01173a740000000000…f28e0b4fae4a3bfee7dc52
                 </TransactionNumber>
-                <CopyToClipboardImg src="/images/copy.svg" />
+                <CopyToClipboard
+                  text={" 0x01173a740000000000…f28e0b4fae4a3bfee7dc52"}
+                  onCopy={() => setcopyToolTip(true)}
+                >
+                  <Tooltip title={copyToolTip ? "copied" : "copy to clipboard"}>
+                    <CopyToClipboardImg src="/images/copy.svg" />
+                  </Tooltip>
+                </CopyToClipboard>
               </SubHead>
             </RawInputDiv>
           </MidContainer>
@@ -641,7 +679,21 @@ const Container = styled.div`
   }
 `;
 
-const Hash = styled.div`
+const HashDesktop = styled.div`
+  display: flex;
+  flex-flow: row nowrap;
+  margin-top: 0.625rem;
+  margin-bottom: 10px;
+  border: none;
+  color: #191919;
+  font-weight: 500;
+  width: 100%;
+  max-width: 30.063rem;
+  @media (max-width: 1024px) {
+    display: none;
+  }
+`;
+const HashMobile = styled.div`
   display: flex;
   flex-flow: row nowrap;
   margin-top: 0.625rem;
@@ -649,6 +701,9 @@ const Hash = styled.div`
   border: none;
   width: 100%;
   max-width: 30.063rem;
+  @media (min-width: 1023px) {
+    display: none;
+  }
 `;
 const SubHeading = styled.div`
   font-size: 0.875rem;
@@ -658,7 +713,7 @@ const SubHeading = styled.div`
 `;
 
 const CopyToClipboardImg = styled.img`
-  margin-left: 90px;
+  margin-left: 150px;
   cursor: pointer;
   @media (min-width: 340px) and (max-width: 768px) {
     margin-left: 10px;
