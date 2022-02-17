@@ -60,7 +60,7 @@ export default function ContractDetails(props) {
     try {
       setLoader(true);
       const response = await ContractsService.hideContract(requestData);
-      console.log();
+      console.log(response);
       setHide(false);
       window.location.reload();
     } catch (e) {
