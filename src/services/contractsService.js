@@ -26,7 +26,6 @@ function getHeaders() {
 
 async function getContractsList(requestData) {
   let url = process.env.REACT_APP_USER_CONTRACT_MICROSERVICE + httpConstants.API_END_POINT.GET_CONTRACTS_LIST;
-  console.log("url----", url);
   return httpService(httpConstants.METHOD_TYPE.POST, getHeaders(), requestData, url)
     .then((response) => {
       if (!response.success || response.responseCode !== 200 || !response.responseData || response.responseData.length === 0)

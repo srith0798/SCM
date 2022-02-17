@@ -26,13 +26,12 @@ class Routes extends BaseComponent {
     return (
       <Suspense fallback={<ShowLoader />}>
         <Switch>
-          <Redirect exact from="/" to="/dashboard/about" />
-          <Route exact path={"/dashboard"} component={Dashboard} />
-          <Route exact path={"/dashboard"} component={Dashboard} />
-          <Route exact path={"/dashboard/:menu"} component={Dashboard} />
+          <Redirect exact from="/" to="/about" />
+          <Route exact path={"/"} component={Dashboard} />
+          <Route exact path={"/:menu"} component={Dashboard} />
           <Route
             exact
-            path={"/dashboard/:menu/:subMenu"}
+            path={"/:menu/:subMenu"}
             component={Dashboard}
           />
           <Redirect exact from="*" to="/" />

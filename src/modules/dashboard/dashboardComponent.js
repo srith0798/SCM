@@ -37,14 +37,14 @@ const HomeComponent = (props) => {
         </Container>
       ) : (
         <Container>
-          {Utility.isMenuActive("/Contract") &&
-            (Utility.isMenuActive("/Contract-details") ? (
+          {Utility.isMenuActive("/contracts") &&
+            (Utility.isMenuActive("/contract-details") ? (
               <ContractDetails />
             ) : (
               <Contract />
             ))}
-          {Utility.isMenuActive("/Transaction") &&
-            (Utility.isMenuActive("/Transaction-details") ? (
+          {Utility.isMenuActive("/transactions") &&
+            (Utility.isMenuActive("/transaction-details") ? (
               <TransactionDetails />
             ) : (
               <TransactionList />
@@ -52,11 +52,11 @@ const HomeComponent = (props) => {
           {Utility.isMenuActive("/about") && (
             <About getCurrentUserDetails={props.getCurrentUserDetails} />
           )}
-          {Utility.isMenuActive("/Analytics") && <Analytics />}
-          {Utility.isMenuActive("/rules") && <Rules />}
+          {Utility.isMenuActive("/analytics") && <Analytics />}
+          {Utility.isMenuActive("/alerting") && <Rules />}
           {Utility.isMenuActive("/add-alert") && <AddAlert />}
           {Utility.isMenuActive("/alert-detail") && <AlertDetails />}
-          {Utility.isMenuActive("/Network") && <Network />}
+          {Utility.isMenuActive("/networks") && <Network />}
         </Container>
       )}
     </>
