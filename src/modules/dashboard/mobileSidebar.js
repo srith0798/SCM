@@ -46,7 +46,8 @@ export default function Sidebar(props) {
     if (value === "alerting") setAlertingIcon("/images/Alerting_white.svg");
   };
   const changeOriginalSourceForIcons = (value) => {
-    if (value === "transactions") setTransactionIcon("/images/transactions.svg");
+    if (value === "transactions")
+      setTransactionIcon("/images/transactions.svg");
     if (value === "networks") setNetworksIcon("/images/networks.svg");
     if (value === "contracts") setContractsIcon("/images/contracts.svg");
     if (value === "analytics") setAnalyticsIcon("/images/analytics.svg");
@@ -132,13 +133,17 @@ const Hamburger = styled.img`
   margin: 5px 12px 0px 9px;
   position: absolute;
   left: 123px;
-  top: 22px;
+  top: 5px;
   cursor: pointer;
-  @media (min-width: 769px) {
+  @media (min-width: 1024px) {
     display: none;
   }
-  @media (max-width: 375px) {
-    top: 51px;
+  @media (max-width: 768px) {
+    top: 22px;
+    margin: 5px 12px 0px 12px;
+  }
+  @media (min-width: 375px) and(max-width: 1023px) {
+    top: 22px;
     margin: 5px 12px 0px 12px;
   }
 `;
@@ -152,7 +157,7 @@ const SidebarContainer = styled.div`
   height: 100%;
   width: 248px;
   padding-top: 15px;
-  @media (min-width: 769px) {
+  @media (min-width: 1023px) {
     display: none;
   }
 `;

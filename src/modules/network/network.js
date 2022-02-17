@@ -33,7 +33,6 @@ export default function Network() {
 
       setLoader(true);
       const response = await contractsService.getNetworksLists(requestData);
-      console.log("getNetworksLists", response);
       setLoader(false);
       setAddress(response.networkList);
       if (response.networkList.length === 0) setShowPlaceHolder(true);
@@ -95,19 +94,12 @@ export default function Network() {
           {address.map((data, index) => {
             return (
               <ContainerBox style={{ columnGap: "36px" }}>
-                {/* <Icon src="/images/mainnet.svg" /> */}
                 <Head>{data.networkName}</Head>
                 <Url>{data.newRpcUrl}</Url>
               </ContainerBox>
             );
           })}
         </div>
-        {/* {showPlaceHolder && (
-          <PlaceHolderContainer>
-            <PlaceHolderImage src="/images/contracts.svg" />
-            No Contracts Found
-          </PlaceHolderContainer>
-        )} */}
       </Div>
     </MainContainer>
   );

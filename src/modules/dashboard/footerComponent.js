@@ -65,7 +65,7 @@ const SubColOne = styled.div`
   }
 `;
 const SubColTwo = styled.div`
-  width: 165px;
+  width: 100%;
   margin: 54px 0 0 70px;
   @media screen and (min-width: 375px) and (max-width: 425px) {
     margin: 32px 0 0 70px;
