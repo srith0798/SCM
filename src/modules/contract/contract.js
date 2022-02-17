@@ -13,7 +13,6 @@ import AddTags from "../popup/addTag";
 
 export default function Contract(props) {
   const [open, setOpen] = React.useState(false);
-  const [showPlaceHolder, setShowPlaceHolder] = React.useState(false);
   const [loader, setLoader] = React.useState(false);
   const [contractNameToolTip, setcontractNameToolTip] = React.useState(false);
   const [addressToolTip, setaddressToolTip] = React.useState(false);
@@ -21,6 +20,9 @@ export default function Contract(props) {
   const [tagToolTip, settagToolTip] = React.useState(false);
   const [visibilityToolTip, setvisibilityToolTip] = React.useState(false);
   const [page, setPage] = React.useState(1);
+  const [address, setAddress] = React.useState([]);
+  const [searchRow, setSearchRow] = React.useState([]);
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -44,7 +46,6 @@ export default function Contract(props) {
       setLoader(true);
       const response = await ContractsService.getContractsList(requestData);
       setLoader(false);
-      console.log("resss", response);
       setAddress(response.contractList);
       let pageCount = response.totalCount;
       if (pageCount % 10 === 0) {
@@ -55,33 +56,32 @@ export default function Contract(props) {
       if (response.contractList.length === 0) setShowPlaceHolder(true);
       else setShowPlaceHolder(false);
     } catch (e) {
-      setShowPlaceHolder(true);
       setLoader(false);
     }
   };
 
   const searching = async (searchValues, searchKeys) => {
+    let userId = sessionManager.getDataFromCookies("userId");
     try {
       const requestData = {
         searchValue: searchValues,
         searchKeys: searchKeys,
         skip: 0,
         limit: 10,
+        userId: userId,
       };
       setLoader(true);
       const response = await ContractsService.getContractsList(requestData);
       setLoader(false);
-      setAddress(response.contractList);
-      if (response.contractList.length === 0) setShowPlaceHolder(true);
+      setSearchRow(response.contractList);
     } catch (e) {
-      setShowPlaceHolder(true);
       setLoader(false);
     }
   };
-  const [input, setInput] = useState();
+  const [input, setInput] = useState("");
   const search = (e) => {
     setInput(e.target.value);
-    searching(e.target.value, ["address", "status", ""]);
+    searching(e.target.value, ["address"]);
   };
 
   const changePage = (value) => {
@@ -91,8 +91,6 @@ export default function Contract(props) {
   React.useEffect(() => {
     getContractList();
   }, []);
-
-  const [address, setAddress] = React.useState([]);
 
   const [addTag, setAddTag] = useState(false);
   const Open = () => {
@@ -214,7 +212,7 @@ export default function Contract(props) {
             </ColumnOne>
           </Row>
         </Div>
-        {address.map((data, index) => {
+        {(input === "" ? address : searchRow).map((data, index) => {
           return (
             <div style={{ cursor: "pointer" }}>
               <Div>
@@ -254,12 +252,11 @@ export default function Contract(props) {
             </div>
           );
         })}
-        {showPlaceHolder && (
-          <PlaceHolderContainer>
-            <PlaceHolderImage src="/images/contracts.svg" />
-            No Contracts Found
-          </PlaceHolderContainer>
-        )}
+        {/* {(address.length === 0 || searchRow.length === 0 ? <PlaceHolderContainer>
+              <PlaceHolderImage src="/images/contracts.svg" />
+              No contract found
+            </PlaceHolderContainer> : "" )
+          } */}
       </TableContainer>
       <PaginationDiv>
         <ReactPaginate

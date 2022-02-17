@@ -43,10 +43,10 @@ export default function TransactionList(props) {
   const [address, setAddress] = React.useState([]);
   const [searchRow, setSearchRow] = React.useState([]);
   const [contracts, setContracts] = React.useState([]);
-  const [selected, setSelected] = React.useState({});
+  const [selected, setSelected] = React.useState("");
   const [page, setPage] = React.useState(1);
   const [valueCheck, setValueCheck] = React.useState(0);
-
+  
   const getContractNames = async (skip = 0, limit = 10) => {
     let userId = sessionManager.getDataFromCookies("userId");
     try {
@@ -60,7 +60,7 @@ export default function TransactionList(props) {
       setLoader(false);
 
       setContracts(response.contractList);
-
+      setSelected(response.contractList[0].address)
       if (response.contractList.length === 0) setShowPlaceHolder(true);
     } catch (e) {
       setShowPlaceHolder(true);
@@ -68,16 +68,20 @@ export default function TransactionList(props) {
     }
   };
 
+  console.log("dfxdx", selected);
+
   const getTransaction = async (skip = 0, limit = 10) => {
     try {
       const requestData = {
         skip: skip,
         limit: limit,
+        contractAddress: selected,
       };
       setLoader(true);
       const response = await ContractsService.getTransactionsList(requestData);
       setLoader(false);
       setAddress(response.transactionList);
+      console.log("response", response.transactionList);
       let pageCount = response.totalCount;
       if (pageCount % 10 === 0) {
         setPage(parseInt(pageCount / 10));
@@ -172,6 +176,7 @@ export default function TransactionList(props) {
     getContractNames();
     getTransaction();
   }, [select]);
+
   const [selectDrop, setSelectDrop] = React.useState([]);
 
   const filterSearch = async () => {
@@ -202,6 +207,7 @@ export default function TransactionList(props) {
       console.log(e);
     }
   };
+
   return (
     <>
       <MainContainer>
@@ -280,7 +286,7 @@ export default function TransactionList(props) {
                     src="/images/XDCmainnet.svg"
                   />
                   <br />
-                  <TransactionHash>{selected.address}</TransactionHash>
+                  <TransactionHash>{selected}</TransactionHash>
                   <Image src="/images/Arrrow.svg" />
                 </DropDown>
 

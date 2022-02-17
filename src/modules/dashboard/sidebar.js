@@ -6,22 +6,22 @@ import { sessionManager } from "../../managers/sessionManager";
 
 export default function Sidebar(props) {
   const redirectToAbout = () => {
-    history.push("/dashboard/about");
+    history.push("/about");
   };
   const redirectToTransaction = () => {
-    history.push("/dashboard/Transactions/transaction-list");
+    history.push("/transactions");
   };
   const redirectToContract = () => {
-    history.push("/dashboard/Contracts/contract");
+    history.push("/contracts");
   };
   const redirectToNetwork = () => {
-    history.push("/dashboard/Networks/network");
+    history.push("/networks");
   };
   const redirectToAnalytics = () => {
-    history.push("/dashboard/Analytics/analytics");
+    history.push("/analytics");
   };
   const redirectToAlerting = () => {
-    history.push("/dashboard/Alerting/rules");
+    history.push("/alerting");
   };
   const redirectToFaqs = () => {
     history.push("/");
@@ -33,7 +33,7 @@ export default function Sidebar(props) {
     sessionManager.removeDataFromCookies("userId");
     sessionManager.removeDataFromCookies("username");
     sessionManager.removeDataFromCookies("profilePicture");
-    window.location.href = "http://localhost:3000/dashboard/about";
+    history.replace('/')
   };
 
   const [aboutIcon, setAboutIcon] = React.useState(
@@ -57,19 +57,19 @@ export default function Sidebar(props) {
 
   const changeSourceForIcons = (value) => {
     if (value === "about") setAboutIcon("/images/abouticon_white.svg");
-    if (value === "Transaction")
+    if (value === "transactions")
       setTransactionIcon("/images/Transactions_white.svg");
-    if (value === "Contracts") setContractsIcon("/images/contracts_white.svg");
-    if (value === "Networks") setNetworksIcon("/images/networks_white.svg");
-    if (value === "Analytics") setAnalyticsIcon("/images/Analytics_white.svg");
+    if (value === "contracts") setContractsIcon("/images/contracts_white.svg");
+    if (value === "networks") setNetworksIcon("/images/networks_white.svg");
+    if (value === "analytics") setAnalyticsIcon("/images/Analytics_white.svg");
     if (value === "alerting") setAlertingIcon("/images/Alerting_white.svg");
   };
   const changeOriginalSourceForIcons = (value) => {
     if (value === "about") setAboutIcon("/images/abouticon_blue.svg");
-    if (value === "Transaction") setTransactionIcon("/images/transactions.svg");
-    if (value === "Networks") setNetworksIcon("/images/networks.svg");
-    if (value === "Contracts") setContractsIcon("/images/contracts.svg");
-    if (value === "Analytics") setAnalyticsIcon("/images/analytics.svg");
+    if (value === "transactions") setTransactionIcon("/images/transactions.svg");
+    if (value === "networks") setNetworksIcon("/images/networks.svg");
+    if (value === "contracts") setContractsIcon("/images/contracts.svg");
+    if (value === "analytics") setAnalyticsIcon("/images/analytics.svg");
     if (value === "alerting") setAlertingIcon("/images/alerting.svg");
   };
 
@@ -89,44 +89,44 @@ export default function Sidebar(props) {
       </Wrapper>
       <Wrapper
         style={{
-          backgroundColor: utility.isMenuActive("Transaction") ? "#1d3c93" : "",
+          backgroundColor: utility.isMenuActive("transactions") ? "#1d3c93" : "",
         }}
         onClick={redirectToTransaction}
-        onMouseOver={() => changeSourceForIcons("Transaction")}
-        onMouseOut={() => changeOriginalSourceForIcons("Transaction")}
+        onMouseOver={() => changeSourceForIcons("transactions")}
+        onMouseOut={() => changeOriginalSourceForIcons("transactions")}
       >
         <Icon src={transactionIcon} />
         <Heading>Transactions</Heading>
       </Wrapper>
       <Wrapper
         style={{
-          backgroundColor: utility.isMenuActive("contract") ? "#1d3c93" : "",
+          backgroundColor: utility.isMenuActive("contracts") ? "#1d3c93" : "",
         }}
         onClick={redirectToContract}
-        onMouseOver={() => changeSourceForIcons("Contracts")}
-        onMouseOut={() => changeOriginalSourceForIcons("Contracts")}
+        onMouseOver={() => changeSourceForIcons("contracts")}
+        onMouseOut={() => changeOriginalSourceForIcons("contracts")}
       >
         <Icon src={contractsIcon} />
         <Heading>Contracts</Heading>
       </Wrapper>
       <Wrapper
         style={{
-          backgroundColor: utility.isMenuActive("Network") ? "#1d3c93" : "",
+          backgroundColor: utility.isMenuActive("networks") ? "#1d3c93" : "",
         }}
         onClick={redirectToNetwork}
-        onMouseOver={() => changeSourceForIcons("Networks")}
-        onMouseOut={() => changeOriginalSourceForIcons("Networks")}
+        onMouseOver={() => changeSourceForIcons("networks")}
+        onMouseOut={() => changeOriginalSourceForIcons("networks")}
       >
         <Icon src={networksIcon} />
         <Heading>Networks</Heading>
       </Wrapper>
       <Wrapper
         style={{
-          backgroundColor: utility.isMenuActive("Analytics") ? "#1d3c93" : "",
+          backgroundColor: utility.isMenuActive("analytics") ? "#1d3c93" : "",
         }}
         onClick={redirectToAnalytics}
-        onMouseOver={() => changeSourceForIcons("Analytics")}
-        onMouseOut={() => changeOriginalSourceForIcons("Analytics")}
+        onMouseOver={() => changeSourceForIcons("analytics")}
+        onMouseOut={() => changeOriginalSourceForIcons("analytics")}
       >
         <Icon src={analyticsIcon} />
         <Heading>Analytics</Heading>
