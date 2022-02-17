@@ -32,7 +32,7 @@ export default function Contract(props) {
     setOpen(false);
   };
   const redirectTODetails = (id) => {
-    history.push("/contract-details" + id);
+    history.push("/contracts/contract-details" + id);
   };
 
   const getContractList = async (skip = 0, limit = 10) => {

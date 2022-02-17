@@ -118,7 +118,7 @@ export default function ContractDetails(props) {
     setRemoveState(false);
   };
   const backButton = () => {
-    history.push("/dashboard/contracts");
+    history.push("/contracts");
   };
   const [addTag, setAddTag] = useState(false);
   const Open = () => {
