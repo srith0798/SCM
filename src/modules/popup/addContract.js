@@ -46,7 +46,7 @@ export default function AddContract(props) {
         return;
       }
       if (response) {
-        utility.apiSuccessToast("Contract added");
+       // utility.apiSuccessToast("Contract added");
         props.click();
         props.getContractList();
         // props.reloadData();
@@ -118,6 +118,10 @@ export default function AddContract(props) {
             >
               Import Contracts
             </Button>
+           
+           
+            <span > </span>
+
           </Container>
         </MainContainer>
       </Dialog>

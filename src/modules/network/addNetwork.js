@@ -96,7 +96,7 @@ export default function AddNetwork(props) {
         } else {
           setNewRpcUrl(newRpcUrl);
           console.log("two");
-          utility.apiSuccessToast("Network Added successfully");
+         // utility.apiSuccessToast("Network Added successfully");
           return true;
         }
       });
