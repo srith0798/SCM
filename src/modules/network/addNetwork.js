@@ -96,12 +96,10 @@ export default function AddNetwork(props) {
         } else {
           setNewRpcUrl(newRpcUrl);
           console.log("two");
-          utility.apiSuccessToast("Network Added successfully");
           return true;
         }
       });
-    }
-     else {
+    } else {
       if (!newRpcUrl.startsWith("http")) {
         utility.apiFailureToast(
           "URIs require the appropriate HTTP/HTTPS prefix."
