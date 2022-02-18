@@ -1,10 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-export default function SourceCode() {
+export default function SourceCode(props) {
+  console.log("asdas", props);
   return (
     <MainContainer>
       <Container>
-        <Div>Code</Div>
+        <Div>{props.data}</Div>
       </Container>
     </MainContainer>
   );
@@ -37,5 +38,5 @@ const Div = styled.div`
   text-align: center;
   justify-content: center;
   color: #aaadc4;
-  font-size: 25px;
+  overflow-x: scroll;
 `;

@@ -22,7 +22,7 @@ export default function TransactionList() {
   const [open, isOpen] = useState(false);
   const [filterPopupOpen, setfilterPopupOpen] = useState(false);
   const [countToggle, setCountToggle] = useState(10);
-
+  let url = history?.location?.state?.id;
   const handleClickOpen = () => {
     isOpen(true);
   };
@@ -45,8 +45,11 @@ export default function TransactionList() {
   const [searchRow, setSearchRow] = React.useState([]);
   const [contracts, setContracts] = React.useState([]);
   const [selected, setSelected] = React.useState("");
+  const [selectedName, setSelectedName] = React.useState("");
   const [page, setPage] = React.useState(1);
   const [valueCheck, setValueCheck] = React.useState(0);
+
+
   const getContractNames = async (skip = 0, limit = 10) => {
     let userId = sessionManager.getDataFromCookies("userId");
     try {
@@ -59,15 +62,22 @@ export default function TransactionList() {
       const response = await ContractsService.getContractsList(requestData);
       setLoader(false);
       setContracts(response.contractList);
+      if(!url){
       setSelected(response.contractList[0].address)
       getTransaction(response.contractList[0].address);
+      setSelectedName(response.contractList[0].contractName)
+    }
+      else {
+      setSelected(url)
+      getTransaction(url);
+      getContractById(url);
+      }
       if (response.contractList.length === 0) setShowPlaceHolder(true);
     } catch (e) {
       setShowPlaceHolder(true);
       setLoader(false);
     }
   };
-
   const getTransaction = async (address, skip = 0, limit = countToggle) => {
     try {
       const requestData = {
@@ -125,6 +135,12 @@ export default function TransactionList() {
     setOpen(false);
   };
 
+  const getContractById = async () => {
+    try {
+      const response = await ContractsService.getContractsById(url);
+    } catch (err) {
+    }
+  };
   const styles = {
     position: "absolute",
     top: 90,
@@ -146,7 +162,10 @@ export default function TransactionList() {
     color: "#191919",
   };
   const redirectToTransactionDetails = (id) => {
-    history.push("/transactions/transaction-details", {data: id});
+    history.push({
+      pathname: "/transactions/transaction-details?" + id,
+      state:{id: id}
+    })
   };
   const changePage = (value) => {
     setValueCheck(value.selected);
@@ -285,7 +304,7 @@ export default function TransactionList() {
                 selected={selected.address}
               >
                 <DropDown onClick={handleClick}>
-                  App_Transactions_Validator{" "}
+                  {selectedName !== undefined ? selectedName : ""}{" "}
                   <img
                     style={{ marginLeft: "0.5rem" }}
                     alt=""
@@ -300,9 +319,9 @@ export default function TransactionList() {
                   <Box sx={styles}>
                     {contracts.length &&
                       contracts.map((item) => (
-                        <div onClick={() => {getTransaction(item.address); setSelected(item.address)}}>
+                        <div onClick={() => {getTransaction(item.address); setSelected(item.address); setSelectedName(item.contractName);}}>
                           <Label>Contract</Label>
-                          App_Transactions_Validator
+                          {item.contractName}
                           <br />
                           <TransactionHash>{item.address}</TransactionHash>
                         </div>
@@ -454,7 +473,7 @@ export default function TransactionList() {
 
                     {toggle.when && (
                       <ColumnSecond>
-                        <Moment toNow>{data.createdOn}</Moment>
+                      {new Date(data.createdOn).toLocaleString("en-US")}
                       </ColumnSecond>
                     )}
                   </RowData>
@@ -730,6 +749,7 @@ const BackgroundChangerTxhash = styled.div`
   border-radius: 6px;
   opacity: 1;
   padding: 1px 6px 1px 4px;
+  cursor: pointer;
 
   @media (min-width: 300px) and (max-width: 1371px) {
     margin-left: 0px;
@@ -790,6 +810,7 @@ const TransactionHash = styled.div`
   font-weight: 600;
   color: #416be0;
   margin-top: 0.5rem;
+  cursor: pointer;
   width: 100%;
   @media (min-width: 300px) and (max-width: 767px) {
     font-size: 0.575rem;
