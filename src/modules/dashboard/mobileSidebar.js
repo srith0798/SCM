@@ -133,19 +133,19 @@ const Hamburger = styled.img`
   margin: 5px 12px 0px 9px;
   position: absolute;
   left: 123px;
-  top: 5px;
+  top: 22px;
   cursor: pointer;
   @media (min-width: 1024px) {
     display: none;
   }
-  @media (max-width: 768px) {
-    top: 22px;
+  @media (max-width: 767px) {
+    top: 51px;
     margin: 5px 12px 0px 12px;
   }
-  @media (min-width: 375px) and(max-width: 1023px) {
-    top: 22px;
-    margin: 5px 12px 0px 12px;
-  }
+  // @media (min-width: 768px) and(max-width: 1023px) {
+  //   top: 22px;
+  //   margin: 5px 12px 0px 12px;
+  // }
 `;
 const SidebarContainer = styled.div`
   position: absolute;
