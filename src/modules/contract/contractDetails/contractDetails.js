@@ -49,7 +49,6 @@ export default function ContractDetails(props) {
   let version = `${address.sourceCode}`;
   version = version?.split[" "]
   //   solidityV = solidityV[3];
-  console.log("sadasd", version);
   const handleClickOpen = () => {
     setOpen(true);
   };
