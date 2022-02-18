@@ -531,7 +531,7 @@ const Container = styled.div`
   border-radius: 0.375rem;
   width: 100%;
   margin-top: 0.625rem;
-  height: 159px;
+  height: 140px;
 `;
 
 const SubHeading = styled.div`
@@ -546,7 +546,7 @@ const DetailsSection = styled.div`
   border-radius: 0.375rem;
   width: 100%;
   padding: 0.625rem 0.625rem 1.5rem 0.625rem;
-  margin-top: 1.25rem;
+  margin-top: 2.25rem;
   overflow-x: auto;
   @media (min-width: 300px) and (max-width: 768px) {
     height: 485px;
@@ -573,10 +573,10 @@ const DetailsSection = styled.div`
 `;
 const Div = styled.div`
   display: flex;
-  border-bottom: 0.063rem solid #e3e7eb;
-  padding: 1.25rem 1.25rem 0.2rem 1.25rem;
+  border-bottom: 0.063rem solid #efefef;
+  padding: 1.25rem 1.25rem 0.7rem 1.25rem;
   @media (min-width: 375px) and (max-width: 1200px) {
-    border-bottom: 0.063rem solid #e3e7eb;
+    border-bottom: 0.063rem solid #efefef;
     width: 1000px;
   }
 `;
@@ -639,11 +639,15 @@ const PopUp = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 1rem;
+  margin-top: 3rem;
   width: 100%;
   max-width: 59.375rem;
   font-size: 0.875rem;
   min-width: 900px;
+  margin-left: 15px;
+  @media (min-width: 0px) and (max-width: 767px) {
+    margin-top: 1rem;
+  }
 `;
 
 const PopUpBlock = styled.div`
@@ -669,7 +673,7 @@ const TabLister = styled.div`
   justify-content: space-between;
   width: 100%;
   max-width: 18.125rem;
-  margin: 1.563rem 0rem 0.625rem 1.063rem;
+  margin: 1.563rem 0rem 0.625rem 1.363rem;
   cursor: pointer;
   @media (min-width: 340px) and (max-width: 768px) {
     margin: none;

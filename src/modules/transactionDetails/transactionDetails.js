@@ -79,7 +79,7 @@ export default function TransactionDetails() {
             onCopy={() => setcopyToolTip(true)}
           >
             <Tooltip title={copyToolTip ? "copied" : "copy to clipboard"}>
-              <CopyToClipboardImg src="/images/copy.svg" />
+              <CopyToClipboardImage src="/images/copy.svg" />
             </Tooltip>
           </CopyToClipboard>
           {/* <FailButton>Fail</FailButton> */}
@@ -196,7 +196,9 @@ export default function TransactionDetails() {
           >
             <TabImage
               alt=""
-              style={{ marginRight: "0.375rem" }}
+              style={{
+                marginRight: "0.375rem",
+              }}
               src={
                 activeButton === "StateChange"
                   ? "/images/statechange_blue.svg"
@@ -417,9 +419,9 @@ const MainContainer = styled.div`
   width: 100%;
   padding: 2.125rem;
   display: 100%;
-  height: auto;
+  height: 100vh;
   @media (min-width: 340px) and (max-width: 768px) {
-    padding: 1rem;
+    padding: 1.2rem;
   }
 `;
 const TopContainer = styled.div`
@@ -429,6 +431,7 @@ const TopContainer = styled.div`
 `;
 
 const TabImage = styled.img`
+  width: 22px;
   @media (min-width: 300px) and (max-width: 414px) {
     width: 13px;
     margin-bottom: 5px;
@@ -501,23 +504,34 @@ const SubHeadBlue = styled.div`
 const CommonDiv = styled.div`
   border-bottom: 0.031rem #eaf1ec solid;
   padding: 0.813rem;
+  @media (min-width: 300px) and (max-width: 768px) {
+    column-gap: 0px;
+  }
 `;
 const TimeStampDiv = styled.div`
   border-bottom: 0.031rem #eaf1ec solid;
   padding: 0.813rem;
   display: flex;
-  @media (min-width: 300px) and (max-width: 767px) {
+
+  @media (max-width: 375px) {
     display: flex;
-    column-gap: 104px;
+    white-space: nowrap;
+    column-gap: 80px;
   }
 `;
 const CommonDivBlock = styled.div`
   border-bottom: 0.031rem #eaf1ec solid;
   padding: 0.813rem;
   display: flex;
+  column-gap: 0px;
   @media (min-width: 300px) and (max-width: 767px) {
     display: flex;
     column-gap: 138px;
+  }
+  @media (max-width: 375px) {
+    display: flex;
+    white-space: nowrap;
+    column-gap: 118px;
   }
 `;
 const FeeDiv = styled.div`
@@ -528,7 +542,12 @@ const FeeDiv = styled.div`
   @media (min-width: 300px) and (max-width: 767px) {
     display: flex;
     white-space: nowrap;
-    column-gap: 69px;
+    column-gap: 68px;
+  }
+  @media (max-width: 375px) {
+    display: flex;
+    white-space: nowrap;
+    column-gap: 46px;
   }
 `;
 const CommonDivFrom = styled.div`
@@ -537,7 +556,12 @@ const CommonDivFrom = styled.div`
   display: flex;
   @media (min-width: 300px) and (max-width: 767px) {
     display: flex;
-    column-gap: 143px;
+    column-gap: 141px;
+  }
+  @media (max-width: 375px) {
+    display: flex;
+    white-space: nowrap;
+    column-gap: 123px;
   }
 `;
 const RawInputDiv = styled.div`
@@ -550,6 +574,11 @@ const RawInputDiv = styled.div`
     white-space: nowrap;
     column-gap: 108px;
   }
+  @media (max-width: 375px) {
+    display: flex;
+    white-space: nowrap;
+    column-gap: 87px;
+  }
 `;
 const GasPriceDiv = styled.div`
   border-bottom: 0.031rem #eaf1ec solid;
@@ -559,7 +588,12 @@ const GasPriceDiv = styled.div`
   @media (min-width: 300px) and (max-width: 767px) {
     display: flex;
     white-space: nowrap;
-    column-gap: 114px;
+    column-gap: 111px;
+  }
+  @media (max-width: 375px) {
+    display: flex;
+    white-space: nowrap;
+    column-gap: 91px;
   }
 `;
 const CommonDivTo = styled.div`
@@ -568,7 +602,12 @@ const CommonDivTo = styled.div`
   display: flex;
   @media (min-width: 300px) and (max-width: 767px) {
     display: flex;
-    column-gap: 162px;
+    column-gap: 159px;
+  }
+  @media (max-width: 375px) {
+    display: flex;
+    white-space: nowrap;
+    column-gap: 140px;
   }
 `;
 const MidContainer = styled.div`
@@ -616,7 +655,10 @@ const Heading = styled.div`
   color: #102c78;
   width: 100%;
   max-width: 16.25rem;
-  @media (min-width: 340px) and (max-width: 768px) {
+  @media (min-width: 0px) and (max-width: 767px) {
+    max-width: 11.25rem;
+  }
+  @media (min-width: 768px) and (max-width: 1023px) {
     max-width: 11.25rem;
   }
 `;
@@ -686,6 +728,7 @@ const Container = styled.div`
 
 const HashDesktop = styled.div`
   display: flex;
+  font-size: 14px;
   flex-flow: row nowrap;
   margin-top: 0.625rem;
   margin-bottom: 10px;
@@ -694,7 +737,7 @@ const HashDesktop = styled.div`
   font-weight: 500;
   width: 100%;
   max-width: 30.063rem;
-  @media (max-width: 1024px) {
+  @media (max-width: 767px) {
     display: none;
   }
 `;
@@ -706,7 +749,7 @@ const HashMobile = styled.div`
   border: none;
   width: 100%;
   max-width: 30.063rem;
-  @media (min-width: 1023px) {
+  @media (min-width: 767px) {
     display: none;
   }
 `;
@@ -720,9 +763,25 @@ const SubHeading = styled.div`
 const CopyToClipboardImg = styled.img`
   margin-left: 150px;
   cursor: pointer;
-  @media (min-width: 340px) and (max-width: 768px) {
+  @media (min-width: 340px) and (max-width: 767px) {
     margin-left: 10px;
   }
+  @media (min-width: 768px) and (max-width: 1024px) {
+    margin-left: 110px;
+  }
+`;
+const CopyToClipboardImage = styled.img`
+  margin-left: 110px;
+  cursor: pointer;
+  @media (min-width: 340px) and (max-width: 767px) {
+    margin-left: 10px;
+  }
+  @media (min-width: 1024px) and (max-width: 1075px) {
+    margin-left: 84px;
+  }
+  // @media (min-width: 768px) and (max-width: 1024px) {
+  //   margin-left: px;
+  // }
 `;
 
 const TextLine = styled.div`
@@ -753,7 +812,7 @@ const TabLister = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  max-width: 39.125rem;
+  max-width: 37.125rem;
   margin: 1.563rem 0rem 0.625rem 1.063rem;
   cursor: pointer;
   @media (max-width: 768px) {
@@ -765,8 +824,9 @@ const TabLister = styled.div`
     margin: 0rem 0rem 0rem 0rem;
     white-space: nowrap;
     padding-left: 10px;
+    max-width: 34.125rem;
   }
-  @media (min-width: 320px) and (max-width: 414px) {
+  @media (max-width: 414px) {
     display: flex;
     justify-content: space-between;
     min-height: 45px;
@@ -777,12 +837,12 @@ const TabLister = styled.div`
     padding-left: 0px;
   }
 
-  @media (min-width: 600px) and (max-width: 923px) {
-    overflow-y: hidden;
-    font-size: 0.8rem;
-    padding-left: 0px;
-    margin: 0rem 0rem 0rem 0rem;
-  }
+  // @media (min-width: 600px) and (max-width: 923px) {
+  //   overflow-y: hidden;
+  //   font-size: 0.8rem;
+  //   padding-left: 0px;
+  //   margin: 0rem 0rem 0rem 0rem;
+  // }
 `;
 const TabView = styled.div`
   padding: 0.313rem 0.5rem 0.313rem 0.5rem;
@@ -832,7 +892,10 @@ const AlertButton = styled.div`
   margin-left: 2px;
   padding-top: 2px;
   padding-left: 8px;
-  @media (min-width: 300px) and (max-width: 916px) {
+  @media (min-width: 1024px) and (max-width: 1110px) {
+    display: none;
+  }
+  @media (max-width: 1024px) {
     display: none;
   }
 `;
