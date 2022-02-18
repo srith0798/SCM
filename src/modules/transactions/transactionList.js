@@ -59,7 +59,7 @@ export default function TransactionList() {
       const response = await ContractsService.getContractsList(requestData);
       setLoader(false);
       setContracts(response.contractList);
-      setSelected(response.contractList[0].address)
+      setSelected(response.contractList[0].address);
       getTransaction(response.contractList[0].address);
       if (response.contractList.length === 0) setShowPlaceHolder(true);
     } catch (e) {
@@ -146,11 +146,15 @@ export default function TransactionList() {
     color: "#191919",
   };
   const redirectToTransactionDetails = (id) => {
-    history.push("/transactions/transaction-details", {data: id});
+    history.push("/transactions/transaction-details", { data: id });
   };
   const changePage = (value) => {
     setValueCheck(value.selected);
-    getTransaction(selected, Math.ceil(value.selected * countToggle), countToggle);
+    getTransaction(
+      selected,
+      Math.ceil(value.selected * countToggle),
+      countToggle
+    );
   };
   const [toggle, setToggle] = React.useState({
     transactionHash: true,
@@ -170,11 +174,9 @@ export default function TransactionList() {
   const [toInput, setToInput] = React.useState([]);
 
   useEffect(() => {
-    if(selected.length>0){
-    getTransaction(selected);
-    }
-    else
-    getContractNames();
+    if (selected.length > 0) {
+      getTransaction(selected);
+    } else getContractNames();
   }, [select, countToggle]);
 
   const [selectDrop, setSelectDrop] = React.useState([]);
@@ -207,12 +209,10 @@ export default function TransactionList() {
     }
   };
 
-  function setStatus(val){
-  if(val===true){
-    return "Success";
-  }
-  else
-  return "Fail"
+  function setStatus(val) {
+    if (val === true) {
+      return "Success";
+    } else return "Fail";
   }
 
   return (
@@ -300,7 +300,12 @@ export default function TransactionList() {
                   <Box sx={styles}>
                     {contracts.length &&
                       contracts.map((item) => (
-                        <div onClick={() => {getTransaction(item.address); setSelected(item.address)}}>
+                        <div
+                          onClick={() => {
+                            getTransaction(item.address);
+                            setSelected(item.address);
+                          }}
+                        >
                           <Label>Contract</Label>
                           App_Transactions_Validator
                           <br />
@@ -418,22 +423,24 @@ export default function TransactionList() {
                 <Div>
                   <RowData>
                     {toggle.transactionHash && (
-                      <ColumnSecond onClick={()=> redirectToTransactionDetails(data.hash)}>
+                      <ColumnSecond
+                        onClick={() => redirectToTransactionDetails(data.hash)}
+                      >
                         <BackgroundChangerTxhash>
                           {utility.truncateTxnAddress(data.hash)}
                         </BackgroundChangerTxhash>
                       </ColumnSecond>
                     )}
 
-                    {toggle.status && (
-                      <ColumnSecond>{status}</ColumnSecond>
-                    )}
+                    {toggle.status && <ColumnSecond>{status}</ColumnSecond>}
 
                     {toggle.function && (
                       <ColumnSecond>{data.function}</ColumnSecond>
                     )}
                     {toggle.contracts && (
-                      <ColumnSecond>{utility.truncateTxnAddress(data.contractAddress)}</ColumnSecond>
+                      <ColumnSecond>
+                        {utility.truncateTxnAddress(data.contractAddress)}
+                      </ColumnSecond>
                     )}
 
                     {toggle.from && (
@@ -470,10 +477,26 @@ export default function TransactionList() {
           )} */}
         </TableContainer>
         <PaginationDiv>
-          <BottomLabel>Per Page
-          <SelectionDivStyle buttonToggle={countToggle} onClick={()=> setCountToggle(10)}>10</SelectionDivStyle>
-          <SelectionDivStyleTwo buttonToggle={countToggle} onClick={()=> setCountToggle(20)}>20</SelectionDivStyleTwo>
-          <SelectionDivStyleThree buttonToggle={countToggle} onClick={()=> setCountToggle(50)}>50</SelectionDivStyleThree>
+          <BottomLabel>
+            Per Page
+            <SelectionDivStyle
+              buttonToggle={countToggle}
+              onClick={() => setCountToggle(10)}
+            >
+              10
+            </SelectionDivStyle>
+            <SelectionDivStyleTwo
+              buttonToggle={countToggle}
+              onClick={() => setCountToggle(20)}
+            >
+              20
+            </SelectionDivStyleTwo>
+            <SelectionDivStyleThree
+              buttonToggle={countToggle}
+              onClick={() => setCountToggle(50)}
+            >
+              50
+            </SelectionDivStyleThree>
           </BottomLabel>
           <ReactPaginate
             previousLabel={"<-"}
@@ -503,14 +526,17 @@ const BottomLabel = styled.div`
   color: #797979;
   margin-right: 5px;
   font-weight: 500;
-  font-family: 'Inter', Medium;
+  font-family: "Inter", Medium;
 `;
 const Div = styled.div`
   padding: 0.75rem;
   border-bottom: 1px solid #e3e7eb;
   white-space: nowrap;
   column-gap: 20px;
-  width: fit-content;
+  width: 100%;
+  @media (min-width: 300px) and (max-width: 768px) {
+    width: 500%;
+  }
 `;
 const RowData = styled.div`
   display: flex;
@@ -792,7 +818,7 @@ const TransactionHash = styled.div`
   margin-top: 0.5rem;
   width: 100%;
   @media (min-width: 300px) and (max-width: 767px) {
-    font-size: 0.575rem;
+    font-size: 0.6rem;
   }
   @media (max-width: 375px) {
     font-size: 0.55rem;
@@ -802,8 +828,8 @@ const TransactionHash = styled.div`
 const Image = styled.img`
   width: 0.95rem;
   position: absolute;
-  top: 29px;
-  right: 39px;
+  top: 21px;
+  right: 21px;
   cursor: pointer;
   @media (max-width: 375px) {
     width: 0.85rem;
@@ -853,53 +879,50 @@ const SelectionDivStyle = styled.div`
   font-weight: 600;
   font-family: Inter;
   margin-right: 10px;
-  border-radius: 4px 4px 4px 4px; 
+  border-radius: 4px 4px 4px 4px;
   height: 20px;
   width: 20px;
   margin-left: 5px;
   display: flex;
-    justify-content: center;
-    align-items: center;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
   color: ${(props) => (props.buttonToggle === 10 ? "#ffffff" : "#191919")};
 
   background-color: ${(props) =>
     props.buttonToggle === 10 ? "#3163F0" : "#FFFFFF"};
- 
 `;
 const SelectionDivStyleTwo = styled.div`
   font-size: 12px;
   font-weight: 600;
   font-family: Inter;
   margin-right: 10px;
-  border-radius: 4px 4px 4px 4px; 
+  border-radius: 4px 4px 4px 4px;
   height: 20px;
   width: 20px;
   display: flex;
-    justify-content: center;
-    align-items: center;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
   color: ${(props) => (props.buttonToggle === 20 ? "#ffffff" : "#191919")};
 
   background-color: ${(props) =>
     props.buttonToggle === 20 ? "#3163F0" : "#FFFFFF"};
-
 `;
 const SelectionDivStyleThree = styled.div`
   font-size: 12px;
   font-weight: 600;
   font-family: Inter;
   margin-right: 10px;
-  border-radius: 4px 4px 4px 4px; 
+  border-radius: 4px 4px 4px 4px;
   height: 20px;
   width: 20px;
   display: flex;
-    justify-content: center;
-    align-items: center;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
   color: ${(props) => (props.buttonToggle === 50 ? "#ffffff" : "#191919")};
 
   background-color: ${(props) =>
     props.buttonToggle === 50 ? "#3163F0" : "#FFFFFF"};
-
 `;

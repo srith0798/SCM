@@ -131,7 +131,7 @@ const ApplyButton = styled.div`
   cursor: pointer;
 
   @media (min-width: 300px) and (max-width: 414px) {
-    margin-left: 30px;
+    margin-left: 13px;
     height: 27px;
     width: 116px;
     padding-top: 2px;
@@ -366,6 +366,7 @@ const LastContainer = styled.div`
   @media (min-width: 300px) and (max-width: 414px) {
     justify-content: start;
     margin-top: -18px;
+    margin-left: -13px;
   }
 `;
 const NewContainerOne = styled.div`
