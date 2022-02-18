@@ -531,7 +531,7 @@ const Container = styled.div`
   border-radius: 0.375rem;
   width: 100%;
   margin-top: 0.625rem;
-  height: 140px;
+  height: 165px;
 `;
 
 const SubHeading = styled.div`
