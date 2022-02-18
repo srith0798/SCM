@@ -195,7 +195,6 @@ const MainContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 23px;
   overflow: hidden;
 `;
 const Container = styled.div`
@@ -229,8 +228,7 @@ const MainHeading = styled.div`
 `;
 const BorderDiv = styled.div`
   border-bottom: 1px solid #ededed;
-  width: 700px;
-  margin-left: -23px;
+  width: 100%;
 `;
 const Content = styled.div`
   font-size: 1rem;

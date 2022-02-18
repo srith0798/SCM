@@ -147,7 +147,7 @@ export default function AddAlert() {
                     >
                       <img alt="" src={successfulTransaction} />
                       <Title>Successful Transaction</Title>
-                      <SubTitle>trigger when Successful Transaction happen</SubTitle>
+                      <SubTitle>Trigger when Successful Transaction happen</SubTitle>
                     </BoxContainer>
                     <BoxContainer
                       onClick={() => changeProgress("ALERT_TARGET")}
@@ -156,7 +156,7 @@ export default function AddAlert() {
                     >
                       <img alt="" src={failedTransaction} />
                       <Title>Failed Transaction</Title>
-                      <SubTitle>trigger when Transactions fails</SubTitle>
+                      <SubTitle>Trigger when Transactions fails</SubTitle>
                     </BoxContainer>
                     <BoxContainer
                       onClick={() => changeProgress("ALERT_TARGET")}
@@ -165,7 +165,7 @@ export default function AddAlert() {
                     >
                       <img alt="" src={tokenTransfer} />
                       <Title>XRC-20 Token Transfer </Title>
-                      <SubTitle>trigger whenever an XRC-20 Token Transfer happen</SubTitle>
+                      <SubTitle>Trigger whenever an XRC-20 Token Transfer happen</SubTitle>
                     </BoxContainer>
                     <BoxContainer
                       onClick={() => changeProgress("ALERT_TARGET")}
@@ -174,7 +174,7 @@ export default function AddAlert() {
                     >
                       <img alt="" src={transactionValue} />
                       <Title>Transaction Value</Title>
-                      <SubTitle>trigger whenever transaction value matches</SubTitle>
+                      <SubTitle>Trigger whenever transaction value matches</SubTitle>
                     </BoxContainer>
                     <BoxContainer
                       onClick={() => changeProgress("ALERT_TARGET")}
@@ -183,7 +183,7 @@ export default function AddAlert() {
                     >
                       <img alt="" src={balanceToken} />
                       <Title>XDC Balance</Title>
-                      <SubTitle>trigger when XDC balance falls below certain threshold</SubTitle>
+                      <SubTitle>Trigger when XDC balance falls below certain threshold</SubTitle>
                     </BoxContainer>
 
                     <BoxContainer
@@ -193,12 +193,12 @@ export default function AddAlert() {
                     >
                       <img alt="" src={stateChange} />
                       <Title>State Change</Title>
-                      <SubTitle>trigger whenever stable variable changes</SubTitle>
+                      <SubTitle>Trigger whenever stable variable changes</SubTitle>
                     </BoxContainer>
                     <BoxContainer>
                       <img alt="" src="/images/functioncall.svg" />
                       <Title>Function call</Title>
-                      <SubTitle>COMMING SOON</SubTitle>
+                      <Title1>Coming soon</Title1>
                     </BoxContainer>
                   </MainBoxContainer>
                 )}
@@ -474,6 +474,21 @@ const SubTitle = styled.div`
   max-width: 16.25rem;
   padding-top: 5px;
 `;
+
+const Title1 = styled.div`
+top: 617px;
+left: 680px;
+width: 157px;
+height: 26px;
+text-align: center;
+font: normal normal 600 22px/26px Inter;
+letter-spacing: 0px;
+color: #1D3C93;
+opacity: 1;
+`;
+
+
+
 
 const Container = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
