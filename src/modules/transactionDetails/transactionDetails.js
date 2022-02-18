@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { Row } from "simple-flexbox";
 import { CopyToClipboard } from "react-copy-to-clipboard";
@@ -15,6 +15,7 @@ export default function TransactionDetails() {
   const [eventToolTip, seteventToolTip] = React.useState(false);
   const [statusToolTip, setstatusToolTip] = React.useState(false);
   const [copyToolTip, setcopyToolTip] = React.useState(false);
+  const [row, setRow] = React.useState([]);
 
   const [activeButton, setActiveButton] = React.useState("Overview");
   const handleViewClick = (e) => {
@@ -23,6 +24,7 @@ export default function TransactionDetails() {
   const backButton = () => {
     history.push("/transactions");
   };
+  let url = history.location.state.id;
   const searchTransaction = async (searchValues, searchKeys) => {
     try {
       const requestData = {
@@ -32,9 +34,13 @@ export default function TransactionDetails() {
         limit: 1,
       };
       const response = await ContractsService.getTransactionsList(requestData);
-      // setRow(response.transactionList);
-    } catch (e) {}
+      setRow(response.transactionList[0]);
+    } catch (e) {
+    }
   };
+  useEffect(()=>{
+  searchTransaction(url, ["hash"]);
+  }, [url])
 
   return (
     <MainContainer>
@@ -50,7 +56,7 @@ export default function TransactionDetails() {
             Transaction Details
           </Title>
         </TitleDiv>
-        <Button>View in explorer</Button>
+        <Button onClick={()=> window.open(`https://observer.xdc.org/transaction-details/${row.hash}`)}>View in explorer</Button>
       </SubContainer>
 
       <Container>
@@ -60,15 +66,15 @@ export default function TransactionDetails() {
         <TopContainer>
           <HashMobile>
             {utility.truncateTxnAddress(
-              "0x1822a4c5b699f8c2653062033b86aceea234d804dd536cfab6b75af669a2ca8"
+            `${row.hash}`
             )}
           </HashMobile>
           <HashDesktop>
-            0x1822a4c5b699f8c2653062033b86aceea234d804dd536cfab6b75af669a2ca8
+          {row.hash}
           </HashDesktop>
           <CopyToClipboard
             text={
-              "0x1822a4c5b699f8c2653062033b86aceea234d804dd536cfab6b75af669a2ca8"
+              row.hash
             }
             onCopy={() => setcopyToolTip(true)}
           >
@@ -76,7 +82,7 @@ export default function TransactionDetails() {
               <CopyToClipboardImage src="/images/copy.svg" />
             </Tooltip>
           </CopyToClipboard>
-          <FailButton>Fail</FailButton>
+          {/* <FailButton>Fail</FailButton> */}
           <AlertButton>
             <img
               alt=""
@@ -221,33 +227,33 @@ export default function TransactionDetails() {
             <CommonDiv>
               <Row>
                 <Heading>Network</Heading>
-                <SubHead>XDC mainnet</SubHead>
+                <SubHead>{""}</SubHead>
               </Row>
             </CommonDiv>
-            <CommonDiv>
+            {/* <CommonDiv>
               <Row>
                 <Heading>Error</Heading>
                 <SubHead>Out of Gas</SubHead>
               </Row>
-            </CommonDiv>
+            </CommonDiv> */}
             <CommonDivBlock>
               <Heading>Block</Heading>
-              <SubHead>36585614 (358349 block confirmation)</SubHead>
+              <SubHead>{row.blockNumber}</SubHead>
             </CommonDivBlock>
             <CommonDiv>
               <Row>
                 <Heading>Transactions index</Heading>
-                <SubHead>5</SubHead>
+                <SubHead>{row.transactionIndex}</SubHead>
               </Row>
             </CommonDiv>
             <CommonDivFrom>
               <Heading>From</Heading>
               <SubHead>
                 <TransactionNumber>
-                  xdc2113d5d4d7427123be37319dcee7dc52d3f8c2a9
+                {row.from}
                 </TransactionNumber>
                 <CopyToClipboard
-                  text={"xdc2113d5d4d7427123be37319dcee7dc52d3f8c2a9"}
+                  text={row.from}
                   onCopy={() => setcopyToolTip(true)}
                 >
                   <Tooltip title={copyToolTip ? "copied" : "copy to clipboard"}>
@@ -263,10 +269,10 @@ export default function TransactionDetails() {
               <Heading>To</Heading>
               <SubHead>
                 <TransactionNumber>
-                  xdc2113d5d4d7427123be37319dcee7dc52d3f8c2a9
+                {row.to}
                 </TransactionNumber>
                 <CopyToClipboard
-                  text={"xdc2113d5d4d7427123be37319dcee7dc52d3f8c2a9"}
+                  text={row.to}
                   onCopy={() => setcopyToolTip(true)}
                 >
                   <Tooltip title={copyToolTip ? "copied" : "copy to clipboard"}>
@@ -277,29 +283,29 @@ export default function TransactionDetails() {
             </CommonDivTo>
             <TimeStampDiv>
               <Heading>Timestamp</Heading>
-              <SubHead>03 mins ago (Oct-27-2021 11:58:44 PM +UTC)</SubHead>
+              <SubHead>{new Date(row.timestamp).toLocaleString("en-US")}</SubHead>
             </TimeStampDiv>
             <CommonDiv>
               <Row>
                 <Heading>Value</Heading>
-                <SubHead> 10 XDC</SubHead>
+                <SubHead>{row.value} XDC</SubHead>
               </Row>
             </CommonDiv>
             <CommonDiv>
               <Row>
                 <Heading>Nonce</Heading>
-                <SubHead>453</SubHead>
+                <SubHead>{row.nonce}</SubHead>
               </Row>
             </CommonDiv>
             <CommonDiv>
               <Row>
                 <Heading>Gas Used</Heading>
-                <SubHead>60,052 (100%)</SubHead>
+                <SubHead>{row.gasUsed}</SubHead>
               </Row>
             </CommonDiv>
             <GasPriceDiv>
               <Heading>Gas Price</Heading>
-              <SubHead>0.000000000842346544 XDC (0.842346544 Gwei)</SubHead>
+              <SubHead>{row.gasPrice} XDC</SubHead>
             </GasPriceDiv>
             <FeeDiv>
               <Heading>Transaction Fee</Heading>
@@ -401,7 +407,7 @@ export default function TransactionDetails() {
           </LastContainer>
         </ScrollableDiv>
       )}
-      {activeButton === "Contracts" && <SubContracts />}
+      {activeButton === "Contracts" && <SubContracts address={row.contractAddress}/>}
       {activeButton === "EventsDetails" && <EventsDetails />}
       {activeButton === "StateChange" && <StateChange />}
     </MainContainer>

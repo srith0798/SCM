@@ -21,7 +21,7 @@ export default function ContractAbi(props) {
               <Add>Contract ABI</Add>
               <img alt="" src="/images/close.svg" onClick={props.click} />
             </SubContainer>
-            <Div>Code</Div>
+            <Div>{props.data}</Div>
           </Container>
         </MainContainer>
       </Dialog>
@@ -43,6 +43,7 @@ const Container = styled.div`
   max-width: 700px;
   height: 300px;
   padding: 20px;
+  overflow-x: hidden;
 `;
 const SubContainer = styled.div`
   display: flex;
@@ -57,13 +58,10 @@ const Div = styled.div`
   border-radius: 4px;
   width: 100%;
   max-width: 650px;
-  height: 220px;
+  height: auto;
   margin-top: 8px;
-  padding: 20px;
-  display: flex;
-  align-items: center;
-  text-align: center;
-  justify-content: center;
+  padding: 10px;
+  display: inline-block;
   color: #aaadc4;
-  font-size: 45px;
+  overflow-x: scroll;
 `;
