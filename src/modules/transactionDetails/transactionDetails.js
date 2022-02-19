@@ -62,7 +62,7 @@ export default function TransactionDetails() {
             )
           }
         >
-          View in explorer
+          View in Observatory
         </Button>
       </SubContainer>
 
