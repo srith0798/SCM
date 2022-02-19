@@ -124,6 +124,7 @@ const MainContainer = styled.div`
 const MainBoxContainer = styled.div`
   background: #ecf0f7 0% 0% no-repeat padding-box;
   width: 100%;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-item: center;

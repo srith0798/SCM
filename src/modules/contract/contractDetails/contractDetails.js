@@ -178,7 +178,9 @@ export default function ContractDetails(props) {
               alignItems: "center",
             }}
           >
-            <Hash>{name}</Hash>
+            {/* <Hash>{name}</Hash> */}
+            <HashMobile>{utility.truncateTxnAddress(name)}</HashMobile>
+            <HashDesktop>{name}</HashDesktop>
             <CopyToClipboard text={name} onCopy={() => setcopyToolTip(true)}>
               <Tooltip title={copyToolTip ? "copied" : "copy to clipboard"}>
                 <CopyImg src="/images/copy.svg" />
@@ -534,7 +536,7 @@ const MainContainer = styled.div`
   }
 `;
 
-const Hash = styled.div`
+const HashDesktop = styled.div`
   display: flex;
   flex-flow: row nowrap;
   margin-top: 0.625rem;
@@ -542,13 +544,29 @@ const Hash = styled.div`
   border: none;
   width: 100%;
   max-width: 24.063rem;
+  @media (max-width: 767px) {
+    display: none;
+  }
+`;
+const HashMobile = styled.div`
+  display: flex;
+  flex-flow: row nowrap;
+  margin-top: 0.625rem;
+  margin-bottom: 10px;
+  border: none;
+  width: 100%;
+  max-width: 24.063rem;
+  @media (min-width: 767px) {
+    display: none;
+  }
 `;
 const Container = styled.div`
   background-color: #ffffff;
   border-radius: 0.375rem;
   width: 100%;
   margin-top: 0.625rem;
-  height: 165px;
+  max-height: 160px;
+  min-height: 145px;
 `;
 
 const SubHeading = styled.div`
@@ -644,6 +662,9 @@ const EvmData = styled.div`
 const CopyImg = styled.img`
   margin-left: 15%;
   cursor: pointer;
+  @media (max-width: 767px) {
+    margin-left: -20%;
+  }
 `;
 const TableHeading = styled.div`
   font-size: 0.875rem;

@@ -85,7 +85,7 @@ export default function Contract(props) {
   const [input, setInput] = useState("");
   const search = (e) => {
     setInput(e.target.value);
-    searching(e.target.value, ["address"]);
+    searching(e.target.value, ["address", "contractName"]);
   };
 
   const changePage = (value) => {

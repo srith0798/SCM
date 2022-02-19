@@ -745,7 +745,7 @@ const HashMobile = styled.div`
   margin-top: 0.625rem;
   margin-bottom: 10px;
   border: none;
-  width: 100%;
+  width: 60%;
   max-width: 30.063rem;
   @media (min-width: 767px) {
     display: none;

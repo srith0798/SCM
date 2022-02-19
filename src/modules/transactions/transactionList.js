@@ -22,8 +22,8 @@ export default function TransactionList() {
   const [open, isOpen] = useState(false);
   const [filterPopupOpen, setfilterPopupOpen] = useState(false);
   const [countToggle, setCountToggle] = useState(10);
-  let url = history.location.state.id;
-  let name = history.location.state.name;
+  let url = history?.location?.state?.id;
+  let name = history?.location?.state?.name;
   const handleClickOpen = () => {
     isOpen(true);
   };
@@ -433,63 +433,70 @@ export default function TransactionList() {
               )}
             </RowData>
           </Div>
-          <div>
-            {(input === "" ? address : searchRow).map((data, index) => {
-              const status = setStatus(data.status);
-              return (
-                <Div>
-                  <RowData>
-                    {toggle.transactionHash && (
-                      <ColumnSecond
-                        onClick={() => redirectToTransactionDetails(data?.hash)}
-                      >
-                        <BackgroundChangerTxhash>
-                          {utility.truncateTxnAddress(data.hash)}
-                        </BackgroundChangerTxhash>
-                      </ColumnSecond>
-                    )}
+          {input ? (
+            <div>
+              {(input === "" ? address : searchRow).map((data, index) => {
+                const status = setStatus(data.status);
+                return (
+                  <Div>
+                    <RowData
+                      onClick={() => redirectToTransactionDetails(data?.hash)}
+                    >
+                      {toggle.transactionHash && (
+                        <ColumnSecond>
+                          <BackgroundChangerTxhash>
+                            {utility.truncateTxnAddress(data.hash)}
+                          </BackgroundChangerTxhash>
+                        </ColumnSecond>
+                      )}
 
-                    {toggle.status && <ColumnSecond>{status}</ColumnSecond>}
+                      {toggle.status && <ColumnSecond>{status}</ColumnSecond>}
 
-                    {toggle.function && (
-                      <ColumnSecond>{data.function}</ColumnSecond>
-                    )}
-                    {toggle.contracts && (
-                      <ColumnSecond>
-                        {utility.truncateTxnAddress(data.contractAddress)}
-                      </ColumnSecond>
-                    )}
+                      {toggle.function && (
+                        <ColumnSecond>{data.function}</ColumnSecond>
+                      )}
+                      {toggle.contracts && (
+                        <ColumnSecond>
+                          {utility.truncateTxnAddress(data.contractAddress)}
+                        </ColumnSecond>
+                      )}
 
-                    {toggle.from && (
-                      <ColumnSecond>
-                        <BackgroundChangerFrom>
-                          {utility.truncateTxnAddress(data.from)}
-                        </BackgroundChangerFrom>
-                      </ColumnSecond>
-                    )}
+                      {toggle.from && (
+                        <ColumnSecond>
+                          <BackgroundChangerFrom>
+                            {utility.truncateTxnAddress(data.from)}
+                          </BackgroundChangerFrom>
+                        </ColumnSecond>
+                      )}
 
-                    {toggle.to && (
-                      <ColumnSecond>
-                        <BackgroundChangerTo>
-                          {utility.truncateTxnAddress(data.to)}
-                        </BackgroundChangerTo>
-                      </ColumnSecond>
-                    )}
+                      {toggle.to && (
+                        <ColumnSecond>
+                          <BackgroundChangerTo>
+                            {utility.truncateTxnAddress(data.to)}
+                          </BackgroundChangerTo>
+                        </ColumnSecond>
+                      )}
 
-                    {toggle.when && (
-                      <ColumnSecond>
-                        {new Date(data.createdOn).toLocaleString("en-US")}
-                      </ColumnSecond>
-                    )}
-                  </RowData>
-                </Div>
-              );
-            })}
-          </div>
+                      {toggle.when && (
+                        <ColumnSecond>
+                          {new Date(data.createdOn).toLocaleString("en-US")}
+                        </ColumnSecond>
+                      )}
+                    </RowData>
+                  </Div>
+                );
+              })}
+            </div>
+          ) : (
+            <PlaceHolderContainer>
+              <PlaceHolderImage src="/images/transactions-blue.svg" />
+              No Transaction Found
+            </PlaceHolderContainer>
+          )}
           {/* {showPlaceHolder && (
             <PlaceHolderContainer>
               <PlaceHolderImage src="/images/contracts.svg" />
-              No Contracts Found
+              No Transaction Found
             </PlaceHolderContainer>
           )} */}
         </TableContainer>
