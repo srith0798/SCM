@@ -163,7 +163,7 @@ export default function ContractDetails(props) {
                 )
               }
             >
-              View in Observer
+              View in Observatory
             </Button>
           </MainHeading>
         </SubContainer>
@@ -730,7 +730,7 @@ const Button = styled.button`
   color: #3163f0;
   border: none;
   border-radius: 0.25rem;
-  max-width: 9.75rem;
+  width: 170px;
   white-space: nowrap;
   height: 2.125rem;
   font-size: 0.875rem;
