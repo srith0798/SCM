@@ -37,7 +37,10 @@ export default function About(props) {
                   onClick={() =>
                     history.push({
                       pathname: "/contracts",
-                      state: { id: address.address },
+                      state: {
+                        id: address.address,
+                        homepageHistory: "from-home-page",
+                      },
                     })
                   }
                 >

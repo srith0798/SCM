@@ -660,7 +660,7 @@ const EvmData = styled.div`
   }
 `;
 const CopyImg = styled.img`
-  margin-left: 15%;
+  margin-left: 5%;
   cursor: pointer;
   @media (max-width: 767px) {
     margin-left: -20%;
