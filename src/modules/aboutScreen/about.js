@@ -6,9 +6,12 @@ import WalletPopUp from "./walletPopUp";
 import Tooltip from "@mui/material/Tooltip";
 import FooterComponent from "../dashboard/footerComponent";
 import ReactPlayer from "react-player";
+import { history } from "../../managers/history";
+import AddContract from "../popup/addContract";
 
 export default function About(props) {
   const [state, setState] = useState(true);
+  const [address, setAddress] = React.useState({});
 
   return (
     <>
@@ -30,7 +33,14 @@ export default function About(props) {
                 disableFocusListener
                 title="Click to get started with Xmartly"
               >
-                <Button>
+                <Button
+                  onClick={() =>
+                    history.push({
+                      pathname: "/contracts",
+                      state: { id: address.address },
+                    })
+                  }
+                >
                   Add Your Smart Contract
                   <img
                     style={{ marginLeft: "0.375rem" }}

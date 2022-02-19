@@ -23,7 +23,7 @@ export default function ContractDetails(props) {
   const handleViewClick = (e) => {
     setActiveButton(e.target.id);
   };
-  
+
   const [copyToolTip, setcopyToolTip] = React.useState(false);
   const [contractAddress, setContractAddress] = React.useState({});
   const [address, setAddress] = React.useState({});
@@ -47,7 +47,7 @@ export default function ContractDetails(props) {
   const [open, setOpen] = useState(false);
   const [loader, setLoader] = useState(false);
   let version = `${address.sourceCode}`;
-  version = version?.split[" "]
+  version = version?.split[" "];
   //   solidityV = solidityV[3];
   const handleClickOpen = () => {
     setOpen(true);
@@ -156,7 +156,15 @@ export default function ContractDetails(props) {
               />
               Contract Details
             </Heading>
-            <Button onClick={()=> window.open(`https://observer.xdc.org/address/${address.address}`)}>View in Explorer</Button>
+            <Button
+              onClick={() =>
+                window.open(
+                  `https://observer.xdc.org/address/${address.address}`
+                )
+              }
+            >
+              View in Observer
+            </Button>
           </MainHeading>
         </SubContainer>
         <Container>
@@ -170,7 +178,7 @@ export default function ContractDetails(props) {
               alignItems: "center",
             }}
           >
-            <Hash>{utility.truncateTxnAddress(name)}</Hash>
+            <Hash>{name}</Hash>
             <CopyToClipboard text={name} onCopy={() => setcopyToolTip(true)}>
               <Tooltip title={copyToolTip ? "copied" : "copy to clipboard"}>
                 <CopyImg src="/images/copy.svg" />
@@ -250,7 +258,7 @@ export default function ContractDetails(props) {
                   <Row>
                     {address.tags &&
                       address.tags.map((tag, index) => (
-                        <div>
+                        <div style={{ marginRight: "9px" }}>
                           {console.log("abc", tag, index)}
                           <FinanceTag onClick={() => removeTagOpen(tag)}>
                             <ImageTag
@@ -300,10 +308,14 @@ export default function ContractDetails(props) {
               </Div>
 
               <PopUp>
-                <PopUpBlock  onClick={()=>history.push({
-      pathname: "/transactions",
-      state:{id: address.address}
-    })}>
+                <PopUpBlock
+                  onClick={() =>
+                    history.push({
+                      pathname: "/transactions",
+                      state: { id: address.address },
+                    })
+                  }
+                >
                   <RowProperty>
                     <img alt="" src="/images/cube.svg" />
                   </RowProperty>
@@ -311,7 +323,9 @@ export default function ContractDetails(props) {
                 </PopUpBlock>
 
                 <PopUpBlock>
-                  {open && <ContractAbi click={handleClose} data={address.abi} />}
+                  {open && (
+                    <ContractAbi click={handleClose} data={address.abi} />
+                  )}
                   <RowProperty
                     onClick={() => {
                       handleClickOpen();
@@ -389,7 +403,9 @@ export default function ContractDetails(props) {
               </PopUp>
             </DetailsSection>
           )}
-          {activeButton === "Source Code" && <SourceCode data={address.sourceCode} />}
+          {activeButton === "Source Code" && (
+            <SourceCode data={address.sourceCode} />
+          )}
         </Container>
       </MainContainer>
     </>
@@ -452,6 +468,7 @@ const FinanceTag = styled.div`
   border: 1px solid #eaefff;
   border-radius: 4px;
   width: 100%;
+  white-space: nowrap;
   padding: 10px;
   height: 30px;
   align-items: center;
@@ -466,6 +483,7 @@ const ImageTag = styled.div`
       : `url("/images/Tag.svg")`};
 
   background-position: left;
+  padding-right: 9px;
   background-size: 13px;
   position: relative;
   background-color: #eaefff;
@@ -548,7 +566,7 @@ const DetailsSection = styled.div`
   margin-top: 2.25rem;
   overflow-x: auto;
   @media (min-width: 300px) and (max-width: 768px) {
-    height: 485px;
+    height: 500px;
     overflow: scroll;
     overflow-y: hidden;
     width: 100%;
@@ -624,7 +642,7 @@ const EvmData = styled.div`
   }
 `;
 const CopyImg = styled.img`
-  margin-left: -12%;
+  margin-left: 15%;
   cursor: pointer;
 `;
 const TableHeading = styled.div`

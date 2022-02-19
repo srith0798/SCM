@@ -34,10 +34,9 @@ export default function Contract(props) {
   const redirectTODetails = (id) => {
     history.push({
       pathname: "/contracts/contract-details?" + id,
-      state:{id: id}
-    })
+      state: { id: id },
+    });
   };
-
 
   const getContractList = async (skip = 0, limit = 10) => {
     let userId = sessionManager.getDataFromCookies("userId");
@@ -221,17 +220,13 @@ export default function Contract(props) {
           return (
             <div style={{ cursor: "pointer" }}>
               <Div>
-                <Row>
-                  <ColumnSecond onClick={() => redirectTODetails(data._id)}>
-                    {data.contractName}
-                  </ColumnSecond>
+                <Row onClick={() => redirectTODetails(data._id)}>
+                  <ColumnSecond>{data.contractName}</ColumnSecond>
                   <ColumnSecond>
                     {utility.truncateTxnAddress(data.address)}
                   </ColumnSecond>
 
-                  <ColumnSecond>
-                    {data.network}
-                  </ColumnSecond>
+                  <ColumnSecond>{data.network}</ColumnSecond>
                   <ColumnSecond style={{ display: "flex" }}>
                     {address[index].tags &&
                       address[index].tags.map(
@@ -291,7 +286,7 @@ const FinanceTag = styled.div`
   background-color: #eaefff;
   border: 1px solid #eaefff;
   border-radius: 0.25rem;
-
+  pointer: cursor;
   max-width: 17.75rem;
   white-space: nowrap;
   height: 2.125rem;
@@ -310,6 +305,7 @@ const AddTag = styled.button`
   font-weight: 600;
   border: none;
   outline: none;
+  pointer: cursor;
   white-space: nowrap;
   background-image: url("/images/add-icon.svg");
   background-repeat: no-repeat;

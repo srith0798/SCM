@@ -22,7 +22,8 @@ export default function TransactionList() {
   const [open, isOpen] = useState(false);
   const [filterPopupOpen, setfilterPopupOpen] = useState(false);
   const [countToggle, setCountToggle] = useState(10);
-  let url = history?.location?.state?.id;
+  let url = history.location.state.id;
+  let name = history.location.state.name;
   const handleClickOpen = () => {
     isOpen(true);
   };
@@ -49,7 +50,6 @@ export default function TransactionList() {
   const [page, setPage] = React.useState(1);
   const [valueCheck, setValueCheck] = React.useState(0);
 
-
   const getContractNames = async (skip = 0, limit = 10) => {
     let userId = sessionManager.getDataFromCookies("userId");
     try {
@@ -62,15 +62,14 @@ export default function TransactionList() {
       const response = await ContractsService.getContractsList(requestData);
       setLoader(false);
       setContracts(response.contractList);
-      if(!url){
-      setSelected(response.contractList[0].address)
-      getTransaction(response.contractList[0].address);
-      setSelectedName(response.contractList[0].contractName)
-    }
-      else {
-      setSelected(url)
-      getTransaction(url);
-      getContractById(url);
+      if (!url) {
+        setSelected(response.contractList[0].address);
+        getTransaction(response.contractList[0].address);
+        setSelectedName(response.contractList[0].contractName);
+      } else {
+        setSelected(url);
+        getTransaction(url);
+        // getContractById(url);
       }
       if (response.contractList.length === 0) setShowPlaceHolder(true);
     } catch (e) {
@@ -135,12 +134,6 @@ export default function TransactionList() {
     setOpen(false);
   };
 
-  const getContractById = async () => {
-    try {
-      const response = await ContractsService.getContractsById(url);
-    } catch (err) {
-    }
-  };
   const styles = {
     position: "absolute",
     top: 90,
@@ -164,8 +157,8 @@ export default function TransactionList() {
   const redirectToTransactionDetails = (id) => {
     history.push({
       pathname: "/transactions/transaction-details?" + id,
-      state:{id: id}
-    })
+      state: { id: id },
+    });
   };
   const changePage = (value) => {
     setValueCheck(value.selected);
@@ -304,7 +297,11 @@ export default function TransactionList() {
                 selected={selected.address}
               >
                 <DropDown onClick={handleClick}>
-                  {selectedName !== undefined ? selectedName : ""}{" "}
+                  {selectedName !== undefined
+                    ? name !== undefined
+                      ? name
+                      : selectedName
+                    : ""}{" "}
                   <img
                     style={{ marginLeft: "0.5rem" }}
                     alt=""
@@ -319,7 +316,13 @@ export default function TransactionList() {
                   <Box sx={styles}>
                     {contracts.length &&
                       contracts.map((item) => (
-                        <div onClick={() => {getTransaction(item.address); setSelected(item.address); setSelectedName(item.contractName);}}>
+                        <div
+                          onClick={() => {
+                            getTransaction(item.address);
+                            setSelected(item.address);
+                            setSelectedName(item.contractName);
+                          }}
+                        >
                           <Label>Contract</Label>
                           {item.contractName}
                           <br />
@@ -438,7 +441,7 @@ export default function TransactionList() {
                   <RowData>
                     {toggle.transactionHash && (
                       <ColumnSecond
-                        onClick={() => redirectToTransactionDetails(data.hash)}
+                        onClick={() => redirectToTransactionDetails(data?.hash)}
                       >
                         <BackgroundChangerTxhash>
                           {utility.truncateTxnAddress(data.hash)}
@@ -475,7 +478,7 @@ export default function TransactionList() {
 
                     {toggle.when && (
                       <ColumnSecond>
-                      {new Date(data.createdOn).toLocaleString("en-US")}
+                        {new Date(data.createdOn).toLocaleString("en-US")}
                       </ColumnSecond>
                     )}
                   </RowData>
