@@ -135,9 +135,10 @@ export default function Contract(props) {
 
       <TableContainer>
         <Div>
-          <Row>
+          <RowContainer>
             <ColumnOne>
-              Contract Name
+            
+            Contract Name
               <Tooltip
                 open={contractNameToolTip}
                 onOpen={() => setcontractNameToolTip(true)}
@@ -150,8 +151,11 @@ export default function Contract(props) {
                   src="/images/tool-tip.svg"
                 />
               </Tooltip>
+           
+             
             </ColumnOne>
             <ColumnOne>
+            <ColOne>
               Address
               <Tooltip
                 open={addressToolTip}
@@ -165,8 +169,10 @@ export default function Contract(props) {
                   src="/images/tool-tip.svg"
                 />
               </Tooltip>
+              </ColOne>
             </ColumnOne>
             <ColumnOne>
+            <ColOne>
               Network
               <Tooltip
                 open={networkToolTip}
@@ -180,8 +186,10 @@ export default function Contract(props) {
                   src="/images/tool-tip.svg"
                 />
               </Tooltip>
+              </ColOne>
             </ColumnOne>
             <ColumnOne>
+            <ColOne>
               Tag
               <Tooltip
                 open={tagToolTip}
@@ -195,8 +203,10 @@ export default function Contract(props) {
                   src="/images/tool-tip.svg"
                 />
               </Tooltip>
+              </ColOne>
             </ColumnOne>
             <ColumnOne>
+            <ColOneVisibility>
               Visibility
               <Tooltip
                 open={visibilityToolTip}
@@ -210,14 +220,15 @@ export default function Contract(props) {
                   src="/images/tool-tip.svg"
                 />
               </Tooltip>
+              </ColOneVisibility>
             </ColumnOne>
-          </Row>
+          </RowContainer>
         </Div>
         {(input === "" ? address : searchRow).map((data, index) => {
           return (
             <div style={{ cursor: "pointer" }}>
               <Div>
-                <Row>
+                <RowTag>
                   <ColumnSecond onClick={() => redirectTODetails(data._id)}>
                     {data.contractName}
                   </ColumnSecond>
@@ -229,6 +240,7 @@ export default function Contract(props) {
                     {data.network ? "Apothem" : "Mainnet"}
                   </ColumnSecond>
                   <ColumnSecond style={{ display: "flex" }}>
+                    <TagCol>
                     {address[index].tags &&
                       address[index].tags.map(
                         (tag, index) =>
@@ -244,11 +256,12 @@ export default function Contract(props) {
                     {data.tags && data.tags.length === 0 && (
                       <AddTag onClick={() => Open()}>Add Tag</AddTag>
                     )}
+                    </TagCol>
                   </ColumnSecond>
                   <ColumnSecond>
                     {data.isHidden ? "Hidden" : "Visible"}
                   </ColumnSecond>
-                </Row>
+                </RowTag>
               </Div>
             </div>
           );
@@ -394,6 +407,25 @@ const MainContainer = styled.div`
   }
 `;
 
+const RowContainer = styled.div`
+  display: flex;
+  flex-flow: row nowrap;
+  @media (min-width: 768px) and (max-width: 1128px) {
+    column-gap:152px;
+  
+  }
+`;
+
+const RowTag = styled.div`
+  display: flex;
+  flex-flow: row nowrap;
+  @media (min-width: 768px) and (max-width: 1128px) {
+    column-gap:92px;
+  
+  }
+`;
+
+
 const MainHeading = styled.div`
   display: flex;
 
@@ -405,7 +437,8 @@ const MainHeading = styled.div`
     display: flex;
     flex-direction: column;
     padding-top: 7px;
-  }
+  }column-gap: 152px;
+
 `;
 const SubContainer = styled.div`
   width: 100%;
@@ -542,6 +575,9 @@ const Div = styled.div`
   @media (min-width: 300px) and (max-width: 1200px) {
     width: 1232px;
   }
+  @media (min-width: 300px) and (max-width: 767px) {
+    width: 1287px !important;
+  }
 `;
 const ColumnOne = styled.div`
   font-size: 0.875rem;
@@ -550,7 +586,33 @@ const ColumnOne = styled.div`
   width: 100%;
   max-width: 18.75rem;
   min-width: 180px;
+  @media (min-width: 300px) and (max-width: 767px){
+  margin-left:76px;
+  }
+  @media (min-width: 768px) and (max-width: 1128px) {
+    max-width: 9.75rem;
+    min-width: 26px;
+  
+  }
+
 `;
+
+
+const ColOneVisibility = styled.div`
+@media (min-width: 768px) and (max-width: 1128px) {
+  
+  
+}
+`;
+
+const ColOne = styled.div`
+@media (min-width: 768px) and (max-width: 1128px) {
+  
+  
+}
+`;
+
+
 const ColumnSecond = styled.div`
   font-size: 0.875rem;
   min-width: 180px;
@@ -559,6 +621,18 @@ const ColumnSecond = styled.div`
   width: 100%;
   white-space: nowrap;
   max-width: 18.75rem;
+  @media (min-width: 300px) and (max-width: 767px){
+    margin-left:76px;
+    }
+`;
+const TagCol = styled.div`
+@media (min-width: 300px) and (max-width: 767px){
+  margin-left:-10px;
+  }
+@media (min-width: 768px) and (max-width: 1128px) {
+  margin-left:-10px;
+  
+  }
 `;
 const ToolTipIcon = styled.img`
   width: 0.75rem;
