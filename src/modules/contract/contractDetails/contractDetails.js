@@ -27,6 +27,8 @@ export default function ContractDetails(props) {
   const [copyToolTip, setcopyToolTip] = React.useState(false);
   const [contractAddress, setContractAddress] = React.useState({});
   const [address, setAddress] = React.useState({});
+  const [Solidity, setSolidity] = React.useState("");
+
   const getContractById = async () => {
     let url = history.location.state.id;
     setContractAddress(url);
@@ -35,7 +37,9 @@ export default function ContractDetails(props) {
       const response = await ContractsService.getContractsById(url);
       setLoader(false);
       setAddress(response);
-      console.log("address", response);
+      let version = response.sourceCode;
+      version = version.split(";")[0].split(" ")[2].replace(";", "");
+      setSolidity(version.replace("^", ""));
     } catch (err) {
       setLoader(false);
     }
@@ -46,9 +50,6 @@ export default function ContractDetails(props) {
 
   const [open, setOpen] = useState(false);
   const [loader, setLoader] = useState(false);
-  let version = `${address.sourceCode}`;
-  version = version?.split[" "];
-  //   solidityV = solidityV[3];
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -248,7 +249,7 @@ export default function ContractDetails(props) {
               </Div>
               <Div>
                 <TableHeading>Solidity version</TableHeading>
-                <SolidityData>{address.blockNumber}</SolidityData>
+                <SolidityData>{Solidity}</SolidityData>
               </Div>
               <Div>
                 <TableHeading>Verification</TableHeading>
@@ -313,7 +314,10 @@ export default function ContractDetails(props) {
                   onClick={() =>
                     history.push({
                       pathname: "/transactions",
-                      state: { id: address.address },
+                      state: {
+                        id: address.address,
+                        name: address.contractName,
+                      },
                     })
                   }
                 >
