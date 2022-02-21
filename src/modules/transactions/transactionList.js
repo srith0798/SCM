@@ -63,18 +63,16 @@ export default function TransactionList() {
       const response = await ContractsService.getContractsList(requestData);
       setLoader(false);
       response.contractList.forEach((row) => {
-      if(row.isHidden === false)
-      dropDownSelect.push(row);
+        if (row.isHidden === false) dropDownSelect.push(row);
       });
       setContracts(dropDownSelect);
-      if(!url){
-      setSelected(dropDownSelect[0].address)
-      getTransaction(dropDownSelect[0].address);
-      setSelectedName(dropDownSelect[0].contractName)
-    }
-      else {
-      setSelected(url)
-      getTransaction(url);
+      if (!url) {
+        setSelected(dropDownSelect[0].address);
+        getTransaction(dropDownSelect[0].address);
+        setSelectedName(dropDownSelect[0].contractName);
+      } else {
+        setSelected(url);
+        getTransaction(url);
       }
       if (response.contractList.length === 0) setShowPlaceHolder(true);
     } catch (e) {
@@ -162,10 +160,8 @@ export default function TransactionList() {
   const redirectToTransactionDetails = (id, status) => {
     history.push({
       pathname: "/transactions/transaction-details?" + id,
-      state:{id: id,
-             status: status,
-      }
-    })
+      state: { id: id, status: status },
+    });
   };
   const changePage = (value) => {
     setValueCheck(value.selected);
@@ -304,7 +300,11 @@ export default function TransactionList() {
                 selected={selected.address}
               >
                 <DropDown onClick={handleClick}>
-                  {selectedName !== undefined ? name!==undefined ? name : selectedName : ""}{" "}
+                  {selectedName !== undefined
+                    ? name !== undefined
+                      ? name
+                      : selectedName
+                    : ""}{" "}
                   <img
                     style={{ marginLeft: "0.5rem" }}
                     alt=""
@@ -441,11 +441,13 @@ export default function TransactionList() {
               const status = setStatus(data.status);
               return (
                 <Div>
-                  <RowData>
+                  <RowData
+                    onClick={() =>
+                      redirectToTransactionDetails(data?.hash, status)
+                    }
+                  >
                     {toggle.transactionHash && (
-                      <ColumnSecond
-                        onClick={() => redirectToTransactionDetails(data?.hash, status)}
-                      >
+                      <ColumnSecond>
                         <BackgroundChangerTxhash>
                           {utility.truncateTxnAddress(data.hash)}
                         </BackgroundChangerTxhash>
@@ -481,7 +483,7 @@ export default function TransactionList() {
 
                     {toggle.when && (
                       <ColumnSecond>
-                      {new Date(data.createdOn).toLocaleString("en-US")}
+                        {new Date(data.createdOn).toLocaleString("en-US")}
                       </ColumnSecond>
                     )}
                   </RowData>
