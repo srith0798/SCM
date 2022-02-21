@@ -17,7 +17,7 @@ export default function SubContracts(props) {
               <img
                 style={{ marginRight: "4px" }}
                 alt=""
-                src="/images/Verified_tick.svg"
+                src="/images/verified_tick.svg"
               />
               Verified Contracts
             </Button>

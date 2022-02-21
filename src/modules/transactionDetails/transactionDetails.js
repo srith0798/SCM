@@ -137,7 +137,7 @@ export default function TransactionDetails() {
               style={{ marginRight: "0.375rem" }}
               src={
                 activeButton === "Contracts"
-                  ? "/images/Contract_blue.svg"
+                  ? "/images/contract_blue.svg"
                   : "/images/contract_grey.svg"
               }
             />
@@ -224,7 +224,7 @@ export default function TransactionDetails() {
             <CommonDiv>
               <Row>
                 <Heading>Network</Heading>
-                <SubHead>{""}</SubHead>
+                <SubHead>{row.network}</SubHead>
               </Row>
             </CommonDiv>
             {/* <CommonDiv>
@@ -336,7 +336,7 @@ export default function TransactionDetails() {
                   <img
                     style={{ marginLeft: "2px" }}
                     alt=""
-                    src="/images/Arrrow.svg"
+                    src="/images/arrrow.svg"
                   />
                 </SubHeadBlue>
               </Row>
@@ -349,7 +349,7 @@ export default function TransactionDetails() {
                   <img
                     style={{ marginLeft: "2px" }}
                     alt=""
-                    src="/images/Arrrow.svg"
+                    src="/images/arrrow.svg"
                   />
                 </SubHeadBlue>
               </Row>

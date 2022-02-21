@@ -243,7 +243,7 @@ export default function TransactionList() {
           <NewDiv>
             <Transactions>Transactions</Transactions>
             <SearchBar
-              placeholder="Search by status or name"
+              placeholder="Search by address or name"
               onChange={search}
               value={input}
             />
@@ -304,7 +304,7 @@ export default function TransactionList() {
                 selected={selected.address}
               >
                 <DropDown onClick={handleClick}>
-                  {selectedName !== undefined ? name!==undefined ? name : selectedName : ""}{" "}
+                    {selectedName || "Contract"}
                   <img
                     style={{ marginLeft: "0.5rem" }}
                     alt=""
@@ -312,27 +312,33 @@ export default function TransactionList() {
                   />
                   <br />
                   <TransactionHash>{selected}</TransactionHash>
-                  <Image src="/images/Arrrow.svg" />
+                  <Image src="/images/arrrow.svg" />
                 </DropDown>
 
                 {isSetOpen ? (
-                  <Box sx={styles}>
-                    {contracts.length &&
-                      contracts.map((item) => (
-                        <div
-                          onClick={() => {
-                            getTransaction(item.address);
-                            setSelected(item.address);
-                            setSelectedName(item.contractName);
-                          }}
-                        >
-                          <Label>Contract</Label>
-                          {item.contractName}
-                          <br />
-                          <TransactionHash>{item.address}</TransactionHash>
-                        </div>
-                      ))}
-                  </Box>
+                    <Box sx={styles}>
+                        <Label>Contracts</Label>
+                        {contracts.length &&
+                        contracts.map((item) => (
+                            <div
+                                onClick={() => {
+                                    setOpen(false)
+                                    getTransaction(item.address);
+                                    setSelected(item.address);
+                                    setSelectedName(item.contractName);
+                                }}
+                            >
+                                {item.contractName || "Contract"}
+                                <img
+                                    style={{marginLeft: "0.5rem"}}
+                                    alt=""
+                                    src="/images/XDCmainnet.svg"
+                                />
+                                <br/>
+                                <TransactionHash>{item.address}</TransactionHash>
+                            </div>
+                        ))}
+                    </Box>
                 ) : null}
               </Box>
             </ClickAwayListener>
@@ -557,6 +563,10 @@ const Div = styled.div`
   @media (min-width: 300px) and (max-width: 768px) {
     width: 500%;
   }
+
+  @media (min-width: 767px) and (max-width: 1200px) {
+    width: 230%;
+  }
 `;
 const RowData = styled.div`
   display: flex;
@@ -565,6 +575,11 @@ const RowData = styled.div`
   @media (min-width: 300px) and (max-width: 768px) {
     column-gap: 36px;
   }
+
+  @media (min-width: 767px) and (max-width: 1200px) {
+    
+  }
+
 `;
 
 const TableContainer = styled.div`
@@ -699,8 +714,6 @@ const SearchBar = styled.input`
   padding-left: 1.875rem;
   background-size: 0.75rem;
   outline: none;
-  width: 100%;
-  max-width: 261px;
   font-size: 0.775rem;
   *:focus {
     outline: none;
@@ -759,6 +772,10 @@ const ColumnOne = styled.div`
   @media (min-width: 300px) and (max-width: 767px) {
     width: 100%;
   }
+  @media (min-width: 767px) and (max-width: 1200px) {
+    width: 8%;
+  }
+
 `;
 const ColumnSecond = styled.div`
   font-size: 0.875rem;
@@ -871,6 +888,7 @@ const Image = styled.img`
 const Label = styled.div`
   font-size: 0.75rem;
   font-weight: 600;
+  margin-bottom: 10px;
   color: #767c93;
 `;
 const ToolTipIcon = styled.img`
