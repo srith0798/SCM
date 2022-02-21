@@ -31,9 +31,12 @@ export default function Graph(props) {
   useEffect(()=>{
   setData(props?.data)
   setType(props?.type)
-  }, [props.data]);
+
+}, [props.data]);
   const CustomPoint = () => {
+
     return (
+     
       <g>
         <circle
           fill="#3763dd"
@@ -44,6 +47,7 @@ export default function Graph(props) {
           cy={points.y}
         />
       </g>
+     
     );
   };
   return (
@@ -74,7 +78,6 @@ export default function Graph(props) {
         //   legendOffset: 40,
         //   legendPosition: "center",
         // }}
-        gridYValues={5}
       />
        <div className="dates">
          <p>{props.firstDate}</p>
@@ -85,55 +88,6 @@ export default function Graph(props) {
     </>
   );
 }
-const dataEntry = [
-  {
-    id: "japan",
-    color: "hsl(135, 70%, 50%)",
-    data: [
-      {
-        x: "NETWORK1",
-        y: 151,
-      },
-      {
-        x: "NETWORK2",
-        y: 106,
-      },
-      {
-        x: "NETWORK3",
-        y: 44,
-      },
-      {
-        x: "NETWORK4",
-        y: 264,
-      },
-      {
-        x: "NETWORK5",
-        y: 275,
-      },
-      {
-        x: "NETWORK6",
-        y: 34,
-      },
-      {
-        x: "NETWORK7",
-        y: 211,
-      },
-      {
-        x: "NETWORK8",
-        y: 288,
-      },
-      {
-        x: "NETWORK9",
-        y: 86,
-      },
-      {
-        x: "others",
-        y: 181,
-      },
-    ],
-  },
-];
-
 const ToolTipElement = (props) => {
   return (
       <TooltipGraph>
@@ -161,7 +115,7 @@ const graphProperties = {
   axisBottom: true,
   axisLeft: true,
   enableGridX: true,
-  enableGridY: false,
+  enableGridY: true,
   enableSlices: false,
   enablePoints: false,
   enableArea: true,
@@ -172,49 +126,66 @@ const graphProperties = {
 
 const MyResponsiveLine = ({ data, MouseMovePoint, CustomPoint }) => (
   <ResponsiveLine
-    {...graphProperties}
-    data={data}
-    tooltip={ToolTipElement}
-    layers={[
-      "grid",
-      "markers",
-      "axes",
-      "areas",
-      "lines",
-      "points",
-      "slices",
-      "mesh",
-      "legends",
-      CustomPoint,
-    ]}
-    margin={{bottom: 5, left: 40, top:10, right:5 }}
-    enableGridX={true}
-    enableGridY={true}
-    axisBottom={false}
-    axisRight={false}
-    axisRight={{
-      tickSize: 2,
-      tickPadding: 5,
-      tickRotation: 0,
-      tickValues: [1 , 2 , 3, 4, 5],
-    }}
-    gridYValues={5}
+  margin={{bottom: 30, left :30 , top:10 , right:20}}
+  data={data}
+  tooltip={ToolTipElement}
 
-    xScale={{ type: "point" }}
-    defs={[
+  xScale={{ type: "point" }}
+  yScale={{
+      type: "linear",
+      min: "auto",
+      max: "auto",
+      stacked: true,
+      reverse: false,
+  }}
+  yFormat=" >-.2f"
+  curve="monotoneX"
+  axisTop={null}
+  axisRight={null}
+  axisBottom={{
+    orient: "right",
+    tickSize: 2,
+    tickPadding: 15,
+    format: function(value){ 
+   let fisrtValue= data[0]?.data[0]?.x,lastValue=data[0]?.data[data[0].data.length-1]?.x;
+    if(value === fisrtValue || value === lastValue) return moment(value).format("DD MMM");
+    else return "";
+},
+tickSize: 0,
+
+}}
+  axisLeft={{
+      orient: "left",
+      tickSize: 0,
+      tickPadding: 5,
+      tickValues: 3,
+        format: function(value){ 
+            if(value < 999) return value;
+            else return (value/1000).toFixed(1) + 'k';
+        }
+    }}
+    defs ={[
       linearGradientDef("gradientA", [
-        { offset: 0, color: "inherit" },
-        { offset: 20, color: "inherit", opacity: 0 },
-      ]),
+        { offset:0 , color: "inherit"},
+        {offset: 100, color:"inherit", opacity:0},
+      ])
     ]}
-    fill={[{ match: "*", id: "gradientA" }]}
-    yScale={{
-       type: 'linear',
-        }}
-    colors={[["#3163F0"]]}
-    pointSize={5}
-    legends={[]}
-    onMouseMove={MouseMovePoint}
+  fill={[{match: "*", id:"gradientA"}]}
+  enableGridX={true}
+  enableGridY={true}
+  enablePoints={true}
+  pointSize={10}
+  pointColor="#3163F0"  
+  colors ={[["#3163F0"]]}
+  pointBorderWidth={2}
+  pointLabelYOffset={-12}
+  enableArea={true}
+  areaBaselineValue={1}
+  enableCrosshair={false}
+  useMesh={true}
+  legends={[]}
+  theme={{ fontSize: 11, fontFamily: "Inter",textColor:"#7C828A" }}
+
   />
 );
 

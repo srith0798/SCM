@@ -12,6 +12,8 @@ import FullScreen from "./fullScreen";
 import TopCalls from "./topCalls";
 import utility from "../../utility";
 import moment from "moment";
+import ShowLoader from "../../common/components/showLoader";
+
 export default function MainComponent(props) {
   const [isSetOpen, setOpen] = React.useState(false);
   const [contracts, setContracts] = React.useState([]);
@@ -23,10 +25,12 @@ export default function MainComponent(props) {
   const[expandGraph , setExpandGraph] = React.useState(0);
   const[graphName , setGraphName] =React.useState("");
   const[data , setData] =React.useState([]);
-  const[transactionOverTimeSelect, setTransactionOverTimeSelect]=React.useState("5");
-  const[gasUsedSelect, setGasUsedSelect]=React.useState("5");
-  const[activeUserSelect, setActiveUserSelect]=React.useState("5");
-  const[dropDownValue, setDropDownValue]=React.useState("5");
+  const[transactionOverTimeSelect, setTransactionOverTimeSelect]=React.useState("7");
+  const[gasUsedSelect, setGasUsedSelect]=React.useState("7");
+  const[activeUserSelect, setActiveUserSelect]=React.useState("7");
+  const[dropDownValue, setDropDownValue]=React.useState("7");
+  const[loader, setLoader]=React.useState("7");
+
 
 
   const handleClick = () => {
@@ -65,11 +69,12 @@ export default function MainComponent(props) {
         limit: limit,
         userId: userId,
       };
-     
+      setLoader(true)
       const response = await ContractsService.getContractsList(requestData);
-      await getTransactionAnalytics(response.contractList[0].address)
-      await getGasUsedAnalytics(response.contractList[0].address)
-      await getActiveUsersAnalytics(response.contractList[0].address)
+      getTransactionAnalytics(response.contractList[0].address)
+      getGasUsedAnalytics(response.contractList[0].address)
+      getActiveUsersAnalytics(response.contractList[0].address)
+      setLoader(false);
       setContracts(response.contractList);
       setSelected(response.contractList[0])
       if (response.contractList.length === 0) {return}
@@ -84,8 +89,8 @@ export default function MainComponent(props) {
     setDropDownValue(event.target.value)
     }
     const req = {
-      address :"xdc8a3cc832bb6b255622e92dc9d4611f2a94d200da",
-      numberOfDays: event?.target?.value || 5
+      address :address ? address : selected.address,
+      numberOfDays: event?.target?.value || 7
     }
     const [error , response ] = await utility.parseResponse(AnalyticsService.getTransactionsAnalytics(req));
     if(error) return;
@@ -122,8 +127,8 @@ export default function MainComponent(props) {
     setDropDownValue(event.target.value)
     }
     const req = {
-      address :"xdc8a3cc832bb6b255622e92dc9d4611f2a94d200da",
-      numberOfDays: event?.target?.value || 5
+      address :address ? address : selected.address,
+      numberOfDays: event?.target?.value || 7
     }
     const [error , response ] = await utility.parseResponse(AnalyticsService.getGasUsedAnalytics(req));
     if(error) return;
@@ -160,8 +165,8 @@ export default function MainComponent(props) {
     setDropDownValue(event.target.value)
     }
     const req = {
-      address :"xdc8a3cc832bb6b255622e92dc9d4611f2a94d200da",
-      numberOfDays: event?.target?.value || 5
+      address :address ? address : selected.address,
+      numberOfDays: event?.target?.value || 7
     }
     const [error , response ] = await utility.parseResponse(AnalyticsService.getActiveUsersAnalytics(req));
     if(error) return;
@@ -195,17 +200,11 @@ export default function MainComponent(props) {
       await getTransactionAnalytics(address , event);
     if(expandGraph=== 2)
       await getGasUsedAnalytics(address , event)  
+    if(expandGraph=== 3)
+      await getActiveUsersAnalytics(address , event)    
   }
 
-  let length = transactionCount ? transactionCount?.data?.length : "";
-  const firstDate =
-  transactionCount && transactionCount?.length == 0
-      ? ""
-      : moment(transactionCount[0]?.date).format("D MMM");
-  const lastDate =
-  transactionCount && transactionCount?.length == 0
-      ? ""
-      : moment(transactionCount[length]?.date).format("D MMM");
+ 
 
   const selectContract = (item) =>{
     setSelected(item);
@@ -228,6 +227,7 @@ export default function MainComponent(props) {
 
   return (
     <>
+    <ShowLoader state={loader} top={"33%"}></ShowLoader>
     {expandGraph === 0 ? 
        <div style={{ overflow: "auto" }}>
        <Column>
@@ -285,8 +285,7 @@ export default function MainComponent(props) {
            getAnalyticsData = {getTransactionAnalytics} 
            selectValue={transactionOverTimeSelect}
            data={noOfTransactions}
-           firstDate={firstDate}
-           lastDate={lastDate}
+        
            graphNo={1}
           ></LineGraphContainer>
         <LineGraphContainer 
@@ -295,15 +294,15 @@ export default function MainComponent(props) {
           getAnalyticsData = {getGasUsedAnalytics} 
           selectValue={gasUsedSelect}
           data={gasPriceData}
-          firstDate={firstDate}
-          lastDate={lastDate}
+    
           graphNo={2}
 
           ></LineGraphContainer>
           </ResponsiveRow>
                <ResponsiveRow>
                  <GraphContainer>
-                   <SubContainer>
+                   <div>Under Development</div>
+                   {/* <SubContainer>
                      <div style={{ display: "flex", alignItems: "center" }}>
                        <Head>
                          Top Callers
@@ -333,8 +332,8 @@ export default function MainComponent(props) {
                          Last 25 days
                        </option>
                      </select>
-                   </SubContainer>
-                   <Div>
+                   </SubContainer> */}
+                   {/* <Div>
                      <ContractFrom>Contract from</ContractFrom>
                      <Network>
                        xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c
@@ -357,16 +356,15 @@ export default function MainComponent(props) {
                    <Div>
                      <ContractFrom>Network</ContractFrom>
                      <Network>Mainnet</Network>
-                   </Div>
-                 </GraphContainer>
+                   </Div>*/}
+                 </GraphContainer> 
                  <LineGraphContainer 
                     heading="Active Users" 
                     expandGraphs={expandGraphs} 
                     getAnalyticsData = {getActiveUsersAnalytics} 
                     selectValue={activeUserSelect}
                     data={activeUserData}
-                    firstDate={firstDate}
-                    lastDate={lastDate}
+
                     graphNo={3}
 
                   ></LineGraphContainer>
@@ -406,7 +404,8 @@ export default function MainComponent(props) {
                  </GraphContainer> */}
                </ResponsiveRow>
                <GraphContainer>
-                 <SubContainer>
+              <div>Under Development</div>
+                 {/* <SubContainer>
                    <div style={{ display: "flex", alignItems: "center" }}>
                      <Head>
                        Top Function calls
@@ -453,7 +452,7 @@ export default function MainComponent(props) {
                  <Div>
                    <ContractFrom>Network</ContractFrom>
                    <Network>Mainnet</Network>
-                 </Div>
+                 </Div> */}
                </GraphContainer>
              {/* </ScrollableDiv> */}
            </MainContainer>
@@ -465,7 +464,7 @@ export default function MainComponent(props) {
       <FullScreen graphName={graphName} data={data}
      
         getAnalytics={callAnalyticsFunctions} 
-      
+        expandGraphs={expandGraphs}
         dropDownValue={dropDownValue}/>
     )}
     {expandGraph > 3 && (
@@ -497,9 +496,6 @@ const LineGraphContainer = (props) =>{
         />
       </div>
       <select id="noOfDays" className="select" value={props.selectValue}  onChange={(event)=>{props.getAnalyticsData("" , event)}}>
-        <option value="5" className="select-dropdown">
-          Last 5 days
-        </option>
         <option value="7" className="select-dropdown">
           Last 7 days
         </option>
@@ -509,9 +505,12 @@ const LineGraphContainer = (props) =>{
         <option value="25" className="select-dropdown">
           Last 25 days
         </option>
+        <option value="30" className="select-dropdown">
+          Last 1 Month
+        </option>
       </select>
     </SubContainer>
-   <GraphSize> <Line data={props.data} firstDate={props.firstDate} lastDate ={props.lastDate}/></GraphSize>
+   <GraphSize> <Line data={props.data} /></GraphSize>
   </GraphContainer>
  
 // </ResponsiveRow>
@@ -522,7 +521,6 @@ const ResponsiveRow = styled.div`
   flex-flow: row nowrap;
   justify-content: space-between;
   width: 100%;
-  justify-content: space-between;
   @media (min-width: 300px) and (max-width: 1024px) {
     display: block;
   }
@@ -567,9 +565,8 @@ const Container = styled.div`
   }
 `;
 const GraphSize = styled.div`
-  height: 9.75rem;
+  height: 13.75rem;
   width: auto;
-  margin-top: 1.29rem;
   margin-bottom: 1.2rem;
   background: transparent;
   @media (max-width: 767px) {
@@ -596,7 +593,7 @@ const Content = styled.div`
 `;
 
 const GraphContainer = styled.div`
-  width: 740px;
+  width: 590px;
   background: #ffffff 0% 0% no-repeat padding-box;
   border-radius: 0.375rem;
   height: 356px;

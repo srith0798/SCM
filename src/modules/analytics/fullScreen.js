@@ -6,7 +6,7 @@ import Tooltip from "@mui/material/Tooltip";
 
 export default function FullScreen(props) {
   const ClickMe = () => {
-    props.changeExpand(0);
+    props.expandGraphs(0);
   };
   return (
     <div>
@@ -40,9 +40,6 @@ export default function FullScreen(props) {
               <GraphContainer>
                 <FlexEnd>
                   <select id="transactions" className="select" value={props.dropDownValue} onChange={(event)=>{props.getAnalytics("", event)}}>
-                    <option value="5" className="select-dropdown">
-                      Last 5 days
-                    </option>
                     <option value="7" className="select-dropdown">
                       Last 7 days
                     </option>
@@ -51,6 +48,9 @@ export default function FullScreen(props) {
                     </option>
                     <option value="25" className="select-dropdown">
                       Last 25 days
+                    </option>
+                    <option value="30" className="select-dropdown">
+                      Last 1 month
                     </option>
                   </select>
                 </FlexEnd>
