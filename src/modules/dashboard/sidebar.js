@@ -49,10 +49,10 @@ export default function Sidebar(props) {
   //   "/images/networks.svg"
   // );
   const [analyticsIcon, setAnalyticsIcon] = React.useState(
-    "/images/analytics.svg"
+    "/images/analytics-blue.svg"
   );
   const [alertingIcon, setAlertingIcon] = React.useState(
-    "/images/alerting.svg"
+    "/images/alerting-blue.svg"
   );
 
   const changeSourceForIcons = (value) => {
@@ -70,8 +70,8 @@ export default function Sidebar(props) {
       setTransactionIcon("/images/transactions-blue.svg");
     // if (value === "networks") setNetworksIcon("/images/networks.svg");
     if (value === "contracts") setContractsIcon("/images/contracts.svg");
-    if (value === "analytics") setAnalyticsIcon("/images/analytics.svg");
-    if (value === "alerting") setAlertingIcon("/images/alerting.svg");
+    if (value === "analytics") setAnalyticsIcon("/images/analytics-blue.svg");
+    if (value === "alerting") setAlertingIcon("/images/alerting-blue.svg");
   };
 
   return (
