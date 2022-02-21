@@ -16,7 +16,6 @@ export default function Remove(props) {
   const classes = useStyles();
   console.log(props.contract);
   const executeRemoveContract = async () => {
-    console.log("HERE");
     const request = {
       id: props.contract._id,
     };

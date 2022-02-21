@@ -21,14 +21,11 @@ function Header(props) {
     );
     let checkResult = Web3.utils.toChecksumAddress(balance);
     if (checkResult)
-      // let fixed = Math.round(checkResult * 100000) / 100000;
-      // console.log(Web3.utils.toChecksumAddress(balance));
       web3.eth.getBalance(checkResult, function (error, result) {
         if (error) {
         } else {
           let num = Number(result / 1000000000000000000);
 
-          // console.log("fixed", num.toFixed(1));
           getSetBalance(num.toFixed(2));
         }
       });
