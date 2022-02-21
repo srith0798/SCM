@@ -18,6 +18,9 @@ import { sessionManager } from "../../managers/sessionManager";
 import UserService from "../../services/userService";
 import { history } from "../../managers/history";
 import ConnectWallets from "./connectWallets";
+import utility from "../../utility";
+import toast, { Toaster } from "react-hot-toast";
+import { httpConstants } from "../../constants";
 
 //Replace Under Development with component once developed-
 const HomeComponent = (props) => {
@@ -64,6 +67,18 @@ const HomeComponent = (props) => {
 };
 
 const dashboardComponent = (props) => {
+
+  const loginErrorMessage = () =>
+
+  toast.error(httpConstants.MESSAGE.VALIDATE_BROWSER_LOGIN, {
+
+    duration: 4000,
+
+    position: httpConstants.MESSAGE.TOASTS_POSITION,
+
+    className: "toast-div-address",
+
+  });
   const getCurrentUserDetails = async () => {
     let user = "";
 
@@ -87,6 +102,9 @@ const dashboardComponent = (props) => {
       }
       sessionManager.setDataInCookies(true, "isLoggedIn");
       history.push("/dashboard/about");
+    }
+    else{
+      loginErrorMessage();
     }
     return true; //required to close the "connect wallet" popup
   };
