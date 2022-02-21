@@ -7,7 +7,7 @@ const useStyles = makeStyles(() => ({
   dialogBox: {
     width: "100% !important",
     maxWidth: "700px",
-    height: "700px",
+    height: "600px",
   },
 }));
 
@@ -36,47 +36,9 @@ export default function Settings(props) {
               Change the layout of the transactions list and display only the
               columns and information that is most important to you.
             </Content>
-            <SubContainer
-              style={{
-                padding: "15px 12px 10px 10px",
-              }}
-            >
-              <Heading>Transaction Hash</Heading>
-              <label class="switch">
-                <input
-                  type="checkbox"
-                  onChange={(event) =>
-                    props.setToggle({
-                      ...props.toggle,
-                      transactionHash: event.target.checked,
-                    })
-                  }
-                  checked={props.toggle.transactionHash}
-                />
-                <span class="slider round"></span>
-              </label>
-            </SubContainer>
+
             <BorderDiv></BorderDiv>
-            <SubContainer
-              style={{
-                padding: "5px 12px 10px 10px",
-              }}
-            >
-              <Heading>Status</Heading>
-              <label class="switch">
-                <input
-                  type="checkbox"
-                  onChange={(event) =>
-                    props.setToggle({
-                      ...props.toggle,
-                      status: event.target.checked,
-                    })
-                  }
-                  checked={props.toggle.status}
-                />
-                <span class="slider round"></span>
-              </label>
-            </SubContainer>
+
             <BorderDiv></BorderDiv>
             <SubContainer
               style={{
@@ -195,7 +157,6 @@ const MainContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 23px;
   overflow: hidden;
 `;
 const Container = styled.div`
@@ -229,8 +190,7 @@ const MainHeading = styled.div`
 `;
 const BorderDiv = styled.div`
   border-bottom: 1px solid #ededed;
-  width: 700px;
-  margin-left: -23px;
+  width: 100%;
 `;
 const Content = styled.div`
   font-size: 1rem;

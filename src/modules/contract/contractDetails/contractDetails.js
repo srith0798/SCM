@@ -23,19 +23,19 @@ export default function ContractDetails(props) {
   const handleViewClick = (e) => {
     setActiveButton(e.target.id);
   };
+  
   const [copyToolTip, setcopyToolTip] = React.useState(false);
   const [contractAddress, setContractAddress] = React.useState({});
   const [address, setAddress] = React.useState({});
   const getContractById = async () => {
-    let url = window.location.pathname;
-    let addressURL = url.split("/");
-    addressURL = addressURL[3];
-    setContractAddress(addressURL);
+    let url = history.location.state.id;
+    setContractAddress(url);
     try {
       setLoader(true);
-      const response = await ContractsService.getContractsById(addressURL);
+      const response = await ContractsService.getContractsById(url);
       setLoader(false);
       setAddress(response);
+      console.log("address", response);
     } catch (err) {
       setLoader(false);
     }
@@ -46,7 +46,9 @@ export default function ContractDetails(props) {
 
   const [open, setOpen] = useState(false);
   const [loader, setLoader] = useState(false);
-
+  let version = `${address.sourceCode}`;
+  version = version?.split[" "]
+  //   solidityV = solidityV[3];
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -154,7 +156,7 @@ export default function ContractDetails(props) {
               />
               Contract Details
             </Heading>
-            <Button>View in Explorer</Button>
+            <Button onClick={()=> window.open(`https://observer.xdc.org/address/${address.address}`)}>View in Explorer</Button>
           </MainHeading>
         </SubContainer>
         <Container>
@@ -232,7 +234,7 @@ export default function ContractDetails(props) {
             <DetailsSection>
               <Div>
                 <TableHeading>Network</TableHeading>
-                <TableData>XDC Mainnet</TableData>
+                <TableData>{address.network}</TableData>
               </Div>
               <Div>
                 <TableHeading>Solidity version</TableHeading>
@@ -286,11 +288,11 @@ export default function ContractDetails(props) {
               </Div>
               <Div>
                 <TableHeading>Compiler</TableHeading>
-                <TableData>{address.blockNumber}</TableData>
+                <TableData>{address.compilerVersion}</TableData>
               </Div>
               <Div>
                 <TableHeading>EVM version</TableHeading>
-                <EvmData>{address.blockNumber}</EvmData>
+                <EvmData>Default</EvmData>
               </Div>
               <Div>
                 <TableHeading>Optimizations</TableHeading>
@@ -298,7 +300,10 @@ export default function ContractDetails(props) {
               </Div>
 
               <PopUp>
-                <PopUpBlock>
+                <PopUpBlock  onClick={()=>history.push({
+      pathname: "/transactions",
+      state:{id: address.address}
+    })}>
                   <RowProperty>
                     <img alt="" src="/images/cube.svg" />
                   </RowProperty>
@@ -306,7 +311,7 @@ export default function ContractDetails(props) {
                 </PopUpBlock>
 
                 <PopUpBlock>
-                  {open && <ContractAbi click={handleClose} />}
+                  {open && <ContractAbi click={handleClose} data={address.abi} />}
                   <RowProperty
                     onClick={() => {
                       handleClickOpen();
@@ -384,7 +389,7 @@ export default function ContractDetails(props) {
               </PopUp>
             </DetailsSection>
           )}
-          {activeButton === "Source Code" && <SourceCode />}
+          {activeButton === "Source Code" && <SourceCode data={address.sourceCode} />}
         </Container>
       </MainContainer>
     </>
@@ -525,7 +530,7 @@ const Container = styled.div`
   border-radius: 0.375rem;
   width: 100%;
   margin-top: 0.625rem;
-  height: 159px;
+  height: 165px;
 `;
 
 const SubHeading = styled.div`
@@ -540,7 +545,7 @@ const DetailsSection = styled.div`
   border-radius: 0.375rem;
   width: 100%;
   padding: 0.625rem 0.625rem 1.5rem 0.625rem;
-  margin-top: 1.25rem;
+  margin-top: 2.25rem;
   overflow-x: auto;
   @media (min-width: 300px) and (max-width: 768px) {
     height: 485px;
@@ -567,10 +572,10 @@ const DetailsSection = styled.div`
 `;
 const Div = styled.div`
   display: flex;
-  border-bottom: 0.063rem solid #e3e7eb;
-  padding: 1.25rem 1.25rem 0.2rem 1.25rem;
+  border-bottom: 0.063rem solid #efefef;
+  padding: 1.25rem 1.25rem 0.7rem 1.25rem;
   @media (min-width: 375px) and (max-width: 1200px) {
-    border-bottom: 0.063rem solid #e3e7eb;
+    border-bottom: 0.063rem solid #efefef;
     width: 1000px;
   }
 `;
@@ -633,11 +638,15 @@ const PopUp = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 1rem;
+  margin-top: 3rem;
   width: 100%;
   max-width: 59.375rem;
   font-size: 0.875rem;
   min-width: 900px;
+  margin-left: 15px;
+  @media (min-width: 0px) and (max-width: 767px) {
+    margin-top: 1rem;
+  }
 `;
 
 const PopUpBlock = styled.div`
@@ -663,7 +672,7 @@ const TabLister = styled.div`
   justify-content: space-between;
   width: 100%;
   max-width: 18.125rem;
-  margin: 1.563rem 0rem 0.625rem 1.063rem;
+  margin: 1.563rem 0rem 0.625rem 1.363rem;
   cursor: pointer;
   @media (min-width: 340px) and (max-width: 768px) {
     margin: none;

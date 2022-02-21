@@ -32,8 +32,12 @@ export default function Contract(props) {
     setOpen(false);
   };
   const redirectTODetails = (id) => {
-    history.push("/contracts/contract-details" + id);
+    history.push({
+      pathname: "/contracts/contract-details?" + id,
+      state:{id: id}
+    })
   };
+
 
   const getContractList = async (skip = 0, limit = 10) => {
     let userId = sessionManager.getDataFromCookies("userId");
@@ -48,11 +52,11 @@ export default function Contract(props) {
       const response = await ContractsService.getContractsList(requestData);
       setLoader(false);
       setAddress(response.contractList);
-      let pageCount = response.totalCount;
+      let pageCount = response.contractList.length;
       if (pageCount % 10 === 0) {
         setPage(parseInt(pageCount / 10));
       } else {
-        setPage(parseInt(pageCount / 10));
+        setPage(parseInt(pageCount / 10) + 1);
       }
       if (response.contractList.length === 0) setShowPlaceHolder(true);
       else setShowPlaceHolder(false);
@@ -237,7 +241,7 @@ export default function Contract(props) {
                   </ColumnSecond>
 
                   <ColumnSecond>
-                    {data.network ? "Apothem" : "Mainnet"}
+                    {data.network}
                   </ColumnSecond>
                   <ColumnSecond style={{ display: "flex" }}>
                     <TagCol>

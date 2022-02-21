@@ -98,9 +98,9 @@ export default function AddContract(props) {
             />
             {hideStep && (
               <Text>
-                1. Go to XDC Explorer <br></br>
+                1. Go to XDC Observatory <br></br>
                 2. Check for an verified contract <br></br> 3. Copy contract
-                address <br></br>4. Paste it on the given field below
+                address <br></br>4. Paste it on the given field above
               </Text>
             )}
             {verifyAddress === "" ? (
@@ -140,7 +140,7 @@ const XDCLogo = styled.img`
   margin-bottom: 5px;
 `;
 const BlueLine = styled.div`
-  width: 30px;
+  width: 115px;
   border-bottom: 2px solid blue;
 `;
 const AddressImport = styled.div`
