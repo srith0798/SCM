@@ -84,7 +84,7 @@ export default function AddAlert() {
                 borderBottom: activeButton === "Rules" ? "2px solid blue" : "",
               }}
             >
-              <img alt="" style={{ marginRight: "0.375rem" }} src={activeButton === "Rules" ? "/images/rules.svg" : "/images/rules1.svg"} />
+              <img alt="" style={{ marginRight: "0.375rem" }} src={activeButton === "Rules" ? "/images/rules.svg" : "/images/rules.svg"} />
               Rules
             </TabView>
             <TabView
