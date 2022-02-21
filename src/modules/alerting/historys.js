@@ -16,12 +16,15 @@ export default function Historys() {
               </Tooltip>
             </ColumnOne>
             <ColumnOne>
+            <ContractCol>
               Contract
               <Tooltip disableFocusListener title="Name of the smart contract">
                 <ToolTipIcon src="/images/tool-tip.svg" />
               </Tooltip>
+              </ContractCol>
             </ColumnOne>
             <ColumnOne>
+            <TxCol>
               Tx Hash
               <Tooltip
                 disableFocusListener
@@ -29,8 +32,10 @@ export default function Historys() {
               >
                 <ToolTipIcon src="/images/tool-tip.svg" />
               </Tooltip>
+              </TxCol>
             </ColumnOne>
             <ColumnOne>
+            <NetworkCol>
               Network
               <Tooltip
                 disableFocusListener
@@ -38,8 +43,10 @@ export default function Historys() {
               >
                 <ToolTipIcon src="/images/tool-tip.svg" />
               </Tooltip>
+              </NetworkCol>
             </ColumnOne>
             <ColumnOne>
+            <WhenCol>
               When
               <Tooltip
                 disableFocusListener
@@ -47,6 +54,7 @@ export default function Historys() {
               >
                 <ToolTipIcon src="/images/tool-tip.svg" />
               </Tooltip>
+              </WhenCol>
             </ColumnOne>
           </RowContainer>
         </NewDiv>
@@ -121,7 +129,7 @@ const RowData = styled.div`
 const RowContainer = styled.div`
   display: flex;
   @media (min-width: 300px) and (max-width: 768px) {
-    column-gap: 84px;
+    column-gap: 77px;
   }
 `;
 const ToolTipIcon = styled.img`
@@ -151,4 +159,34 @@ const ColumnTwo = styled.div`
   font-size: 0.875rem;
   width: 100%;
   max-width: 18.75rem;
+`;
+
+const ContractCol = styled.div`
+@media (min-width: 768px) and (max-width: 1128px) {
+  margin-left: 13px;
+}
+
+`;
+
+const TxCol = styled.div`
+@media (min-width: 768px) and (max-width: 1128px) {
+  margin-left: -7px;
+}
+
+`;
+
+const NetworkCol = styled.div`
+@media (min-width: 768px) and (max-width: 1128px) {
+  margin-left: -8px;
+}
+
+`;
+
+
+
+const WhenCol = styled.div`
+@media (min-width: 768px) and (max-width: 1128px) {
+  margin-left: -33px;
+}
+
 `;
