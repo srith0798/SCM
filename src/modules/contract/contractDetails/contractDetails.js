@@ -37,9 +37,10 @@ export default function ContractDetails(props) {
       const response = await ContractsService.getContractsById(url);
       setLoader(false);
       setAddress(response);
-      let version = response.sourceCode;
-      version = version.split(";")[0].split(" ")[2].replace(";", "");
-      setSolidity(version.replace("^", ""));
+      let version = response.sourceCode || "";
+      version = version.includes("pragma solidity") ? version.substr(version.indexOf("pragma solidity")) : ""
+      version = version.substring(16, version.indexOf(";"))
+      setSolidity(version);
     } catch (err) {
       setLoader(false);
     }
