@@ -39,22 +39,22 @@ export default function FullScreen(props) {
             >
               <GraphContainer>
                 <FlexEnd>
-                  <select id="cars" className="select">
-                    <option value="volvo" className="select-dropdown">
+                  <select id="transactions" className="select" value={props.dropDownValue} onChange={(event)=>{props.getAnalytics("", event)}}>
+                    <option value="5" className="select-dropdown">
                       Last 5 days
                     </option>
-                    <option value="saab" className="select-dropdown">
+                    <option value="7" className="select-dropdown">
                       Last 7 days
                     </option>
-                    <option value="mercedes" className="select-dropdown">
+                    <option value="15" className="select-dropdown">
                       Last 15 days
                     </option>
-                    <option value="audi" className="select-dropdown">
+                    <option value="25" className="select-dropdown">
                       Last 25 days
                     </option>
                   </select>
                 </FlexEnd>
-                <Line />
+              <GraphSize>  <Line data={props.data} type= "fullScreen"/> </GraphSize>
               </GraphContainer>
             </Row>
           </MainContainer>
@@ -90,7 +90,16 @@ const GraphContainer = styled.div`
   margin-top: 20px;
   padding: 20px;
 `;
-
+const GraphSize = styled.div`
+  height: 15.75rem;
+  width: auto;
+  margin-top: 1.29rem;
+  margin-bottom: 1.2rem;
+  background: transparent;
+  @media (max-width: 767px) {
+    height: 80px;
+  }
+`;
 const ExpandButton = styled.button`
   background-image: url("/images/Export.svg");
   background-repeat: no-repeat;
