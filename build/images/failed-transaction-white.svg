@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
-  <g id="Failed_transaction" data-name="Failed transaction" transform="translate(-704 -307)">
-    <path id="Path_178" data-name="Path 178" d="M34,19A16,16,0,1,0,50,35,16.016,16.016,0,0,0,34,19Z" transform="translate(686 288)" fill="#fff"/>
-    <path id="Path_180" data-name="Path 180" d="M25.095,23.327a1.273,1.273,0,0,1-1.8,1.8l-5.622-5.649L12.02,25.1a1.273,1.273,0,0,1-1.8-1.8l5.649-5.622-5.622-5.649a1.273,1.273,0,1,1,1.8-1.8l5.622,5.649,5.649-5.622a1.273,1.273,0,1,1,1.8,1.8l-5.649,5.622Z" transform="translate(702.385 305.385)" fill="#416be0"/>
-  </g>
-</svg>
