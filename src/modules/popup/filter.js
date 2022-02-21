@@ -369,7 +369,7 @@ const LastContainer = styled.div`
   @media (min-width: 300px) and (max-width: 414px) {
     justify-content: start;
     margin-top: -18px;
-    margin-left: -13px;
+    margin-left: 6px;
   }
 `;
 const NewContainerOne = styled.div`
