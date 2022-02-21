@@ -16,6 +16,10 @@ const FooterContainer = styled.div`
   @media (min-width: 1024px) {
     display: none;
   }
+
+  @media (min-width: 300px) and (max-width: 768px) {
+    height: 118%;
+  } 
 `;
 const ColumnContainer = styled.div`
   display: flex;
@@ -31,8 +35,10 @@ const Column = styled.div`
   @media screen and (min-width: 375px) and (max-width: 425px) {
     flex-direction: column;
     width: 100%;
-    margin: 55.66px 0 0 0px;
   }
+  @media (min-width: 300px) and (max-width: 768px) {
+    margin: 50px 23px 0 0.5px;
+  } 
 `;
 const FooterImg = styled.img`
   height: 37.23px;
@@ -58,6 +64,11 @@ const SecondColumn = styled.div`
   height: 220px;
   display: flex;
   justify-content: space-between;
+  @media (min-width: 300px) and (max-width: 768px) {
+  
+    margin-top: 183px;
+    margin-left: -302px;
+  }
 `;
 const SubColOne = styled.div`
   width: 90px;
@@ -65,6 +76,8 @@ const SubColOne = styled.div`
   @media screen and (min-width: 375px) and (max-width: 425px) {
     margin: 32px 0 0 24px;
   }
+
+  
 `;
 const SubColTwo = styled.div`
   width: 100%;
@@ -107,6 +120,9 @@ const ContactRow = styled.div`
   @media screen and (min-width: 375px) and (max-width: 425px) {
     margin: 96px 0 0 28.95px;
   }
+  @media (min-width: 300px) and (max-width: 768px) {
+    margin: 69px 0 0 184px;
+  }
 `;
 const LinkContainerThird = styled.div`
   width: 95.95px;
@@ -134,6 +150,9 @@ const CopyrightContainer = styled.div`
   height: 15px;
   @media screen and (min-width: 375px) and (max-width: 425px) {
     margin: 35px 0 0 28.95px;
+  }
+  @media (min-width: 300px) and (max-width: 768px) {
+    margin: -52px 0 0 22px;
   }
 `;
 const XDCIcon = styled.img`

@@ -21,7 +21,9 @@ export default function About(props) {
             <LeftContainer>
               <Row>
                 <DetailBox>
-                  Manage your <Span>Smart Contracts</Span> on XDC Network
+                
+                  <DivDesktop>Manage your <Span>Smart Contracts</Span> on XDC Network</DivDesktop>
+                  <MobileSpan> <Span1>Manage your Smart </Span1> <br></br><Span1>Contracts on XDC Network</Span1></MobileSpan>
                 </DetailBox>
               </Row>
               <DataBox>
@@ -106,7 +108,10 @@ export default function About(props) {
           </GreyContainer>
         </MainBoxContainer>
       </MainContainer>
+      <DivFooter>
       <FooterComponent />
+      </DivFooter>
+      
 
       <div>
         {!sessionManager.getDataFromCookies("isLoggedIn") && (
@@ -134,6 +139,7 @@ const MainBoxContainer = styled.div`
   padding: 4.125rem;
   @media (min-width: 300px) and (max-width: 700px) {
     padding: 1.125rem;
+    height: 1377px;
   }
   @media (max-width: 375px) {
     padding: 16px;
@@ -186,10 +192,31 @@ const RightContainer = styled.div`
 const LeftContainer = styled.div`
   width: 100%;
   padding: 3.9rem;
+  @media (min-width: 300px) and (max-width: 414px) {
+    padding: 1.5rem;
+  }
+
 `;
 const Span = styled.span`
   color: #0089ff;
   white-space: nowrap;
+
+`;
+const Span1 = styled.span`
+@media (min-width: 300px) and (max-width: 414px) {
+  white-space: nowrap;
+}
+`;
+const DivDesktop = styled.div`
+@media (min-width: 300px) and (max-width: 414px) {
+  display:none;
+}
+`;
+const MobileSpan = styled.div`
+@media (min-width: 414px) and (max-width: 2300px) {
+  display:none;
+}
+
 `;
 const IconRow = styled.div`
   display: flex;
@@ -340,6 +367,11 @@ const SubHead = styled.div`
   @media (min-width: 300px) and (max-width: 414px) {
     font-size: 0.8rem;
   }
+`;
+const DivFooter= styled.div`
+@media (min-width: 300px) and (max-width: 414px) {
+  z-index: -1;
+}
 `;
 const SmartButton = styled.div`
   background-repeat: no-repeat;

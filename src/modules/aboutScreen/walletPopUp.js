@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Dialog from "@mui/material/Dialog";
 import { makeStyles } from "@material-ui/styles";
+import toast, { Toaster } from "react-hot-toast";
 
 const useStyles = makeStyles(() => ({
   dialogBox: {
@@ -16,7 +17,10 @@ export default function WalletPopUp(props) {
   const connectWallet = () => {
     if (props.getCurrentUserDetails()) props.click();
   };
+  
   return (
+    <>
+    <div><Toaster /></div>
     <div>
       {props.state ? (
         <Dialog classes={{ paper: classes.dialogBox }} open={true}>
@@ -83,6 +87,7 @@ export default function WalletPopUp(props) {
         </Dialog>
       ) : null}
     </div>
+    </>
   );
 }
 const Button = styled.button`

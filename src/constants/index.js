@@ -31,4 +31,8 @@ export const httpConstants = {
     ADD_NETWORK: "/add-network",
     GET_NETWORK_LIST: "/get-network",
   },
+  MESSAGE:{
+    TOASTS_POSITION:"top-center",
+    VALIDATE_BROWSER_LOGIN:"Please Login To XDCPay"
+  }
 };

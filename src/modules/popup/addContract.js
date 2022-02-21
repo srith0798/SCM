@@ -249,7 +249,7 @@ const HideSteps = styled.button`
   background-color: #ffffff;
   color: #3163f0;
   cursor: pointer;
-  background-image: url("/images/Arrrow.svg");
+  background-image: url("/images/arrrow.svg");
   background-repeat: no-repeat;
   width: 100%;
   max-width: 114px;
