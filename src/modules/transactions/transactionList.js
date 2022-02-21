@@ -557,6 +557,10 @@ const Div = styled.div`
   @media (min-width: 300px) and (max-width: 768px) {
     width: 500%;
   }
+
+  @media (min-width: 767px) and (max-width: 1200px) {
+    width: 230%;
+  }
 `;
 const RowData = styled.div`
   display: flex;
@@ -565,6 +569,11 @@ const RowData = styled.div`
   @media (min-width: 300px) and (max-width: 768px) {
     column-gap: 36px;
   }
+
+  @media (min-width: 767px) and (max-width: 1200px) {
+    
+  }
+
 `;
 
 const TableContainer = styled.div`
@@ -759,6 +768,10 @@ const ColumnOne = styled.div`
   @media (min-width: 300px) and (max-width: 767px) {
     width: 100%;
   }
+  @media (min-width: 767px) and (max-width: 1200px) {
+    width: 8%;
+  }
+
 `;
 const ColumnSecond = styled.div`
   font-size: 0.875rem;
