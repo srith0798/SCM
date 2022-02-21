@@ -31,14 +31,15 @@ const Column = styled.div`
   @media screen and (min-width: 375px) and (max-width: 425px) {
     flex-direction: column;
     width: 100%;
-    margin: 55.66px 0 0 22.75px;
+    margin: 55.66px 0 0 0px;
   }
 `;
 const FooterImg = styled.img`
   height: 37.23px;
-  width: 160.8px;
+  width: 189.8px;
   margin: 0 0 24.84px 0;
   @media screen and (min-width: 375px) and (max-width: 425px) {
+    padding: 0 0 0 10px;
     margin: 0 0 22.45px 0;
   }
 `;
@@ -50,6 +51,7 @@ const Text = styled.span`
   letter-spacing: 0px;
   color: #ffffff;
   opacity: 1;
+  padding-left: 20px;
 `;
 const SecondColumn = styled.div`
   width: 135px;
@@ -65,7 +67,7 @@ const SubColOne = styled.div`
   }
 `;
 const SubColTwo = styled.div`
-  width: 165px;
+  width: 100%;
   margin: 54px 0 0 70px;
   @media screen and (min-width: 375px) and (max-width: 425px) {
     margin: 32px 0 0 70px;
@@ -93,7 +95,7 @@ const LinkContainerSecond = styled.div`
   height: 134px;
   text-align: left;
 `;
-const Link = styled.span`
+const Link = styled.a`
   font: normal normal normal 16px/38px Inter;
   letter-spacing: 0px;
   color: #8ca6f0;
@@ -148,17 +150,28 @@ function FooterComponent() {
         <Column>
           <FooterImg src="/images/smarthub.svg" alt="" />
           <Text>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit Ut quis
-            maximus augue.
+            Easily govern your smart contract deployment with end-to-end
+            lifecycle utility
           </Text>
         </Column>
         <SecondColumn>
           <SubColOne>
             <ColHeading>Tools</ColHeading>
             <LinkContainer>
-              <Link>SmartMint</Link>
-              <Link> SmartView </Link>
-              <Link> SmartDrop </Link>
+              <Link href="https://observer.xdc.org/" target="_blank">
+                Observatory
+              </Link>
+              <Link href="https://stats.xdc.org/" target="_blank">
+                {" "}
+                NetworkStats{" "}
+              </Link>
+              <Link
+                href="https://chrome.google.com/webstore/detail/xdcpay/bocpokimicclpaiekenaeelehdjllofo?hl=en-US"
+                target="_blank"
+              >
+                {" "}
+                XDCPay{" "}
+              </Link>
               <Link> SmartLock </Link>
               <Link> SmartStrem</Link>
             </LinkContainer>
@@ -167,8 +180,16 @@ function FooterComponent() {
           <SubColTwo>
             <ColHeading>Resources</ColHeading>
             <LinkContainerSecond>
-              <Link>About XDC</Link>
-              <Link> Documentation </Link>
+              <Link
+                href="https://medium.com/xdc-foundation-communications"
+                target="_blank"
+              >
+                About XDC
+              </Link>
+              <Link href="https://docs.xdc.org/" target="_blank">
+                {" "}
+                Documentation{" "}
+              </Link>
               <Link> Privacy Policy</Link>
               <Link> Terms and Conditions</Link>
             </LinkContainerSecond>
@@ -176,15 +197,31 @@ function FooterComponent() {
         </SecondColumn>
       </ColumnContainer>
       <ContactRow>
-        <ColHeading>Contact</ColHeading>
+        <ColHeading>Contact Us</ColHeading>
         <LinkContainerThird>
           <ContactContainer>
             <SocialIcon src="/images/twitter-inactive.svg" />
-            <Link>Twitter</Link>
+            <Link href="https://twitter.com/XDCFoundation" target="_blank">
+              {" "}
+              Twitter
+            </Link>
           </ContactContainer>
           <ContactContainer>
             <SocialIcon src="/images/telegram-inactive.svg" />
-            <Link> Telegram </Link>
+            <Link
+              href="https://www.youtube.com/channel/UCXAAtlD-CRraNJKzDTF4pfg"
+              target="_blank"
+            >
+              {" "}
+              Youtube{" "}
+            </Link>
+          </ContactContainer>
+          <ContactContainer>
+            <SocialIcon src="/images/telegram-inactive.svg" />
+            <Link href="https://www.facebook.com/XDCFoundation" target="_blank">
+              {" "}
+              Facebook{" "}
+            </Link>
           </ContactContainer>
         </LinkContainerThird>
       </ContactRow>

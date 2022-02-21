@@ -1,5 +1,4 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Row } from "simple-flexbox";
 import { sessionManager } from "../../managers/sessionManager";
@@ -7,9 +6,13 @@ import WalletPopUp from "./walletPopUp";
 import Tooltip from "@mui/material/Tooltip";
 import FooterComponent from "../dashboard/footerComponent";
 import ReactPlayer from "react-player";
+import { history } from "../../managers/history";
+import AddContract from "../popup/addContract";
 
 export default function About(props) {
   const [state, setState] = useState(true);
+  const [address, setAddress] = React.useState({});
+
   return (
     <>
       <MainContainer>
@@ -30,7 +33,17 @@ export default function About(props) {
                 disableFocusListener
                 title="Click to get started with Xmartly"
               >
-                <Button>
+                <Button
+                  onClick={() =>
+                    history.push({
+                      pathname: "/contracts",
+                      state: {
+                        id: address.address,
+                        homepageHistory: "from-home-page",
+                      },
+                    })
+                  }
+                >
                   Add Your Smart Contract
                   <img
                     style={{ marginLeft: "0.375rem" }}
@@ -52,9 +65,7 @@ export default function About(props) {
               <SmartButton>
                 Add Your Smart Contract
                 <img
-                  style={{
-                    marginLeft: "4px",
-                  }}
+                  style={{ marginLeft: "0.375rem" }}
                   alt=""
                   src="/images/question-mark.svg"
                 />
@@ -116,6 +127,7 @@ const MainContainer = styled.div`
 const MainBoxContainer = styled.div`
   background: #ecf0f7 0% 0% no-repeat padding-box;
   width: 100%;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-item: center;
@@ -140,9 +152,9 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-self: center;
-  height: 468px;
+  // height: 468px;
   max-width: 1306px;
-  @media (min-width: 340px) and (max-width: 768px) {
+  @media (min-width: 768px) and (max-width: 1023px) {
     flex-direction: column;
     padding-right: 30px;
     padding-top: 30px;
@@ -156,7 +168,7 @@ const Container = styled.div`
     padding-left: 0px;
     height: auto;
   }
-  @media (max-width: 800px) {
+  @media (max-width: 1023px) {
     flex-direction: column;
   }
 `;
@@ -226,12 +238,14 @@ const Button = styled.button`
   border: none;
   border-radius: 0.25rem;
   margin-top: 1.875rem;
+  width: fit-content;
   display: flex;
   font-size: 1rem;
   font-weight: 600;
   white-space: nowrap;
-  @media (min-width: 340px) and (max-width: 793px) {
-    margin-left: 112px;
+  @media (min-width: 340px) and (max-width: 1023px) {
+    margin-left: auto;
+    margin-right: auto;
   }
   @media (min-width: 300px) and (max-width: 414px) {
     margin-left: 30px;
@@ -244,7 +258,7 @@ const Button = styled.button`
     height: 40px;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 1023px) {
     display: none;
   }
 `;
@@ -339,13 +353,14 @@ const SmartButton = styled.div`
   border: none;
   border-radius: 0.25rem;
   margin-top: 1.875rem;
+  width: fit-content;
   display: flex;
   font-size: 1rem;
   font-weight: 600;
   white-space: nowrap;
-  @media (min-width: 340px) and (max-width: 793px) {
-    margin-left: 102px;
-    margin-right: 101px;
+  @media (min-width: 340px) and (max-width: 1023px) {
+    margin-left: auto;
+    margin-right: auto;
     margin-top: 21px;
   }
   @media (max-width: 414px) {
@@ -365,7 +380,7 @@ const SmartButton = styled.div`
     margin-left: 44px;
     width: 162px;
   }
-  @media (min-width: 769px) {
+  @media (min-width: 1024px) {
     display: none;
   }
 `;

@@ -19,38 +19,40 @@ export default function AddContract(props) {
   const [checkBox, setCheckBox] = useState(false);
   const [address, setAddress] = React.useState("");
   const [verifyAddress, setVerifyAddress] = React.useState("");
-  const [loader ,setLoader] = React.useState(false)
+  const [loader, setLoader] = React.useState(false);
 
   const checkAddress = async () => {
-      setLoader(true)
-      const [error] = await utility.parseResponse(ContractsService.checkAddress(address));
-      setLoader(false)
-      if(error){
-        utility.apiFailureToast(error);
-        return;
-      }
-      setVerifyAddress(address);
+    setLoader(true);
+    const [error] = await utility.parseResponse(
+      ContractsService.checkAddress(address)
+    );
+    setLoader(false);
+    if (error) {
+      utility.apiFailureToast(error);
+      return;
+    }
+    setVerifyAddress(address);
   };
 
   const addContract = async () => {
-      let userId = sessionManager.getDataFromCookies("userId")
-         let requestData = {
-        contractAddress: address,
-        userId:userId
-      };
-      setLoader(true)
-      const [error ,response] = await utility.parseResponse(ContractsService.addContract(requestData));
-      setLoader(false)
-      if(error){
-        utility.apiFailureToast(error);
-        return;
-      }
-      if (response) {
-        utility.apiSuccessToast("Contract added");
-        props.click();
-        props.getContractList();
-        // props.reloadData();
-      }
+    let userId = sessionManager.getDataFromCookies("userId");
+    let requestData = {
+      contractAddress: address,
+      userId: userId,
+    };
+    setLoader(true);
+    const [error, response] = await utility.parseResponse(
+      ContractsService.addContract(requestData)
+    );
+    setLoader(false);
+    if (error) {
+      utility.apiFailureToast(error);
+      return;
+    }
+    if (response) {
+      props.click();
+      props.getContractList();
+    }
   };
 
   const handleEnterKey = (e) => {
@@ -75,7 +77,10 @@ export default function AddContract(props) {
                 justifyContent: "space-between",
               }}
             >
-              <Content>You can import contracts that have been verified publicly on XDC.</Content>
+              <Content>
+                You can import contracts that have been verified publicly on
+                XDC.
+              </Content>
 
               <HideSteps
                 onClick={() => {
@@ -93,8 +98,9 @@ export default function AddContract(props) {
             />
             {hideStep && (
               <Text>
-                1. Go to XDC Explorer <br></br>
-                2. Check for an verified contract <br></br> 3. Copy contract address <br></br>4. Paste it on the given field below
+                1. Go to XDC Observatory <br></br>
+                2. Check for an verified contract <br></br> 3. Copy contract
+                address <br></br>4. Paste it on the given field above
               </Text>
             )}
             {verifyAddress === "" ? (
@@ -106,7 +112,10 @@ export default function AddContract(props) {
                   <BlueLine></BlueLine>
                 </IconImport>
                 <SelectImport>
-                  <CheckBox type="checkbox" onChange={(e) => setCheckBox(e.target.checked)} />
+                  <CheckBox
+                    type="checkbox"
+                    onChange={(e) => setCheckBox(e.target.checked)}
+                  />
                   <AddressImport>{address}</AddressImport>
                 </SelectImport>
               </ImportBox>
@@ -131,7 +140,7 @@ const XDCLogo = styled.img`
   margin-bottom: 5px;
 `;
 const BlueLine = styled.div`
-  width: 30px;
+  width: 115px;
   border-bottom: 2px solid blue;
 `;
 const AddressImport = styled.div`

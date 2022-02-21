@@ -31,11 +31,9 @@ function PopOverComponent(props) {
   const [openPopOver, setOpenPopOver] = React.useState(null);
   const handleClick = (event) => {
     setAnchorEl(anchorEl ? null : event.currentTarget);
-    console.log("eventcurrent", event.currentTarget);
   };
   const [cancel, setCancel] = React.useState(false);
   const handlePopup = () => {
-    console.log("cancel", cancel);
     setCancel(!cancel);
   };
   const handleClose = () => {
@@ -45,7 +43,6 @@ function PopOverComponent(props) {
   const [file, setFile] = React.useState(null);
 
   const handleUpload = (event) => {
-    console.log("uploading file", event.target.files);
     setFile({
       raw: event.target.files[0],
       previewURL: URL.createObjectURL(event.target.files[0]),
@@ -63,7 +60,6 @@ function PopOverComponent(props) {
     return await FileUpload.fileUpload(formData);
   };
   const savePicture = async (event) => {
-    console.log("save clicked");
     let logoData = {};
     if (file && file.raw) logoData = await uploadLogo(file?.raw);
     const userMetaData = sessionManager.getDataFromCookies(
@@ -76,7 +72,6 @@ function PopOverComponent(props) {
       id: UserID.sub,
       picture: logoData[0].url,
     };
-    console.log("uploaded logo data is ======>", req);
     const [err, response] = await Utility.parseResponse(
       UserService.updateUser(req)
     );

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { Row } from "simple-flexbox";
 import { CopyToClipboard } from "react-copy-to-clipboard";
@@ -9,17 +9,37 @@ import SubContracts from "./subContracts";
 import { history } from "../../managers/history";
 import utility from "../../utility";
 import Tooltip from "@mui/material/Tooltip";
+import ContractsService from "../../services/contractsService";
 
 export default function TransactionDetails() {
   const [eventToolTip, seteventToolTip] = React.useState(false);
   const [statusToolTip, setstatusToolTip] = React.useState(false);
+  const [copyToolTip, setcopyToolTip] = React.useState(false);
+  const [row, setRow] = React.useState([]);
+
   const [activeButton, setActiveButton] = React.useState("Overview");
   const handleViewClick = (e) => {
     setActiveButton(e.target.id);
   };
   const backButton = () => {
-    history.push("/dashboard/Transactions");
+    history.push("/transactions");
   };
+  let url = history.location.state.id;
+  const searchTransaction = async (searchValues, searchKeys) => {
+    try {
+      const requestData = {
+        searchValue: searchValues,
+        searchKeys: searchKeys,
+        skip: 0,
+        limit: 1,
+      };
+      const response = await ContractsService.getTransactionsList(requestData);
+      setRow(response.transactionList[0]);
+    } catch (e) {}
+  };
+  useEffect(() => {
+    searchTransaction(url, ["hash"]);
+  }, [url]);
   return (
     <MainContainer>
       <SubContainer>
@@ -34,7 +54,15 @@ export default function TransactionDetails() {
             Transaction Details
           </Title>
         </TitleDiv>
-        <Button>View in explorer</Button>
+        <Button
+          onClick={() =>
+            window.open(
+              `https://observer.xdc.org/transaction-details/${row.hash}`
+            )
+          }
+        >
+          View in Observatory
+        </Button>
       </SubContainer>
 
       <Container>
@@ -42,19 +70,23 @@ export default function TransactionDetails() {
           Txn hash
         </SubHeading>
         <TopContainer>
-          <Hash>
-            {utility.truncateTxnAddress(
-              "0x1822a4c5b699f8c2653062033b86aceea234d804dd5358c"
-            )}
-          </Hash>
-          <CopyToClipboard>
-            <img alt="" src="/images/copy.svg" />
+          <HashMobile>{utility.truncateTxnAddress(`${row.hash}`)}</HashMobile>
+          <HashDesktop>{row.hash}</HashDesktop>
+          <CopyToClipboard text={row.hash} onCopy={() => setcopyToolTip(true)}>
+            <Tooltip title={copyToolTip ? "copied" : "copy to clipboard"}>
+              <CopyToClipboardImage src="/images/copy.svg" />
+            </Tooltip>
           </CopyToClipboard>
-          <FailButton>Fail</FailButton>
+          {/* <FailButton>Fail</FailButton> */}
           <AlertButton>
             <img
               alt=""
-              style={{ width: "15px", cursor: "pointer", marginRight: "6px" }}
+              style={{
+                width: "15px",
+                cursor: "pointer",
+                marginRight: "6px",
+                marginBottom: "3px",
+              }}
               src="/images/addalert.svg"
             />
             Add alert
@@ -159,7 +191,9 @@ export default function TransactionDetails() {
           >
             <TabImage
               alt=""
-              style={{ marginRight: "0.375rem" }}
+              style={{
+                marginRight: "0.375rem",
+              }}
               src={
                 activeButton === "StateChange"
                   ? "/images/statechange_blue.svg"
@@ -188,70 +222,85 @@ export default function TransactionDetails() {
             <CommonDiv>
               <Row>
                 <Heading>Network</Heading>
-                <SubHead>XDC mainnet</SubHead>
+                <SubHead>{""}</SubHead>
               </Row>
             </CommonDiv>
-            <CommonDiv>
+            {/* <CommonDiv>
               <Row>
                 <Heading>Error</Heading>
                 <SubHead>Out of Gas</SubHead>
               </Row>
-            </CommonDiv>
+            </CommonDiv> */}
             <CommonDivBlock>
               <Heading>Block</Heading>
-              <SubHead>36585614 (358349 block confirmation)</SubHead>
+              <SubHead>{row.blockNumber}</SubHead>
             </CommonDivBlock>
             <CommonDiv>
               <Row>
                 <Heading>Transactions index</Heading>
-                <SubHead>5</SubHead>
+                <SubHead>{row.transactionIndex}</SubHead>
               </Row>
             </CommonDiv>
             <CommonDivFrom>
               <Heading>From</Heading>
               <SubHead>
-                <TransactionNumber>
-                  xdc2113d5d4d7427123be37319dcee7dc52d3f8c2a9
-                </TransactionNumber>
-
-                <CopyToClipboardImg src="/images/copy.svg" />
+                <TransactionNumber>{row.from}</TransactionNumber>
+                <CopyToClipboard
+                  text={row.from}
+                  onCopy={() => setcopyToolTip(true)}
+                >
+                  <Tooltip title={copyToolTip ? "copied" : "copy to clipboard"}>
+                    <CopyToClipboardImg
+                      // onClick={() => setcopyToolTip(true)}
+                      src="/images/copy.svg"
+                    />
+                  </Tooltip>
+                </CopyToClipboard>
               </SubHead>
             </CommonDivFrom>
             <CommonDivTo>
               <Heading>To</Heading>
               <SubHead>
-                <TransactionNumber>
-                  xdc2113d5d4d7427123be37319dcee7dc52d3f8c2a9
-                </TransactionNumber>
-
-                <CopyToClipboardImg src="/images/copy.svg" />
+                <TransactionNumber>{row.to}</TransactionNumber>
+                <CopyToClipboard
+                  text={row.to}
+                  onCopy={() => setcopyToolTip(true)}
+                >
+                  <Tooltip title={copyToolTip ? "copied" : "copy to clipboard"}>
+                    <CopyToClipboardImg src="/images/copy.svg" />
+                  </Tooltip>
+                </CopyToClipboard>
               </SubHead>
             </CommonDivTo>
             <TimeStampDiv>
               <Heading>Timestamp</Heading>
-              <SubHead>03 mins ago (Oct-27-2021 11:58:44 PM +UTC)</SubHead>
+              <SubHead>
+                {new Date(row.createdOn).toLocaleString("en-US")}
+              </SubHead>
             </TimeStampDiv>
             <CommonDiv>
               <Row>
                 <Heading>Value</Heading>
-                <SubHead> 10 XDC</SubHead>
+                <SubHead>{row.value} XDC</SubHead>
               </Row>
             </CommonDiv>
             <CommonDiv>
               <Row>
                 <Heading>Nonce</Heading>
-                <SubHead>453</SubHead>
+                <SubHead>{row.nonce}</SubHead>
               </Row>
             </CommonDiv>
             <CommonDiv>
               <Row>
                 <Heading>Gas Used</Heading>
-                <SubHead>60,052 (100%)</SubHead>
+                <SubHead>
+                  {row.gasUsed} ({((row.gas / row.gasUsed) * 100).toFixed(2)})%
+                </SubHead>
               </Row>
             </CommonDiv>
             <GasPriceDiv>
               <Heading>Gas Price</Heading>
-              <SubHead>0.000000000842346544 XDC (0.842346544 Gwei)</SubHead>
+              <SubHead>{row.gasPrice} XDC</SubHead>
             </GasPriceDiv>
             <FeeDiv>
               <Heading>Transaction Fee</Heading>
@@ -261,9 +310,16 @@ export default function TransactionDetails() {
               <Heading>Raw input</Heading>
               <SubHead>
                 <TransactionNumber>
-                  xdc2113d5d4d7427123be37319dcee7dc52d3f8c2a9
+                  0x01173a740000000000…f28e0b4fae4a3bfee7dc52
                 </TransactionNumber>
-                <CopyToClipboardImg src="/images/copy.svg" />
+                <CopyToClipboard
+                  text={" 0x01173a740000000000…f28e0b4fae4a3bfee7dc52"}
+                  onCopy={() => setcopyToolTip(true)}
+                >
+                  <Tooltip title={copyToolTip ? "copied" : "copy to clipboard"}>
+                    <CopyToClipboardImg src="/images/copy.svg" />
+                  </Tooltip>
+                </CopyToClipboard>
               </SubHead>
             </RawInputDiv>
           </MidContainer>
@@ -346,7 +402,9 @@ export default function TransactionDetails() {
           </LastContainer>
         </ScrollableDiv>
       )}
-      {activeButton === "Contracts" && <SubContracts />}
+      {activeButton === "Contracts" && (
+        <SubContracts address={row.contractAddress} />
+      )}
       {activeButton === "EventsDetails" && <EventsDetails />}
       {activeButton === "StateChange" && <StateChange />}
     </MainContainer>
@@ -358,9 +416,9 @@ const MainContainer = styled.div`
   width: 100%;
   padding: 2.125rem;
   display: 100%;
-  height: auto;
+  height: 100vh;
   @media (min-width: 340px) and (max-width: 768px) {
-    padding: 1rem;
+    padding: 1.2rem;
   }
 `;
 const TopContainer = styled.div`
@@ -370,6 +428,7 @@ const TopContainer = styled.div`
 `;
 
 const TabImage = styled.img`
+  width: 22px;
   @media (min-width: 300px) and (max-width: 414px) {
     width: 13px;
     margin-bottom: 5px;
@@ -442,23 +501,34 @@ const SubHeadBlue = styled.div`
 const CommonDiv = styled.div`
   border-bottom: 0.031rem #eaf1ec solid;
   padding: 0.813rem;
+  @media (min-width: 300px) and (max-width: 768px) {
+    column-gap: 0px;
+  }
 `;
 const TimeStampDiv = styled.div`
   border-bottom: 0.031rem #eaf1ec solid;
   padding: 0.813rem;
   display: flex;
-  @media (min-width: 300px) and (max-width: 767px) {
+
+  @media (max-width: 375px) {
     display: flex;
-    column-gap: 104px;
+    white-space: nowrap;
+    column-gap: 80px;
   }
 `;
 const CommonDivBlock = styled.div`
   border-bottom: 0.031rem #eaf1ec solid;
   padding: 0.813rem;
   display: flex;
+  column-gap: 0px;
   @media (min-width: 300px) and (max-width: 767px) {
     display: flex;
     column-gap: 138px;
+  }
+  @media (max-width: 375px) {
+    display: flex;
+    white-space: nowrap;
+    column-gap: 118px;
   }
 `;
 const FeeDiv = styled.div`
@@ -469,7 +539,12 @@ const FeeDiv = styled.div`
   @media (min-width: 300px) and (max-width: 767px) {
     display: flex;
     white-space: nowrap;
-    column-gap: 69px;
+    column-gap: 68px;
+  }
+  @media (max-width: 375px) {
+    display: flex;
+    white-space: nowrap;
+    column-gap: 46px;
   }
 `;
 const CommonDivFrom = styled.div`
@@ -478,7 +553,12 @@ const CommonDivFrom = styled.div`
   display: flex;
   @media (min-width: 300px) and (max-width: 767px) {
     display: flex;
-    column-gap: 143px;
+    column-gap: 141px;
+  }
+  @media (max-width: 375px) {
+    display: flex;
+    white-space: nowrap;
+    column-gap: 123px;
   }
 `;
 const RawInputDiv = styled.div`
@@ -491,6 +571,11 @@ const RawInputDiv = styled.div`
     white-space: nowrap;
     column-gap: 108px;
   }
+  @media (max-width: 375px) {
+    display: flex;
+    white-space: nowrap;
+    column-gap: 87px;
+  }
 `;
 const GasPriceDiv = styled.div`
   border-bottom: 0.031rem #eaf1ec solid;
@@ -500,7 +585,12 @@ const GasPriceDiv = styled.div`
   @media (min-width: 300px) and (max-width: 767px) {
     display: flex;
     white-space: nowrap;
-    column-gap: 114px;
+    column-gap: 111px;
+  }
+  @media (max-width: 375px) {
+    display: flex;
+    white-space: nowrap;
+    column-gap: 91px;
   }
 `;
 const CommonDivTo = styled.div`
@@ -509,7 +599,12 @@ const CommonDivTo = styled.div`
   display: flex;
   @media (min-width: 300px) and (max-width: 767px) {
     display: flex;
-    column-gap: 162px;
+    column-gap: 159px;
+  }
+  @media (max-width: 375px) {
+    display: flex;
+    white-space: nowrap;
+    column-gap: 140px;
   }
 `;
 const MidContainer = styled.div`
@@ -557,7 +652,10 @@ const Heading = styled.div`
   color: #102c78;
   width: 100%;
   max-width: 16.25rem;
-  @media (min-width: 340px) and (max-width: 768px) {
+  @media (min-width: 0px) and (max-width: 767px) {
+    max-width: 11.25rem;
+  }
+  @media (min-width: 768px) and (max-width: 1023px) {
     max-width: 11.25rem;
   }
 `;
@@ -578,7 +676,7 @@ const Button = styled.button`
   color: #3163f0;
   border: none;
   border-radius: 0.25rem;
-  max-width: 17.75rem;
+  width: 170px;
   white-space: nowrap;
   height: 2.125rem;
   font-size: 0.875rem;
@@ -625,14 +723,32 @@ const Container = styled.div`
   }
 `;
 
-const Hash = styled.div`
+const HashDesktop = styled.div`
+  display: flex;
+  font-size: 14px;
+  flex-flow: row nowrap;
+  margin-top: 0.625rem;
+  margin-bottom: 10px;
+  border: none;
+  color: #191919;
+  font-weight: 500;
+  width: 100%;
+  max-width: 30.063rem;
+  @media (max-width: 767px) {
+    display: none;
+  }
+`;
+const HashMobile = styled.div`
   display: flex;
   flex-flow: row nowrap;
   margin-top: 0.625rem;
   margin-bottom: 10px;
   border: none;
-  width: 100%;
+  width: 60%;
   max-width: 30.063rem;
+  @media (min-width: 767px) {
+    display: none;
+  }
 `;
 const SubHeading = styled.div`
   font-size: 0.875rem;
@@ -642,11 +758,27 @@ const SubHeading = styled.div`
 `;
 
 const CopyToClipboardImg = styled.img`
-  margin-left: 90px;
+  margin-left: 150px;
   cursor: pointer;
-  @media (min-width: 340px) and (max-width: 768px) {
+  @media (min-width: 340px) and (max-width: 767px) {
     margin-left: 10px;
   }
+  @media (min-width: 768px) and (max-width: 1024px) {
+    margin-left: 110px;
+  }
+`;
+const CopyToClipboardImage = styled.img`
+  margin-left: 110px;
+  cursor: pointer;
+  @media (min-width: 340px) and (max-width: 767px) {
+    margin-left: 10px;
+  }
+  @media (min-width: 1024px) and (max-width: 1075px) {
+    margin-left: 84px;
+  }
+  // @media (min-width: 768px) and (max-width: 1024px) {
+  //   margin-left: px;
+  // }
 `;
 
 const TextLine = styled.div`
@@ -677,7 +809,7 @@ const TabLister = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  max-width: 39.125rem;
+  max-width: 37.125rem;
   margin: 1.563rem 0rem 0.625rem 1.063rem;
   cursor: pointer;
   @media (max-width: 768px) {
@@ -689,8 +821,9 @@ const TabLister = styled.div`
     margin: 0rem 0rem 0rem 0rem;
     white-space: nowrap;
     padding-left: 10px;
+    max-width: 34.125rem;
   }
-  @media (min-width: 320px) and (max-width: 414px) {
+  @media (max-width: 414px) {
     display: flex;
     justify-content: space-between;
     min-height: 45px;
@@ -701,12 +834,12 @@ const TabLister = styled.div`
     padding-left: 0px;
   }
 
-  @media (min-width: 600px) and (max-width: 923px) {
-    overflow-y: hidden;
-    font-size: 0.8rem;
-    padding-left: 0px;
-    margin: 0rem 0rem 0rem 0rem;
-  }
+  // @media (min-width: 600px) and (max-width: 923px) {
+  //   overflow-y: hidden;
+  //   font-size: 0.8rem;
+  //   padding-left: 0px;
+  //   margin: 0rem 0rem 0rem 0rem;
+  // }
 `;
 const TabView = styled.div`
   padding: 0.313rem 0.5rem 0.313rem 0.5rem;
@@ -756,7 +889,10 @@ const AlertButton = styled.div`
   margin-left: 2px;
   padding-top: 2px;
   padding-left: 8px;
-  @media (min-width: 300px) and (max-width: 916px) {
+  @media (min-width: 1024px) and (max-width: 1110px) {
+    display: none;
+  }
+  @media (max-width: 1024px) {
     display: none;
   }
 `;

@@ -14,9 +14,9 @@ export default function Sidebar(props) {
   const redirectToContract = () => {
     history.push("/contracts");
   };
-  const redirectToNetwork = () => {
-    history.push("/networks");
-  };
+  // const redirectToNetwork = () => {
+  //   history.push("/networks");
+  // };
   const redirectToAnalytics = () => {
     history.push("/analytics");
   };
@@ -33,21 +33,21 @@ export default function Sidebar(props) {
     sessionManager.removeDataFromCookies("userId");
     sessionManager.removeDataFromCookies("username");
     sessionManager.removeDataFromCookies("profilePicture");
-    history.replace('/')
+    history.replace("/");
   };
 
   const [aboutIcon, setAboutIcon] = React.useState(
-    "/images/abouticon_blue.svg"
+    "/images/abouticon-blue.svg"
   );
   const [transactionIcon, setTransactionIcon] = React.useState(
-    "/images/transactions.svg"
+    "/images/transactions-blue.svg"
   );
   const [contractsIcon, setContractsIcon] = React.useState(
     "/images/contracts.svg"
   );
-  const [networksIcon, setNetworksIcon] = React.useState(
-    "/images/networks.svg"
-  );
+  // const [networksIcon, setNetworksIcon] = React.useState(
+  //   "/images/networks.svg"
+  // );
   const [analyticsIcon, setAnalyticsIcon] = React.useState(
     "/images/analytics.svg"
   );
@@ -58,16 +58,17 @@ export default function Sidebar(props) {
   const changeSourceForIcons = (value) => {
     if (value === "about") setAboutIcon("/images/abouticon_white.svg");
     if (value === "transactions")
-      setTransactionIcon("/images/Transactions_white.svg");
-    if (value === "contracts") setContractsIcon("/images/contracts_white.svg");
-    if (value === "networks") setNetworksIcon("/images/networks_white.svg");
-    if (value === "analytics") setAnalyticsIcon("/images/Analytics_white.svg");
-    if (value === "alerting") setAlertingIcon("/images/Alerting_white.svg");
+      setTransactionIcon("/images/transactions-white.svg");
+    if (value === "contracts") setContractsIcon("/images/contracts-white.svg");
+    // if (value === "networks") setNetworksIcon("/images/networks-white.svg");
+    if (value === "analytics") setAnalyticsIcon("/images/analytics-white.svg");
+    if (value === "alerting") setAlertingIcon("/images/alerting-white.svg");
   };
   const changeOriginalSourceForIcons = (value) => {
-    if (value === "about") setAboutIcon("/images/abouticon_blue.svg");
-    if (value === "transactions") setTransactionIcon("/images/transactions.svg");
-    if (value === "networks") setNetworksIcon("/images/networks.svg");
+    if (value === "about") setAboutIcon("/images/abouticon-blue.svg");
+    if (value === "transactions")
+      setTransactionIcon("/images/transactions-blue.svg");
+    // if (value === "networks") setNetworksIcon("/images/networks.svg");
     if (value === "contracts") setContractsIcon("/images/contracts.svg");
     if (value === "analytics") setAnalyticsIcon("/images/analytics.svg");
     if (value === "alerting") setAlertingIcon("/images/alerting.svg");
@@ -89,7 +90,9 @@ export default function Sidebar(props) {
       </Wrapper>
       <Wrapper
         style={{
-          backgroundColor: utility.isMenuActive("transactions") ? "#1d3c93" : "",
+          backgroundColor: utility.isMenuActive("transactions")
+            ? "#1d3c93"
+            : "",
         }}
         onClick={redirectToTransaction}
         onMouseOver={() => changeSourceForIcons("transactions")}
@@ -109,7 +112,7 @@ export default function Sidebar(props) {
         <Icon src={contractsIcon} />
         <Heading>Contracts</Heading>
       </Wrapper>
-      <Wrapper
+      {/* <Wrapper
         style={{
           backgroundColor: utility.isMenuActive("networks") ? "#1d3c93" : "",
         }}
@@ -119,7 +122,7 @@ export default function Sidebar(props) {
       >
         <Icon src={networksIcon} />
         <Heading>Networks</Heading>
-      </Wrapper>
+      </Wrapper> */}
       <Wrapper
         style={{
           backgroundColor: utility.isMenuActive("analytics") ? "#1d3c93" : "",
@@ -176,7 +179,7 @@ const SidebarContainer = styled.div`
   height: 100%;
   width: 248px;
   padding-top: 15px;
-  @media (max-width: 768px) {
+  @media (max-width: 1023px) {
     display: none;
   }
 `;

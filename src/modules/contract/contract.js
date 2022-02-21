@@ -10,17 +10,24 @@ import ReactPaginate from "react-paginate";
 import utility from "../../utility";
 import { sessionManager } from "../../managers/sessionManager";
 import AddTags from "../popup/addTag";
+import { useLocation } from "react-router";
 
 export default function Contract(props) {
-  const [open, setOpen] = React.useState(false);
-  const [loader, setLoader] = React.useState(false);
-  const [contractNameToolTip, setcontractNameToolTip] = React.useState(false);
-  const [addressToolTip, setaddressToolTip] = React.useState(false);
-  const [networkToolTip, setnetworkToolTip] = React.useState(false);
-  const [tagToolTip, settagToolTip] = React.useState(false);
-  const [visibilityToolTip, setvisibilityToolTip] = React.useState(false);
-  const [address, setAddress] = React.useState([]);
-  const [searchRow, setSearchRow] = React.useState([]);
+  const [open, setOpen] = useState(false);
+  const [loader, setLoader] = useState(false);
+  const [contractNameToolTip, setcontractNameToolTip] = useState(false);
+  const [addressToolTip, setaddressToolTip] = useState(false);
+  const [networkToolTip, setnetworkToolTip] = useState(false);
+  const [tagToolTip, settagToolTip] = useState(false);
+  const [visibilityToolTip, setvisibilityToolTip] = useState(false);
+  const [page, setPage] = useState(1);
+  const [address, setAddress] = useState([]);
+  const [searchRow, setSearchRow] = useState([]);
+  const [showplaceholder, setShowPlaceHolder] = useState([]);
+  const [addTagPopUp, setAddTagPopUp] = useState(false);
+  let redirectDetails = false;
+
+  const location = useLocation();
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -29,8 +36,14 @@ export default function Contract(props) {
   const handleClose = () => {
     setOpen(false);
   };
-  const redirectTODetails = (id) => {
-    history.push("/dashboard/Contract-details/" + id);
+  const redirectTODetails = (e, id) => {
+    redirectDetails = true;
+    setAddTagPopUp(false);
+    if (addTagPopUp && redirectDetails) return;
+    history.push({
+      pathname: "/contracts/contract-details?" + id,
+      state: { id: id },
+    });
   };
 
   const getContractList = async (skip = 0, limit = 10) => {
@@ -43,9 +56,19 @@ export default function Contract(props) {
       };
 
       setLoader(true);
+
       const response = await ContractsService.getContractsList(requestData);
+      // data empty or not !response.responseData
       setLoader(false);
       setAddress(response.contractList);
+      let pageCount = response.contractList.length;
+      if (pageCount % 10 === 0) {
+        setPage(parseInt(pageCount / 10));
+      } else {
+        setPage(parseInt(pageCount / 10) + 1);
+      }
+      if (response.contractList.length === 0) setShowPlaceHolder(true);
+      else setShowPlaceHolder(false);
     } catch (e) {
       setLoader(false);
     }
@@ -59,7 +82,7 @@ export default function Contract(props) {
         searchKeys: searchKeys,
         skip: 0,
         limit: 10,
-        userId: userId
+        userId: userId,
       };
       setLoader(true);
       const response = await ContractsService.getContractsList(requestData);
@@ -72,27 +95,32 @@ export default function Contract(props) {
   const [input, setInput] = useState("");
   const search = (e) => {
     setInput(e.target.value);
-    searching(e.target.value, ["address"]);
+    searching(e.target.value, ["address", "contractName"]);
   };
 
   const changePage = (value) => {
-    getContractList(Math.ceil(value.selected * 5), 5);
+    getContractList(Math.ceil(value.selected * 10), 10);
   };
 
   React.useEffect(() => {
     getContractList();
   }, []);
 
-  
-
   const [addTag, setAddTag] = useState(false);
-  const Open = () => {
+  const Open = (e) => {
+    e.stopPropagation();
+    setAddTagPopUp(true);
     setAddTag(true);
   };
   const Close = () => {
     setAddTag(false);
     getContractList();
   };
+
+  if (location.state && location.state.homepageHistory) {
+    setOpen(true);
+    location.state.homepageHistory = null;
+  }
 
   return (
     <MainContainer>
@@ -209,17 +237,13 @@ export default function Contract(props) {
           return (
             <div style={{ cursor: "pointer" }}>
               <Div>
-                <Row>
-                  <ColumnSecond onClick={() => redirectTODetails(data._id)}>
-                    {data.contractName}
-                  </ColumnSecond>
+                <Row onClick={(e) => redirectTODetails(e, data._id)}>
+                  <ColumnSecond>{data.contractName}</ColumnSecond>
                   <ColumnSecond>
                     {utility.truncateTxnAddress(data.address)}
                   </ColumnSecond>
 
-                  <ColumnSecond>
-                    {data.network ? "Apothem" : "Mainnet"}
-                  </ColumnSecond>
+                  <ColumnSecond>{data.network}</ColumnSecond>
                   <ColumnSecond style={{ display: "flex" }}>
                     {address[index].tags &&
                       address[index].tags.map(
@@ -234,7 +258,7 @@ export default function Contract(props) {
                       />
                     )}
                     {data.tags && data.tags.length === 0 && (
-                      <AddTag onClick={() => Open()}>Add Tag</AddTag>
+                      <AddTag onClick={(e) => Open(e)}>Add Tag</AddTag>
                     )}
                   </ColumnSecond>
                   <ColumnSecond>
@@ -255,7 +279,7 @@ export default function Contract(props) {
         <ReactPaginate
           previousLabel={"<"}
           nextLabel={">"}
-          pageCount={2}
+          pageCount={page}
           breakLabel={"..."}
           initialPage={0}
           onPageChange={changePage}
@@ -279,7 +303,7 @@ const FinanceTag = styled.div`
   background-color: #eaefff;
   border: 1px solid #eaefff;
   border-radius: 0.25rem;
-
+  pointer: cursor;
   max-width: 17.75rem;
   white-space: nowrap;
   height: 2.125rem;
@@ -293,11 +317,13 @@ const FinanceTag = styled.div`
 `;
 const AddTag = styled.button`
   color: #416be0;
+  z-index: 99;
   background: #ffffff 0% 0% no-repeat padding-box;
   font-size: 1rem;
   font-weight: 600;
   border: none;
   outline: none;
+  pointer: cursor;
   white-space: nowrap;
   background-image: url("/images/add-icon.svg");
   background-repeat: no-repeat;

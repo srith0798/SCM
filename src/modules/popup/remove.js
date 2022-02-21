@@ -8,6 +8,7 @@ import ContractService from "../../services/contractsService";
 const useStyles = makeStyles(() => ({
   dialogBox: {
     width: "50% !important",
+    bottom: "150px",
   },
 }));
 
@@ -15,7 +16,6 @@ export default function Remove(props) {
   const classes = useStyles();
   console.log(props.contract);
   const executeRemoveContract = async () => {
-    console.log("HERE");
     const request = {
       id: props.contract._id,
     };
@@ -25,7 +25,12 @@ export default function Remove(props) {
 
   return (
     <div>
-      <Dialog classes={{ paper: classes.dialogBox }} open={true} fullWidth maxWidth="xm">
+      <Dialog
+        classes={{ paper: classes.dialogBox }}
+        open={true}
+        fullWidth
+        maxWidth="xm"
+      >
         <MainContainer>
           <Container>
             <SubContainer style={{ justifyContent: "space-between" }}>
@@ -38,11 +43,15 @@ export default function Remove(props) {
               /> */}
             </SubContainer>
             <Content>
-              Are you sure you wish to remove the contract? This will remove the contract from the transaction listing, and affect all the
-              alerts that use this contract.
+              Are you sure you wish to remove the contract? This will remove the
+              contract from the transaction listing, and affect all the alerts
+              that use this contract.
             </Content>
             <SubContainer style={{ width: "100%", marginTop: "30px" }}>
-              <ButtonConfirm text={"Remove contract"} click={executeRemoveContract} />
+              <ButtonConfirm
+                text={"Remove contract"}
+                click={executeRemoveContract}
+              />
               <CancelButton onClick={props.click}>Cancel</CancelButton>
             </SubContainer>
           </Container>

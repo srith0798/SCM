@@ -8,7 +8,9 @@ const useStyles = makeStyles(() => ({
   dialogBox: {
     width: "100% !important",
     bottom: "100px",
-    height: "387px",
+    maxWidth: "563px",
+    height: "325px",
+    overflow: "hidden",
   },
 }));
 
@@ -35,7 +37,6 @@ export default function Filter(props) {
 
       setLoader(true);
       const response = await contractsService.getNetworksLists(requestData);
-      console.log("response", response.networkList);
       setLoader(false);
       setAddress(response.networkList);
       if (response.networkList.length === 0) setShowPlaceHolder(true);
@@ -63,11 +64,11 @@ export default function Filter(props) {
                   Success
                 </ButtonB>
                 <ButtonC tag={props.select} onClick={() => props.setSelect(3)}>
-                  Failed
+                  Fail
                 </ButtonC>
               </RowBoxOne>
             </NewContainerStatus>
-            <NewContainerOne>
+            {/* <NewContainerOne>
               <Content>Network</Content>
 
               <select
@@ -82,12 +83,10 @@ export default function Filter(props) {
                 <option className="options-select">
                   https://rpc.apothem.network
                 </option> */}
-
-                {address &&
+            {/* {address &&
                   address.map((items) => <option>{items.newRpcUrl}</option>)}
-              </select>
-            </NewContainerOne>
-
+              </select> */}
+            {/* </NewContainerOne> */}
             <NewContainer style={{ paddingBottom: "20px" }}>
               <Content>Date Range</Content>
 
@@ -132,7 +131,7 @@ const ApplyButton = styled.div`
   cursor: pointer;
 
   @media (min-width: 300px) and (max-width: 414px) {
-    margin-left: 30px;
+    margin-left: 13px;
     height: 27px;
     width: 116px;
     padding-top: 2px;
@@ -319,7 +318,7 @@ const RowBoxOne = styled.div`
   display: flex;
   justify-content: start;
   width: 100%;
-  max-width: 400px;
+  max-width: 403px;
   @media (min-width: 300px) and (max-width: 414px) {
     max-width: 240px;
   }
@@ -363,10 +362,11 @@ const NewContainerStatus = styled.div`
 const LastContainer = styled.div`
   display: flex;
   justify-content: end;
-  max-width: 498px;
+  max-width: 466px;
   @media (min-width: 300px) and (max-width: 414px) {
     justify-content: start;
     margin-top: -18px;
+    margin-left: -13px;
   }
 `;
 const NewContainerOne = styled.div`

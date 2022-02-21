@@ -5,7 +5,6 @@ import { useLocation } from "react-router-dom";
 
 export default function ConnectWallets(props) {
   const location = useLocation();
-  console.log();
 
   const ConnectWallet = () => {
     props.getCurrentUserDetails();

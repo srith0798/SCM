@@ -69,13 +69,10 @@ const dashboardComponent = (props) => {
 
     try {
       user = window.web3.eth.accounts;
-    } catch (e) {
-      console.log(e);
-    }
+    } catch (e) {}
 
     if (user && user.length) {
       const response = await UserService.addUser({ accountAddress: user[0] });
-      console.log("responsecookies", response);
       if (response.accountAddress) {
         sessionManager.setDataInCookies(
           response.accountAddress,
@@ -90,7 +87,6 @@ const dashboardComponent = (props) => {
       }
       sessionManager.setDataInCookies(true, "isLoggedIn");
       history.push("/dashboard/about");
-      // await window.web3.eth.getBalance("0x2bb78852ecff61058ad71f23225d6d580f9ad8ef", (bal) => console.log(bal))
     }
     return true; //required to close the "connect wallet" popup
   };

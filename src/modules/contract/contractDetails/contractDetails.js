@@ -11,6 +11,7 @@ import ShowContract from "./showContract";
 import "react-tabs/style/react-tabs.css";
 import SourceCode from "./sourceCode";
 import ContractsService from "../../../services/contractsService";
+import Tooltip from "@mui/material/Tooltip";
 
 import utility from "../../../utility";
 import { history } from "../../../managers/history";
@@ -23,18 +24,18 @@ export default function ContractDetails(props) {
     setActiveButton(e.target.id);
   };
 
+  const [copyToolTip, setcopyToolTip] = React.useState(false);
   const [contractAddress, setContractAddress] = React.useState({});
   const [address, setAddress] = React.useState({});
   const getContractById = async () => {
-    let url = window.location.pathname;
-    let addressURL = url.split("/");
-    addressURL = addressURL[3];
-    setContractAddress(addressURL);
+    let url = history.location.state.id;
+    setContractAddress(url);
     try {
       setLoader(true);
-      const response = await ContractsService.getContractsById(addressURL);
+      const response = await ContractsService.getContractsById(url);
       setLoader(false);
       setAddress(response);
+      console.log("address", response);
     } catch (err) {
       setLoader(false);
     }
@@ -45,7 +46,9 @@ export default function ContractDetails(props) {
 
   const [open, setOpen] = useState(false);
   const [loader, setLoader] = useState(false);
-
+  let version = `${address.sourceCode}`;
+  version = version?.split[" "];
+  //   solidityV = solidityV[3];
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -117,7 +120,7 @@ export default function ContractDetails(props) {
     setRemoveState(false);
   };
   const backButton = () => {
-    history.push("/dashboard/Contracts");
+    history.push("/contracts");
   };
   const [addTag, setAddTag] = useState(false);
   const Open = () => {
@@ -153,12 +156,20 @@ export default function ContractDetails(props) {
               />
               Contract Details
             </Heading>
-            <Button>View in Explorer</Button>
+            <Button
+              onClick={() =>
+                window.open(
+                  `https://observer.xdc.org/address/${address.address}`
+                )
+              }
+            >
+              View in Observatory
+            </Button>
           </MainHeading>
         </SubContainer>
         <Container>
-          <SubHeading style={{ paddingTop: "0.625rem", paddingLeft: "1rem" }}>
-            App_Transactions_Validator
+          <SubHeading style={{ paddingTop: "1rem", paddingLeft: "1rem" }}>
+            {address.contractName}
           </SubHeading>
           <div
             style={{
@@ -167,9 +178,13 @@ export default function ContractDetails(props) {
               alignItems: "center",
             }}
           >
-            <Hash>{utility.truncateTxnAddress(name)}</Hash>
-            <CopyToClipboard text={name}>
-              <CopyImg src="/images/copy.svg" />
+            {/* <Hash>{name}</Hash> */}
+            <HashMobile>{utility.truncateTxnAddress(name)}</HashMobile>
+            <HashDesktop>{name}</HashDesktop>
+            <CopyToClipboard text={name} onCopy={() => setcopyToolTip(true)}>
+              <Tooltip title={copyToolTip ? "copied" : "copy to clipboard"}>
+                <CopyImg src="/images/copy.svg" />
+              </Tooltip>
             </CopyToClipboard>
           </div>
 
@@ -229,7 +244,7 @@ export default function ContractDetails(props) {
             <DetailsSection>
               <Div>
                 <TableHeading>Network</TableHeading>
-                <TableData>XDC Mainnet</TableData>
+                <TableData>{address.network}</TableData>
               </Div>
               <Div>
                 <TableHeading>Solidity version</TableHeading>
@@ -245,8 +260,7 @@ export default function ContractDetails(props) {
                   <Row>
                     {address.tags &&
                       address.tags.map((tag, index) => (
-                        <div>
-                          {console.log("abc", tag, index)}
+                        <div style={{ marginRight: "9px" }}>
                           <FinanceTag onClick={() => removeTagOpen(tag)}>
                             <ImageTag
                               removeTagImage={removeTagImage}
@@ -283,11 +297,11 @@ export default function ContractDetails(props) {
               </Div>
               <Div>
                 <TableHeading>Compiler</TableHeading>
-                <TableData>{address.blockNumber}</TableData>
+                <TableData>{address.compilerVersion}</TableData>
               </Div>
               <Div>
                 <TableHeading>EVM version</TableHeading>
-                <EvmData>{address.blockNumber}</EvmData>
+                <EvmData>Default</EvmData>
               </Div>
               <Div>
                 <TableHeading>Optimizations</TableHeading>
@@ -295,7 +309,14 @@ export default function ContractDetails(props) {
               </Div>
 
               <PopUp>
-                <PopUpBlock>
+                <PopUpBlock
+                  onClick={() =>
+                    history.push({
+                      pathname: "/transactions",
+                      state: { id: address.address },
+                    })
+                  }
+                >
                   <RowProperty>
                     <img alt="" src="/images/cube.svg" />
                   </RowProperty>
@@ -303,7 +324,9 @@ export default function ContractDetails(props) {
                 </PopUpBlock>
 
                 <PopUpBlock>
-                  {open && <ContractAbi click={handleClose} />}
+                  {open && (
+                    <ContractAbi click={handleClose} data={address.abi} />
+                  )}
                   <RowProperty
                     onClick={() => {
                       handleClickOpen();
@@ -381,7 +404,9 @@ export default function ContractDetails(props) {
               </PopUp>
             </DetailsSection>
           )}
-          {activeButton === "Source Code" && <SourceCode />}
+          {activeButton === "Source Code" && (
+            <SourceCode data={address.sourceCode} />
+          )}
         </Container>
       </MainContainer>
     </>
@@ -444,6 +469,7 @@ const FinanceTag = styled.div`
   border: 1px solid #eaefff;
   border-radius: 4px;
   width: 100%;
+  white-space: nowrap;
   padding: 10px;
   height: 30px;
   align-items: center;
@@ -458,6 +484,7 @@ const ImageTag = styled.div`
       : `url("/images/Tag.svg")`};
 
   background-position: left;
+  padding-right: 9px;
   background-size: 13px;
   position: relative;
   background-color: #eaefff;
@@ -508,7 +535,7 @@ const MainContainer = styled.div`
   }
 `;
 
-const Hash = styled.div`
+const HashDesktop = styled.div`
   display: flex;
   flex-flow: row nowrap;
   margin-top: 0.625rem;
@@ -516,13 +543,29 @@ const Hash = styled.div`
   border: none;
   width: 100%;
   max-width: 24.063rem;
+  @media (max-width: 767px) {
+    display: none;
+  }
+`;
+const HashMobile = styled.div`
+  display: flex;
+  flex-flow: row nowrap;
+  margin-top: 0.625rem;
+  margin-bottom: 10px;
+  border: none;
+  width: 100%;
+  max-width: 24.063rem;
+  @media (min-width: 767px) {
+    display: none;
+  }
 `;
 const Container = styled.div`
   background-color: #ffffff;
   border-radius: 0.375rem;
   width: 100%;
   margin-top: 0.625rem;
-  height: 159px;
+  max-height: 160px;
+  min-height: 145px;
 `;
 
 const SubHeading = styled.div`
@@ -537,10 +580,10 @@ const DetailsSection = styled.div`
   border-radius: 0.375rem;
   width: 100%;
   padding: 0.625rem 0.625rem 1.5rem 0.625rem;
-  margin-top: 1.25rem;
+  margin-top: 2.25rem;
   overflow-x: auto;
   @media (min-width: 300px) and (max-width: 768px) {
-    height: 485px;
+    height: 500px;
     overflow: scroll;
     overflow-y: hidden;
     width: 100%;
@@ -564,10 +607,10 @@ const DetailsSection = styled.div`
 `;
 const Div = styled.div`
   display: flex;
-  border-bottom: 0.063rem solid #e3e7eb;
-  padding: 1.25rem 1.25rem 0.2rem 1.25rem;
+  border-bottom: 0.063rem solid #efefef;
+  padding: 1.25rem 1.25rem 0.7rem 1.25rem;
   @media (min-width: 375px) and (max-width: 1200px) {
-    border-bottom: 0.063rem solid #e3e7eb;
+    border-bottom: 0.063rem solid #efefef;
     width: 1000px;
   }
 `;
@@ -616,8 +659,11 @@ const EvmData = styled.div`
   }
 `;
 const CopyImg = styled.img`
-  margin-left: -12%;
+  margin-left: 5%;
   cursor: pointer;
+  @media (max-width: 767px) {
+    margin-left: -20%;
+  }
 `;
 const TableHeading = styled.div`
   font-size: 0.875rem;
@@ -630,11 +676,15 @@ const PopUp = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 1rem;
+  margin-top: 3rem;
   width: 100%;
   max-width: 59.375rem;
   font-size: 0.875rem;
   min-width: 900px;
+  margin-left: 15px;
+  @media (min-width: 0px) and (max-width: 767px) {
+    margin-top: 1rem;
+  }
 `;
 
 const PopUpBlock = styled.div`
@@ -660,7 +710,7 @@ const TabLister = styled.div`
   justify-content: space-between;
   width: 100%;
   max-width: 18.125rem;
-  margin: 1.563rem 0rem 0.625rem 1.063rem;
+  margin: 1.563rem 0rem 0.625rem 1.363rem;
   cursor: pointer;
   @media (min-width: 340px) and (max-width: 768px) {
     margin: none;
@@ -679,7 +729,7 @@ const Button = styled.button`
   color: #3163f0;
   border: none;
   border-radius: 0.25rem;
-  max-width: 9.75rem;
+  width: 170px;
   white-space: nowrap;
   height: 2.125rem;
   font-size: 0.875rem;

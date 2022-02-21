@@ -16,12 +16,14 @@ import "moment-timezone";
 import Moment from "react-moment";
 import ReactPaginate from "react-paginate";
 
-export default function TransactionList(props) {
+export default function TransactionList() {
   const [state, setState] = useState(true);
   const [filterData, setFilterData] = React.useState(1);
   const [open, isOpen] = useState(false);
   const [filterPopupOpen, setfilterPopupOpen] = useState(false);
-
+  const [countToggle, setCountToggle] = useState(10);
+  let url = history?.location?.state?.id;
+  let name = history?.location?.state?.name;
   const handleClickOpen = () => {
     isOpen(true);
   };
@@ -44,9 +46,10 @@ export default function TransactionList(props) {
   const [searchRow, setSearchRow] = React.useState([]);
   const [contracts, setContracts] = React.useState([]);
   const [selected, setSelected] = React.useState("");
+  const [selectedName, setSelectedName] = React.useState("");
   const [page, setPage] = React.useState(1);
   const [valueCheck, setValueCheck] = React.useState(0);
-  
+
   const getContractNames = async (skip = 0, limit = 10) => {
     let userId = sessionManager.getDataFromCookies("userId");
     try {
@@ -58,35 +61,38 @@ export default function TransactionList(props) {
       setLoader(true);
       const response = await ContractsService.getContractsList(requestData);
       setLoader(false);
-
       setContracts(response.contractList);
-      setSelected(response.contractList[0].address)
+      if (!url) {
+        setSelected(response.contractList[0].address);
+        getTransaction(response.contractList[0].address);
+        setSelectedName(response.contractList[0].contractName);
+      } else {
+        setSelected(url);
+        getTransaction(url);
+        // getContractById(url);
+      }
       if (response.contractList.length === 0) setShowPlaceHolder(true);
     } catch (e) {
       setShowPlaceHolder(true);
       setLoader(false);
     }
   };
-
-  console.log("dfxdx", selected);
-
-  const getTransaction = async (skip = 0, limit = 10) => {
+  const getTransaction = async (address, skip = 0, limit = countToggle) => {
     try {
       const requestData = {
         skip: skip,
         limit: limit,
-        contractAddress: selected,
+        contractAddress: address,
       };
       setLoader(true);
       const response = await ContractsService.getTransactionsList(requestData);
       setLoader(false);
       setAddress(response.transactionList);
-      console.log("response", response.transactionList);
       let pageCount = response.totalCount;
-      if (pageCount % 10 === 0) {
-        setPage(parseInt(pageCount / 10));
+      if (pageCount % countToggle === 0) {
+        setPage(parseInt(pageCount / countToggle));
       } else {
-        setPage(parseInt(pageCount / 10) + 1);
+        setPage(parseInt(pageCount / countToggle) + 1);
       }
     } catch (e) {
       setShowPlaceHolder(true);
@@ -99,7 +105,7 @@ export default function TransactionList(props) {
         searchValue: searchValues,
         searchKeys: searchKeys,
         skip: 0,
-        limit: 10,
+        limit: countToggle,
       };
       setLoader(true);
       const response = await ContractsService.getTransactionsList(requestData);
@@ -148,12 +154,19 @@ export default function TransactionList(props) {
     fontWeight: "600",
     color: "#191919",
   };
-  const redirectToTransactionDetails = () => {
-    history.push("/dashboard/Transaction-details");
+  const redirectToTransactionDetails = (id) => {
+    history.push({
+      pathname: "/transactions/transaction-details?" + id,
+      state: { id: id },
+    });
   };
   const changePage = (value) => {
     setValueCheck(value.selected);
-    getTransaction(Math.ceil(value.selected * 10), 10);
+    getTransaction(
+      selected,
+      Math.ceil(value.selected * countToggle),
+      countToggle
+    );
   };
   const [toggle, setToggle] = React.useState({
     transactionHash: true,
@@ -173,16 +186,17 @@ export default function TransactionList(props) {
   const [toInput, setToInput] = React.useState([]);
 
   useEffect(() => {
-    getContractNames();
-    getTransaction();
-  }, [select]);
+    if (selected.length > 0) {
+      getTransaction(selected);
+    } else getContractNames();
+  }, [select, countToggle]);
 
   const [selectDrop, setSelectDrop] = React.useState([]);
 
   const filterSearch = async () => {
     let requestData = {
       skip: 0,
-      limit: 10,
+      limit: countToggle,
       status: "",
       // from: fromInput,
       // to: toInput,
@@ -202,17 +216,21 @@ export default function TransactionList(props) {
       const response = await ContractsService.getTransactionsList(requestData);
 
       setAddress(response.transactionList);
-      console.log("response", response.transactionList);
     } catch (e) {
       console.log(e);
     }
   };
 
+  function setStatus(val) {
+    if (val === true) {
+      return "Success";
+    } else return "Fail";
+  }
+
   return (
     <>
       <MainContainer>
         <ShowLoader state={loader} top={"33%"} />
-
         <TransactionMedia>Transactions</TransactionMedia>
         <TransactionBox>
           <NewDiv>
@@ -279,7 +297,11 @@ export default function TransactionList(props) {
                 selected={selected.address}
               >
                 <DropDown onClick={handleClick}>
-                  App_Transactions_Validator{" "}
+                  {selectedName !== undefined
+                    ? name !== undefined
+                      ? name
+                      : selectedName
+                    : ""}{" "}
                   <img
                     style={{ marginLeft: "0.5rem" }}
                     alt=""
@@ -294,9 +316,15 @@ export default function TransactionList(props) {
                   <Box sx={styles}>
                     {contracts.length &&
                       contracts.map((item) => (
-                        <div onClick={() => setSelected(item)}>
+                        <div
+                          onClick={() => {
+                            getTransaction(item.address);
+                            setSelected(item.address);
+                            setSelectedName(item.contractName);
+                          }}
+                        >
                           <Label>Contract</Label>
-                          App_Transactions_Validator
+                          {item.contractName}
                           <br />
                           <TransactionHash>{item.address}</TransactionHash>
                         </div>
@@ -405,67 +433,98 @@ export default function TransactionList(props) {
               )}
             </RowData>
           </Div>
-          <div>
-            {(input === "" ? address : searchRow).map((data, index) => {
-              return (
-                <Div>
-                  <RowData>
-                    {toggle.transactionHash && (
-                      <ColumnSecond onClick={redirectToTransactionDetails}>
-                        <BackgroundChangerTxhash>
-                          {utility.truncateTxnAddress(data.hash)}
-                        </BackgroundChangerTxhash>
-                      </ColumnSecond>
-                    )}
+          {input ? (
+            <div>
+              {(input === "" ? address : searchRow).map((data, index) => {
+                const status = setStatus(data.status);
+                return (
+                  <Div>
+                    <RowData
+                      onClick={() => redirectToTransactionDetails(data?.hash)}
+                    >
+                      {toggle.transactionHash && (
+                        <ColumnSecond>
+                          <BackgroundChangerTxhash>
+                            {utility.truncateTxnAddress(data.hash)}
+                          </BackgroundChangerTxhash>
+                        </ColumnSecond>
+                      )}
 
-                    {toggle.status && (
-                      <ColumnSecond>{data.status}</ColumnSecond>
-                    )}
+                      {toggle.status && <ColumnSecond>{status}</ColumnSecond>}
 
-                    {toggle.function && (
-                      <ColumnSecond>{data.function}</ColumnSecond>
-                    )}
-                    {toggle.contracts && (
-                      <ColumnSecond>{data.contracts}</ColumnSecond>
-                    )}
+                      {toggle.function && (
+                        <ColumnSecond>{data.function}</ColumnSecond>
+                      )}
+                      {toggle.contracts && (
+                        <ColumnSecond>
+                          {utility.truncateTxnAddress(data.contractAddress)}
+                        </ColumnSecond>
+                      )}
 
-                    {toggle.from && (
-                      <ColumnSecond>
-                        <BackgroundChangerFrom>
-                          {utility.truncateTxnAddress(data.from)}
-                        </BackgroundChangerFrom>
-                      </ColumnSecond>
-                    )}
+                      {toggle.from && (
+                        <ColumnSecond>
+                          <BackgroundChangerFrom>
+                            {utility.truncateTxnAddress(data.from)}
+                          </BackgroundChangerFrom>
+                        </ColumnSecond>
+                      )}
 
-                    {toggle.to && (
-                      <ColumnSecond>
-                        <BackgroundChangerTo>
-                          {utility.truncateTxnAddress(data.to)}
-                        </BackgroundChangerTo>
-                      </ColumnSecond>
-                    )}
+                      {toggle.to && (
+                        <ColumnSecond>
+                          <BackgroundChangerTo>
+                            {utility.truncateTxnAddress(data.to)}
+                          </BackgroundChangerTo>
+                        </ColumnSecond>
+                      )}
 
-                    {toggle.when && (
-                      <ColumnSecond>
-                        <Moment toNow>{data.createdOn}</Moment>
-                      </ColumnSecond>
-                    )}
-                  </RowData>
-                </Div>
-              );
-            })}
-          </div>
+                      {toggle.when && (
+                        <ColumnSecond>
+                          {new Date(data.createdOn).toLocaleString("en-US")}
+                        </ColumnSecond>
+                      )}
+                    </RowData>
+                  </Div>
+                );
+              })}
+            </div>
+          ) : (
+            <PlaceHolderContainer>
+              <PlaceHolderImage src="/images/transactions-blue.svg" />
+              No Transaction Found
+            </PlaceHolderContainer>
+          )}
           {/* {showPlaceHolder && (
             <PlaceHolderContainer>
               <PlaceHolderImage src="/images/contracts.svg" />
-              No Contracts Found
+              No Transaction Found
             </PlaceHolderContainer>
           )} */}
         </TableContainer>
         <PaginationDiv>
+          <BottomLabel>
+            Per Page
+            <SelectionDivStyle
+              buttonToggle={countToggle}
+              onClick={() => setCountToggle(10)}
+            >
+              10
+            </SelectionDivStyle>
+            <SelectionDivStyleTwo
+              buttonToggle={countToggle}
+              onClick={() => setCountToggle(20)}
+            >
+              20
+            </SelectionDivStyleTwo>
+            <SelectionDivStyleThree
+              buttonToggle={countToggle}
+              onClick={() => setCountToggle(50)}
+            >
+              50
+            </SelectionDivStyleThree>
+          </BottomLabel>
           <ReactPaginate
-            previousLabel={"<"}
-            nextLabel={">"}
+            previousLabel={"<-"}
+            nextLabel={"->"}
             pageCount={page}
             breakLabel={"..."}
             initialPage={0}
@@ -484,13 +543,24 @@ export default function TransactionList(props) {
     </>
   );
 }
-
+const BottomLabel = styled.div`
+  display: flex;
+  white-space: nowrap;
+  font-size: 12px;
+  color: #797979;
+  margin-right: 5px;
+  font-weight: 500;
+  font-family: "Inter", Medium;
+`;
 const Div = styled.div`
   padding: 0.75rem;
   border-bottom: 1px solid #e3e7eb;
   white-space: nowrap;
   column-gap: 20px;
-  width: fit-content;
+  width: 100%;
+  @media (min-width: 300px) and (max-width: 768px) {
+    width: 500%;
+  }
 `;
 const RowData = styled.div`
   display: flex;
@@ -505,26 +575,27 @@ const TableContainer = styled.div`
   background-color: #ffffff;
   border-radius: 0.375rem;
   width: 100%;
-  height: 35rem;
+  min-height: 35rem;
+  height: auto;
   padding: 0.625rem;
   margin-top: 1.563rem;
   overflow-y: hidden;
-  ::-webkit-scrollbar {
-    border: 0.5px solid rgb(204, 229, 243);
-    outline: none;
-    border-radius: 15px;
-    /* background: #00A58C; */
-  }
-  ::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 1px grey;
-    border-radius: 15px;
-  }
-  ::-webkit-scrollbar-thumb {
-    background: #3163f0;
-    border-radius: 15px;
-    border: 4px solid transparent;
-    background-clip: content-box;
-  }
+  // ::-webkit-scrollbar {
+  //   border: 0.5px solid rgb(204, 229, 243);
+  //   outline: none;
+  //   border-radius: 15px;
+  //   /* background: #00A58C; */
+  // }
+  // ::-webkit-scrollbar-track {
+  //   box-shadow: inset 0 0 1px grey;
+  //   border-radius: 15px;
+  // }
+  // ::-webkit-scrollbar-thumb {
+  //   background: #3163f0;
+  //   border-radius: 15px;
+  //   border: 4px solid transparent;
+  //   background-clip: content-box;
+  // }
 
   @media (min-width: 300px) and (max-width: 767px) {
     overflow-y: hidden;
@@ -552,7 +623,7 @@ const TableContainer = styled.div`
 `;
 const PaginationDiv = styled.div`
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   margin-top: 15px;
   margin-right: 0;
   & .paginationBttns {
@@ -585,7 +656,7 @@ const MainContainer = styled.div`
   opacity: 1;
   width: 100%;
   padding: 3.125rem;
-  height: 110vh;
+  /* height: 110vh; */
   @media (min-width: 340px) and (max-width: 768px) {
     padding: 3.125rem 1.5rem 1.5rem 1.5rem;
   }
@@ -709,6 +780,7 @@ const BackgroundChangerTxhash = styled.div`
   border-radius: 6px;
   opacity: 1;
   padding: 1px 6px 1px 4px;
+  cursor: pointer;
 
   @media (min-width: 300px) and (max-width: 1371px) {
     margin-left: 0px;
@@ -769,9 +841,10 @@ const TransactionHash = styled.div`
   font-weight: 600;
   color: #416be0;
   margin-top: 0.5rem;
+  cursor: pointer;
   width: 100%;
   @media (min-width: 300px) and (max-width: 767px) {
-    font-size: 0.575rem;
+    font-size: 0.6rem;
   }
   @media (max-width: 375px) {
     font-size: 0.55rem;
@@ -781,8 +854,8 @@ const TransactionHash = styled.div`
 const Image = styled.img`
   width: 0.95rem;
   position: absolute;
-  top: 29px;
-  right: 39px;
+  top: 21px;
+  right: 21px;
   cursor: pointer;
   @media (max-width: 375px) {
     width: 0.85rem;
@@ -825,4 +898,57 @@ const PlaceHolderImage = styled.img`
   -webkit-filter: grayscale(60%); /* Safari 6.0 - 9.   */
   filter: grayscale(60%);
   margin-bottom: 20px;
+`;
+
+const SelectionDivStyle = styled.div`
+  font-size: 12px;
+  font-weight: 600;
+  font-family: Inter;
+  margin-right: 10px;
+  border-radius: 4px 4px 4px 4px;
+  height: 20px;
+  width: 20px;
+  margin-left: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  color: ${(props) => (props.buttonToggle === 10 ? "#ffffff" : "#191919")};
+
+  background-color: ${(props) =>
+    props.buttonToggle === 10 ? "#3163F0" : "#FFFFFF"};
+`;
+const SelectionDivStyleTwo = styled.div`
+  font-size: 12px;
+  font-weight: 600;
+  font-family: Inter;
+  margin-right: 10px;
+  border-radius: 4px 4px 4px 4px;
+  height: 20px;
+  width: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  color: ${(props) => (props.buttonToggle === 20 ? "#ffffff" : "#191919")};
+
+  background-color: ${(props) =>
+    props.buttonToggle === 20 ? "#3163F0" : "#FFFFFF"};
+`;
+const SelectionDivStyleThree = styled.div`
+  font-size: 12px;
+  font-weight: 600;
+  font-family: Inter;
+  margin-right: 10px;
+  border-radius: 4px 4px 4px 4px;
+  height: 20px;
+  width: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  color: ${(props) => (props.buttonToggle === 50 ? "#ffffff" : "#191919")};
+
+  background-color: ${(props) =>
+    props.buttonToggle === 50 ? "#3163F0" : "#FFFFFF"};
 `;

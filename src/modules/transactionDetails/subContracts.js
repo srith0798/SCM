@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { history } from "../../managers/history";
 
-export default function SubContracts() {
+export default function SubContracts(props) {
   const SubButton = () => {
     history.push("/verified-contracts");
   };
@@ -11,35 +11,7 @@ export default function SubContracts() {
       <MainBoxContainer>
         <Container>
           <Title>App_Transactions_Validator</Title>
-          <SubTitle>xdc02aaa39…8b3c</SubTitle>
-          <SubTitleTwo>
-            <Button onClick={SubButton}>
-              <img
-                style={{ marginRight: "4px" }}
-                alt=""
-                src="/images/Verified_tick.svg"
-              />
-              Verified Contracts
-            </Button>
-          </SubTitleTwo>
-        </Container>
-        <Container>
-          <Title>App_Transactions_Validator</Title>
-          <SubTitle>xdc02aaa39…8b3c</SubTitle>
-          <SubTitleTwo>
-            <Button onClick={SubButton}>
-              <img
-                style={{ marginRight: "4px" }}
-                alt=""
-                src="/images/Verified_tick.svg"
-              />
-              Verified Contracts
-            </Button>
-          </SubTitleTwo>
-        </Container>
-        <Container>
-          <Title>App_Transactions_Validator</Title>
-          <SubTitle>xdc02aaa39…8b3c</SubTitle>
+          <SubTitle>{props.address}</SubTitle>
           <SubTitleTwo>
             <Button onClick={SubButton}>
               <img

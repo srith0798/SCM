@@ -529,7 +529,10 @@ const ResponsiveRow = styled.div`
 `;
 const MainContainer = styled.div`
   width: 100%;
-  padding: 25px 20px 0px 25px;
+  padding-left: 71px;
+  padding-right: 53px;
+  padding-top: 32px;
+  padding-bottom: 0px;
   background-color: #ecf0f7;
   @media (min-width: 300px) and (max-width: 1024px) {
     padding: 12px 15px 0px 15px;
@@ -548,7 +551,8 @@ const SubContainer = styled.div`
   display: flex;
   justify-content: space-between;
   margin-top: 1.25rem;
-  padding-left: 5px;
+  // padding-left: 5px;
+  padding-bottom: 12px;
 `;
 const Container = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
@@ -592,12 +596,12 @@ const Content = styled.div`
 `;
 
 const GraphContainer = styled.div`
-  width: 49%;
+  width: 740px;
   background: #ffffff 0% 0% no-repeat padding-box;
   border-radius: 0.375rem;
-  height: auto;
+  height: 356px;
   padding: 1.25rem;
-  margin-top: 2.32rem;
+  margin-top: 2.58rem;
   @media (min-width: 300px) and (max-width: 1024px) {
     width: 100%;
   }
@@ -638,11 +642,21 @@ const Network = styled.div`
     word-break: break-all;
   }
 `;
+// const BorderDiv = styled.div`
+//   border-bottom: 1px solid #e2e8fa;
+// `;
 const Div = styled.div`
   display: flex;
   flex-flow: row nowrap;
-  border-bottom: 1px solid rgb(227, 231, 235);
-  margin-top: 1.25rem;
+  margin-bottom: 1rem;
+`;
+const ContractDiv = styled.div`
+  display: flex;
+  flex-flow: row nowrap;
+  border-top: 1px solid #e2e8fa;
+
+  padding-top: 10px;
+  padding-bottom: 4px;
 `;
 const DropDown = styled.div`
   background: #f5f6fd 0% 0% no-repeat padding-box;

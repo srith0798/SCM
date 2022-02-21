@@ -6,34 +6,26 @@ import utility from "../../utility";
 const Web3 = require("web3");
 
 function Header(props) {
-  console.log(props);
   const [openHumburger, setOpenHumburger] = useState(true);
   const getUserAccountAddress = () => {
     let user = "";
     user = sessionManager.getDataFromCookies("accountAddress");
     if (user) user = utility.truncateTxnAddress(user);
-    console.log("user", user);
     return user;
   };
   const getUserBalance = () => {
     let balance = sessionManager.getDataFromCookies("accountAddress");
-    console.log("webaccount", balance);
     const web3 = new Web3(
       // new Web3.providers.HttpProvider("https://rpc.xinfin.network")
       new Web3.providers.HttpProvider("https://rpc.apothem.network")
     );
     let checkResult = Web3.utils.toChecksumAddress(balance);
     if (checkResult)
-      // let fixed = Math.round(checkResult * 100000) / 100000;
-      // console.log(Web3.utils.toChecksumAddress(balance));
       web3.eth.getBalance(checkResult, function (error, result) {
         if (error) {
-          console.log(error);
         } else {
-          console.log(result);
           let num = Number(result / 1000000000000000000);
 
-          // console.log("fixed", num.toFixed(1));
           getSetBalance(num.toFixed(2));
         }
       });
@@ -88,11 +80,11 @@ const HeaderContainer = styled.div`
   background: #091f5c 0% 0% no-repeat padding-box;
   opacity: 1;
   padding: 5px;
-  @media (max-width: 768px) {
-    padding-top: 22px;
-  }
-  @media (max-width: 375px) {
+  @media (max-width: 767px) {
     padding-top: 50px;
+  }
+  @media (min-width: 768px) and (max-width: 1024px) {
+    padding-top: 22px;
   }
 `;
 const XmartlyLogo = styled.img`
@@ -100,7 +92,7 @@ const XmartlyLogo = styled.img`
 `;
 const GridLogo = styled.img`
   margin-right: 17px;
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     display: none;
   }
 `;

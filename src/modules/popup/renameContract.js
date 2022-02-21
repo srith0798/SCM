@@ -10,7 +10,7 @@ import ButtonConfirm from "../../common/components/buttonConfirm";
 const useStyles = makeStyles(() => ({
   dialogBox: {
     width: "100% !important",
-    top: "-15%",
+    bottom: "160px",
   },
 }));
 
@@ -30,7 +30,6 @@ export default function RenameContract(props) {
     console.log(response);
     if (response.contractName === newName) {
       props.click();
-      utility.apiSuccessToast("contract rename successful");
       setTimeout(() => {
         window.location.reload();
       }, 1000);
