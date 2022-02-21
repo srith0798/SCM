@@ -40,7 +40,6 @@ export default function TransactionDetails() {
   useEffect(() => {
     searchTransaction(url, ["hash"]);
   }, [url]);
-  console.log("rowwwww", row);
   return (
     <MainContainer>
       <SubContainer>

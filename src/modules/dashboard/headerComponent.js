@@ -72,7 +72,6 @@ function PopOverComponent(props) {
       id: UserID.sub,
       picture: logoData[0].url,
     };
-    console.log("uploaded logo data is ======>", req);
     const [err, response] = await Utility.parseResponse(
       UserService.updateUser(req)
     );

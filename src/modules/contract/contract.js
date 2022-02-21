@@ -38,7 +38,6 @@ export default function Contract(props) {
   };
   const redirectTODetails = (e, id) => {
     redirectDetails = true;
-    console.log(addTagPopUp, redirectDetails, "******************");
     setAddTagPopUp(false);
     if (addTagPopUp && redirectDetails) return;
     history.push({
@@ -111,7 +110,6 @@ export default function Contract(props) {
   const Open = (e) => {
     e.stopPropagation();
     setAddTagPopUp(true);
-    console.log(addTagPopUp, "popup ***");
     setAddTag(true);
   };
   const Close = () => {

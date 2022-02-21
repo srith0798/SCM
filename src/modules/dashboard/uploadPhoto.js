@@ -10,7 +10,6 @@ export default function UploadPhoto(props) {
   const { getRootProps, getInputProps } = useDropzone({
     accept: "image/*",
     onDrop: (acceptFiles) => {
-      console.log("uploaded photo is ====>", acceptFiles[0]);
       props.DragAndDropImage(acceptFiles[0]);
     },
   });
