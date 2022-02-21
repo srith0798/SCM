@@ -36,8 +36,7 @@ export default function TransactionDetails() {
       };
       const response = await ContractsService.getTransactionsList(requestData);
       setRow(response.transactionList[0]);
-    } catch (e) {
-    }
+    } catch (e) {}
   };
   useEffect(()=>{
   searchTransaction(url, ["hash"]);
@@ -56,7 +55,15 @@ export default function TransactionDetails() {
             Transaction Details
           </Title>
         </TitleDiv>
-        <Button onClick={()=> window.open(`https://observer.xdc.org/transaction-details/${row.hash}`)}>View in explorer</Button>
+        <Button
+          onClick={() =>
+            window.open(
+              `https://observer.xdc.org/transaction-details/${row.hash}`
+            )
+          }
+        >
+          View in Observatory
+        </Button>
       </SubContainer>
 
       <Container>
@@ -64,20 +71,9 @@ export default function TransactionDetails() {
           Txn hash
         </SubHeading>
         <TopContainer>
-          <HashMobile>
-            {utility.truncateTxnAddress(
-            `${row.hash}`
-            )}
-          </HashMobile>
-          <HashDesktop>
-          {row.hash}
-          </HashDesktop>
-          <CopyToClipboard
-            text={
-              row.hash
-            }
-            onCopy={() => setcopyToolTip(true)}
-          >
+          <HashMobile>{utility.truncateTxnAddress(`${row.hash}`)}</HashMobile>
+          <HashDesktop>{row.hash}</HashDesktop>
+          <CopyToClipboard text={row.hash} onCopy={() => setcopyToolTip(true)}>
             <Tooltip title={copyToolTip ? "copied" : "copy to clipboard"}>
               <CopyToClipboardImage src="/images/copy.svg" />
             </Tooltip>
@@ -250,9 +246,7 @@ export default function TransactionDetails() {
             <CommonDivFrom>
               <Heading>From</Heading>
               <SubHead>
-                <TransactionNumber>
-                {row.from}
-                </TransactionNumber>
+                <TransactionNumber>{row.from}</TransactionNumber>
                 <CopyToClipboard
                   text={row.from}
                   onCopy={() => setcopyToolTip(true)}
@@ -269,9 +263,7 @@ export default function TransactionDetails() {
             <CommonDivTo>
               <Heading>To</Heading>
               <SubHead>
-                <TransactionNumber>
-                {row.to}
-                </TransactionNumber>
+                <TransactionNumber>{row.to}</TransactionNumber>
                 <CopyToClipboard
                   text={row.to}
                   onCopy={() => setcopyToolTip(true)}
@@ -408,7 +400,9 @@ export default function TransactionDetails() {
           </LastContainer>
         </ScrollableDiv>
       )}
-      {activeButton === "Contracts" && <SubContracts address={row.contractAddress}/>}
+      {activeButton === "Contracts" && (
+        <SubContracts address={row.contractAddress} />
+      )}
       {activeButton === "EventsDetails" && <EventsDetails />}
       {activeButton === "StateChange" && <StateChange />}
     </MainContainer>
@@ -680,7 +674,7 @@ const Button = styled.button`
   color: #3163f0;
   border: none;
   border-radius: 0.25rem;
-  max-width: 17.75rem;
+  width: 170px;
   white-space: nowrap;
   height: 2.125rem;
   font-size: 0.875rem;
@@ -748,7 +742,7 @@ const HashMobile = styled.div`
   margin-top: 0.625rem;
   margin-bottom: 10px;
   border: none;
-  width: 100%;
+  width: 60%;
   max-width: 30.063rem;
   @media (min-width: 767px) {
     display: none;

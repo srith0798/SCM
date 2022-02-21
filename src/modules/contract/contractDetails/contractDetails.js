@@ -164,7 +164,7 @@ export default function ContractDetails(props) {
                 )
               }
             >
-              View in Explorer
+              View in Observatory
             </Button>
           </MainHeading>
         </SubContainer>
@@ -179,7 +179,9 @@ export default function ContractDetails(props) {
               alignItems: "center",
             }}
           >
-            <Hash>{utility.truncateTxnAddress(name)}</Hash>
+            {/* <Hash>{name}</Hash> */}
+            <HashMobile>{utility.truncateTxnAddress(name)}</HashMobile>
+            <HashDesktop>{name}</HashDesktop>
             <CopyToClipboard text={name} onCopy={() => setcopyToolTip(true)}>
               <Tooltip title={copyToolTip ? "copied" : "copy to clipboard"}>
                 <CopyImg src="/images/copy.svg" />
@@ -259,8 +261,7 @@ export default function ContractDetails(props) {
                   <Row>
                     {address.tags &&
                       address.tags.map((tag, index) => (
-                        <div>
-                          {console.log("abc", tag, index)}
+                        <div style={{ marginRight: "9px" }}>
                           <FinanceTag onClick={() => removeTagOpen(tag)}>
                             <ImageTag
                               removeTagImage={removeTagImage}
@@ -472,6 +473,7 @@ const FinanceTag = styled.div`
   border: 1px solid #eaefff;
   border-radius: 4px;
   width: 100%;
+  white-space: nowrap;
   padding: 10px;
   height: 30px;
   align-items: center;
@@ -486,6 +488,7 @@ const ImageTag = styled.div`
       : `url("/images/Tag.svg")`};
 
   background-position: left;
+  padding-right: 9px;
   background-size: 13px;
   position: relative;
   background-color: #eaefff;
@@ -536,7 +539,7 @@ const MainContainer = styled.div`
   }
 `;
 
-const Hash = styled.div`
+const HashDesktop = styled.div`
   display: flex;
   flex-flow: row nowrap;
   margin-top: 0.625rem;
@@ -544,13 +547,29 @@ const Hash = styled.div`
   border: none;
   width: 100%;
   max-width: 24.063rem;
+  @media (max-width: 767px) {
+    display: none;
+  }
+`;
+const HashMobile = styled.div`
+  display: flex;
+  flex-flow: row nowrap;
+  margin-top: 0.625rem;
+  margin-bottom: 10px;
+  border: none;
+  width: 100%;
+  max-width: 24.063rem;
+  @media (min-width: 767px) {
+    display: none;
+  }
 `;
 const Container = styled.div`
   background-color: #ffffff;
   border-radius: 0.375rem;
   width: 100%;
   margin-top: 0.625rem;
-  height: 165px;
+  max-height: 160px;
+  min-height: 145px;
 `;
 
 const SubHeading = styled.div`
@@ -568,7 +587,7 @@ const DetailsSection = styled.div`
   margin-top: 2.25rem;
   overflow-x: auto;
   @media (min-width: 300px) and (max-width: 768px) {
-    height: 485px;
+    height: 500px;
     overflow: scroll;
     overflow-y: hidden;
     width: 100%;
@@ -644,8 +663,11 @@ const EvmData = styled.div`
   }
 `;
 const CopyImg = styled.img`
-  margin-left: -12%;
+  margin-left: 5%;
   cursor: pointer;
+  @media (max-width: 767px) {
+    margin-left: -20%;
+  }
 `;
 const TableHeading = styled.div`
   font-size: 0.875rem;
@@ -711,7 +733,7 @@ const Button = styled.button`
   color: #3163f0;
   border: none;
   border-radius: 0.25rem;
-  max-width: 9.75rem;
+  width: 170px;
   white-space: nowrap;
   height: 2.125rem;
   font-size: 0.875rem;

@@ -50,7 +50,6 @@ export default function TransactionList() {
   const [page, setPage] = React.useState(1);
   const [valueCheck, setValueCheck] = React.useState(0);
 
-
   const getContractNames = async (skip = 0, limit = 10) => {
     let userId = sessionManager.getDataFromCookies("userId");
     let dropDownSelect = [];
@@ -320,7 +319,13 @@ export default function TransactionList() {
                   <Box sx={styles}>
                     {contracts.length &&
                       contracts.map((item) => (
-                        <div onClick={() => {getTransaction(item.address); setSelected(item.address); setSelectedName(item.contractName);}}>
+                        <div
+                          onClick={() => {
+                            getTransaction(item.address);
+                            setSelected(item.address);
+                            setSelectedName(item.contractName);
+                          }}
+                        >
                           <Label>Contract</Label>
                           {item.contractName}
                           <br />
@@ -487,7 +492,7 @@ export default function TransactionList() {
           {/* {showPlaceHolder && (
             <PlaceHolderContainer>
               <PlaceHolderImage src="/images/contracts.svg" />
-              No Contracts Found
+              No Transaction Found
             </PlaceHolderContainer>
           )} */}
         </TableContainer>
