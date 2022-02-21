@@ -23,7 +23,7 @@ export default function ContractDetails(props) {
   const handleViewClick = (e) => {
     setActiveButton(e.target.id);
   };
-  
+
   const [copyToolTip, setcopyToolTip] = React.useState(false);
   const [contractAddress, setContractAddress] = React.useState({});
   const [address, setAddress] = React.useState({});
@@ -47,7 +47,7 @@ export default function ContractDetails(props) {
   const [open, setOpen] = useState(false);
   const [loader, setLoader] = useState(false);
   let version = `${address.sourceCode}`;
-  version = version?.split[" "]
+  version = version?.split[" "];
   //   solidityV = solidityV[3];
   const handleClickOpen = () => {
     setOpen(true);
@@ -156,7 +156,15 @@ export default function ContractDetails(props) {
               />
               Contract Details
             </Heading>
-            <Button onClick={()=> window.open(`https://observer.xdc.org/address/${address.address}`)}>View in Explorer</Button>
+            <Button
+              onClick={() =>
+                window.open(
+                  `https://observer.xdc.org/address/${address.address}`
+                )
+              }
+            >
+              View in Observatory
+            </Button>
           </MainHeading>
         </SubContainer>
         <Container>
@@ -170,7 +178,9 @@ export default function ContractDetails(props) {
               alignItems: "center",
             }}
           >
-            <Hash>{utility.truncateTxnAddress(name)}</Hash>
+            {/* <Hash>{name}</Hash> */}
+            <HashMobile>{utility.truncateTxnAddress(name)}</HashMobile>
+            <HashDesktop>{name}</HashDesktop>
             <CopyToClipboard text={name} onCopy={() => setcopyToolTip(true)}>
               <Tooltip title={copyToolTip ? "copied" : "copy to clipboard"}>
                 <CopyImg src="/images/copy.svg" />
@@ -250,8 +260,7 @@ export default function ContractDetails(props) {
                   <Row>
                     {address.tags &&
                       address.tags.map((tag, index) => (
-                        <div>
-                          {console.log("abc", tag, index)}
+                        <div style={{ marginRight: "9px" }}>
                           <FinanceTag onClick={() => removeTagOpen(tag)}>
                             <ImageTag
                               removeTagImage={removeTagImage}
@@ -300,10 +309,14 @@ export default function ContractDetails(props) {
               </Div>
 
               <PopUp>
-                <PopUpBlock  onClick={()=>history.push({
-      pathname: "/transactions",
-      state:{id: address.address}
-    })}>
+                <PopUpBlock
+                  onClick={() =>
+                    history.push({
+                      pathname: "/transactions",
+                      state: { id: address.address },
+                    })
+                  }
+                >
                   <RowProperty>
                     <img alt="" src="/images/cube.svg" />
                   </RowProperty>
@@ -311,7 +324,9 @@ export default function ContractDetails(props) {
                 </PopUpBlock>
 
                 <PopUpBlock>
-                  {open && <ContractAbi click={handleClose} data={address.abi} />}
+                  {open && (
+                    <ContractAbi click={handleClose} data={address.abi} />
+                  )}
                   <RowProperty
                     onClick={() => {
                       handleClickOpen();
@@ -389,7 +404,9 @@ export default function ContractDetails(props) {
               </PopUp>
             </DetailsSection>
           )}
-          {activeButton === "Source Code" && <SourceCode data={address.sourceCode} />}
+          {activeButton === "Source Code" && (
+            <SourceCode data={address.sourceCode} />
+          )}
         </Container>
       </MainContainer>
     </>
@@ -452,6 +469,7 @@ const FinanceTag = styled.div`
   border: 1px solid #eaefff;
   border-radius: 4px;
   width: 100%;
+  white-space: nowrap;
   padding: 10px;
   height: 30px;
   align-items: center;
@@ -466,6 +484,7 @@ const ImageTag = styled.div`
       : `url("/images/Tag.svg")`};
 
   background-position: left;
+  padding-right: 9px;
   background-size: 13px;
   position: relative;
   background-color: #eaefff;
@@ -516,7 +535,7 @@ const MainContainer = styled.div`
   }
 `;
 
-const Hash = styled.div`
+const HashDesktop = styled.div`
   display: flex;
   flex-flow: row nowrap;
   margin-top: 0.625rem;
@@ -524,13 +543,29 @@ const Hash = styled.div`
   border: none;
   width: 100%;
   max-width: 24.063rem;
+  @media (max-width: 767px) {
+    display: none;
+  }
+`;
+const HashMobile = styled.div`
+  display: flex;
+  flex-flow: row nowrap;
+  margin-top: 0.625rem;
+  margin-bottom: 10px;
+  border: none;
+  width: 100%;
+  max-width: 24.063rem;
+  @media (min-width: 767px) {
+    display: none;
+  }
 `;
 const Container = styled.div`
   background-color: #ffffff;
   border-radius: 0.375rem;
   width: 100%;
   margin-top: 0.625rem;
-  height: 165px;
+  max-height: 160px;
+  min-height: 145px;
 `;
 
 const SubHeading = styled.div`
@@ -548,7 +583,7 @@ const DetailsSection = styled.div`
   margin-top: 2.25rem;
   overflow-x: auto;
   @media (min-width: 300px) and (max-width: 768px) {
-    height: 485px;
+    height: 500px;
     overflow: scroll;
     overflow-y: hidden;
     width: 100%;
@@ -624,8 +659,11 @@ const EvmData = styled.div`
   }
 `;
 const CopyImg = styled.img`
-  margin-left: -12%;
+  margin-left: 5%;
   cursor: pointer;
+  @media (max-width: 767px) {
+    margin-left: -20%;
+  }
 `;
 const TableHeading = styled.div`
   font-size: 0.875rem;
@@ -691,7 +729,7 @@ const Button = styled.button`
   color: #3163f0;
   border: none;
   border-radius: 0.25rem;
-  max-width: 9.75rem;
+  width: 170px;
   white-space: nowrap;
   height: 2.125rem;
   font-size: 0.875rem;

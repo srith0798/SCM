@@ -12,10 +12,10 @@ export default function Sidebar(props) {
     history.push("/contracts");
     setOpen(false);
   };
-  const redirectToNetwork = () => {
-    history.push("/networks");
-    setOpen(false);
-  };
+  // const redirectToNetwork = () => {
+  //   history.push("/networks");
+  //   setOpen(false);
+  // };
   const redirectToAnalytics = () => {
     history.push("/analytics");
     setOpen(false);
@@ -30,25 +30,25 @@ export default function Sidebar(props) {
     history.push("/");
   };
   const [transactionIcon, setTransactionIcon] = useState(
-    "/images/transactions.svg"
+    "/images/transactions-blue.svg"
   );
   const [contractsIcon, setContractsIcon] = useState("/images/contracts.svg");
-  const [networksIcon, setNetworksIcon] = useState("/images/networks.svg");
+  // const [networksIcon, setNetworksIcon] = useState("/images/networks.svg");
   const [analyticsIcon, setAnalyticsIcon] = useState("/images/analytics.svg");
   const [alertingIcon, setAlertingIcon] = useState("/images/alerting.svg");
 
   const changeSourceForIcons = (value) => {
     if (value === "transactions")
-      setTransactionIcon("/images/Transactions_white.svg");
-    if (value === "contracts") setContractsIcon("/images/contracts_white.svg");
-    if (value === "networks") setNetworksIcon("/images/networks_white.svg");
-    if (value === "analytics") setAnalyticsIcon("/images/Analytics_white.svg");
-    if (value === "alerting") setAlertingIcon("/images/Alerting_white.svg");
+      setTransactionIcon("/images/transactions-white.svg");
+    if (value === "contracts") setContractsIcon("/images/contracts-white.svg");
+    // if (value === "networks") setNetworksIcon("/images/networks_white.svg");
+    if (value === "analytics") setAnalyticsIcon("/images/analytics-white.svg");
+    if (value === "alerting") setAlertingIcon("/images/alerting-white.svg");
   };
   const changeOriginalSourceForIcons = (value) => {
     if (value === "transactions")
       setTransactionIcon("/images/transactions.svg");
-    if (value === "networks") setNetworksIcon("/images/networks.svg");
+    // if (value === "networks") setNetworksIcon("/images/networks.svg");
     if (value === "contracts") setContractsIcon("/images/contracts.svg");
     if (value === "analytics") setAnalyticsIcon("/images/analytics.svg");
     if (value === "alerting") setAlertingIcon("/images/alerting.svg");
@@ -79,14 +79,14 @@ export default function Sidebar(props) {
             <Icon src={contractsIcon} />
             <Heading>Contracts</Heading>
           </Wrapper>
-          <Wrapper
+          {/* <Wrapper
             onClick={redirectToNetwork}
             onMouseOver={() => changeSourceForIcons("networks")}
             onMouseOut={() => changeOriginalSourceForIcons("networks")}
           >
             <Icon src={networksIcon} />
             <Heading>Networks</Heading>
-          </Wrapper>
+          </Wrapper> */}
           <Wrapper
             onClick={redirectToAnalytics}
             onMouseOver={() => changeSourceForIcons("analytics")}

@@ -40,7 +40,7 @@ export default function Sidebar(props) {
     "/images/abouticon-blue.svg"
   );
   const [transactionIcon, setTransactionIcon] = React.useState(
-    "/images/transactions.svg"
+    "/images/transactions-blue.svg"
   );
   const [contractsIcon, setContractsIcon] = React.useState(
     "/images/contracts.svg"
@@ -67,7 +67,7 @@ export default function Sidebar(props) {
   const changeOriginalSourceForIcons = (value) => {
     if (value === "about") setAboutIcon("/images/abouticon-blue.svg");
     if (value === "transactions")
-      setTransactionIcon("/images/transactions.svg");
+      setTransactionIcon("/images/transactions-blue.svg");
     // if (value === "networks") setNetworksIcon("/images/networks.svg");
     if (value === "contracts") setContractsIcon("/images/contracts.svg");
     if (value === "analytics") setAnalyticsIcon("/images/analytics.svg");
