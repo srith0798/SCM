@@ -238,7 +238,7 @@ export default function ContractDetails(props) {
                     : "/images/source code_grey.svg"
                 }
               />
-              Source Code
+              {address.status === "Unverified" ? "Byte Code" : "Source Code"}
             </TabView>
           </TabLister>
           {activeButton === "General" && (
@@ -247,10 +247,12 @@ export default function ContractDetails(props) {
                 <TableHeading>Network</TableHeading>
                 <TableData>{address.network}</TableData>
               </Div>
+              <VerifyDiv check={address.status}>
               <Div>
                 <TableHeading>Solidity version</TableHeading>
                 <SolidityData>{Solidity}</SolidityData>
               </Div>
+              </VerifyDiv>
               <Div>
                 <TableHeading>Verification</TableHeading>
                 <Verified>{address.status}</Verified>
@@ -296,10 +298,12 @@ export default function ContractDetails(props) {
                   </Row>
                 </TableData>
               </Div>
+              <VerifyDiv check={address.status}>
               <Div>
                 <TableHeading>Compiler</TableHeading>
                 <TableData>{address.compilerVersion}</TableData>
               </Div>
+              </VerifyDiv>
               <Div>
                 <TableHeading>EVM version</TableHeading>
                 <EvmData>Default</EvmData>
@@ -326,7 +330,7 @@ export default function ContractDetails(props) {
                   </RowProperty>
                   <RowProperty>View transactions</RowProperty>
                 </PopUpBlock>
-
+                <VerifyDiv check={address.status}>
                 <PopUpBlock>
                   {open && (
                     <ContractAbi click={handleClose} data={address.abi} />
@@ -338,6 +342,8 @@ export default function ContractDetails(props) {
                   >
                     <img alt="" src="/images/code.svg" />
                   </RowProperty>
+                  
+                  <div>
                   <RowProperty
                     onClick={() => {
                       handleClickOpen();
@@ -345,7 +351,10 @@ export default function ContractDetails(props) {
                   >
                     Contract ABI
                   </RowProperty>
+                  </div>
                 </PopUpBlock>
+                </VerifyDiv>
+
 
                 <PopUpBlock>
                   {renameState && (
@@ -361,6 +370,8 @@ export default function ContractDetails(props) {
                     Rename Contract
                   </RowProperty>
                 </PopUpBlock>
+
+                
                 <PopUpBlock>
                   {hide && (
                     <HideContract
@@ -409,7 +420,7 @@ export default function ContractDetails(props) {
             </DetailsSection>
           )}
           {activeButton === "Source Code" && (
-            <SourceCode data={address.sourceCode} />
+            <SourceCode data={address.status === "Verified" ? address.sourceCode : address.byteCode} />
           )}
         </Container>
       </MainContainer>
@@ -618,6 +629,11 @@ const Div = styled.div`
     width: 1000px;
   }
 `;
+
+const VerifyDiv = styled.div`
+  display: ${(props) => (props.check === "Verified" ? "block" : "none")};
+`;
+
 const TableData = styled.div`
   font-size: 0.875rem;
   font-weight: 600;
@@ -675,7 +691,9 @@ const TableHeading = styled.div`
   color: #102c78;
   max-width: 18.75rem;
   width: 100%;
+
 `;
+
 const PopUp = styled.div`
   display: flex;
   justify-content: space-between;

@@ -40,7 +40,7 @@ export default function TransactionList() {
   const [TxHashToolTip, setTxHashToolTip] = React.useState(false);
   const [statusToolTip, setstatusToolTip] = React.useState(false);
   const [functionToolTip, setfunctionToolTip] = React.useState(false);
-  const [showPlaceHolder, setShowPlaceHolder] = React.useState(false);
+  // const [showPlaceHolder, setShowPlaceHolder] = React.useState(false);
   const [loader, setLoader] = React.useState(false);
   const [address, setAddress] = React.useState([]);
   const [searchRow, setSearchRow] = React.useState([]);
@@ -76,9 +76,9 @@ export default function TransactionList() {
       setSelected(url)
       getTransaction(url);
       }
-      if (response.contractList.length === 0) setShowPlaceHolder(true);
+      // if (response.contractList.length === 0) setShowPlaceHolder(true);
     } catch (e) {
-      setShowPlaceHolder(true);
+      // setShowPlaceHolder(true);
       setLoader(false);
     }
   };
@@ -100,7 +100,7 @@ export default function TransactionList() {
         setPage(parseInt(pageCount / countToggle) + 1);
       }
     } catch (e) {
-      setShowPlaceHolder(true);
+      // setShowPlaceHolder(true);
       setLoader(false);
     }
   };
@@ -117,9 +117,9 @@ export default function TransactionList() {
       setLoader(false);
       setSearchRow(response.transactionList);
 
-      if (response.transactionList.length === 0) setShowPlaceHolder(true);
+      // if (response.transactionList.length === 0) setShowPlaceHolder(true);
     } catch (e) {
-      setShowPlaceHolder(true);
+      // setShowPlaceHolder(true);
       setLoader(false);
     }
   };
@@ -489,13 +489,12 @@ export default function TransactionList() {
               );
             })}
           </div>
-          {/* {showPlaceHolder && (
-            <PlaceHolderContainer>
+            {/* <PlaceHolderContainer>
               <PlaceHolderImage src="/images/contracts.svg" />
               No Transaction Found
-            </PlaceHolderContainer>
-          )} */}
+            </PlaceHolderContainer> */}
         </TableContainer>
+        <PageVerifyCheck check={address.length}>
         <PaginationDiv>
           <BottomLabel>
             Per Page
@@ -530,6 +529,7 @@ export default function TransactionList() {
             activeClassName={"paginationActive"}
           />
         </PaginationDiv>
+        </PageVerifyCheck>
       </MainContainer>
       <div>
         {false && (
@@ -539,6 +539,11 @@ export default function TransactionList() {
     </>
   );
 }
+
+const PageVerifyCheck = styled.div`
+display: ${(props) => (props.check < 10 ? "none" : "block")};
+`;
+
 const BottomLabel = styled.div`
   display: flex;
   white-space: nowrap;

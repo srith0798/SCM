@@ -248,8 +248,8 @@ export default function Contract(props) {
           return (
             <div style={{ cursor: "pointer" }}>
               <Div>
-                <RowTag onClick={(e) => redirectTODetails(e, data._id)}>
-                  <ColumnSecond >
+                <RowTag>
+                  <ColumnSecond onClick={(e) => redirectTODetails(e, data._id)}>
                     {data.contractName}
                   </ColumnSecond>
                   <ColumnSecond>
@@ -290,6 +290,7 @@ export default function Contract(props) {
             </PlaceHolderContainer> : "" )
           } */}
       </TableContainer>
+      <PageVerifyCheck check={address.length}>
       <PaginationDiv>
         <ReactPaginate
           previousLabel={"<"}
@@ -303,9 +304,14 @@ export default function Contract(props) {
           activeClassName={"paginationActive"}
         />
       </PaginationDiv>
+      </PageVerifyCheck>
     </MainContainer>
   );
 }
+
+const PageVerifyCheck = styled.div`
+display: ${(props) => (props.check <= 10 ? "none" : "block")};
+`;
 
 const FinanceTag = styled.div`
   background-image: url("/images/Tag.svg");
@@ -457,7 +463,7 @@ const MainHeading = styled.div`
     display: flex;
     flex-direction: column;
     padding-top: 7px;
-  }column-gap: 152px;
+  }
 
 `;
 const SubContainer = styled.div`

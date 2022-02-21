@@ -34,8 +34,8 @@ export default function Sidebar(props) {
   );
   const [contractsIcon, setContractsIcon] = useState("/images/contracts.svg");
   // const [networksIcon, setNetworksIcon] = useState("/images/networks.svg");
-  const [analyticsIcon, setAnalyticsIcon] = useState("/images/analytics.svg");
-  const [alertingIcon, setAlertingIcon] = useState("/images/alerting.svg");
+  const [analyticsIcon, setAnalyticsIcon] = useState("/images/analytics-blue.svg");
+  const [alertingIcon, setAlertingIcon] = useState("/images/alerting-blue.svg");
 
   const changeSourceForIcons = (value) => {
     if (value === "transactions")
@@ -50,8 +50,8 @@ export default function Sidebar(props) {
       setTransactionIcon("/images/transactions.svg");
     // if (value === "networks") setNetworksIcon("/images/networks.svg");
     if (value === "contracts") setContractsIcon("/images/contracts.svg");
-    if (value === "analytics") setAnalyticsIcon("/images/analytics.svg");
-    if (value === "alerting") setAlertingIcon("/images/alerting.svg");
+    if (value === "analytics") setAnalyticsIcon("/images/analytics-blue.svg");
+    if (value === "alerting") setAlertingIcon("/images/alerting-blue.svg");
   };
 
   return (

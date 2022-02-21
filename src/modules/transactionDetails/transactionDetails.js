@@ -224,7 +224,7 @@ export default function TransactionDetails() {
             <CommonDiv>
               <Row>
                 <Heading>Network</Heading>
-                <SubHead>{""}</SubHead>
+                <SubHead>{row.network}</SubHead>
               </Row>
             </CommonDiv>
             {/* <CommonDiv>
