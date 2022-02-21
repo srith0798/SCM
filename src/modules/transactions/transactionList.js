@@ -23,6 +23,7 @@ export default function TransactionList() {
   const [filterPopupOpen, setfilterPopupOpen] = useState(false);
   const [countToggle, setCountToggle] = useState(10);
   let url = history?.location?.state?.id;
+  let name = history?.location?.state?.name;
   const handleClickOpen = () => {
     isOpen(true);
   };
@@ -52,6 +53,7 @@ export default function TransactionList() {
 
   const getContractNames = async (skip = 0, limit = 10) => {
     let userId = sessionManager.getDataFromCookies("userId");
+    let dropDownSelect = [];
     try {
       const requestData = {
         skip: skip,
@@ -61,16 +63,19 @@ export default function TransactionList() {
       setLoader(true);
       const response = await ContractsService.getContractsList(requestData);
       setLoader(false);
-      setContracts(response.contractList);
+      response.contractList.forEach((row) => {
+      if(row.isHidden === false)
+      dropDownSelect.push(row);
+      });
+      setContracts(dropDownSelect);
       if(!url){
-      setSelected(response.contractList[0].address)
-      getTransaction(response.contractList[0].address);
-      setSelectedName(response.contractList[0].contractName)
+      setSelected(dropDownSelect[0].address)
+      getTransaction(dropDownSelect[0].address);
+      setSelectedName(dropDownSelect[0].contractName)
     }
       else {
       setSelected(url)
       getTransaction(url);
-      getContractById(url);
       }
       if (response.contractList.length === 0) setShowPlaceHolder(true);
     } catch (e) {
@@ -135,12 +140,6 @@ export default function TransactionList() {
     setOpen(false);
   };
 
-  const getContractById = async () => {
-    try {
-      const response = await ContractsService.getContractsById(url);
-    } catch (err) {
-    }
-  };
   const styles = {
     position: "absolute",
     top: 90,
@@ -161,10 +160,12 @@ export default function TransactionList() {
     fontWeight: "600",
     color: "#191919",
   };
-  const redirectToTransactionDetails = (id) => {
+  const redirectToTransactionDetails = (id, status) => {
     history.push({
       pathname: "/transactions/transaction-details?" + id,
-      state:{id: id}
+      state:{id: id,
+             status: status,
+      }
     })
   };
   const changePage = (value) => {
@@ -304,7 +305,7 @@ export default function TransactionList() {
                 selected={selected.address}
               >
                 <DropDown onClick={handleClick}>
-                  {selectedName !== undefined ? selectedName : ""}{" "}
+                  {selectedName !== undefined ? name!==undefined ? name : selectedName : ""}{" "}
                   <img
                     style={{ marginLeft: "0.5rem" }}
                     alt=""
@@ -438,7 +439,7 @@ export default function TransactionList() {
                   <RowData>
                     {toggle.transactionHash && (
                       <ColumnSecond
-                        onClick={() => redirectToTransactionDetails(data.hash)}
+                        onClick={() => redirectToTransactionDetails(data?.hash, status)}
                       >
                         <BackgroundChangerTxhash>
                           {utility.truncateTxnAddress(data.hash)}

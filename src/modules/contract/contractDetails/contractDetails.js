@@ -23,10 +23,12 @@ export default function ContractDetails(props) {
   const handleViewClick = (e) => {
     setActiveButton(e.target.id);
   };
-  
+
   const [copyToolTip, setcopyToolTip] = React.useState(false);
   const [contractAddress, setContractAddress] = React.useState({});
   const [address, setAddress] = React.useState({});
+  const [Solidity, setSolidity] = React.useState("");
+
   const getContractById = async () => {
     let url = history.location.state.id;
     setContractAddress(url);
@@ -35,7 +37,9 @@ export default function ContractDetails(props) {
       const response = await ContractsService.getContractsById(url);
       setLoader(false);
       setAddress(response);
-      console.log("address", response);
+      let version = response.sourceCode;
+      version = version.split(";")[0].split(" ")[2].replace(";", "");
+      setSolidity(version.replace("^", ""));
     } catch (err) {
       setLoader(false);
     }
@@ -46,9 +50,6 @@ export default function ContractDetails(props) {
 
   const [open, setOpen] = useState(false);
   const [loader, setLoader] = useState(false);
-  let version = `${address.sourceCode}`;
-  version = version?.split[" "]
-  //   solidityV = solidityV[3];
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -156,7 +157,15 @@ export default function ContractDetails(props) {
               />
               Contract Details
             </Heading>
-            <Button onClick={()=> window.open(`https://observer.xdc.org/address/${address.address}`)}>View in Explorer</Button>
+            <Button
+              onClick={() =>
+                window.open(
+                  `https://observer.xdc.org/address/${address.address}`
+                )
+              }
+            >
+              View in Explorer
+            </Button>
           </MainHeading>
         </SubContainer>
         <Container>
@@ -238,7 +247,7 @@ export default function ContractDetails(props) {
               </Div>
               <Div>
                 <TableHeading>Solidity version</TableHeading>
-                <SolidityData>{address.blockNumber}</SolidityData>
+                <SolidityData>{Solidity}</SolidityData>
               </Div>
               <Div>
                 <TableHeading>Verification</TableHeading>
@@ -300,10 +309,17 @@ export default function ContractDetails(props) {
               </Div>
 
               <PopUp>
-                <PopUpBlock  onClick={()=>history.push({
-      pathname: "/transactions",
-      state:{id: address.address}
-    })}>
+                <PopUpBlock
+                  onClick={() =>
+                    history.push({
+                      pathname: "/transactions",
+                      state: {
+                        id: address.address,
+                        name: address.contractName,
+                      },
+                    })
+                  }
+                >
                   <RowProperty>
                     <img alt="" src="/images/cube.svg" />
                   </RowProperty>
@@ -311,7 +327,9 @@ export default function ContractDetails(props) {
                 </PopUpBlock>
 
                 <PopUpBlock>
-                  {open && <ContractAbi click={handleClose} data={address.abi} />}
+                  {open && (
+                    <ContractAbi click={handleClose} data={address.abi} />
+                  )}
                   <RowProperty
                     onClick={() => {
                       handleClickOpen();
@@ -389,7 +407,9 @@ export default function ContractDetails(props) {
               </PopUp>
             </DetailsSection>
           )}
-          {activeButton === "Source Code" && <SourceCode data={address.sourceCode} />}
+          {activeButton === "Source Code" && (
+            <SourceCode data={address.sourceCode} />
+          )}
         </Container>
       </MainContainer>
     </>

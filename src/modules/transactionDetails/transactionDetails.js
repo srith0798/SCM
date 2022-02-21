@@ -25,6 +25,7 @@ export default function TransactionDetails() {
     history.push("/transactions");
   };
   let url = history.location.state.id;
+  let status = history.location.state.status;
   const searchTransaction = async (searchValues, searchKeys) => {
     try {
       const requestData = {
@@ -41,7 +42,6 @@ export default function TransactionDetails() {
   useEffect(()=>{
   searchTransaction(url, ["hash"]);
   }, [url])
-
   return (
     <MainContainer>
       <SubContainer>
@@ -82,7 +82,8 @@ export default function TransactionDetails() {
               <CopyToClipboardImage src="/images/copy.svg" />
             </Tooltip>
           </CopyToClipboard>
-          {/* <FailButton>Fail</FailButton> */}
+          <FailButton check={status}>Fail</FailButton>
+          <SuccessButton check={status}>Success</SuccessButton>
           <AlertButton>
             <img
               alt=""
@@ -283,7 +284,7 @@ export default function TransactionDetails() {
             </CommonDivTo>
             <TimeStampDiv>
               <Heading>Timestamp</Heading>
-              <SubHead>{new Date(row.timestamp).toLocaleString("en-US")}</SubHead>
+              <SubHead>{new Date(row.createdOn).toLocaleString("en-US")}</SubHead>
             </TimeStampDiv>
             <CommonDiv>
               <Row>
@@ -300,7 +301,7 @@ export default function TransactionDetails() {
             <CommonDiv>
               <Row>
                 <Heading>Gas Used</Heading>
-                <SubHead>{row.gasUsed}</SubHead>
+                <SubHead>{row.gasUsed} ({((row.gas/row.gasUsed)* 100).toFixed(2)})%</SubHead>
               </Row>
             </CommonDiv>
             <GasPriceDiv>
@@ -866,7 +867,7 @@ const FailButton = styled.div`
   padding: 0px 0px 0px 18px;
   width: 100%;
   margin-left: 1rem;
-  display: flex;
+  display: ${(props) => (props.check === "Fail" ? "flex" : "none")};
   align-items: center;
   width: 69px;
   height: 25px;
@@ -879,6 +880,27 @@ const FailButton = styled.div`
     width: 87px;
   }
 `;
+
+const SuccessButton = styled.div`
+  color: #00A58C;
+  padding: 0px 18px 0px 18px;
+  width: 100%;
+  margin-left: 1rem;
+  display: ${(props) => (props.check === "Success" ? "flex" : "none")};
+  align-items: center;
+  width: 99px;
+  height: 25px;
+  background: #E0FFFA 0% 0% no-repeat padding-box;
+  border: 1px solid #99C7C0;
+  border-radius: 4px;
+  opacity: 1;
+  margin-right: 12px;
+  /* justify-content: center; */
+  @media (min-width: 300px) and (max-width: 767px) {
+    width: 87px;
+  }
+`;
+
 const AlertButton = styled.div`
   top: 202px;
   left: 1016px;
@@ -892,6 +914,7 @@ const AlertButton = styled.div`
   margin-left: 2px;
   padding-top: 2px;
   padding-left: 8px;
+  white-space: nowrap;
   @media (min-width: 1024px) and (max-width: 1110px) {
     display: none;
   }
