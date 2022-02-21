@@ -67,7 +67,7 @@ export default function MainComponent(props) {
                     <TransactionHash>
                       xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c
                     </TransactionHash>
-                    <Image src="/images/Arrrow.svg" />
+                    <Image src="/images/arrrow.svg" />
                   </DropDown>
                   {isSetOpen ? (
                     <Box sx={styles}>
