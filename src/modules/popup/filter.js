@@ -259,7 +259,7 @@ const Input = styled.input`
   height: 34px;
   padding-left: 9px;
 
-  margin-left: 20px;
+  margin-left: 18px;
   width: 160px;
   @media (min-width: 300px) and (max-width: 414px) {
     margin-left: 0px;
@@ -273,6 +273,7 @@ const InputDiv = styled.div`
   @media (min-width: 300px) and (max-width: 414px) {
     display: flex;
     padding-bottom: 30px;
+    margin-right: 0px;
   }
 `;
 const MainContainer = styled.div`
@@ -358,7 +359,7 @@ const NewContainerStatus = styled.div`
   padding-bottom: 20px;
   @media (min-width: 300px) and (max-width: 414px) {
     // flex-direction: column;
-    column-gap: 0px;
+    column-gap: 10px;
   }
 `;
 const LastContainer = styled.div`
@@ -368,7 +369,7 @@ const LastContainer = styled.div`
   @media (min-width: 300px) and (max-width: 414px) {
     justify-content: start;
     margin-top: -18px;
-    margin-left: 4px;
+    margin-left: -13px;
   }
 `;
 const NewContainerOne = styled.div`

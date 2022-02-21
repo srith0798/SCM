@@ -106,7 +106,7 @@ export default function TransactionDetails() {
               paddingLeft: "10px",
               borderBottom:
                 activeButton === "Overview"
-                  ? "0.225rem solid #3163F0"
+                  ? "0.3rem solid #3163F0"
                   : "#AEB7D0",
             }}
           >
@@ -129,7 +129,7 @@ export default function TransactionDetails() {
               display: "flex",
               paddingBottom: "1rem",
               borderBottom:
-                activeButton === "Contracts" ? "0.225rem solid #3163F0" : "",
+                activeButton === "Contracts" ? "0.3rem solid #3163F0" : "",
             }}
           >
             <TabImage
@@ -151,9 +151,7 @@ export default function TransactionDetails() {
               display: "flex",
               paddingBottom: "1rem",
               borderBottom:
-                activeButton === "EventsDetails"
-                  ? "0.225rem solid #3163F0"
-                  : "",
+                activeButton === "EventsDetails" ? "0.3rem solid #3163F0" : "",
             }}
           >
             <TabImage
@@ -188,7 +186,7 @@ export default function TransactionDetails() {
               paddingBottom: "1rem",
               whiteSpace: "nowrap",
               borderBottom:
-                activeButton === "StateChange" ? "0.225rem solid #3163F0" : "",
+                activeButton === "StateChange" ? "0.3rem solid #3163F0" : "",
             }}
           >
             <TabImage

@@ -116,6 +116,7 @@ export default function AddContract(props) {
                   <XDCLogo src="/images/network_xdc.svg"></XDCLogo>
                   <BlueLine></BlueLine>
                 </IconImport>
+
                 <SelectImport>
                   <CheckBox
                     type="checkbox"
@@ -147,6 +148,7 @@ const XDCLogo = styled.img`
 const BlueLine = styled.div`
   width: 115px;
   border-bottom: 2px solid blue;
+  margin-left: -8px;
 `;
 const AddressImport = styled.div`
   color: #436ce0;
