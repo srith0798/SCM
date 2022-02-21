@@ -125,7 +125,7 @@ const SpaceBetween = styled.div`
   padding-bottom: 4px;
   padding-top: 3px;
 `;
-const Button = styled.button`
+const Button = styled.a`
   border: 1px solid white;
   background: transparent;
   border-radius: 5px;

@@ -436,6 +436,7 @@ export default function TransactionList() {
               )}
             </RowData>
           </Div>
+
           <div>
             {(input === "" ? address : searchRow).map((data, index) => {
               const status = setStatus(data.status);
@@ -555,9 +556,9 @@ const Div = styled.div`
   border-bottom: 1px solid #e3e7eb;
   white-space: nowrap;
   column-gap: 20px;
-  width: 100%;
+  width: fit-content;
   @media (min-width: 300px) and (max-width: 768px) {
-    width: 500%;
+    width: fit-content;
   }
 `;
 const RowData = styled.div`
@@ -755,11 +756,11 @@ const ColumnOne = styled.div`
   font-weight: 700;
   color: #102c78;
   column-gap: 20px;
-  width: 100%;
+  width: fit-content;
   min-width: 200.5px;
   white-space: nowrap;
   @media (min-width: 300px) and (max-width: 767px) {
-    width: 100%;
+    width: fit-content;
   }
 `;
 const ColumnSecond = styled.div`

@@ -68,7 +68,12 @@ export default function AddContract(props) {
           <Container>
             <SubContainer>
               <Add>Add Contract</Add>
-              <img alt="" src="/images/close.svg" onClick={props.click} />
+              <img
+                style={{ cursor: "pointer" }}
+                alt=""
+                src="/images/close.svg"
+                onClick={props.click}
+              />
             </SubContainer>
             <div
               style={{

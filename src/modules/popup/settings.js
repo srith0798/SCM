@@ -7,7 +7,7 @@ const useStyles = makeStyles(() => ({
   dialogBox: {
     width: "100% !important",
     maxWidth: "700px",
-    height: "600px",
+    height: "550px",
   },
 }));
 
@@ -36,8 +36,6 @@ export default function Settings(props) {
               Change the layout of the transactions list and display only the
               columns and information that is most important to you.
             </Content>
-
-            <BorderDiv></BorderDiv>
 
             <BorderDiv></BorderDiv>
             <SubContainer
