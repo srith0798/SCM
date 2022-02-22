@@ -133,6 +133,7 @@ export default function Rules() {
                       </Tooltip>
                     </ColumnOne>
                     <ColumnOne>
+                    <Subcolumn3>
                       Address
                       <Tooltip
                         open={addressToolTip}
@@ -146,8 +147,10 @@ export default function Rules() {
                           src="/images/tool-tip.svg"
                         />
                       </Tooltip>
+                      </Subcolumn3>
                     </ColumnOne>
                     <ColumnOne>
+                    <SubColumn2>
                       Network
                       <Tooltip
                         open={networkToolTip}
@@ -161,8 +164,10 @@ export default function Rules() {
                           src="/images/tool-tip.svg"
                         />
                       </Tooltip>
+                      </SubColumn2>
                     </ColumnOne>
                     <ColumnOne>
+                    
                       Alert Type
                       <Tooltip
                         open={alertTypeToolTip}
@@ -176,6 +181,7 @@ export default function Rules() {
                           src="/images/tool-tip.svg"
                         />
                       </Tooltip>
+                      
                     </ColumnOne>
                     <ColumnOne></ColumnOne>
                     <ColumnOne></ColumnOne>
@@ -186,7 +192,7 @@ export default function Rules() {
                     <ColumnTwo>App_Transactions</ColumnTwo>
                     <ColumnTwo>xdcabfe…8b3c</ColumnTwo>
                     <ColumnTwo>XDC Mainnet</ColumnTwo>
-                    <ColumnTwo>Sucessfull</ColumnTwo>
+                    <ColumnTwo><SubColumn>Sucessfull</SubColumn></ColumnTwo>
                     <ColumnTwo style={{ fontSize: "14px", color: "#00A58C" }}>
                       Enabled
                     </ColumnTwo>
@@ -206,8 +212,9 @@ export default function Rules() {
                     <ColumnTwo>App_Transactions</ColumnTwo>
                     <ColumnTwo>xdcabfe…8b3c</ColumnTwo>
                     <ColumnTwo>XDC Mainnet</ColumnTwo>
-                    <ColumnTwo>Failed </ColumnTwo>
+                    <ColumnTwo><SubColumn>Failed</SubColumn> </ColumnTwo>
                     <ColumnTwo
+
                       style={{ fontSize: "0.875rem", color: "#00A58C" }}
                     >
                       Enabled
@@ -282,7 +289,10 @@ const RowData = styled.div`
     column-gap: 84px;
   }
   @media (min-width: 820px) and (max-width: 1200px) {
-    column-gap: 145px !important;
+    column-gap: 135px !important;
+  }
+  @media (min-width: 768px) and (max-width: 1200px) {
+    column-gap: 96px;
   }
 
 `;
@@ -293,7 +303,10 @@ const RowData1 = styled.div`
     column-gap: 84px;
   }
   @media (min-width: 820px) and (max-width: 1200px) {
-    column-gap: 145px !important;
+    column-gap: 133px !important;
+  }
+  @media (min-width: 768px) and (max-width: 1200px) {
+    column-gap: 97px ;
   }
 
 `;
@@ -326,6 +339,39 @@ const ColumnTwo = styled.div`
   @media (min-width: 300px) and (max-width: 768px) {
     margin-right: 20px;
   }
+`;
+const SubColumn = styled.div`
+@media (min-width: 820px) and (max-width: 1200px) {
+  width:39px;
+}
+
+@media (min-width: 768px) and (max-width: 1200px) {
+  width:39px;
+}
+
+`;
+const Subcolumn3= styled.div`
+@media (min-width: 820px) and (max-width: 1200px) {
+  display:flex;
+margin-right:19px !important;
+}
+@media (min-width: 768px) and (max-width: 1200px) {
+  display:flex;
+margin-right:25px !important;
+}
+
+`;
+const SubColumn2= styled.div`
+@media (min-width: 820px) and (max-width: 1200px) {
+  display:flex;
+margin-right:10px !important;
+}
+@media (min-width: 768px) and (max-width: 1200px) {
+  display:flex;
+margin-right:10px ;
+}
+
+
 `;
 const MainContainer = styled.div`
   background: #ecf0f7 0% 0% no-repeat padding-box;
