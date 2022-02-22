@@ -10,8 +10,16 @@ export default function TransactionDetails() {
   const handleViewClick = (e) => {
     setActiveButton(e.target.id);
   };
+  
+  let url = history.location.state.url;
+  let status = history.location.state.status;
   const backButton = () => {
-    history.push("/transaction-details");
+    history.push({
+      pathname: "/transactions/transaction-details?" + url,
+      state:{id: url,
+             status: status,
+      }
+    })
   };
   return (
     <>
