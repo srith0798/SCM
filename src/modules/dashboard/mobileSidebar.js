@@ -34,7 +34,9 @@ export default function Sidebar(props) {
   );
   const [contractsIcon, setContractsIcon] = useState("/images/contracts.svg");
   // const [networksIcon, setNetworksIcon] = useState("/images/networks.svg");
-  const [analyticsIcon, setAnalyticsIcon] = useState("/images/analytics-blue.svg");
+  const [analyticsIcon, setAnalyticsIcon] = useState(
+    "/images/analytics-blue.svg"
+  );
   const [alertingIcon, setAlertingIcon] = useState("/images/alerting-blue.svg");
 
   const changeSourceForIcons = (value) => {
@@ -133,7 +135,7 @@ const Hamburger = styled.img`
   margin: 5px 12px 0px 9px;
   position: absolute;
   left: 123px;
-  top: 22px;
+  top: 5px;
   cursor: pointer;
   @media (min-width: 1024px) {
     display: none;

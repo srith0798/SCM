@@ -93,13 +93,15 @@ export default function Filter(props) {
               <InputDiv>
                 <Input
                   placeholder="From"
-                  type="date"
+                  onfocus="(this.type='date')"
+                  onblur="(this.type='text')"
                   onChange={(e) => props.setFromInput([e.target.value])}
                   value={props.fromInput}
                 />
                 <Input
                   placeholder="To"
-                  type="date"
+                  onfocus="(this.type='date')"
+                  onblur="(this.type='text')"
                   onChange={(e) => props.setToInput([e.target.value])}
                   value={props.toInput}
                 />
@@ -126,7 +128,7 @@ const ApplyButton = styled.div`
   color: #ffffff;
   padding-top: 6px;
   font-size: 14px;
-  margin-right: 28px;
+  margin-right: 25px;
   text-align: center;
   cursor: pointer;
 
@@ -258,7 +260,7 @@ const Input = styled.input`
   padding-left: 9px;
 
   margin-left: 18px;
-  width: 44%;
+  width: 160px;
   @media (min-width: 300px) and (max-width: 414px) {
     margin-left: 0px;
     margin-right: 20px;
@@ -271,6 +273,7 @@ const InputDiv = styled.div`
   @media (min-width: 300px) and (max-width: 414px) {
     display: flex;
     padding-bottom: 30px;
+    margin-right: 0px;
   }
 `;
 const MainContainer = styled.div`
@@ -352,21 +355,21 @@ const NewContainerStatus = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  max-width: 3 00px;
+  column-gap: 103px;
   padding-bottom: 20px;
   @media (min-width: 300px) and (max-width: 414px) {
     // flex-direction: column;
-    // display: flex;
+    column-gap: 10px;
   }
 `;
 const LastContainer = styled.div`
   display: flex;
   justify-content: end;
-  max-width: 466px;
+  max-width: 479px;
   @media (min-width: 300px) and (max-width: 414px) {
     justify-content: start;
     margin-top: -18px;
-    margin-left: -13px;
+    margin-left: 6px;
   }
 `;
 const NewContainerOne = styled.div`
