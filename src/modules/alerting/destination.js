@@ -111,6 +111,9 @@ const MainContainer = styled.div`
 const Div = styled.div`
   padding-bottom: 0.5rem;
   padding-left: 10px;
+  @media (min-width: 300px) and (max-width: 768px) {
+    padding-left: 0px;
+  }
 `;
 const LastDiv = styled.div`
   overflow-y: hidden;
