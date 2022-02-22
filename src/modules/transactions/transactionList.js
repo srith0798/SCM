@@ -24,6 +24,7 @@ export default function TransactionList() {
   const [countToggle, setCountToggle] = useState(10);
   let url = history?.location?.state?.id;
   let name = history?.location?.state?.name;
+
   const handleClickOpen = () => {
     isOpen(true);
   };
@@ -75,6 +76,7 @@ export default function TransactionList() {
       else {
       setSelected(url)
       getTransaction(url);
+      setSelectedName(name)
       }
       // if (response.contractList.length === 0) setShowPlaceHolder(true);
     } catch (e) {
@@ -188,9 +190,15 @@ export default function TransactionList() {
 
   const [select, setSelect] = React.useState(1);
 
-  const [fromInput, setFromInput] = React.useState([]);
+  const [fromInput, setFromInput] = React.useState(0);
 
-  const [toInput, setToInput] = React.useState([]);
+  const [toInput, setToInput] = React.useState(0);
+  let getFrom = new Date(fromInput).toUTCString();
+  let setFrom = new Date(getFrom).getTime()/1000.0;
+
+  let getTo = new Date(toInput).toUTCString();
+  let setTo = new Date(getTo).getTime()/1000.0;
+
 
   useEffect(() => {
     if (selected.length > 0) {
@@ -465,7 +473,8 @@ export default function TransactionList() {
                     )}
                     {toggle.contracts && (
                       <ColumnSecond>
-                        {utility.truncateTxnAddress(data.contractAddress)}
+                        {/* {utility.truncateTxnAddress(data.contractAddress)} */}
+                        {selectedName || "Contract"}
                       </ColumnSecond>
                     )}
 

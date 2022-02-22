@@ -92,16 +92,18 @@ export default function Filter(props) {
 
               <InputDiv>
                 <Input
-                  placeholder="From"
+                  data-placeholder="From"
                   type="date"
                   onChange={(e) => props.setFromInput([e.target.value])}
                   value={props.fromInput}
+                  required aria-required="true"
                 />
                 <Input
-                  placeholder="To"
+                  data-placeholder="To"
                   type="date"
                   onChange={(e) => props.setToInput([e.target.value])}
                   value={props.toInput}
+                  required aria-required="true"
                 />
               </InputDiv>
             </NewContainer>

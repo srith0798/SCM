@@ -24,7 +24,7 @@ export default function Sidebar(props) {
     history.push("/alerting");
   };
   const redirectToFaqs = () => {
-    history.push("/");
+    history.push("/faqs");
   };
 
   const redirectToLogout = () => {

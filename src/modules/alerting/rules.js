@@ -13,7 +13,7 @@ export default function Rules() {
     setActiveButton(e.target.id);
   };
   const redirectToAlertDetails = () => {
-    history.push("/dashboard/alerting/alert-details");
+    history.push("/alert-detail");
   };
 
   const [networkToolTip, setnetworkToolTip] = React.useState(false);
@@ -26,7 +26,7 @@ export default function Rules() {
       <MainContainer>
         <TitleContainer>
           <Title style={{ color: "#191919" }}>Alerting</Title>
-          <Button onClick={() => history.push("/dashboard/add-alert")}>
+          <Button onClick={() => history.push("/add-alert")}>
             Add Alert
           </Button>
         </TitleContainer>

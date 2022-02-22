@@ -10,6 +10,7 @@ import { history } from "../../managers/history";
 import utility from "../../utility";
 import Tooltip from "@mui/material/Tooltip";
 import ContractsService from "../../services/contractsService";
+import moment from "moment";
 
 export default function TransactionDetails() {
   const [eventToolTip, seteventToolTip] = React.useState(false);
@@ -227,12 +228,12 @@ export default function TransactionDetails() {
                 <SubHead>{row.network}</SubHead>
               </Row>
             </CommonDiv>
-            {/* <CommonDiv>
+            <ErrorCheckDiv check={status}>
               <Row>
                 <Heading>Error</Heading>
-                <SubHead>Out of Gas</SubHead>
+                {/* <SubHead>Out of Gas</SubHead> */}
               </Row>
-            </CommonDiv> */}
+            </ErrorCheckDiv>
             <CommonDivBlock>
               <Heading>Block</Heading>
               <SubHead>{row.blockNumber}</SubHead>
@@ -276,7 +277,7 @@ export default function TransactionDetails() {
             </CommonDivTo>
             <TimeStampDiv>
               <Heading>Timestamp</Heading>
-              <SubHead>{new Date(row.createdOn).toLocaleString("en-US")}</SubHead>
+              <SubHead>{moment(row.createdOn).fromNow()+ " " +"(" + new Date(row.createdOn).toLocaleString("en-US")+ ")"}</SubHead>
             </TimeStampDiv>
             <CommonDiv>
               <Row>
@@ -302,13 +303,12 @@ export default function TransactionDetails() {
             </GasPriceDiv>
             <FeeDiv>
               <Heading>Transaction Fee</Heading>
-              <SubHead>0.000119580201654524 XDC</SubHead>
+              <SubHead></SubHead>
             </FeeDiv>
             <RawInputDiv>
               <Heading>Raw input</Heading>
               <SubHead>
                 <TransactionNumber>
-                  0x01173a740000000000…f28e0b4fae4a3bfee7dc52
                 </TransactionNumber>
                 <CopyToClipboard
                   text={" 0x01173a740000000000…f28e0b4fae4a3bfee7dc52"}
@@ -325,7 +325,7 @@ export default function TransactionDetails() {
             <CommonDiv>
               <Row>
                 <Heading>Function: </Heading>
-                <SubHeadBlue>transfer()</SubHeadBlue>
+                <SubHeadBlue>{row.function}</SubHeadBlue>
               </Row>
             </CommonDiv>
             <CommonDiv>
@@ -379,15 +379,29 @@ export default function TransactionDetails() {
               </Row>
             </CommonDiv>
           </TokenTransferDiv>
+          <StackTraceCheckDiv check={status}>
           <b>Stack Trace</b> <ToolTipIcon src="/images/tool-tip.svg" />
           <StackContainer>
             <BackgroundChanger>
-              <TextLine>Error Messege:out of gas</TextLine>
+              {/* <TextLine>Error Messege:out of gas</TextLine>
               <img alt="" src="/images/error.svg" /> balances[_to] =
               balances[_to].add(_value);
-              <br />
+              <br /> */}
             </BackgroundChanger>
           </StackContainer>
+          </StackTraceCheckDiv>
+          <TokenTransferCheckDiv check={status}>
+          <b>Token Transfer</b>
+          <StackContainer>
+            <BackgroundChanger>
+              {/* <TextLine>Error Messege:out of gas</TextLine>
+              <img alt="" src="/images/error.svg" /> balances[_to] =
+              balances[_to].add(_value);
+              <br /> */}
+            </BackgroundChanger>
+          </StackContainer>
+          </TokenTransferCheckDiv>
+          
           <LastContainer>
             <SearchBar placeholder="Execution trace" />
             <br />
@@ -401,7 +415,7 @@ export default function TransactionDetails() {
         </ScrollableDiv>
       )}
       {activeButton === "Contracts" && (
-        <SubContracts address={row.contractAddress} />
+        <SubContracts address={row.contractAddress} url={url} status={status} />
       )}
       {activeButton === "EventsDetails" && <EventsDetails />}
       {activeButton === "StateChange" && <StateChange />}
@@ -414,7 +428,7 @@ const MainContainer = styled.div`
   width: 100%;
   padding: 2.125rem;
   display: 100%;
-  height: 100vh;
+  height: 123vh;
   @media (min-width: 340px) and (max-width: 768px) {
     padding: 1.2rem;
   }
@@ -503,6 +517,15 @@ const CommonDiv = styled.div`
     column-gap: 0px;
   }
 `;
+const ErrorCheckDiv = styled.div`
+  display: ${(props) => (props.check === "Fail" ? "block" : "none")};
+  border-bottom: 0.031rem #eaf1ec solid;
+  padding: 0.813rem;
+  @media (min-width: 300px) and (max-width: 768px) {
+    column-gap: 0px;
+  }
+`;
+
 const TimeStampDiv = styled.div`
   border-bottom: 0.031rem #eaf1ec solid;
   padding: 0.813rem;
@@ -777,6 +800,14 @@ const CopyToClipboardImage = styled.img`
   // @media (min-width: 768px) and (max-width: 1024px) {
   //   margin-left: px;
   // }
+`;
+
+const StackTraceCheckDiv = styled.div`
+display: ${(props) => (props.check === "Fail" ? "block" : "none")};
+`;
+
+const TokenTransferCheckDiv = styled.div`
+display: ${(props) => (props.check === "Success" ? "block" : "none")};
 `;
 
 const TextLine = styled.div`

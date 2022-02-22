@@ -21,6 +21,8 @@ import ConnectWallets from "./connectWallets";
 import utility from "../../utility";
 import toast, { Toaster } from "react-hot-toast";
 import { httpConstants } from "../../constants";
+import VerifiedContracts from "../transactionDetails/verifiedContracts";
+import Faqs from "../faqs/faq";
 
 //Replace Under Development with component once developed-
 const HomeComponent = (props) => {
@@ -55,11 +57,14 @@ const HomeComponent = (props) => {
           {Utility.isMenuActive("/about") && (
             <About getCurrentUserDetails={props.getCurrentUserDetails} />
           )}
+          {Utility.isMenuActive("/faqs") && <Faqs/>}
           {Utility.isMenuActive("/analytics") && <Analytics />}
           {Utility.isMenuActive("/alerting") && <Rules />}
           {Utility.isMenuActive("/add-alert") && <AddAlert />}
           {Utility.isMenuActive("/alert-detail") && <AlertDetails />}
           {Utility.isMenuActive("/networks") && <Network />}
+          {Utility.isMenuActive("/verified-contracts") && <VerifiedContracts/>}
+          
         </Container>
       )}
     </>
@@ -101,7 +106,7 @@ const dashboardComponent = (props) => {
         );
       }
       sessionManager.setDataInCookies(true, "isLoggedIn");
-      history.push("/dashboard/about");
+      history.push("/about");
     }
     else{
       loginErrorMessage();

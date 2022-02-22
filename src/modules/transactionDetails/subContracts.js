@@ -4,7 +4,13 @@ import { history } from "../../managers/history";
 
 export default function SubContracts(props) {
   const SubButton = () => {
-    history.push("/verified-contracts");
+    // history.push("/verified-contracts");
+    history.push({
+      pathname: "/verified-contracts",
+      state: { url: props.url,
+               status: props.status,             
+      }
+    })
   };
   return (
     <MainContainer>

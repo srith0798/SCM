@@ -11,6 +11,7 @@ export default function AddAlert() {
   const [activeButton, setActiveButton] = React.useState("Rules");
   const handleViewClick = (e) => {
     setActiveButton(e.target.id);
+    history.push("/alerting");
   };
 
   const [successfulTransaction, setsuccessfulTransaction] = React.useState("/images/Successful transaction_blue.svg");
@@ -29,7 +30,7 @@ export default function AddAlert() {
     setProgress(value);
   };
   const backButton = () => {
-    history.push("/dashboard/rules");
+    history.push("/alerting");
   };
 
   const changeSourceForIcons = (value) => {

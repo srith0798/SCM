@@ -252,11 +252,11 @@ export default function Contract(props) {
                   <ColumnSecond onClick={(e) => redirectTODetails(e, data._id)}>
                     {data.contractName}
                   </ColumnSecond>
-                  <ColumnSecond>
+                  <ColumnSecond onClick={(e) => redirectTODetails(e, data._id)}>
                     {utility.truncateTxnAddress(data.address)}
                   </ColumnSecond>
 
-                  <ColumnSecond>{data.network}</ColumnSecond>
+                  <ColumnSecond onClick={(e) => redirectTODetails(e, data._id)}>{data.network}</ColumnSecond>
                   <ColumnSecond style={{ display: "flex" }}>
                     <TagCol>
                     {address[index].tags &&
@@ -276,7 +276,7 @@ export default function Contract(props) {
                     )}
                     </TagCol>
                   </ColumnSecond>
-                  <ColumnSecond>
+                  <ColumnSecond onClick={(e) => redirectTODetails(e, data._id)}>
                     {data.isHidden ? "Hidden" : "Visible"}
                   </ColumnSecond>
                 </RowTag>
