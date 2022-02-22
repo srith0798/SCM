@@ -72,18 +72,14 @@ const HomeComponent = (props) => {
 };
 
 const dashboardComponent = (props) => {
-
   const loginErrorMessage = () =>
+    toast.error(httpConstants.MESSAGE.VALIDATE_BROWSER_LOGIN, {
+      duration: 4000,
 
-  toast.error(httpConstants.MESSAGE.VALIDATE_BROWSER_LOGIN, {
+      position: httpConstants.MESSAGE.TOASTS_POSITION,
 
-    duration: 4000,
-
-    position: httpConstants.MESSAGE.TOASTS_POSITION,
-
-    className: "toast-div-address",
-
-  });
+      className: "toast-div-address",
+    });
   const getCurrentUserDetails = async () => {
     let user = "";
 

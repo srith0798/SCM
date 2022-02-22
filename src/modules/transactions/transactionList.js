@@ -64,8 +64,7 @@ export default function TransactionList() {
       const response = await ContractsService.getContractsList(requestData);
       setLoader(false);
       response.contractList.forEach((row) => {
-      if(row.isHidden === false)
-      dropDownSelect.push(row);
+        if (row.isHidden === false) dropDownSelect.push(row);
       });
       setContracts(dropDownSelect);
       if(!url){
@@ -164,10 +163,8 @@ export default function TransactionList() {
   const redirectToTransactionDetails = (id, status) => {
     history.push({
       pathname: "/transactions/transaction-details?" + id,
-      state:{id: id,
-             status: status,
-      }
-    })
+      state: { id: id, status: status },
+    });
   };
   const changePage = (value) => {
     setValueCheck(value.selected);
@@ -245,114 +242,115 @@ export default function TransactionList() {
   return (
     <>
       <MainContainer>
-        <ShowLoader state={loader} top={"33%"} />
-        <TransactionMedia>Transactions</TransactionMedia>
-        <TransactionBox>
-          <NewDiv>
-            <Transactions>Transactions</Transactions>
-            <SearchBar
-              placeholder="Search by address or name"
-              onChange={search}
-              value={input}
-            />
-          </NewDiv>
-
-          <IconContainer>
-            {open && (
-              <Settings
-                click={handleClose}
-                setToggle={setToggle}
-                toggle={toggle}
+        <SubContainer>
+          <ShowLoader state={loader} top={"33%"} />
+          <TransactionMedia>Transactions</TransactionMedia>
+          <TransactionBox>
+            <NewDiv>
+              <Transactions>Transactions</Transactions>
+              <SearchBar
+                placeholder="Search by address or name"
+                onChange={search}
+                value={input}
               />
-            )}
-            <Tooltip disableFocusListener title="Settings">
-              <Icons src="/images/settings.svg" onClick={handleClickOpen} />
-            </Tooltip>
-            <Tooltip disableFocusListener title="Refresh">
-              <Icons
-                onClick={() => getTransaction()}
-                src="/images/refresh.svg"
-              />
-            </Tooltip>
-            {filterPopupOpen && (
-              <Filter
-                click={filterPopupClose}
-                select={select}
-                filterSearch={filterSearch}
-                setSelect={setSelect}
-                fromInput={fromInput}
-                setFromInput={setFromInput}
-                toInput={toInput}
-                setToInput={setToInput}
-                selectDrop={selectDrop}
-                setSelectDrop={setSelectDrop}
-              />
-            )}
-            <Tooltip disableFocusListener title="Filter">
-              <Icons src="/images/filter.svg" onClick={setfilterPopupOpen} />
-            </Tooltip>
-          </IconContainer>
-        </TransactionBox>
+            </NewDiv>
 
-        <Card>
-          <Column>
-            <Heading>View Transaction for Contract</Heading>
-            <InstructionText>
-              You can view transactions per contract by using the contract
-              picker below
-            </InstructionText>
+            <IconContainer>
+              {open && (
+                <Settings
+                  click={handleClose}
+                  setToggle={setToggle}
+                  toggle={toggle}
+                />
+              )}
+              <Tooltip disableFocusListener title="Settings">
+                <Icons src="/images/settings.svg" onClick={handleClickOpen} />
+              </Tooltip>
+              <Tooltip disableFocusListener title="Refresh">
+                <Icons
+                  onClick={() => getTransaction()}
+                  src="/images/refresh.svg"
+                />
+              </Tooltip>
+              {filterPopupOpen && (
+                <Filter
+                  click={filterPopupClose}
+                  select={select}
+                  filterSearch={filterSearch}
+                  setSelect={setSelect}
+                  fromInput={fromInput}
+                  setFromInput={setFromInput}
+                  toInput={toInput}
+                  setToInput={setToInput}
+                  selectDrop={selectDrop}
+                  setSelectDrop={setSelectDrop}
+                />
+              )}
+              <Tooltip disableFocusListener title="Filter">
+                <Icons src="/images/filter.svg" onClick={setfilterPopupOpen} />
+              </Tooltip>
+            </IconContainer>
+          </TransactionBox>
 
-            <ClickAwayListener onClickAway={handleClickAway}>
-              <Box
-                sx={{
-                  position: "relative",
-                  marginRight: "15px;",
-                  wordBreak: "break-all",
-                }}
-                selected={selected.address}
-              >
-                <DropDown onClick={handleClick}>
+          <Card>
+            <Column>
+              <Heading>View Transaction for Contract</Heading>
+              <InstructionText>
+                You can view transactions per contract by using the contract
+                picker below
+              </InstructionText>
+
+              <ClickAwayListener onClickAway={handleClickAway}>
+                <Box
+                  sx={{
+                    position: "relative",
+                    marginRight: "15px;",
+                    wordBreak: "break-all",
+                  }}
+                  selected={selected.address}
+                >
+                  <DropDown onClick={handleClick}>
                     {selectedName || "Contract"}
-                  <img
-                    style={{ marginLeft: "0.5rem" }}
-                    alt=""
-                    src="/images/XDCmainnet.svg"
-                  />
-                  <br />
-                  <TransactionHash>{selected}</TransactionHash>
-                  <Image src="/images/arrrow.svg" />
-                </DropDown>
+                    <img
+                      style={{ marginLeft: "0.5rem" }}
+                      alt=""
+                      src="/images/XDCmainnet.svg"
+                    />
+                    <br />
+                    <TransactionHash>{selected}</TransactionHash>
+                    <Image src="/images/arrrow.svg" />
+                  </DropDown>
 
-                {isSetOpen ? (
+                  {isSetOpen ? (
                     <Box sx={styles}>
-                        <Label>Contracts</Label>
-                        {contracts.length &&
+                      <Label>Contracts</Label>
+                      {contracts.length &&
                         contracts.map((item) => (
-                            <div
-                                onClick={() => {
-                                    setOpen(false)
-                                    getTransaction(item.address);
-                                    setSelected(item.address);
-                                    setSelectedName(item.contractName);
-                                }}
-                            >
-                                {item.contractName || "Contract"}
-                                <img
-                                    style={{marginLeft: "0.5rem"}}
-                                    alt=""
-                                    src="/images/XDCmainnet.svg"
-                                />
-                                <br/>
-                                <TransactionHash>{item.address}</TransactionHash>
-                            </div>
+                          <div
+                            onClick={() => {
+                              setOpen(false);
+                              getTransaction(item.address);
+                              setSelected(item.address);
+                              setSelectedName(item.contractName);
+                            }}
+                          >
+                            {item.contractName || "Contract"}
+                            <img
+                              style={{ marginLeft: "0.5rem" }}
+                              alt=""
+                              src="/images/XDCmainnet.svg"
+                            />
+                            <br />
+                            <TransactionHash>{item.address}</TransactionHash>
+                          </div>
                         ))}
                     </Box>
-                ) : null}
-              </Box>
-            </ClickAwayListener>
-          </Column>
-        </Card>
-
+                  ) : null}
+                </Box>
+              </ClickAwayListener>
+            </Column>
+          </Card>
+        </SubContainer>
         <TableContainer>
           <Div>
             <RowData>
@@ -450,16 +448,19 @@ export default function TransactionList() {
               )}
             </RowData>
           </Div>
+
           <div>
             {(input === "" ? address : searchRow).map((data, index) => {
               const status = setStatus(data.status);
               return (
                 <Div>
-                  <RowData>
+                  <RowData
+                    onClick={() =>
+                      redirectToTransactionDetails(data?.hash, status)
+                    }
+                  >
                     {toggle.transactionHash && (
-                      <ColumnSecond
-                        onClick={() => redirectToTransactionDetails(data?.hash, status)}
-                      >
+                      <ColumnSecond>
                         <BackgroundChangerTxhash>
                           {utility.truncateTxnAddress(data.hash)}
                         </BackgroundChangerTxhash>
@@ -496,7 +497,7 @@ export default function TransactionList() {
 
                     {toggle.when && (
                       <ColumnSecond>
-                      {new Date(data.createdOn).toLocaleString("en-US")}
+                        {new Date(data.createdOn).toLocaleString("en-US")}
                       </ColumnSecond>
                     )}
                   </RowData>
@@ -504,46 +505,46 @@ export default function TransactionList() {
               );
             })}
           </div>
-            {/* <PlaceHolderContainer>
+          {/* <PlaceHolderContainer>
               <PlaceHolderImage src="/images/contracts.svg" />
               No Transaction Found
             </PlaceHolderContainer> */}
         </TableContainer>
         <PageVerifyCheck check={address.length}>
-        <PaginationDiv>
-          <BottomLabel>
-            Per Page
-            <SelectionDivStyle
-              buttonToggle={countToggle}
-              onClick={() => setCountToggle(10)}
-            >
-              10
-            </SelectionDivStyle>
-            <SelectionDivStyleTwo
-              buttonToggle={countToggle}
-              onClick={() => setCountToggle(20)}
-            >
-              20
-            </SelectionDivStyleTwo>
-            <SelectionDivStyleThree
-              buttonToggle={countToggle}
-              onClick={() => setCountToggle(50)}
-            >
-              50
-            </SelectionDivStyleThree>
-          </BottomLabel>
-          <ReactPaginate
-            previousLabel={"<-"}
-            nextLabel={"->"}
-            pageCount={page}
-            breakLabel={"..."}
-            initialPage={0}
-            onPageChange={changePage}
-            containerClassName={"paginationBttns"}
-            disabledClassName={"paginationDisabled"}
-            activeClassName={"paginationActive"}
-          />
-        </PaginationDiv>
+          <PaginationDiv>
+            <BottomLabel>
+              Per Page
+              <SelectionDivStyle
+                buttonToggle={countToggle}
+                onClick={() => setCountToggle(10)}
+              >
+                10
+              </SelectionDivStyle>
+              <SelectionDivStyleTwo
+                buttonToggle={countToggle}
+                onClick={() => setCountToggle(20)}
+              >
+                20
+              </SelectionDivStyleTwo>
+              <SelectionDivStyleThree
+                buttonToggle={countToggle}
+                onClick={() => setCountToggle(50)}
+              >
+                50
+              </SelectionDivStyleThree>
+            </BottomLabel>
+            <ReactPaginate
+              previousLabel={"<-"}
+              nextLabel={"->"}
+              pageCount={page}
+              breakLabel={"..."}
+              initialPage={0}
+              onPageChange={changePage}
+              containerClassName={"paginationBttns"}
+              disabledClassName={"paginationDisabled"}
+              activeClassName={"paginationActive"}
+            />
+          </PaginationDiv>
         </PageVerifyCheck>
       </MainContainer>
       <div>
@@ -556,9 +557,9 @@ export default function TransactionList() {
 }
 
 const PageVerifyCheck = styled.div`
-display: ${(props) => (props.check < 10 ? "none" : "block")};
+  display: ${(props) => (props.check < 10 ? "none" : "block")};
 `;
-
+const SubContainer = styled.div``;
 const BottomLabel = styled.div`
   display: flex;
   white-space: nowrap;
@@ -573,9 +574,9 @@ const Div = styled.div`
   border-bottom: 1px solid #e3e7eb;
   white-space: nowrap;
   column-gap: 20px;
-  width: 100%;
+  width: fit-content;
   @media (min-width: 300px) and (max-width: 768px) {
-    width: 500%;
+    width: fit-content;
   }
 
   @media (min-width: 767px) and (max-width: 1200px) {
@@ -591,9 +592,7 @@ const RowData = styled.div`
   }
 
   @media (min-width: 767px) and (max-width: 1200px) {
-    
   }
-
 `;
 
 const TableContainer = styled.div`
@@ -780,16 +779,15 @@ const ColumnOne = styled.div`
   font-weight: 700;
   color: #102c78;
   column-gap: 20px;
-  width: 100%;
+  width: fit-content;
   min-width: 200.5px;
   white-space: nowrap;
   @media (min-width: 300px) and (max-width: 767px) {
-    width: 100%;
+    width: fit-content;
   }
   @media (min-width: 767px) and (max-width: 1200px) {
     width: 8%;
   }
-
 `;
 const ColumnSecond = styled.div`
   font-size: 0.875rem;

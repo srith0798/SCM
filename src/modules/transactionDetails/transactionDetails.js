@@ -39,9 +39,9 @@ export default function TransactionDetails() {
       setRow(response.transactionList[0]);
     } catch (e) {}
   };
-  useEffect(()=>{
-  searchTransaction(url, ["hash"]);
-  }, [url])
+  useEffect(() => {
+    searchTransaction(url, ["hash"]);
+  }, [url]);
   return (
     <MainContainer>
       <SubContainer>
@@ -107,7 +107,7 @@ export default function TransactionDetails() {
               paddingLeft: "10px",
               borderBottom:
                 activeButton === "Overview"
-                  ? "0.225rem solid #3163F0"
+                  ? "0.3rem solid #3163F0"
                   : "#AEB7D0",
             }}
           >
@@ -130,7 +130,7 @@ export default function TransactionDetails() {
               display: "flex",
               paddingBottom: "1rem",
               borderBottom:
-                activeButton === "Contracts" ? "0.225rem solid #3163F0" : "",
+                activeButton === "Contracts" ? "0.3rem solid #3163F0" : "",
             }}
           >
             <TabImage
@@ -152,9 +152,7 @@ export default function TransactionDetails() {
               display: "flex",
               paddingBottom: "1rem",
               borderBottom:
-                activeButton === "EventsDetails"
-                  ? "0.225rem solid #3163F0"
-                  : "",
+                activeButton === "EventsDetails" ? "0.3rem solid #3163F0" : "",
             }}
           >
             <TabImage
@@ -189,7 +187,7 @@ export default function TransactionDetails() {
               paddingBottom: "1rem",
               whiteSpace: "nowrap",
               borderBottom:
-                activeButton === "StateChange" ? "0.225rem solid #3163F0" : "",
+                activeButton === "StateChange" ? "0.3rem solid #3163F0" : "",
             }}
           >
             <TabImage
@@ -294,7 +292,9 @@ export default function TransactionDetails() {
             <CommonDiv>
               <Row>
                 <Heading>Gas Used</Heading>
-                <SubHead>{row.gasUsed} ({((row.gas/row.gasUsed)* 100).toFixed(2)})%</SubHead>
+                <SubHead>
+                  {row.gasUsed} ({((row.gas / row.gasUsed) * 100).toFixed(2)})%
+                </SubHead>
               </Row>
             </CommonDiv>
             <GasPriceDiv>
@@ -544,12 +544,12 @@ const CommonDivBlock = styled.div`
   column-gap: 0px;
   @media (min-width: 300px) and (max-width: 767px) {
     display: flex;
-    column-gap: 138px;
+    // column-gap: 138px;
   }
   @media (max-width: 375px) {
     display: flex;
     white-space: nowrap;
-    column-gap: 118px;
+    // column-gap: 118px;
   }
 `;
 const FeeDiv = styled.div`
@@ -606,12 +606,12 @@ const GasPriceDiv = styled.div`
   @media (min-width: 300px) and (max-width: 767px) {
     display: flex;
     white-space: nowrap;
-    column-gap: 111px;
+    // column-gap: 111px;
   }
   @media (max-width: 375px) {
     display: flex;
     white-space: nowrap;
-    column-gap: 91px;
+    // column-gap: 91px;
   }
 `;
 const CommonDivTo = styled.div`
@@ -907,7 +907,7 @@ const FailButton = styled.div`
 `;
 
 const SuccessButton = styled.div`
-  color: #00A58C;
+  color: #00a58c;
   padding: 0px 18px 0px 18px;
   width: 100%;
   margin-left: 1rem;
@@ -915,14 +915,14 @@ const SuccessButton = styled.div`
   align-items: center;
   width: 99px;
   height: 25px;
-  background: #E0FFFA 0% 0% no-repeat padding-box;
-  border: 1px solid #99C7C0;
+  background: #e0fffa 0% 0% no-repeat padding-box;
+  border: 1px solid #99c7c0;
   border-radius: 4px;
   opacity: 1;
   margin-right: 12px;
   /* justify-content: center; */
   @media (min-width: 300px) and (max-width: 767px) {
-    width: 87px;
+    width: 100px;
   }
 `;
 

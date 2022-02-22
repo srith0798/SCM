@@ -37,11 +37,23 @@ export default function AddTags(props) {
               <Add>Add Tag to the selected contract</Add>
             </SubContainer>
             <Content>
-              Add unique tags to your contracts to help you filter your transactions pinpoint key events that happened more easily.
+              Add unique tags to your contracts to help you filter your
+              transactions pinpoint key events that happened more easily.
             </Content>
-            <Input type="text" placeholder="E.g. v1.3.37" value={input} onChange={(e) => setInput([e.target.value])} />
-            <SubContainer style={{ width: "100%", maxWidth: "160px", marginTop: "30px" }}>
-              <ButtonConfirm text={"Add Tag"} click={addContractTag} />
+            <Input
+              type="text"
+              placeholder="E.g. v1.3.37"
+              value={input}
+              onChange={(e) => setInput([e.target.value])}
+            />
+            <SubContainer
+              style={{ width: "100%", maxWidth: "160px", marginTop: "30px" }}
+            >
+              <ButtonConfirm
+                onClick={props.click}
+                text={"Add Tag"}
+                click={addContractTag}
+              />
               <CancelButton onClick={props.click}>Cancel</CancelButton>
             </SubContainer>
           </Container>
