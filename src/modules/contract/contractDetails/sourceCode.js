@@ -33,10 +33,11 @@ const Div = styled.div`
   border-radius: 4px;
   width: 100%;
   height: 424px;
-  display: flex;
+  /* display: flex; */
   align-items: center;
   text-align: center;
   justify-content: center;
   color: #aaadc4;
   overflow-x: scroll;
+  line-break: anywhere;
 `;

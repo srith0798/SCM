@@ -455,3 +455,10 @@ input:checked + .slider:before {
   max-width: 352px;
   outline: none;
 }
+
+.dates {
+  display: flex;
+  justify-content: space-between;
+  color: #7C828A;
+  font-size:12px;
+}
