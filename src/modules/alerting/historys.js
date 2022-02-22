@@ -125,12 +125,25 @@ const RowData = styled.div`
   @media (min-width: 300px) and (max-width: 768px) {
     column-gap: 54px;
   }
+  @media (min-width: 820px) and (max-width: 1200px) {
+    column-gap: 72px !important;
+  }
+  @media (min-width: 768px) and (max-width: 1200px) {
+    column-gap: 97px;
+  }
 `;
 const RowContainer = styled.div`
   display: flex;
   @media (min-width: 300px) and (max-width: 768px) {
     column-gap: 77px;
   }
+  @media (min-width: 768px) and (max-width: 1200px) {
+    column-gap: 120px;
+  }
+  @media (min-width: 820px) and (max-width: 1200px) {
+    column-gap: 120px !important;
+  }
+
 `;
 const ToolTipIcon = styled.img`
   width: 0.75rem;

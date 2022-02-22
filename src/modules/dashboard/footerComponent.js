@@ -58,6 +58,15 @@ const SecondColumn = styled.div`
   height: 220px;
   display: flex;
   justify-content: space-between;
+  @media (min-width: 300px) and (max-width: 768px) {
+    margin-top: 183px;
+    margin-left: -302px;
+  }
+
+  @media (min-width: 375px) and (max-width: 768px) {
+    margin-top: 20px;
+    margin-left: 0px !important;
+  }
 `;
 const SubColOne = styled.div`
   width: 90px;

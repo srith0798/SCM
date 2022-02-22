@@ -152,7 +152,8 @@ const MainBoxContainer = styled.div`
     padding: 30px;
   }
   @media (min-width: 768px) and (max-width: 1024px) {
-    padding: 32px;
+    padding: 16px;
+    height: 131vh;
   }
 `;
 const Container = styled.div`
