@@ -152,7 +152,7 @@ const MainBoxContainer = styled.div`
     padding: 30px;
   }
   @media (min-width: 768px) and (max-width: 1024px) {
-    padding: 16px;
+    padding: 32px;
   }
 `;
 const Container = styled.div`
@@ -186,7 +186,7 @@ const RightContainer = styled.div`
   width: 100%;
   padding: 4.7rem;
   @media (min-width: 340px) and (max-width: 803px) {
-    padding: 0.375rem 5rem 7rem 5rem;
+    padding: 1.375rem 3rem 9rem 3rem;
     height: 100%;
   }
   @media (min-width: 300px) and (max-width: 414px) {
@@ -198,6 +198,11 @@ const LeftContainer = styled.div`
   padding: 3.9rem;
   @media (min-width: 300px) and (max-width: 414px) {
     padding: 1.5rem;
+  }
+  @media (min-width: 768px) and (max-width: 1023px) {
+    // padding: 1.5rem;
+    padding: 3.9rem;
+    padding-top: 0;
   }
 `;
 const Span = styled.span`

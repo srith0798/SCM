@@ -558,12 +558,13 @@ const TableContainer = styled.div`
   width: 100%;
   min-height: 20rem;
   overflow: auto;
+  margin-top: 2px;
   padding: 0.625rem 0.625rem 1px 0.625rem;
   @media (min-width: 300px) and (max-width: 767px) {
     overflow-y: hidden;
     overflow-x: auto;
     height: 420px;
-    margin-top: 20px;
+    margin-top: 30px;
 
     position: relative;
     width: 100%;
@@ -606,7 +607,7 @@ const ColumnOne = styled.div`
   max-width: 18.75rem;
   min-width: 180px;
   @media (min-width: 300px) and (max-width: 767px) {
-    margin-left: 76px;
+    // margin-left: 76px;
   }
   @media (min-width: 768px) and (max-width: 1128px) {
     max-width: 9.75rem;
@@ -633,7 +634,7 @@ const ColumnSecond = styled.div`
   white-space: nowrap;
   max-width: 18.75rem;
   @media (min-width: 300px) and (max-width: 767px) {
-    margin-left: 76px;
+    // margin-left: 76px;
   }
 `;
 const TagCol = styled.div`
