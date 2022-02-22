@@ -4,6 +4,7 @@ import Dialog from "@mui/material/Dialog";
 import { makeStyles } from "@material-ui/styles";
 import ButtonConfirm from "../../common/components/buttonConfirm";
 import ContractService from "../../services/contractsService";
+import { history } from "../../managers/history";
 
 const useStyles = makeStyles(() => ({
   dialogBox: {
@@ -23,6 +24,10 @@ export default function Remove(props) {
     const response = await ContractService.removeContract(request);
     window.location.reload();
     console.log(response);
+    props.click();
+    setTimeout(() => {
+      history.push("/contracts");
+    }, 1000);
   };
 
   return (

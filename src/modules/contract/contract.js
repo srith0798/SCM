@@ -245,8 +245,10 @@ export default function Contract(props) {
           return (
             <div style={{ cursor: "pointer" }}>
               <Div>
-                <RowTag onClick={(e) => redirectTODetails(e, data._id)}>
-                  <ColumnSecond>{data.contractName}</ColumnSecond>
+                <RowTag>
+                  <ColumnSecond onClick={(e) => redirectTODetails(e, data._id)}>
+                    {data.contractName}
+                  </ColumnSecond>
                   <ColumnSecond>
                     {utility.truncateTxnAddress(data.address)}
                   </ColumnSecond>
@@ -285,22 +287,28 @@ export default function Contract(props) {
             </PlaceHolderContainer> : "" )
           } */}
       </TableContainer>
-      <PaginationDiv>
-        <ReactPaginate
-          previousLabel={"<"}
-          nextLabel={">"}
-          pageCount={page}
-          breakLabel={"..."}
-          initialPage={0}
-          onPageChange={changePage}
-          containerClassName={"paginationBttns"}
-          disabledClassName={"paginationDisabled"}
-          activeClassName={"paginationActive"}
-        />
-      </PaginationDiv>
+      <PageVerifyCheck check={address.length}>
+        <PaginationDiv>
+          <ReactPaginate
+            previousLabel={"<"}
+            nextLabel={">"}
+            pageCount={page}
+            breakLabel={"..."}
+            initialPage={0}
+            onPageChange={changePage}
+            containerClassName={"paginationBttns"}
+            disabledClassName={"paginationDisabled"}
+            activeClassName={"paginationActive"}
+          />
+        </PaginationDiv>
+      </PageVerifyCheck>
     </MainContainer>
   );
 }
+
+const PageVerifyCheck = styled.div`
+  display: ${(props) => (props.check <= 10 ? "none" : "block")};
+`;
 
 const FinanceTag = styled.div`
   background-image: url("/images/Tag.svg");
@@ -450,7 +458,6 @@ const MainHeading = styled.div`
     flex-direction: column;
     padding-top: 7px;
   }
-  // column-gap: 152px;
 `;
 const SubContainer = styled.div`
   width: 100%;
