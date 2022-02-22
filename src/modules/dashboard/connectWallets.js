@@ -68,8 +68,6 @@ const Heading = styled.div`
 const Div = styled.div`
   background-color: #ffffff;
   border-radius: 4px;
-  top: 163px;
-  left: 321px;
   height: 720px;
   display: flex;
   flex-direction: column;
