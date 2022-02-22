@@ -596,7 +596,7 @@ const Div = styled.div`
     width: 1232px;
   }
   @media (min-width: 300px) and (max-width: 767px) {
-    width: 1287px !important;
+    width: 970px !important;
   }
 `;
 const ColumnOne = styled.div`
@@ -607,7 +607,7 @@ const ColumnOne = styled.div`
   max-width: 18.75rem;
   min-width: 180px;
   @media (min-width: 300px) and (max-width: 767px){
-  margin-left:76px;
+  margin-left:15px;
   }
   @media (min-width: 768px) and (max-width: 1128px) {
     max-width: 9.75rem;
@@ -642,7 +642,7 @@ const ColumnSecond = styled.div`
   white-space: nowrap;
   max-width: 18.75rem;
   @media (min-width: 300px) and (max-width: 767px){
-    margin-left:76px;
+    margin-left:16px;
     }
 `;
 const TagCol = styled.div`

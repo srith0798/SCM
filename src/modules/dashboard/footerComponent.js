@@ -69,6 +69,13 @@ const SecondColumn = styled.div`
     margin-top: 183px;
     margin-left: -302px;
   }
+
+  @media (min-width: 375px) and (max-width: 768px) {
+  
+    margin-top: 20px;
+    margin-left: 0px !important;
+  }
+  
 `;
 const SubColOne = styled.div`
   width: 90px;

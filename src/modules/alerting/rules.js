@@ -182,7 +182,7 @@ export default function Rules() {
                   </RowData>
                 </NewDiv>
                 <NewDiv>
-                  <RowData onClick={redirectToAlertDetails}>
+                  <RowData1 onClick={redirectToAlertDetails}>
                     <ColumnTwo>App_Transactions</ColumnTwo>
                     <ColumnTwo>xdcabfe…8b3c</ColumnTwo>
                     <ColumnTwo>XDC Mainnet</ColumnTwo>
@@ -199,10 +199,10 @@ export default function Rules() {
                         />
                       </Tooltip>
                     </ColumnTwo>
-                  </RowData>
+                  </RowData1>
                 </NewDiv>
                 <NewDiv>
-                  <RowData onClick={redirectToAlertDetails}>
+                  <RowData1 onClick={redirectToAlertDetails}>
                     <ColumnTwo>App_Transactions</ColumnTwo>
                     <ColumnTwo>xdcabfe…8b3c</ColumnTwo>
                     <ColumnTwo>XDC Mainnet</ColumnTwo>
@@ -221,7 +221,7 @@ export default function Rules() {
                         />
                       </Tooltip>
                     </ColumnTwo>
-                  </RowData>
+                  </RowData1>
                 </NewDiv>
               </DetailBox>
             </TableContainer>
@@ -281,6 +281,21 @@ const RowData = styled.div`
   @media (min-width: 300px) and (max-width: 768px) {
     column-gap: 84px;
   }
+  @media (min-width: 820px) and (max-width: 1200px) {
+    column-gap: 145px !important;
+  }
+
+`;
+
+const RowData1 = styled.div`
+  display: flex;
+  @media (min-width: 300px) and (max-width: 768px) {
+    column-gap: 84px;
+  }
+  @media (min-width: 820px) and (max-width: 1200px) {
+    column-gap: 145px !important;
+  }
+
 `;
 const ToolTipIcon = styled.img`
   width: 0.75rem;
