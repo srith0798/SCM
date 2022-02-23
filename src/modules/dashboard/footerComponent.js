@@ -33,6 +33,12 @@ const Column = styled.div`
     width: 100%;
     margin: 55.66px 0 0 0px;
   }
+  @media (min-width: 300px) and (max-width: 768px) {
+    margin: 50px 23px 0 0.5px;
+  } 
+  @media (min-width: 768px) and (max-width: 1200px) {
+    margin: 50px 23px 0px 61.5px;
+  }
 `;
 const FooterImg = styled.img`
   height: 37.23px;
@@ -116,6 +122,15 @@ const ContactRow = styled.div`
   @media screen and (min-width: 375px) and (max-width: 425px) {
     margin: 96px 0 0 28.95px;
   }
+  @media (min-width: 300px) and (max-width: 768px) {
+    margin: 69px 0 0 184px;
+  }
+  @media (min-width: 768px) and (max-width: 1200px) {
+    margin: 120px 0 0 384px
+  }
+  @media (min-width: 820px) and (max-width: 1200px) {
+    margin: 132px 0 0 384px !important;
+  }
 `;
 const LinkContainerThird = styled.div`
   width: 95.95px;
@@ -144,6 +159,12 @@ const CopyrightContainer = styled.div`
   @media screen and (min-width: 375px) and (max-width: 425px) {
     margin: 35px 0 0 28.95px;
   }
+  @media (min-width: 300px) and (max-width: 768px) {
+    margin: -52px 0 0 22px;
+  }
+  @media (min-width: 768px) and (max-width: 1200px) {
+    margin: -53px 0 0 86px
+  }
 `;
 const XDCIcon = styled.img`
   width: 116.47px;
@@ -157,7 +178,7 @@ function FooterComponent() {
     <FooterContainer>
       <ColumnContainer>
         <Column>
-          <FooterImg src="/images/smarthub.svg" alt="" />
+          <FooterImg src="/images/smartHub.svg" alt="" />
           <Text>
             Easily govern your smart contract deployment with end-to-end
             lifecycle utility
