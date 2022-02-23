@@ -1,41 +1,72 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { Row } from "simple-flexbox";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import "react-tabs/style/react-tabs.css";
 import { history } from "../../managers/history";
+import utility from "../../utility";
+import Tooltip from "@mui/material/Tooltip";
+import ContractsService from "../../services/contractsService";
 
 export default function TransactionDetails() {
-  const [activeButton, setActiveButton] = React.useState("Overview");
+  const [eventToolTip, seteventToolTip] = React.useState(false);
+  const [statusToolTip, setstatusToolTip] = React.useState(false);
+  const [copyToolTip, setcopyToolTip] = React.useState(false);
+  const [row, setRow] = React.useState([]);
+
+  const [activeButton, setActiveButton] = React.useState("Contracts");
   const handleViewClick = (e) => {
     setActiveButton(e.target.id);
   };
-  
-  let url = history.location.state.url;
+
+  let url = history.location.state.id;
   let status = history.location.state.status;
+  const searchTransaction = async (searchValues, searchKeys) => {
+    try {
+      const requestData = {
+        searchValue: searchValues,
+        searchKeys: searchKeys,
+        skip: 0,
+        limit: 1,
+      };
+      const response = await ContractsService.getTransactionsList(requestData);
+      setRow(response.transactionList[0]);
+    } catch (e) {}
+  };
+  useEffect(() => {
+    searchTransaction(url, ["hash"]);
+  }, [url]);
   const backButton = () => {
     history.push({
       pathname: "/transactions/transaction-details?" + url,
-      state:{id: url,
-             status: status,
-      }
-    })
+      state: { id: url, status: status },
+    });
   };
   return (
     <>
       <MainContainer>
-        <Row style={{ display: "flex", justifyContent: "space-between" }}>
+        <SubContainer>
           <TitleDiv>
-            <img
-              alt=""
-              style={{ marginRight: "0.425rem", cursor: "pointer" }}
-              src="/images/back.svg"
-              onClick={backButton}
-            />
-            <Title>Transactions Details</Title>
+            <Title>
+              <img
+                alt=""
+                src="/images/back.svg"
+                style={{ marginRight: "8px" }}
+                onClick={() => backButton()}
+              />
+              Transaction Details
+            </Title>
           </TitleDiv>
-          <Button>View in Explorer</Button>
-        </Row>
+          <Button
+            onClick={() =>
+              window.open(
+                `https://observer.xdc.org/transaction-details/${row.hash}`
+              )
+            }
+          >
+            View in Observatory
+          </Button>
+        </SubContainer>
 
         <Container>
           <SubHeading
@@ -43,18 +74,20 @@ export default function TransactionDetails() {
           >
             Txn hash
           </SubHeading>
-          <div
-            style={{
-              paddingLeft: "1.25rem",
-              display: "flex",
-              alignItems: "center",
-            }}
-          >
-            <Hash>xdcabfe4184e5f9f600fe86d20ffdse2fsfbsgsgsa768b3c</Hash>
-            <CopyToClipboard>
-              <CopyImg src="/images/copy.svg" />
+          <TopContainer>
+            <HashMobile>{utility.truncateTxnAddress(`${row.hash}`)}</HashMobile>
+            <HashDesktop>{row.hash}</HashDesktop>
+            <CopyToClipboard
+              text={row.hash}
+              onCopy={() => setcopyToolTip(true)}
+            >
+              <Tooltip title={copyToolTip ? "copied" : "copy to clipboard"}>
+                <CopyToClipboardImage src="/images/copy.svg" />
+              </Tooltip>
             </CopyToClipboard>
-          </div>
+            {/* <SuccessButton check={status}>Success</SuccessButton> */}
+          </TopContainer>
+
           <TabLister>
             <TabView
               id="Overview"
@@ -62,14 +95,15 @@ export default function TransactionDetails() {
               style={{
                 color: activeButton === "Overview" ? "#3163F0" : "#AEB7D0",
                 display: "flex",
-                paddingBottom: "0.875rem",
+                paddingBottom: "1rem",
+                paddingLeft: "10px",
                 borderBottom:
                   activeButton === "Overview"
-                    ? "0.125rem solid #3163F0"
+                    ? "0.3rem solid #3163F0"
                     : "#AEB7D0",
               }}
             >
-              <img
+              <TabImage
                 alt=""
                 style={{ marginRight: "0.375rem" }}
                 src={
@@ -86,67 +120,96 @@ export default function TransactionDetails() {
               style={{
                 color: activeButton === "Contracts" ? "#3163F0" : "#AEB7D0",
                 display: "flex",
-                paddingBottom: "0.875rem",
+                paddingBottom: "1rem",
                 borderBottom:
-                  activeButton === "Contracts" ? "0.125rem solid blue" : "",
+                  activeButton === "Contracts" ? "0.3rem solid #3163F0" : "",
               }}
             >
-              <img
+              <TabImage
                 alt=""
                 style={{ marginRight: "0.375rem" }}
                 src={
                   activeButton === "Contracts"
-                    ? "/images/contracts.svg"
+                    ? "/images/contract_blue.svg"
                     : "/images/contract_grey.svg"
                 }
               />
               Contracts
             </TabView>
             <TabView
-              id="Events"
+              id="EventsDetails"
               onClick={handleViewClick}
               style={{
-                color: activeButton === "Events" ? "#3163F0" : "#AEB7D0",
+                color: activeButton === "EventsDetails" ? "#3163F0" : "#AEB7D0",
                 display: "flex",
-                paddingBottom: "0.875rem",
+                paddingBottom: "1rem",
                 borderBottom:
-                  activeButton === "Events" ? "0.125rem solid #3163F0" : "",
+                  activeButton === "EventsDetails"
+                    ? "0.3rem solid #3163F0"
+                    : "",
               }}
             >
-              <img
+              <TabImage
                 alt=""
                 style={{ marginRight: "0.375rem" }}
                 src={
-                  activeButton === "Events"
+                  activeButton === "EventsDetails"
                     ? "/images/event_blue.svg"
                     : "/images/event_grey.svg"
                 }
-              />{" "}
-              EventsDetails
+              />
+              Events
+              <Tooltip
+                open={eventToolTip}
+                onOpen={() => seteventToolTip(true)}
+                onClose={() => seteventToolTip(false)}
+                disableFocusListener
+                title="events details"
+              >
+                <ToolTipIcon
+                  onClick={() => seteventToolTip(!eventToolTip)}
+                  src="/images/tool-tip.svg"
+                />
+              </Tooltip>
             </TabView>
             <TabView
               id="StateChange"
               onClick={handleViewClick}
               style={{
                 color: activeButton === "StateChange" ? "#3163F0" : "#AEB7D0",
+                display: "flex",
+                paddingBottom: "1rem",
+                whiteSpace: "nowrap",
                 borderBottom:
-                  activeButton === "StateChange"
-                    ? "0.125rem solid #3163F0"
-                    : "",
+                  activeButton === "StateChange" ? "0.3rem solid #3163F0" : "",
               }}
             >
-              <img
+              <TabImage
                 alt=""
-                style={{ marginRight: "0.375rem", marginBottom: "4px" }}
+                style={{
+                  marginRight: "0.375rem",
+                }}
                 src={
-                  activeButton === "Events"
-                    ? "/images/statechange_grey.svg"
+                  activeButton === "StateChange"
+                    ? "/images/statechange_blue.svg"
                     : "/images/statechange_grey.svg"
                 }
               />
-              State Change
+              State changes
+              <Tooltip
+                open={statusToolTip}
+                onOpen={() => setstatusToolTip(true)}
+                onClose={() => setstatusToolTip(false)}
+                disableFocusListener
+                title="state Change details"
+              >
+                <ToolTipIcon
+                  onClick={() => setstatusToolTip(!statusToolTip)}
+                  src="/images/tool-tip.svg"
+                />
+              </Tooltip>
             </TabView>
-          </TabLister>{" "}
+          </TabLister>
         </Container>
         <BoxContainer>
           <DetailContainer>
@@ -156,106 +219,97 @@ export default function TransactionDetails() {
             </Row>
           </DetailContainer>
           <CommonDiv>
-            <Row>
+            <RowData>
               <Heads>
-                <img
-                  alt=""
-                  src="/images/contracts.svg"
-                  style={{ width: "1rem" }}
-                />
+                <Icon alt="" src="/images/contracts.svg" />
                 <TextLi>Subcontracts name</TextLi>
               </Heads>
-            </Row>
+            </RowData>
           </CommonDiv>
           <CommonDiv>
-            <Row>
+            <RowData>
               <Head>
-                <img
-                  alt=""
-                  src="/images/contracts.svg"
-                  style={{ width: "1rem" }}
-                />
+                <Icon alt="" src="/images/contracts.svg" />
                 Subcontracts name
               </Head>
-            </Row>
+            </RowData>
           </CommonDiv>
           <CommonDiv>
-            <Row>
+            <RowData>
               <Head>
-                <img
-                  alt=""
-                  src="/images/contracts.svg"
-                  style={{ width: "1rem" }}
-                />
+                <Icon alt="" src="/images/contracts.svg" />
                 Subcontracts name
               </Head>
-            </Row>
+            </RowData>
           </CommonDiv>
           <CommonDiv>
-            <Row>
+            <RowData>
               <Head>
-                <img
-                  alt=""
-                  src="/images/contracts.svg"
-                  style={{ width: "1rem" }}
-                />
+                <Icon alt="" src="/images/contracts.svg" />
                 Subcontracts name
               </Head>
-            </Row>
+            </RowData>
           </CommonDiv>
           <CommonDiv>
-            <Row>
+            <RowData>
               <Head>
-                <img
-                  alt=""
-                  src="/images/contracts.svg"
-                  style={{ width: "1rem" }}
-                />
+                <Icon alt="" src="/images/contracts.svg" />
                 Subcontracts name
               </Head>
-            </Row>
+            </RowData>
           </CommonDiv>
           <CommonDiv>
-            <Row>
+            <RowData>
               <Head>
-                <img
-                  alt=""
-                  src="/images/contracts.svg"
-                  style={{ width: "1rem" }}
-                />
+                <Icon alt="" src="/images/contracts.svg" />
                 Subcontracts name
               </Head>
-            </Row>
+            </RowData>
           </CommonDiv>
           <CommonDiv>
-            <Row>
+            <RowData>
               <Head>
-                <img
-                  alt=""
-                  src="/images/contracts.svg"
-                  style={{ width: "1rem" }}
-                />
+                <Icon alt="" src="/images/contracts.svg" />
                 Subcontracts name
               </Head>
-            </Row>
+            </RowData>
           </CommonDiv>
           <CommonDiv>
-            <Row>
+            <RowData>
               <Head>
-                <img
-                  alt=""
-                  src="/images/contracts.svg"
-                  style={{ width: "1rem" }}
-                />
+                <Icon alt="" src="/images/contracts.svg" />
                 Subcontracts name
               </Head>
-            </Row>
+            </RowData>
           </CommonDiv>
         </BoxContainer>
       </MainContainer>
     </>
   );
 }
+
+const SubContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  height: 3.125rem;
+  align-items: center;
+  padding-bottom: 15px;
+
+  @media (min-width: 300px) and (max-width: 485px) {
+    flex-direction: column;
+  }
+`;
+
+const RowData = styled.div`
+  display: flex;
+  padding-left: 16px;
+  width: 250px;
+  &:hover {
+    background-color: #3163f0;
+    color: #ffffff;
+  }
+`;
 const SubHead = styled.div`
   font-size: 20px;
   font-weight: 600px;
@@ -266,10 +320,23 @@ const SubHead = styled.div`
 const DetailContainer = styled.div`
   padding: 15px;
 `;
+const TopContainer = styled.div`
+  padding-left: 1.25rem;
+  display: flex;
+  align-items: center;
+`;
+const ToolTipIcon = styled.img`
+  width: 0.75rem;
+  cursor: pointer;
+  margin-left: 0.513rem;
+  margin-bottom: 1px;
+  @media (min-width: 300px) and (max-width: 767px) {
+    margin-bottom: 6px;
+  }
+`;
 
 const CommonDiv = styled.div`
   width: 100%;
-  padding-left: 10px;
 `;
 
 const MainContainer = styled.div`
@@ -283,26 +350,42 @@ const MainContainer = styled.div`
 const Button = styled.button`
   background-image: url("/images/globe.svg");
   background-repeat: no-repeat;
-  background-position: 8px;
-  padding-left: 21px;
-  background-size: 14px;
+  background-position: 0.5rem;
+  padding-left: 1.75rem;
+  background-size: 1rem;
   position: relative;
   background-color: #ffffff;
   color: #3163f0;
   border: none;
-  border-radius: 4px;
-  width: 130px;
-  height: 34px;
-  font-size: 14px;
+  border-radius: 0.25rem;
+  width: 170px;
+  white-space: nowrap;
+  height: 2.125rem;
+  font-size: 0.875rem;
+  @media (min-width: 300px) and (max-width: 485px) {
+    display: none;
+  }
 `;
-
 const Container = styled.div`
   background-color: #ffffff;
-  border-radius: 6px;
+  border-radius: 0.375rem;
   width: 100%;
-  height: 167px;
-  margin-top: 20px;
-  padding: 20px;
+  height: 9.6rem;
+  margin-top: 0.5rem;
+  width: 100%;
+  overflow: hidden;
+  @media (min-width: 300px) and (max-width: 768px) {
+    background-color: #ffffff;
+    border-radius: 0.375rem;
+    width: 100%;
+    height: 8rem;
+    margin-top: 1.25rem;
+    flex-direction: column;
+    width: 100%;
+  }
+  @media (max-width: 375px) {
+    height: 7.4rem;
+  }
 `;
 const BoxContainer = styled.div`
   background-color: #ffffff;
@@ -310,16 +393,6 @@ const BoxContainer = styled.div`
   width: 100%;
   height: auto;
   margin-top: 20px;
-  padding: 10px;
-`;
-const Hash = styled.div`
-  display: flex;
-  flex-flow: row nowrap;
-  margin-top: 10px;
-  font-weight: 600;
-  border: none;
-  width: 100%;
-  max-width: 385px;
 `;
 const SubHeading = styled.div`
   font: normal normal medium 14px/17px Inter;
@@ -327,8 +400,8 @@ const SubHeading = styled.div`
   color: #102c78;
 `;
 
-const CopyImg = styled.img`
-  margin-left: 9%;
+const Icon = styled.img`
+  width: 1rem;
   cursor: pointer;
 `;
 
@@ -336,7 +409,7 @@ const Heading = styled.div`
   text-align: left;
   font-size: 16px;
   font-weight: 600;
-  color: #102c78;
+  color: #3163f0;
   opacity: 1;
   width: 100%;
   max-width: 110px;
@@ -348,32 +421,21 @@ const Head = styled.div`
   opacity: 1;
   width 150px;
   height: 50px;
-  &:hover{
-    background-color: #3163F0;
-    color: #ffffff;
-  }
+  
   
 `;
 const Heads = styled.div`
- display: flex;
+  display: flex;
   align-items: center;
-  font: normal normal 600 14px/17px Inter;
-  opacity: 1;
-  width 9.375rem;
+  font-size: 14px;
+
   height: 3.125rem;
-  &:hover{
-    background-color: #3163F0;
+  &:hover {
+    background-color: #3163f0;
     color: #ffffff;
   }
 `;
-const TabLister = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  max-width: 33.125rem;
-  margin: 1.563rem 0rem 0.625rem 1.063rem;
-  cursor: pointer;
-`;
+
 const TabView = styled.div`
   padding: 0.313rem 0.5rem 0.313rem 0.5rem;
 `;
@@ -393,4 +455,124 @@ const TextLi = styled.div`
   font-size: 0.875rem;
   font-weight: 600;
   font-size: 0.875rem;
+`;
+const HashDesktop = styled.div`
+  display: flex;
+  font-size: 14px;
+  flex-flow: row nowrap;
+  margin-top: 0.625rem;
+  margin-bottom: 10px;
+  border: none;
+  color: #191919;
+  font-weight: 500;
+  width: 100%;
+  max-width: 30.063rem;
+  @media (max-width: 767px) {
+    display: none;
+  }
+`;
+const HashMobile = styled.div`
+  display: flex;
+  flex-flow: row nowrap;
+  margin-top: 0.625rem;
+  margin-bottom: 10px;
+  border: none;
+  width: 60%;
+  max-width: 30.063rem;
+  @media (min-width: 767px) {
+    display: none;
+  }
+`;
+
+const CopyToClipboardImg = styled.img`
+  margin-left: 150px;
+  cursor: pointer;
+  @media (min-width: 340px) and (max-width: 767px) {
+    margin-left: 10px;
+  }
+  @media (min-width: 768px) and (max-width: 1024px) {
+    margin-left: 110px;
+  }
+`;
+const CopyToClipboardImage = styled.img`
+  margin-left: 110px;
+  cursor: pointer;
+  @media (min-width: 340px) and (max-width: 767px) {
+    margin-left: 10px;
+  }
+  @media (min-width: 1024px) and (max-width: 1075px) {
+    margin-left: 84px;
+  }
+  // @media (min-width: 768px) and (max-width: 1024px) {
+  //   margin-left: px;
+  // }
+`;
+
+const StackTraceCheckDiv = styled.div`
+  display: ${(props) => (props.check === "Fail" ? "block" : "none")};
+`;
+
+const TokenTransferCheckDiv = styled.div`
+  display: ${(props) => (props.check === "Success" ? "block" : "none")};
+`;
+
+const TextLine = styled.div`
+  text-align: left;
+  color: #ce1a1a;
+  font-weight: 600;
+  padding-left: 24px;
+`;
+const SearchBar = styled.input`
+  height: 2.188rem;
+  width: 12.5rem;
+  border: none;
+  margin-bottom: 1.5rem;
+  border-radius: 0.25rem;
+  background-image: url("/images/search-icon.svg");
+  background-repeat: no-repeat;
+  background-color: #f5f6fd;
+  background-position: 0.5rem;
+  padding-left: 1.875rem;
+  background-size: 0.75rem;
+  position: relative;
+  /* &:focus: {
+    outline: none;
+    border: none;
+  } */
+`;
+const TabLister = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 37.125rem;
+  margin: 1.563rem 0rem 0.625rem 1.063rem;
+  cursor: pointer;
+  @media (max-width: 768px) {
+    display: flex;
+    justify-content: space-between;
+    min-height: 45px;
+    font-size: 13px;
+    overflow-y: hidden;
+    margin: 0rem 0rem 0rem 0rem;
+    white-space: nowrap;
+    padding-left: 10px;
+    max-width: 34.125rem;
+  }
+  @media (max-width: 414px) {
+    display: flex;
+    justify-content: space-between;
+    min-height: 45px;
+    font-size: 0.6rem;
+    overflow-y: hidden;
+    margin: 0rem 0rem 0rem 0rem;
+    white-space: nowrap;
+    padding-left: 0px;
+  }
+`;
+const TabImage = styled.img`
+  width: 22px;
+  @media (min-width: 300px) and (max-width: 414px) {
+    width: 13px;
+    margin-bottom: 5px;
+  }
 `;

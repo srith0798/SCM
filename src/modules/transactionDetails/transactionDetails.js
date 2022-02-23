@@ -275,7 +275,13 @@ export default function TransactionDetails() {
             </CommonDivTo>
             <TimeStampDiv>
               <Heading>Timestamp</Heading>
-              <SubHead>{moment(row.createdOn).fromNow()+ " " +"(" + new Date(row.createdOn).toLocaleString("en-US")+ ")"}</SubHead>
+              <SubHead>
+                {moment(row.createdOn).fromNow() +
+                  " " +
+                  "(" +
+                  new Date(row.createdOn).toLocaleString("en-US") +
+                  ")"}
+              </SubHead>
             </TimeStampDiv>
             <CommonDiv>
               <Row>
@@ -308,8 +314,7 @@ export default function TransactionDetails() {
             <RawInputDiv>
               <Heading>Raw input</Heading>
               <SubHead>
-                <TransactionNumber>
-                </TransactionNumber>
+                <TransactionNumber></TransactionNumber>
                 <CopyToClipboard
                   text={" 0x01173a740000000000…f28e0b4fae4a3bfee7dc52"}
                   onCopy={() => setcopyToolTip(true)}
@@ -380,28 +385,28 @@ export default function TransactionDetails() {
             </CommonDiv>
           </TokenTransferDiv>
           <StackTraceCheckDiv check={status}>
-          <b>Stack Trace</b> <ToolTipIcon src="/images/tool-tip.svg" />
-          <StackContainer>
-            <BackgroundChanger>
-              {/* <TextLine>Error Messege:out of gas</TextLine>
+            <b>Stack Trace</b> <ToolTipIcon src="/images/tool-tip.svg" />
+            <StackContainer>
+              <BackgroundChanger>
+                {/* <TextLine>Error Messege:out of gas</TextLine>
               <img alt="" src="/images/error.svg" /> balances[_to] =
               balances[_to].add(_value);
               <br /> */}
-            </BackgroundChanger>
-          </StackContainer>
+              </BackgroundChanger>
+            </StackContainer>
           </StackTraceCheckDiv>
           <TokenTransferCheckDiv check={status}>
-          <b>Token Transfer</b>
-          <StackContainer>
-            <BackgroundChanger>
-              {/* <TextLine>Error Messege:out of gas</TextLine>
+            <b>Token Transfer</b>
+            <StackContainer>
+              <BackgroundChanger>
+                {/* <TextLine>Error Messege:out of gas</TextLine>
               <img alt="" src="/images/error.svg" /> balances[_to] =
               balances[_to].add(_value);
               <br /> */}
-            </BackgroundChanger>
-          </StackContainer>
+              </BackgroundChanger>
+            </StackContainer>
           </TokenTransferCheckDiv>
-          
+
           <LastContainer>
             <SearchBar placeholder="Execution trace" />
             <br />
@@ -803,11 +808,11 @@ const CopyToClipboardImage = styled.img`
 `;
 
 const StackTraceCheckDiv = styled.div`
-display: ${(props) => (props.check === "Fail" ? "block" : "none")};
+  display: ${(props) => (props.check === "Fail" ? "block" : "none")};
 `;
 
 const TokenTransferCheckDiv = styled.div`
-display: ${(props) => (props.check === "Success" ? "block" : "none")};
+  display: ${(props) => (props.check === "Success" ? "block" : "none")};
 `;
 
 const TextLine = styled.div`
@@ -862,13 +867,6 @@ const TabLister = styled.div`
     white-space: nowrap;
     padding-left: 0px;
   }
-
-  // @media (min-width: 600px) and (max-width: 923px) {
-  //   overflow-y: hidden;
-  //   font-size: 0.8rem;
-  //   padding-left: 0px;
-  //   margin: 0rem 0rem 0rem 0rem;
-  // }
 `;
 const TabView = styled.div`
   padding: 0.313rem 0.5rem 0.313rem 0.5rem;

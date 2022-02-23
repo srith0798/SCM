@@ -3,6 +3,7 @@ import { Row } from "simple-flexbox";
 import "react-tabs/style/react-tabs.css";
 import styled from "styled-components";
 import Tooltip from "@mui/material/Tooltip";
+import DestinationTags from "../popup/addDestination";
 
 export default function Destination() {
   return (
@@ -19,33 +20,21 @@ export default function Destination() {
           </Row>
           <RowContainer>
             <Button>
-              <img
-                alt=""
-                src="/images/slack.svg"
-                style={{ marginRight: "0.25rem", width: "1.3rem" }}
-              />{" "}
+              <ButtonIcon alt="" src="/images/slack.svg" />
               Slack
             </Button>
             <Button>
-              <img
-                alt=""
-                src="/images/webhook.svg"
-                style={{ marginRight: "0.25rem", width: "1.3rem" }}
-              />
+              <ButtonIcon alt="" src="/images/webhook.svg" />
               Webhook
             </Button>
             <Button>
-              <img
-                alt=""
-                src="/images/email.svg"
-                style={{ marginRight: "0.25rem", width: "1.3rem" }}
-              />
+              <ButtonIcon alt="" src="/images/email.svg" />
               Email
             </Button>
           </RowContainer>
         </Div>
 
-        <ColumnOne style={{ paddingBottom: "10px", paddingLeft: "15px" }}>
+        <ColumnOne>
           Active Destination
           <Tooltip
             disableFocusListener
@@ -115,6 +104,10 @@ const Div = styled.div`
     padding-left: 0px;
   }
 `;
+const ButtonIcon = styled.img`
+  margin-right: 0.25rem;
+  width: 1.3rem;
+`;
 const LastDiv = styled.div`
   overflow-y: hidden;
   height: 109px;
@@ -152,6 +145,8 @@ const ColumnOne = styled.div`
   width: 100%;
   margin-bottom: 1.25rem;
   border-bottom: 0.125rem solid #e3e7eb;
+  padding-bottom: 10px;
+  padding-left: 15px;
 `;
 const Button = styled.div`
   width: 6rem;
