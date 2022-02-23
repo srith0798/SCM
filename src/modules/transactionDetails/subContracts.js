@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect, useCallback } from "react";
 import styled from "styled-components";
 import { history } from "../../managers/history";
 import ContractsService from "../../services/contractsService";
+import { sessionManager } from "../../managers/sessionManager";
 
 export default function SubContracts(props) {
   const [address, setAddress] = React.useState([]);
@@ -11,32 +12,37 @@ export default function SubContracts(props) {
     // history.push("/verified-contracts");
     history.push({
       pathname: "/verified-contracts",
-      state: { url: props.url,
-               status: props.status,             
-      }
-    })
+      state: { url: props.url, status: props.status },
+    });
   };
-  const getContractById = async () => {
-    let url = history.location.state.id;
-    setContractAddress(url);
+  const getContractList = async (skip = 0, limit = 10) => {
     try {
+      let userId = sessionManager.getDataFromCookies("userId");
+      const requestData = {
+        skip: skip,
+        limit: limit,
+        userId: userId,
+      };
       setLoader(true);
-      const response = await ContractsService.getContractsById("621394158f827c002a9e0379");
+      const response = await ContractsService.getContractsList(requestData);
       setLoader(false);
-      setAddress(response);
-    } catch (err) {
+      let check = response.contractList.filter((row) => {
+        return row.address === props.address;
+      });
+      setAddress(check);
+    } catch (e) {
       setLoader(false);
     }
   };
-  React.useEffect(()=> {
-    getContractById();
-  },[]);
+  useEffect(() => {
+    getContractList();
+  }, []);
   return (
     <MainContainer>
       <MainBoxContainer>
         <Container>
-          <Title>App_Transactions_Validator</Title>
-          <SubTitle>{props.address}</SubTitle>
+          <Title>{address[0]?.contractName}</Title>
+          <SubTitle>{address[0]?.address}</SubTitle>
           <SubTitleTwo>
             <Button onClick={SubButton}>
               <img
@@ -44,7 +50,7 @@ export default function SubContracts(props) {
                 alt=""
                 src="/images/verified_tick.svg"
               />
-              Verified Contracts
+              {address[0]?.status}
             </Button>
           </SubTitleTwo>
         </Container>

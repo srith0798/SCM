@@ -465,7 +465,7 @@ export default function TransactionList() {
                 <Div>
                   <RowData
                     onClick={() =>
-                      redirectToTransactionDetails(data?.hash, status, )
+                      redirectToTransactionDetails(data?.hash, status )
                     }
                   >
                     {toggle.transactionHash && (
