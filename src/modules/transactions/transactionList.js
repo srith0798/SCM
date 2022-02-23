@@ -589,13 +589,13 @@ const Div = styled.div`
   }
 
   @media (min-width: 767px) and (max-width: 1200px) {
-    width: 230%;
+    width: fit-content;
   }
 `;
 const RowData = styled.div`
   display: flex;
   flex-direction: row;
-  column-gap: 24px;
+  column-gap: 21px;
   @media (min-width: 300px) and (max-width: 768px) {
     column-gap: 36px;
   }
@@ -686,10 +686,11 @@ const PaginationDiv = styled.div`
 `;
 const MainContainer = styled.div`
   background: #ecf0f7 0% 0% no-repeat padding-box;
-  opacity: 1;
+
   width: 100%;
-  padding: 3.125rem;
-  /* height: 110vh; */
+  padding: 4.125rem;
+  padding-bottom: 6rem;
+  height: auto;
   @media (min-width: 340px) and (max-width: 768px) {
     padding: 3.125rem 1.5rem 1.5rem 1.5rem;
   }
@@ -726,27 +727,25 @@ const TransactionMedia = styled.div`
   }
 `;
 const SearchBar = styled.input`
-  height: 2.188rem;
-  border: none;
-  margin-left: 0.938rem;
+  background: #ffffff 0% 0% no-repeat padding-box;
   border-radius: 0.25rem;
-  background-image: url("/images/search-icon.svg");
+  font-size: 14px;
+  font-family: normal;
+  font-weight: 400;
+  color: #888888;
+  padding-left: 1.975rem;
+  background-image: url("/images/searchbar-icon.svg");
   background-repeat: no-repeat;
-  background-position: 0.5rem;
-  padding-left: 1.875rem;
-  background-size: 0.75rem;
-  outline: none;
-  font-size: 0.775rem;
-  *:focus {
-    outline: none;
-  }
-  @media (min-width: 300px) and (max-width: 767px) {
-    display: flex;
-    margin-left: -1px;
-    margin-right: 8px;
-    // padding: 5px;
-    font-size: 12px;
-    // background-image: none;
+  background-position: 0.7rem;
+  background-size: 12.6px;
+  position: relative;
+  border: none;
+  width: 270px;
+  height: 38px;
+  margin-left: 10px;
+  @media (max-width: 767px) {
+    width: min-content;
+    height: 37px;
   }
 `;
 const Icons = styled.img`

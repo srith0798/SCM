@@ -241,7 +241,7 @@ export default function TransactionDetails() {
             </ErrorCheckDiv>
             <CommonDivBlock>
               <Heading>Block</Heading>
-              <SubHead>{row.blockNumber}</SubHead>
+              <SubHead style={{ color: "#416BE0" }}>{row.blockNumber}</SubHead>
             </CommonDivBlock>
             <CommonDiv>
               <Row>
@@ -282,7 +282,13 @@ export default function TransactionDetails() {
             </CommonDivTo>
             <TimeStampDiv>
               <Heading>Timestamp</Heading>
-              <SubHead>{moment(row.createdOn).fromNow()+ " " +"(" + new Date(row.createdOn).toLocaleString("en-US")+ ")"}</SubHead>
+              <SubHead>
+                {moment(row.createdOn).fromNow() +
+                  " " +
+                  "(" +
+                  new Date(row.createdOn).toLocaleString("en-US") +
+                  ")"}
+              </SubHead>
             </TimeStampDiv>
             <CommonDiv>
               <Row>
@@ -400,15 +406,15 @@ export default function TransactionDetails() {
             </CommonDiv>
           </TokenTransferDiv>
           <StackTraceCheckDiv check={status}>
-          <b>Stack Trace</b> <ToolTipIcon src="/images/tool-tip.svg" />
-          <StackContainer>
-            <BackgroundChanger>
-              {/* <TextLine>Error Messege:out of gas</TextLine>
+            <b>Stack Trace</b> <ToolTipIcon src="/images/tool-tip.svg" />
+            <StackContainer>
+              <BackgroundChanger>
+                {/* <TextLine>Error Messege:out of gas</TextLine>
               <img alt="" src="/images/error.svg" /> balances[_to] =
               balances[_to].add(_value);
               <br /> */}
-            </BackgroundChanger>
-          </StackContainer>
+              </BackgroundChanger>
+            </StackContainer>
           </StackTraceCheckDiv>
           <TokenTransferCheckDiv check={status}>
           <b>Token Transfer</b>
@@ -469,7 +475,7 @@ const TabImage = styled.img`
   width: 22px;
   @media (min-width: 300px) and (max-width: 414px) {
     width: 13px;
-    margin-bottom: 5px;
+    margin-bottom: 2px;
   }
 `;
 
@@ -487,14 +493,8 @@ const TitleDiv = styled.div`
 `;
 const Title = styled.div`
   white-space: nowrap;
-  @media (min-width: 340px) and (max-width: 768px) {
+  @media (min-width: 340px) and (max-width: 767px) {
     align-items: left;
-  }
-  @media (max-width: 414px) {
-    margin-left: -53px;
-  }
-  @media (max-width: 375px) {
-    margin-left: -41px;
   }
 `;
 const FunctionContainer = styled.div`
@@ -566,11 +566,16 @@ const TimeStampDiv = styled.div`
   border-bottom: 0.031rem #eaf1ec solid;
   padding: 0.813rem;
   display: flex;
-
+  column-gap: 0px;
   @media (max-width: 375px) {
     display: flex;
     white-space: nowrap;
     column-gap: 80px;
+  }
+  @media (min-width: 376px) and (max-width: 414px) {
+    display: flex;
+    white-space: nowrap;
+    column-gap: 98px;
   }
 `;
 const CommonDivBlock = styled.div`
@@ -756,7 +761,6 @@ const SubContainer = styled.div`
   padding-bottom: 15px;
 
   @media (min-width: 300px) and (max-width: 485px) {
-    flex-direction: column;
   }
 `;
 const ScrollableDiv = styled.div`
@@ -834,30 +838,21 @@ const CopyToClipboardImage = styled.img`
   margin-left: 110px;
   cursor: pointer;
   @media (min-width: 340px) and (max-width: 767px) {
-    margin-left: 10px;
+    margin-left: 2px;
   }
   @media (min-width: 1024px) and (max-width: 1075px) {
     margin-left: 84px;
   }
-  // @media (min-width: 768px) and (max-width: 1024px) {
-  //   margin-left: px;
-  // }
 `;
 
 const StackTraceCheckDiv = styled.div`
-display: ${(props) => (props.check === "Fail" ? "block" : "none")};
+  display: ${(props) => (props.check === "Fail" ? "block" : "none")};
 `;
 
 const TokenTransferCheckDiv = styled.div`
-display: ${(props) => (props.check === "Success" ? "block" : "none")};
+  display: ${(props) => (props.check === "Success" ? "block" : "none")};
 `;
 
-const TextLine = styled.div`
-  text-align: left;
-  color: #ce1a1a;
-  font-weight: 600;
-  padding-left: 24px;
-`;
 const SearchBar = styled.input`
   height: 2.188rem;
   width: 12.5rem;
@@ -904,13 +899,6 @@ const TabLister = styled.div`
     white-space: nowrap;
     padding-left: 0px;
   }
-
-  // @media (min-width: 600px) and (max-width: 923px) {
-  //   overflow-y: hidden;
-  //   font-size: 0.8rem;
-  //   padding-left: 0px;
-  //   margin: 0rem 0rem 0rem 0rem;
-  // }
 `;
 const TabView = styled.div`
   padding: 0.313rem 0.5rem 0.313rem 0.5rem;
@@ -927,6 +915,7 @@ const ToolTipIcon = styled.img`
   margin-left: 0.513rem;
   @media (min-width: 300px) and (max-width: 767px) {
     margin-bottom: 6px;
+    display: none;
   }
 `;
 const FailButton = styled.div`
@@ -964,7 +953,7 @@ const SuccessButton = styled.div`
   margin-right: 12px;
   /* justify-content: center; */
   @media (min-width: 300px) and (max-width: 767px) {
-    width: 100px;
+    width: 30%;
   }
 `;
 
