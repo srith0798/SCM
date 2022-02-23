@@ -13,7 +13,7 @@ export default function Rules() {
     setActiveButton(e.target.id);
   };
   const redirectToAlertDetails = () => {
-    history.push("/dashboard/alerting/alert-details");
+    history.push("/alert-detail");
   };
 
   const [networkToolTip, setnetworkToolTip] = React.useState(false);
@@ -26,7 +26,7 @@ export default function Rules() {
       <MainContainer>
         <TitleContainer>
           <Title style={{ color: "#191919" }}>Alerting</Title>
-          <Button onClick={() => history.push("/dashboard/add-alert")}>
+          <Button onClick={() => history.push("/add-alert")}>
             Add Alert
           </Button>
         </TitleContainer>
@@ -133,6 +133,7 @@ export default function Rules() {
                       </Tooltip>
                     </ColumnOne>
                     <ColumnOne>
+                    <Subcolumn3>
                       Address
                       <Tooltip
                         open={addressToolTip}
@@ -146,8 +147,10 @@ export default function Rules() {
                           src="/images/tool-tip.svg"
                         />
                       </Tooltip>
+                      </Subcolumn3>
                     </ColumnOne>
                     <ColumnOne>
+                    <SubColumn2>
                       Network
                       <Tooltip
                         open={networkToolTip}
@@ -161,8 +164,10 @@ export default function Rules() {
                           src="/images/tool-tip.svg"
                         />
                       </Tooltip>
+                      </SubColumn2>
                     </ColumnOne>
                     <ColumnOne>
+                    
                       Alert Type
                       <Tooltip
                         open={alertTypeToolTip}
@@ -176,17 +181,18 @@ export default function Rules() {
                           src="/images/tool-tip.svg"
                         />
                       </Tooltip>
+                      
                     </ColumnOne>
                     <ColumnOne></ColumnOne>
                     <ColumnOne></ColumnOne>
                   </RowData>
                 </NewDiv>
                 <NewDiv>
-                  <RowData onClick={redirectToAlertDetails}>
+                  <RowData1 onClick={redirectToAlertDetails}>
                     <ColumnTwo>App_Transactions</ColumnTwo>
                     <ColumnTwo>xdcabfe…8b3c</ColumnTwo>
                     <ColumnTwo>XDC Mainnet</ColumnTwo>
-                    <ColumnTwo>Sucessfull</ColumnTwo>
+                    <ColumnTwo><SubColumn>Sucessfull</SubColumn></ColumnTwo>
                     <ColumnTwo style={{ fontSize: "14px", color: "#00A58C" }}>
                       Enabled
                     </ColumnTwo>
@@ -199,15 +205,16 @@ export default function Rules() {
                         />
                       </Tooltip>
                     </ColumnTwo>
-                  </RowData>
+                  </RowData1>
                 </NewDiv>
                 <NewDiv>
-                  <RowData onClick={redirectToAlertDetails}>
+                  <RowData1 onClick={redirectToAlertDetails}>
                     <ColumnTwo>App_Transactions</ColumnTwo>
                     <ColumnTwo>xdcabfe…8b3c</ColumnTwo>
                     <ColumnTwo>XDC Mainnet</ColumnTwo>
-                    <ColumnTwo>Failed </ColumnTwo>
+                    <ColumnTwo><SubColumn>Failed</SubColumn> </ColumnTwo>
                     <ColumnTwo
+
                       style={{ fontSize: "0.875rem", color: "#00A58C" }}
                     >
                       Enabled
@@ -221,7 +228,7 @@ export default function Rules() {
                         />
                       </Tooltip>
                     </ColumnTwo>
-                  </RowData>
+                  </RowData1>
                 </NewDiv>
               </DetailBox>
             </TableContainer>
@@ -281,6 +288,27 @@ const RowData = styled.div`
   @media (min-width: 300px) and (max-width: 768px) {
     column-gap: 84px;
   }
+  @media (min-width: 820px) and (max-width: 1200px) {
+    column-gap: 135px !important;
+  }
+  @media (min-width: 768px) and (max-width: 1200px) {
+    column-gap: 96px;
+  }
+
+`;
+
+const RowData1 = styled.div`
+  display: flex;
+  @media (min-width: 300px) and (max-width: 768px) {
+    column-gap: 84px;
+  }
+  @media (min-width: 820px) and (max-width: 1200px) {
+    column-gap: 133px !important;
+  }
+  @media (min-width: 768px) and (max-width: 1200px) {
+    column-gap: 97px ;
+  }
+
 `;
 const ToolTipIcon = styled.img`
   width: 0.75rem;
@@ -311,6 +339,39 @@ const ColumnTwo = styled.div`
   @media (min-width: 300px) and (max-width: 768px) {
     margin-right: 20px;
   }
+`;
+const SubColumn = styled.div`
+@media (min-width: 820px) and (max-width: 1200px) {
+  width:39px;
+}
+
+@media (min-width: 768px) and (max-width: 1200px) {
+  width:39px;
+}
+
+`;
+const Subcolumn3= styled.div`
+@media (min-width: 820px) and (max-width: 1200px) {
+  display:flex;
+margin-right:19px !important;
+}
+@media (min-width: 768px) and (max-width: 1200px) {
+  display:flex;
+margin-right:25px !important;
+}
+
+`;
+const SubColumn2= styled.div`
+@media (min-width: 820px) and (max-width: 1200px) {
+  display:flex;
+margin-right:10px !important;
+}
+@media (min-width: 768px) and (max-width: 1200px) {
+  display:flex;
+margin-right:10px ;
+}
+
+
 `;
 const MainContainer = styled.div`
   background: #ecf0f7 0% 0% no-repeat padding-box;

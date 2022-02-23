@@ -84,7 +84,6 @@ const HeaderContainer = styled.div`
     padding-top: 50px;
   }
   @media (min-width: 768px) and (max-width: 1024px) {
-    padding-top: 22px;
   }
 `;
 const XmartlyLogo = styled.img`

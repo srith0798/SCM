@@ -10,6 +10,7 @@ import { history } from "../../managers/history";
 import utility from "../../utility";
 import Tooltip from "@mui/material/Tooltip";
 import ContractsService from "../../services/contractsService";
+import moment from "moment";
 
 export default function TransactionDetails() {
   const [eventToolTip, seteventToolTip] = React.useState(false);
@@ -38,9 +39,9 @@ export default function TransactionDetails() {
       setRow(response.transactionList[0]);
     } catch (e) {}
   };
-  useEffect(()=>{
-  searchTransaction(url, ["hash"]);
-  }, [url])
+  useEffect(() => {
+    searchTransaction(url, ["hash"]);
+  }, [url]);
   return (
     <MainContainer>
       <SubContainer>
@@ -106,7 +107,7 @@ export default function TransactionDetails() {
               paddingLeft: "10px",
               borderBottom:
                 activeButton === "Overview"
-                  ? "0.225rem solid #3163F0"
+                  ? "0.3rem solid #3163F0"
                   : "#AEB7D0",
             }}
           >
@@ -129,7 +130,7 @@ export default function TransactionDetails() {
               display: "flex",
               paddingBottom: "1rem",
               borderBottom:
-                activeButton === "Contracts" ? "0.225rem solid #3163F0" : "",
+                activeButton === "Contracts" ? "0.3rem solid #3163F0" : "",
             }}
           >
             <TabImage
@@ -151,9 +152,7 @@ export default function TransactionDetails() {
               display: "flex",
               paddingBottom: "1rem",
               borderBottom:
-                activeButton === "EventsDetails"
-                  ? "0.225rem solid #3163F0"
-                  : "",
+                activeButton === "EventsDetails" ? "0.3rem solid #3163F0" : "",
             }}
           >
             <TabImage
@@ -188,7 +187,7 @@ export default function TransactionDetails() {
               paddingBottom: "1rem",
               whiteSpace: "nowrap",
               borderBottom:
-                activeButton === "StateChange" ? "0.225rem solid #3163F0" : "",
+                activeButton === "StateChange" ? "0.3rem solid #3163F0" : "",
             }}
           >
             <TabImage
@@ -227,12 +226,12 @@ export default function TransactionDetails() {
                 <SubHead>{row.network}</SubHead>
               </Row>
             </CommonDiv>
-            {/* <CommonDiv>
+            <ErrorCheckDiv check={status}>
               <Row>
                 <Heading>Error</Heading>
-                <SubHead>Out of Gas</SubHead>
+                {/* <SubHead>Out of Gas</SubHead> */}
               </Row>
-            </CommonDiv> */}
+            </ErrorCheckDiv>
             <CommonDivBlock>
               <Heading>Block</Heading>
               <SubHead>{row.blockNumber}</SubHead>
@@ -276,7 +275,7 @@ export default function TransactionDetails() {
             </CommonDivTo>
             <TimeStampDiv>
               <Heading>Timestamp</Heading>
-              <SubHead>{new Date(row.createdOn).toLocaleString("en-US")}</SubHead>
+              <SubHead>{moment(row.createdOn).fromNow()+ " " +"(" + new Date(row.createdOn).toLocaleString("en-US")+ ")"}</SubHead>
             </TimeStampDiv>
             <CommonDiv>
               <Row>
@@ -293,7 +292,9 @@ export default function TransactionDetails() {
             <CommonDiv>
               <Row>
                 <Heading>Gas Used</Heading>
-                <SubHead>{row.gasUsed} ({((row.gas/row.gasUsed)* 100).toFixed(2)})%</SubHead>
+                <SubHead>
+                  {row.gasUsed} ({((row.gas / row.gasUsed) * 100).toFixed(2)})%
+                </SubHead>
               </Row>
             </CommonDiv>
             <GasPriceDiv>
@@ -302,13 +303,12 @@ export default function TransactionDetails() {
             </GasPriceDiv>
             <FeeDiv>
               <Heading>Transaction Fee</Heading>
-              <SubHead>0.000119580201654524 XDC</SubHead>
+              <SubHead></SubHead>
             </FeeDiv>
             <RawInputDiv>
               <Heading>Raw input</Heading>
               <SubHead>
                 <TransactionNumber>
-                  0x01173a740000000000…f28e0b4fae4a3bfee7dc52
                 </TransactionNumber>
                 <CopyToClipboard
                   text={" 0x01173a740000000000…f28e0b4fae4a3bfee7dc52"}
@@ -325,7 +325,7 @@ export default function TransactionDetails() {
             <CommonDiv>
               <Row>
                 <Heading>Function: </Heading>
-                <SubHeadBlue>transfer()</SubHeadBlue>
+                <SubHeadBlue>{row.function}</SubHeadBlue>
               </Row>
             </CommonDiv>
             <CommonDiv>
@@ -379,15 +379,29 @@ export default function TransactionDetails() {
               </Row>
             </CommonDiv>
           </TokenTransferDiv>
+          <StackTraceCheckDiv check={status}>
           <b>Stack Trace</b> <ToolTipIcon src="/images/tool-tip.svg" />
           <StackContainer>
             <BackgroundChanger>
-              <TextLine>Error Messege:out of gas</TextLine>
+              {/* <TextLine>Error Messege:out of gas</TextLine>
               <img alt="" src="/images/error.svg" /> balances[_to] =
               balances[_to].add(_value);
-              <br />
+              <br /> */}
             </BackgroundChanger>
           </StackContainer>
+          </StackTraceCheckDiv>
+          <TokenTransferCheckDiv check={status}>
+          <b>Token Transfer</b>
+          <StackContainer>
+            <BackgroundChanger>
+              {/* <TextLine>Error Messege:out of gas</TextLine>
+              <img alt="" src="/images/error.svg" /> balances[_to] =
+              balances[_to].add(_value);
+              <br /> */}
+            </BackgroundChanger>
+          </StackContainer>
+          </TokenTransferCheckDiv>
+          
           <LastContainer>
             <SearchBar placeholder="Execution trace" />
             <br />
@@ -401,7 +415,7 @@ export default function TransactionDetails() {
         </ScrollableDiv>
       )}
       {activeButton === "Contracts" && (
-        <SubContracts address={row.contractAddress} />
+        <SubContracts address={row.contractAddress} url={url} status={status} />
       )}
       {activeButton === "EventsDetails" && <EventsDetails />}
       {activeButton === "StateChange" && <StateChange />}
@@ -414,7 +428,7 @@ const MainContainer = styled.div`
   width: 100%;
   padding: 2.125rem;
   display: 100%;
-  height: 100vh;
+  height: 123vh;
   @media (min-width: 340px) and (max-width: 768px) {
     padding: 1.2rem;
   }
@@ -503,6 +517,15 @@ const CommonDiv = styled.div`
     column-gap: 0px;
   }
 `;
+const ErrorCheckDiv = styled.div`
+  display: ${(props) => (props.check === "Fail" ? "block" : "none")};
+  border-bottom: 0.031rem #eaf1ec solid;
+  padding: 0.813rem;
+  @media (min-width: 300px) and (max-width: 768px) {
+    column-gap: 0px;
+  }
+`;
+
 const TimeStampDiv = styled.div`
   border-bottom: 0.031rem #eaf1ec solid;
   padding: 0.813rem;
@@ -521,12 +544,12 @@ const CommonDivBlock = styled.div`
   column-gap: 0px;
   @media (min-width: 300px) and (max-width: 767px) {
     display: flex;
-    column-gap: 138px;
+    // column-gap: 138px;
   }
   @media (max-width: 375px) {
     display: flex;
     white-space: nowrap;
-    column-gap: 118px;
+    // column-gap: 118px;
   }
 `;
 const FeeDiv = styled.div`
@@ -583,12 +606,12 @@ const GasPriceDiv = styled.div`
   @media (min-width: 300px) and (max-width: 767px) {
     display: flex;
     white-space: nowrap;
-    column-gap: 111px;
+    // column-gap: 111px;
   }
   @media (max-width: 375px) {
     display: flex;
     white-space: nowrap;
-    column-gap: 91px;
+    // column-gap: 91px;
   }
 `;
 const CommonDivTo = styled.div`
@@ -779,6 +802,14 @@ const CopyToClipboardImage = styled.img`
   // }
 `;
 
+const StackTraceCheckDiv = styled.div`
+display: ${(props) => (props.check === "Fail" ? "block" : "none")};
+`;
+
+const TokenTransferCheckDiv = styled.div`
+display: ${(props) => (props.check === "Success" ? "block" : "none")};
+`;
+
 const TextLine = styled.div`
   text-align: left;
   color: #ce1a1a;
@@ -876,7 +907,7 @@ const FailButton = styled.div`
 `;
 
 const SuccessButton = styled.div`
-  color: #00A58C;
+  color: #00a58c;
   padding: 0px 18px 0px 18px;
   width: 100%;
   margin-left: 1rem;
@@ -884,14 +915,14 @@ const SuccessButton = styled.div`
   align-items: center;
   width: 99px;
   height: 25px;
-  background: #E0FFFA 0% 0% no-repeat padding-box;
-  border: 1px solid #99C7C0;
+  background: #e0fffa 0% 0% no-repeat padding-box;
+  border: 1px solid #99c7c0;
   border-radius: 4px;
   opacity: 1;
   margin-right: 12px;
   /* justify-content: center; */
   @media (min-width: 300px) and (max-width: 767px) {
-    width: 87px;
+    width: 100px;
   }
 `;
 

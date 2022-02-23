@@ -21,6 +21,8 @@ import ConnectWallets from "./connectWallets";
 import utility from "../../utility";
 import toast, { Toaster } from "react-hot-toast";
 import { httpConstants } from "../../constants";
+import VerifiedContracts from "../transactionDetails/verifiedContracts";
+import Faqs from "../faqs/faq";
 
 //Replace Under Development with component once developed-
 const HomeComponent = (props) => {
@@ -55,11 +57,14 @@ const HomeComponent = (props) => {
           {Utility.isMenuActive("/about") && (
             <About getCurrentUserDetails={props.getCurrentUserDetails} />
           )}
+          {Utility.isMenuActive("/faqs") && <Faqs/>}
           {Utility.isMenuActive("/analytics") && <Analytics />}
           {Utility.isMenuActive("/alerting") && <Rules />}
           {Utility.isMenuActive("/add-alert") && <AddAlert />}
           {Utility.isMenuActive("/alert-detail") && <AlertDetails />}
           {Utility.isMenuActive("/networks") && <Network />}
+          {Utility.isMenuActive("/verified-contracts") && <VerifiedContracts/>}
+          
         </Container>
       )}
     </>
@@ -67,18 +72,14 @@ const HomeComponent = (props) => {
 };
 
 const dashboardComponent = (props) => {
-
   const loginErrorMessage = () =>
+    toast.error(httpConstants.MESSAGE.VALIDATE_BROWSER_LOGIN, {
+      duration: 4000,
 
-  toast.error(httpConstants.MESSAGE.VALIDATE_BROWSER_LOGIN, {
+      position: httpConstants.MESSAGE.TOASTS_POSITION,
 
-    duration: 4000,
-
-    position: httpConstants.MESSAGE.TOASTS_POSITION,
-
-    className: "toast-div-address",
-
-  });
+      className: "toast-div-address",
+    });
   const getCurrentUserDetails = async () => {
     let user = "";
 
@@ -101,7 +102,7 @@ const dashboardComponent = (props) => {
         );
       }
       sessionManager.setDataInCookies(true, "isLoggedIn");
-      history.push("/dashboard/about");
+      history.push("/about");
     }
     else{
       loginErrorMessage();

@@ -157,8 +157,7 @@ export default function Contract(props) {
         <Div>
           <RowContainer>
             <ColumnOne>
-            
-            Contract Name
+              Contract Name
               <Tooltip
                 open={contractNameToolTip}
                 onOpen={() => setcontractNameToolTip(true)}
@@ -171,75 +170,73 @@ export default function Contract(props) {
                   src="/images/tool-tip.svg"
                 />
               </Tooltip>
-           
-             
             </ColumnOne>
             <ColumnOne>
-            <ColOne>
-              Address
-              <Tooltip
-                open={addressToolTip}
-                onOpen={() => setaddressToolTip(true)}
-                onClose={() => setaddressToolTip(false)}
-                disableFocusListener
-                title="Wallet address"
-              >
-                <ToolTipIcon
-                  onClick={() => setaddressToolTip(!addressToolTip)}
-                  src="/images/tool-tip.svg"
-                />
-              </Tooltip>
+              <ColOne>
+                Address
+                <Tooltip
+                  open={addressToolTip}
+                  onOpen={() => setaddressToolTip(true)}
+                  onClose={() => setaddressToolTip(false)}
+                  disableFocusListener
+                  title="Wallet address"
+                >
+                  <ToolTipIcon
+                    onClick={() => setaddressToolTip(!addressToolTip)}
+                    src="/images/tool-tip.svg"
+                  />
+                </Tooltip>
               </ColOne>
             </ColumnOne>
             <ColumnOne>
-            <ColOne>
-              Network
-              <Tooltip
-                open={networkToolTip}
-                onOpen={() => setnetworkToolTip(true)}
-                onClose={() => setnetworkToolTip(false)}
-                disableFocusListener
-                title="Network on which the contract is executed"
-              >
-                <ToolTipIcon
-                  onClick={() => setnetworkToolTip(!networkToolTip)}
-                  src="/images/tool-tip.svg"
-                />
-              </Tooltip>
+              <ColOne>
+                Network
+                <Tooltip
+                  open={networkToolTip}
+                  onOpen={() => setnetworkToolTip(true)}
+                  onClose={() => setnetworkToolTip(false)}
+                  disableFocusListener
+                  title="Network on which the contract is executed"
+                >
+                  <ToolTipIcon
+                    onClick={() => setnetworkToolTip(!networkToolTip)}
+                    src="/images/tool-tip.svg"
+                  />
+                </Tooltip>
               </ColOne>
             </ColumnOne>
             <ColumnOne>
-            <ColOne>
-              Tag
-              <Tooltip
-                open={tagToolTip}
-                onOpen={() => settagToolTip(true)}
-                onClose={() => settagToolTip(false)}
-                disableFocusListener
-                title="Tag name associated with the contract"
-              >
-                <ToolTipIcon
-                  onClick={() => settagToolTip(!tagToolTip)}
-                  src="/images/tool-tip.svg"
-                />
-              </Tooltip>
+              <ColOne>
+                Tag
+                <Tooltip
+                  open={tagToolTip}
+                  onOpen={() => settagToolTip(true)}
+                  onClose={() => settagToolTip(false)}
+                  disableFocusListener
+                  title="Tag name associated with the contract"
+                >
+                  <ToolTipIcon
+                    onClick={() => settagToolTip(!tagToolTip)}
+                    src="/images/tool-tip.svg"
+                  />
+                </Tooltip>
               </ColOne>
             </ColumnOne>
             <ColumnOne>
-            <ColOneVisibility>
-              Visibility
-              <Tooltip
-                open={visibilityToolTip}
-                onOpen={() => setvisibilityToolTip(true)}
-                onClose={() => setvisibilityToolTip(false)}
-                disableFocusListener
-                title="Is the contract visible to the users or not"
-              >
-                <ToolTipIcon
-                  onClick={() => setvisibilityToolTip(!visibilityToolTip)}
-                  src="/images/tool-tip.svg"
-                />
-              </Tooltip>
+              <ColOneVisibility>
+                Visibility
+                <Tooltip
+                  open={visibilityToolTip}
+                  onOpen={() => setvisibilityToolTip(true)}
+                  onClose={() => setvisibilityToolTip(false)}
+                  disableFocusListener
+                  title="Is the contract visible to the users or not"
+                >
+                  <ToolTipIcon
+                    onClick={() => setvisibilityToolTip(!visibilityToolTip)}
+                    src="/images/tool-tip.svg"
+                  />
+                </Tooltip>
               </ColOneVisibility>
             </ColumnOne>
           </RowContainer>
@@ -252,31 +249,31 @@ export default function Contract(props) {
                   <ColumnSecond onClick={(e) => redirectTODetails(e, data._id)}>
                     {data.contractName}
                   </ColumnSecond>
-                  <ColumnSecond>
+                  <ColumnSecond onClick={(e) => redirectTODetails(e, data._id)}>
                     {utility.truncateTxnAddress(data.address)}
                   </ColumnSecond>
 
-                  <ColumnSecond>{data.network}</ColumnSecond>
+                  <ColumnSecond onClick={(e) => redirectTODetails(e, data._id)}>{data.network}</ColumnSecond>
                   <ColumnSecond style={{ display: "flex" }}>
                     <TagCol>
-                    {address[index].tags &&
-                      address[index].tags.map(
-                        (tag, index) =>
-                          index <= 0 && <FinanceTag>{tag}</FinanceTag>
+                      {address[index].tags &&
+                        address[index].tags.map(
+                          (tag, index) =>
+                            index <= 0 && <FinanceTag>{tag}</FinanceTag>
+                        )}
+                      {addTag && (
+                        <AddTags
+                          click={Close}
+                          address={address}
+                          contract={true}
+                        />
                       )}
-                    {addTag && (
-                      <AddTags
-                        click={Close}
-                        address={address}
-                        contract={true}
-                      />
-                    )}
-                    {data.tags && data.tags.length === 0 && (
-                      <AddTag onClick={(e) => Open(e)}>Add Tag</AddTag>
-                    )}
+                      {data.tags && data.tags.length === 0 && (
+                        <AddTag onClick={(e) => Open(e)}>Add Tag</AddTag>
+                      )}
                     </TagCol>
                   </ColumnSecond>
-                  <ColumnSecond>
+                  <ColumnSecond onClick={(e) => redirectTODetails(e, data._id)}>
                     {data.isHidden ? "Hidden" : "Visible"}
                   </ColumnSecond>
                 </RowTag>
@@ -291,26 +288,26 @@ export default function Contract(props) {
           } */}
       </TableContainer>
       <PageVerifyCheck check={address.length}>
-      <PaginationDiv>
-        <ReactPaginate
-          previousLabel={"<"}
-          nextLabel={">"}
-          pageCount={page}
-          breakLabel={"..."}
-          initialPage={0}
-          onPageChange={changePage}
-          containerClassName={"paginationBttns"}
-          disabledClassName={"paginationDisabled"}
-          activeClassName={"paginationActive"}
-        />
-      </PaginationDiv>
+        <PaginationDiv>
+          <ReactPaginate
+            previousLabel={"<"}
+            nextLabel={">"}
+            pageCount={page}
+            breakLabel={"..."}
+            initialPage={0}
+            onPageChange={changePage}
+            containerClassName={"paginationBttns"}
+            disabledClassName={"paginationDisabled"}
+            activeClassName={"paginationActive"}
+          />
+        </PaginationDiv>
       </PageVerifyCheck>
     </MainContainer>
   );
 }
 
 const PageVerifyCheck = styled.div`
-display: ${(props) => (props.check <= 10 ? "none" : "block")};
+  display: ${(props) => (props.check <= 10 ? "none" : "block")};
 `;
 
 const FinanceTag = styled.div`
@@ -437,8 +434,7 @@ const RowContainer = styled.div`
   display: flex;
   flex-flow: row nowrap;
   @media (min-width: 768px) and (max-width: 1128px) {
-    column-gap:152px;
-  
+    column-gap: 152px;
   }
 `;
 
@@ -446,11 +442,9 @@ const RowTag = styled.div`
   display: flex;
   flex-flow: row nowrap;
   @media (min-width: 768px) and (max-width: 1128px) {
-    column-gap:92px;
-  
+    column-gap: 92px;
   }
 `;
-
 
 const MainHeading = styled.div`
   display: flex;
@@ -464,7 +458,6 @@ const MainHeading = styled.div`
     flex-direction: column;
     padding-top: 7px;
   }
-
 `;
 const SubContainer = styled.div`
   width: 100%;
@@ -565,12 +558,13 @@ const TableContainer = styled.div`
   width: 100%;
   min-height: 20rem;
   overflow: auto;
+  margin-top: 2px;
   padding: 0.625rem 0.625rem 1px 0.625rem;
   @media (min-width: 300px) and (max-width: 767px) {
     overflow-y: hidden;
     overflow-x: auto;
     height: 420px;
-    margin-top: 20px;
+    margin-top: 30px;
 
     position: relative;
     width: 100%;
@@ -602,7 +596,7 @@ const Div = styled.div`
     width: 1232px;
   }
   @media (min-width: 300px) and (max-width: 767px) {
-    width: 1287px !important;
+    width: 970px !important;
   }
 `;
 const ColumnOne = styled.div`
@@ -612,32 +606,24 @@ const ColumnOne = styled.div`
   width: 100%;
   max-width: 18.75rem;
   min-width: 180px;
-  @media (min-width: 300px) and (max-width: 767px){
-  margin-left:76px;
+  @media (min-width: 300px) and (max-width: 767px) {
+    margin-left: 15px;
   }
   @media (min-width: 768px) and (max-width: 1128px) {
     max-width: 9.75rem;
     min-width: 26px;
-  
   }
-
 `;
 
-
 const ColOneVisibility = styled.div`
-@media (min-width: 768px) and (max-width: 1128px) {
-  
-  
-}
+  @media (min-width: 768px) and (max-width: 1128px) {
+  }
 `;
 
 const ColOne = styled.div`
-@media (min-width: 768px) and (max-width: 1128px) {
-  
-  
-}
+  @media (min-width: 768px) and (max-width: 1128px) {
+  }
 `;
-
 
 const ColumnSecond = styled.div`
   font-size: 0.875rem;
@@ -647,17 +633,16 @@ const ColumnSecond = styled.div`
   width: 100%;
   white-space: nowrap;
   max-width: 18.75rem;
-  @media (min-width: 300px) and (max-width: 767px){
-    margin-left:76px;
-    }
+  @media (min-width: 300px) and (max-width: 767px) {
+    margin-left: 16px;
+  }
 `;
 const TagCol = styled.div`
-@media (min-width: 300px) and (max-width: 767px){
-  margin-left:-10px;
+  @media (min-width: 300px) and (max-width: 767px) {
+    margin-left: -10px;
   }
-@media (min-width: 768px) and (max-width: 1128px) {
-  margin-left:-10px;
-  
+  @media (min-width: 768px) and (max-width: 1128px) {
+    margin-left: -10px;
   }
 `;
 const ToolTipIcon = styled.img`
