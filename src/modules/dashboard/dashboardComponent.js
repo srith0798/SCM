@@ -57,14 +57,13 @@ const HomeComponent = (props) => {
           {Utility.isMenuActive("/about") && (
             <About getCurrentUserDetails={props.getCurrentUserDetails} />
           )}
-          {Utility.isMenuActive("/faqs") && <Faqs/>}
+          {Utility.isMenuActive("/faqs") && <Faqs />}
           {Utility.isMenuActive("/analytics") && <Analytics />}
           {Utility.isMenuActive("/alerting") && <Rules />}
           {Utility.isMenuActive("/add-alert") && <AddAlert />}
           {Utility.isMenuActive("/alert-detail") && <AlertDetails />}
           {Utility.isMenuActive("/networks") && <Network />}
-          {Utility.isMenuActive("/verified-contracts") && <VerifiedContracts/>}
-          
+          {Utility.isMenuActive("/verified-contracts") && <VerifiedContracts />}
         </Container>
       )}
     </>
@@ -103,8 +102,7 @@ const dashboardComponent = (props) => {
       }
       sessionManager.setDataInCookies(true, "isLoggedIn");
       history.push("/about");
-    }
-    else{
+    } else {
       loginErrorMessage();
     }
     return true; //required to close the "connect wallet" popup

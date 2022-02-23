@@ -15,104 +15,103 @@ export default function About(props) {
 
   return (
     <>
-      <MainContainer>
-        <MainBoxContainer>
-          <Container>
-            <LeftContainer>
-              <Row>
-                <DetailBox>
-                  <DivDesktop>
-                    Manage your <Span>Smart Contracts</Span> on XDC Network
-                  </DivDesktop>
-                  <MobileSpan>
-                    {" "}
-                    <Span1>Manage your Smart </Span1> <br></br>
-                    <Span1>Contracts on XDC Network</Span1>
-                  </MobileSpan>
-                </DetailBox>
-              </Row>
-              <DataBox>
-                Easily govern your smart contract deployment with end-to-end
-                lifecycle utility, empowering the entire on-chain critical
-                business logic.
-              </DataBox>
-              <Tooltip
-                disableFocusListener
-                title="Click to get started with Xmartly"
+      <MainBoxContainer>
+        <Container>
+          <LeftContainer>
+            <Row>
+              <DetailBox>
+                <DivDesktop>
+                  Manage your <Span>Smart Contracts</Span> on XDC Network
+                </DivDesktop>
+                <MobileSpan>
+                  {" "}
+                  <Span1>Manage your Smart </Span1> <br></br>
+                  <Span1>Contracts on XDC Network</Span1>
+                </MobileSpan>
+              </DetailBox>
+            </Row>
+            <DataBox>
+              Easily govern your smart contract deployment with end-to-end
+              lifecycle utility, empowering the entire on-chain critical
+              business logic.
+            </DataBox>
+            <Tooltip
+              disableFocusListener
+              title="Click to get started with Xmartly"
+            >
+              <Button
+                onClick={() =>
+                  history.push({
+                    pathname: "/contracts",
+                    state: {
+                      id: address.address,
+                      homepageHistory: "from-home-page",
+                    },
+                  })
+                }
               >
-                <Button
-                  onClick={() =>
-                    history.push({
-                      pathname: "/contracts",
-                      state: {
-                        id: address.address,
-                        homepageHistory: "from-home-page",
-                      },
-                    })
-                  }
-                >
-                  Add Your Smart Contract
-                  <img
-                    style={{ marginLeft: "0.375rem" }}
-                    alt=""
-                    src="/images/question-mark.svg"
-                  />
-                </Button>
-              </Tooltip>
-            </LeftContainer>
-            <RightContainer>
-              <VideoBox>
-                <ReactPlayer
-                  url="https://www.youtube.com/watch?v=qfXJKTkXzD8"
-                  controls
-                  width="100%"
-                  height="100%"
-                />
-              </VideoBox>
-              <SmartButton>
                 Add Your Smart Contract
                 <img
                   style={{ marginLeft: "0.375rem" }}
                   alt=""
                   src="/images/question-mark.svg"
                 />
-              </SmartButton>
-            </RightContainer>
-          </Container>
+              </Button>
+            </Tooltip>
+          </LeftContainer>
+          <RightContainer>
+            <VideoBox>
+              <ReactPlayer
+                url="https://www.youtube.com/watch?v=qfXJKTkXzD8"
+                controls
+                width="100%"
+                height="100%"
+              />
+            </VideoBox>
+            <SmartButton>
+              Add Your Smart Contract
+              <img
+                style={{ marginLeft: "0.375rem" }}
+                alt=""
+                src="/images/question-mark.svg"
+              />
+            </SmartButton>
+          </RightContainer>
+        </Container>
 
-          <GreyContainer>
-            <HeadingContainer>
-              Introducing the Smart Contracts - by XDC
-              <SubHead>Add smart contract and managing them</SubHead>
-            </HeadingContainer>
-            <IconRow>
-              <IconContainer>
-                <img alt="" src="/images/manage contracts.svg" />
-                <Title>Manage Contracts</Title>
-                <SubTitle>
-                  You can add and manage any contract deployed on XDC Network.
-                </SubTitle>
-              </IconContainer>
-              <IconContainer>
-                <img alt="" src="/images/analyticsicon.svg" />
-                <Title>Analytics</Title>
-                <SubTitle>
-                  View analytics like number of transactions, gas fee etc for
-                  the added contract.
-                </SubTitle>
-              </IconContainer>
-              <IconContainer>
-                <img alt="" src="/images/set alerts.svg" />
-                <Title>Set Alerts</Title>
-                <SubTitle>
-                  You can set different types of alert for you contracts,
-                  without missing any information
-                </SubTitle>
-              </IconContainer>
-            </IconRow>
-          </GreyContainer>
-        </MainBoxContainer>
-      </MainContainer>
+        <GreyContainer>
+          <HeadingContainer>
+            Introducing the Smart Contracts - by XDC
+            <SubHead>Add smart contract and managing them</SubHead>
+          </HeadingContainer>
+          <IconRow>
+            <IconContainer>
+              <img alt="" src="/images/manage contracts.svg" />
+              <Title>Manage Contracts</Title>
+              <SubTitle>
+                You can add and manage any contract deployed on XDC Network.
+              </SubTitle>
+            </IconContainer>
+            <IconContainer>
+              <img alt="" src="/images/analyticsicon.svg" />
+              <Title>Analytics</Title>
+              <SubTitle>
+                View analytics like number of transactions, gas fee etc for the
+                added contract.
+              </SubTitle>
+            </IconContainer>
+            <IconContainer>
+              <img alt="" src="/images/set alerts.svg" />
+              <Title>Set Alerts</Title>
+              <SubTitle>
+                You can set different types of alert for you contracts, without
+                missing any information
+              </SubTitle>
+            </IconContainer>
+          </IconRow>
+        </GreyContainer>
+      </MainBoxContainer>
+
       <DivFooter>
         <FooterComponent />
       </DivFooter>
@@ -141,6 +140,7 @@ const MainBoxContainer = styled.div`
   flex-direction: column;
   align-item: center;
   padding: 4.125rem;
+  height: 110vh;
   @media (min-width: 300px) and (max-width: 700px) {
     padding: 1.125rem;
     height: 1377px;
@@ -150,10 +150,6 @@ const MainBoxContainer = styled.div`
   }
   @media (max-width: 768px) {
     padding: 30px;
-  }
-  @media (min-width: 768px) and (max-width: 1024px) {
-    padding: 16px;
-    height: 131vh;
   }
 `;
 const Container = styled.div`
