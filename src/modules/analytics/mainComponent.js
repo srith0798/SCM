@@ -1,4 +1,4 @@
-import React , {useEffect} from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { Row, Column } from "simple-flexbox";
 import Line from "./graph";
@@ -13,23 +13,36 @@ import TopCalls from "./topCalls";
 import utility from "../../utility";
 import moment from "moment";
 import ShowLoader from "../../common/components/showLoader";
+import { analytics } from "../../constants";
 
 export default function MainComponent(props) {
   const [isSetOpen, setOpen] = React.useState(false);
   const [contracts, setContracts] = React.useState([]);
   const [selected, setSelected] = React.useState({});
-  const [noOfTransactions , setNoOfTransactions] = React.useState([]);
-  const [gasPriceData , setGasPriceData] = React.useState([]);
-  const[activeUserData, setActiveUserData]=React.useState([]);
-  const[transactionCount , setTransactionCount] = React.useState([]);
-  const[expandGraph , setExpandGraph] = React.useState(0);
-  const[graphName , setGraphName] =React.useState("");
-  const[data , setData] =React.useState([]);
-  const[transactionOverTimeSelect, setTransactionOverTimeSelect]=React.useState("7");
-  const[gasUsedSelect, setGasUsedSelect]=React.useState("7");
-  const[activeUserSelect, setActiveUserSelect]=React.useState("7");
-  const[dropDownValue, setDropDownValue]=React.useState("7");
-  const[loader, setLoader]=React.useState("7");
+  const [noOfTransactions, setNoOfTransactions] = React.useState([]);
+  const [gasPriceData, setGasPriceData] = React.useState([]);
+  const [activeUserData, setActiveUserData] = React.useState([]);
+  const [topCallersData, setTopCallersData] = React.useState([]);
+  const [topFunctionCallsData, setTopFunctionCallsData] = React.useState([]);
+  const [transactionCount, setTransactionCount] = React.useState([]);
+  const [expandGraph, setExpandGraph] = React.useState(0);
+  const [graphName, setGraphName] = React.useState("");
+  const [data, setData] = React.useState([]);
+  const [transactionOverTimeSelect, setTransactionOverTimeSelect] = React.useState("7");
+  const [gasUsedSelect, setGasUsedSelect] = React.useState("7");
+  const [activeUserSelect, setActiveUserSelect] = React.useState("7");
+  const [topCallersSelct, setTopCallersSelect] = React.useState("7");
+  const [topFunctionCallsSelect, setTopFunctionCallsSelect] = React.useState("7");
+  const [dropDownValue, setDropDownValue] = React.useState("7");
+  const [loader, setLoader] = React.useState("7");
+  const [tableData, setTableData] = React.useState([]);
+  const [transactionOverTimeError, setTransactionOverTimeError] = React.useState("");
+  const [gasUsedOverTimeError, setGasUsedOverTimeError] = React.useState("");
+  const [activeUsersError, setActiveUsersError] = React.useState("");
+  const [topCallersError, setTopCallersError] = React.useState("");
+  const [topFunctionCallsError, setTopFunctionCallsError] = React.useState("");
+  const [error, setError] = React.useState("");
+
 
 
 
@@ -63,150 +76,168 @@ export default function MainComponent(props) {
 
   const getContractNames = async (skip = 0, limit = 10) => {
     let userId = sessionManager.getDataFromCookies("userId");
-    try {
       const requestData = {
         skip: skip,
         limit: limit,
         userId: userId,
       };
       setLoader(true)
-      const response = await ContractsService.getContractsList(requestData);
+      const [error , response] = await utility.parseResponse(ContractsService.getContractsList(requestData));
+      if(error){
+        setLoader(false);
+        return;
+      }
+      if (response.contractList.length === 0) { return }
       getTransactionAnalytics(response.contractList[0].address)
       getGasUsedAnalytics(response.contractList[0].address)
       getActiveUsersAnalytics(response.contractList[0].address)
+      getTopCallers(response.contractList[0].address)
+      getTopFunctionCalls(response.contractList[0].address)
       setLoader(false);
       setContracts(response.contractList);
       setSelected(response.contractList[0])
-      if (response.contractList.length === 0) {return}
-    } catch (e) {
-      
-    }
   };
-  const getTransactionAnalytics = async(address, event) =>{
-    // console.log("eee", event.target.value);
-    if(event?.target?.value){
-    setTransactionOverTimeSelect(event.target.value)
-    setDropDownValue(event.target.value)
+  const getTransactionAnalytics = async (address, event) => {
+    if (event?.target?.value) {
+      setTransactionOverTimeSelect(event.target.value)
+      setDropDownValue(event.target.value)
     }
+    
     const req = {
-      address :address ? address : selected.address,
+      address: address ? address : selected.address,
       numberOfDays: event?.target?.value || 7
     }
-    const [error , response ] = await utility.parseResponse(AnalyticsService.getTransactionsAnalytics(req));
-    if(error) return;
-    var arr = [{
-      id: "Transactions",
-      color: "hsl(248, 70%, 50%)",
-      data: []
-  }];
-
-  var resultData = []
-  response.map(items => {
-      resultData.push({
-          x: items.dateString,
-          y: items.count
-      })
-      return true;
-
-      // moment(items.timestamp * 1000).format("MMMM Do YYYY"),moment(items.timestamp * 1000).format("MMMM Do YYYY"),
-
-  })
-
-  arr[0].data = resultData;
-  setNoOfTransactions(arr);
-  setData(arr)
-  // setTransactionCount(response)
-  
-  
+    setLoader(true);
+    const [error, response] = await utility.parseResponse(AnalyticsService.getTransactionsAnalytics(req));
+    if (error || !response || response.length === 0) {
+      setTransactionOverTimeError("No Transactions Available");
+      setNoOfTransactions([]);
+      setData([]);
+      setLoader(false);
+      return;
+    }
+    setLoader(false);
+   const resultData = getGraphData("Transactions", response , "dateString" , "count");
+   setNoOfTransactions(resultData);
+   setData(resultData);
   }
 
-  const getGasUsedAnalytics = async(address, event) =>{
-    // console.log("eee", event.target.value);
-    if(event?.target?.value){
-    setGasUsedSelect(event.target.value)
-    setDropDownValue(event.target.value)
+  const getGasUsedAnalytics = async (address, event) => {
+    if (event?.target?.value) {
+      setGasUsedSelect(event.target.value)
+      setDropDownValue(event.target.value)
     }
     const req = {
-      address :address ? address : selected.address,
+      address: address ? address : selected.address,
       numberOfDays: event?.target?.value || 7
     }
-    const [error , response ] = await utility.parseResponse(AnalyticsService.getGasUsedAnalytics(req));
-    if(error) return;
-    var arr = [{
-      id: "GasPrice",
-      color: "hsl(248, 70%, 50%)",
-      data: []
-  }];
+    const [error, response] = await utility.parseResponse(AnalyticsService.getGasUsedAnalytics(req));
+    if (error || !response || response.length === 0) {
+      setGasUsedOverTimeError("No Data Available");
+      setGasPriceData([]);
+      setData([]);
+      return;
+    }  
+    const resultData = getGraphData("GasPrice", response , "dateString" , "gasUsedOverTime");
+    setGasPriceData(resultData);
+    setData(resultData);
 
-  var resultData = []
-  response.map(items => {
-      resultData.push({
-          x: items.dateString,
-          y: items.gasUsedOverTime
-      })
-      return true;
-
-      // moment(items.timestamp * 1000).format("MMMM Do YYYY"),moment(items.timestamp * 1000).format("MMMM Do YYYY"),
-
-  })
-
-  arr[0].data = resultData;
-  setGasPriceData(arr);
-  setData(arr);
-  // setTransactionCount(response)
-  
-  
   }
 
-  const getActiveUsersAnalytics = async(address, event) =>{
-    // console.log("eee", event.target.value);
-    if(event?.target?.value){
-    setActiveUserSelect(event.target.value)
-    setDropDownValue(event.target.value)
+  const getActiveUsersAnalytics = async (address, event) => {
+    if (event?.target?.value) {
+      setActiveUserSelect(event.target.value)
+      setDropDownValue(event.target.value)
     }
     const req = {
-      address :address ? address : selected.address,
+      address: address ? address : selected.address,
       numberOfDays: event?.target?.value || 7
     }
-    const [error , response ] = await utility.parseResponse(AnalyticsService.getActiveUsersAnalytics(req));
-    if(error) return;
-    var arr = [{
-      id: "ActiveUsers",
-      color: "hsl(248, 70%, 50%)",
-      data: []
+    const [error, response] = await utility.parseResponse(AnalyticsService.getActiveUsersAnalytics(req));
+    if (error || !response || response.length === 0) {
+      setActiveUsersError("No Active Users Available");
+      setActiveUserData([]);
+      setData([]);
+      return;
+    }  
+    const resultData = getGraphData("ActiveUsers", response , "dateString" , "activeUsers");
+    setActiveUserData(resultData);
+    setData(resultData);
+  }
+
+  const getTopCallers = async (address, event) => {
+    if (event?.target?.value) {
+      setTopCallersSelect(event.target.value)
+      setDropDownValue(event.target.value)
+    }
+    const req = {
+      address: address ? address : selected.address,
+      numberOfDays: event?.target?.value || 7
+    }
+    const [error, response] = await utility.parseResponse(AnalyticsService.getTopCallers(req));
+    if (error || !response || response.length === 0) {
+      setTopCallersError("No Top Callers Available");
+      setTopCallersData([]);
+      setTableData([]);
+      return;
+    }    
+    setTopCallersData(response);
+    setTableData(response);
+  }
+
+  const getTopFunctionCalls = async (address, event) => {
+    if (event?.target?.value) {
+      setTopFunctionCallsSelect(event.target.value)
+      setDropDownValue(event.target.value)
+    }
+    const req = {
+      address: address ? address : selected.address,
+      numberOfDays: event?.target?.value || 7
+    }
+    const [error, response] = await utility.parseResponse(AnalyticsService.getTopFunctionCalls(req));
+    if (error || !response || response.length === 0) {
+      setTopFunctionCallsError("No Top Function Calls Available");
+      setTopFunctionCallsData([]);
+      setTableData([]);
+      return;
+    }
+    setTopFunctionCallsData(response);
+    setTableData(response);
+  }
+  const callAnalyticsFunctions = async (address, event) => {
+    if (expandGraph === 1)
+      await getTransactionAnalytics(address, event);
+    if (expandGraph === 2)
+      await getGasUsedAnalytics(address, event)
+    if (expandGraph === 3)
+      await getActiveUsersAnalytics(address, event)
+    if (expandGraph === 4)
+      await getTopCallers(address, event)
+    if (expandGraph === 5)
+      await getTopFunctionCalls(address, event)
+  }
+
+ const getGraphData = (id , response, xComponent , yComponent ) =>{
+  let arr = [{
+    id: id,
+    color: "hsl(248, 70%, 50%)",
+    data: []
   }];
 
-  var resultData = []
+  let resultData = []
   response.map(items => {
-      resultData.push({
-          x: items.dateString,
-          y: items.activeUsers
-      })
-      return true;
-
-      // moment(items.timestamp * 1000).format("MMMM Do YYYY"),moment(items.timestamp * 1000).format("MMMM Do YYYY"),
-
+    resultData.push({
+      x: items[xComponent],
+      y: items[yComponent]
+    })
+    return true;
   })
-
   arr[0].data = resultData;
-  setActiveUserData(arr);
-  setData(arr);
-  // setTransactionCount(response)
-  
-  
-  }
-  const callAnalyticsFunctions = async(address, event) =>{
-    if(expandGraph === 1)
-      await getTransactionAnalytics(address , event);
-    if(expandGraph=== 2)
-      await getGasUsedAnalytics(address , event)  
-    if(expandGraph=== 3)
-      await getActiveUsersAnalytics(address , event)    
-  }
+  return arr;
 
- 
+ }
 
-  const selectContract = (item) =>{
+  const selectContract = (item) => {
     setSelected(item);
   }
   useEffect(() => {
@@ -214,272 +245,199 @@ export default function MainComponent(props) {
 
   }, []);
 
- const expandGraphs =  (value,data, dropDownValue) =>{
-  if (value === 1) {setGraphName("Transactions over time"); setData(data)}
-  if (value === 2) {setGraphName("Gas used overtime"); setData(data)}
-  if (value === 3) setGraphName("Active users");
-  if (value === 4) setGraphName("Top Callers");
-  if (value === 5) setGraphName("Top Function Calls");
-  
-  setExpandGraph(value);
-  setDropDownValue(dropDownValue);
+  const expandGraphs = (value, data, dropDownValue) => {
+    if (value === 1) { setGraphName("Transactions over time"); setData(data); setError(transactionOverTimeError) }
+    if (value === 2) { setGraphName("Gas used overtime"); setData(data); setError(gasUsedOverTimeError) }
+    if (value === 3) { setGraphName("Active users"); setData(data); setError(activeUsersError) }
+    if (value === 4) { setGraphName("Top Callers"); setData(data); setError(topCallersError) }
+    if (value === 5) { setGraphName("Top Function Calls"); setData(data); setError(topFunctionCallsError) }
+    setExpandGraph(value);
+    setDropDownValue(dropDownValue);
   }
 
   return (
     <>
-    <ShowLoader state={loader} top={"33%"}></ShowLoader>
-    {expandGraph === 0 ? 
-       <div style={{ overflow: "auto" }}>
-       <Column>
-         <Row>
-           <MainContainer>
-             <SubContainer>
-               <MainHeading>Analytics</MainHeading>
-               <Tooltip disableFocusListener title="Refresh">
-                 <BackImage src="/images/refresh.svg" />
-               </Tooltip>
-             </SubContainer>
-             <Container>
-               <View>View analytics for contract</View>
-               <Content>
-                 You can view analytics data per contract by using the contract
-                 picker below.
-               </Content>
-               <ClickAwayListener onClickAway={handleClickAway}>
-                 <Box sx={{ position: "relative" }}
-                  selected={selected?.address}
-                 >
-                   <DropDown onClick={handleClick}>
-                     {selected?.contractName ? selected.contractName : "Contract"}
-                     <img
-                       style={{ marginLeft: "0.5rem" }}
-                       alt=""
-                       src="/images/XDCmainnet.svg"
-                     />
-                     <br />
-                     <TransactionHash>{selected?.address}</TransactionHash>
-                     <Image src="/images/Arrrow.svg" />
-                   </DropDown>
-                   {isSetOpen ? (
-                   <Box sx={styles}>
-                     {contracts.length &&
-                       contracts.map((item) => (
-                         <div onClick={()=>selectContract(item)}>
-                           <Label>Contract</Label>
-                           {item?.contractName ? item.contractName : "Contract"}
-                           <br />
-                           <TransactionHash>{item.address}</TransactionHash>
-                         </div>
-                       ))}
-                   </Box>
-                 ) : null}
-               </Box>
-               </ClickAwayListener>
-             </Container>
-             {/* <ScrollableDiv> */}
-               <ResponsiveRow>
-                 
-          <LineGraphContainer
-           heading="Transactions over time" 
-           expandGraphs={expandGraphs} 
-           getAnalyticsData = {getTransactionAnalytics} 
-           selectValue={transactionOverTimeSelect}
-           data={noOfTransactions}
-        
-           graphNo={1}
-          ></LineGraphContainer>
-        <LineGraphContainer 
-          heading="Gas used over time" 
-          expandGraphs={expandGraphs} 
-          getAnalyticsData = {getGasUsedAnalytics} 
-          selectValue={gasUsedSelect}
-          data={gasPriceData}
-    
-          graphNo={2}
+      <ShowLoader state={loader} top={"33%"}></ShowLoader>
+      {expandGraph === 0 ?
+        <div style={{ overflow: "auto" }}>
+          <Column>
+            <Row>
+              <MainContainer>
+                <SubContainer>
+                  <MainHeading>Analytics</MainHeading>
+                  <Tooltip disableFocusListener title="Refresh">
+                    <BackImage src="/images/refresh.svg" />
+                  </Tooltip>
+                </SubContainer>
+                <Container>
+                  <View>View analytics for contract</View>
+                  <Content>
+                    You can view analytics data per contract by using the contract
+                    picker below.
+                  </Content>
+                  <ClickAwayListener onClickAway={handleClickAway}>
+                    <Box sx={{ position: "relative" }}
+                      selected={selected?.address}
+                    >
+                      <DropDown onClick={handleClick}>
+                        {selected?.contractName ? selected.contractName : "Contract"}
+                        <img
+                          style={{ marginLeft: "0.5rem" }}
+                          alt=""
+                          src="/images/XDCmainnet.svg"
+                        />
+                        <br />
+                        <TransactionHash>{selected?.address}</TransactionHash>
+                        <Image src="/images/Arrrow.svg" />
+                      </DropDown>
+                      {isSetOpen ? (
+                        <Box sx={styles}>
+                          {contracts.length &&
+                            contracts.map((item) => (
+                              <div onClick={() => selectContract(item)}>
+                                <Label>Contract</Label>
+                                {item?.contractName ? item.contractName : "Contract"}
+                                <br />
+                                <TransactionHash>{item.address}</TransactionHash>
+                              </div>
+                            ))}
+                        </Box>
+                      ) : null}
+                    </Box>
+                  </ClickAwayListener>
+                </Container>
+                {/* <ScrollableDiv> */}
+                <ResponsiveRow>
+                  <GraphContainer>
+                    <SubContainer>
+                      <SelectComponent
+                        heading="Transactions over time"
+                        expandGraphs={expandGraphs}
+                        getAnalyticsData={getTransactionAnalytics}
+                        selectValue={transactionOverTimeSelect}
+                        data={noOfTransactions}
+                        graphNo={1}>
+                      </SelectComponent>
+                    </SubContainer>
+                    <GraphSize> <Line data={noOfTransactions} error={transactionOverTimeError}/></GraphSize>
+                  </GraphContainer>
 
-          ></LineGraphContainer>
-          </ResponsiveRow>
-               <ResponsiveRow>
-                 <GraphContainer>
-                   <div>Under Development</div>
-                   {/* <SubContainer>
-                     <div style={{ display: "flex", alignItems: "center" }}>
-                       <Head>
-                         Top Callers
-                         <Tooltip
-                           disableFocusListener
-                           title="List of top callers in past days"
-                         >
-                           <ToolTipIcon src="/images/tool-tip.svg" />
-                         </Tooltip>
-                       </Head>
-                       <BackImage
-                         src="/images/expand.svg"
-                         onClick={() => props.changeExpand(4)}
-                       />
-                     </div>
-                     <select id="cars" className="select">
-                       <option value="volvo" className="select-dropdown">
-                         Last 5 days
-                       </option>
-                       <option value="saab" className="select-dropdown">
-                         Last 7 days
-                       </option>
-                       <option value="mercedes" className="select-dropdown">
-                         Last 15 days
-                       </option>
-                       <option value="audi" className="select-dropdown">
-                         Last 25 days
-                       </option>
-                     </select>
-                   </SubContainer> */}
-                   {/* <Div>
-                     <ContractFrom>Contract from</ContractFrom>
-                     <Network>
-                       xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c
-                     </Network>
-                   </Div>
-                   <Div>
-                     <ContractFrom>Network</ContractFrom>
-                     <Network>Mainnet</Network>
-                   </Div>
-                   <Div>
-                     <ContractFrom>Contract from</ContractFrom>
-                     <Network>
-                       xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c
-                     </Network>
-                   </Div>
-                   <Div>
-                     <ContractFrom>Network</ContractFrom>
-                     <Network>Mainnet</Network>
-                   </Div>
-                   <Div>
-                     <ContractFrom>Network</ContractFrom>
-                     <Network>Mainnet</Network>
-                   </Div>*/}
-                 </GraphContainer> 
-                 <LineGraphContainer 
-                    heading="Active Users" 
-                    expandGraphs={expandGraphs} 
-                    getAnalyticsData = {getActiveUsersAnalytics} 
-                    selectValue={activeUserSelect}
-                    data={activeUserData}
 
-                    graphNo={3}
+                  <GraphContainer>
+                    <SubContainer>
+                      <SelectComponent
+                        heading="Gas used over time"
+                        expandGraphs={expandGraphs}
+                        getAnalyticsData={getGasUsedAnalytics}
+                        selectValue={gasUsedSelect}
+                        data={gasPriceData}
 
-                  ></LineGraphContainer>
-                 {/* <GraphContainer>
-                   <SubContainer>
-                     <div style={{ display: "flex", alignItems: "center" }}>
-                       <Head>
-                         Active users
-                         <Tooltip
-                           disableFocusListener
-                           title="Number of active users in the given time range"
-                         >
-                           <ToolTipIcon src="/images/tool-tip.svg" />
-                         </Tooltip>
-                       </Head>
-                       <BackImage
-                         src="/images/expand.svg"
-                         onClick={() => props.changeExpand(3)}
-                       />
-                     </div>
-                     <select id="cars" className="select">
-                       <option value="volvo" className="select-dropdown">
-                         Last 5 days
-                       </option>
-                       <option value="saab" className="select-dropdown">
-                         Last 7 days
-                       </option>
-                       <option value="mercedes" className="select-dropdown">
-                         Last 15 days
-                       </option>
-                       <option value="audi" className="select-dropdown">
-                         Last 25 days
-                       </option>
-                     </select>
-                   </SubContainer>
-                   <Line />
-                 </GraphContainer> */}
-               </ResponsiveRow>
-               <GraphContainer>
-              <div>Under Development</div>
-                 {/* <SubContainer>
-                   <div style={{ display: "flex", alignItems: "center" }}>
-                     <Head>
-                       Top Function calls
-                       <Tooltip disableFocusListener title="URL of the network">
-                         <ToolTipIcon src="/images/tool-tip.svg" />
-                       </Tooltip>
-                     </Head>
-                     <BackImage
-                       src="/images/expand.svg"
-                       onClick={() => props.changeExpand(5)}
-                     />
-                   </div>
-                   <select id="cars" className="select">
-                     <option value="volvo" className="select-dropdown">
-                       Last 5 days
-                     </option>
-                     <option value="saab" className="select-dropdown">
-                       Last 7 days
-                     </option>
-                     <option value="mercedes" className="select-dropdown">
-                       Last 15 days
-                     </option>
-                     <option value="audi" className="select-dropdown">
-                       Last 25 days
-                     </option>
-                   </select>
-                 </SubContainer>
-                 <Div>
-                   <ContractFrom>Contract from</ContractFrom>
-                   <Network>xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c</Network>
-                 </Div>
-                 <Div>
-                   <ContractFrom>Network</ContractFrom>
-                   <Network>Mainnet</Network>
-                 </Div>
-                 <Div>
-                   <ContractFrom>Contract from</ContractFrom>
-                   <Network>xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c</Network>
-                 </Div>
-                 <Div>
-                   <ContractFrom>Network</ContractFrom>
-                   <Network>Mainnet</Network>
-                 </Div>
-                 <Div>
-                   <ContractFrom>Network</ContractFrom>
-                   <Network>Mainnet</Network>
-                 </Div> */}
-               </GraphContainer>
-             {/* </ScrollableDiv> */}
-           </MainContainer>
-         </Row>
-       </Column>
-     </div>   
-    : ""}
-    {expandGraph > 0 && expandGraph < 4 && (
-      <FullScreen graphName={graphName} data={data}
-     
-        getAnalytics={callAnalyticsFunctions} 
-        expandGraphs={expandGraphs}
-        dropDownValue={dropDownValue}/>
-    )}
-    {expandGraph > 3 && (
-      <TopCalls graphName={graphName} changeExpand={expandGraphs} />
-    )}
-  </>
-   
+                        graphNo={2}>
+                      </SelectComponent>
+                    </SubContainer>
+                    <GraphSize> <Line data={gasPriceData} error={gasUsedOverTimeError}/></GraphSize>
+                  </GraphContainer>
+                </ResponsiveRow>
+                <ResponsiveRow>
+                  <GraphContainer>
+                    <TableData
+                      heading="Top Callers"
+                      expandGraphs={expandGraphs}
+                      getAnalyticsData={getTopCallers}
+                      selectValue={topCallersSelct}
+                      data={topCallersData}
+                      graphNo={4}
+                      error={topCallersError}
+                    ></TableData>
+                  </GraphContainer>
+                  <GraphContainer>
+                    <SubContainer>
+                      <SelectComponent
+                        heading="Active Users"
+                        expandGraphs={expandGraphs}
+                        getAnalyticsData={getActiveUsersAnalytics}
+                        selectValue={activeUserSelect}
+                        data={activeUserData}
+                        graphNo={3}>
+                      </SelectComponent>
+                    </SubContainer>
+                    <GraphSize> <Line data={activeUserData} error={activeUsersError}/></GraphSize>
+                  </GraphContainer>
+                </ResponsiveRow>
+                <GraphContainer>
+                  <TableData
+                    heading="Top Function Calls"
+                    expandGraphs={expandGraphs}
+                    getAnalyticsData={getTopFunctionCalls}
+                    selectValue={topFunctionCallsSelect}
+                    data={topFunctionCallsData}
+                    graphNo={5}
+                    error={topFunctionCallsError}
+                  ></TableData>
+                </GraphContainer>
+                {/* </ScrollableDiv> */}
+              </MainContainer>
+            </Row>
+          </Column>
+        </div>
+        : ""}
+      {expandGraph > 0 && expandGraph < 4 && (
+        <FullScreen graphName={graphName} data={data}
+          getAnalytics={callAnalyticsFunctions}
+          expandGraphs={expandGraphs}
+          dropDownValue={dropDownValue}
+          error={error}
+           />
+      )}
+      {expandGraph > 3 && (
+        <TopCalls graphName={graphName} data={tableData} graphNo={expandGraph}
+          changeExpand={expandGraphs}
+          getAnalytics={callAnalyticsFunctions}
+          expandGraphs={expandGraphs}
+          dropDownValue={dropDownValue}
+          error={error} />
+      )}
+    </>
+
   );
 }
 
-const LineGraphContainer = (props) =>{
-  return(
-  // <ResponsiveRow>
-  <GraphContainer>
-    <SubContainer>
+const TableData = (props) => {
+  return (
+    <>
+      <SubContainer>
+        <SelectComponent
+          graphNo={props.graphNo} data={props.data}
+          heading={props.heading} expandGraphs={props.expandGraphs}
+          selectValue={props.selectValue} getAnalyticsData={props.getAnalyticsData}>
+        </SelectComponent>
+      </SubContainer>
+      <Table>
+      {props?.data && props.data.length && props.data.length > 0 ? props.data.map((item) => (
+       <TableRow>     
+         <DataColumn>          
+        <Div>
+            {props.graphNo === 4 ? <ContractFrom>Contract from:</ContractFrom> : <ContractFrom>Function:</ContractFrom>}
+            {props.graphNo === 4 ? <Network>{item.address}</Network> : <Network>{item.function}</Network>}
+          </Div>
+          <Div>
+            <ContractFrom>Network:</ContractFrom>
+            <Network>{item.network}</Network>
+          </Div>
+          </DataColumn>
+          <Count>{item.count}</Count>
+          </TableRow>
+      )) : <>{props.error}</>}
+        </Table>
+
+
+    </>
+  )
+}
+
+const SelectComponent = (props) => {
+  return (
+    <>
       <div style={{ display: "flex", alignItems: "center" }}>
         <Head>
           {props.heading}
@@ -492,30 +450,21 @@ const LineGraphContainer = (props) =>{
         </Head>
         <BackImage
           src="/images/expand.svg"
-          onClick={() => props.expandGraphs(props.graphNo, props.data ,props.selectValue)}
+          onClick={() => props.expandGraphs(props.graphNo, props.data, props.selectValue)}
         />
       </div>
-      <select id="noOfDays" className="select" value={props.selectValue}  onChange={(event)=>{props.getAnalyticsData("" , event)}}>
-        <option value="7" className="select-dropdown">
-          Last 7 days
-        </option>
-        <option value="15" className="select-dropdown">
-          Last 15 days
-        </option>
-        <option value="25" className="select-dropdown">
-          Last 25 days
-        </option>
-        <option value="30" className="select-dropdown">
-          Last 1 Month
-        </option>
+      <select id="dates" className="select" value={props.selectValue} onChange={(event) => { props.getAnalyticsData("", event) }}>
+        {analytics && analytics.ANALYTICS_DROPDOWN && analytics.ANALYTICS_DROPDOWN.map((option) => (
+          <option value={option.VALUE} className="select-dropdown">
+            {option.TEXT}
+          </option>
+        ))}
+
       </select>
-    </SubContainer>
-   <GraphSize> <Line data={props.data} /></GraphSize>
-  </GraphContainer>
- 
-// </ResponsiveRow>
+    </>
   )
 }
+
 const ResponsiveRow = styled.div`
   display: flex;
   flex-flow: row nowrap;
@@ -530,12 +479,13 @@ const MainContainer = styled.div`
   padding-left: 71px;
   padding-right: 53px;
   padding-top: 32px;
-  padding-bottom: 0px;
+  padding-bottom: 20px;
   background-color: #ecf0f7;
   @media (min-width: 300px) and (max-width: 1024px) {
     padding: 12px 15px 0px 15px;
   }
 `;
+
 const MainHeading = styled.div`
   text-align: left;
   font-size: 1.5rem;
@@ -573,6 +523,11 @@ const GraphSize = styled.div`
     height: 80px;
   }
 `;
+const Table =styled.div`
+  height:15rem;
+  overflow-y:scroll;
+  margin-top:1rem;
+`
 const View = styled.div`
   font-size: 1rem;
   font-weight: 600;
@@ -592,6 +547,20 @@ const Content = styled.div`
   }
 `;
 
+const TableRow = styled.div`
+  display:flex;
+  flex-flow:column-nowrap;
+  margin-bottom:1rem;
+  border-top: 1px solid rgb(227, 231, 235);
+`;
+const DataColumn = styled.div`
+  width:100%;
+  padding-top:15px;
+`;
+const Count = styled.div`
+ color: #3163F0;
+ padding-top:15px;
+`;
 const GraphContainer = styled.div`
   width: 590px;
   background: #ffffff 0% 0% no-repeat padding-box;
@@ -623,18 +592,18 @@ const ToolTipIcon = styled.img`
   margin-left: 0.5rem;
 `;
 const ContractFrom = styled.div`
-  width: 100%;
-  max-width: 9.375rem;
-  color: #102c78;
+  width: 26%;
+  color: #102C78;
+  font-size: 14px;
   font-weight: 600;
-
   @media (min-width: 300px) and (max-width: 767px) {
     word-break: break-all;
   }
 `;
 const Network = styled.div`
+  color: #303134;
+  font-size: 14px;
   width: 100%;
-  max-width: 9.375rem;
   @media (min-width: 300px) and (max-width: 767px) {
     word-break: break-all;
   }
@@ -645,7 +614,7 @@ const Network = styled.div`
 const Div = styled.div`
   display: flex;
   flex-flow: row nowrap;
-  margin-bottom: 1rem;
+  margin-bottom: 0.125rem;
 `;
 const ContractDiv = styled.div`
   display: flex;
