@@ -10,18 +10,17 @@ export default function Graph(props) {
   const [data, setData] = useState([]);
   const [type, setType] = useState("");
 
-
   const [graphAccounts] = useState([]);
 
   let length = graphAccounts.length;
-  const firstDate =
-    graphAccounts.length === 0
-      ? ""
-      : moment(graphAccounts[length - 1].day).format("D MMM");
-  const lastDate =
-    graphAccounts.length === 0
-      ? ""
-      : moment(graphAccounts[0].day).format("D MMM");
+  // const firstDate =
+  //   graphAccounts.length === 0
+  //     ? ""
+  //     : moment(graphAccounts[length - 1].day).format("D MMM");
+  // const lastDate =
+  //   graphAccounts.length === 0
+  //     ? ""
+  //     : moment(graphAccounts[0].day).format("D MMM");
   const MouseMovePoint = (event) => {
     const x = event.x;
     const y = event.y;
@@ -79,12 +78,8 @@ export default function Graph(props) {
         //   legendPosition: "center",
         // }}
       />
-       <div className="dates">
-         <p>{props.firstDate}</p>
-         <p>{props.lastDate}</p>
-       </div>
     </>
-    : <>No Data Available</>}
+    : <>{props.error}</>}
     </>
   );
 }

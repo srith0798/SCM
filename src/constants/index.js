@@ -36,3 +36,24 @@ export const httpConstants = {
     VALIDATE_BROWSER_LOGIN:"Please Login To XDCPay"
   }
 };
+
+export const analytics = {
+  ANALYTICS_DROPDOWN :[
+    {
+      TEXT : "Last 7 days",
+      VALUE: 7
+    },
+    {
+      TEXT : "Last 15 days",
+      VALUE: 15
+    },
+    {
+      TEXT : "Last 25 days",
+      VALUE: 25
+    },
+    {
+      TEXT : "Last 1 month",
+      VALUE: 30
+    },
+  ]
+}

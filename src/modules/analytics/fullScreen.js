@@ -54,7 +54,7 @@ export default function FullScreen(props) {
                     </option>
                   </select>
                 </FlexEnd>
-              <GraphSize>  <Line data={props.data} type= "fullScreen"/> </GraphSize>
+              <GraphSize>  <Line data={props.data} type= "fullScreen" error={props.error}/> </GraphSize>
               </GraphContainer>
             </Row>
           </MainContainer>

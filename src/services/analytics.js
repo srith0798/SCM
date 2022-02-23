@@ -4,7 +4,9 @@ import { httpService } from "../utility/httpService";
 export default {
   getTransactionsAnalytics,
   getGasUsedAnalytics,
-  getActiveUsersAnalytics
+  getActiveUsersAnalytics,
+  getTopCallers,
+  getTopFunctionCalls
 };
 
 function getHeaders() {
@@ -52,3 +54,31 @@ async function getGasUsedAnalytics(requestData) {
         return Promise.reject(err);
       });
   }
+
+  async function getTopCallers(requestData) {
+    let url = process.env.REACT_APP_USER_TRANSACTION_MICROSERVICE +  "/get-top-callers";
+    return httpService(httpConstants.METHOD_TYPE.POST, getHeaders(), requestData, url)
+      .then((response) => {
+        if (!response.success || response.responseCode !== 200 || !response.responseData || response.responseData.length === 0)
+          return Promise.reject(response);
+        return Promise.resolve(response.responseData);
+      })
+      .catch(function (err) {
+        return Promise.reject(err);
+      });
+  }
+
+  async function getTopFunctionCalls(requestData) {
+    let url = process.env.REACT_APP_USER_TRANSACTION_MICROSERVICE +  "/get-top-function-calls";
+    return httpService(httpConstants.METHOD_TYPE.POST, getHeaders(), requestData, url)
+      .then((response) => {
+        if (!response.success || response.responseCode !== 200 || !response.responseData || response.responseData.length === 0)
+          return Promise.reject(response);
+        return Promise.resolve(response.responseData);
+      })
+      .catch(function (err) {
+        return Promise.reject(err);
+      });
+  }
+
+

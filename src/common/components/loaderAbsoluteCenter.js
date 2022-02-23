@@ -4,7 +4,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 
 const LoaderHolder = styled.div`
   position: absolute;
-  left: 50%;
+  left: 55%;
   z-index: 10000;
 `;
 
