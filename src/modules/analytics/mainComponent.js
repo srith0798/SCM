@@ -422,7 +422,8 @@ const TableData = (props) => {
           </Div>
           <Div>
             <ContractFrom>Network:</ContractFrom>
-            <Network>{item.network}</Network>
+            <SubNetwork><Network>{item.network}</Network></SubNetwork>
+            <MobileNetwork>{item.network}</MobileNetwork>
           </Div>
           </DataColumn>
           <Count>{item.count}</Count>
@@ -501,6 +502,10 @@ const SubContainer = styled.div`
   margin-top: 1.25rem;
   // padding-left: 5px;
   padding-bottom: 12px;
+  @media (min-width: 300px) and (max-width: 768px) {
+    margin-top: 2px;
+    padding-bottom: 2px;
+  }
 `;
 const Container = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
@@ -550,16 +555,24 @@ const Content = styled.div`
 const TableRow = styled.div`
   display:flex;
   flex-flow:column-nowrap;
-  margin-bottom:1rem;
+  margin-bottom:6px;
   border-top: 1px solid rgb(227, 231, 235);
+  @media (min-width: 300px) and (max-width: 768px) {
+    width:653px;
+  }
+
 `;
 const DataColumn = styled.div`
   width:100%;
-  padding-top:15px;
+  padding-top:9px;
 `;
 const Count = styled.div`
  color: #3163F0;
  padding-top:15px;
+ @media (min-width: 300px) and (max-width: 768px) {
+  margin-left:162px;
+  padding-right: 17px;
+}
 `;
 const GraphContainer = styled.div`
   width: 590px;
@@ -570,6 +583,7 @@ const GraphContainer = styled.div`
   margin-top: 2.58rem;
   @media (min-width: 300px) and (max-width: 1024px) {
     width: 100%;
+    padding: 1.25rem 8px 1.25rem 8px;
   }
 `;
 const ScrollableDiv = styled.div`
@@ -598,6 +612,7 @@ const ContractFrom = styled.div`
   font-weight: 600;
   @media (min-width: 300px) and (max-width: 767px) {
     word-break: break-all;
+    white-space: nowrap;
   }
 `;
 const Network = styled.div`
@@ -606,7 +621,36 @@ const Network = styled.div`
   width: 100%;
   @media (min-width: 300px) and (max-width: 767px) {
     word-break: break-all;
+    white-space: nowrap;
+    margin-left: 6px;
+    
   }
+`;
+const MobileNetwork = styled.div`
+color: #303134;
+  font-size: 14px;
+  width: 100%;
+  @media (min-width: 300px) and (max-width: 767px) {
+    word-break: break-all;
+    white-space: nowrap;
+    margin-left:13px;
+  }
+  @media (min-width: 768px) and (max-width: 1200px) {
+   display:none;
+  }
+  @media (min-width: 820px) and (max-width: 1200px) {
+    display:none;
+  }
+  @media (min-width: 1200px) and (max-width: 2300px){
+    display:none;
+  }
+  
+`;
+const SubNetwork = styled.div`
+@media (min-width: 300px) and (max-width: 768px) {
+  margin-left: 0px;
+  display:none;
+}
 `;
 // const BorderDiv = styled.div`
 //   border-bottom: 1px solid #e2e8fa;
