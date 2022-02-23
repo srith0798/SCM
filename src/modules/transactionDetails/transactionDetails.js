@@ -686,7 +686,7 @@ const StackContainer = styled.div`
   height: 9.375rem;
 `;
 const BackgroundChanger = styled.div`
-  width: 1016px;
+  width: 100%;
   height: 106px;
   background-repeat: no-repeat;
   background: #f7f8fd 0% 0% no-repeat padding-box;
