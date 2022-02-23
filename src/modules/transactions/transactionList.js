@@ -753,7 +753,6 @@ const IconContainer = styled.div`
   }
 `;
 const Heading = styled.span`
-  margin-top: 0.625rem;
   color: #102c78;
   font-size: 0.975rem;
   font-weight: 600;
