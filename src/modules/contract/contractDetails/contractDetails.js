@@ -38,8 +38,10 @@ export default function ContractDetails(props) {
       setLoader(false);
       setAddress(response);
       let version = response.sourceCode || "";
-      version = version.includes("pragma solidity") ? version.substr(version.indexOf("pragma solidity")) : ""
-      version = version.substring(16, version.indexOf(";"))
+      version = version.includes("pragma solidity")
+        ? version.substr(version.indexOf("pragma solidity"))
+        : "";
+      version = version.substring(16, version.indexOf(";"));
       setSolidity(version);
     } catch (err) {
       setLoader(false);
@@ -170,7 +172,7 @@ export default function ContractDetails(props) {
           </MainHeading>
         </SubContainer>
         <Container>
-          <SubHeading style={{ paddingTop: "1rem", paddingLeft: "1rem" }}>
+          <SubHeading style={{ paddingTop: "1rem", paddingLeft: "1.3rem" }}>
             {address.contractName}
           </SubHeading>
           <div
@@ -249,10 +251,10 @@ export default function ContractDetails(props) {
                 <TableData>{address.network}</TableData>
               </Div>
               <VerifyDiv check={address.status}>
-              <Div>
-                <TableHeading>Solidity version</TableHeading>
-                <SolidityData>{Solidity}</SolidityData>
-              </Div>
+                <Div>
+                  <TableHeading>Solidity version</TableHeading>
+                  <SolidityData>{Solidity}</SolidityData>
+                </Div>
               </VerifyDiv>
               <Div>
                 <TableHeading>Verification</TableHeading>
@@ -300,10 +302,10 @@ export default function ContractDetails(props) {
                 </TableData>
               </Div>
               <VerifyDiv check={address.status}>
-              <Div>
-                <TableHeading>Compiler</TableHeading>
-                <TableData>{address.compilerVersion}</TableData>
-              </Div>
+                <Div>
+                  <TableHeading>Compiler</TableHeading>
+                  <TableData>{address.compilerVersion}</TableData>
+                </Div>
               </VerifyDiv>
               <Div>
                 <TableHeading>EVM version</TableHeading>
@@ -332,30 +334,29 @@ export default function ContractDetails(props) {
                   <RowProperty>View transactions</RowProperty>
                 </PopUpBlock>
                 <VerifyDiv check={address.status}>
-                <PopUpBlock>
-                  {open && (
-                    <ContractAbi click={handleClose} data={address.abi} />
-                  )}
-                  <RowProperty
-                    onClick={() => {
-                      handleClickOpen();
-                    }}
-                  >
-                    <img alt="" src="/images/code.svg" />
-                  </RowProperty>
-                  
-                  <div>
-                  <RowProperty
-                    onClick={() => {
-                      handleClickOpen();
-                    }}
-                  >
-                    Contract ABI
-                  </RowProperty>
-                  </div>
-                </PopUpBlock>
-                </VerifyDiv>
+                  <PopUpBlock>
+                    {open && (
+                      <ContractAbi click={handleClose} data={address.abi} />
+                    )}
+                    <RowProperty
+                      onClick={() => {
+                        handleClickOpen();
+                      }}
+                    >
+                      <img alt="" src="/images/code.svg" />
+                    </RowProperty>
 
+                    <div>
+                      <RowProperty
+                        onClick={() => {
+                          handleClickOpen();
+                        }}
+                      >
+                        Contract ABI
+                      </RowProperty>
+                    </div>
+                  </PopUpBlock>
+                </VerifyDiv>
 
                 <PopUpBlock>
                   {renameState && (
@@ -372,7 +373,6 @@ export default function ContractDetails(props) {
                   </RowProperty>
                 </PopUpBlock>
 
-                
                 <PopUpBlock>
                   {hide && (
                     <HideContract
@@ -421,7 +421,13 @@ export default function ContractDetails(props) {
             </DetailsSection>
           )}
           {activeButton === "Source Code" && (
-            <SourceCode data={address.status === "Verified" ? address.sourceCode : address.byteCode} />
+            <SourceCode
+              data={
+                address.status === "Verified"
+                  ? address.sourceCode
+                  : address.byteCode
+              }
+            />
           )}
         </Container>
       </MainContainer>
@@ -530,8 +536,8 @@ const AddTag = styled.button`
   white-space: nowrap;
   background-image: url("/images/add-icon.svg");
   background-repeat: no-repeat;
-  background-position: 0.5rem;
-  padding-left: 1.75rem;
+  background-position: 0rem;
+  padding-left: 1.2rem;
   background-size: 0.875rem;
   position: relative;
   background-color: #ffffff;
@@ -554,7 +560,7 @@ const MainContainer = styled.div`
 const HashDesktop = styled.div`
   display: flex;
   flex-flow: row nowrap;
-  margin-top: 0.625rem;
+  margin-top: 0.325rem;
   margin-bottom: 10px;
   border: none;
   width: 100%;
@@ -565,8 +571,10 @@ const HashDesktop = styled.div`
 `;
 const HashMobile = styled.div`
   display: flex;
+  font-size: 14px;
+  font-weight: 600;
   flex-flow: row nowrap;
-  margin-top: 0.625rem;
+  margin-top: 0.325rem;
   margin-bottom: 10px;
   border: none;
   width: 100%;
@@ -588,7 +596,7 @@ const SubHeading = styled.div`
   font-size: 1.1rem;
   font-weight: 600;
   color: #102c78;
-  margin-bottom: 10px;
+  margin-bottom: 2px;
 `;
 
 const DetailsSection = styled.div`
@@ -692,7 +700,6 @@ const TableHeading = styled.div`
   color: #102c78;
   max-width: 18.75rem;
   width: 100%;
-
 `;
 
 const PopUp = styled.div`

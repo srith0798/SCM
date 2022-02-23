@@ -11,9 +11,10 @@ import { sessionManager } from "../../managers/sessionManager";
 import FullScreen from "./fullScreen";
 import TopCalls from "./topCalls";
 import utility from "../../utility";
-import moment from "moment";
 import ShowLoader from "../../common/components/showLoader";
 import { analytics } from "../../constants";
+import Grid from '@mui/material/Grid';
+
 
 export default function MainComponent(props) {
   const [isSetOpen, setOpen] = React.useState(false);
@@ -117,7 +118,12 @@ export default function MainComponent(props) {
       return;
     }
     setLoader(false);
-   const resultData = getGraphData("Transactions", response , "dateString" , "count");
+    let resultData =[];
+   const failed = getGraphDataForTransactions("TransactionsFailed", response , "dateString" , "failedTransactions");
+   resultData.push(failed);
+   const success = getGraphDataForTransactions("TransactionSuccess", response , "dateString" , "successfullTransactions");
+   resultData.push(success);
+console.log(resultData);
    setNoOfTransactions(resultData);
    setData(resultData);
   }
@@ -220,8 +226,8 @@ export default function MainComponent(props) {
  const getGraphData = (id , response, xComponent , yComponent ) =>{
   let arr = [{
     id: id,
-    color: "hsl(248, 70%, 50%)",
-    data: []
+    "color": "hsl(221, 70%, 50%)",   
+     data: []
   }];
 
   let resultData = []
@@ -236,6 +242,32 @@ export default function MainComponent(props) {
   return arr;
 
  }
+
+ const getGraphDataForTransactions = (id , response, xComponent , yComponent ) =>{
+  let dataObject = {
+    id: id,
+    "color": "hsl(221, 70%, 50%)",
+    data: []
+  }
+  let resultData = []
+  response.map(items => {
+    if(yComponent === "failedTransactions")
+    resultData.push({
+      x: items[xComponent],
+      y: 2
+    })
+    else
+    resultData.push({
+      x: items[xComponent],
+      y: items[yComponent]
+    })
+    return true;
+  })
+  dataObject.data = resultData;
+  return dataObject;
+
+ }
+
 
   const selectContract = (item) => {
     setSelected(item);
@@ -307,7 +339,9 @@ export default function MainComponent(props) {
                   </ClickAwayListener>
                 </Container>
                 {/* <ScrollableDiv> */}
-                <ResponsiveRow>
+                {/* <ResponsiveRow> */}
+                <Grid container rowSpacing={1} columnSpacing={{ xs: 12, sm: 2, md: 3 }}>
+                <Grid item xs={12} sm={12} md={6}>
                   <GraphContainer>
                     <SubContainer>
                       <SelectComponent
@@ -321,8 +355,8 @@ export default function MainComponent(props) {
                     </SubContainer>
                     <GraphSize> <Line data={noOfTransactions} error={transactionOverTimeError}/></GraphSize>
                   </GraphContainer>
-
-
+                  </Grid>
+                  <Grid item xs={12} sm={12} md={6}>
                   <GraphContainer>
                     <SubContainer>
                       <SelectComponent
@@ -337,8 +371,12 @@ export default function MainComponent(props) {
                     </SubContainer>
                     <GraphSize> <Line data={gasPriceData} error={gasUsedOverTimeError}/></GraphSize>
                   </GraphContainer>
-                </ResponsiveRow>
-                <ResponsiveRow>
+                  </Grid>
+                {/* </ResponsiveRow> */}
+                </Grid>
+                {/* <ResponsiveRow> */}
+                <Grid container rowSpacing={1} columnSpacing={{ xs: 12, sm: 2, md: 3 }}>
+                <Grid item xs={12} sm={12} md={6}>
                   <GraphContainer>
                     <TableData
                       heading="Top Callers"
@@ -350,6 +388,8 @@ export default function MainComponent(props) {
                       error={topCallersError}
                     ></TableData>
                   </GraphContainer>
+                  </Grid>
+                  <Grid item xs={12} sm={12} md={6}>
                   <GraphContainer>
                     <SubContainer>
                       <SelectComponent
@@ -363,7 +403,11 @@ export default function MainComponent(props) {
                     </SubContainer>
                     <GraphSize> <Line data={activeUserData} error={activeUsersError}/></GraphSize>
                   </GraphContainer>
-                </ResponsiveRow>
+                  </Grid>
+                  </Grid>
+                {/* </ResponsiveRow> */}
+                <Grid container rowSpacing={1} columnSpacing={{ xs: 12, sm: 2, md: 3 }}>
+                <Grid item xs={12} sm={12} md={6}>
                 <GraphContainer>
                   <TableData
                     heading="Top Function Calls"
@@ -375,6 +419,8 @@ export default function MainComponent(props) {
                     error={topFunctionCallsError}
                   ></TableData>
                 </GraphContainer>
+                </Grid>
+                </Grid>
                 {/* </ScrollableDiv> */}
               </MainContainer>
             </Row>
@@ -575,7 +621,7 @@ const Count = styled.div`
 }
 `;
 const GraphContainer = styled.div`
-  width: 590px;
+  
   background: #ffffff 0% 0% no-repeat padding-box;
   border-radius: 0.375rem;
   height: 356px;

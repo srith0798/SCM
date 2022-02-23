@@ -253,7 +253,9 @@ export default function Contract(props) {
                     {utility.truncateTxnAddress(data.address)}
                   </ColumnSecond>
 
-                  <ColumnSecond onClick={(e) => redirectTODetails(e, data._id)}>{data.network}</ColumnSecond>
+                  <ColumnSecond onClick={(e) => redirectTODetails(e, data._id)}>
+                    {data.network}
+                  </ColumnSecond>
                   <ColumnSecond style={{ display: "flex" }}>
                     <TagCol>
                       {address[index].tags &&
@@ -345,8 +347,8 @@ const AddTag = styled.button`
   white-space: nowrap;
   background-image: url("/images/add-icon.svg");
   background-repeat: no-repeat;
-  background-position: 0.5rem;
-  padding-left: 1.75rem;
+  background-position: 0rem;
+  padding-left: 0.3rem;
   background-size: 0.875rem;
   position: relative;
   background-color: #ffffff;
@@ -423,7 +425,7 @@ const MainContainer = styled.div`
   background-color: #ecf0f7;
   width: 100%;
   height: 100vh;
-  padding: 2.125rem;
+  padding: 4.125rem;
   height: 100vh;
   @media (max-width: 414px) {
     padding: 1.2rem;
@@ -529,27 +531,22 @@ const Button = styled.button`
 const Input = styled.input`
   background: #ffffff 0% 0% no-repeat padding-box;
   border-radius: 0.25rem;
-  font-size: 0.875rem;
-  font-weight: 600;
-  padding: 0.438rem;
+  font-size: 14px;
+  font-family: normal;
+  font-weight: 400;
   color: #888888;
-  border: 0rem;
-  padding-left: 1.875rem;
-  background-image: url("/images/search-icon.svg");
+  padding-left: 1.975rem;
+  background-image: url("/images/searchbar-icon.svg");
   background-repeat: no-repeat;
-  background-position: 0.5rem;
-  background-size: 0.75rem;
+  background-position: 0.7rem;
+  background-size: 12.6px;
   position: relative;
   border: none;
+  width: 270px;
   height: 38px;
-  outline: none;
-  display: flex;
   @media (max-width: 767px) {
     width: min-content;
     height: 37px;
-  }
-  @media (min-width: 375px) {
-    width: 223px;
   }
 `;
 const TableContainer = styled.div`
