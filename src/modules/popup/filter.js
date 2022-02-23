@@ -26,7 +26,12 @@ export default function Filter(props) {
 
   const Close = () => {
     props.click();
+  };
+  const Apply = () => {
     props.filterSearch();
+    setTimeout(()=> {
+      props.click();
+    },500)
   };
   const getNetworkList = async (skip = 0, limit = 20) => {
     try {
@@ -108,7 +113,7 @@ export default function Filter(props) {
               </InputDiv>
             </NewContainer>
             <LastContainer>
-              <ApplyButton onClick={() => props.filterSearch()}>
+              <ApplyButton onClick={() => Apply()}>
                 Apply
               </ApplyButton>
               <CancelButton onClick={() => Close()}>Cancel</CancelButton>

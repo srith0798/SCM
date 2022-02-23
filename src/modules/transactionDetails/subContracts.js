@@ -1,8 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 import { history } from "../../managers/history";
+import ContractsService from "../../services/contractsService";
 
 export default function SubContracts(props) {
+  const [address, setAddress] = React.useState([]);
+  const [url, setContractAddress] = React.useState("");
+  const [loader, setLoader] = React.useState(false);
   const SubButton = () => {
     // history.push("/verified-contracts");
     history.push({
@@ -12,6 +16,21 @@ export default function SubContracts(props) {
       }
     })
   };
+  const getContractById = async () => {
+    let url = history.location.state.id;
+    setContractAddress(url);
+    try {
+      setLoader(true);
+      const response = await ContractsService.getContractsById("621394158f827c002a9e0379");
+      setLoader(false);
+      setAddress(response);
+    } catch (err) {
+      setLoader(false);
+    }
+  };
+  React.useEffect(()=> {
+    getContractById();
+  },[]);
   return (
     <MainContainer>
       <MainBoxContainer>

@@ -19,6 +19,9 @@ export default function TransactionDetails() {
   const [row, setRow] = React.useState([]);
 
   const [activeButton, setActiveButton] = React.useState("Overview");
+  const [from, setFrom] = React.useState("");
+  const [to, setTo] = React.useState("");
+  const [input, setInput] = React.useState("");
   const handleViewClick = (e) => {
     setActiveButton(e.target.id);
   };
@@ -37,11 +40,15 @@ export default function TransactionDetails() {
       };
       const response = await ContractsService.getTransactionsList(requestData);
       setRow(response.transactionList[0]);
+      setInput(utility.truncateTxnAddress(response.transactionList[0].input))
+      setFrom(utility.truncateTxnAddress(response.transactionList[0].from))
+      setTo(utility.truncateTxnAddress(response.transactionList[0].to))
     } catch (e) {}
   };
   useEffect(() => {
     searchTransaction(url, ["hash"]);
   }, [url]);
+  
   return (
     <MainContainer>
       <SubContainer>
@@ -309,6 +316,7 @@ export default function TransactionDetails() {
               <Heading>Raw input</Heading>
               <SubHead>
                 <TransactionNumber>
+                  {input}
                 </TransactionNumber>
                 <CopyToClipboard
                   text={" 0x01173a740000000000…f28e0b4fae4a3bfee7dc52"}
@@ -354,16 +362,28 @@ export default function TransactionDetails() {
                 </SubHeadBlue>
               </Row>
             </CommonDiv>
-            <CommonDiv>
+            <CommonInputDiv>
+              <div>
               <Row>
                 <Heading>Caller Address </Heading>
               </Row>
               <Row>
                 <SubHeading style={{ fontWeight: "400", marginRight: "40px" }}>
-                  xdcabf...a32c99be1768b3c
+                  {row.from}
                 </SubHeading>
               </Row>
-            </CommonDiv>
+              </div>
+              <div>
+              <Row>
+                <Heading>Contract Address </Heading>
+              </Row>
+              <Row>
+                <SubHeading style={{ fontWeight: "400", marginRight: "40px" }}>
+                  {row.contractAddress}
+                </SubHeading>
+              </Row>
+              </div>
+            </CommonInputDiv>
           </FunctionContainer>
           <TokenTransferDiv>
             <CommonDiv>
@@ -393,15 +413,21 @@ export default function TransactionDetails() {
           <TokenTransferCheckDiv check={status}>
           <b>Token Transfer</b>
           <StackContainer>
+
             <BackgroundChanger>
-              {/* <TextLine>Error Messege:out of gas</TextLine>
-              <img alt="" src="/images/error.svg" /> balances[_to] =
-              balances[_to].add(_value);
-              <br /> */}
+            <FlexDiv>
+            <div>
+            <Heading>From</Heading>
+            <SubHeadBlue>{from}</SubHeadBlue>
+            </div>
+            <div>
+            <Heading>To</Heading>
+            <SubHeadBlue>{to}</SubHeadBlue>
+            </div>
+            </FlexDiv>
             </BackgroundChanger>
           </StackContainer>
           </TokenTransferCheckDiv>
-          
           <LastContainer>
             <SearchBar placeholder="Execution trace" />
             <br />
@@ -513,6 +539,16 @@ const SubHeadBlue = styled.div`
 const CommonDiv = styled.div`
   border-bottom: 0.031rem #eaf1ec solid;
   padding: 0.813rem;
+
+  @media (min-width: 300px) and (max-width: 768px) {
+    column-gap: 0px;
+  }
+`;
+const CommonInputDiv = styled.div`
+  border-bottom: 0.031rem #eaf1ec solid;
+  padding: 0.813rem;
+  display: flex;
+  justify-content: space-between;
   @media (min-width: 300px) and (max-width: 768px) {
     column-gap: 0px;
   }
@@ -656,6 +692,12 @@ const BackgroundChanger = styled.div`
     width: 100%;
     padding: 1rem;
   }
+`;
+const FlexDiv = styled.div`
+display: flex;
+justify-content: space-between;
+padding-right: 10%;
+padding-left: 10%;
 `;
 const LastContainer = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
