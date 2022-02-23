@@ -21,9 +21,14 @@ export default function About(props) {
             <LeftContainer>
               <Row>
                 <DetailBox>
-                
-                  <DivDesktop>Manage your <Span>Smart Contracts</Span> on XDC Network</DivDesktop>
-                  <MobileSpan> <Span1>Manage your Smart </Span1> <br></br><Span1>Contracts on XDC Network</Span1></MobileSpan>
+                  <DivDesktop>
+                    Manage your <Span>Smart Contracts</Span> on XDC Network
+                  </DivDesktop>
+                  <MobileSpan>
+                    {" "}
+                    <Span1>Manage your Smart </Span1> <br></br>
+                    <Span1>Contracts on XDC Network</Span1>
+                  </MobileSpan>
                 </DetailBox>
               </Row>
               <DataBox>
@@ -109,9 +114,8 @@ export default function About(props) {
         </MainBoxContainer>
       </MainContainer>
       <DivFooter>
-      <FooterComponent />
+        <FooterComponent />
       </DivFooter>
-      
 
       <div>
         {!sessionManager.getDataFromCookies("isLoggedIn") && (
@@ -132,7 +136,7 @@ const MainContainer = styled.div`
 const MainBoxContainer = styled.div`
   background: #ecf0f7 0% 0% no-repeat padding-box;
   width: 100%;
-  height: 100vh;
+  // height: 100vh;
   display: flex;
   flex-direction: column;
   align-item: center;
@@ -186,7 +190,7 @@ const RightContainer = styled.div`
   width: 100%;
   padding: 4.7rem;
   @media (min-width: 340px) and (max-width: 803px) {
-    padding: 0.375rem 5rem 7rem 5rem;
+    padding: 1.375rem 3rem 9rem 3rem;
     height: 100%;
   }
   @media (min-width: 300px) and (max-width: 414px) {
@@ -199,28 +203,30 @@ const LeftContainer = styled.div`
   @media (min-width: 300px) and (max-width: 414px) {
     padding: 1.5rem;
   }
-
+  @media (min-width: 768px) and (max-width: 1023px) {
+    // padding: 1.5rem;
+    padding: 3.9rem;
+    padding-top: 0;
+  }
 `;
 const Span = styled.span`
   color: #0089ff;
   white-space: nowrap;
-
 `;
 const Span1 = styled.span`
-@media (min-width: 300px) and (max-width: 414px) {
-  white-space: nowrap;
-}
+  @media (min-width: 300px) and (max-width: 414px) {
+    white-space: nowrap;
+  }
 `;
 const DivDesktop = styled.div`
-@media (min-width: 300px) and (max-width: 414px) {
-  display:none;
-}
+  @media (min-width: 300px) and (max-width: 414px) {
+    display: none;
+  }
 `;
 const MobileSpan = styled.div`
-@media (min-width: 414px) and (max-width: 2300px) {
-  display:none;
-}
-
+  @media (min-width: 414px) and (max-width: 2300px) {
+    display: none;
+  }
 `;
 const IconRow = styled.div`
   display: flex;
@@ -378,10 +384,10 @@ const SubHead = styled.div`
     font-size: 0.8rem;
   }
 `;
-const DivFooter= styled.div`
-@media (min-width: 300px) and (max-width: 414px) {
-  z-index: -1;
-}
+const DivFooter = styled.div`
+  @media (min-width: 300px) and (max-width: 414px) {
+    z-index: -1;
+  }
 `;
 const SmartButton = styled.div`
   background-repeat: no-repeat;

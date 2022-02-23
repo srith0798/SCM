@@ -6,7 +6,7 @@ import { history } from "../../managers/history";
 
 export default function AlertDetails() {
   const backButton = () => {
-    history.push("/dashboard/rules");
+    history.push("/alerting");
   };
   return (
     <MainBoxContainer>
