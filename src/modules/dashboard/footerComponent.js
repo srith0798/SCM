@@ -159,12 +159,15 @@ const CopyrightContainer = styled.div`
   @media screen and (min-width: 375px) and (max-width: 425px) {
     margin: 35px 0 0 28.95px;
   }
+<<<<<<< HEAD
   @media (min-width: 300px) and (max-width: 768px) {
     margin: -52px 0 0 22px;
   }
   @media (min-width: 768px) and (max-width: 1200px) {
     margin: -53px 0 0 86px
   }
+=======
+>>>>>>> ae61024f58fa0fdde01a53282c5060b9354755a1
 `;
 const XDCIcon = styled.img`
   width: 116.47px;
