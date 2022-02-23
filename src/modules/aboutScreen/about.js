@@ -141,6 +141,7 @@ const MainBoxContainer = styled.div`
   flex-direction: column;
   align-item: center;
   padding: 4.125rem;
+  height: 100vh;
   @media (min-width: 300px) and (max-width: 700px) {
     padding: 1.125rem;
     height: 1377px;

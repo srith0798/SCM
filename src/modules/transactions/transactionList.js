@@ -67,15 +67,14 @@ export default function TransactionList() {
         if (row.isHidden === false) dropDownSelect.push(row);
       });
       setContracts(dropDownSelect);
-      if(!url){
-      setSelected(dropDownSelect[0].address)
-      getTransaction(dropDownSelect[0].address);
-      setSelectedName(dropDownSelect[0].contractName)
-    }
-      else {
-      setSelected(url)
-      getTransaction(url);
-      setSelectedName(name)
+      if (!url) {
+        setSelected(dropDownSelect[0].address);
+        getTransaction(dropDownSelect[0].address);
+        setSelectedName(dropDownSelect[0].contractName);
+      } else {
+        setSelected(url);
+        getTransaction(url);
+        setSelectedName(name);
       }
       // if (response.contractList.length === 0) setShowPlaceHolder(true);
     } catch (e) {
@@ -191,11 +190,10 @@ export default function TransactionList() {
 
   const [toInput, setToInput] = React.useState(0);
   let getFrom = new Date(fromInput).toUTCString();
-  let setFrom = new Date(getFrom).getTime()/1000.0;
+  let setFrom = new Date(getFrom).getTime() / 1000.0;
 
   let getTo = new Date(toInput).toUTCString();
-  let setTo = new Date(getTo).getTime()/1000.0;
-
+  let setTo = new Date(getTo).getTime() / 1000.0;
 
   useEffect(() => {
     if (selected.length > 0) {
@@ -680,7 +678,7 @@ const MainContainer = styled.div`
   opacity: 1;
   width: 100%;
   padding: 3.125rem;
-  /* height: 110vh; */
+  height: 100vh;
   @media (min-width: 340px) and (max-width: 768px) {
     padding: 3.125rem 1.5rem 1.5rem 1.5rem;
   }
