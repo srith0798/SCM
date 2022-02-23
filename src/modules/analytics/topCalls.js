@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Row } from "simple-flexbox";
+import {analytics} from "../../constants"
 
 export default function TopCalls(props) {
   const ClickMe = () => {
@@ -32,41 +33,31 @@ export default function TopCalls(props) {
       >
         <GraphContainer>
           <FlexEnd>
-            <select id="cars" className="select">
-              <option value="volvo" className="select-dropdown">
-                Last 5 days
-              </option>
-              <option value="saab" className="select-dropdown">
-                Last 7 days
-              </option>
-              <option value="mercedes" className="select-dropdown">
-                Last 15 days
-              </option>
-              <option value="audi" className="select-dropdown">
-                Last 25 days
-              </option>
-            </select>
+          <select id="dates" className="select" value={props.dropDownValue} onChange={(event)=>{props.getAnalytics("", event)}}>
+        {analytics && analytics.ANALYTICS_DROPDOWN  && analytics.ANALYTICS_DROPDOWN.map((option)=>(
+          <option value={option.VALUE} className="select-dropdown">
+            {option.TEXT}
+          </option>
+        ))}
+        </select>
           </FlexEnd>
-          <Div>
-            <ContractFrom>Contract from</ContractFrom>
-            <Network>xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c</Network>
-          </Div>
-          <Div>
-            <ContractFrom>Network</ContractFrom>
-            <Network>Mainnet</Network>
-          </Div>
-          <Div>
-            <ContractFrom>Contract from</ContractFrom>
-            <Network>xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c</Network>
-          </Div>
-          <Div>
-            <ContractFrom>Network</ContractFrom>
-            <Network>Mainnet</Network>
-          </Div>
-          <Div>
-            <ContractFrom>Network</ContractFrom>
-            <Network>Mainnet</Network>
-          </Div>
+          <Table>
+          { props?.data && props.data.length && props.data.length>0 ? props.data.map((item)=>(
+              <TableRow>     
+              <DataColumn>          
+             <Div>
+                 {props.graphNo === 4 ? <ContractFrom>Contract from:</ContractFrom> : <ContractFrom>Function:</ContractFrom>}
+                 {props.graphNo === 4 ? <Network>{item.address}</Network> : <Network>{item.function}</Network>}
+               </Div>
+               <Div>
+                 <ContractFrom>Network:</ContractFrom>
+                 <Network>{item.network}</Network>
+               </Div>
+               </DataColumn>
+               <Count>{item.count}</Count>
+               </TableRow>
+                   )):<>{props.error}</>}
+              </Table>
         </GraphContainer>
       </Row>
     </MainContainer>
@@ -132,19 +123,46 @@ const Icon = styled.img`
   margin-left: 10px;
   cursor: pointer;
 `;
+
+const Table =styled.div`
+  height:30rem;
+  overflow-y:scroll;
+  margin-top:1rem;
+`
 const ContractFrom = styled.div`
-  width: 100%;
-  max-width: 150px;
-  color: #102c78;
+  width: 26%;
+  color: #102C78;
+  font-size: 14px;
   font-weight: 600;
+  @media (min-width: 300px) and (max-width: 767px) {
+    word-break: break-all;
+  }
 `;
 const Network = styled.div`
+  color: #303134;
+  font-size: 14px;
   width: 100%;
-  max-width: 150px;
+  @media (min-width: 300px) and (max-width: 767px) {
+    word-break: break-all;
+  }
 `;
 const Div = styled.div`
   display: flex;
   flex-flow: row nowrap;
-  border-bottom: 1px solid rgb(227, 231, 235);
-  padding: 10px 0px 3px 8px;
+  margin-bottom: 0.125rem;
 `;
+const TableRow = styled.div`
+  display:flex;
+  flex-flow:column-nowrap;
+  margin-bottom:1rem;
+  border-top: 1px solid rgb(227, 231, 235);
+`;
+const DataColumn = styled.div`
+  width:100%;
+  padding-top:15px;
+`;
+const Count = styled.div`
+ color: #3163F0;
+ padding-top:15px;
+`;
+
