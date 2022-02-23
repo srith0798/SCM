@@ -14,7 +14,7 @@ export default function TransactionDetails() {
   const [copyToolTip, setcopyToolTip] = React.useState(false);
   const [row, setRow] = React.useState([]);
 
-  const [activeButton, setActiveButton] = React.useState("Contracts");
+  const [activeButton, setActiveButton] = React.useState("");
   const handleViewClick = (e) => {
     setActiveButton(e.target.id);
   };
@@ -228,58 +228,58 @@ export default function TransactionDetails() {
           </CommonDiv>
           <CommonDiv>
             <RowData>
-              <Head>
+              <Heads>
                 <Icon alt="" src="/images/contracts.svg" />
                 Subcontracts name
-              </Head>
+              </Heads>
             </RowData>
           </CommonDiv>
           <CommonDiv>
             <RowData>
-              <Head>
+              <Heads>
                 <Icon alt="" src="/images/contracts.svg" />
                 Subcontracts name
-              </Head>
+              </Heads>
             </RowData>
           </CommonDiv>
           <CommonDiv>
             <RowData>
-              <Head>
+              <Heads>
                 <Icon alt="" src="/images/contracts.svg" />
                 Subcontracts name
-              </Head>
+              </Heads>
             </RowData>
           </CommonDiv>
           <CommonDiv>
             <RowData>
-              <Head>
+              <Heads>
                 <Icon alt="" src="/images/contracts.svg" />
                 Subcontracts name
-              </Head>
+              </Heads>
             </RowData>
           </CommonDiv>
           <CommonDiv>
             <RowData>
-              <Head>
+              <Heads>
                 <Icon alt="" src="/images/contracts.svg" />
                 Subcontracts name
-              </Head>
+              </Heads>
             </RowData>
           </CommonDiv>
           <CommonDiv>
             <RowData>
-              <Head>
+              <Heads>
                 <Icon alt="" src="/images/contracts.svg" />
                 Subcontracts name
-              </Head>
+              </Heads>
             </RowData>
           </CommonDiv>
           <CommonDiv>
             <RowData>
-              <Head>
+              <Heads>
                 <Icon alt="" src="/images/contracts.svg" />
                 Subcontracts name
-              </Head>
+              </Heads>
             </RowData>
           </CommonDiv>
         </BoxContainer>
@@ -305,6 +305,7 @@ const RowData = styled.div`
   display: flex;
   padding-left: 16px;
   width: 250px;
+  height: 50px;
   &:hover {
     background-color: #3163f0;
     color: #ffffff;
@@ -403,6 +404,7 @@ const SubHeading = styled.div`
 const Icon = styled.img`
   width: 1rem;
   cursor: pointer;
+  margin-right: 2px;
 `;
 
 const Heading = styled.div`
@@ -414,21 +416,14 @@ const Heading = styled.div`
   width: 100%;
   max-width: 110px;
 `;
-const Head = styled.div`
-  display: flex;
-  align-items: center;
-  font: normal normal 600 14px/17px Inter;
-  opacity: 1;
-  width 150px;
-  height: 50px;
-  
-  
-`;
+
 const Heads = styled.div`
   display: flex;
   align-items: center;
   font-size: 14px;
-
+  white-space: nowrap;
+  align-items: center;
+  font: normal normal 600 14px/17px Inter;
   height: 3.125rem;
   &:hover {
     background-color: #3163f0;
@@ -484,16 +479,6 @@ const HashMobile = styled.div`
   }
 `;
 
-const CopyToClipboardImg = styled.img`
-  margin-left: 150px;
-  cursor: pointer;
-  @media (min-width: 340px) and (max-width: 767px) {
-    margin-left: 10px;
-  }
-  @media (min-width: 768px) and (max-width: 1024px) {
-    margin-left: 110px;
-  }
-`;
 const CopyToClipboardImage = styled.img`
   margin-left: 110px;
   cursor: pointer;
@@ -503,43 +488,8 @@ const CopyToClipboardImage = styled.img`
   @media (min-width: 1024px) and (max-width: 1075px) {
     margin-left: 84px;
   }
-  // @media (min-width: 768px) and (max-width: 1024px) {
-  //   margin-left: px;
-  // }
 `;
 
-const StackTraceCheckDiv = styled.div`
-  display: ${(props) => (props.check === "Fail" ? "block" : "none")};
-`;
-
-const TokenTransferCheckDiv = styled.div`
-  display: ${(props) => (props.check === "Success" ? "block" : "none")};
-`;
-
-const TextLine = styled.div`
-  text-align: left;
-  color: #ce1a1a;
-  font-weight: 600;
-  padding-left: 24px;
-`;
-const SearchBar = styled.input`
-  height: 2.188rem;
-  width: 12.5rem;
-  border: none;
-  margin-bottom: 1.5rem;
-  border-radius: 0.25rem;
-  background-image: url("/images/search-icon.svg");
-  background-repeat: no-repeat;
-  background-color: #f5f6fd;
-  background-position: 0.5rem;
-  padding-left: 1.875rem;
-  background-size: 0.75rem;
-  position: relative;
-  /* &:focus: {
-    outline: none;
-    border: none;
-  } */
-`;
 const TabLister = styled.div`
   display: flex;
   justify-content: space-between;

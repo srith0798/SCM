@@ -26,9 +26,7 @@ export default function Rules() {
       <MainContainer>
         <TitleContainer>
           <Title style={{ color: "#191919" }}>Alerting</Title>
-          <Button onClick={() => history.push("/add-alert")}>
-            Add Alert
-          </Button>
+          <Button onClick={() => history.push("/add-alert")}>Add Alert</Button>
         </TitleContainer>
         <Container>
           <NewDivOne>
@@ -133,41 +131,40 @@ export default function Rules() {
                       </Tooltip>
                     </ColumnOne>
                     <ColumnOne>
-                    <Subcolumn3>
-                      Address
-                      <Tooltip
-                        open={addressToolTip}
-                        onOpen={() => setaddressToolTip(true)}
-                        onClose={() => setaddressToolTip(false)}
-                        disableFocusListener
-                        title="Wallet address"
-                      >
-                        <ToolTipIcon
-                          onClick={() => setaddressToolTip(!addressToolTip)}
-                          src="/images/tool-tip.svg"
-                        />
-                      </Tooltip>
+                      <Subcolumn3>
+                        Address
+                        <Tooltip
+                          open={addressToolTip}
+                          onOpen={() => setaddressToolTip(true)}
+                          onClose={() => setaddressToolTip(false)}
+                          disableFocusListener
+                          title="Wallet address"
+                        >
+                          <ToolTipIcon
+                            onClick={() => setaddressToolTip(!addressToolTip)}
+                            src="/images/tool-tip.svg"
+                          />
+                        </Tooltip>
                       </Subcolumn3>
                     </ColumnOne>
                     <ColumnOne>
-                    <SubColumn2>
-                      Network
-                      <Tooltip
-                        open={networkToolTip}
-                        onOpen={() => setnetworkToolTip(true)}
-                        onClose={() => setnetworkToolTip(false)}
-                        disableFocusListener
-                        title="The executing blockchain network"
-                      >
-                        <ToolTipIcon
-                          onClick={() => setnetworkToolTip(!networkToolTip)}
-                          src="/images/tool-tip.svg"
-                        />
-                      </Tooltip>
+                      <SubColumn2>
+                        Network
+                        <Tooltip
+                          open={networkToolTip}
+                          onOpen={() => setnetworkToolTip(true)}
+                          onClose={() => setnetworkToolTip(false)}
+                          disableFocusListener
+                          title="The executing blockchain network"
+                        >
+                          <ToolTipIcon
+                            onClick={() => setnetworkToolTip(!networkToolTip)}
+                            src="/images/tool-tip.svg"
+                          />
+                        </Tooltip>
                       </SubColumn2>
                     </ColumnOne>
                     <ColumnOne>
-                    
                       Alert Type
                       <Tooltip
                         open={alertTypeToolTip}
@@ -181,7 +178,6 @@ export default function Rules() {
                           src="/images/tool-tip.svg"
                         />
                       </Tooltip>
-                      
                     </ColumnOne>
                     <ColumnOne></ColumnOne>
                     <ColumnOne></ColumnOne>
@@ -192,7 +188,9 @@ export default function Rules() {
                     <ColumnTwo>App_Transactions</ColumnTwo>
                     <ColumnTwo>xdcabfe…8b3c</ColumnTwo>
                     <ColumnTwo>XDC Mainnet</ColumnTwo>
-                    <ColumnTwo><SubColumn>Sucessfull</SubColumn></ColumnTwo>
+                    <ColumnTwo>
+                      <SubColumn>Sucessfull</SubColumn>
+                    </ColumnTwo>
                     <ColumnTwo style={{ fontSize: "14px", color: "#00A58C" }}>
                       Enabled
                     </ColumnTwo>
@@ -212,9 +210,10 @@ export default function Rules() {
                     <ColumnTwo>App_Transactions</ColumnTwo>
                     <ColumnTwo>xdcabfe…8b3c</ColumnTwo>
                     <ColumnTwo>XDC Mainnet</ColumnTwo>
-                    <ColumnTwo><SubColumn>Failed</SubColumn> </ColumnTwo>
+                    <ColumnTwo>
+                      <SubColumn>Failed</SubColumn>{" "}
+                    </ColumnTwo>
                     <ColumnTwo
-
                       style={{ fontSize: "0.875rem", color: "#00A58C" }}
                     >
                       Enabled
@@ -294,7 +293,6 @@ const RowData = styled.div`
   @media (min-width: 768px) and (max-width: 1200px) {
     column-gap: 96px;
   }
-
 `;
 
 const RowData1 = styled.div`
@@ -306,9 +304,8 @@ const RowData1 = styled.div`
     column-gap: 133px !important;
   }
   @media (min-width: 768px) and (max-width: 1200px) {
-    column-gap: 97px ;
+    column-gap: 97px;
   }
-
 `;
 const ToolTipIcon = styled.img`
   width: 0.75rem;
@@ -341,43 +338,39 @@ const ColumnTwo = styled.div`
   }
 `;
 const SubColumn = styled.div`
-@media (min-width: 820px) and (max-width: 1200px) {
-  width:39px;
-}
+  @media (min-width: 820px) and (max-width: 1200px) {
+    width: 39px;
+  }
 
-@media (min-width: 768px) and (max-width: 1200px) {
-  width:39px;
-}
-
+  @media (min-width: 768px) and (max-width: 1200px) {
+    width: 39px;
+  }
 `;
-const Subcolumn3= styled.div`
-@media (min-width: 820px) and (max-width: 1200px) {
-  display:flex;
-margin-right:19px !important;
-}
-@media (min-width: 768px) and (max-width: 1200px) {
-  display:flex;
-margin-right:25px !important;
-}
-
+const Subcolumn3 = styled.div`
+  @media (min-width: 820px) and (max-width: 1200px) {
+    display: flex;
+    margin-right: 19px !important;
+  }
+  @media (min-width: 768px) and (max-width: 1200px) {
+    display: flex;
+    margin-right: 25px !important;
+  }
 `;
-const SubColumn2= styled.div`
-@media (min-width: 820px) and (max-width: 1200px) {
-  display:flex;
-margin-right:10px !important;
-}
-@media (min-width: 768px) and (max-width: 1200px) {
-  display:flex;
-margin-right:10px ;
-}
-
-
+const SubColumn2 = styled.div`
+  @media (min-width: 820px) and (max-width: 1200px) {
+    display: flex;
+    margin-right: 10px !important;
+  }
+  @media (min-width: 768px) and (max-width: 1200px) {
+    display: flex;
+    margin-right: 10px;
+  }
 `;
 const MainContainer = styled.div`
   background: #ecf0f7 0% 0% no-repeat padding-box;
   opacity: 1;
   width: 100%;
-  padding: 2.5rem;
+  padding: 4.5rem;
   height: 100vh;
   @media (min-width: 340px) and (max-width: 768px) {
     padding: 38px 20px 20px 20px;

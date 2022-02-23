@@ -234,7 +234,7 @@ export default function TransactionDetails() {
             </ErrorCheckDiv>
             <CommonDivBlock>
               <Heading>Block</Heading>
-              <SubHead>{row.blockNumber}</SubHead>
+              <SubHead style={{ color: "#416BE0" }}>{row.blockNumber}</SubHead>
             </CommonDivBlock>
             <CommonDiv>
               <Row>
@@ -448,7 +448,7 @@ const TabImage = styled.img`
   width: 22px;
   @media (min-width: 300px) and (max-width: 414px) {
     width: 13px;
-    margin-bottom: 5px;
+    margin-bottom: 2px;
   }
 `;
 
@@ -466,14 +466,8 @@ const TitleDiv = styled.div`
 `;
 const Title = styled.div`
   white-space: nowrap;
-  @media (min-width: 340px) and (max-width: 768px) {
+  @media (min-width: 340px) and (max-width: 767px) {
     align-items: left;
-  }
-  @media (max-width: 414px) {
-    margin-left: -53px;
-  }
-  @media (max-width: 375px) {
-    margin-left: -41px;
   }
 `;
 const FunctionContainer = styled.div`
@@ -535,11 +529,16 @@ const TimeStampDiv = styled.div`
   border-bottom: 0.031rem #eaf1ec solid;
   padding: 0.813rem;
   display: flex;
-
+  column-gap: 0px;
   @media (max-width: 375px) {
     display: flex;
     white-space: nowrap;
     column-gap: 80px;
+  }
+  @media (min-width: 376px) and (max-width: 414px) {
+    display: flex;
+    white-space: nowrap;
+    column-gap: 98px;
   }
 `;
 const CommonDivBlock = styled.div`
@@ -719,7 +718,6 @@ const SubContainer = styled.div`
   padding-bottom: 15px;
 
   @media (min-width: 300px) and (max-width: 485px) {
-    flex-direction: column;
   }
 `;
 const ScrollableDiv = styled.div`
@@ -797,14 +795,11 @@ const CopyToClipboardImage = styled.img`
   margin-left: 110px;
   cursor: pointer;
   @media (min-width: 340px) and (max-width: 767px) {
-    margin-left: 10px;
+    margin-left: 2px;
   }
   @media (min-width: 1024px) and (max-width: 1075px) {
     margin-left: 84px;
   }
-  // @media (min-width: 768px) and (max-width: 1024px) {
-  //   margin-left: px;
-  // }
 `;
 
 const StackTraceCheckDiv = styled.div`
@@ -815,12 +810,6 @@ const TokenTransferCheckDiv = styled.div`
   display: ${(props) => (props.check === "Success" ? "block" : "none")};
 `;
 
-const TextLine = styled.div`
-  text-align: left;
-  color: #ce1a1a;
-  font-weight: 600;
-  padding-left: 24px;
-`;
 const SearchBar = styled.input`
   height: 2.188rem;
   width: 12.5rem;
@@ -883,6 +872,7 @@ const ToolTipIcon = styled.img`
   margin-left: 0.513rem;
   @media (min-width: 300px) and (max-width: 767px) {
     margin-bottom: 6px;
+    display: none;
   }
 `;
 const FailButton = styled.div`
@@ -920,7 +910,7 @@ const SuccessButton = styled.div`
   margin-right: 12px;
   /* justify-content: center; */
   @media (min-width: 300px) and (max-width: 767px) {
-    width: 100px;
+    width: 30%;
   }
 `;
 
