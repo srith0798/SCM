@@ -2,11 +2,23 @@ import React from "react";
 import styled from "styled-components";
 import { Row } from "simple-flexbox";
 import {analytics} from "../../constants"
+import {CSVLink} from 'react-csv';
 
 export default function TopCalls(props) {
   const ClickMe = () => {
     props.changeExpand(0);
   };
+
+const  topCallersheaders = [
+    { label: 'Address', key: 'address' },
+    { label: 'Network', key: 'network' },
+    { label: 'Count', key: 'count' },
+  ];
+const  topFunctionCallheaders = [
+    { label: 'Function', key: 'function' },
+    { label: 'Network', key: 'network' },
+    { label: 'Count', key: 'count' },
+  ]; 
   return (
     <MainContainer>
       <SubContainer>
@@ -20,7 +32,11 @@ export default function TopCalls(props) {
           <MainHeading>{props.graphName}</MainHeading>
         </AlignmentContainer>
         <AlignmentContainer>
-          <ExpandButton>Export Data</ExpandButton>
+        {props.graphNo === 4 ?  <CSVLink style={csvLink} data={props.data} headers={topCallersheaders}
+        filename="Top Callers"
+        >Export Data</CSVLink>:
+        <CSVLink data={props.data} headers={topFunctionCallheaders} filename="Top Function Calls"
+        >Export Data</CSVLink>}
           <Icon src="/images/refresh.svg" />
         </AlignmentContainer>
       </SubContainer>
@@ -166,3 +182,23 @@ const Count = styled.div`
  padding-top:15px;
 `;
 
+const csvLink ={
+
+  backgroundImage: `url("/images/Export.svg")`,
+  backgroundRepeat: "no-repeat",
+  backgroundPosition: "8px",
+  paddingLeft: "26px",
+  backgroundSize: "18px",
+  position: "relative",
+  backgroundColor: "#ffffff",
+  border: "none",
+  borderRadius: "4px",
+  width: "100%",
+  color: "#3163f0",
+  height: "34px",
+  fontSize: "1rem",
+  fontWeight: "500",
+  textDecoration: "none",
+  paddingTop: "5px",
+  paddingRight: "15px"
+}

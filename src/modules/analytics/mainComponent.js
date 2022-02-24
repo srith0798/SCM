@@ -103,7 +103,8 @@ export default function MainComponent(props) {
       setTransactionOverTimeSelect(event.target.value)
       setDropDownValue(event.target.value)
     }
-    
+    else
+      setTransactionOverTimeSelect(7)
     const req = {
       address: address ? address : selected.address,
       numberOfDays: event?.target?.value || 7
@@ -133,17 +134,22 @@ console.log(resultData);
       setGasUsedSelect(event.target.value)
       setDropDownValue(event.target.value)
     }
+    else
+      setGasUsedSelect(7)
     const req = {
       address: address ? address : selected.address,
       numberOfDays: event?.target?.value || 7
     }
+    setLoader(true);
     const [error, response] = await utility.parseResponse(AnalyticsService.getGasUsedAnalytics(req));
     if (error || !response || response.length === 0) {
       setGasUsedOverTimeError("No Data Available");
       setGasPriceData([]);
       setData([]);
+      setLoader(false);
       return;
     }  
+    setLoader(false);
     const resultData = getGraphData("GasPrice", response , "dateString" , "gasUsedOverTime");
     setGasPriceData(resultData);
     setData(resultData);
@@ -155,17 +161,22 @@ console.log(resultData);
       setActiveUserSelect(event.target.value)
       setDropDownValue(event.target.value)
     }
+    else
+      setActiveUserSelect(7)
     const req = {
       address: address ? address : selected.address,
       numberOfDays: event?.target?.value || 7
     }
+    setLoader(true);
     const [error, response] = await utility.parseResponse(AnalyticsService.getActiveUsersAnalytics(req));
     if (error || !response || response.length === 0) {
       setActiveUsersError("No Active Users Available");
       setActiveUserData([]);
       setData([]);
+      setLoader(false);
       return;
     }  
+    setLoader(false);
     const resultData = getGraphData("ActiveUsers", response , "dateString" , "activeUsers");
     setActiveUserData(resultData);
     setData(resultData);
@@ -176,17 +187,22 @@ console.log(resultData);
       setTopCallersSelect(event.target.value)
       setDropDownValue(event.target.value)
     }
+    else
+      setTopCallersSelect(7)
     const req = {
       address: address ? address : selected.address,
       numberOfDays: event?.target?.value || 7
     }
+    setLoader(true);
     const [error, response] = await utility.parseResponse(AnalyticsService.getTopCallers(req));
     if (error || !response || response.length === 0) {
       setTopCallersError("No Top Callers Available");
       setTopCallersData([]);
       setTableData([]);
+      setLoader(false);
       return;
     }    
+    setLoader(false);
     setTopCallersData(response);
     setTableData(response);
   }
@@ -196,17 +212,22 @@ console.log(resultData);
       setTopFunctionCallsSelect(event.target.value)
       setDropDownValue(event.target.value)
     }
+    else
+      setTopFunctionCallsSelect(7)
     const req = {
       address: address ? address : selected.address,
       numberOfDays: event?.target?.value || 7
     }
+    setLoader(true);
     const [error, response] = await utility.parseResponse(AnalyticsService.getTopFunctionCalls(req));
     if (error || !response || response.length === 0) {
       setTopFunctionCallsError("No Top Function Calls Available");
       setTopFunctionCallsData([]);
       setTableData([]);
+      setLoader(false);
       return;
     }
+    setLoader(false);
     setTopFunctionCallsData(response);
     setTableData(response);
   }
@@ -286,6 +307,15 @@ console.log(resultData);
     setExpandGraph(value);
     setDropDownValue(dropDownValue);
   }
+  const changeContract = (item) =>{
+    selectContract(item);
+    getTransactionAnalytics(item.address)
+    getGasUsedAnalytics(item.address)
+    getActiveUsersAnalytics(item.address)
+    getTopCallers(item.address)
+    getTopFunctionCalls(item.address)
+    setOpen((prev) => !prev);
+  }
 
   return (
     <>
@@ -326,7 +356,7 @@ console.log(resultData);
                         <Box sx={styles}>
                           {contracts.length &&
                             contracts.map((item) => (
-                              <div onClick={() => selectContract(item)}>
+                              <div onClick={() => changeContract(item)}>
                                 <Label>Contract</Label>
                                 {item?.contractName ? item.contractName : "Contract"}
                                 <br />
@@ -433,6 +463,7 @@ console.log(resultData);
           expandGraphs={expandGraphs}
           dropDownValue={dropDownValue}
           error={error}
+          selected = {selected}
            />
       )}
       {expandGraph > 3 && (
@@ -566,7 +597,7 @@ const Container = styled.div`
   }
 `;
 const GraphSize = styled.div`
-  height: 13.75rem;
+  height: 14.8rem;
   width: auto;
   margin-bottom: 1.2rem;
   background: transparent;
@@ -576,7 +607,7 @@ const GraphSize = styled.div`
 `;
 const Table =styled.div`
   height:15rem;
-  overflow-y:scroll;
+  overflow-y:hidden;
   margin-top:1rem;
 `
 const View = styled.div`
