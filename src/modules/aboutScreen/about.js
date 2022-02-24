@@ -159,8 +159,8 @@ const MainBoxContainer = styled.div`
     padding: 16px;
     height:212vh;
   }
-  @media (min-width: 820px) and (max-width: 1200px) {
-    height:217vh;!important;
+  @media (min-width: 800px) and (max-width: 1200px) {
+    height:200vh;!important;
   }
 `;
 const Container = styled.div`
@@ -178,6 +178,9 @@ const Container = styled.div`
     padding-top: 30px;
     padding-left: 46px;
     height: 778px;
+  }
+  @media (min-width:800px) and (max-width: 1200px){
+    height:668px !important;
   }
   @media (min-width: 300px) and (max-width: 414px) {
     flex-direction: column;
@@ -200,9 +203,9 @@ const RightContainer = styled.div`
   @media (min-width: 300px) and (max-width: 414px) {
     padding: 30px;
   }
-  @media (min-width: 820px) and (max-width: 1200px) {
-    column-gap: 120px !important;
-    padding: 0.7rem 4.7rem 4.7rem 4.7rem;
+  @media (min-width: 800px) and (max-width: 1200px) {
+    padding: 0.7rem 4.7rem 0.7rem 4.7rem;
+    margin-bottom: 155px;
   }
 `;
 const LeftContainer = styled.div`

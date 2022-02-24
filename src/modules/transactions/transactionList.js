@@ -14,6 +14,7 @@ import utility from "../../utility";
 import Filter from "../popup/filter";
 import "moment-timezone";
 import ReactPaginate from "react-paginate";
+import moment from 'moment';
 
 export default function TransactionList() {
   const [state, setState] = useState(true);
@@ -476,7 +477,13 @@ export default function TransactionList() {
                       </ColumnSecond>
                     )}
 
-                    {toggle.status && <ColumnSecond>{status}</ColumnSecond>}
+                    
+                    {(status!="Success")?(toggle.status && <ColumnSecond style={{color:"red"}}>
+                    {status}
+                    </ColumnSecond>)
+                    :(toggle.status && <ColumnSecond style={{color:"green"}}>
+                      {status}
+                      </ColumnSecond>)}
 
                     {toggle.function && (
                       <ColumnSecond>{func}</ColumnSecond>
@@ -505,8 +512,10 @@ export default function TransactionList() {
                     )}
 
                     {toggle.when && (
+                     
                       <ColumnSecond>
-                        {new Date(data.createdOn).toLocaleString("en-US")}
+                       {moment(data.createdOn).format('lll')}
+                        {/* {new Date(data.createdOn).toLocaleString("en-US")} */}
                       </ColumnSecond>
                     )}
                   </RowData>
