@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="29.266" height="29.266" viewBox="0 0 29.266 29.266">
+  <g id="mainnet" transform="translate(-336 -216.867)">
+    <rect id="Rectangle_334" data-name="Rectangle 334" width="29.266" height="29.266" rx="6" transform="translate(336 216.867)" fill="#2149b9"/>
+    <g id="Group_10" data-name="Group 10" transform="translate(340.246 221.745)">
+      <path id="Combined_Shape" data-name="Combined Shape" d="M10.387,20.9A10.454,10.454,0,0,1,0,11.626l2.347-1.173L0,9.279a10.453,10.453,0,0,1,20.774,0l-2.347,1.174,2.347,1.173A10.454,10.454,0,0,1,10.387,20.9Z" transform="translate(0 0)" fill="#fff"/>
+      <path id="X" d="M1.616,8,3.342,5.067,5.062,8H6.683L4.21,3.968,6.628,0h-1.6L3.342,2.891,1.66,0H.055L2.479,3.968,0,8Z" transform="translate(7.028 6.47)" fill="#2149b9"/>
+    </g>
+  </g>
+</svg>
