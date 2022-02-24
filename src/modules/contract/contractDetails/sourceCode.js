@@ -50,4 +50,7 @@ const Div = styled.div`
   color: #aaadc4;
   overflow-x: scroll;
   line-break: anywhere;
+  white-space: pre-line;
+  text-align: left;
+  padding-left: 12px;
 `;

@@ -135,13 +135,12 @@ const MainContainer = styled.div`
 const MainBoxContainer = styled.div`
   background: #ecf0f7 0% 0% no-repeat padding-box;
   width: 100%;
-  // height: 100vh;
   display: flex;
   flex-direction: column;
   align-item: center;
-  padding: 4.125rem;
-  height: 110vh;
-  @media (min-width: 300px) and (max-width: 768px) {
+  padding: 3.125rem;
+  height: -webkit-fill-available;
+  @media (min-width: 300px) and (max-width: 700px) {
     padding: 1.125rem;
     height: 1377px;
   }
@@ -159,8 +158,8 @@ const MainBoxContainer = styled.div`
     padding: 16px;
     height:212vh;
   }
-  @media (min-width: 820px) and (max-width: 1200px) {
-    height:217vh;!important;
+  @media (min-width: 800px) and (max-width: 1200px) {
+    height:200vh;!important;
   }
 `;
 const Container = styled.div`
@@ -178,6 +177,9 @@ const Container = styled.div`
     padding-top: 30px;
     padding-left: 46px;
     height: 778px;
+  }
+  @media (min-width:800px) and (max-width: 1200px){
+    height:668px !important;
   }
   @media (min-width: 300px) and (max-width: 414px) {
     flex-direction: column;
@@ -200,9 +202,9 @@ const RightContainer = styled.div`
   @media (min-width: 300px) and (max-width: 414px) {
     padding: 30px;
   }
-  @media (min-width: 820px) and (max-width: 1200px) {
-    column-gap: 120px !important;
-    padding: 0.7rem 4.7rem 4.7rem 4.7rem;
+  @media (min-width: 800px) and (max-width: 1200px) {
+    padding: 0.7rem 4.7rem 0.7rem 4.7rem;
+    margin-bottom: 155px;
   }
 `;
 const LeftContainer = styled.div`
@@ -252,8 +254,6 @@ const IconRow = styled.div`
     flex-direction: column;
     align-items: center;
   }
-  
-
 `;
 const DataBox = styled.div`
   display: flex;
@@ -279,7 +279,6 @@ const DetailBox = styled.div`
   }
 
   @media (max-width: 768px) and (max-width: 1200px) {
-    
   }
 `;
 
@@ -345,8 +344,14 @@ const HeadingContainer = styled.div`
     white-space: nowrap;
     padding-top: 20px;
   }
-  
-  @media (min-width: 768px) and (max-width: 1200px) {
+  <<<<<<< HEAD @media (min-width: 300px) and (max-width: 768px) {
+    white-space: nowrap;
+  }
+  =======>>>>>>>d1c9b590dc079a5a1d4f0a9c0703bc780e13bec6
+    @media
+    (min-width: 768px)
+    and
+    (max-width: 1200px) {
     white-space: nowrap;
   }
 `;

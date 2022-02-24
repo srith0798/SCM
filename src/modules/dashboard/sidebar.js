@@ -146,7 +146,7 @@ export default function Sidebar(props) {
         <Heading>Alerting</Heading>
       </Wrapper>
 
-      <Wrapper style={{ marginTop: "8rem" }} onClick={redirectToFaqs}>
+      <Wrapper style={{ marginTop: "18rem" }} onClick={redirectToFaqs}>
         <Icon src="/images/Subtraction 2.svg" />
         <Heading>FAQs</Heading>
       </Wrapper>

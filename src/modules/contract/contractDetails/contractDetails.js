@@ -579,7 +579,7 @@ const HashMobile = styled.div`
   margin-bottom: 10px;
   border: none;
   width: 100%;
-  max-width: 24.063rem;
+  max-width: 19.063rem;
   @media (min-width: 767px) {
     display: none;
   }
@@ -605,7 +605,7 @@ const DetailsSection = styled.div`
   border-radius: 0.375rem;
   width: 100%;
   padding: 0.625rem 0.625rem 1.5rem 0.625rem;
-  margin-top: 2.25rem;
+  margin-top: 3.25rem;
   overflow-x: auto;
   @media (min-width: 300px) and (max-width: 768px) {
     height: auto;
