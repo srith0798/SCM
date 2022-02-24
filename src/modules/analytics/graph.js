@@ -4,6 +4,7 @@ import { linearGradientDef } from "@nivo/core";
 import "../../assets/styles/custom.css";
 import moment from "moment";
 import styled from "styled-components";
+import utility from "../../utility";
 
 
 export default function Graph(props) {
@@ -98,7 +99,7 @@ const ToolTipElement = (props) => {
 
        {props.point.serieId !== "ActiveUsers" ? <TooltipDataHeader><div>Account: </div> <TooltipDataValues>XDC</TooltipDataValues></TooltipDataHeader> : ""}
        <TooltipDataHeader><div>Network: </div> <TooltipDataValues>Mainnet</TooltipDataValues></TooltipDataHeader> 
-       {props.point.serieId !== "ActiveUsers" ?<TooltipDataHeader><div>Deployment Status: </div> <TooltipDataValues>Success</TooltipDataValues></TooltipDataHeader>  : ""}
+       {/* {props.point.serieId !== "ActiveUsers" ?<TooltipDataHeader><div>Deployment Status: </div> <TooltipDataValues>Success</TooltipDataValues></TooltipDataHeader>  : ""} */}
         </TooltipData>
       </TooltipGraph>
   );
@@ -141,8 +142,7 @@ tickSize: 0,
       tickPadding: 5,
       tickValues: 3,
         format: function(value){ 
-            if(value < 999) return value;
-            else return (value/1000).toFixed(1) + 'k';
+          return utility.convertToInternationalCurrencySystem(value)
         }
     }}
     defs ={[

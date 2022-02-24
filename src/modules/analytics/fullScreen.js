@@ -3,11 +3,43 @@ import styled from "styled-components";
 import { Row, Column } from "simple-flexbox";
 import Line from "./graph";
 import Tooltip from "@mui/material/Tooltip";
+import { ExportToCsv } from 'export-to-csv';
+import moment from "moment";
 
 export default function FullScreen(props) {
   const ClickMe = () => {
     props.expandGraphs(0);
   };
+  const exportToCSV = (data) =>{
+    let result=[],
+    options = { 
+      showLabels: true, 
+      useTextFile: false,
+      headers: ['Date', 'Count'],
+      title: `Contract Address : ${props?.selected?.address}`,
+      showTitle:true,
+      filename:'Data Over Time'
+    };
+     data && data.length && data.map((item)=>{
+     if((item.id).includes("Transaction"))  {
+      options["headers"] =["Date" , "Count" , "Status"]
+       item.data.map((count)=>{
+         if(item.id ==="TransactionsFailed")
+         {
+         count["Status"]="Fail";
+         }
+         else
+         count["Status"]="Success";
+         return true
+       })
+       
+     }
+     result= result.concat(item.data);
+    })
+
+  const csvExporter = new ExportToCsv(options);
+  csvExporter.generateCsv(result);
+  }
   return (
     <div>
       <Column>
@@ -24,7 +56,7 @@ export default function FullScreen(props) {
                 <MainHeading>{props.graphName}</MainHeading>
               </AlignmentContainer>
               <AlignmentContainer>
-                <ExpandButton>Export Data</ExpandButton>
+                <ExpandButton onClick={()=>exportToCSV(props?.data)}>Export Data</ExpandButton>
                 <Tooltip disableFocusListener title="Refresh">
                   <Icon src="/images/refresh.svg" />
                 </Tooltip>
