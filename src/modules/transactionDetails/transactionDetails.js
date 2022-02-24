@@ -315,14 +315,14 @@ export default function TransactionDetails() {
               <Heading>Raw input</Heading>
               <SubHead>
                 <TransactionNumber></TransactionNumber>
-                <CopyToClipboard
+                {/* <CopyToClipboard
                   text={" 0x01173a740000000000…f28e0b4fae4a3bfee7dc52"}
                   onCopy={() => setcopyToolTip(true)}
                 >
                   <Tooltip title={copyToolTip ? "copied" : "copy to clipboard"}>
                     <CopyToClipboardImg src="/images/copy.svg" />
                   </Tooltip>
-                </CopyToClipboard>
+                </CopyToClipboard> */}
               </SubHead>
             </RawInputDiv>
           </MidContainer>
@@ -446,7 +446,7 @@ const TopContainer = styled.div`
 
 const TabImage = styled.img`
   width: 22px;
-  @media (min-width: 300px) and (max-width: 414px) {
+  @media (min-width: 300px) and (max-width: 425px) {
     width: 13px;
     margin-bottom: 2px;
   }
@@ -535,10 +535,10 @@ const TimeStampDiv = styled.div`
     white-space: nowrap;
     column-gap: 80px;
   }
-  @media (min-width: 376px) and (max-width: 414px) {
+  @media (min-width: 376px) and (max-width: 425px) {
     display: flex;
     white-space: nowrap;
-    column-gap: 98px;
+    column-gap: 100px;
   }
 `;
 const CommonDivBlock = styled.div`
@@ -578,7 +578,7 @@ const CommonDivFrom = styled.div`
   display: flex;
   @media (min-width: 300px) and (max-width: 767px) {
     display: flex;
-    column-gap: 141px;
+    column-gap: 139px;
   }
   @media (max-width: 375px) {
     display: flex;
@@ -624,7 +624,7 @@ const CommonDivTo = styled.div`
   display: flex;
   @media (min-width: 300px) and (max-width: 767px) {
     display: flex;
-    column-gap: 159px;
+    column-gap: 158px;
   }
   @media (max-width: 375px) {
     display: flex;
@@ -768,7 +768,7 @@ const HashMobile = styled.div`
   margin-top: 0.625rem;
   margin-bottom: 10px;
   border: none;
-  width: 60%;
+  width: 40%;
   max-width: 30.063rem;
   @media (min-width: 767px) {
     display: none;
@@ -787,15 +787,18 @@ const CopyToClipboardImg = styled.img`
   @media (min-width: 340px) and (max-width: 767px) {
     margin-left: 10px;
   }
-  @media (min-width: 768px) and (max-width: 1024px) {
-    margin-left: 110px;
+  @media (min-width: 767px) and (max-width: 1024px) {
+    margin-left: 70px;
   }
 `;
 const CopyToClipboardImage = styled.img`
-  margin-left: 110px;
+  margin-left: 100px;
   cursor: pointer;
   @media (min-width: 340px) and (max-width: 767px) {
     margin-left: 2px;
+  }
+  @media (min-width: 768px) and (max-width: 1023px) {
+    margin-left: 83px;
   }
   @media (min-width: 1024px) and (max-width: 1075px) {
     margin-left: 84px;
@@ -846,7 +849,7 @@ const TabLister = styled.div`
     padding-left: 10px;
     max-width: 34.125rem;
   }
-  @media (max-width: 414px) {
+  @media (max-width: 425px) {
     display: flex;
     justify-content: space-between;
     min-height: 45px;
@@ -861,7 +864,7 @@ const TabView = styled.div`
   padding: 0.313rem 0.5rem 0.313rem 0.5rem;
   display: flex;
   padding-bottom: 1.2rem;
-  @media (min-width: 320px) and (max-width: 414px) {
+  @media (min-width: 320px) and (max-width: 425px) {
     padding: 1rem 0.5rem 0.313rem 0.5rem;
     padding-bottom: 1.2rem;
   }
@@ -911,6 +914,12 @@ const SuccessButton = styled.div`
   /* justify-content: center; */
   @media (min-width: 300px) and (max-width: 767px) {
     width: 30%;
+    margin-left: 60px;
+  }
+  @media (min-width: 768px) and (max-width: 1023px) {
+    padding: 0px 9px 0px 13px;
+    margin-left: 0.7rem;
+    width: 92px;
   }
 `;
 

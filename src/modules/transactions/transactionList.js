@@ -556,6 +556,7 @@ export default function TransactionList() {
 
 const PageVerifyCheck = styled.div`
   display: ${(props) => (props.check < 10 ? "none" : "block")};
+  height: auto;
 `;
 const SubContainer = styled.div``;
 const BottomLabel = styled.div`
@@ -675,13 +676,13 @@ const PaginationDiv = styled.div`
 `;
 const MainContainer = styled.div`
   background: #ecf0f7 0% 0% no-repeat padding-box;
-
+  height: auto;
   width: 100%;
   padding: 4.125rem;
   padding-bottom: 6rem;
-  height: auto;
-  @media (min-width: 340px) and (max-width: 768px) {
-    padding: 3.125rem 1.5rem 1.5rem 1.5rem;
+
+  @media (min-width: 340px) and (max-width: 1024px) {
+    padding: 3.125rem 1.5rem 7rem 1.5rem;
   }
 `;
 const TransactionBox = styled.div`
@@ -735,6 +736,7 @@ const SearchBar = styled.input`
   @media (max-width: 767px) {
     width: min-content;
     height: 37px;
+    margin-left: 0px;
   }
 `;
 const Icons = styled.img`
@@ -750,6 +752,7 @@ const IconContainer = styled.div`
     width: 100%;
     max-width: 123px;
     height: 35px;
+    margin-top: 3px;
   }
 `;
 const Heading = styled.span`
@@ -759,16 +762,16 @@ const Heading = styled.span`
 `;
 const InstructionText = styled.span`
   margin-top: 0.625rem;
-  color: #191919;
+  color: rgb(25, 25, 25);
   font-size: 0.9rem;
   font-weight: 600;
-  margin-bottom: 0.825rem;
+  margin-bottom: 1.2rem;
 `;
 const Card = styled.div`
   margin-top: 1.25rem;
   background-color: #ffffff;
   border-radius: 0.25rem;
-  padding: 1rem 0rem 2rem 1rem;
+  padding: 1rem 0rem 1.6rem 1rem;
 `;
 const ColumnOne = styled.div`
   font-size: 0.875rem;
@@ -875,8 +878,8 @@ const TransactionHash = styled.div`
 const Image = styled.img`
   width: 0.95rem;
   position: absolute;
-  top: 21px;
-  right: 21px;
+  top: 36px;
+  right: 17px;
   cursor: pointer;
   @media (max-width: 375px) {
     width: 0.85rem;

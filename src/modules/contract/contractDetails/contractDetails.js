@@ -607,7 +607,7 @@ const DetailsSection = styled.div`
   margin-top: 2.25rem;
   overflow-x: auto;
   @media (min-width: 300px) and (max-width: 768px) {
-    height: 500px;
+    height: auto;
     overflow: scroll;
     overflow-y: hidden;
     width: 100%;
