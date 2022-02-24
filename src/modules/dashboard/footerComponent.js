@@ -19,7 +19,7 @@ const FooterContainer = styled.div`
 `;
 const ColumnContainer = styled.div`
   display: flex;
-  @media screen and (min-width: 375px) and (max-width: 425px) {
+  @media screen and (min-width: 375px) and (max-width: 768px) {
     flex-direction: column;
   }
 `;
@@ -77,14 +77,14 @@ const SecondColumn = styled.div`
 const SubColOne = styled.div`
   width: 90px;
   margin: 54px 0 0 24px;
-  @media screen and (min-width: 375px) and (max-width: 425px) {
+  @media screen and (min-width: 375px) and (max-width: 768px) {
     margin: 32px 0 0 24px;
   }
 `;
 const SubColTwo = styled.div`
   width: 100%;
   margin: 54px 0 0 70px;
-  @media screen and (min-width: 375px) and (max-width: 425px) {
+  @media screen and (min-width: 375px) and (max-width: 768px) {
     margin: 32px 0 0 70px;
   }
 `;
@@ -148,7 +148,6 @@ const SocialIcon = styled.img`
   width: 17px;
   height: 14px;
   margin-right: 9px;
-  background: #8ca6f0 0% 0% no-repeat padding-box;
   opacity: 1;
 `;
 const CopyrightContainer = styled.div`
@@ -160,7 +159,7 @@ const CopyrightContainer = styled.div`
     margin: 35px 0 0 28.95px;
   }
   @media (min-width: 300px) and (max-width: 768px) {
-    margin: -52px 0 0 22px;
+    margin: 0px 0 0 22px;
   }
   @media (min-width: 768px) and (max-width: 1200px) {
     margin: -53px 0 0 86px
@@ -229,14 +228,14 @@ function FooterComponent() {
         <ColHeading>Contact Us</ColHeading>
         <LinkContainerThird>
           <ContactContainer>
-            <SocialIcon src="/images/twitter-inactive.svg" />
+            <SocialIcon src="/images/Twitter.svg" />
             <Link href="https://twitter.com/XDCFoundation" target="_blank">
               {" "}
               Twitter
             </Link>
           </ContactContainer>
           <ContactContainer>
-            <SocialIcon src="/images/telegram-inactive.svg" />
+            <SocialIcon src="/images/youtube.svg" />
             <Link
               href="https://www.youtube.com/channel/UCXAAtlD-CRraNJKzDTF4pfg"
               target="_blank"
@@ -246,7 +245,7 @@ function FooterComponent() {
             </Link>
           </ContactContainer>
           <ContactContainer>
-            <SocialIcon src="/images/telegram-inactive.svg" />
+            <SocialIcon src="/images/facebook.svg" />
             <Link href="https://www.facebook.com/XDCFoundation" target="_blank">
               {" "}
               Facebook{" "}
