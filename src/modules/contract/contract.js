@@ -155,7 +155,7 @@ export default function Contract(props) {
 
       <TableContainer>
         <Div>
-          <RowContainer>
+          <RowContainer style={{ alignItems: "center" }}>
             <ColumnOne>
               Contract Name
               <Tooltip
@@ -425,16 +425,20 @@ const MainContainer = styled.div`
   background-color: #ecf0f7;
   width: 100%;
   height: 100vh;
-  padding: 4.125rem;
-  height: 100vh;
-  @media (max-width: 414px) {
+  padding: 3.125rem;
+
+  @media (max-width: 767px) {
     padding: 1.2rem;
+  }
+  @media (min-width: 767px) and (max-width: 1023px) {
+    padding: 2rem;
   }
 `;
 
 const RowContainer = styled.div`
   display: flex;
   flex-flow: row nowrap;
+
   @media (min-width: 768px) and (max-width: 1128px) {
     column-gap: 152px;
   }
@@ -443,6 +447,7 @@ const RowContainer = styled.div`
 const RowTag = styled.div`
   display: flex;
   flex-flow: row nowrap;
+  align-items: center;
   @media (min-width: 768px) and (max-width: 1128px) {
     column-gap: 92px;
   }
@@ -636,10 +641,8 @@ const ColumnSecond = styled.div`
 `;
 const TagCol = styled.div`
   @media (min-width: 300px) and (max-width: 767px) {
-    margin-left: -10px;
   }
   @media (min-width: 768px) and (max-width: 1128px) {
-    margin-left: -10px;
   }
 `;
 const ToolTipIcon = styled.img`
