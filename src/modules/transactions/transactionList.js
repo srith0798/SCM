@@ -479,13 +479,7 @@ export default function TransactionList() {
                       </ColumnSecond>
                     )}
 
-                    {toggle.status && (
-                      <ColumnSecond
-                        style={{ color: "#00A58C", fontWeight: 600 }}
-                      >
-                        {status}
-                      </ColumnSecond>
-                    )}
+                    {toggle.status && <ColumnSecond>{status}</ColumnSecond>}
 
                     {toggle.function && <ColumnSecond>{func}</ColumnSecond>}
                     {toggle.contracts && (
