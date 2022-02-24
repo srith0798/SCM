@@ -597,7 +597,7 @@ const Container = styled.div`
   }
 `;
 const GraphSize = styled.div`
-  height: 13.75rem;
+  height: 14.8rem;
   width: auto;
   margin-bottom: 1.2rem;
   background: transparent;
