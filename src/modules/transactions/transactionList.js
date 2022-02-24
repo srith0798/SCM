@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import styled from "styled-components";
 import { Column } from "simple-flexbox";
 import LetsGetStarted from "../popup/letsGetStartedPopUp";
@@ -13,7 +13,6 @@ import ShowLoader from "../../common/components/showLoader";
 import utility from "../../utility";
 import Filter from "../popup/filter";
 import "moment-timezone";
-import Moment from "react-moment";
 import ReactPaginate from "react-paginate";
 
 export default function TransactionList() {
@@ -24,7 +23,16 @@ export default function TransactionList() {
   const [countToggle, setCountToggle] = useState(10);
   let url = history?.location?.state?.id;
   let name = history?.location?.state?.name;
+  const [fromInput, setFromInput] = React.useState(0);
+  const [toInput, setToInput] = React.useState(0);
 
+  let getFrom = new Date(fromInput).toUTCString();
+  let setFrom = new Date(getFrom).getTime();
+
+  let getTo = new Date(toInput).toUTCString();
+  let setTo = new Date(getTo).getTime();
+
+  let range = { min: setFrom, max: setTo };
   const handleClickOpen = () => {
     isOpen(true);
   };
@@ -41,7 +49,7 @@ export default function TransactionList() {
   const [TxHashToolTip, setTxHashToolTip] = React.useState(false);
   const [statusToolTip, setstatusToolTip] = React.useState(false);
   const [functionToolTip, setfunctionToolTip] = React.useState(false);
-  // const [showPlaceHolder, setShowPlaceHolder] = React.useState(false);
+  const [showPlaceHolder, setShowPlaceHolder] = React.useState(false);
   const [loader, setLoader] = React.useState(false);
   const [address, setAddress] = React.useState([]);
   const [searchRow, setSearchRow] = React.useState([]);
@@ -50,6 +58,7 @@ export default function TransactionList() {
   const [selectedName, setSelectedName] = React.useState("");
   const [page, setPage] = React.useState(1);
   const [valueCheck, setValueCheck] = React.useState(0);
+  const [defaultAddress, setDefaultAddress] = React.useState("");
 
   const getContractNames = async (skip = 0, limit = 10) => {
     let userId = sessionManager.getDataFromCookies("userId");
@@ -70,6 +79,7 @@ export default function TransactionList() {
       if (!url) {
         setSelected(dropDownSelect[0].address);
         getTransaction(dropDownSelect[0].address);
+        setDefaultAddress(dropDownSelect[0].address);
         setSelectedName(dropDownSelect[0].contractName);
       } else {
         setSelected(url);
@@ -82,12 +92,12 @@ export default function TransactionList() {
       setLoader(false);
     }
   };
-  const getTransaction = async (address, skip = 0, limit = countToggle) => {
+  const getTransaction = async (url, skip = 0, limit = countToggle) => {
     try {
-      const requestData = {
+      let requestData = {
         skip: skip,
         limit: limit,
-        contractAddress: address,
+        contractAddress: url,
       };
       setLoader(true);
       const response = await ContractsService.getTransactionsList(requestData);
@@ -98,12 +108,12 @@ export default function TransactionList() {
         setPage(parseInt(pageCount / countToggle));
       } else {
         setPage(parseInt(pageCount / countToggle) + 1);
-      }
-    } catch (e) {
-      // setShowPlaceHolder(true);
+    } } catch (e) {
+      setShowPlaceHolder(true);
       setLoader(false);
     }
   };
+  
   const searchTransaction = async (searchValues, searchKeys) => {
     try {
       const requestData = {
@@ -116,8 +126,6 @@ export default function TransactionList() {
       const response = await ContractsService.getTransactionsList(requestData);
       setLoader(false);
       setSearchRow(response.transactionList);
-
-      // if (response.transactionList.length === 0) setShowPlaceHolder(true);
     } catch (e) {
       // setShowPlaceHolder(true);
       setLoader(false);
@@ -167,11 +175,13 @@ export default function TransactionList() {
   };
   const changePage = (value) => {
     setValueCheck(value.selected);
+    if(selected.length > 0) {
     getTransaction(
       selected,
       Math.ceil(value.selected * countToggle),
       countToggle
     );
+    }
   };
   const [toggle, setToggle] = React.useState({
     transactionHash: true,
@@ -182,19 +192,8 @@ export default function TransactionList() {
     to: true,
     when: true,
   });
-  /////searchFilter
 
   const [select, setSelect] = React.useState(1);
-
-  const [fromInput, setFromInput] = React.useState(0);
-
-  const [toInput, setToInput] = React.useState(0);
-  let getFrom = new Date(fromInput).toUTCString();
-  let setFrom = new Date(getFrom).getTime() / 1000.0;
-
-  let getTo = new Date(toInput).toUTCString();
-  let setTo = new Date(getTo).getTime() / 1000.0;
-
   useEffect(() => {
     if (selected.length > 0) {
       getTransaction(selected);
@@ -204,30 +203,35 @@ export default function TransactionList() {
   const [selectDrop, setSelectDrop] = React.useState([]);
 
   const filterSearch = async () => {
-    let requestData = {
+    let requestData = [];
+    if(select === 2 || select === 3)
+     requestData = {
       skip: 0,
       limit: countToggle,
-      status: "",
-      // from: fromInput,
-      // to: toInput,
-      // network: selectDrop,
+      status: select === 2 ? true : false,
     };
-    switch (select) {
-      case 2:
-        requestData.status = true;
-        break;
-      case 3:
-        requestData.status = false;
-        break;
-      default:
-        return requestData;
+    else
+    requestData = {
+    skip: 0,
+    limit: countToggle,
+    contractAddress: defaultAddress,
     }
     try {
+      setLoader(true);
       const response = await ContractsService.getTransactionsList(requestData);
-
+      setLoader(false);
+      if(setFrom>0 && setTo> 0) {
+        let result = response.transactionList.filter((row) => {
+              return row.createdOn <= range.max && row.createdOn >= range.min;
+        });
+        setAddress(result);
+      }
+      else{
       setAddress(response.transactionList);
+      }
     } catch (e) {
       console.log(e);
+      setLoader(false);
     }
   };
 
@@ -236,6 +240,12 @@ export default function TransactionList() {
       return "Success";
     } else return "Fail";
   }
+
+  function setfunction (val) {
+   let trim = val.split("(");
+   return trim[0];
+  }
+
 
   return (
     <>
@@ -266,7 +276,7 @@ export default function TransactionList() {
               </Tooltip>
               <Tooltip disableFocusListener title="Refresh">
                 <Icons
-                  onClick={() => getTransaction()}
+                  onClick={() => {getContractNames(); setFromInput(0); setToInput(0);}}
                   src="/images/refresh.svg"
                 />
               </Tooltip>
@@ -450,11 +460,12 @@ export default function TransactionList() {
           <div>
             {(input === "" ? address : searchRow).map((data, index) => {
               const status = setStatus(data.status);
+              const func = setfunction(data.function);
               return (
                 <Div>
                   <RowData
                     onClick={() =>
-                      redirectToTransactionDetails(data?.hash, status)
+                      redirectToTransactionDetails(data?.hash, status )
                     }
                   >
                     {toggle.transactionHash && (
@@ -468,7 +479,7 @@ export default function TransactionList() {
                     {toggle.status && <ColumnSecond>{status}</ColumnSecond>}
 
                     {toggle.function && (
-                      <ColumnSecond>{data.function}</ColumnSecond>
+                      <ColumnSecond>{func}</ColumnSecond>
                     )}
                     {toggle.contracts && (
                       <ColumnSecond>

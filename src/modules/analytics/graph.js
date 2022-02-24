@@ -4,6 +4,8 @@ import { linearGradientDef } from "@nivo/core";
 import "../../assets/styles/custom.css";
 import moment from "moment";
 import styled from "styled-components";
+import utility from "../../utility";
+
 
 export default function Graph(props) {
   const [points, setPoints] = useState({ x: 0, y: 0 });
@@ -12,7 +14,7 @@ export default function Graph(props) {
 
   const [graphAccounts] = useState([]);
 
-  let length = graphAccounts.length;
+  // let length = graphAccounts.length;
   // const firstDate =
   //   graphAccounts.length === 0
   //     ? ""
@@ -78,6 +80,7 @@ export default function Graph(props) {
         //   legendPosition: "center",
         // }}
       />
+      {data[0]?.id.includes("Transactions")? <Legend></Legend> : ""}
     </>
     : <>{props.error}</>}
     </>
@@ -96,45 +99,29 @@ const ToolTipElement = (props) => {
 
        {props.point.serieId !== "ActiveUsers" ? <TooltipDataHeader><div>Account: </div> <TooltipDataValues>XDC</TooltipDataValues></TooltipDataHeader> : ""}
        <TooltipDataHeader><div>Network: </div> <TooltipDataValues>Mainnet</TooltipDataValues></TooltipDataHeader> 
-       {props.point.serieId !== "ActiveUsers" ?<TooltipDataHeader><div>Deployment Status: </div> <TooltipDataValues>Success</TooltipDataValues></TooltipDataHeader>  : ""}
+       {/* {props.point.serieId !== "ActiveUsers" ?<TooltipDataHeader><div>Deployment Status: </div> <TooltipDataValues>Success</TooltipDataValues></TooltipDataHeader>  : ""} */}
         </TooltipData>
       </TooltipGraph>
   );
 };
 
-const graphProperties = {
-  margin: { top: 10, right: 0, bottom: 0, left: 0 },
-  curve: "monotoneX",
-  axisTop: null,
-  axisRight: true,
-  axisBottom: true,
-  axisLeft: true,
-  enableGridX: true,
-  enableGridY: true,
-  enableSlices: false,
-  enablePoints: false,
-  enableArea: true,
-  areaOpacity: 0.9,
-  useMesh: true,
-  animate: true,
-};
 
 const MyResponsiveLine = ({ data, MouseMovePoint, CustomPoint }) => (
   <ResponsiveLine
-  margin={{bottom: 30, left :30 , top:10 , right:20}}
+  margin={{bottom: 37, left :30 , top:10 , right:20}}
   data={data}
   tooltip={ToolTipElement}
 
-  xScale={{ type: "point" }}
+  // xScale={{ type: "point" }}
   yScale={{
       type: "linear",
-      min: "auto",
-      max: "auto",
       stacked: true,
       reverse: false,
+      min:"auto",
+      max:"auto"
   }}
   yFormat=" >-.2f"
-  curve="monotoneX"
+  curve="natural"
   axisTop={null}
   axisRight={null}
   axisBottom={{
@@ -155,8 +142,7 @@ tickSize: 0,
       tickPadding: 5,
       tickValues: 3,
         format: function(value){ 
-            if(value < 999) return value;
-            else return (value/1000).toFixed(1) + 'k';
+          return utility.convertToInternationalCurrencySystem(value)
         }
     }}
     defs ={[
@@ -170,8 +156,9 @@ tickSize: 0,
   enableGridY={true}
   enablePoints={true}
   pointSize={10}
-  pointColor="#3163F0"  
-  colors ={[["#3163F0"]]}
+  pointColor={{ from: 'color', modifiers: [] }}
+  colors ={ (data[0]?.id).includes("Transactions") ? ["#BBCBF7", "#3163F0"] : ["#3163F0"]}
+  colorBy="index"
   pointBorderWidth={2}
   pointLabelYOffset={-12}
   enableArea={true}
@@ -180,10 +167,33 @@ tickSize: 0,
   useMesh={true}
   legends={[]}
   theme={{ fontSize: 11, fontFamily: "Inter",textColor:"#7C828A" }}
-
+ 
   />
 );
 
+const Legend = () =>{
+  return (
+    <LegendDiv>
+    <LegendSpan>
+    <LegendImg src="/images/indicator.svg"></LegendImg>Successful Transactions
+    </LegendSpan>
+    <LegendSpan>
+    <LegendImg src="/images/Failed transaction white.svg"></LegendImg> Failed Transactions
+    </LegendSpan>
+      </LegendDiv>
+  )
+}
+ const LegendDiv = styled.div`
+  font-size:12px;
+  text-align:center;
+  color: rgb(124, 130, 138);
+ `;
+ const LegendImg = styled.img`
+ width:12px;
+`;
+const LegendSpan = styled.span`
+ margin-right:5px;
+`;
 const GraphSize = styled.div`
   height: 9.75rem;
   width: auto;

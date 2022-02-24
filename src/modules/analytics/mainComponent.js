@@ -11,9 +11,10 @@ import { sessionManager } from "../../managers/sessionManager";
 import FullScreen from "./fullScreen";
 import TopCalls from "./topCalls";
 import utility from "../../utility";
-import moment from "moment";
 import ShowLoader from "../../common/components/showLoader";
 import { analytics } from "../../constants";
+import Grid from '@mui/material/Grid';
+
 
 export default function MainComponent(props) {
   const [isSetOpen, setOpen] = React.useState(false);
@@ -117,7 +118,12 @@ export default function MainComponent(props) {
       return;
     }
     setLoader(false);
-   const resultData = getGraphData("Transactions", response , "dateString" , "count");
+    let resultData =[];
+   const failed = getGraphDataForTransactions("TransactionsFailed", response , "dateString" , "failedTransactions");
+   resultData.push(failed);
+   const success = getGraphDataForTransactions("TransactionSuccess", response , "dateString" , "successfullTransactions");
+   resultData.push(success);
+console.log(resultData);
    setNoOfTransactions(resultData);
    setData(resultData);
   }
@@ -131,13 +137,16 @@ export default function MainComponent(props) {
       address: address ? address : selected.address,
       numberOfDays: event?.target?.value || 7
     }
+    setLoader(true);
     const [error, response] = await utility.parseResponse(AnalyticsService.getGasUsedAnalytics(req));
     if (error || !response || response.length === 0) {
       setGasUsedOverTimeError("No Data Available");
       setGasPriceData([]);
       setData([]);
+      setLoader(false);
       return;
     }  
+    setLoader(false);
     const resultData = getGraphData("GasPrice", response , "dateString" , "gasUsedOverTime");
     setGasPriceData(resultData);
     setData(resultData);
@@ -153,13 +162,16 @@ export default function MainComponent(props) {
       address: address ? address : selected.address,
       numberOfDays: event?.target?.value || 7
     }
+    setLoader(true);
     const [error, response] = await utility.parseResponse(AnalyticsService.getActiveUsersAnalytics(req));
     if (error || !response || response.length === 0) {
       setActiveUsersError("No Active Users Available");
       setActiveUserData([]);
       setData([]);
+      setLoader(false);
       return;
     }  
+    setLoader(false);
     const resultData = getGraphData("ActiveUsers", response , "dateString" , "activeUsers");
     setActiveUserData(resultData);
     setData(resultData);
@@ -174,13 +186,16 @@ export default function MainComponent(props) {
       address: address ? address : selected.address,
       numberOfDays: event?.target?.value || 7
     }
+    setLoader(true);
     const [error, response] = await utility.parseResponse(AnalyticsService.getTopCallers(req));
     if (error || !response || response.length === 0) {
       setTopCallersError("No Top Callers Available");
       setTopCallersData([]);
       setTableData([]);
+      setLoader(false);
       return;
     }    
+    setLoader(false);
     setTopCallersData(response);
     setTableData(response);
   }
@@ -194,13 +209,16 @@ export default function MainComponent(props) {
       address: address ? address : selected.address,
       numberOfDays: event?.target?.value || 7
     }
+    setLoader(true);
     const [error, response] = await utility.parseResponse(AnalyticsService.getTopFunctionCalls(req));
     if (error || !response || response.length === 0) {
       setTopFunctionCallsError("No Top Function Calls Available");
       setTopFunctionCallsData([]);
       setTableData([]);
+      setLoader(false);
       return;
     }
+    setLoader(false);
     setTopFunctionCallsData(response);
     setTableData(response);
   }
@@ -220,8 +238,8 @@ export default function MainComponent(props) {
  const getGraphData = (id , response, xComponent , yComponent ) =>{
   let arr = [{
     id: id,
-    color: "hsl(248, 70%, 50%)",
-    data: []
+    "color": "hsl(221, 70%, 50%)",   
+     data: []
   }];
 
   let resultData = []
@@ -236,6 +254,32 @@ export default function MainComponent(props) {
   return arr;
 
  }
+
+ const getGraphDataForTransactions = (id , response, xComponent , yComponent ) =>{
+  let dataObject = {
+    id: id,
+    "color": "hsl(221, 70%, 50%)",
+    data: []
+  }
+  let resultData = []
+  response.map(items => {
+    if(yComponent === "failedTransactions")
+    resultData.push({
+      x: items[xComponent],
+      y: 2
+    })
+    else
+    resultData.push({
+      x: items[xComponent],
+      y: items[yComponent]
+    })
+    return true;
+  })
+  dataObject.data = resultData;
+  return dataObject;
+
+ }
+
 
   const selectContract = (item) => {
     setSelected(item);
@@ -253,6 +297,11 @@ export default function MainComponent(props) {
     if (value === 5) { setGraphName("Top Function Calls"); setData(data); setError(topFunctionCallsError) }
     setExpandGraph(value);
     setDropDownValue(dropDownValue);
+  }
+  const changeContract = (item) =>{
+    selectContract(item);
+    getContractNames(item.address);
+    setOpen((prev) => !prev);
   }
 
   return (
@@ -294,7 +343,7 @@ export default function MainComponent(props) {
                         <Box sx={styles}>
                           {contracts.length &&
                             contracts.map((item) => (
-                              <div onClick={() => selectContract(item)}>
+                              <div onClick={() => changeContract(item)}>
                                 <Label>Contract</Label>
                                 {item?.contractName ? item.contractName : "Contract"}
                                 <br />
@@ -307,7 +356,9 @@ export default function MainComponent(props) {
                   </ClickAwayListener>
                 </Container>
                 {/* <ScrollableDiv> */}
-                <ResponsiveRow>
+                {/* <ResponsiveRow> */}
+                <Grid container rowSpacing={1} columnSpacing={{ xs: 12, sm: 2, md: 3 }}>
+                <Grid item xs={12} sm={12} md={6}>
                   <GraphContainer>
                     <SubContainer>
                       <SelectComponent
@@ -321,8 +372,8 @@ export default function MainComponent(props) {
                     </SubContainer>
                     <GraphSize> <Line data={noOfTransactions} error={transactionOverTimeError}/></GraphSize>
                   </GraphContainer>
-
-
+                  </Grid>
+                  <Grid item xs={12} sm={12} md={6}>
                   <GraphContainer>
                     <SubContainer>
                       <SelectComponent
@@ -337,8 +388,12 @@ export default function MainComponent(props) {
                     </SubContainer>
                     <GraphSize> <Line data={gasPriceData} error={gasUsedOverTimeError}/></GraphSize>
                   </GraphContainer>
-                </ResponsiveRow>
-                <ResponsiveRow>
+                  </Grid>
+                {/* </ResponsiveRow> */}
+                </Grid>
+                {/* <ResponsiveRow> */}
+                <Grid container rowSpacing={1} columnSpacing={{ xs: 12, sm: 2, md: 3 }}>
+                <Grid item xs={12} sm={12} md={6}>
                   <GraphContainer>
                     <TableData
                       heading="Top Callers"
@@ -350,6 +405,8 @@ export default function MainComponent(props) {
                       error={topCallersError}
                     ></TableData>
                   </GraphContainer>
+                  </Grid>
+                  <Grid item xs={12} sm={12} md={6}>
                   <GraphContainer>
                     <SubContainer>
                       <SelectComponent
@@ -363,7 +420,11 @@ export default function MainComponent(props) {
                     </SubContainer>
                     <GraphSize> <Line data={activeUserData} error={activeUsersError}/></GraphSize>
                   </GraphContainer>
-                </ResponsiveRow>
+                  </Grid>
+                  </Grid>
+                {/* </ResponsiveRow> */}
+                <Grid container rowSpacing={1} columnSpacing={{ xs: 12, sm: 2, md: 3 }}>
+                <Grid item xs={12} sm={12} md={6}>
                 <GraphContainer>
                   <TableData
                     heading="Top Function Calls"
@@ -375,6 +436,8 @@ export default function MainComponent(props) {
                     error={topFunctionCallsError}
                   ></TableData>
                 </GraphContainer>
+                </Grid>
+                </Grid>
                 {/* </ScrollableDiv> */}
               </MainContainer>
             </Row>
@@ -387,6 +450,7 @@ export default function MainComponent(props) {
           expandGraphs={expandGraphs}
           dropDownValue={dropDownValue}
           error={error}
+          selected = {selected}
            />
       )}
       {expandGraph > 3 && (
@@ -422,7 +486,8 @@ const TableData = (props) => {
           </Div>
           <Div>
             <ContractFrom>Network:</ContractFrom>
-            <Network>{item.network}</Network>
+            <SubNetwork><Network>{item.network}</Network></SubNetwork>
+            <MobileNetwork>{item.network}</MobileNetwork>
           </Div>
           </DataColumn>
           <Count>{item.count}</Count>
@@ -501,6 +566,10 @@ const SubContainer = styled.div`
   margin-top: 1.25rem;
   // padding-left: 5px;
   padding-bottom: 12px;
+  @media (min-width: 300px) and (max-width: 768px) {
+    margin-top: 2px;
+    padding-bottom: 2px;
+  }
 `;
 const Container = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
@@ -525,7 +594,7 @@ const GraphSize = styled.div`
 `;
 const Table =styled.div`
   height:15rem;
-  overflow-y:scroll;
+  overflow-y:hidden;
   margin-top:1rem;
 `
 const View = styled.div`
@@ -550,19 +619,27 @@ const Content = styled.div`
 const TableRow = styled.div`
   display:flex;
   flex-flow:column-nowrap;
-  margin-bottom:1rem;
+  margin-bottom:6px;
   border-top: 1px solid rgb(227, 231, 235);
+  @media (min-width: 300px) and (max-width: 768px) {
+    width:653px;
+  }
+
 `;
 const DataColumn = styled.div`
   width:100%;
-  padding-top:15px;
+  padding-top:9px;
 `;
 const Count = styled.div`
  color: #3163F0;
  padding-top:15px;
+ @media (min-width: 300px) and (max-width: 768px) {
+  margin-left:162px;
+  padding-right: 17px;
+}
 `;
 const GraphContainer = styled.div`
-  width: 590px;
+  
   background: #ffffff 0% 0% no-repeat padding-box;
   border-radius: 0.375rem;
   height: 356px;
@@ -570,6 +647,7 @@ const GraphContainer = styled.div`
   margin-top: 2.58rem;
   @media (min-width: 300px) and (max-width: 1024px) {
     width: 100%;
+    padding: 1.25rem 8px 1.25rem 8px;
   }
 `;
 const ScrollableDiv = styled.div`
@@ -598,6 +676,7 @@ const ContractFrom = styled.div`
   font-weight: 600;
   @media (min-width: 300px) and (max-width: 767px) {
     word-break: break-all;
+    white-space: nowrap;
   }
 `;
 const Network = styled.div`
@@ -606,7 +685,36 @@ const Network = styled.div`
   width: 100%;
   @media (min-width: 300px) and (max-width: 767px) {
     word-break: break-all;
+    white-space: nowrap;
+    margin-left: 6px;
+    
   }
+`;
+const MobileNetwork = styled.div`
+color: #303134;
+  font-size: 14px;
+  width: 100%;
+  @media (min-width: 300px) and (max-width: 767px) {
+    word-break: break-all;
+    white-space: nowrap;
+    margin-left:13px;
+  }
+  @media (min-width: 768px) and (max-width: 1200px) {
+   display:none;
+  }
+  @media (min-width: 820px) and (max-width: 1200px) {
+    display:none;
+  }
+  @media (min-width: 1200px) and (max-width: 2300px){
+    display:none;
+  }
+  
+`;
+const SubNetwork = styled.div`
+@media (min-width: 300px) and (max-width: 768px) {
+  margin-left: 0px;
+  display:none;
+}
 `;
 // const BorderDiv = styled.div`
 //   border-bottom: 1px solid #e2e8fa;
