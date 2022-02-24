@@ -215,6 +215,7 @@ const LeftContainer = styled.div`
     // padding: 1.5rem;
     padding: 3.9rem;
     padding-top: 0;
+    padding-bottom: 16px;
   }
 `;
 const Span = styled.span`
@@ -229,6 +230,11 @@ const Span1 = styled.span`
 const DivDesktop = styled.div`
   @media (min-width: 300px) and (max-width: 414px) {
     display: none;
+  }
+  @media (min-width: 768px) and (max-width: 1200px) {
+    text-align: -webkit-center;
+    padding-bottom: 48px;
+    padding-top: 2px;
   }
 `;
 const MobileSpan = styled.div`
@@ -256,8 +262,11 @@ const DataBox = styled.div`
   @media (min-width: 300px) and (max-width: 414px) {
     font-size: 14px;
   }
+  @media (min-width: 768px) and (max-width: 1200px) {
+    text-align: -webkit-center !important;
+  }
   @media (max-width: 768px) {
-    text-align: center;
+    text-align: -webkit-center !important;
   }
 `;
 const DetailBox = styled.div`
@@ -269,8 +278,8 @@ const DetailBox = styled.div`
     font-size: 1.2rem;
   }
 
-  @media (max-width: 768px) {
-    text-align: center;
+  @media (max-width: 768px) and (max-width: 1200px) {
+    
   }
 `;
 
