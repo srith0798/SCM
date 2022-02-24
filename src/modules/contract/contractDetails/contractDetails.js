@@ -422,12 +422,13 @@ export default function ContractDetails(props) {
           )}
           {activeButton === "Source Code" && (
             <SourceCode
-              data={
+         data={
                 address.status === "Verified"
-                  ? address.sourceCode
-                  : address.byteCode
-              }
-            />
+                   ? address.sourceCode
+                   : address.byteCode
+               }>
+          </SourceCode>
+           
           )}
         </Container>
       </MainContainer>
