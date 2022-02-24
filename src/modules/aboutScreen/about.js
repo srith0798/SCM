@@ -141,9 +141,13 @@ const MainBoxContainer = styled.div`
   align-item: center;
   padding: 4.125rem;
   height: 110vh;
-  @media (min-width: 300px) and (max-width: 700px) {
+  @media (min-width: 300px) and (max-width: 768px) {
     padding: 1.125rem;
     height: 1377px;
+  }
+  @media (min-width: 414px) and (max-width: 768px) {
+    padding: 1.125rem;
+    height: 1811px;
   }
   @media (max-width: 375px) {
     padding: 16px;
@@ -153,10 +157,10 @@ const MainBoxContainer = styled.div`
   }
   @media (min-width: 768px) and (max-width: 1200px) {
     padding: 16px;
-    height:113vh;
+    height:212vh;
   }
   @media (min-width: 820px) and (max-width: 1200px) {
-    height:111vh;!important;
+    height:217vh;!important;
   }
 `;
 const Container = styled.div`
@@ -196,6 +200,10 @@ const RightContainer = styled.div`
   @media (min-width: 300px) and (max-width: 414px) {
     padding: 30px;
   }
+  @media (min-width: 820px) and (max-width: 1200px) {
+    column-gap: 120px !important;
+    padding: 0.7rem 4.7rem 4.7rem 4.7rem;
+  }
 `;
 const LeftContainer = styled.div`
   width: 100%;
@@ -233,10 +241,13 @@ const IconRow = styled.div`
   justify-content: space-between;
   max-width: 47.438rem;
   width: 100%;
-  @media (min-width: 300px) and (max-width: 414px) {
+  @media (min-width: 300px) and (max-width: 768px) {
     max-width: 47.438rem;
     flex-direction: column;
+    align-items: center;
   }
+  
+
 `;
 const DataBox = styled.div`
   display: flex;
@@ -319,15 +330,13 @@ const HeadingContainer = styled.div`
   font-weight: 600;
   color: #1f1f1f;
   padding: 3.75rem;
-  @media (min-width: 300px) and (max-width: 414px) {
+  @media (min-width: 300px) and (max-width: 768px) {
     font-size: 1rem;
     padding: 0rem;
     white-space: nowrap;
     padding-top: 20px;
   }
-  @media (min-width: 300px) and (max-width: 768px) {
-    white-space:nowrap;
-  }
+  
   @media (min-width: 768px) and (max-width: 1200px) {
     white-space: nowrap;
   }
@@ -370,7 +379,7 @@ const IconContainer = styled.div`
   align-items: center;
   text-align: center;
   cursor: pointer;
-  @media (min-width: 300px) and (max-width: 414px) {
+  @media (min-width: 300px) and (max-width: 768px) {
     height: 232px;
   }
 `;
