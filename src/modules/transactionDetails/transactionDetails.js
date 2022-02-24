@@ -959,7 +959,6 @@ const SuccessButton = styled.div`
   margin-right: 12px;
   /* justify-content: center; */
   @media (min-width: 300px) and (max-width: 767px) {
-    width: 30%;
     margin-left: 60px;
   }
   @media (min-width: 768px) and (max-width: 1023px) {

@@ -135,12 +135,11 @@ const MainContainer = styled.div`
 const MainBoxContainer = styled.div`
   background: #ecf0f7 0% 0% no-repeat padding-box;
   width: 100%;
-  // height: 100vh;
   display: flex;
   flex-direction: column;
   align-item: center;
-  padding: 4.125rem;
-  height: 110vh;
+  padding: 3.125rem;
+  height: -webkit-fill-available;
   @media (min-width: 300px) and (max-width: 700px) {
     padding: 1.125rem;
     height: 1377px;
@@ -326,7 +325,7 @@ const HeadingContainer = styled.div`
     padding-top: 20px;
   }
   @media (min-width: 300px) and (max-width: 768px) {
-    white-space:nowrap;
+    white-space: nowrap;
   }
   @media (min-width: 768px) and (max-width: 1200px) {
     white-space: nowrap;

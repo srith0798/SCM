@@ -316,6 +316,7 @@ export default function TransactionList() {
                   sx={{
                     position: "relative",
                     marginRight: "15px;",
+                    marginBottom: "16px",
                     wordBreak: "break-all",
                   }}
                   selected={selected.address}
@@ -323,7 +324,7 @@ export default function TransactionList() {
                   <DropDown onClick={handleClick}>
                     {selectedName || "Contract"}
                     <img
-                      style={{ marginLeft: "0.5rem" }}
+                      style={{ marginLeft: "0.5rem", marginBottom: "10px," }}
                       alt=""
                       src="/images/XDCmainnet.svg"
                     />
@@ -585,31 +586,27 @@ const Div = styled.div`
   border-bottom: 1px solid #e3e7eb;
   white-space: nowrap;
   column-gap: 20px;
-  width: fit-content;
-  @media (min-width: 300px) and (max-width: 768px) {
-    width: fit-content;
-  }
-
-  @media (min-width: 767px) and (max-width: 1200px) {
-    width: fit-content;
+  width: auto;
+  @media (min-width: 300px) and (max-width: 767px) {
+    column-gap: 70px;
   }
 `;
 const RowData = styled.div`
   display: flex;
   flex-direction: row;
-  column-gap: 21px;
-  @media (min-width: 300px) and (max-width: 768px) {
-    column-gap: 36px;
-  }
-
-  @media (min-width: 767px) and (max-width: 1200px) {
+  white-space: nowrap;
+  column-gap: 20px;
+  width: auto;
+  @media (min-width: 300px) and (max-width: 767px) {
+    column-gap: 70px;
   }
 `;
 
 const TableContainer = styled.div`
   background-color: #ffffff;
   border-radius: 0.375rem;
-  width: 100%;
+  min-width: 5rem;
+  width: auto;
   min-height: 35rem;
   height: auto;
   padding: 0.625rem;
@@ -704,10 +701,6 @@ const TransactionBox = styled.div`
 `;
 const NewDiv = styled.div`
   display: flex;
-  @media (min-width: 340px) and (max-width: 768px) {
-    margin-left: -3px;
-    padding: 2px;
-  }
 `;
 const Transactions = styled.div`
   font-size: 1.5rem;
@@ -790,22 +783,18 @@ const ColumnOne = styled.div`
   font-weight: 700;
   color: #102c78;
   column-gap: 20px;
-  width: fit-content;
-  min-width: 200.5px;
+  width: 100%;
+  min-width: 120px;
   white-space: nowrap;
-  @media (min-width: 300px) and (max-width: 767px) {
-    width: fit-content;
-  }
-  @media (min-width: 767px) and (max-width: 1200px) {
-    width: 8%;
-  }
 `;
 const ColumnSecond = styled.div`
   font-size: 0.875rem;
   font-weight: 500;
   color: #191919;
   width: 100%;
-  min-width: 200px;
+  min-width: 120px;
+  white-space: nowrap;
+  width: 100%;
 `;
 
 const BackgroundChangerTxhash = styled.div`
@@ -818,13 +807,13 @@ const BackgroundChangerTxhash = styled.div`
   padding: 1px 6px 1px 4px;
   cursor: pointer;
 
-  @media (min-width: 300px) and (max-width: 1371px) {
-    margin-left: 0px;
-    background-repeat: no-repeat;
-    background: #eaefff 0% 0% no-repeat padding-box;
-    border-radius: 6px;
-    opacity: 1;
-  }
+  // @media (min-width: 300px) and (max-width: 1371px) {
+  //   margin-left: 0px;
+  //   background-repeat: no-repeat;
+  //   background: #eaefff 0% 0% no-repeat padding-box;
+  //   border-radius: 6px;
+  //   opacity: 1;
+  // }
 `;
 const BackgroundChangerTo = styled.div`
   width: fit-content;

@@ -391,11 +391,11 @@ const PaginationDiv = styled.div`
 
 const IconDiv = styled.div`
   display: flex;
-  @media (max-width: 767px) {
-    // margin-bottom: 26px;
+  @media (min-width: 424px) and (max-width: 767px) {
+    margin-top: 51px;
   }
-  @media (max-width: 414px) {
-    margin-bottom: 0px;
+  @media (max-width: 424px) {
+    margin-top: 50px;
   }
 `;
 const RefreshImage = styled.img`
@@ -408,16 +408,12 @@ const RefreshImage = styled.img`
   }
   @media (min-width: 375px) and (max-width: 767px) {
     margin-right: 0.325rem;
-    margin-top: 51px;
+
     margin-left: 3px;
   }
-  @media (max-width: 414px) {
+  @media (max-width: 425px) {
     margin-right: 0.325rem;
-    margin-top: 51px;
     margin-left: 3px;
-  }
-  @media (min-width: 376px) and (max-width: 413px) {
-    display: none;
   }
 `;
 
@@ -460,7 +456,7 @@ const MainHeading = styled.div`
     display: flex;
     flex-direction: row;
   }
-  @media (max-width: 425px) {
+  @media (max-width: 767px) {
     display: flex;
     flex-direction: column;
     padding-top: 7px;
@@ -475,7 +471,6 @@ const SubContainer = styled.div`
   padding-bottom: 15px;
   @media (max-width: 767px) {
     padding-top: 47px;
-    // padding-bottom: 42px;
   }
   @media (min-width: 300px) {
     padding-top: 47px;
@@ -492,7 +487,7 @@ const Heading = styled.div`
     // padding-top: 40px;
     margin-top: 3px;
   }
-  @media (min-width: 375px) {
+  @media (min-width: 360px) {
     font-size: 1.4rem;
     flex-direction: column;
     margin-bottom: 10px;
@@ -512,18 +507,12 @@ const Button = styled.button`
   width: 8.125rem;
   height: 2.125rem;
   font-size: 0.875rem;
-  @media (max-width: 768px) {
-  }
 
-  @media (max-width: 425px) {
-    margin-top: 51px;
+  @media (max-width: 767px) {
     width: 35px;
     font-size: 0rem;
     height: 33px;
     background-position: 0.6rem;
-  }
-  @media (min-width: 376px) and (max-width: 413px) {
-    display: none;
   }
 `;
 const Input = styled.input`

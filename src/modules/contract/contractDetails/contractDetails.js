@@ -604,7 +604,7 @@ const DetailsSection = styled.div`
   border-radius: 0.375rem;
   width: 100%;
   padding: 0.625rem 0.625rem 1.5rem 0.625rem;
-  margin-top: 2.25rem;
+  margin-top: 3.25rem;
   overflow-x: auto;
   @media (min-width: 300px) and (max-width: 768px) {
     height: auto;
