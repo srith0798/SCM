@@ -155,7 +155,7 @@ export default function Contract(props) {
 
       <TableContainer>
         <Div>
-          <RowContainer>
+          <RowContainer style={{ alignItems: "center" }}>
             <ColumnOne>
               Contract Name
               <Tooltip
@@ -438,6 +438,7 @@ const MainContainer = styled.div`
 const RowContainer = styled.div`
   display: flex;
   flex-flow: row nowrap;
+
   @media (min-width: 768px) and (max-width: 1128px) {
     column-gap: 152px;
   }
@@ -446,6 +447,7 @@ const RowContainer = styled.div`
 const RowTag = styled.div`
   display: flex;
   flex-flow: row nowrap;
+  align-items: center;
   @media (min-width: 768px) and (max-width: 1128px) {
     column-gap: 92px;
   }

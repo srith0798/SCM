@@ -700,6 +700,9 @@ const TableHeading = styled.div`
   color: #102c78;
   max-width: 18.75rem;
   width: 100%;
+  @media (max-width: 767px) {
+    max-width: 13.75rem;
+  }
 `;
 
 const PopUp = styled.div`

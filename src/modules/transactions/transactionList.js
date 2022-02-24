@@ -623,7 +623,7 @@ const TableContainer = styled.div`
   @media (min-width: 300px) and (max-width: 767px) {
     overflow-y: hidden;
     width: 100%;
-    height: 581px;
+    height: auto;
 
     position: relative;
     ::-webkit-scrollbar {
