@@ -151,6 +151,13 @@ const MainBoxContainer = styled.div`
   @media (max-width: 768px) {
     padding: 30px;
   }
+  @media (min-width: 768px) and (max-width: 1200px) {
+    padding: 16px;
+    height:113vh;
+  }
+  @media (min-width: 820px) and (max-width: 1200px) {
+    height:111vh;!important;
+  }
 `;
 const Container = styled.div`
   background-color: #ffffff;
@@ -317,6 +324,12 @@ const HeadingContainer = styled.div`
     padding: 0rem;
     white-space: nowrap;
     padding-top: 20px;
+  }
+  @media (min-width: 300px) and (max-width: 768px) {
+    white-space:nowrap;
+  }
+  @media (min-width: 768px) and (max-width: 1200px) {
+    white-space: nowrap;
   }
 `;
 const GreyContainer = styled.div`
