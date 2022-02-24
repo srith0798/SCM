@@ -108,7 +108,7 @@ const ToolTipElement = (props) => {
 
 const MyResponsiveLine = ({ data, MouseMovePoint, CustomPoint }) => (
   <ResponsiveLine
-  margin={{bottom: 37, left :30 , top:10 , right:20}}
+  margin={{bottom: 37, left :32 , top:10 , right:20}}
   data={data}
   tooltip={ToolTipElement}
 
@@ -117,7 +117,7 @@ const MyResponsiveLine = ({ data, MouseMovePoint, CustomPoint }) => (
       type: "linear",
       stacked: true,
       reverse: false,
-      min:"auto",
+      min:0,
       max:"auto"
   }}
   yFormat=" >-.2f"
@@ -129,7 +129,7 @@ const MyResponsiveLine = ({ data, MouseMovePoint, CustomPoint }) => (
     tickSize: 2,
     tickPadding: 15,
     format: function(value){ 
-   let fisrtValue= data[0]?.data[0]?.x,lastValue=data[0]?.data[data[0].data.length-1]?.x;
+    let fisrtValue= data[0]?.data[0]?.x,lastValue=data[0]?.data[data[0].data.length-1]?.x;
     if(value === fisrtValue || value === lastValue) return moment(value).format("DD MMM");
     else return "";
 },
@@ -139,7 +139,7 @@ tickSize: 0,
   axisLeft={{
       orient: "left",
       tickSize: 0,
-      tickPadding: 5,
+      tickPadding: 15,
       tickValues: 3,
         format: function(value){ 
           return utility.convertToInternationalCurrencySystem(value)
