@@ -135,13 +135,12 @@ const MainContainer = styled.div`
 const MainBoxContainer = styled.div`
   background: #ecf0f7 0% 0% no-repeat padding-box;
   width: 100%;
-  // height: 100vh;
   display: flex;
   flex-direction: column;
   align-item: center;
-  padding: 4.125rem;
-  height: 110vh;
-  @media (min-width: 300px) and (max-width: 768px) {
+  padding: 3.125rem;
+  height: -webkit-fill-available;
+  @media (min-width: 300px) and (max-width: 700px) {
     padding: 1.125rem;
     height: 1377px;
   }
@@ -255,8 +254,6 @@ const IconRow = styled.div`
     flex-direction: column;
     align-items: center;
   }
-  
-
 `;
 const DataBox = styled.div`
   display: flex;
@@ -282,7 +279,6 @@ const DetailBox = styled.div`
   }
 
   @media (max-width: 768px) and (max-width: 1200px) {
-    
   }
 `;
 
@@ -348,8 +344,14 @@ const HeadingContainer = styled.div`
     white-space: nowrap;
     padding-top: 20px;
   }
-  
-  @media (min-width: 768px) and (max-width: 1200px) {
+  <<<<<<< HEAD @media (min-width: 300px) and (max-width: 768px) {
+    white-space: nowrap;
+  }
+  =======>>>>>>>d1c9b590dc079a5a1d4f0a9c0703bc780e13bec6
+    @media
+    (min-width: 768px)
+    and
+    (max-width: 1200px) {
     white-space: nowrap;
   }
 `;

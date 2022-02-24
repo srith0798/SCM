@@ -551,8 +551,9 @@ const CommonInputDiv = styled.div`
   display: flex;
   max-width: fit-content;
   justify-content: space-between;
-  @media (min-width: 300px) and (max-width: 768px) {
-    column-gap: 0px;
+  @media (min-width: 300px) and (max-width: 1023px) {
+    flex-direction: column;
+    row-gap: 20px;
   }
 `;
 const ErrorCheckDiv = styled.div`
@@ -633,7 +634,7 @@ const RawInputDiv = styled.div`
   @media (min-width: 300px) and (max-width: 767px) {
     display: flex;
     white-space: nowrap;
-    column-gap: 108px;
+    column-gap: 0px;
   }
   @media (max-width: 375px) {
     display: flex;
@@ -820,7 +821,7 @@ const HashMobile = styled.div`
   }
 `;
 const SubHeading = styled.div`
-  font-size: 0.875rem;
+  font-size: 0.8rem;
   font-weight: 600;
   color: #102c78;
   display: flex;
@@ -958,7 +959,6 @@ const SuccessButton = styled.div`
   margin-right: 12px;
   /* justify-content: center; */
   @media (min-width: 300px) and (max-width: 767px) {
-    width: 30%;
     margin-left: 60px;
   }
   @media (min-width: 768px) and (max-width: 1023px) {

@@ -22,12 +22,13 @@ export default function Remove(props) {
       id: props.contract._id,
     };
     const response = await ContractService.removeContract(request);
-    window.location.reload();
+
     console.log(response);
     props.click();
-    setTimeout(() => {
-      history.push("/contracts");
-    }, 1000);
+
+    history.push("/contracts");
+
+    // window.location.reload();
   };
 
   return (
