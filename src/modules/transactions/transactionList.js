@@ -108,12 +108,13 @@ export default function TransactionList() {
         setPage(parseInt(pageCount / countToggle));
       } else {
         setPage(parseInt(pageCount / countToggle) + 1);
-    } } catch (e) {
+      }
+    } catch (e) {
       setShowPlaceHolder(true);
       setLoader(false);
     }
   };
-  
+
   const searchTransaction = async (searchValues, searchKeys) => {
     try {
       const requestData = {
@@ -175,12 +176,12 @@ export default function TransactionList() {
   };
   const changePage = (value) => {
     setValueCheck(value.selected);
-    if(selected.length > 0) {
-    getTransaction(
-      selected,
-      Math.ceil(value.selected * countToggle),
-      countToggle
-    );
+    if (selected.length > 0) {
+      getTransaction(
+        selected,
+        Math.ceil(value.selected * countToggle),
+        countToggle
+      );
     }
   };
   const [toggle, setToggle] = React.useState({
@@ -204,30 +205,29 @@ export default function TransactionList() {
 
   const filterSearch = async () => {
     let requestData = [];
-    if(select === 2 || select === 3)
-     requestData = {
-      skip: 0,
-      limit: countToggle,
-      status: select === 2 ? true : false,
-    };
+    if (select === 2 || select === 3)
+      requestData = {
+        skip: 0,
+        limit: countToggle,
+        status: select === 2 ? true : false,
+      };
     else
-    requestData = {
-    skip: 0,
-    limit: countToggle,
-    contractAddress: defaultAddress,
-    }
+      requestData = {
+        skip: 0,
+        limit: countToggle,
+        contractAddress: defaultAddress,
+      };
     try {
       setLoader(true);
       const response = await ContractsService.getTransactionsList(requestData);
       setLoader(false);
-      if(setFrom>0 && setTo> 0) {
+      if (setFrom > 0 && setTo > 0) {
         let result = response.transactionList.filter((row) => {
-              return row.createdOn <= range.max && row.createdOn >= range.min;
+          return row.createdOn <= range.max && row.createdOn >= range.min;
         });
         setAddress(result);
-      }
-      else{
-      setAddress(response.transactionList);
+      } else {
+        setAddress(response.transactionList);
       }
     } catch (e) {
       console.log(e);
@@ -241,11 +241,10 @@ export default function TransactionList() {
     } else return "Fail";
   }
 
-  function setfunction (val) {
-   let trim = val.split("(");
-   return trim[0];
+  function setfunction(val) {
+    let trim = val.split("(");
+    return trim[0];
   }
-
 
   return (
     <>
@@ -276,7 +275,11 @@ export default function TransactionList() {
               </Tooltip>
               <Tooltip disableFocusListener title="Refresh">
                 <Icons
-                  onClick={() => {getContractNames(); setFromInput(0); setToInput(0);}}
+                  onClick={() => {
+                    getContractNames();
+                    setFromInput(0);
+                    setToInput(0);
+                  }}
                   src="/images/refresh.svg"
                 />
               </Tooltip>
@@ -465,7 +468,7 @@ export default function TransactionList() {
                 <Div>
                   <RowData
                     onClick={() =>
-                      redirectToTransactionDetails(data?.hash, status )
+                      redirectToTransactionDetails(data?.hash, status)
                     }
                   >
                     {toggle.transactionHash && (
@@ -476,11 +479,15 @@ export default function TransactionList() {
                       </ColumnSecond>
                     )}
 
-                    {toggle.status && <ColumnSecond>{status}</ColumnSecond>}
-
-                    {toggle.function && (
-                      <ColumnSecond>{func}</ColumnSecond>
+                    {toggle.status && (
+                      <ColumnSecond
+                        style={{ color: "#00A58C", fontWeight: 600 }}
+                      >
+                        {status}
+                      </ColumnSecond>
                     )}
+
+                    {toggle.function && <ColumnSecond>{func}</ColumnSecond>}
                     {toggle.contracts && (
                       <ColumnSecond>
                         {/* {utility.truncateTxnAddress(data.contractAddress)} */}
