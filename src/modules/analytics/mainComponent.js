@@ -121,8 +121,11 @@ export default function MainComponent(props) {
     setLoader(false);
     let resultData =[];
    const failed = getGraphDataForTransactions("TransactionsFailed", response , "dateString" , "failedTransactions");
+   console.log(failed);
    resultData.push(failed);
    const success = getGraphDataForTransactions("TransactionSuccess", response , "dateString" , "successfullTransactions");
+   console.log(success);
+
    resultData.push(success);
 console.log(resultData);
    setNoOfTransactions(resultData);
@@ -272,12 +275,6 @@ console.log(resultData);
   }
   let resultData = []
   response.map(items => {
-    if(yComponent === "failedTransactions")
-    resultData.push({
-      x: items[xComponent],
-      y: 2
-    })
-    else
     resultData.push({
       x: items[xComponent],
       y: items[yComponent]
@@ -498,7 +495,7 @@ const TableData = (props) => {
             {props.graphNo === 4 ? <Network>{item.address}</Network> : <Network>{item.function}</Network>}
           </Div>
           <Div>
-            <ContractFrom>Network:</ContractFrom>
+            <NetworkHead>Network:</NetworkHead>
             <SubNetwork><Network>{item.network}</Network></SubNetwork>
             <MobileNetwork>{item.network}</MobileNetwork>
           </Div>
@@ -684,6 +681,16 @@ const ToolTipIcon = styled.img`
 `;
 const ContractFrom = styled.div`
   width: 26%;
+  color: #102C78;
+  font-size: 14px;
+  font-weight: 600;
+  @media (min-width: 300px) and (max-width: 767px) {
+    word-break: break-all;
+    white-space: nowrap;
+  }
+`;
+const NetworkHead = styled.div`
+  width: 20.5%;
   color: #102C78;
   font-size: 14px;
   font-weight: 600;
