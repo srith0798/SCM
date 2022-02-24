@@ -395,7 +395,7 @@ export default function MainComponent(props) {
                         />
                         <br />
                         <TransactionHash>{selected?.address}</TransactionHash>
-                        <Image src="/images/arrrow.svg" />
+                        <Image src="/images/Arrrow.svg" />
                       </DropDown>
                       {isSetOpen ? (
                         <Box sx={styles}>
