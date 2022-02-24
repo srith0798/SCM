@@ -103,7 +103,8 @@ export default function MainComponent(props) {
       setTransactionOverTimeSelect(event.target.value)
       setDropDownValue(event.target.value)
     }
-    
+    else
+      setTransactionOverTimeSelect(7)
     const req = {
       address: address ? address : selected.address,
       numberOfDays: event?.target?.value || 7
@@ -133,6 +134,8 @@ console.log(resultData);
       setGasUsedSelect(event.target.value)
       setDropDownValue(event.target.value)
     }
+    else
+      setGasUsedSelect(7)
     const req = {
       address: address ? address : selected.address,
       numberOfDays: event?.target?.value || 7
@@ -158,6 +161,8 @@ console.log(resultData);
       setActiveUserSelect(event.target.value)
       setDropDownValue(event.target.value)
     }
+    else
+      setActiveUserSelect(7)
     const req = {
       address: address ? address : selected.address,
       numberOfDays: event?.target?.value || 7
@@ -182,6 +187,8 @@ console.log(resultData);
       setTopCallersSelect(event.target.value)
       setDropDownValue(event.target.value)
     }
+    else
+      setTopCallersSelect(7)
     const req = {
       address: address ? address : selected.address,
       numberOfDays: event?.target?.value || 7
@@ -205,6 +212,8 @@ console.log(resultData);
       setTopFunctionCallsSelect(event.target.value)
       setDropDownValue(event.target.value)
     }
+    else
+      setTopFunctionCallsSelect(7)
     const req = {
       address: address ? address : selected.address,
       numberOfDays: event?.target?.value || 7
@@ -300,7 +309,11 @@ console.log(resultData);
   }
   const changeContract = (item) =>{
     selectContract(item);
-    getContractNames(item.address);
+    getTransactionAnalytics(item.address)
+    getGasUsedAnalytics(item.address)
+    getActiveUsersAnalytics(item.address)
+    getTopCallers(item.address)
+    getTopFunctionCalls(item.address)
     setOpen((prev) => !prev);
   }
 
