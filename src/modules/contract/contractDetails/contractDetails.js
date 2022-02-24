@@ -607,7 +607,7 @@ const DetailsSection = styled.div`
   margin-top: 2.25rem;
   overflow-x: auto;
   @media (min-width: 300px) and (max-width: 768px) {
-    height: 500px;
+    height: auto;
     overflow: scroll;
     overflow-y: hidden;
     width: 100%;
@@ -700,6 +700,9 @@ const TableHeading = styled.div`
   color: #102c78;
   max-width: 18.75rem;
   width: 100%;
+  @media (max-width: 767px) {
+    max-width: 13.75rem;
+  }
 `;
 
 const PopUp = styled.div`
