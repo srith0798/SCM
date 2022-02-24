@@ -549,6 +549,7 @@ const CommonInputDiv = styled.div`
   border-bottom: 0.031rem #eaf1ec solid;
   padding: 0.813rem;
   display: flex;
+  max-width: fit-content;
   justify-content: space-between;
   @media (min-width: 300px) and (max-width: 768px) {
     column-gap: 0px;
@@ -687,7 +688,7 @@ const StackContainer = styled.div`
   height: 9.375rem;
 `;
 const BackgroundChanger = styled.div`
-  width: 100%;
+  width: 50%;
   height: 106px;
   background-repeat: no-repeat;
   background: #f7f8fd 0% 0% no-repeat padding-box;
@@ -702,8 +703,8 @@ const BackgroundChanger = styled.div`
 const FlexDiv = styled.div`
   display: flex;
   justify-content: space-between;
-  padding-right: 10%;
-  padding-left: 10%;
+  width: 100%;
+  max-width: 300px;
 `;
 const LastContainer = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
