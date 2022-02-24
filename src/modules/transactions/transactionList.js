@@ -700,7 +700,7 @@ const MainContainer = styled.div`
   padding-bottom: 6rem;
 
   @media (min-width: 340px) and (max-width: 1024px) {
-    padding: 3.125rem 1.5rem 7rem 1.5rem;
+    padding: 3.125rem 1.5rem 11rem 1.5rem;
   }
 `;
 const TransactionBox = styled.div`

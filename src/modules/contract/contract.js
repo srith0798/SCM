@@ -391,8 +391,8 @@ const PaginationDiv = styled.div`
 
 const IconDiv = styled.div`
   display: flex;
-  @media (max-width: 768px) {
-    margin-bottom: 26px;
+  @media (max-width: 767px) {
+    // margin-bottom: 26px;
   }
   @media (max-width: 414px) {
     margin-bottom: 0px;
@@ -406,9 +406,9 @@ const RefreshImage = styled.img`
     -moz-box-shadow: 3px 10px 21px -8px rgb(0 0 0 / 75%);
     transition: box-shadow 0.3s ease-in-out 0s;
   }
-  @media (min-width: 375px) and (max-width: 768px) {
+  @media (min-width: 375px) and (max-width: 767px) {
     margin-right: 0.325rem;
-    margin-top: 28px;
+    margin-top: 51px;
     margin-left: 3px;
   }
   @media (max-width: 414px) {
@@ -460,7 +460,7 @@ const MainHeading = styled.div`
     display: flex;
     flex-direction: row;
   }
-  @media (max-width: 414px) {
+  @media (max-width: 425px) {
     display: flex;
     flex-direction: column;
     padding-top: 7px;
@@ -513,16 +513,9 @@ const Button = styled.button`
   height: 2.125rem;
   font-size: 0.875rem;
   @media (max-width: 768px) {
-    margin-top: 28px;
   }
-  @media (max-width: 375px) {
-    margin-top: 51px;
-    width: 35px;
-    font-size: 0rem;
-    height: 33px;
-    background-position: 0.6rem;
-  }
-  @media (max-width: 414px) {
+
+  @media (max-width: 425px) {
     margin-top: 51px;
     width: 35px;
     font-size: 0rem;
