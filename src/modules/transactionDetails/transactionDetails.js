@@ -283,11 +283,14 @@ export default function TransactionDetails() {
             <TimeStampDiv>
               <Heading>Timestamp</Heading>
               <SubHead>
-                {moment(row.createdOn).fromNow() +
+                {moment(row.createdOn).format('lll') + " UTC "+ 
+                moment(Number(row.createdOn) * 1000).utc().format("hh:mm ") }
+                
+                {/* {moment(row.createdOn).fromNow() +
                   " " +
                   "(" +
                   new Date(row.createdOn).toLocaleString("en-US") +
-                  ")"}
+                  ")"} */}
               </SubHead>
             </TimeStampDiv>
             <CommonDiv>
@@ -306,7 +309,7 @@ export default function TransactionDetails() {
               <Row>
                 <Heading>Gas Used</Heading>
                 <SubHead>
-                  {row.gasUsed} ({((row.gas / row.gasUsed) * 100).toFixed(2)})%
+                  {new Intl.NumberFormat().format(row.gasUsed)} ({((row.gas / row.gasUsed) * 100).toFixed(2)})%
                 </SubHead>
               </Row>
             </CommonDiv>

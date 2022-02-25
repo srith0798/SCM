@@ -128,7 +128,9 @@ export default function ContractDetails(props) {
   };
   const [addTag, setAddTag] = useState(false);
   const Open = () => {
+   
     setAddTag(true);
+    
   };
   const Close = () => {
     setAddTag(false);
@@ -291,6 +293,7 @@ export default function ContractDetails(props) {
                     )}
 
                     {addTag && (
+                     
                       <AddTags
                         click={Close}
                         address={address}
