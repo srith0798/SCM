@@ -123,6 +123,10 @@ const SpaceBetween = styled.div`
   justify-content: space-between;
   padding-bottom: 4px;
   padding-top: 3px;
+  @media (min-width: 768px) and (max-width: 1200px) {
+    padding-bottom: 7px;
+  padding-top: 7px;
+  }
 `;
 const Button = styled.button`
   border: 1px solid white;
