@@ -892,7 +892,7 @@ const Label = styled.div`
 const BackImage = styled.img`
   cursor: pointer;
   margin-left: 4px;
-  @media (min-width: 300px) and (max-width: 1024px) {
-    display: none;
+  @media (min-width: 300px) and (max-width: 768px) {
+     display: none;
   }
 `;

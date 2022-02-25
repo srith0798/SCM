@@ -434,19 +434,12 @@ const MainContainer = styled.div`
 const RowContainer = styled.div`
   display: flex;
   flex-flow: row nowrap;
-
-  @media (min-width: 768px) and (max-width: 1128px) {
-    column-gap: 152px;
-  }
 `;
 
 const RowTag = styled.div`
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
-  @media (min-width: 768px) and (max-width: 1128px) {
-    column-gap: 92px;
-  }
 `;
 
 const MainHeading = styled.div`
@@ -576,26 +569,26 @@ const TableContainer = styled.div`
 const Div = styled.div`
   padding: 0.75rem;
   border-bottom: 0.063rem solid #e3e7eb;
-  @media (min-width: 300px) and (max-width: 1200px) {
-    width: 1232px;
+  width: 100%;
+  min-width: 130px;
+  white-space: nowrap;
+  @media (min-width: 300px) and (max-width: 750px) {
+    width: 100%;
+    min-width: 180px;
   }
-  @media (min-width: 300px) and (max-width: 767px) {
-    width: 970px !important;
-  }
+  // @media (min-width: 300px) and (max-width: 767px) {
+  //   width: 970px !important;
+  // }
 `;
 const ColumnOne = styled.div`
   font-size: 0.875rem;
   font-weight: 600;
   color: #102c78;
   width: 100%;
-  max-width: 18.75rem;
-  min-width: 180px;
-  @media (min-width: 300px) and (max-width: 767px) {
-    margin-left: 15px;
-  }
-  @media (min-width: 768px) and (max-width: 1128px) {
-    max-width: 9.75rem;
-    min-width: 26px;
+  min-width: 130px;
+  @media (min-width: 300px) and (max-width: 750px) {
+    width: 100%;
+    min-width: 180px;
   }
 `;
 
@@ -611,14 +604,14 @@ const ColOne = styled.div`
 
 const ColumnSecond = styled.div`
   font-size: 0.875rem;
-  min-width: 180px;
+  min-width: 130px;
   font-weight: 400;
   color: #191919;
   width: 100%;
   white-space: nowrap;
-  max-width: 18.75rem;
-  @media (min-width: 300px) and (max-width: 767px) {
-    margin-left: 16px;
+  @media (min-width: 300px) and (max-width: 750px) {
+    width: 100%;
+    min-width: 180px;
   }
 `;
 const TagCol = styled.div`

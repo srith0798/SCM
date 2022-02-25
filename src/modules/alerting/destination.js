@@ -106,7 +106,8 @@ const Div = styled.div`
 `;
 const ButtonIcon = styled.img`
   margin-right: 0.25rem;
-  width: 1.3rem;
+  margin-bottom: 3px;
+  width: 1.4rem;
 `;
 const LastDiv = styled.div`
   overflow-y: hidden;
@@ -149,8 +150,8 @@ const ColumnOne = styled.div`
   padding-left: 15px;
 `;
 const Button = styled.div`
-  width: 6rem;
-  height: 2.5rem;
+  width: 6.3rem;
+  height: 2.6rem;
   background: #ffffff 0% 0% no-repeat padding-box;
   border: 1px solid #416be0;
   border-radius: 0.375rem;
@@ -160,6 +161,7 @@ const Button = styled.div`
   color: #1d3c93;
   font-size: 0.875rem;
   cursor: pointer;
+  padding-top: 4px;
 `;
 const ColumnTwo = styled.div`
   display: flex;

@@ -2,6 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import Dialog from "@mui/material/Dialog";
 import { makeStyles } from "@material-ui/styles";
+import { PrismAsyncLight as SyntaxHighlighter } from 'react-syntax-highlighter';
+import json from 'react-syntax-highlighter/dist/esm/languages/hljs/json';
+import { base16AteliersulphurpoolLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
+SyntaxHighlighter.registerLanguage('json', json);
 
 const useStyles = makeStyles(() => ({
   dialogBox: {
@@ -21,7 +25,9 @@ export default function ContractAbi(props) {
               <Add>Contract ABI</Add>
               <img alt="" src="/images/close.svg" onClick={props.click} />
             </SubContainer>
-            <Div>{props.data}</Div>
+            <SyntaxHighlighter language="json" style={base16AteliersulphurpoolLight} wrapLongLines={true} customStyle = {{  backgroundColor: "#f0f2fc"}}>
+            {props.data}
+            </SyntaxHighlighter>
           </Container>
         </MainContainer>
       </Dialog>

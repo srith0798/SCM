@@ -128,6 +128,7 @@ const GraphSize = styled.div`
   margin-top: 1.29rem;
   margin-bottom: 1.2rem;
   background: transparent;
+  text-align: center;
   @media (max-width: 767px) {
     height: 80px;
   }

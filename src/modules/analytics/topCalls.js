@@ -72,7 +72,9 @@ const  topFunctionCallheaders = [
                </DataColumn>
                <Count>{item.count}</Count>
                </TableRow>
-                   )):<>{props.error}</>}
+                   )):<>
+                   <SubTable>{props.error}</SubTable>
+                   </>}
               </Table>
         </GraphContainer>
       </Row>
@@ -144,7 +146,12 @@ const Table =styled.div`
   height:30rem;
   overflow-y:scroll;
   margin-top:1rem;
-`
+  //text-align: center;
+`;
+
+const SubTable = styled.div`
+text-align: center;
+`;
 const ContractFrom = styled.div`
   width: 26%;
   color: #102C78;
