@@ -175,6 +175,7 @@ export default function TransactionList() {
     });
   };
   const changePage = (value) => {
+    console.log("sdd.", value);
     setValueCheck(value.selected);
     if(setFrom>0 || select === 2 || select === 3){
       filterSearch(Math.ceil(value.selected * countToggle),

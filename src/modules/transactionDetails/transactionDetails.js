@@ -17,11 +17,15 @@ export default function TransactionDetails() {
   const [statusToolTip, setstatusToolTip] = React.useState(false);
   const [copyToolTip, setcopyToolTip] = React.useState(false);
   const [row, setRow] = React.useState([]);
-
   const [activeButton, setActiveButton] = React.useState("Overview");
   const [from, setFrom] = React.useState("");
   const [to, setTo] = React.useState("");
   const [input, setInput] = React.useState("");
+  const [showInputData, setShowInputData] = React.useState(false);
+  const [showOutputData, setShowOutputData] = React.useState(false);
+
+  const wei = 0.000000001;
+
   const handleViewClick = (e) => {
     setActiveButton(e.target.id);
   };
@@ -306,24 +310,26 @@ export default function TransactionDetails() {
               <Row>
                 <Heading>Gas Used</Heading>
                 <SubHead>
-                  {row.gasUsed} ({((row.gas / row.gasUsed) * 100).toFixed(2)})%
+                  {row.gasUsed || 0 } ({((row.gas / row.gasUsed || 0) * 100).toFixed(2) || 0})%
                 </SubHead>
               </Row>
             </CommonDiv>
             <GasPriceDiv>
               <Heading>Gas Price</Heading>
-              <SubHead>{row.gasPrice} XDC</SubHead>
+              <SubHead>
+                {row.gasPrice || 0} XDC ({row.gasPrice * wei || 0} Gwei)
+              </SubHead>
             </GasPriceDiv>
             <FeeDiv>
               <Heading>Transaction Fee</Heading>
-              <SubHead></SubHead>
+              <SubHead>{row.gasPrice * row.gasUsed || 0} XDC</SubHead>
             </FeeDiv>
             <RawInputDiv>
               <Heading>Raw input</Heading>
               <SubHead>
                 <TransactionNumber>{input}</TransactionNumber>
                 <CopyToClipboard
-                  text={" 0x01173a740000000000…f28e0b4fae4a3bfee7dc52"}
+                  text={input}
                   onCopy={() => setcopyToolTip(true)}
                 >
                   <Tooltip title={copyToolTip ? "copied" : "copy to clipboard"}>
@@ -343,7 +349,7 @@ export default function TransactionDetails() {
             <CommonDiv>
               <Row>
                 <Heading>Input:</Heading>
-                <SubHeadBlue>
+                <SubHeadBlue onClick={() => setShowInputData(!showInputData)}>
                   view data
                   <img
                     style={{ marginLeft: "2px" }}
@@ -352,6 +358,28 @@ export default function TransactionDetails() {
                   />
                 </SubHeadBlue>
               </Row>
+
+              {showInputData === true ? (
+                <DataDivContainer>
+                  <BackgroundChanger>
+                    <InputDataDiv>
+                      <SubHeadBlue>
+                        {"{" +
+                          "\n" +
+                          '"_to"' +
+                          ":" +
+                          '"' +
+                          row.input +
+                          '"' +
+                          "\n" +
+                          "}"}
+                      </SubHeadBlue>
+                    </InputDataDiv>
+                  </BackgroundChanger>
+                </DataDivContainer>
+              ) : (
+                ""
+              )}
             </CommonDiv>
             <CommonDiv>
               <Row>
@@ -536,6 +564,8 @@ const SubHeadBlue = styled.div`
   font-size: 0.85rem;
   display: flex;
   color: #416be0;
+  cursor: pointer;
+  white-space: pre;
 `;
 const CommonDiv = styled.div`
   border-bottom: 0.031rem #eaf1ec solid;
@@ -688,6 +718,15 @@ const StackContainer = styled.div`
   margin-top: 1.25rem;
   height: 9.375rem;
 `;
+
+const DataDivContainer = styled.div`
+  background: #ffffff 0% 0% no-repeat padding-box;
+  background-repeat: no-repeat;
+  border-radius: 0.375rem;
+  padding: 1rem;
+  height: 8rem;
+`;
+
 const BackgroundChanger = styled.div`
   width: 50%;
   height: 106px;
@@ -707,6 +746,14 @@ const FlexDiv = styled.div`
   width: 100%;
   max-width: 300px;
 `;
+
+const InputDataDiv = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  overflow-y: scroll;
+`;
+
 const LastContainer = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
   border-radius: 0.375rem;
