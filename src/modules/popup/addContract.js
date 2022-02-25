@@ -20,6 +20,7 @@ export default function AddContract(props) {
   const [address, setAddress] = React.useState("");
   const [verifyAddress, setVerifyAddress] = React.useState("");
   const [loader, setLoader] = React.useState(false);
+  const [error,setError]=useState("")
 
   const checkAddress = async () => {
     setLoader(true);
@@ -46,6 +47,7 @@ export default function AddContract(props) {
     );
     setLoader(false);
     if (error) {
+      setError(error)
       utility.apiFailureToast(error);
       return;
     }
@@ -101,6 +103,7 @@ export default function AddContract(props) {
               onChange={(e) => setAddress(e.target.value)}
               onKeyDown={(e) => handleEnterKey(e)}
             />
+            <ErrorTag>{error}</ErrorTag>
             {hideStep && (
               <Text>
                 1. Go to XDC Observatory <br></br>
@@ -159,6 +162,12 @@ const AddressImport = styled.div`
 const ImportBox = styled.div`
   background-color: #f0f2fc;
   width: 100%;
+`;
+const ErrorTag= styled.div`
+  color:red;
+  font-size: 16px;
+  padding: 0px 0px 8px 28px;
+  margin-bottom: 0px;
 `;
 const IconImport = styled.div`
   padding: 8px 8px 0px 8px;
@@ -220,7 +229,7 @@ const Input = styled.input`
   width: 100%;
   background-color: #f0f2fc;
   height: 30px;
-  margin-bottom: 15px;
+  margin-bottom: 5px;
   margin-top: 15px;
   font-size: 0.8rem;
   font-weight: 600;
