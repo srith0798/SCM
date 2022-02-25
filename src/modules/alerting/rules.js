@@ -41,7 +41,7 @@ export default function Rules() {
                   paddingTop: " 9px",
                   fontSize: "14px",
                   borderBottom:
-                    activeButton === "Rules" ? "2px solid #3163F0" : "",
+                    activeButton === "Rules" ? "0.2rem solid #3163F0" : "",
                 }}
               >
                 <img
@@ -65,7 +65,7 @@ export default function Rules() {
                   paddingTop: " 9px",
                   fontSize: "14px",
                   borderBottom:
-                    activeButton === "History" ? "0.125rem solid #3163F0" : "",
+                    activeButton === "History" ? "0.2rem solid #3163F0" : "",
                 }}
               >
                 <img
@@ -91,7 +91,7 @@ export default function Rules() {
                   paddingTop: " 9px",
                   borderBottom:
                     activeButton === "Destination"
-                      ? "0.125rem solid #3163F0"
+                      ? "0.2rem solid #3163F0"
                       : "",
                 }}
               >
@@ -131,38 +131,34 @@ export default function Rules() {
                       </Tooltip>
                     </ColumnOne>
                     <ColumnOne>
-                      <Subcolumn3>
-                        Address
-                        <Tooltip
-                          open={addressToolTip}
-                          onOpen={() => setaddressToolTip(true)}
-                          onClose={() => setaddressToolTip(false)}
-                          disableFocusListener
-                          title="Wallet address"
-                        >
-                          <ToolTipIcon
-                            onClick={() => setaddressToolTip(!addressToolTip)}
-                            src="/images/tool-tip.svg"
-                          />
-                        </Tooltip>
-                      </Subcolumn3>
+                      Address
+                      <Tooltip
+                        open={addressToolTip}
+                        onOpen={() => setaddressToolTip(true)}
+                        onClose={() => setaddressToolTip(false)}
+                        disableFocusListener
+                        title="Wallet address"
+                      >
+                        <ToolTipIcon
+                          onClick={() => setaddressToolTip(!addressToolTip)}
+                          src="/images/tool-tip.svg"
+                        />
+                      </Tooltip>
                     </ColumnOne>
                     <ColumnOne>
-                      <SubColumn2>
-                        Network
-                        <Tooltip
-                          open={networkToolTip}
-                          onOpen={() => setnetworkToolTip(true)}
-                          onClose={() => setnetworkToolTip(false)}
-                          disableFocusListener
-                          title="The executing blockchain network"
-                        >
-                          <ToolTipIcon
-                            onClick={() => setnetworkToolTip(!networkToolTip)}
-                            src="/images/tool-tip.svg"
-                          />
-                        </Tooltip>
-                      </SubColumn2>
+                      Network
+                      <Tooltip
+                        open={networkToolTip}
+                        onOpen={() => setnetworkToolTip(true)}
+                        onClose={() => setnetworkToolTip(false)}
+                        disableFocusListener
+                        title="The executing blockchain network"
+                      >
+                        <ToolTipIcon
+                          onClick={() => setnetworkToolTip(!networkToolTip)}
+                          src="/images/tool-tip.svg"
+                        />
+                      </Tooltip>
                     </ColumnOne>
                     <ColumnOne>
                       Alert Type
@@ -185,12 +181,12 @@ export default function Rules() {
                 </NewDiv>
                 <NewDiv>
                   <RowData1 onClick={redirectToAlertDetails}>
-                    <ColumnTwo>App_Transactions</ColumnTwo>
-                    <ColumnTwo>xdcabfe…8b3c</ColumnTwo>
-                    <ColumnTwo>XDC Mainnet</ColumnTwo>
+                    <ColumnTwo>App_Transactions</ColumnTwo>{" "}
                     <ColumnTwo>
-                      <SubColumn>Sucessfull</SubColumn>
+                      <BackgroundChanger>xdcabfe…8b3c </BackgroundChanger>
                     </ColumnTwo>
+                    <ColumnTwo>XDC Mainnet</ColumnTwo>
+                    <ColumnTwo>Sucessfull</ColumnTwo>
                     <ColumnTwo style={{ fontSize: "14px", color: "#00A58C" }}>
                       Enabled
                     </ColumnTwo>
@@ -208,11 +204,11 @@ export default function Rules() {
                 <NewDiv>
                   <RowData1 onClick={redirectToAlertDetails}>
                     <ColumnTwo>App_Transactions</ColumnTwo>
-                    <ColumnTwo>xdcabfe…8b3c</ColumnTwo>
-                    <ColumnTwo>XDC Mainnet</ColumnTwo>
                     <ColumnTwo>
-                      <SubColumn>Failed</SubColumn>{" "}
+                      <BackgroundChanger>xdcabfe…8b3c </BackgroundChanger>
                     </ColumnTwo>
+                    <ColumnTwo>XDC Mainnet</ColumnTwo>
+                    <ColumnTwo>Failed</ColumnTwo>
                     <ColumnTwo
                       style={{ fontSize: "0.875rem", color: "#00A58C" }}
                     >
@@ -244,8 +240,8 @@ const TableContainer = styled.div`
   background-color: #ffffff;
   border-radius: 0.375rem;
   width: 100%;
-  height: 15rem;
-  padding: 0.625rem;
+  height: 20rem;
+  padding: 1rem;
   overflow-y: hidden;
   @media (min-width: 300px) and (max-width: 700px) {
     width: 100%;
@@ -284,28 +280,10 @@ const Container = styled.div`
 `;
 const RowData = styled.div`
   display: flex;
-  @media (min-width: 300px) and (max-width: 768px) {
-    column-gap: 84px;
-  }
-  @media (min-width: 820px) and (max-width: 1200px) {
-    column-gap: 135px !important;
-  }
-  @media (min-width: 768px) and (max-width: 1200px) {
-    column-gap: 97px;
-  }
 `;
 
 const RowData1 = styled.div`
   display: flex;
-  @media (min-width: 300px) and (max-width: 768px) {
-    column-gap: 84px;
-  }
-  @media (min-width: 820px) and (max-width: 1200px) {
-    column-gap: 133px !important;
-  }
-  @media (min-width: 768px) and (max-width: 1200px) {
-    column-gap: 97px;
-  }
 `;
 const ToolTipIcon = styled.img`
   width: 0.75rem;
@@ -320,11 +298,22 @@ const ColumnOne = styled.div`
   font-weight: 600;
   color: #102c78;
   width: 100%;
-  max-width: 18.75rem;
+  min-width: 130px;
   cursor: pointer;
-  @media (min-width: 300px) and (max-width: 768px) {
-    margin-right: 32px;
+  @media (min-width: 300px) and (max-width: 1024px) {
+    width: 100%;
+    min-width: 160px;
   }
+`;
+const BackgroundChanger = styled.div`
+  width: fit-content;
+  height: auto;
+  background-repeat: no-repeat;
+  background: #eaefff 0% 0% no-repeat padding-box;
+  border-radius: 6px;
+  opacity: 1;
+  padding: 1px 6px 1px 4px;
+  cursor: pointer;
 `;
 const ColumnTwo = styled.div`
   display: flex;
@@ -332,45 +321,19 @@ const ColumnTwo = styled.div`
   font-size: 0.875rem;
   color: #191919;
   width: 100%;
-  max-width: 18.75rem;
-  @media (min-width: 300px) and (max-width: 768px) {
-    margin-right: 20px;
+  min-width: 130px;
+  @media (min-width: 300px) and (max-width: 1024px) {
+    width: 100%;
+    min-width: 160px;
   }
 `;
-const SubColumn = styled.div`
-  @media (min-width: 820px) and (max-width: 1200px) {
-    width: 39px;
-  }
+const SubColumn = styled.div``;
 
-  @media (min-width: 768px) and (max-width: 1200px) {
-    width: 39px;
-  }
-`;
-const Subcolumn3 = styled.div`
-  @media (min-width: 820px) and (max-width: 1200px) {
-    display: flex;
-    margin-right: 19px !important;
-  }
-  @media (min-width: 768px) and (max-width: 1200px) {
-    display: flex;
-    margin-right: 25px !important;
-  }
-`;
-const SubColumn2 = styled.div`
-  @media (min-width: 820px) and (max-width: 1200px) {
-    display: flex;
-    margin-right: 10px !important;
-  }
-  @media (min-width: 768px) and (max-width: 1200px) {
-    display: flex;
-    margin-right: 10px;
-  }
-`;
 const MainContainer = styled.div`
   background: #ecf0f7 0% 0% no-repeat padding-box;
   opacity: 1;
   width: 100%;
-  padding: 4.5rem;
+  padding: 3.5rem;
   height: 100vh;
   @media (min-width: 340px) and (max-width: 768px) {
     padding: 38px 20px 20px 20px;

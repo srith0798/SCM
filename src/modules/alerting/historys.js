@@ -9,22 +9,19 @@ export default function Historys() {
       <DetailBox>
         <NewDiv>
           <RowContainer>
-            <ColumnOne>
+            <ColumnOne style={{ paddingLeft: "2px" }}>
               Alert Type
               <Tooltip disableFocusListener title="Transaction status">
                 <ToolTipIcon src="/images/tool-tip.svg" />
               </Tooltip>
             </ColumnOne>
             <ColumnOne>
-            <ContractCol>
               Contract
               <Tooltip disableFocusListener title="Name of the smart contract">
                 <ToolTipIcon src="/images/tool-tip.svg" />
               </Tooltip>
-              </ContractCol>
             </ColumnOne>
             <ColumnOne>
-            <TxCol>
               Tx Hash
               <Tooltip
                 disableFocusListener
@@ -32,10 +29,8 @@ export default function Historys() {
               >
                 <ToolTipIcon src="/images/tool-tip.svg" />
               </Tooltip>
-              </TxCol>
             </ColumnOne>
             <ColumnOne>
-            <NetworkCol>
               Network
               <Tooltip
                 disableFocusListener
@@ -43,10 +38,8 @@ export default function Historys() {
               >
                 <ToolTipIcon src="/images/tool-tip.svg" />
               </Tooltip>
-              </NetworkCol>
             </ColumnOne>
             <ColumnOne>
-            <WhenCol>
               When
               <Tooltip
                 disableFocusListener
@@ -54,7 +47,6 @@ export default function Historys() {
               >
                 <ToolTipIcon src="/images/tool-tip.svg" />
               </Tooltip>
-              </WhenCol>
             </ColumnOne>
           </RowContainer>
         </NewDiv>
@@ -122,28 +114,9 @@ const Div = styled.div`
 `;
 const RowData = styled.div`
   display: flex;
-  @media (min-width: 300px) and (max-width: 768px) {
-    column-gap: 54px;
-  }
-  @media (min-width: 820px) and (max-width: 1200px) {
-    column-gap: 72px !important;
-  }
-  @media (min-width: 768px) and (max-width: 1200px) {
-    column-gap: 97px;
-  }
 `;
 const RowContainer = styled.div`
   display: flex;
-  @media (min-width: 300px) and (max-width: 768px) {
-    column-gap: 77px;
-  }
-  @media (min-width: 768px) and (max-width: 1200px) {
-    column-gap: 120px;
-  }
-  @media (min-width: 820px) and (max-width: 1200px) {
-    column-gap: 120px !important;
-  }
-
 `;
 const ToolTipIcon = styled.img`
   width: 0.75rem;
@@ -157,10 +130,11 @@ const ColumnOne = styled.div`
   font-weight: 600;
   color: #102c78;
   width: 100%;
-  max-width: 18.75rem;
-  @media (min-width: 300px) and (max-width: 768px) {
-    margin-right: 18px;
-    margin-left: 5px;
+  min-width: 160px;
+
+  @media (min-width: 300px) and (max-width: 767px) {
+    width: 100%;
+    min-width: 181px;
   }
 `;
 
@@ -171,35 +145,9 @@ const ColumnTwo = styled.div`
   color: #191919;
   font-size: 0.875rem;
   width: 100%;
-  max-width: 18.75rem;
-`;
-
-const ContractCol = styled.div`
-@media (min-width: 768px) and (max-width: 1128px) {
-  margin-left: 13px;
-}
-
-`;
-
-const TxCol = styled.div`
-@media (min-width: 768px) and (max-width: 1128px) {
-  margin-left: -7px;
-}
-
-`;
-
-const NetworkCol = styled.div`
-@media (min-width: 768px) and (max-width: 1128px) {
-  margin-left: -8px;
-}
-
-`;
-
-
-
-const WhenCol = styled.div`
-@media (min-width: 768px) and (max-width: 1128px) {
-  margin-left: -33px;
-}
-
+  min-width: 160px;
+  @media (min-width: 300px) and (max-width: 767px) {
+    width: 100%;
+    min-width: 180px;
+  }
 `;
