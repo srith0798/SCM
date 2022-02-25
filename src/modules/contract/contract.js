@@ -289,7 +289,7 @@ export default function Contract(props) {
             </PlaceHolderContainer> : "" )
           } */}
       </TableContainer>
-      <PageVerifyCheck check={address.length}>
+      <PageVerifyCheck check={page}>
         <PaginationDiv>
           <ReactPaginate
             previousLabel={"<"}
@@ -309,7 +309,7 @@ export default function Contract(props) {
 }
 
 const PageVerifyCheck = styled.div`
-  display: ${(props) => (props.check <= 10 ? "none" : "block")};
+  display: ${(props) => (props.check === 1 ? "none" : "block")};
 `;
 
 const FinanceTag = styled.div`

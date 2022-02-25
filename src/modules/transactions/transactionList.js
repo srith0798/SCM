@@ -14,7 +14,7 @@ import utility from "../../utility";
 import Filter from "../popup/filter";
 import "moment-timezone";
 import ReactPaginate from "react-paginate";
-import moment from 'moment';
+import moment from "moment";
 
 export default function TransactionList() {
   const [state, setState] = useState(true);
@@ -33,7 +33,6 @@ export default function TransactionList() {
   let getTo = new Date(toInput).toUTCString();
   let setTo = new Date(getTo).getTime();
 
-  let range = { min: setFrom, max: setTo };
   const handleClickOpen = () => {
     isOpen(true);
   };
@@ -177,14 +176,19 @@ export default function TransactionList() {
   };
   const changePage = (value) => {
     setValueCheck(value.selected);
-    if (selected.length > 0) {
+    if(setFrom>0 || select === 2 || select === 3){
+      filterSearch(Math.ceil(value.selected * countToggle),
+      countToggle);
+    }
+    else if(selected.length > 0) {
       getTransaction(
-        selected,
-        Math.ceil(value.selected * countToggle),
-        countToggle
-      );
+            selected,
+            Math.ceil(value.selected * countToggle),
+            countToggle
+          );
     }
   };
+  
   const [toggle, setToggle] = React.useState({
     transactionHash: true,
     status: true,
@@ -200,36 +204,61 @@ export default function TransactionList() {
     if (selected.length > 0) {
       getTransaction(selected);
     } else getContractNames();
-  }, [select, countToggle]);
+  }, [countToggle]);
 
   const [selectDrop, setSelectDrop] = React.useState([]);
 
-  const filterSearch = async () => {
+  const filterSearch = async (skip = 0, limit = countToggle) => {
     let requestData = [];
-    if (select === 2 || select === 3)
+    if (setFrom > 0 && (select === 2 || select === 3))
       requestData = {
-        skip: 0,
-        limit: countToggle,
+        skip: skip,
+        limit: limit,
+        contractAddress: selected ? selected : defaultAddress,
+        status: select === 2 ? true : false,
+        date : {
+          fromDate: setFrom,
+          toDate: setTo
+       },
+      };
+    else if (setFrom > 0 && select === 1)
+      requestData = {
+        skip: skip,
+        limit: limit,
+        contractAddress: selected ? selected : defaultAddress,
+        status: "",
+        date : {
+          fromDate: setFrom,
+          toDate: setTo
+       },
+      };
+    else if ((select === 2 || select === 3) && setFrom === 0)
+      requestData = {
+        skip: skip,
+        limit: limit,
+        contractAddress: selected ? selected : defaultAddress,
         status: select === 2 ? true : false,
       };
     else
       requestData = {
-        skip: 0,
-        limit: countToggle,
-        contractAddress: defaultAddress,
+        skip: skip,
+        limit: limit,
+        contractAddress: selected ? selected : defaultAddress,
       };
     try {
       setLoader(true);
-      const response = await ContractsService.getTransactionsList(requestData);
+      const response = await ContractsService.getTransactionsList(
+        requestData
+      );
       setLoader(false);
-      if (setFrom > 0 && setTo > 0) {
-        let result = response.transactionList.filter((row) => {
-          return row.createdOn <= range.max && row.createdOn >= range.min;
-        });
-        setAddress(result);
+      let pageCount = response.totalCount;
+      if (pageCount % countToggle === 0) {
+        setPage(parseInt(pageCount / countToggle));
       } else {
-        setAddress(response.transactionList);
+        setPage(parseInt(pageCount / countToggle) + 1);
       }
+      setAddress(response.transactionList);
+      // }
     } catch (e) {
       console.log(e);
       setLoader(false);
@@ -243,7 +272,7 @@ export default function TransactionList() {
   }
 
   function setfunction(val) {
-    let trim = val.split("(");
+    let trim = val?.split("(");
     return trim[0];
   }
 
@@ -464,8 +493,8 @@ export default function TransactionList() {
 
           <div>
             {(input === "" ? address : searchRow).map((data, index) => {
-              const status = setStatus(data.status);
-              const func = setfunction(data.function);
+              const status = setStatus(data?.status);
+              const func = setfunction(data?.function ? data.function : "");
               return (
                 <Div>
                   <RowData
@@ -481,13 +510,17 @@ export default function TransactionList() {
                       </ColumnSecond>
                     )}
 
-                    
-                    {(status!="Success")?(toggle.status && <ColumnSecond style={{color:"red"}}>
-                    {status}
-                    </ColumnSecond>)
-                    :(toggle.status && <ColumnSecond style={{color:"green"}}>
-                      {status}
-                      </ColumnSecond>)}
+                    {status != "Success"
+                      ? toggle.status && (
+                          <ColumnSecond style={{ color: "red" }}>
+                            {status}
+                          </ColumnSecond>
+                        )
+                      : toggle.status && (
+                          <ColumnSecond style={{ color: "green" }}>
+                            {status}
+                          </ColumnSecond>
+                        )}
 
                     {toggle.function && <ColumnSecond>{func}</ColumnSecond>}
                     {toggle.contracts && (
@@ -514,10 +547,8 @@ export default function TransactionList() {
                     )}
 
                     {toggle.when && (
-                     
                       <ColumnSecond>
-                       {moment(data.createdOn).format('lll')}
-                        {/* {new Date(data.createdOn).toLocaleString("en-US")} */}
+                        {moment(data.timestamp * 1000).format("lll")}
                       </ColumnSecond>
                     )}
                   </RowData>
@@ -530,41 +561,41 @@ export default function TransactionList() {
               No Transaction Found
             </PlaceHolderContainer> */}
         </TableContainer>
-        <PageVerifyCheck check={address.length}>
-          <PaginationDiv>
-            <BottomLabel>
-              Per Page
-              <SelectionDivStyle
-                buttonToggle={countToggle}
-                onClick={() => setCountToggle(10)}
-              >
-                10
-              </SelectionDivStyle>
-              <SelectionDivStyleTwo
-                buttonToggle={countToggle}
-                onClick={() => setCountToggle(20)}
-              >
-                20
-              </SelectionDivStyleTwo>
-              <SelectionDivStyleThree
-                buttonToggle={countToggle}
-                onClick={() => setCountToggle(50)}
-              >
-                50
-              </SelectionDivStyleThree>
-            </BottomLabel>
-            <ReactPaginate
-              previousLabel={"<-"}
-              nextLabel={"->"}
-              pageCount={page}
-              breakLabel={"..."}
-              initialPage={0}
-              onPageChange={changePage}
-              containerClassName={"paginationBttns"}
-              disabledClassName={"paginationDisabled"}
-              activeClassName={"paginationActive"}
-            />
-          </PaginationDiv>
+        <PageVerifyCheck check={page}>
+        <PaginationDiv>
+          <BottomLabel>
+            Per Page
+            <SelectionDivStyle
+              buttonToggle={countToggle}
+              onClick={() => setCountToggle(10)}
+            >
+              10
+            </SelectionDivStyle>
+            <SelectionDivStyleTwo
+              buttonToggle={countToggle}
+              onClick={() => setCountToggle(20)}
+            >
+              20
+            </SelectionDivStyleTwo>
+            <SelectionDivStyleThree
+              buttonToggle={countToggle}
+              onClick={() => setCountToggle(50)}
+            >
+              50
+            </SelectionDivStyleThree>
+          </BottomLabel>
+          <ReactPaginate
+            previousLabel={"<-"}
+            nextLabel={"->"}
+            pageCount={page === 0 ? 1 : page}
+            breakLabel={"..."}
+            initialPage={0}
+            onPageChange={changePage}
+            containerClassName={"paginationBttns"}
+            disabledClassName={"paginationDisabled"}
+            activeClassName={"paginationActive"}
+          />
+        </PaginationDiv>
         </PageVerifyCheck>
       </MainContainer>
       <div>
@@ -577,7 +608,7 @@ export default function TransactionList() {
 }
 
 const PageVerifyCheck = styled.div`
-  display: ${(props) => (props.check < 10 ? "none" : "block")};
+  display: ${(props) => (props.check === 1? "none" : "block")};
   height: auto;
 `;
 const SubContainer = styled.div``;
