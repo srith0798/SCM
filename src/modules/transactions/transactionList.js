@@ -86,9 +86,9 @@ export default function TransactionList() {
         getTransaction(url);
         setSelectedName(name);
       }
-      // if (response.contractList.length === 0) setShowPlaceHolder(true);
+      if (response.contractList.length === 0) setShowPlaceHolder(true);
     } catch (e) {
-      // setShowPlaceHolder(true);
+      setShowPlaceHolder(true);
       setLoader(false);
     }
   };
@@ -114,6 +114,8 @@ export default function TransactionList() {
       setLoader(false);
     }
   };
+    console.log('setS', address);
+    console.log('searching', searchRow)
 
   const searchTransaction = async (searchValues, searchKeys) => {
     try {
@@ -128,7 +130,7 @@ export default function TransactionList() {
       setLoader(false);
       setSearchRow(response.transactionList);
     } catch (e) {
-      // setShowPlaceHolder(true);
+      setShowPlaceHolder(true);
       setLoader(false);
     }
   };
@@ -138,7 +140,7 @@ export default function TransactionList() {
     setInput(event.target.value);
     searchTransaction(event.target.value, ["hash"]);
   };
-
+  
   const [isSetOpen, setOpen] = React.useState(false);
   const handleClick = (e) => {
     setOpen((prev) => !prev);
@@ -206,6 +208,8 @@ export default function TransactionList() {
       getTransaction(selected);
     } else getContractNames();
   }, [countToggle]);
+
+
 
   const [selectDrop, setSelectDrop] = React.useState([]);
 
@@ -556,11 +560,18 @@ export default function TransactionList() {
                 </Div>
               );
             })}
+           
           </div>
-          {/* <PlaceHolderContainer>
-              <PlaceHolderImage src="/images/contracts.svg" />
-              No Transaction Found
-            </PlaceHolderContainer> */}
+        {((input === "" && address.length === 0) || (input !== "" && searchRow.length === 0)) && (
+          <PlaceHolderContainer>
+            <PlaceHolderImage src="/images/transactions-blue.svg" />
+            No transactions found <br/>
+            add your first contract 
+          </PlaceHolderContainer>
+        )}
+        
+             
+          
         </TableContainer>
         <PageVerifyCheck check={page}>
         <PaginationDiv>
@@ -958,12 +969,12 @@ const PlaceHolderContainer = styled.div`
   align-items: center;
   opacity: 50%;
   font-weight: 600;
-  font-size: 13px;
+  font-size: 14px;
 `;
 const PlaceHolderImage = styled.img`
-  width: 50px;
+  width: 60px;
   -webkit-filter: grayscale(60%); /* Safari 6.0 - 9.   */
-  filter: grayscale(60%);
+  filter: grayscale(50%);
   margin-bottom: 20px;
 `;
 

@@ -250,7 +250,9 @@ export default function Contract(props) {
                     {data.contractName}
                   </ColumnSecond>
                   <ColumnSecond onClick={(e) => redirectTODetails(e, data._id)}>
-                    {utility.truncateTxnAddress(data.address)}
+                    <BackgroundChanger>
+                      {utility.truncateTxnAddress(data.address)}
+                    </BackgroundChanger>
                   </ColumnSecond>
 
                   <ColumnSecond onClick={(e) => redirectTODetails(e, data._id)}>
@@ -283,11 +285,13 @@ export default function Contract(props) {
             </div>
           );
         })}
-        {/* {(address.length === 0 || searchRow.length === 0 ? <PlaceHolderContainer>
-              <PlaceHolderImage src="/images/contracts.svg" />
-              No contract found
-            </PlaceHolderContainer> : "" )
-          } */}
+        {((input === "" && address.length === 0) ||
+          (input !== "" && searchRow.length === 0)) && (
+          <PlaceHolderContainer>
+            <PlaceHolderImage src="/images/contracts.svg" />
+            No Contracts Available
+          </PlaceHolderContainer>
+        )}
       </TableContainer>
       <PageVerifyCheck check={page}>
         <PaginationDiv>
@@ -436,6 +440,16 @@ const RowContainer = styled.div`
   flex-flow: row nowrap;
 `;
 
+const BackgroundChanger = styled.div`
+  width: fit-content;
+  height: auto;
+  background-repeat: no-repeat;
+  background: #eaefff 0% 0% no-repeat padding-box;
+  border-radius: 6px;
+  opacity: 1;
+  padding: 1px 6px 1px 4px;
+  cursor: pointer;
+`;
 const RowTag = styled.div`
   display: flex;
   flex-flow: row nowrap;
@@ -573,12 +587,9 @@ const Div = styled.div`
   min-width: 130px;
   white-space: nowrap;
   @media (min-width: 300px) and (max-width: 750px) {
-    width: 100%;
+    width: fit-content;
     min-width: 180px;
   }
-  // @media (min-width: 300px) and (max-width: 767px) {
-  //   width: 970px !important;
-  // }
 `;
 const ColumnOne = styled.div`
   font-size: 0.875rem;
@@ -587,7 +598,7 @@ const ColumnOne = styled.div`
   width: 100%;
   min-width: 130px;
   @media (min-width: 300px) and (max-width: 750px) {
-    width: 100%;
+    width: fit-content;
     min-width: 180px;
   }
 `;
