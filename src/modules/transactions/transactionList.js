@@ -573,7 +573,7 @@ export default function TransactionList() {
              
           
         </TableContainer>
-        <PageVerifyCheck check={page}>
+        <PageVerifyCheck ch   eck={page}>
         <PaginationDiv>
           <BottomLabel>
             Per Page
