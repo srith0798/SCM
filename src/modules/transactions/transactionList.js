@@ -125,6 +125,7 @@ export default function TransactionList() {
         searchKeys: searchKeys,
         skip: 0,
         limit: countToggle,
+        contractAddress:selected
       };
       setLoader(true);
       const response = await ContractsService.getTransactionsList(requestData);
@@ -574,7 +575,7 @@ export default function TransactionList() {
              
           
         </TableContainer>
-        <PageVerifyCheck check={page}>
+        <PageVerifyCheck ch   eck={page}>
         <PaginationDiv>
           <BottomLabel>
             Per Page

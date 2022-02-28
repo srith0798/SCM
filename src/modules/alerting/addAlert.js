@@ -7,11 +7,17 @@ import Destination from "./destination";
 // import Destination from "../Alerting/Destination";
 import Historys from "./historys";
 import { genericConstants } from "../../constants";
+import { sessionManager } from "../../managers/sessionManager";
+import utility from "../../utility";
+import contractsService from "../../services/contractsService";
 
 export default function AddAlert() {
   const [activeButton, setActiveButton] = React.useState("Rules");
   const [alertType, setAlertType] = React.useState("");
   const [alertTarget, setAlertTarget] = React.useState("");
+  const [loader, setLoader] = React.useState(false);
+  const [parametersData, setParametersData] = React.useState(false);
+
 
   const [icon, setIcon] = React.useState({
     successfulTransaction: genericConstants.ALERT_TYPE_IMAGES.SUCCESSFULL_TRANSACTIONS.IMAGE,
@@ -63,7 +69,29 @@ export default function AddAlert() {
   const selectAlertTarget = (type) =>{
     setAlertTarget(type);
     changeProgress("PARAMETERS")
+    if(type === genericConstants.ALERT_TYPE.ADDRESS)
+       getContracts();
   }
+
+  const getContracts = async () => {
+    let userId = sessionManager.getDataFromCookies("userId");
+    const requestData = {
+      userId: userId
+    };
+    setLoader(true);
+    const [error, response] = await utility.parseResponse(
+      contractsService.getContractsList(requestData)
+    );
+    if (error) {
+      setLoader(false);
+      return;
+    }
+    if (response.contractList.length === 0) {
+      return;
+    }
+    setLoader(false);
+    setParametersData(response.contractList);
+  };
   return (
     <>
       <MainContainer>
@@ -226,7 +254,10 @@ export default function AddAlert() {
                   <AlertTargetContainer style={{ flexDirection: "column" }}>
                     <ParameterContainer>
                       <FilterSelect>
-                        <option value="filter">Filter by event name</option>
+                         <option value="">Filter by event </option>
+                        {parametersData && parametersData.length && parametersData.map((option)=>(
+                          <option value={option.address}>{option.address}</option>
+                        ))}
                       </FilterSelect>
                     </ParameterContainer>
                     <ApplyButton onClick={() => changeProgress("DESTINATION")}>
