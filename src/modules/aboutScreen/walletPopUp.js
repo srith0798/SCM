@@ -159,6 +159,9 @@ const DetailBox = styled.div`
   display: flex;
   margin-top: 26px;
   // padding-bottom: 18px;
+  @media (min-width: 250px) and (max-width:550px) {
+    flex-direction: column;
+  }
 `;
 const MainContainer = styled.div`
   width: 100%;
