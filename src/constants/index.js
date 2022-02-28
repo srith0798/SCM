@@ -13,7 +13,7 @@ export const httpConstants = {
     APPLICATION_JSON: "application/json",
     MULTIPART_FORM_DATA: "multipart/form-data",
     APPLICATION_FORM_URLENCODED: "application/x-www-form-urlencoded",
-    IMAGE_PNG: "image/png",
+    IMAGE_PNG: "IMAGE/png",
   },
   DEVICE_TYPE: {
     WEB: "web",
@@ -56,4 +56,44 @@ export const analytics = {
       VALUE: 30
     },
   ]
+}
+
+export const genericConstants={
+  ALERT_TYPE:{
+  SUCCESSFULL_TRANSACTIONS:"SUCCESSFULL_TRANSACTIONS",
+  FAILED_TRANSACTIONS:"FAILED_TRANSACTIONS",
+  TOKEN_TRANSFER:"TOKEN_TRANSFER",
+  TRANSACTION_VALUE:"TRANSACTION_VALUE",
+  XDC_BALANCE:"XDC_BALANCE",
+  STATE_CHANGE:"STATE_CHANGE",
+  FUNCTION_CALL:"FUNCTION_CALL",
+  ADDRESS:"ADDRESS",
+  NETWORK:"NETWORK",
+  TAG:"TAG"
+},
+ ALERT_TYPE_IMAGES:{
+    SUCCESSFULL_TRANSACTIONS:{TYPE: "successfulTransaction", IMAGE : "/images/successful-transaction-blue.svg"},
+    FAILED_TRANSACTIONS: {TYPE: "failedTransaction", IMAGE : "/images/failed-transaction-blue.svg"},
+    TOKEN_TRANSFER:{TYPE: "tokenTransfer", IMAGE :  "/images/xdc-token-transfer-blue.svg"},
+    TRANSACTION_VALUE: {TYPE: "transactionValue", IMAGE : "/images/transaction-value-blue.svg"},
+    XDC_BALANCE: {TYPE: "balanceToken", IMAGE : "/images/xdc-balance-blue.svg"},
+    STATE_CHANGE:{TYPE: "stateChange", IMAGE : "/images/state-change-blue.svg"},
+    FUNCTION_CALL: {TYPE: "functionCall", IMAGE :"/images/functioncall.svg"},
+    ADDRESS:{TYPE: "address", IMAGE : "/images/address-logo-blue.svg"},
+    NETWORK: {TYPE: "network", IMAGE :  "/images/network-logo-blue.svg"},
+    TAG:{TYPE: "tag", IMAGE :  "/images/tag-logo-blue.svg"}
+ },
+ ALERT_TYPE_IMAGES_WHITE:{
+  SUCCESSFULL_TRANSACTIONS:{TYPE: "successfulTransaction", IMAGE : "/images/successful-transaction.svg"},
+  FAILED_TRANSACTIONS: {TYPE: "failedTransaction", IMAGE : "/images/failed-transaction-white.svg"},
+  TOKEN_TRANSFER:{TYPE: "tokenTransfer", IMAGE :  "/images/xdc-token-white.svg"},
+  TRANSACTION_VALUE: {TYPE: "transactionValue", IMAGE : "/images/xdc-logo-white.svg"},
+  XDC_BALANCE: {TYPE: "balanceToken", IMAGE : "/images/xdc-logo-white.svg"},
+  STATE_CHANGE:{TYPE: "stateChange", IMAGE : "/images/state-change-white.svg"},
+  FUNCTION_CALL: {TYPE: "functionCall", IMAGE :"/images/functioncall.svg"},
+  ADDRESS:{TYPE: "address", IMAGE : "/images/address-logo-white.svg"},
+  NETWORK: {TYPE: "network", IMAGE :  "/images/network-logo-white.svg"},
+  TAG:{TYPE: "tag", IMAGE :  "/images/tag-logo-white.svg"}
+},
+
 }
