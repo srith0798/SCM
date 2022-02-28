@@ -98,6 +98,7 @@ export default function TransactionList() {
         skip: skip,
         limit: limit,
         contractAddress: url,
+        sortingKey:{timestamp:-1},
       };
       setLoader(true);
       const response = await ContractsService.getTransactionsList(requestData);
