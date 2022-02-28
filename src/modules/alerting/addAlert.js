@@ -6,35 +6,29 @@ import styled from "styled-components";
 import Destination from "./destination";
 // import Destination from "../Alerting/Destination";
 import Historys from "./historys";
+import { genericConstants } from "../../constants";
 
 export default function AddAlert() {
   const [activeButton, setActiveButton] = React.useState("Rules");
+  const [alertType, setAlertType] = React.useState("");
+  const [alertTarget, setAlertTarget] = React.useState("");
+
+  const [icon, setIcon] = React.useState({
+    successfulTransaction: genericConstants.ALERT_TYPE_IMAGES.SUCCESSFULL_TRANSACTIONS.IMAGE,
+    failedTransaction:  genericConstants.ALERT_TYPE_IMAGES.FAILED_TRANSACTIONS.IMAGE,
+    tokenTransfer: genericConstants.ALERT_TYPE_IMAGES.TOKEN_TRANSFER.IMAGE,
+    transactionValue:  genericConstants.ALERT_TYPE_IMAGES.TRANSACTION_VALUE.IMAGE,
+    balanceToken:  genericConstants.ALERT_TYPE_IMAGES.XDC_BALANCE.IMAGE,
+    stateChange: genericConstants.ALERT_TYPE_IMAGES.STATE_CHANGE.IMAGE,
+    functionCall: genericConstants.ALERT_TYPE_IMAGES.FUNCTION_CALL.IMAGE,
+    address:genericConstants.ALERT_TYPE_IMAGES.ADDRESS.IMAGE,
+    network:genericConstants.ALERT_TYPE_IMAGES.NETWORK.IMAGE,
+    tag:genericConstants.ALERT_TYPE_IMAGES.TAG.IMAGE,
+  });
   const handleViewClick = (e) => {
     setActiveButton(e.target.id);
     history.push("/alerting");
   };
-
-  const [successfulTransaction, setsuccessfulTransaction] = React.useState(
-    "/images/Successful transaction_blue.svg"
-  );
-  const [failedTransaction, setfailedTransaction] = React.useState(
-    "/images/failed-transaction-blue.svg"
-  );
-  const [tokenTransfer, settokenTransfer] = React.useState(
-    "/images/xdc-token-blue.svg"
-  );
-  const [transactionValue, settransactionValue] = React.useState(
-    "/images/xdc-logo-blue.svg"
-  );
-  const [balanceToken, setBalanceToken] = React.useState(
-    "/images/xdc-logo-blue.svg"
-  );
-  const [stateChange, setstateChange] = React.useState(
-    "/images/state-change-blue.svg"
-  );
-  const [functionCall, setfunctionCall] = React.useState(
-    "/images/functioncall.svg"
-  );
 
   // alert target
   const [addressToken, setaddressToken] = React.useState(
@@ -54,50 +48,22 @@ export default function AddAlert() {
     history.push("/alerting");
   };
 
-  const changeSourceForIcons = (value) => {
-    if (value === "successfulTransaction")
-      setsuccessfulTransaction("/images/successful-transaction.svg");
-    if (value === "failedTransaction")
-      setfailedTransaction("/images/failed-transaction-white.svg");
-    if (value === "tokenTransfer")
-      settokenTransfer("/images/xdc-token-white.svg");
-    if (value === "transactionValue")
-      settransactionValue("/images/xdc-logo-white.svg");
-    if (value === "balanceToken") setBalanceToken("/images/xdc-logo-white.svg");
-    if (value === "stateChange")
-      setstateChange("/images/state-change-white.svg");
-    if (value === "functionCall") setfunctionCall("/images/functioncall.svg");
-
-    // for alert target tabs
-    if (value === "addressToken")
-      setaddressToken("/images/address-logo-white.svg");
-    if (value === "networkAddress")
-      setnetworkAddress("/images/network-logo-white.svg");
-    if (value === "tagAddress") settagAddress("/images/tag-logo-white.svg");
+  const changeSourceForIcons = (value,type) => {
+    setIcon({ ...icon , [type] :genericConstants.ALERT_TYPE_IMAGES_WHITE[value].IMAGE});
   };
 
-  const changeOriginalSourceForIcons = (value) => {
-    if (value === "successfulTransaction")
-      setsuccessfulTransaction("/images/successful-transaction-blue.svg");
-    if (value === "failedTransaction")
-      setfailedTransaction("/images/failed-transaction-blue.svg");
-    if (value === "tokenTransfer")
-      settokenTransfer("/images/xdc-token-blue.svg");
-
-    if (value === "transactionValue")
-      settransactionValue("/images/xdc-logo-blue.svg");
-    if (value === "balanceToken") setBalanceToken("/images/xdc-logo-blue.svg");
-    if (value === "stateChange")
-      setstateChange("/images/state-change-blue.svg");
-    if (value === "functionCall") setfunctionCall("/images/functioncall.svg");
-    // for alert target
-    if (value === "addressToken")
-      setaddressToken("/images/address-logo-blue.svg");
-    if (value === "networkAddress")
-      setnetworkAddress("/images/network-logo-blue.svg");
-    if (value === "tagAddress") settagAddress("/images/tag-logo-blue.svg");
+  const changeOriginalSourceForIcons = (value,type) => {
+    setIcon({ ...icon , [type] :genericConstants.ALERT_TYPE_IMAGES[value].IMAGE});
   };
 
+  const selectAlertType = (type) =>{
+    setAlertType(type);
+    changeProgress("ALERT_TARGET")
+  }
+  const selectAlertTarget = (type) =>{
+    setAlertTarget(type);
+    changeProgress("PARAMETERS")
+  }
   return (
     <>
       <MainContainer>
@@ -205,105 +171,12 @@ export default function AddAlert() {
               <SideLineProvider>
                 <Line></Line>
                 {progress === "ALERT_TYPE" && (
-                  <MainBoxContainer>
-                    <BoxContainer
-                      onClick={() => changeProgress("ALERT_TARGET")}
-                      onMouseOver={() =>
-                        changeSourceForIcons("successfulTransaction")
-                      }
-                      onMouseOut={() =>
-                        changeOriginalSourceForIcons("successfulTransaction")
-                      }
-                    >
-                      <img alt="" src={successfulTransaction} />
-                      <Title>Successful transaction</Title>
-                      <SubTitle>
-                        Triggers when successful transaction happen
-                      </SubTitle>
-                    </BoxContainer>
-                    <BoxContainer
-                      onClick={() => changeProgress("ALERT_TARGET")}
-                      onMouseOver={() =>
-                        changeSourceForIcons("failedTransaction")
-                      }
-                      onMouseOut={() =>
-                        changeOriginalSourceForIcons("failedTransaction")
-                      }
-                    >
-                      <img alt="" src={failedTransaction} />
-                      <Title>Failed transaction</Title>
-                      <SubTitle>Triggers when transactions fails</SubTitle>
-                    </BoxContainer>
-                    <BoxContainer
-                      onClick={() => changeProgress("ALERT_TARGET")}
-                      onMouseOver={() => changeSourceForIcons("tokenTransfer")}
-                      onMouseOut={() =>
-                        changeOriginalSourceForIcons("tokenTransfer")
-                      }
-                    >
-                      <img alt="" src={tokenTransfer} />
-                      <Title>XRC-20 Token Transfer </Title>
-                      <SubTitle>
-                        Triggers whenever an XRC-20 token transfer happen
-                      </SubTitle>
-                    </BoxContainer>
-                    <BoxContainer
-                      onClick={() => changeProgress("ALERT_TARGET")}
-                      onMouseOver={() =>
-                        changeSourceForIcons("transactionValue")
-                      }
-                      onMouseOut={() =>
-                        changeOriginalSourceForIcons("transactionValue")
-                      }
-                    >
-                      <img alt="" src={transactionValue} />
-                      <Title>Transaction Value</Title>
-                      <SubTitle>
-                        Triggers whenever transaction value matches
-                      </SubTitle>
-                    </BoxContainer>
-                    <BoxContainer
-                      onClick={() => changeProgress("ALERT_TARGET")}
-                      onMouseOver={() => changeSourceForIcons("balanceToken ")}
-                      onMouseOut={() =>
-                        changeOriginalSourceForIcons("balanceToken")
-                      }
-                    >
-                      <img alt="" src={balanceToken} />
-                      <Title>XDC Balance</Title>
-                      <SubTitle>
-                        Triggers when XDC balance falls below certain threshold
-                      </SubTitle>
-                    </BoxContainer>
-
-                    <BoxContainer
-                      onClick={() => changeProgress("ALERT_TARGET")}
-                      onMouseOver={() => changeSourceForIcons("stateChange")}
-                      onMouseOut={() =>
-                        changeOriginalSourceForIcons("stateChange")
-                      }
-                    >
-                      <img alt="" src={stateChange} />
-                      <Title>State Change</Title>
-                      <SubTitle>
-                        Triggers whenever stable variable changes
-                      </SubTitle>
-                    </BoxContainer>
-                    <BoxContainer
-                      onClick={() => changeProgress("ALERT_TARGET")}
-                      onMouseOver={() => changeSourceForIcons("functionCall")}
-                      onMouseOut={() =>
-                        changeOriginalSourceForIcons("functionCall")
-                      }
-                    >
-                      <img alt="" src={functionCall} />
-                      <Title>Function Call</Title>
-                      <SubTitle style={{ fontSize: "22px", fontWeight: 600 }}>
-                        Coming soon
-                      </SubTitle>
-                    </BoxContainer>
-                  </MainBoxContainer>
-                )}
+                          <AlertTypeContainer
+                          selectAlertType={selectAlertType}
+                          changeOriginalSourceForIcons={changeOriginalSourceForIcons}
+                          changeSourceForIcons={changeSourceForIcons}
+                          icon={icon}
+                          ></AlertTypeContainer>       )}
               </SideLineProvider>
               <AlertContainer>
                 {progress === "ALERT_TYPE" || progress === "ALERT_TARGET" ? (
@@ -322,43 +195,15 @@ export default function AddAlert() {
               <SideLineProvider>
                 <Line></Line>
                 {progress === "ALERT_TARGET" && (
-                  <AlertTargetContainer>
-                    <BoxContainer
-                      onClick={() => changeProgress("PARAMETERS")}
-                      onMouseOver={() => changeSourceForIcons("addressToken")}
-                      onMouseOut={() =>
-                        changeOriginalSourceForIcons("addressToken")
-                      }
-                    >
-                      <img alt="" src={addressToken} />
-                      <Title>Address</Title>
-                      <SubTitle>recieve alert for only one address</SubTitle>
-                    </BoxContainer>
-                    <BoxContainer
-                      onClick={() => changeProgress("PARAMETERS")}
-                      onMouseOver={() => changeSourceForIcons("networkAddress")}
-                      onMouseOut={() =>
-                        changeOriginalSourceForIcons("networkAddress")
-                      }
-                    >
-                      <img alt="" src={networkAddress} />
-                      <Title>Network</Title>
-                      <SubTitle>
-                        recieve alert for deployment on a network
-                      </SubTitle>
-                    </BoxContainer>
-                    <BoxContainer
-                      onClick={() => changeProgress("PARAMETERS")}
-                      onMouseOver={() => changeSourceForIcons("tagAddress")}
-                      onMouseOut={() =>
-                        changeOriginalSourceForIcons("tagAddress")
-                      }
-                    >
-                      <img alt="" src={tagAddress} />
-                      <Title>Tag</Title>
-                      <SubTitle>Recieve alert for every address</SubTitle>
-                    </BoxContainer>
-                  </AlertTargetContainer>
+                 <AlertTarget
+                 selectAlertTarget={selectAlertTarget}
+                 changeOriginalSourceForIcons={changeOriginalSourceForIcons}
+                 changeSourceForIcons={changeSourceForIcons}
+                 addressToken={addressToken}
+                 networkAddress={networkAddress}
+                 tagAddress={tagAddress}
+                 icon={icon}
+                 ></AlertTarget>
                 )}
               </SideLineProvider>
 
@@ -493,6 +338,151 @@ export default function AddAlert() {
   );
 }
 
+const AlertTypeContainer = (props) => {
+  return(
+    <MainBoxContainer>
+    <BoxContainer
+      onClick={() => props.selectAlertType(genericConstants.ALERT_TYPE.SUCCESSFULL_TRANSACTIONS)}
+      onMouseOver={() =>
+        props.changeSourceForIcons(genericConstants.ALERT_TYPE.SUCCESSFULL_TRANSACTIONS,"successfulTransaction")
+      }
+      onMouseOut={() =>
+        props.changeOriginalSourceForIcons(genericConstants.ALERT_TYPE.SUCCESSFULL_TRANSACTIONS,"successfulTransaction")
+      }
+    >
+      <img alt="" src={props.icon.successfulTransaction} />
+      <Title>Successful transaction</Title>
+      <SubTitle>
+        Triggers when successful transaction happen
+      </SubTitle>
+    </BoxContainer>
+    <BoxContainer
+      onClick={() => props.selectAlertType(genericConstants.ALERT_TYPE.FAILED_TRANSACTIONS)}
+      onMouseOver={() =>
+        props.changeSourceForIcons(genericConstants.ALERT_TYPE.FAILED_TRANSACTIONS,"failedTransaction")
+      }
+      onMouseOut={() =>
+        props.changeOriginalSourceForIcons(genericConstants.ALERT_TYPE.FAILED_TRANSACTIONS,"failedTransaction")
+      }
+    >
+      <img alt="" src={props.icon.failedTransaction} />
+      <Title>Failed transaction</Title>
+      <SubTitle>Triggers when transactions fails</SubTitle>
+    </BoxContainer>
+    <BoxContainer
+      onClick={() => props.selectAlertType(genericConstants.ALERT_TYPE.TOKEN_TRANSFER)}
+      onMouseOver={() => props.changeSourceForIcons(genericConstants.ALERT_TYPE.TOKEN_TRANSFER,"tokenTransfer")}
+      onMouseOut={() =>
+        props.changeOriginalSourceForIcons(genericConstants.ALERT_TYPE.TOKEN_TRANSFER,"tokenTransfer")
+      }
+    >
+      <img alt="" src={props.icon.tokenTransfer} />
+      <Title>XRC-20 Token Transfer </Title>
+      <SubTitle>
+        Triggers whenever an XRC-20 token transfer happen
+      </SubTitle>
+    </BoxContainer>
+    <BoxContainer
+      onClick={() => props.selectAlertType(genericConstants.ALERT_TYPE.TRANSACTION_VALUE)}
+      onMouseOver={() =>
+        props.changeSourceForIcons(genericConstants.ALERT_TYPE.TRANSACTION_VALUE,"transactionValue")
+      }
+      onMouseOut={() =>
+        props.changeOriginalSourceForIcons(genericConstants.ALERT_TYPE.TRANSACTION_VALUE,"transactionValue")
+      }
+    >
+      <img alt="" src={props.icon.transactionValue} />
+      <Title>Transaction Value</Title>
+      <SubTitle>
+        Triggers whenever transaction value matches
+      </SubTitle>
+    </BoxContainer>
+    <BoxContainer
+      onClick={() => props.selectAlertType(genericConstants.ALERT_TYPE.XDC_BALANCE)}
+      onMouseOver={() => props.changeSourceForIcons(genericConstants.ALERT_TYPE.XDC_BALANCE,"balanceToken")}
+      onMouseOut={() =>
+        props.changeOriginalSourceForIcons(genericConstants.ALERT_TYPE.XDC_BALANCE,"balanceToken")
+      }
+    >
+      <img alt="" src={props.icon.balanceToken} />
+      <Title>XDC Balance</Title>
+      <SubTitle>
+        Triggers when XDC balance falls below certain threshold
+      </SubTitle>
+    </BoxContainer>
+
+    <BoxContainer
+      onClick={() => props.selectAlertType(genericConstants.ALERT_TYPE.STATE_CHANGE)}
+      onMouseOver={() => props.changeSourceForIcons(genericConstants.ALERT_TYPE.STATE_CHANGE,"stateChange")}
+      onMouseOut={() =>
+        props.changeOriginalSourceForIcons(genericConstants.ALERT_TYPE.STATE_CHANGE,"stateChange")
+      }
+    >
+      <img alt="" src={props.icon.stateChange} />
+      <Title>State Change</Title>
+      <SubTitle>
+        Triggers whenever stable variable changes
+      </SubTitle>
+    </BoxContainer>
+    <BoxContainer
+      onClick={() => props.selectAlertType(genericConstants.ALERT_TYPE.FUNCTION_CALL)}
+      onMouseOver={() => props.changeSourceForIcons(genericConstants.ALERT_TYPE.FUNCTION_CALL,"functionCall")}
+      onMouseOut={() =>
+        props.changeOriginalSourceForIcons(genericConstants.ALERT_TYPE.FUNCTION_CALL,"functionCall")
+      }
+    >
+      <img alt="" src={props.icon.functionCall} />
+      <Title>Function Call</Title>
+      <SubTitle style={{ fontSize: "22px", fontWeight: 600 }}>
+        Coming soon
+      </SubTitle>
+    </BoxContainer>
+  </MainBoxContainer>
+
+  )
+}
+
+const AlertTarget = (props) =>{
+  return(
+   <AlertTargetContainer>
+                    <BoxContainer
+                      onClick={() => props.selectAlertTarget(genericConstants.ALERT_TYPE.ADDRESS)}
+                      onMouseOver={() => props.changeSourceForIcons(genericConstants.ALERT_TYPE.ADDRESS,"address")}
+                      onMouseOut={() =>
+                        props.changeOriginalSourceForIcons(genericConstants.ALERT_TYPE.ADDRESS,"address")
+                      }
+                    >
+                      <img alt="" src={props.icon.address} />
+                      <Title>Address</Title>
+                      <SubTitle>recieve alert for only one address</SubTitle>
+                    </BoxContainer>
+                    <BoxContainer
+                      onClick={() => props.selectAlertTarget(genericConstants.ALERT_TYPE.NETWORK)}
+                      onMouseOver={() => props.changeSourceForIcons(genericConstants.ALERT_TYPE.NETWORK,"network")}
+                      onMouseOut={() =>
+                        props.changeOriginalSourceForIcons(genericConstants.ALERT_TYPE.NETWORK,"network")
+                      }
+                    >
+                      <img alt="" src={props.icon.network} />
+                      <Title>Network</Title>
+                      <SubTitle>
+                        recieve alert for deployment on a network
+                      </SubTitle>
+                    </BoxContainer>
+                    <BoxContainer
+                      onClick={() => props.selectAlertTarget(genericConstants.ALERT_TYPE.TAG)}
+                      onMouseOver={() => props.changeSourceForIcons(genericConstants.ALERT_TYPE.TAG,"tag")}
+                      onMouseOut={() =>
+                        props.changeOriginalSourceForIcons(genericConstants.ALERT_TYPE.TAG,"tag")
+                      }
+                    >
+                      <img alt="" src={props.icon.tag} />
+                      <Title>Tag</Title>
+                      <SubTitle>Recieve alert for every address</SubTitle>
+                    </BoxContainer>
+                  </AlertTargetContainer>
+  )
+}
 const DestinationDetail = styled.div`
   margin-bottom: 10px;
   padding: 20px 0 0 0;

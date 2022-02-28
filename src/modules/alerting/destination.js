@@ -3,7 +3,6 @@ import { Row } from "simple-flexbox";
 import "react-tabs/style/react-tabs.css";
 import styled from "styled-components";
 import Tooltip from "@mui/material/Tooltip";
-import DestinationTags from "../popup/addDestination";
 
 export default function Destination() {
   return (

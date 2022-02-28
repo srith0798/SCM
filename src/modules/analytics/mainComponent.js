@@ -301,12 +301,6 @@ export default function MainComponent(props) {
     };
     let resultData = [];
     response.map((items) => {
-      if (yComponent === "failedTransactions")
-        resultData.push({
-          x: items[xComponent],
-          y: 2,
-        });
-      else
         resultData.push({
           x: items[xComponent],
           y: items[yComponent],
@@ -355,7 +349,11 @@ export default function MainComponent(props) {
   };
   const changeContract = (item) => {
     selectContract(item);
-    getContractNames(item.address);
+    getTransactionAnalytics(item.address);
+    getGasUsedAnalytics(item.address);
+    getActiveUsersAnalytics(item.address);
+    getTopCallers(item.address);
+    getTopFunctionCalls(item.address);
     setOpen((prev) => !prev);
   };
 
@@ -592,7 +590,7 @@ const TableData = (props) => {
                   )}
                 </Div>
                 <Div>
-                  <ContractFrom>Network:</ContractFrom>
+                  <NetworkHead>Network:</NetworkHead>
                   <SubNetwork>
                     <Network>{item.network}</Network>
                   </SubNetwork>
@@ -796,6 +794,16 @@ const ContractFrom = styled.div`
     word-break: break-all;
     white-space: nowrap;
   }
+`;
+const NetworkHead = styled.div`
+width: 20.5%;
+color: #102c78;
+font-size: 14px;
+font-weight: 600;
+@media (min-width: 300px) and (max-width: 767px) {
+  word-break: break-all;
+  white-space: nowrap;
+}
 `;
 const Network = styled.div`
   color: #303134;
