@@ -61,7 +61,7 @@ export default function Sidebar(props) {
       <Hamburger src="/images/hamburger.svg" onClick={() => setOpen(!open)} />
       {open && (
         <SidebarContainer>
-          <Wrapper onClick={redirectToAbout} style={{ marginTop: "4rem" }}>
+          <Wrapper onClick={redirectToAbout} style={{ marginTop: "20px" }}>
             <Icon src="/images/Xmartly.svg" />
             <Heading>About Xmartly</Heading>
           </Wrapper>
@@ -109,10 +109,12 @@ export default function Sidebar(props) {
             <Icon src="/images/Subtraction 2.svg" />
             <Heading>FAQs</Heading>
           </Wrapper>
+          <LogoutTag>
           <Wrapper onClick={redirectToLogout}>
             <Icon src="/images/Log out.svg" />
             <Heading>Logout</Heading>
           </Wrapper>
+          </LogoutTag>
           <CenterDiv>
             <img alt="" src="/images/Group 12.svg" />
           </CenterDiv>
@@ -156,12 +158,17 @@ const SidebarContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100%;
+  height: 119%;
   width: 248px;
   padding-top: 15px;
   @media (min-width: 1023px) {
     display: none;
   }
+`;
+const LogoutTag = styled.div`
+@media (min-width: 300px) and (max-width: 768px) {
+  display:none;
+}
 `;
 const Icon = styled.img`
   cursor: pointer;
