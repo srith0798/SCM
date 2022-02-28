@@ -124,6 +124,7 @@ export default function TransactionList() {
         searchKeys: searchKeys,
         skip: 0,
         limit: countToggle,
+        contractAddress:selected
       };
       setLoader(true);
       const response = await ContractsService.getTransactionsList(requestData);
