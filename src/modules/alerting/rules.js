@@ -110,122 +110,118 @@ export default function Rules() {
           </NewDivOne>
           {activeButton === "Rules" && (
             <TableContainer>
-              <DetailBox>
-                <NewDiv>
-                  <RowData onClick={redirectToAlertDetails}>
-                    <ColumnOne>
-                      Contract Name
-                      <Tooltip
-                        open={contractNameToolTip}
-                        onOpen={() => setcontractNameToolTip(true)}
-                        onClose={() => setcontractNameToolTip(false)}
-                        disableFocusListener
-                        title="Name of the smart contract"
-                      >
-                        <ToolTipIcon
-                          onClick={() =>
-                            setcontractNameToolTip(!contractNameToolTip)
-                          }
-                          src="/images/tool-tip.svg"
-                        />
-                      </Tooltip>
-                    </ColumnOne>
-                    <ColumnOne>
-                      Address
-                      <Tooltip
-                        open={addressToolTip}
-                        onOpen={() => setaddressToolTip(true)}
-                        onClose={() => setaddressToolTip(false)}
-                        disableFocusListener
-                        title="Wallet address"
-                      >
-                        <ToolTipIcon
-                          onClick={() => setaddressToolTip(!addressToolTip)}
-                          src="/images/tool-tip.svg"
-                        />
-                      </Tooltip>
-                    </ColumnOne>
-                    <ColumnOne>
-                      Network
-                      <Tooltip
-                        open={networkToolTip}
-                        onOpen={() => setnetworkToolTip(true)}
-                        onClose={() => setnetworkToolTip(false)}
-                        disableFocusListener
-                        title="The executing blockchain network"
-                      >
-                        <ToolTipIcon
-                          onClick={() => setnetworkToolTip(!networkToolTip)}
-                          src="/images/tool-tip.svg"
-                        />
-                      </Tooltip>
-                    </ColumnOne>
-                    <ColumnOne>
-                      Alert Type
-                      <Tooltip
-                        open={alertTypeToolTip}
-                        onOpen={() => setalertTypeToolTip(true)}
-                        onClose={() => setalertTypeToolTip(false)}
-                        disableFocusListener
-                        title="Transaction status"
-                      >
-                        <ToolTipIcon
-                          onClick={() => setalertTypeToolTip(!alertTypeToolTip)}
-                          src="/images/tool-tip.svg"
-                        />
-                      </Tooltip>
-                    </ColumnOne>
-                    <ColumnOne></ColumnOne>
-                    <ColumnOne></ColumnOne>
-                  </RowData>
-                </NewDiv>
-                <NewDiv>
-                  <RowData1 onClick={redirectToAlertDetails}>
-                    <ColumnTwo>App_Transactions</ColumnTwo>{" "}
-                    <ColumnTwo>
-                      <BackgroundChanger>xdcabfe…8b3c </BackgroundChanger>
-                    </ColumnTwo>
-                    <ColumnTwo>XDC Mainnet</ColumnTwo>
-                    <ColumnTwo>Sucessfull</ColumnTwo>
-                    <ColumnTwo style={{ fontSize: "14px", color: "#00A58C" }}>
-                      Enabled
-                    </ColumnTwo>
-                    <ColumnTwo>
-                      <Tooltip disableFocusListener title="Delete">
-                        <img
-                          alt=""
-                          src="/images/delete-blue.svg"
-                          style={{ width: "1rem" }}
-                        />
-                      </Tooltip>
-                    </ColumnTwo>
-                  </RowData1>
-                </NewDiv>
-                <NewDiv>
-                  <RowData1 onClick={redirectToAlertDetails}>
-                    <ColumnTwo>App_Transactions</ColumnTwo>
-                    <ColumnTwo>
-                      <BackgroundChanger>xdcabfe…8b3c </BackgroundChanger>
-                    </ColumnTwo>
-                    <ColumnTwo>XDC Mainnet</ColumnTwo>
-                    <ColumnTwo>Failed</ColumnTwo>
-                    <ColumnTwo
-                      style={{ fontSize: "0.875rem", color: "#00A58C" }}
+              <NewDiv>
+                <RowData onClick={redirectToAlertDetails}>
+                  <ColumnOne>
+                    Contract Name
+                    <Tooltip
+                      open={contractNameToolTip}
+                      onOpen={() => setcontractNameToolTip(true)}
+                      onClose={() => setcontractNameToolTip(false)}
+                      disableFocusListener
+                      title="Name of the smart contract"
                     >
-                      Enabled
-                    </ColumnTwo>
-                    <ColumnTwo>
-                      <Tooltip disableFocusListener title="Delete">
-                        <img
-                          alt=""
-                          src="/images/delete-blue.svg"
-                          style={{ width: "1rem" }}
-                        />
-                      </Tooltip>
-                    </ColumnTwo>
-                  </RowData1>
-                </NewDiv>
-              </DetailBox>
+                      <ToolTipIcon
+                        onClick={() =>
+                          setcontractNameToolTip(!contractNameToolTip)
+                        }
+                        src="/images/tool-tip.svg"
+                      />
+                    </Tooltip>
+                  </ColumnOne>
+                  <ColumnOne>
+                    Address
+                    <Tooltip
+                      open={addressToolTip}
+                      onOpen={() => setaddressToolTip(true)}
+                      onClose={() => setaddressToolTip(false)}
+                      disableFocusListener
+                      title="Wallet address"
+                    >
+                      <ToolTipIcon
+                        onClick={() => setaddressToolTip(!addressToolTip)}
+                        src="/images/tool-tip.svg"
+                      />
+                    </Tooltip>
+                  </ColumnOne>
+                  <ColumnOne>
+                    Network
+                    <Tooltip
+                      open={networkToolTip}
+                      onOpen={() => setnetworkToolTip(true)}
+                      onClose={() => setnetworkToolTip(false)}
+                      disableFocusListener
+                      title="The executing blockchain network"
+                    >
+                      <ToolTipIcon
+                        onClick={() => setnetworkToolTip(!networkToolTip)}
+                        src="/images/tool-tip.svg"
+                      />
+                    </Tooltip>
+                  </ColumnOne>
+                  <ColumnOne>
+                    Alert Type
+                    <Tooltip
+                      open={alertTypeToolTip}
+                      onOpen={() => setalertTypeToolTip(true)}
+                      onClose={() => setalertTypeToolTip(false)}
+                      disableFocusListener
+                      title="Transaction status"
+                    >
+                      <ToolTipIcon
+                        onClick={() => setalertTypeToolTip(!alertTypeToolTip)}
+                        src="/images/tool-tip.svg"
+                      />
+                    </Tooltip>
+                  </ColumnOne>
+                  <ColumnOne></ColumnOne>
+                  <ColumnOne></ColumnOne>
+                </RowData>
+              </NewDiv>
+              <NewDiv>
+                <RowData1 onClick={redirectToAlertDetails}>
+                  <ColumnTwo>App_Transactions</ColumnTwo>{" "}
+                  <ColumnTwo>
+                    <BackgroundChanger>xdcabfe…8b3c </BackgroundChanger>
+                  </ColumnTwo>
+                  <ColumnTwo>XDC Mainnet</ColumnTwo>
+                  <ColumnTwo>Sucessfull</ColumnTwo>
+                  <ColumnTwo style={{ fontSize: "14px", color: "#00A58C" }}>
+                    Enabled
+                  </ColumnTwo>
+                  <ColumnTwo>
+                    <Tooltip disableFocusListener title="Delete">
+                      <img
+                        alt=""
+                        src="/images/delete-blue.svg"
+                        style={{ width: "1rem" }}
+                      />
+                    </Tooltip>
+                  </ColumnTwo>
+                </RowData1>
+              </NewDiv>
+              <NewDiv>
+                <RowData1 onClick={redirectToAlertDetails}>
+                  <ColumnTwo>App_Transactions</ColumnTwo>
+                  <ColumnTwo>
+                    <BackgroundChanger>xdcabfe…8b3c </BackgroundChanger>
+                  </ColumnTwo>
+                  <ColumnTwo>XDC Mainnet</ColumnTwo>
+                  <ColumnTwo>Failed</ColumnTwo>
+                  <ColumnTwo style={{ fontSize: "0.875rem", color: "#00A58C" }}>
+                    Enabled
+                  </ColumnTwo>
+                  <ColumnTwo>
+                    <Tooltip disableFocusListener title="Delete">
+                      <img
+                        alt=""
+                        src="/images/delete-blue.svg"
+                        style={{ width: "1rem" }}
+                      />
+                    </Tooltip>
+                  </ColumnTwo>
+                </RowData1>
+              </NewDiv>
             </TableContainer>
           )}
           {activeButton === "History" && <Historys />}
@@ -327,7 +323,6 @@ const ColumnTwo = styled.div`
     min-width: 160px;
   }
 `;
-const SubColumn = styled.div``;
 
 const MainContainer = styled.div`
   background: #ecf0f7 0% 0% no-repeat padding-box;
@@ -360,6 +355,9 @@ const NewDiv = styled.div`
   padding: 0.938rem;
   border-bottom: 0.063rem solid #e3e7eb;
   padding-left: 0;
+  @media (min-width: 300px) and (max-width: 1024px) {
+    width: fit-content;
+  }
 `;
 const NewDivOne = styled.div`
   border-bottom: 0.063rem solid #e3e7eb;
