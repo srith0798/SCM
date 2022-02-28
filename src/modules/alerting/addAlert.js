@@ -254,7 +254,10 @@ export default function AddAlert() {
                   <AlertTargetContainer style={{ flexDirection: "column" }}>
                     <ParameterContainer>
                       <FilterSelect>
-                        <option value="filter">Filter by event name</option>
+                         <option value="">Filter by event </option>
+                        {parametersData && parametersData.length && parametersData.map((option)=>(
+                          <option value={option.address}>{option.address}</option>
+                        ))}
                       </FilterSelect>
                     </ParameterContainer>
                     <ApplyButton onClick={() => changeProgress("DESTINATION")}>
