@@ -1040,8 +1040,12 @@ const SuccessButton = styled.div`
   }
   @media (min-width: 768px) and (max-width: 1023px) {
     padding: 0px 9px 0px 13px;
-    margin-left: 0.7rem;
+    margin-left: 1.7rem;
     width: 92px;
+  }
+  @media (max-width: 820px) {
+    padding: 0px 9px 0px 13px;
+    // margin-left: 1rem;
   }
 `;
 

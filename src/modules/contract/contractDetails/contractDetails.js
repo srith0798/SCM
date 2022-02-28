@@ -204,7 +204,7 @@ export default function ContractDetails(props) {
                 alignItems: "center",
                 borderBottom:
                   activeButton === "General"
-                    ? "0.125rem solid #3163F0"
+                    ? "0.25rem solid #3163F0"
                     : "#AEB7D0",
               }}
             >
@@ -229,7 +229,7 @@ export default function ContractDetails(props) {
                 paddingright: "16px",
                 alignItems: "center",
                 borderBottom:
-                  activeButton === "Source Code" ? "0.125rem solid blue" : "",
+                  activeButton === "Source Code" ? "0.25rem solid blue" : "",
               }}
             >
               <img
@@ -470,18 +470,18 @@ const Heading = styled.div`
   }
 `;
 const Verified = styled.div`
-  font-size: 1rem;
+  font-size: 14px;
   font-weight: 600;
   color: #00a58c;
-  margin-right: 83px;
+
   @media (min-width: 320px) and (max-width: 768px) {
   }
 `;
 const Enabled = styled.div`
-  font-size: 1rem;
+  font-size: 14px;
   font-weight: 600;
   color: #00a58c;
-  margin-right: 83px;
+
   @media (min-width: 320px) and (max-width: 768px) {
   }
 `;
@@ -492,7 +492,7 @@ const FinanceTag = styled.div`
   border-radius: 4px;
   width: 100%;
   white-space: nowrap;
-  padding: 10px;
+  padding: 16px 8px 14px 7px;
   height: 30px;
   align-items: center;
   text-align: center;
@@ -529,7 +529,7 @@ const ImageTag = styled.div`
 const AddTag = styled.button`
   color: #416be0;
   background: #ffffff 0% 0% no-repeat padding-box;
-  font-size: 1rem;
+  font-size: 14px;
   font-weight: 600;
   border: none;
   outline: none;
@@ -646,22 +646,20 @@ const VerifyDiv = styled.div`
 `;
 
 const TableData = styled.div`
-  font-size: 0.875rem;
+  font-size: 14px;
   font-weight: 600;
   color: #191919;
   width: 100%;
   /* max-width: 9.375rem; */
-  font-size: 1rem;
   font-weight: 600;
   margin-right: 6px;
 `;
 const SolidityData = styled.div`
-  font-size: 0.875rem;
   font-weight: 600;
   color: #191919;
   width: 100%;
   max-width: 9.375rem;
-  font-size: 1rem;
+  font-size: 14px;
   font-weight: 600;
   @media (max-width: 768px) {
     margin-right: 13px;
@@ -683,7 +681,7 @@ const EvmData = styled.div`
   color: #191919;
   width: 100%;
   max-width: 9.375rem;
-  font-size: 1rem;
+  font-size: 14px;
   font-weight: 600;
   @media (max-width: 414px) {
     margin-right: 12px;
@@ -745,7 +743,7 @@ const TabLister = styled.div`
   justify-content: space-between;
   width: 100%;
   max-width: 18.125rem;
-  margin: 1.563rem 0rem 0.625rem 1.363rem;
+  margin: 2rem 0rem 0rem 1.363rem;
   cursor: pointer;
   @media (min-width: 340px) and (max-width: 768px) {
     margin: none;

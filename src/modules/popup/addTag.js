@@ -15,7 +15,6 @@ export default function AddTags(props) {
   const classes = useStyles();
 
   const addContractTag = async () => {
-    props.click()
     let requestData = {
       contractId: props.contract ? props.address[0]._id : props.address._id,
       tags: input,
@@ -23,9 +22,11 @@ export default function AddTags(props) {
 
     try {
       const response = await contractsService.addTags(requestData);
+      console.log(response);
     } catch (e) {
       console.log("Error", e);
     }
+    props.click(window.location.reload());
   };
 
   return (
@@ -49,10 +50,7 @@ export default function AddTags(props) {
             <SubContainer
               style={{ width: "100%", maxWidth: "160px", marginTop: "30px" }}
             >
-              <ButtonConfirm 
-                text={"Add Tag"}
-                click={addContractTag}
-              />
+              <ButtonConfirm text={"Add Tag"} click={addContractTag} />
               <CancelButton onClick={props.click}>Cancel</CancelButton>
             </SubContainer>
           </Container>
