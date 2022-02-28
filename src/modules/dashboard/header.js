@@ -17,7 +17,7 @@ function Header(props) {
     let balance = sessionManager.getDataFromCookies("accountAddress");
     const web3 = new Web3(
       // new Web3.providers.HttpProvider("https://rpc.xinfin.network")
-      new Web3.providers.HttpProvider("https://rpc.xinfin.network")
+      new Web3.providers.HttpProvider(process.env.REACT_APP_NETWORK_RPC_URL)
     );
     let checkResult = Web3.utils.toChecksumAddress(balance);
     if (checkResult)
