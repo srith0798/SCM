@@ -4,7 +4,6 @@ import { Row, Column } from "simple-flexbox";
 import Line from "./graph";
 import Tooltip from "@mui/material/Tooltip";
 import { ExportToCsv } from 'export-to-csv';
-import moment from "moment";
 
 export default function FullScreen(props) {
   const ClickMe = () => {
@@ -35,6 +34,7 @@ export default function FullScreen(props) {
        
      }
      result= result.concat(item.data);
+     return true;
     })
 
   const csvExporter = new ExportToCsv(options);
