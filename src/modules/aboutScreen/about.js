@@ -68,7 +68,17 @@ export default function About(props) {
                 height="100%"
               />
             </VideoBox>
-            <SmartButton>
+            <SmartButton
+             onClick={() =>
+              history.push({
+                pathname: "/contracts",
+                state: {
+                  id: address.address,
+                  homepageHistory: "from-home-page",
+                },
+              })
+            }
+            >
               Add Your Smart Contract
               <img
                 style={{ marginLeft: "0.375rem" }}

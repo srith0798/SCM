@@ -237,66 +237,84 @@ export default function TransactionDetails() {
                 <SubHead>{row.network}</SubHead>
               </Row>
             </CommonDiv>
-            <ErrorCheckDiv check={status}>
+            <CommonDiv check={status}>
               <Row>
                 <Heading>Error</Heading>
                 {/* <SubHead>Out of Gas</SubHead> */}
               </Row>
-            </ErrorCheckDiv>
-            <CommonDivBlock>
-              <Heading>Block</Heading>
-              <SubHead style={{ color: "#416BE0" }}>{row.blockNumber}</SubHead>
-            </CommonDivBlock>
+            </CommonDiv>
+            <CommonDiv>
+              <Row>
+                <Heading>Block</Heading>
+                <SubHead style={{ color: "#416BE0" }}>
+                  {row.blockNumber}
+                </SubHead>
+              </Row>
+            </CommonDiv>
             <CommonDiv>
               <Row>
                 <Heading>Transactions index</Heading>
                 <SubHead>{row.transactionIndex}</SubHead>
               </Row>
             </CommonDiv>
-            <CommonDivFrom>
-              <Heading>From</Heading>
-              <SubHead>
-                <TransactionNumber>{row.from}</TransactionNumber>
-                <CopyToClipboard
-                  text={row.from}
-                  onCopy={() => setcopyToolTip(true)}
-                >
-                  <Tooltip title={copyToolTip ? "copied" : "copy to clipboard"}>
-                    <CopyToClipboardImg
-                      // onClick={() => setcopyToolTip(true)}
-                      src="/images/copy.svg"
-                    />
-                  </Tooltip>
-                </CopyToClipboard>
-              </SubHead>
-            </CommonDivFrom>
-            <CommonDivTo>
-              <Heading>To</Heading>
-              <SubHead>
-                <TransactionNumber>{row.to}</TransactionNumber>
-                <CopyToClipboard
-                  text={row.to}
-                  onCopy={() => setcopyToolTip(true)}
-                >
-                  <Tooltip title={copyToolTip ? "copied" : "copy to clipboard"}>
-                    <CopyToClipboardImg src="/images/copy.svg" />
-                  </Tooltip>
-                </CopyToClipboard>
-              </SubHead>
-            </CommonDivTo>
-            <TimeStampDiv>
-              <Heading>Timestamp</Heading>
-              <SubHead>
-                {moment(row.createdOn).format('lll') + " UTC "+ 
-                moment(Number(row.createdOn) * 1000).utc().format("hh:mm ") }
-                
-                {/* {moment(row.createdOn).fromNow() +
+            <CommonDiv>
+              <Row>
+                <Heading>From</Heading>
+                <SubHead>
+                  <TransactionNumber>{row.from}</TransactionNumber>
+                  <CopyToClipboard
+                    text={row.from}
+                    onCopy={() => setcopyToolTip(true)}
+                  >
+                    <Tooltip
+                      title={copyToolTip ? "copied" : "copy to clipboard"}
+                    >
+                      <CopyToClipboardImg
+                        // onClick={() => setcopyToolTip(true)}
+                        src="/images/copy.svg"
+                      />
+                    </Tooltip>
+                  </CopyToClipboard>
+                </SubHead>
+              </Row>
+            </CommonDiv>
+            <CommonDiv>
+              <Row>
+                <Heading>To</Heading>
+                <SubHead>
+                  <TransactionNumber>{row.to}</TransactionNumber>
+                  <CopyToClipboard
+                    text={row.to}
+                    onCopy={() => setcopyToolTip(true)}
+                  >
+                    <Tooltip
+                      title={copyToolTip ? "copied" : "copy to clipboard"}
+                    >
+                      <CopyToClipboardImg src="/images/copy.svg" />
+                    </Tooltip>
+                  </CopyToClipboard>
+                </SubHead>
+              </Row>
+            </CommonDiv>
+            <CommonDiv>
+              <Row>
+                {" "}
+                <Heading>Timestamp</Heading>
+                <SubHead>
+                  {moment(row.createdOn).format("lll") +
+                    " UTC " +
+                    moment(Number(row.createdOn) * 1000)
+                      .utc()
+                      .format("hh:mm ")}
+
+                  {/* {moment(row.createdOn).fromNow() +
                   " " +
                   "(" +
                   new Date(row.createdOn).toLocaleString("en-US") +
                   ")"} */}
-              </SubHead>
-            </TimeStampDiv>
+                </SubHead>
+              </Row>
+            </CommonDiv>
             <CommonDiv>
               <Row>
                 <Heading>Value</Heading>
@@ -313,34 +331,43 @@ export default function TransactionDetails() {
               <Row>
                 <Heading>Gas Used</Heading>
                 <SubHead>
-                  {new Intl.NumberFormat().format(row.gasUsed)} ({((row.gas / row.gasUsed) * 100).toFixed(2)})%
+                  {new Intl.NumberFormat().format(row.gasUsed)} (
+                  {((row.gas / row.gasUsed) * 100).toFixed(2)})%
                 </SubHead>
               </Row>
             </CommonDiv>
-            <GasPriceDiv>
-              <Heading>Gas Price</Heading>
-              <SubHead>
-                {row.gasPrice || 0} XDC ({row.gasPrice * wei || 0} Gwei)
-              </SubHead>
-            </GasPriceDiv>
-            <FeeDiv>
-              <Heading>Transaction Fee</Heading>
-              <SubHead>{row.gasPrice * row.gasUsed || 0} XDC</SubHead>
-            </FeeDiv>
-            <RawInputDiv>
-              <Heading>Raw input</Heading>
-              <SubHead>
-                <TransactionNumber>{input}</TransactionNumber>
-                <CopyToClipboard
-                  text={input}
-                  onCopy={() => setcopyToolTip(true)}
-                >
-                  <Tooltip title={copyToolTip ? "copied" : "copy to clipboard"}>
-                    <CopyToClipboardImg src="/images/copy.svg" />
-                  </Tooltip>
-                </CopyToClipboard>{" "}
-              </SubHead>
-            </RawInputDiv>
+            <CommonDiv>
+              <Row>
+                <Heading>Gas Price</Heading>
+                <SubHead>
+                  {row.gasPrice || 0} XDC ({row.gasPrice * wei || 0} Gwei)
+                </SubHead>
+              </Row>
+            </CommonDiv>
+            <CommonDiv>
+              <Row>
+                <Heading>Transaction Fee</Heading>
+                <SubHead>{row.gasPrice * row.gasUsed || 0} XDC</SubHead>
+              </Row>
+            </CommonDiv>
+            <CommonDiv>
+              <Row>
+                <Heading>Raw input</Heading>
+                <SubHead>
+                  <TransactionNumber>{input}</TransactionNumber>
+                  <CopyToClipboard
+                    text={input}
+                    onCopy={() => setcopyToolTip(true)}
+                  >
+                    <Tooltip
+                      title={copyToolTip ? "copied" : "copy to clipboard"}
+                    >
+                      <CopyToClipboardImg src="/images/copy.svg" />
+                    </Tooltip>
+                  </CopyToClipboard>{" "}
+                </SubHead>
+              </Row>
+            </CommonDiv>
           </MidContainer>
           <FunctionContainer>
             <CommonDiv>
@@ -505,7 +532,7 @@ const TopContainer = styled.div`
 
 const TabImage = styled.img`
   width: 22px;
-  @media (min-width: 300px) and (max-width: 425px) {
+  @media (min-width: 300px) and (max-width: 500px) {
     width: 13px;
     margin-bottom: 2px;
   }
@@ -557,10 +584,9 @@ const SubHead = styled.div`
   font-size: 14px;
   display: flex;
   font-weight: 500;
-  justify-content: space-between;
+  justify-content: start;
   width: 100%;
   // overflow: hidden;
-  max-width: 354px;
   white-space: nowrap;
 `;
 const SubHeadBlue = styled.div`
@@ -573,9 +599,10 @@ const SubHeadBlue = styled.div`
 const CommonDiv = styled.div`
   border-bottom: 0.031rem #eaf1ec solid;
   padding: 0.813rem;
-
-  @media (min-width: 300px) and (max-width: 768px) {
-    column-gap: 0px;
+  @media (min-width: 300px) and (max-width: 767px) {
+    width: 100%;
+    min-width: 200px;
+    max-width: 600px;
   }
 `;
 const CommonInputDiv = styled.div`
@@ -774,7 +801,7 @@ const Heading = styled.div`
   width: 100%;
   max-width: 16.25rem;
   @media (min-width: 0px) and (max-width: 767px) {
-    max-width: 11.25rem;
+    min-width: 170px;
   }
   @media (min-width: 768px) and (max-width: 1023px) {
     max-width: 11.25rem;
@@ -945,7 +972,7 @@ const TabLister = styled.div`
     padding-left: 10px;
     max-width: 34.125rem;
   }
-  @media (max-width: 425px) {
+  @media (max-width: 500px) {
     display: flex;
     justify-content: space-between;
     min-height: 45px;

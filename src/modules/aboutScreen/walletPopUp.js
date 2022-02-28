@@ -17,38 +17,39 @@ export default function WalletPopUp(props) {
   const connectWallet = () => {
     if (props.getCurrentUserDetails()) props.click();
   };
-  
+
   return (
     <>
-    <div><Toaster /></div>
-    <div>
-      {props.state ? (
-        <Dialog classes={{ paper: classes.dialogBox }} open={true}>
-          <MainContainer>
-            <Container>
-              <RowContainer>
-                <Add>
-                  Connect Wallet
-                  <CrossIcon
-                    alt=""
-                    src="/images/xdc-cut.svg"
-                    onClick={props.click}
-                  />
-                </Add>
-              </RowContainer>
-              <Line></Line>
-              <DetailBox>
-                <IconContainer>
-                  <StepsTitle>Step 1</StepsTitle>
-                  <img
-                    style={{ width: "40px" }}
-                    alt=""
-                    src="/images/xdc-install.svg"
-                  />
-                  <Title>Install XDCPay</Title>
-                  <SubTitle>
-                    Install XDCPay Chrome extension from{" "}
-                    <p>
+      <div>
+        <Toaster />
+      </div>
+      <div>
+        {props.state ? (
+          <Dialog classes={{ paper: classes.dialogBox }} open={true}>
+            <MainContainer>
+              <Container>
+                <RowContainer>
+                  <Add>
+                    Connect Wallet
+                    <CrossIcon
+                      alt=""
+                      src="/images/xdc-cut.svg"
+                      onClick={props.click}
+                    />
+                  </Add>
+                </RowContainer>
+                <Line></Line>
+                <DetailBox>
+                  <IconContainer>
+                    <StepsTitle>Step 1</StepsTitle>
+                    <img
+                      style={{ width: "40px", marginTop: "10px" }}
+                      alt=""
+                      src="/images/xdc-install.svg"
+                    />
+                    <Title style={{ marginTop: "2px" }}>Install XDCPay</Title>
+                    <SubTitle>
+                      Install XDCPay Chrome extension from{" "}
                       <a
                         href="https://chrome.google.com/webstore/detail/xdcpay/bocpokimicclpaiekenaeelehdjllofo?hl=en-GB"
                         rel="noopener noreferrer"
@@ -56,37 +57,38 @@ export default function WalletPopUp(props) {
                       >
                         here
                       </a>
-                    </p>
-                  </SubTitle>
-                </IconContainer>
-                <IconContainer>
-                  <StepsTitle>Step 2</StepsTitle>
-                  <img alt="" src="/images/xdc-login.svg" />
-                  <Title>Login to XDCPay</Title>
-                  <SubTitle>
-                    Login to you account on XDCPay Chrome extension.
-                  </SubTitle>
-                </IconContainer>
-                <IconContainer>
-                  <StepsTitle>Step 3</StepsTitle>
-                  <img alt="" src="/images/xdc-wallet.svg" />
-                  <Title>Connect Wallet</Title>
-                  <SubTitle>Connect your XDCPay wallet with SmartHub.</SubTitle>
-                </IconContainer>
-              </DetailBox>
-              <Button onClick={() => connectWallet()}>
-                <img
-                  style={{ paddingLeft: "30px", marginRight: "15px" }}
-                  alt=""
-                  src="/images/xdc-logo-white.svg"
-                />
-                Connect Wallet
-              </Button>
-            </Container>
-          </MainContainer>
-        </Dialog>
-      ) : null}
-    </div>
+                    </SubTitle>
+                  </IconContainer>
+                  <IconContainer>
+                    <StepsTitle>Step 2</StepsTitle>
+                    <img alt="" src="/images/xdc-login.svg" />
+                    <Title>Login to XDCPay</Title>
+                    <SubTitle>
+                      Login to you account on XDCPay Chrome extension.
+                    </SubTitle>
+                  </IconContainer>
+                  <IconContainer>
+                    <StepsTitle>Step 3</StepsTitle>
+                    <img alt="" src="/images/xdc-wallet.svg" />
+                    <Title>Connect Wallet</Title>
+                    <SubTitle>
+                      Connect your XDCPay wallet with SmartHub.
+                    </SubTitle>
+                  </IconContainer>
+                </DetailBox>
+                <Button onClick={() => connectWallet()}>
+                  <img
+                    style={{ paddingLeft: "30px", marginRight: "15px" }}
+                    alt=""
+                    src="/images/xdc-logo-white.svg"
+                  />
+                  Connect Wallet
+                </Button>
+              </Container>
+            </MainContainer>
+          </Dialog>
+        ) : null}
+      </div>
     </>
   );
 }
@@ -106,7 +108,7 @@ const Button = styled.button`
   border-radius: 0.25rem;
   font-size: 16px;
   font-weight: 600;
-  margin-top: 19px;
+  margin-top: 27px;
 `;
 const Title = styled.div`
   text-align: center;
@@ -136,10 +138,11 @@ const SubTitle = styled.div`
 `;
 
 const IconContainer = styled.div`
-  padding: 20px;
+  padding: 6px;
   border: 0.031rem #eaf1ec solid;
-  margin-top: 14px;
-  margin-right: 6px;
+  width: 200px;
+  height: 233px;
+  margin: 3px;
 `;
 const CrossIcon = styled.img`
   cursor: pointer;
@@ -154,7 +157,11 @@ const CrossIcon = styled.img`
 `;
 const DetailBox = styled.div`
   display: flex;
+  margin-top: 26px;
   // padding-bottom: 18px;
+  @media (min-width: 250px) and (max-width:550px) {
+    flex-direction: column;
+  }
 `;
 const MainContainer = styled.div`
   width: 100%;
