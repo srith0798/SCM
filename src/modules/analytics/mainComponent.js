@@ -393,7 +393,7 @@ export default function MainComponent(props) {
                         />
                         <br />
                         <TransactionHash>{selected?.address}</TransactionHash>
-                        <Image src="/images/Arrrow.svg" />
+                        <Image src="/images/arrrow.svg" />
                       </DropDown>
                       {isSetOpen ? (
                         <Box sx={styles}>
@@ -901,6 +901,6 @@ const BackImage = styled.img`
   cursor: pointer;
   margin-left: 4px;
   @media (min-width: 300px) and (max-width: 768px) {
-     display: none;
+    display: none;
   }
 `;

@@ -128,9 +128,7 @@ export default function ContractDetails(props) {
   };
   const [addTag, setAddTag] = useState(false);
   const Open = () => {
-   
     setAddTag(true);
-    
   };
   const Close = () => {
     setAddTag(false);
@@ -293,7 +291,6 @@ export default function ContractDetails(props) {
                     )}
 
                     {addTag && (
-                     
                       <AddTags
                         click={Close}
                         address={address}
@@ -425,13 +422,12 @@ export default function ContractDetails(props) {
           )}
           {activeButton === "Source Code" && (
             <SourceCode
-         data={
+              data={
                 address.status === "Verified"
-                   ? address.sourceCode
-                   : address.byteCode
-               }>
-          </SourceCode>
-           
+                  ? address.sourceCode
+                  : address.byteCode
+              }
+            ></SourceCode>
           )}
         </Container>
       </MainContainer>
@@ -567,6 +563,8 @@ const HashDesktop = styled.div`
   margin-top: 0.325rem;
   margin-bottom: 10px;
   border: none;
+  font-weight: 700;
+  font-size: 14px;
   width: 100%;
   max-width: 24.063rem;
   @media (max-width: 767px) {
@@ -576,7 +574,7 @@ const HashDesktop = styled.div`
 const HashMobile = styled.div`
   display: flex;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 700;
   flex-flow: row nowrap;
   margin-top: 0.325rem;
   margin-bottom: 10px;
@@ -608,7 +606,7 @@ const DetailsSection = styled.div`
   border-radius: 0.375rem;
   width: 100%;
   padding: 0.625rem 0.625rem 1.5rem 0.625rem;
-  margin-top: 3.25rem;
+  margin-top: 4.25rem;
   overflow-x: auto;
   @media (min-width: 300px) and (max-width: 768px) {
     height: auto;
@@ -636,7 +634,7 @@ const DetailsSection = styled.div`
 const Div = styled.div`
   display: flex;
   border-bottom: 0.063rem solid #efefef;
-  padding: 1.25rem 1.25rem 0.7rem 1.25rem;
+  padding: 1.25rem 1.25rem 1rem 1.25rem;
   @media (min-width: 375px) and (max-width: 1200px) {
     border-bottom: 0.063rem solid #efefef;
     width: 1000px;
@@ -692,8 +690,8 @@ const EvmData = styled.div`
   }
 `;
 const CopyImg = styled.img`
-  margin-left: 5%;
   cursor: pointer;
+  margin-bottom: 4px;
   @media (max-width: 767px) {
     margin-left: -20%;
   }

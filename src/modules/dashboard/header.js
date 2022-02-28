@@ -38,10 +38,10 @@ function Header(props) {
     <HeaderContainer>
       <SpaceBetween>
         <div style={{ display: "flex", marginLeft: "12px" }}>
-          <GridLogo
+          {/* <GridLogo
             src="/images/Grid.svg"
             onClick={() => setOpenHumburger(openHumburger)}
-          />
+          /> */}
           <XmartlyLogo src="/images/Logo.svg" />
         </div>
         {sessionManager.getDataFromCookies("accountAddress") ? (
@@ -125,7 +125,7 @@ const SpaceBetween = styled.div`
   padding-top: 3px;
   @media (min-width: 768px) and (max-width: 1200px) {
     padding-bottom: 7px;
-  padding-top: 7px;
+    padding-top: 7px;
   }
 `;
 const Button = styled.button`
