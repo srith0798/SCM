@@ -155,6 +155,9 @@ const CrossIcon = styled.img`
 const DetailBox = styled.div`
   display: flex;
   // padding-bottom: 18px;
+  @media (min-width: 250px) and (max-width:550px) {
+    flex-direction: column;
+  }
 `;
 const MainContainer = styled.div`
   width: 100%;
