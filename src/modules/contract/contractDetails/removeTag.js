@@ -21,15 +21,15 @@ export default function RemoveTag(props) {
     try {
       const response = await contractsService.removeTags(requestData);
       console.log("removeResponse", response);
+      props.click();
+      props.getContractById();
+      window.location.reload();
     } catch (e) {
       console.log("Error", e);
     }
   };
   const classes = useStyles();
-  const Close = () => {
-    props.click();
-    props.getContractById();
-  };
+
   return (
     <div>
       <Dialog classes={{ paper: classes.dialogBox }} open={true}>
@@ -38,11 +38,15 @@ export default function RemoveTag(props) {
             <SubContainer>
               <Add>Remove tag from contract</Add>
             </SubContainer>
-            <Content>Are you sure you want to remove this tag from the contract?</Content>
+            <Content>
+              Are you sure you want to remove this tag from the contract?
+            </Content>
 
-            <SubContainer style={{ width: "100%", maxWidth: "160px", marginTop: "30px" }}>
+            <SubContainer
+              style={{ width: "100%", maxWidth: "160px", marginTop: "30px" }}
+            >
               <ButtonConfirm text={"Remove"} click={removeTags} />
-              <CancelButton onClick={() => Close()}>Cancel</CancelButton>
+              <CancelButton onClick={props.click}>Cancel</CancelButton>
             </SubContainer>
           </Container>
         </MainContainer>
