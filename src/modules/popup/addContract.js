@@ -48,7 +48,6 @@ export default function AddContract(props) {
     setLoader(false);
     if (error) {
       setError(error)
-      utility.apiFailureToast(error);
       return;
     }
     if (response) {
@@ -62,6 +61,7 @@ export default function AddContract(props) {
       checkAddress();
     }
   };
+  
   return (
     <div>
       <ShowLoader state={loader} top={"33%"} />
@@ -129,9 +129,11 @@ export default function AddContract(props) {
                 </SelectImport>
               </ImportBox>
             )}
+           
             <Button
+            disabled={address==""}
               onClick={addContract}
-              style={{ backgroundColor: address === "" ? "#9DB5F8" : "" }}
+              style={{ backgroundColor: address === "" ? "#9DB5F8" : ""  }}
             >
               Import Contracts
             </Button>

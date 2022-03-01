@@ -166,10 +166,20 @@ const MainBoxContainer = styled.div`
   }
   @media (min-width: 768px) and (max-width: 1200px) {
     padding: 16px;
-    height:212vh;
+    height:128vh;
   }
-  @media (min-width: 800px) and (max-width: 1200px) {
-    height:200vh;!important;
+  @media (min-width: 800px) and (max-width: 1024px) {
+    height:117vh;!important;
+  }
+  @media (min-width: 1024px) and (max-width: 1200px) {
+    height:175vh;!important;
+  }
+  @media (min-height: 1024px) and (max-height: 1190px) {
+    padding: 16px;
+    height:108vh;
+  }
+  @media (min-width:1200px){
+    height:127vh
   }
 `;
 const Container = styled.div`
@@ -354,14 +364,7 @@ const HeadingContainer = styled.div`
     white-space: nowrap;
     padding-top: 20px;
   }
-  <<<<<<< HEAD @media (min-width: 300px) and (max-width: 768px) {
-    white-space: nowrap;
-  }
-  =======>>>>>>>d1c9b590dc079a5a1d4f0a9c0703bc780e13bec6
-    @media
-    (min-width: 768px)
-    and
-    (max-width: 1200px) {
+  @media (min-width: 768px) and (max-width: 1200px) {
     white-space: nowrap;
   }
 `;
