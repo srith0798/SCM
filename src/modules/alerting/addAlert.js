@@ -71,6 +71,8 @@ export default function AddAlert() {
     changeProgress("PARAMETERS")
     if(type === genericConstants.ALERT_TYPE.ADDRESS)
        getContracts();
+    else if(type === genericConstants.ALERT_TYPE.NETWORK)   
+      getTags();
   }
 
   const getContracts = async () => {
@@ -81,6 +83,26 @@ export default function AddAlert() {
     setLoader(true);
     const [error, response] = await utility.parseResponse(
       contractsService.getContractsList(requestData)
+    );
+    if (error) {
+      setLoader(false);
+      return;
+    }
+    if (response.contractList.length === 0) {
+      return;
+    }
+    setLoader(false);
+    setParametersData(response.contractList);
+  };
+  
+  const getTags = async () => {
+    let userId = sessionManager.getDataFromCookies("userId");
+    const requestData = {
+      userId: userId
+    };
+    setLoader(true);
+    const [error, response] = await utility.parseResponse(
+      contractsService.getTags(requestData)
     );
     if (error) {
       setLoader(false);
