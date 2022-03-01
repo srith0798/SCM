@@ -332,7 +332,7 @@ export default function TransactionDetails() {
                 <Heading>Gas Used</Heading>
                 <SubHead>
                   {new Intl.NumberFormat().format(row.gasUsed)} (
-                  {((row.gas / row.gasUsed) * 100).toFixed(2)})%
+                  {((row.gas / row.gasUsed) * 100).toFixed(2)})
                 </SubHead>
               </Row>
             </CommonDiv>
@@ -340,7 +340,8 @@ export default function TransactionDetails() {
               <Row>
                 <Heading>Gas Price</Heading>
                 <SubHead>
-                  {row.gasPrice || 0} XDC ({row.gasPrice * wei || 0} Gwei)
+                  {row.gasPrice || 0} XDC 
+                  {/* ({row.gasPrice * wei || 0} Gwei) */}
                 </SubHead>
               </Row>
             </CommonDiv>

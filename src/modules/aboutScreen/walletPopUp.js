@@ -76,6 +76,61 @@ export default function WalletPopUp(props) {
                     </SubTitle>
                   </IconContainer>
                 </DetailBox>
+
+                {/* for mobile devices */}
+                <DetailBoxMobile>
+                <IconContainerMobile>
+                    <StepsTitleMobile>Step 1</StepsTitleMobile>
+                    <DivMobile>
+                    <img
+                      style={{ width: "40px",margin: "1px 8px 1px 5px" }}
+                      alt=""
+                      src="/images/xdc-install.svg"
+                    />
+                    <SubDivMob>
+                    <TitleMobile style={{ marginTop: "2px" }}>Install XDCPay</TitleMobile>
+                    <SubTitleMobile>
+                      Install XDCPay Chrome extension from{" "}
+                      <a
+                        href="https://chrome.google.com/webstore/detail/xdcpay/bocpokimicclpaiekenaeelehdjllofo?hl=en-GB"
+                        rel="noopener noreferrer"
+                        target="_blank"
+                      >
+                        here
+                      </a>
+                    </SubTitleMobile>
+                    </SubDivMob>
+                   
+                    </DivMobile>
+                    
+                  </IconContainerMobile>
+                  <IconContainerMobile>
+                    <StepsTitleMobile>Step 2</StepsTitleMobile>
+                    <DivMobile>
+                    <img alt="" src="/images/xdc-login.svg" />
+                    <SubDivMob>
+                    <TitleMobile>Login to XDCPay</TitleMobile>
+                    <SubTitleMobile>
+                      Login to you account on XDCPay Chrome extension.
+                    </SubTitleMobile>
+                    </SubDivMob>
+                    </DivMobile>
+                  </IconContainerMobile>
+                  <IconContainerMobile>
+                    <StepsTitleMobile>Step 3</StepsTitleMobile>
+                    <DivMobile>
+                    <img alt="" src="/images/xdc-wallet.svg" />
+                    <SubDivMob>
+                    <TitleMobile>Connect Wallet</TitleMobile>
+                    <SubTitleMobile>
+                      Connect your XDCPay wallet with SmartHub.
+                    </SubTitleMobile>
+                    </SubDivMob>
+                    </DivMobile>
+                  </IconContainerMobile>
+
+
+                </DetailBoxMobile>
                 <Button onClick={() => connectWallet()}>
                   <img
                     style={{ paddingLeft: "30px", marginRight: "15px" }}
@@ -109,6 +164,9 @@ const Button = styled.button`
   font-size: 16px;
   font-weight: 600;
   margin-top: 27px;
+  @media (min-width: 300px) and (max-width: 580px) {
+    margin-top: 9px;
+  }
 `;
 const Title = styled.div`
   text-align: center;
@@ -120,6 +178,16 @@ const Title = styled.div`
   opacity: 1;
   padding-top: 20px;
 `;
+const TitleMobile = styled.div`
+text-align: left;
+  font: normal normal 600 16px/20px Inter;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0px;
+  color: #1f1f1f;
+  opacity: 1;
+  padding-top: 0px;`;
+
 const StepsTitle = styled.div`
   text-align: center;
   font: normal normal normal 14px/17px Inter;
@@ -127,6 +195,16 @@ const StepsTitle = styled.div`
   color: #7b7979;
   opacity: 1;
   padding-bottom: 10px;
+`;
+const StepsTitleMobile = styled.div`
+  text-align: left;
+  font: normal normal normal 14px/17px Inter;
+  letter-spacing: 0px;
+  color: #7b7979;
+  opacity: 1;
+  padding-bottom: 10px;
+  margin-top: 22px;
+  margin-left: 15px;
 `;
 const SubTitle = styled.div`
   text-align: center;
@@ -136,6 +214,14 @@ const SubTitle = styled.div`
   font-size: 16px;
   font-weight: normal;
 `;
+const SubTitleMobile =styled.div`
+text-align: left;
+  letter-spacing: 0px;
+  opacity: 1;
+  padding-top: 10px;
+  font-size: 14px;
+  font-weight: normal;
+`;
 
 const IconContainer = styled.div`
   padding: 6px;
@@ -143,6 +229,15 @@ const IconContainer = styled.div`
   width: 200px;
   height: 233px;
   margin: 3px;
+`;
+const IconContainerMobile = styled.div`
+  padding: 6px;
+  border: 0.031rem #eaf1ec solid;
+  width: 96%;
+  height: 148px;
+  margin: 3px;
+  margin-bottom: 16px;
+  border-radius: 6px;
 `;
 const CrossIcon = styled.img`
   cursor: pointer;
@@ -159,10 +254,32 @@ const DetailBox = styled.div`
   display: flex;
   margin-top: 26px;
   // padding-bottom: 18px;
-  @media (min-width: 250px) and (max-width:550px) {
+  @media (min-width: 250px) and (max-width:580px) {
     flex-direction: column;
+    display:none;
   }
 `;
+const DetailBoxMobile = styled.div`
+  display: flex;
+  margin-top: 26px;
+  // padding-bottom: 18px;
+  @media (min-width: 250px) and (max-width:580px) {
+    flex-direction: column;
+  }
+  @media (min-width: 580px) {
+    display:none;
+  }
+`;
+const DivMobile = styled.div`
+@media (min-width: 250px) and (max-width:768px) {
+  display: flex;
+  flex-direction: row;
+  margin-top: 0px;
+  margin-left: 12px;
+}
+`;
+const SubDivMob = styled.div``;
+
 const MainContainer = styled.div`
   width: 100%;
   display: flex;
