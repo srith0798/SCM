@@ -26,7 +26,7 @@ export default function Faqs(props) {
       id: 3,
       questionText: "How can I add a smart contract ?",
       answerText:
-        "Follow the below-mentioned steps to add a smart contract on Xmartly Connect your XDCPay walletClick on Add your Smart Contract.Import your publicly verified contract by entering the contract address.Click on Import Contracts.",
+        "Follow the below-mentioned steps to add a smart contract on Xmartly Connect your XDCPay wallet | Click on Add your Smart Contract.| Import your publicly verified contract by entering the contract address.| Click on Import Contracts.",
     },
     {
       id: 4,

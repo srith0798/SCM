@@ -158,9 +158,10 @@ const SidebarContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 119%;
+  height: 86%;
   width: 248px;
   padding-top: 15px;
+  overflow-x: hidden;
   @media (min-width: 1023px) {
     display: none;
   }

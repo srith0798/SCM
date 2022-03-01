@@ -111,6 +111,9 @@ const DetailBox = styled.div`
 const Div = styled.div`
   padding: 0.938rem;
   border-bottom: 0.063rem solid #e3e7eb;
+  @media (min-width: 300px) and (max-width: 1024px) {
+    width: fit-content;
+  }
 `;
 const RowData = styled.div`
   display: flex;
