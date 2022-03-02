@@ -49,8 +49,12 @@ export default function AddTags(props) {
             />
             <SubContainer
               style={{ width: "100%", maxWidth: "160px", marginTop: "30px" }}
-            >
-              <ButtonConfirm text={"Add Tag"} click={addContractTag} />
+            >  
+              <ButtonConfirm
+                input={input}
+                text={"Add Tag"}
+                click={addContractTag}
+                /> 
               <CancelButton onClick={props.click}>Cancel</CancelButton>
             </SubContainer>
           </Container>

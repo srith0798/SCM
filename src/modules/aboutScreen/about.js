@@ -260,6 +260,9 @@ const DivDesktop = styled.div`
   }
 `;
 const MobileSpan = styled.div`
+@media (min-width: 300px) and (max-width: 768px) {
+  text-align:center;
+}
   @media (min-width: 414px) and (max-width: 2300px) {
     display: none;
   }
@@ -452,8 +455,8 @@ const SmartButton = styled.div`
     font-size: 0.6rem;
     height: 40px;
     margin-right: 64px;
-    margin-left: 61px;
-    width: 162px;
+    margin-left: 48px;
+    width: 181px;
   }
 
   @media (max-width: 375px) {
