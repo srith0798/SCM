@@ -21,6 +21,8 @@ export default function TransactionDetails() {
   const [from, setFrom] = React.useState("");
   const [to, setTo] = React.useState("");
   const [input, setInput] = React.useState("");
+  const [inputDesktop, setInputDesktop] = React.useState("");
+  const [inputCopy, setInputCopy] = React.useState("");
   const [showInputData, setShowInputData] = React.useState(false);
   const [showOutputData, setShowOutputData] = React.useState(false);
 
@@ -45,6 +47,8 @@ export default function TransactionDetails() {
       const response = await ContractsService.getTransactionsList(requestData);
       setRow(response.transactionList[0]);
       setInput(utility.truncateTxnAddress(response.transactionList[0].input));
+      setInputDesktop(utility.truncateTxnAddressDesktop(response.transactionList[0].input));
+      setInputCopy(response.transactionList[0].input)
       setFrom(utility.truncateTxnAddress(response.transactionList[0].from));
       setTo(utility.truncateTxnAddress(response.transactionList[0].to));
     } catch (e) {}
@@ -237,7 +241,7 @@ export default function TransactionDetails() {
                 <SubHead>{row.network}</SubHead>
               </Row>
             </CommonDiv>
-            <CommonDiv check={status}>
+            <CommonDiv style={{display: status=="Success"? "none":"" }} check={status}>
               <Row>
                 <Heading>Error</Heading>
                 {/* <SubHead>Out of Gas</SubHead> */}
@@ -331,8 +335,9 @@ export default function TransactionDetails() {
               <Row>
                 <Heading>Gas Used</Heading>
                 <SubHead>
-                  {new Intl.NumberFormat().format(row.gasUsed)} (
-                  {((row.gas / row.gasUsed) * 100).toFixed(2)})
+                  {new Intl.NumberFormat().format(row.gasUsed)} 
+                  {/* (
+                  {((row.gas / row.gasUsed) * 100).toFixed(2)}) */}
                 </SubHead>
               </Row>
             </CommonDiv>
@@ -355,9 +360,9 @@ export default function TransactionDetails() {
               <Row>
                 <Heading>Raw input</Heading>
                 <SubHead>
-                  <TransactionNumber>{input}</TransactionNumber>
+                  <Input><TransactionNumber>{inputDesktop}</TransactionNumber></Input>
                   <CopyToClipboard
-                    text={input}
+                    text={inputCopy}
                     onCopy={() => setcopyToolTip(true)}
                   >
                     <Tooltip
@@ -524,6 +529,9 @@ const MainContainer = styled.div`
   @media (min-width: 340px) and (max-width: 768px) {
     padding: 1.2rem;
   }
+`;
+const Input = styled.div`
+margin-right:20px;
 `;
 const TopContainer = styled.div`
   padding-left: 1.25rem;

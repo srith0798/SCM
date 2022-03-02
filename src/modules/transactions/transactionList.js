@@ -637,6 +637,7 @@ const BottomLabel = styled.div`
   font-family: "Inter", Medium;
 `;
 const Div = styled.div`
+
   padding: 0.75rem;
   border-bottom: 1px solid #e3e7eb;
   white-space: nowrap;
@@ -644,6 +645,9 @@ const Div = styled.div`
   width: auto;
   @media (min-width: 300px) and (max-width: 767px) {
     column-gap: 70px;
+  }
+  @media (min-width: 768px) and (max-width: 1200px) {
+    width:1111px
   }
 `;
 const RowData = styled.div`
@@ -811,8 +815,8 @@ const IconContainer = styled.div`
   @media (min-width: 300px) and (max-width: 768px) {
     width: 100%;
     max-width: 123px;
-    height: 35px;
-    margin-top: 3px;
+    height: 37px;
+    margin-top: 0px;
   }
 `;
 const Heading = styled.span`

@@ -88,6 +88,10 @@ const HeaderContainer = styled.div`
 `;
 const XmartlyLogo = styled.img`
   margin-right: 17px;
+  @media (min-width: 300px) and (max-width: 1024px) {
+    margin-left:50px
+  }
+  
 `;
 // const GridLogo = styled.img`
 //   margin-right: 17px;
