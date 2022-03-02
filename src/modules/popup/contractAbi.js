@@ -67,15 +67,15 @@ const Add = styled.div`
   font: normal normal 600 24px/29px Inter;
   color: #303134;
 `;
-const Div = styled.div`
-  background-color: #f0f2fc;
-  border-radius: 4px;
-  width: 100%;
-  max-width: 650px;
-  height: auto;
-  margin-top: 8px;
-  padding: 10px;
-  display: inline-block;
-  color: #aaadc4;
-  overflow-x: scroll;
-`;
+// const Div = styled.div`
+//   background-color: #f0f2fc;
+//   border-radius: 4px;
+//   width: 100%;
+//   max-width: 650px;
+//   height: auto;
+//   margin-top: 8px;
+//   padding: 10px;
+//   display: inline-block;
+//   color: #aaadc4;
+//   overflow-x: scroll;
+// `;

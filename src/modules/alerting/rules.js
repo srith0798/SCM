@@ -385,4 +385,4 @@ const TabView = styled.div`
   }
 `;
 
-const DetailBox = styled.div``;
+// const DetailBox = styled.div``;

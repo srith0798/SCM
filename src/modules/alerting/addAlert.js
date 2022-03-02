@@ -10,6 +10,10 @@ import { genericConstants } from "../../constants";
 import { sessionManager } from "../../managers/sessionManager";
 import utility from "../../utility";
 import contractsService from "../../services/contractsService";
+import DestinationService from "../../services/destination";
+import AlertService from "../../services/alert";
+
+
 
 export default function AddAlert() {
   const [activeButton, setActiveButton] = React.useState("Rules");
@@ -17,8 +21,10 @@ export default function AddAlert() {
   const [alertTarget, setAlertTarget] = React.useState("");
   const [loader, setLoader] = React.useState(false);
   const [parametersData, setParametersData] = React.useState(false);
-
-
+  const [threshold, setThreshold] = React.useState("");
+  const [destinations, setDestinations] = React.useState([]);
+  const [selectedDestinations, setSelectedDestinations] = React.useState([]);
+  const [targetValue, setTargetValue] = React.useState("");
   const [icon, setIcon] = React.useState({
     successfulTransaction: genericConstants.ALERT_TYPE_IMAGES.SUCCESSFULL_TRANSACTIONS.IMAGE,
     failedTransaction:  genericConstants.ALERT_TYPE_IMAGES.FAILED_TRANSACTIONS.IMAGE,
@@ -36,19 +42,17 @@ export default function AddAlert() {
     history.push("/alerting");
   };
 
-  // alert target
-  const [addressToken, setaddressToken] = React.useState(
-    "/images/address-logo-blue.svg"
-  );
-  const [networkAddress, setnetworkAddress] = React.useState(
-    "/images/network-logo-blue.svg"
-  );
-  const [tagAddress, settagAddress] = React.useState(
-    "/images/tag-logo-blue.svg"
-  );
   const [progress, setProgress] = React.useState("ALERT_TYPE");
-  const changeProgress = (value) => {
+  const changeProgress =async (value) => {
+    if(value === "DESTINATION")
+      getDestinations();
+    if(value === "Rules")
+     {
+       await addAlert();
+       history.push("/alerting");
+    }
     setProgress(value);
+
   };
   const backButton = () => {
     history.push("/alerting");
@@ -71,6 +75,8 @@ export default function AddAlert() {
     changeProgress("PARAMETERS")
     if(type === genericConstants.ALERT_TYPE.ADDRESS)
        getContracts();
+    else if(type === genericConstants.ALERT_TYPE.TAG)   
+       getTags();
   }
 
   const getContracts = async () => {
@@ -89,9 +95,65 @@ export default function AddAlert() {
     if (response.contractList.length === 0) {
       return;
     }
+    console.log("test", response);
     setLoader(false);
     setParametersData(response.contractList);
   };
+  
+  const getTags = async () => {
+    let userId = sessionManager.getDataFromCookies("userId");
+    const requestData = {
+      userId: userId
+    };
+    setLoader(true);
+    const [error, response] = await utility.parseResponse(
+      contractsService.getTags(requestData)
+    );
+    if (error) {
+      setLoader(false);
+      return;
+    }
+    if (response.length === 0) {
+      return;
+    }
+    setLoader(false);
+    setParametersData(response);
+  };
+  const getDestinations =async () =>{
+    let requestData = {
+      userId : sessionManager.getDataFromCookies("userId")
+    }
+    const [error,response] = await utility.parseResponse(DestinationService.getDestinations(requestData));
+    if(error)
+      return;
+    setDestinations(response);
+  }
+  const selectDestinations =async (event) =>{
+    let id = event.target.value
+    if(event.target.checked)
+    setSelectedDestinations(prevArray => [...prevArray, id])
+    else 
+    setSelectedDestinations(selectedDestinations.filter(item => item !== id));
+  }
+  const selectTargetValue = (event)=>{
+    setTargetValue(event.target.value);
+  }
+  const addAlert =async () =>{
+    let requestData = {
+      userId : sessionManager.getDataFromCookies("userId"),
+      type: alertType,
+      target:{
+        type : alertTarget,
+        value : targetValue,
+        threshold:''
+      },
+      destinations:selectedDestinations
+    }
+    const [error,response] = await utility.parseResponse(AlertService.addAlert(requestData));
+    if(error)
+      return;
+  }
+  
   return (
     <>
       <MainContainer>
@@ -227,9 +289,6 @@ export default function AddAlert() {
                  selectAlertTarget={selectAlertTarget}
                  changeOriginalSourceForIcons={changeOriginalSourceForIcons}
                  changeSourceForIcons={changeSourceForIcons}
-                 addressToken={addressToken}
-                 networkAddress={networkAddress}
-                 tagAddress={tagAddress}
                  icon={icon}
                  ></AlertTarget>
                 )}
@@ -253,14 +312,23 @@ export default function AddAlert() {
                 {progress === "PARAMETERS" && (
                   <AlertTargetContainer style={{ flexDirection: "column" }}>
                     <ParameterContainer>
-                      <FilterSelect>
+                      <FilterSelect onChange={selectTargetValue}>
                          <option value="">Filter by event </option>
-                        {parametersData && parametersData.length && parametersData.map((option)=>(
+                        {parametersData && parametersData.length ? parametersData.map((option)=>(
+                          <>
+                          {alertTarget === genericConstants.ALERT_TYPE.ADDRESS ?
                           <option value={option.address}>{option.address}</option>
-                        ))}
+                          :  <option value={option}>{option}</option>}
+                          </>
+                        )) :   <option value="">No Data Available </option>}
                       </FilterSelect>
                     </ParameterContainer>
-                    <ApplyButton onClick={() => changeProgress("DESTINATION")}>
+                    <ParameterContainer>
+                    {alertType === genericConstants.ALERT_TYPE.TRANSACTION_VALUE || alertType === genericConstants.ALERT_TYPE.XDC_BALANCE ?
+                      <Threshold placeholder="Enter Threshold" value={threshold} onChange={(event)=>{setThreshold(event.target.value)}}>
+                      </Threshold> : "" }
+                    </ParameterContainer>
+                    <ApplyButton onClick={() => changeProgress("DESTINATION")} disabled = {!parametersData.length}>
                       Next
                     </ApplyButton>
                   </AlertTargetContainer>
@@ -276,71 +344,9 @@ export default function AddAlert() {
                     sent to.
                   </SelectType>
                   {progress === "DESTINATION" && (
-                    <DestinationDetail>
-                      <EmailBox>
-                        <EmailDetail>
-                          <Img alt="" src="/images/email.svg" />
-                          Email
-                          <EmailShow>it@supportteam.com</EmailShow>
-                        </EmailDetail>
-
-                        <SliderDiv>
-                          <label class="switch">
-                            <input type="checkbox" />
-                            <span class="slider round"></span>
-                          </label>
-                        </SliderDiv>
-                      </EmailBox>
-                      <EmailBox>
-                        <EmailDetail>
-                          <Img alt="" src="/images/webhook.svg" />
-                          Finance
-                          <EmailShow>https://webhook.site/a0e</EmailShow>
-                        </EmailDetail>
-                        <SliderDiv>
-                          <label class="switch">
-                            <input type="checkbox" />
-                            <span class="slider round"></span>
-                          </label>
-                        </SliderDiv>
-                      </EmailBox>
-
-                      <RowContainer>
-                        <Buttonn>
-                          <img
-                            alt=""
-                            src="/images/slack.svg"
-                            style={{
-                              marginRight: "0.25rem",
-                              width: "1.3rem",
-                            }}
-                          />{" "}
-                          Slack
-                        </Buttonn>
-                        <Buttonn>
-                          <img
-                            alt=""
-                            src="/images/webhook.svg"
-                            style={{
-                              marginRight: "0.25rem",
-                              width: "1.3rem",
-                            }}
-                          />
-                          Webhook
-                        </Buttonn>
-                        <Buttonn>
-                          <img
-                            alt=""
-                            src="/images/email.svg"
-                            style={{
-                              marginRight: "0.25rem",
-                              width: "1.3rem",
-                            }}
-                          />
-                          Email
-                        </Buttonn>
-                      </RowContainer>
-                    </DestinationDetail>
+                   <DestinationComponent destinations={destinations}
+                   selectDestinations = {selectDestinations}
+                   ></DestinationComponent>
                   )}
                 </ProgressHeader>
               </AlertContainer>
@@ -512,6 +518,65 @@ const AlertTarget = (props) =>{
                       <SubTitle>Recieve alert for every address</SubTitle>
                     </BoxContainer>
                   </AlertTargetContainer>
+  )
+}
+
+const DestinationComponent = (props) =>{
+  const {destinations} =props;
+  return(
+
+    <DestinationDetail>
+      {destinations && destinations.length && destinations.map((destination)=>(
+            <EmailBox>
+            <EmailDetail>
+              <Img alt="" src="/images/email.svg" />
+              {destination.type}
+              <EmailShow>{destination.url}</EmailShow>
+            </EmailDetail>
+            <SliderDiv>
+              <label class="switch">
+                <input type="checkbox" value={destination.destinationId} onChange={(event)=>props.selectDestinations(event)} />
+                <span class="slider round"></span>
+              </label>
+            </SliderDiv>
+          </EmailBox>
+      ))}
+    <RowContainer>
+      <Buttonn>
+        <img
+          alt=""
+          src="/images/slack.svg"
+          style={{
+            marginRight: "0.25rem",
+            width: "1.3rem",
+          }}
+        />{" "}
+        Slack
+      </Buttonn>
+      <Buttonn>
+        <img
+          alt=""
+          src="/images/webhook.svg"
+          style={{
+            marginRight: "0.25rem",
+            width: "1.3rem",
+          }}
+        />
+        Webhook
+      </Buttonn>
+      <Buttonn>
+        <img
+          alt=""
+          src="/images/email.svg"
+          style={{
+            marginRight: "0.25rem",
+            width: "1.3rem",
+          }}
+        />
+        Email
+      </Buttonn>
+    </RowContainer>
+  </DestinationDetail>
   )
 }
 const DestinationDetail = styled.div`
@@ -791,6 +856,17 @@ const Img = styled.img`
   margin-right: 4px;
 `;
 const FilterSelect = styled.select`
+  outline: none;
+  border: none;
+  background-color: #f5f6fd;
+  border-radius: 3px;
+  width: 100%;
+  padding: 0px 10px 0px 10px;
+  font-size: 12px;
+  height: 40px;
+  color: #a6aabf;
+`;
+const Threshold = styled.input`
   outline: none;
   border: none;
   background-color: #f5f6fd;

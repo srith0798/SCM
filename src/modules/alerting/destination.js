@@ -1,10 +1,36 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Row } from "simple-flexbox";
 import "react-tabs/style/react-tabs.css";
 import styled from "styled-components";
 import Tooltip from "@mui/material/Tooltip";
+import utility from "../../utility";
+import DestinationService from "../../services/destination";
+import { sessionManager } from "../../managers/sessionManager";
+
 
 export default function Destination() {
+  const [destinations , setDestinations] = React.useState([]);
+  const getDestinations =async () =>{
+    let requestData = {
+      userId : sessionManager.getDataFromCookies("userId")
+    }
+    const [error,response] = await utility.parseResponse(DestinationService.getDestinations(requestData));
+    if(error)
+      return;
+    setDestinations(response);
+  }
+  const addDestination =async () =>{
+    let requestData = {
+      userId : sessionManager.getDataFromCookies("userId")
+    }
+    const [error,response] = await utility.parseResponse(DestinationService.addDestination(requestData));
+    if(error)
+      return;
+    setDestinations(response);
+  }
+  useEffect(() => {
+    getDestinations();
+  }, []);
   return (
     <>
       <MainContainer>
@@ -43,48 +69,31 @@ export default function Destination() {
           </Tooltip>
         </ColumnOne>
         <LastDiv>
-          <Div>
-            <RowData>
-              <Img alt="" src="/images/email.svg" />
-              <ColumnTwo style={{ color: "#191919" }}>Finance</ColumnTwo>
-              <ColumnTwo style={{ fontWeight: "normal" }}>
-                it@supportteam.com
-              </ColumnTwo>
-              <ColumnTwo>
-                <ColorChanging style={{ fontWeight: "normal" }}>
-                  Verified
-                </ColorChanging>
-              </ColumnTwo>
-              <ColumnTwo>
-                <Tooltip disableFocusListener title="Delete">
-                  <img
-                    alt=""
-                    src="/images/deletes.svg"
-                    style={{ width: "1.1rem" }}
-                  />
-                </Tooltip>
-              </ColumnTwo>
-            </RowData>
-          </Div>
-          <Div>
-            <RowData>
-              <Img alt="" src="/images/email.svg" />
-              <ColumnTwo style={{ color: "#191919" }}> Finance</ColumnTwo>
-              <ColumnTwo style={{ fontWeight: "normal" }}>
-                http://webhook.site/ssss
-              </ColumnTwo>
-              <ColumnTwo>
-                <ColorChanging style={{ fontWeight: "normal" }}>
-                  Connected
-                </ColorChanging>
-              </ColumnTwo>
-              <ColumnTwo>
-                <Tooltip disableFocusListener title="Delete">
-                  <Icon src="/images/deletes.svg" style={{ width: "1.1rem" }} />
-                </Tooltip>
-              </ColumnTwo>
-            </RowData>
-          </Div>
+          {destinations && destinations.length >0 && destinations.map((destination)=>(
+                <Div>
+                <RowData>
+                  <Img alt="" src="/images/email.svg" />
+                  <ColumnTwo style={{ color: "#191919" }}>{destination.type}</ColumnTwo>
+                  <ColumnTwo style={{ fontWeight: "normal" }}>
+                    {destination.url}
+                  </ColumnTwo>
+                  <ColumnTwo>
+                    <ColorChanging style={{ fontWeight: "normal" }}>
+                      {destination.status}
+                    </ColorChanging>
+                  </ColumnTwo>
+                  <ColumnTwo>
+                    <Tooltip disableFocusListener title="Delete">
+                      <img
+                        alt=""
+                        src="/images/deletes.svg"
+                        style={{ width: "1.1rem" }}
+                      />
+                    </Tooltip>
+                  </ColumnTwo>
+                </RowData>
+              </Div>
+          ))}
         </LastDiv>
       </MainContainer>
     </>
