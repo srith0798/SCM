@@ -501,7 +501,7 @@ const FinanceTag = styled.div`
 `;
 const ImageTag = styled.div`
   background-image: ${(props) =>
-    props.removeTagImage == props.index
+    props.removeTagImage === props.index
       ? `url("/images/close.svg")`
       : `url("/images/Tag.svg")`};
 
@@ -665,18 +665,18 @@ const SolidityData = styled.div`
     margin-right: 13px;
   }
 `;
-const TagData = styled.div`
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: #191919;
-  width: 100%;
-  max-width: 9.375rem;
-  font-size: 1rem;
-  font-weight: 600;
-  @media (min-width: 340px) and (max-width: 768px) {
-    margin-left: 14px;
-  }
-`;
+// const TagData = styled.div`
+//   font-size: 0.875rem;
+//   font-weight: 600;
+//   color: #191919;
+//   width: 100%;
+//   max-width: 9.375rem;
+//   font-size: 1rem;
+//   font-weight: 600;
+//   @media (min-width: 340px) and (max-width: 768px) {
+//     margin-left: 14px;
+//   }
+// `;
 const EvmData = styled.div`
   color: #191919;
   width: 100%;

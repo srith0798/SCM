@@ -6,7 +6,7 @@ import utility from "../../utility";
 const Web3 = require("web3");
 
 function Header(props) {
-  const [openHumburger, setOpenHumburger] = useState(true);
+  // const [openHumburger, setOpenHumburger] = useState(true);
   const getUserAccountAddress = () => {
     let user = "";
     user = sessionManager.getDataFromCookies("accountAddress");
@@ -93,12 +93,12 @@ const XmartlyLogo = styled.img`
   }
   
 `;
-const GridLogo = styled.img`
-  margin-right: 17px;
-  @media (max-width: 1024px) {
-    display: none;
-  }
-`;
+// const GridLogo = styled.img`
+//   margin-right: 17px;
+//   @media (max-width: 1024px) {
+//     display: none;
+//   }
+// `;
 const XDCContainer = styled.div`
   background: #3e579a;
   display: flex;

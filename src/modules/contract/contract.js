@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Row } from "simple-flexbox";
+// import { Row } from "simple-flexbox";
 import ShowLoader from "../../common/components/showLoader";
 import AddContract from "../popup/addContract";
 import { history } from "../../managers/history";
