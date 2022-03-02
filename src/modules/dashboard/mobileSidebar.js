@@ -134,9 +134,9 @@ const CenterDiv = styled.div`
 const Hamburger = styled.img`
   width: 35px;
   height: 32px;
-  margin: 5px 12px 0px 9px;
+  margin: 5px 12px 0px 19px;
   position: absolute;
-  left: 123px;
+  // left: 123px;
   top: 5px;
   cursor: pointer;
   @media (min-width: 1024px) {

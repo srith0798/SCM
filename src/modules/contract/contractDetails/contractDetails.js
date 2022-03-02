@@ -297,7 +297,7 @@ export default function ContractDetails(props) {
                         contract={false}
                       />
                     )}
-                    <AddTag onClick={() => Open()}>Add Tag</AddTag>
+                    <AddTag disabled={address.tags!=""} onClick={() => Open()}>Add Tag</AddTag>
                   </Row>
                 </TableData>
               </Div>

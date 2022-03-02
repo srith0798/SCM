@@ -712,6 +712,7 @@ const GraphSize = styled.div`
   width: auto;
   margin-bottom: 1.2rem;
   background: transparent;
+  text-align:center;
   @media (max-width: 767px) {
     height: 80px;
   }
@@ -720,6 +721,7 @@ const Table = styled.div`
   height: 15rem;
   overflow-y: hidden;
   margin-top: 1rem;
+  text-align:center;
 `;
 const View = styled.div`
   font-size: 1rem;
