@@ -305,6 +305,8 @@ export default function Contract(props) {
             containerClassName={"paginationBttns"}
             disabledClassName={"paginationDisabled"}
             activeClassName={"paginationActive"}
+            pageRangeDisplayed={0}
+            marginPagesDisplayed={0}
           />
         </PaginationDiv>
       </PageVerifyCheck>

@@ -6,7 +6,6 @@ import utility from "../../utility";
 const Web3 = require("web3");
 
 function Header(props) {
-  // const [openHumburger, setOpenHumburger] = useState(true);
   const getUserAccountAddress = () => {
     let user = "";
     user = sessionManager.getDataFromCookies("accountAddress");
@@ -16,9 +15,9 @@ function Header(props) {
   const getUserBalance = () => {
     let balance = sessionManager.getDataFromCookies("accountAddress");
     const web3 = new Web3(
-      // new Web3.providers.HttpProvider("https://rpc.xinfin.network")
       new Web3.providers.HttpProvider(process.env.REACT_APP_NETWORK_RPC_URL)
     );
+    console.log("adadad", web3);
     let checkResult = Web3.utils.toChecksumAddress(balance);
     if (checkResult)
       web3.eth.getBalance(checkResult, function (error, result) {
@@ -46,13 +45,7 @@ function Header(props) {
         </div>
         {sessionManager.getDataFromCookies("accountAddress") ? (
           <XDCContainer>
-            <XDCInfo
-              onClick={() => {
-                getUserBalance();
-              }}
-            >
-              {getBalance} XDC
-            </XDCInfo>
+            <XDCInfo {...getUserBalance()}>{getBalance} XDC</XDCInfo>
             <UserContainer>
               {getUserAccountAddress()}
               <UserLogo src="/images/profile.svg" />

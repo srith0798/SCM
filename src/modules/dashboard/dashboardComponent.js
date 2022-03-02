@@ -26,6 +26,8 @@ import Faqs from "../faqs/faq";
 
 //Replace Under Development with component once developed-
 const HomeComponent = (props) => {
+  let check = window.web3.eth.accounts;
+  console.log("user", check);
   useEffect(() => {}, []);
   return (
     <>
@@ -87,6 +89,7 @@ const dashboardComponent = (props) => {
     } catch (e) {}
 
     if (user && user.length) {
+      
       const response = await UserService.addUser({ accountAddress: user[0] });
       if (response.accountAddress) {
         sessionManager.setDataInCookies(

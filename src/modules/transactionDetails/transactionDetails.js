@@ -332,7 +332,7 @@ export default function TransactionDetails() {
                 <Heading>Gas Used</Heading>
                 <SubHead>
                   {new Intl.NumberFormat().format(row.gasUsed)} (
-                  {((row.gas / row.gasUsed) * 100).toFixed(2)})
+                  {((row.gas / row.gasUsed) * 100).toFixed(2)}%)
                 </SubHead>
               </Row>
             </CommonDiv>
@@ -340,7 +340,7 @@ export default function TransactionDetails() {
               <Row>
                 <Heading>Gas Price</Heading>
                 <SubHead>
-                  {row.gasPrice || 0} XDC 
+                  {(row.gasPrice / 1000000000000000000).toFixed(12).toLocaleString('fullwide', {useGrouping:false} ).replace(/\.?0+$/, "") || 0} XDC 
                   {/* ({row.gasPrice * wei || 0} Gwei) */}
                 </SubHead>
               </Row>
@@ -348,7 +348,7 @@ export default function TransactionDetails() {
             <CommonDiv>
               <Row>
                 <Heading>Transaction Fee</Heading>
-                <SubHead>{row.gasPrice * row.gasUsed || 0} XDC</SubHead>
+                <SubHead>{((row.gasPrice * row.gasUsed )/1000000000000000000) || 0} XDC</SubHead>
               </Row>
             </CommonDiv>
             <CommonDiv>
