@@ -368,7 +368,13 @@ export default function MainComponent(props) {
                 <SubContainer>
                   <MainHeading>Analytics</MainHeading>
                   <Tooltip disableFocusListener title="Refresh">
-                    <BackImage src="/images/refresh.svg" />
+                    <BackImage
+                     onClick={() => {
+                      getContractNames();
+                      
+                    }}
+                    src="/images/refresh.svg" 
+                    />
                   </Tooltip>
                 </SubContainer>
                 <Container>

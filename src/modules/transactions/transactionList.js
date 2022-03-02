@@ -373,7 +373,8 @@ export default function TransactionList() {
                   {isSetOpen ? (
                     <Box sx={styles}>
                       <Label>Contracts</Label>
-                      {contracts.length &&
+                      {(contracts.length!=0)?
+                      (contracts.length &&
                         contracts.map((item) => (
                           <div
                             onClick={() => {
@@ -392,7 +393,7 @@ export default function TransactionList() {
                             <br />
                             <TransactionHash>{item.address}</TransactionHash>
                           </div>
-                        ))}
+                        ))):""}
                     </Box>
                   ) : null}
                 </Box>
