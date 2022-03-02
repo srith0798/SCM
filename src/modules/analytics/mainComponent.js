@@ -24,7 +24,7 @@ export default function MainComponent(props) {
   const [activeUserData, setActiveUserData] = React.useState([]);
   const [topCallersData, setTopCallersData] = React.useState([]);
   const [topFunctionCallsData, setTopFunctionCallsData] = React.useState([]);
-  const [transactionCount, setTransactionCount] = React.useState([]);
+  // const [transactionCount, setTransactionCount] = React.useState([]);
   const [expandGraph, setExpandGraph] = React.useState(0);
   const [graphName, setGraphName] = React.useState("");
   const [data, setData] = React.useState([]);

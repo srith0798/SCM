@@ -38,19 +38,19 @@ const Container = styled.div`
   overflow-y: scroll;
 `;
 
-const Div = styled.div`
-  background-color: #f0f2fc;
-  border-radius: 4px;
-  width: 100%;
-  height: 424px;
-  /* display: flex; */
-  align-items: center;
-  text-align: center;
-  justify-content: center;
-  color: #aaadc4;
-  overflow-x: scroll;
-  line-break: anywhere;
-  white-space: pre-line;
-  text-align: left;
-  padding-left: 12px;
-`;
+// const Div = styled.div`
+//   background-color: #f0f2fc;
+//   border-radius: 4px;
+//   width: 100%;
+//   height: 424px;
+//   /* display: flex; */
+//   align-items: center;
+//   text-align: center;
+//   justify-content: center;
+//   color: #aaadc4;
+//   overflow-x: scroll;
+//   line-break: anywhere;
+//   white-space: pre-line;
+//   text-align: left;
+//   padding-left: 12px;
+// `;

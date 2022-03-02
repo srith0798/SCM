@@ -149,6 +149,8 @@ async function addTags(requestData) {
 }
 async function getTags(requestData) {
   let url = process.env.REACT_APP_USER_CONTRACT_MICROSERVICE + httpConstants.API_END_POINT.ADD_TAGS;
+  if(requestData?.userId)
+    url =  url + `?userId=${requestData.userId}`;
   console.log("url----", url);
   return httpService(httpConstants.METHOD_TYPE.GET, getHeaders(), requestData, url)
     .then((response) => {
