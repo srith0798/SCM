@@ -30,9 +30,7 @@ export default function TransactionList() {
   let getFrom = new Date(fromInput).toUTCString();
   let setFrom = new Date(getFrom).getTime();
 
-  let getTo = new Date(toInput).toUTCString();
-  let setTo = new Date(getTo).getTime();
-
+  let setTo = moment.utc(toInput[0]).endOf('day').valueOf();
   const handleClickOpen = () => {
     isOpen(true);
   };
@@ -610,6 +608,8 @@ export default function TransactionList() {
             containerClassName={"paginationBttns"}
             disabledClassName={"paginationDisabled"}
             activeClassName={"paginationActive"}
+            pageRangeDisplayed={0}
+            marginPagesDisplayed={0}
           />
         </PaginationDiv>
         </PageVerifyCheck>
