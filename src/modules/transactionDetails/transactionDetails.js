@@ -11,6 +11,7 @@ import utility from "../../utility";
 import Tooltip from "@mui/material/Tooltip";
 import ContractsService from "../../services/contractsService";
 import moment from "moment";
+import { sessionManager } from "../../managers/sessionManager";
 
 export default function TransactionDetails() {
   const [eventToolTip, seteventToolTip] = React.useState(false);
@@ -21,10 +22,12 @@ export default function TransactionDetails() {
   const [from, setFrom] = React.useState("");
   const [to, setTo] = React.useState("");
   const [input, setInput] = React.useState("");
+  const [transfer, setTransfer] = React.useState("");
   const [inputDesktop, setInputDesktop] = React.useState("");
   const [inputCopy, setInputCopy] = React.useState("");
   const [showInputData, setShowInputData] = React.useState(false);
   const [showOutputData, setShowOutputData] = React.useState(false);
+  const [contractName, setContractName] = React.useState("");
 
   const wei = 0.000000001;
 
@@ -36,6 +39,8 @@ export default function TransactionDetails() {
   };
   let url = history.location.state.id;
   let status = history.location.state.status;
+  let selected = history.location.state.selected;
+
   const searchTransaction = async (searchValues, searchKeys) => {
     try {
       const requestData = {
@@ -47,14 +52,40 @@ export default function TransactionDetails() {
       const response = await ContractsService.getTransactionsList(requestData);
       setRow(response.transactionList[0]);
       setInput(utility.truncateTxnAddress(response.transactionList[0].input));
-      setInputDesktop(utility.truncateTxnAddressDesktop(response.transactionList[0].input));
-      setInputCopy(response.transactionList[0].input)
+      setInputDesktop(
+        utility.truncateTxnAddressDesktop(response.transactionList[0].input)
+      );
+      setInputCopy(response.transactionList[0].input);
       setFrom(utility.truncateTxnAddress(response.transactionList[0].from));
       setTo(utility.truncateTxnAddress(response.transactionList[0].to));
     } catch (e) {}
   };
+
+  const getContractList = async (skip = 0, limit = 10) => {
+    try {
+      let userId = sessionManager.getDataFromCookies("userId");
+      const requestData = {
+        skip: skip,
+        limit: limit,
+        userId: userId,
+      };
+      const response = await ContractsService.getContractsList(requestData);
+      let check = response.contractList.filter((filteredRow) => {
+        return filteredRow.address === selected;
+      });
+      setContractName(check[0].contractName);
+      let arr = check[0].sourceCode.split("}");
+      let final = arr.filter((row) => {
+        return row.includes("transfer(address");
+      });
+      setTransfer(final[final.length - 1]);
+    } catch (e) {}
+  };
   useEffect(() => {
     searchTransaction(url, ["hash"]);
+    setTimeout(() => {
+      getContractList();
+    }, 2000);
   }, [url]);
 
   return (
@@ -241,7 +272,10 @@ export default function TransactionDetails() {
                 <SubHead>{row.network}</SubHead>
               </Row>
             </CommonDiv>
-            <CommonDiv style={{display: status=="Success"? "none":"" }} check={status}>
+            <CommonDiv
+              style={{ display: status == "Success" ? "none" : "" }}
+              check={status}
+            >
               <Row>
                 <Heading>Error</Heading>
                 {/* <SubHead>Out of Gas</SubHead> */}
@@ -344,7 +378,11 @@ export default function TransactionDetails() {
               <Row>
                 <Heading>Gas Price</Heading>
                 <SubHead>
-                  {(row.gasPrice / 1000000000000000000).toFixed(12).toLocaleString('fullwide', {useGrouping:false} ).replace(/\.?0+$/, "") || 0} XDC 
+                  {(row.gasPrice / 1000000000000000000)
+                    .toFixed(12)
+                    .toLocaleString("fullwide", { useGrouping: false })
+                    .replace(/\.?0+$/, "") || 0}{" "}
+                  XDC
                   {/* ({row.gasPrice * wei || 0} Gwei) */}
                 </SubHead>
               </Row>
@@ -352,14 +390,18 @@ export default function TransactionDetails() {
             <CommonDiv>
               <Row>
                 <Heading>Transaction Fee</Heading>
-                <SubHead>{((row.gasPrice * row.gasUsed )/1000000000000000000) || 0} XDC</SubHead>
+                <SubHead>
+                  {(row.gasPrice * row.gasUsed) / 1000000000000000000 || 0} XDC
+                </SubHead>
               </Row>
             </CommonDiv>
             <CommonDiv>
               <Row>
                 <Heading>Raw input</Heading>
                 <SubHead>
-                  <Input><TransactionNumber>{inputDesktop}</TransactionNumber></Input>
+                  <Input>
+                    <TransactionNumber>{inputDesktop}</TransactionNumber>
+                  </Input>
                   <CopyToClipboard
                     text={inputCopy}
                     onCopy={() => setcopyToolTip(true)}
@@ -506,7 +548,14 @@ export default function TransactionDetails() {
               src="/images/contracts.svg"
               style={{ width: "1rem", marginRight: "3px" }}
             />
-            transfer in App_Transactions_Validator
+            transfer in {contractName}
+            <DataDivContainer>
+              <BackgroundChangerTransfer>
+                <InputDataDiv>
+                  <SubHeadBlue>{transfer!=="" ? transfer + "}" : "No function available"}</SubHeadBlue>
+                </InputDataDiv>
+              </BackgroundChangerTransfer>
+            </DataDivContainer>
           </LastContainer>
         </ScrollableDiv>
       )}
@@ -530,7 +579,7 @@ const MainContainer = styled.div`
   }
 `;
 const Input = styled.div`
-margin-right:20px;
+  margin-right: 20px;
 `;
 const TopContainer = styled.div`
   padding-left: 1.25rem;
@@ -781,6 +830,22 @@ const BackgroundChanger = styled.div`
     padding: 1rem;
   }
 `;
+
+const BackgroundChangerTransfer = styled.div`
+  width: 50%;
+  height: 300px;
+  /* max-height: 300px; */
+  background-repeat: no-repeat;
+  background: #f7f8fd 0% 0% no-repeat padding-box;
+  border-radius: 6px;
+  opacity: 1;
+  padding: 1.875rem;
+  @media (min-width: 300px) and (max-width: 1371px) {
+    width: 100%;
+    padding: 1rem;
+  }
+`;
+
 const FlexDiv = styled.div`
   display: flex;
   justify-content: space-between;
@@ -799,7 +864,9 @@ const LastContainer = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
   border-radius: 0.375rem;
   margin-top: 1.25rem;
-  height: 18.75rem;
+  height: 100%;
+  max-height: 30rem;
+  /* height: 18.75rem; */
   padding: 2rem;
   font-weight: 600;
 `;
