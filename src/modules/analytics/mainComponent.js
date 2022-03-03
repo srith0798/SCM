@@ -31,15 +31,15 @@ export default function MainComponent(props) {
   const [
     transactionOverTimeSelect,
     setTransactionOverTimeSelect,
-  ] = React.useState("7");
-  const [gasUsedSelect, setGasUsedSelect] = React.useState("7");
-  const [activeUserSelect, setActiveUserSelect] = React.useState("7");
-  const [topCallersSelct, setTopCallersSelect] = React.useState("7");
+  ] = React.useState("30");
+  const [gasUsedSelect, setGasUsedSelect] = React.useState("30");
+  const [activeUserSelect, setActiveUserSelect] = React.useState("30");
+  const [topCallersSelct, setTopCallersSelect] = React.useState("30");
   const [topFunctionCallsSelect, setTopFunctionCallsSelect] = React.useState(
-    "7"
+    "30"
   );
-  const [dropDownValue, setDropDownValue] = React.useState("7");
-  const [loader, setLoader] = React.useState("7");
+  const [dropDownValue, setDropDownValue] = React.useState("30");
+  const [loader, setLoader] = React.useState("30");
   const [tableData, setTableData] = React.useState([]);
   const [
     transactionOverTimeError,
@@ -438,6 +438,7 @@ export default function MainComponent(props) {
                           selectValue={transactionOverTimeSelect}
                           data={noOfTransactions}
                           graphNo={1}
+                          error1={transactionOverTimeError}
                         ></SelectComponent>
                       </SubContainer>
                       <GraphSize>
@@ -459,6 +460,7 @@ export default function MainComponent(props) {
                           selectValue={gasUsedSelect}
                           data={gasPriceData}
                           graphNo={2}
+                          error1={transactionOverTimeError}
                         ></SelectComponent>
                       </SubContainer>
                       <GraphSize>
@@ -488,6 +490,7 @@ export default function MainComponent(props) {
                         data={topCallersData}
                         graphNo={4}
                         error={topCallersError}
+                        
                       ></TableData>
                     </GraphContainer>
                   </Grid>
@@ -501,6 +504,7 @@ export default function MainComponent(props) {
                           selectValue={activeUserSelect}
                           data={activeUserData}
                           graphNo={3}
+                          error1={transactionOverTimeError}
                         ></SelectComponent>
                       </SubContainer>
                       <GraphSize>
@@ -576,6 +580,8 @@ const TableData = (props) => {
           expandGraphs={props.expandGraphs}
           selectValue={props.selectValue}
           getAnalyticsData={props.getAnalyticsData}
+          error={props.error}
+          error1={props.error}
         ></SelectComponent>
       </SubContainer>
       <Table>
@@ -615,11 +621,12 @@ const TableData = (props) => {
 };
 
 const SelectComponent = (props) => {
+  
   return (
     <>
       <div style={{ display: "flex", alignItems: "center" }}>
         <Head>
-          {props.heading}
+        {props.heading}
           <Tooltip
             disableFocusListener
             title="Transaction executed in due course"
@@ -636,6 +643,7 @@ const SelectComponent = (props) => {
       </div>
       <select
         id="dates"
+        style={{display:props.error1!=""?"none":""}}
         className="select"
         value={props.selectValue}
         onChange={(event) => {
@@ -712,14 +720,16 @@ const GraphSize = styled.div`
   width: auto;
   margin-bottom: 1.2rem;
   background: transparent;
+  text-align:center;
   @media (max-width: 767px) {
-    height: 80px;
+    height: 250px;
   }
 `;
 const Table = styled.div`
   height: 15rem;
   overflow-y: hidden;
   margin-top: 1rem;
+  text-align:center;
 `;
 const View = styled.div`
   font-size: 1rem;

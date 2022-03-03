@@ -45,8 +45,14 @@ export default function AddTags(props) {
               type="text"
               placeholder="E.g. v1.3.37"
               value={input}
-              onChange={(e) => setInput([e.target.value])}
-            />
+              
+              onChange={(e) =>{
+                if(e.target.value.length==30) return false; 
+                setInput([e.target.value])
+
+              } 
+                }             
+            />      
             <SubContainer
               style={{ width: "100%", maxWidth: "160px", marginTop: "30px" }}
             >  

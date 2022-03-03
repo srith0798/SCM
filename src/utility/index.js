@@ -24,7 +24,9 @@ const utility = {
   isMenuActive,
   parseResponse,
   convertToInternationalCurrencySystem,
-  minimizeAddress
+  minimizeAddress,
+  truncateTxnAddressDesktop,
+  truncateTag
 };
 export default utility;
 
@@ -93,6 +95,18 @@ function apiSuccessToast(msg) {
 function truncateTxnAddress(address) {
   const start = address.slice(0, 7);
   const end = address.slice(-5);
+  // console.log(start, end);
+  return start + "..." + end;
+}
+function truncateTxnAddressDesktop(address) {
+  const start = address.slice(0, 20);
+  const end = address.slice(-16);
+  // console.log(start, end);
+  return start + "..." + end;
+}
+function truncateTag(tag){
+  const start = tag.slice(0, 20);
+  const end = tag.slice(-16);
   // console.log(start, end);
   return start + "..." + end;
 }

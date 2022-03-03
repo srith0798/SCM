@@ -16,6 +16,9 @@ export default function Sidebar(props) {
   //   history.push("/networks");
   //   setOpen(false);
   // };
+  const redirectToFaqs = () => {
+    history.push("/faqs");
+  };
   const redirectToAnalytics = () => {
     history.push("/analytics");
     setOpen(false);
@@ -105,7 +108,7 @@ export default function Sidebar(props) {
             <Icon src={alertingIcon} />
             <Heading>Alerting</Heading>
           </Wrapper>
-          <Wrapper style={{ marginTop: "8rem" }}>
+          <Wrapper style={{ marginTop: "8rem" }} onClick={redirectToFaqs}>
             <Icon src="/images/Subtraction 2.svg" />
             <Heading>FAQs</Heading>
           </Wrapper>
@@ -134,9 +137,9 @@ const CenterDiv = styled.div`
 const Hamburger = styled.img`
   width: 35px;
   height: 32px;
-  margin: 5px 12px 0px 9px;
+  margin: 5px 12px 0px 19px;
   position: absolute;
-  left: 123px;
+  // left: 123px;
   top: 5px;
   cursor: pointer;
   @media (min-width: 1024px) {

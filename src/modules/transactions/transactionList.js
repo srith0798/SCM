@@ -30,9 +30,7 @@ export default function TransactionList() {
   let getFrom = new Date(fromInput).toUTCString();
   let setFrom = new Date(getFrom).getTime();
 
-  let getTo = new Date(toInput).toUTCString();
-  let setTo = new Date(getTo).getTime();
-
+  let setTo = moment.utc(toInput[0]).endOf('day').valueOf();
   const handleClickOpen = () => {
     isOpen(true);
   };
@@ -118,6 +116,8 @@ export default function TransactionList() {
     console.log('setS', address);
     console.log('searching', searchRow)
 
+
+
   const searchTransaction = async (searchValues, searchKeys) => {
     try {
       const requestData = {
@@ -172,10 +172,10 @@ export default function TransactionList() {
     fontWeight: "600",
     color: "#191919",
   };
-  const redirectToTransactionDetails = (id, status) => {
+  const redirectToTransactionDetails = (id, status, selected) => {
     history.push({
       pathname: "/transactions/transaction-details?" + id,
-      state: { id: id, status: status },
+      state: { id: id, status: status, selected: selected },
     });
   };
   const changePage = (value) => {
@@ -357,6 +357,7 @@ export default function TransactionList() {
                   }}
                   selected={selected.address}
                 >
+                  
                   <DropDown onClick={handleClick}>
                     {selectedName || "Contract"}
                     <img
@@ -506,7 +507,7 @@ export default function TransactionList() {
                 <Div>
                   <RowData
                     onClick={() =>
-                      redirectToTransactionDetails(data?.hash, status)
+                      redirectToTransactionDetails(data?.hash, status, selected)
                     }
                   >
                     {toggle.transactionHash && (
@@ -575,7 +576,7 @@ export default function TransactionList() {
              
           
         </TableContainer>
-        <PageVerifyCheck ch   eck={page}>
+        <PageVerifyCheck style={{display:address.length<10?"none":""}}  ch   eck={page}>
         <PaginationDiv>
           <BottomLabel>
             Per Page
@@ -608,6 +609,8 @@ export default function TransactionList() {
             containerClassName={"paginationBttns"}
             disabledClassName={"paginationDisabled"}
             activeClassName={"paginationActive"}
+            pageRangeDisplayed={0}
+            marginPagesDisplayed={0}
           />
         </PaginationDiv>
         </PageVerifyCheck>
@@ -636,6 +639,7 @@ const BottomLabel = styled.div`
   font-family: "Inter", Medium;
 `;
 const Div = styled.div`
+
   padding: 0.75rem;
   border-bottom: 1px solid #e3e7eb;
   white-space: nowrap;
@@ -643,6 +647,9 @@ const Div = styled.div`
   width: auto;
   @media (min-width: 300px) and (max-width: 767px) {
     column-gap: 70px;
+  }
+  @media (min-width: 768px) and (max-width: 1200px) {
+    width:1111px
   }
 `;
 const RowData = styled.div`
@@ -810,8 +817,8 @@ const IconContainer = styled.div`
   @media (min-width: 300px) and (max-width: 768px) {
     width: 100%;
     max-width: 123px;
-    height: 35px;
-    margin-top: 3px;
+    height: 37px;
+    margin-top: 0px;
   }
 `;
 const Heading = styled.span`

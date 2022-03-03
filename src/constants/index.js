@@ -40,6 +40,10 @@ export const httpConstants = {
 export const analytics = {
   ANALYTICS_DROPDOWN :[
     {
+      TEXT : "Last 1 month",
+      VALUE: 30
+    },
+    {
       TEXT : "Last 7 days",
       VALUE: 7
     },
@@ -50,11 +54,8 @@ export const analytics = {
     {
       TEXT : "Last 25 days",
       VALUE: 25
-    },
-    {
-      TEXT : "Last 1 month",
-      VALUE: 30
-    },
+    }
+   ,
   ]
 }
 

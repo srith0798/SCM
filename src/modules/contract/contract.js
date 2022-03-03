@@ -260,11 +260,14 @@ export default function Contract(props) {
                   </ColumnSecond>
                   <ColumnSecond style={{ display: "flex" }}>
                     <TagCol>
-                      {address[index].tags &&
+                      {(data.tags=="")? 
+                      (<AddTag onClick={(e) => Open(e)}>Add Tag</AddTag>) 
+                      :
+                      (address[index].tags &&
                         address[index].tags.map(
                           (tag, index) =>
-                            index <= 0 && <FinanceTag>{tag}</FinanceTag>
-                        )}
+                            index <= 0 && <FinanceTag>{console.log(tag,"tag====")} {data.tags[0]}</FinanceTag>
+                        ))}
                       {addTag && (
                         <AddTags
                           click={Close}
@@ -272,9 +275,9 @@ export default function Contract(props) {
                           contract={true}
                         />
                       )}
-                      {data.tags && data.tags.length === 0 && (
+                      {/* {data.tags && data.tags.length === 0 && (
                         <AddTag onClick={(e) => Open(e)}>Add Tag</AddTag>
-                      )}
+                      )} */}
                     </TagCol>
                   </ColumnSecond>
                   <ColumnSecond onClick={(e) => redirectTODetails(e, data._id)}>
@@ -305,6 +308,8 @@ export default function Contract(props) {
             containerClassName={"paginationBttns"}
             disabledClassName={"paginationDisabled"}
             activeClassName={"paginationActive"}
+            pageRangeDisplayed={0}
+            marginPagesDisplayed={0}
           />
         </PaginationDiv>
       </PageVerifyCheck>

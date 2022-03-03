@@ -9,6 +9,11 @@ const useStyles = makeStyles(() => ({
     width: "100% !important",
     marginBottom: "275px",
     height: "440px",
+    ['@media screen and (min-width: 300px) and (max-width: 580px)']:{
+      height:"665px",
+      marginBottom: "51px",
+  },
+
   },
 }));
 
@@ -139,6 +144,16 @@ export default function WalletPopUp(props) {
                   />
                   Connect Wallet
                 </Button>
+               <ButtonDivMobile>
+                <ButtonMobile onClick={() => connectWallet()}>
+                  <img
+                    style={{ paddingLeft: "30px", marginRight: "15px" }}
+                    alt=""
+                    src="/images/xdc-logo-white.svg"
+                  />
+                  Connect Wallet..
+                </ButtonMobile>
+                </ButtonDivMobile>
               </Container>
             </MainContainer>
           </Dialog>
@@ -166,7 +181,38 @@ const Button = styled.button`
   margin-top: 27px;
   @media (min-width: 300px) and (max-width: 580px) {
     margin-top: 9px;
+    display:none;
   }
+`;
+const ButtonMobile = styled.button`
+background-repeat: no-repeat;
+display: -webkit-inline-box;
+background-position: 0.5rem;
+padding: 14px;
+item-align: center;
+background-size: 0.875rem;
+width: 264px;
+height: 50px;
+padding-top: 9px;
+background-color: #3163f0;
+color: #ffffff;
+border: none;
+border-radius: 0.25rem;
+font-size: 16px;
+font-weight: 600;
+margin-top: 27px;
+@media (min-width: 300px) and (max-width: 580px) {
+  margin-top: 9px;
+}
+@media (min-width: 580px){
+  display:none;
+}
+`;
+const ButtonDivMobile = styled.div`
+padding:2px
+@media (min-width: 580px){
+  display:none;
+}
 `;
 const Title = styled.div`
   text-align: center;
@@ -238,6 +284,7 @@ const IconContainerMobile = styled.div`
   margin: 3px;
   margin-bottom: 16px;
   border-radius: 6px;
+  margin-left: 9px;
 `;
 const CrossIcon = styled.img`
   cursor: pointer;
