@@ -95,5 +95,18 @@ export const genericConstants={
   NETWORK: {TYPE: "network", IMAGE :  "/images/network-logo-white.svg"},
   TAG:{TYPE: "tag", IMAGE :  "/images/tag-logo-white.svg"}
 },
-
+ALERT_TYPE_NAMES:{
+  SUCCESSFULL_TRANSACTIONS:"Successfull Transaction",
+  FAILED_TRANSACTIONS:"Failed Transaction",
+  TOKEN_TRANSFER:"Token Transfer",
+  TRANSACTION_VALUE:"Value",
+  XDC_BALANCE:"Balance",
+  STATE_CHANGE:"State Change",
+  FUNCTION_CALL:"Function Call"
+},
+DESTINATION_TYPE :{
+  SLACK:"Slack",
+  WEBHOOK:"Webhook",
+  EMAIL:"Email"
+}
 }

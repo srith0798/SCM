@@ -23,7 +23,8 @@ const utility = {
   isEmpty,
   isMenuActive,
   parseResponse,
-  convertToInternationalCurrencySystem
+  convertToInternationalCurrencySystem,
+  minimizeAddress
 };
 export default utility;
 
@@ -71,6 +72,10 @@ function getHeader() {
   //     'device-id': sessionManager.getDataFromCookies(genericConstants.COOKIES_KEY.DEVICE_ID),
   //     'Content-Type': httpConstants.CONTENT_TYPE.APPLICATION_JSON
   // };
+}
+
+function minimizeAddress(data) {
+  return data.replace(/(.{7})..(.{5})+/, "$1…");
 }
 
 function isNumber(n) {

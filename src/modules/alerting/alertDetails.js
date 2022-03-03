@@ -1,10 +1,35 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Row } from "simple-flexbox";
 import "react-tabs/style/react-tabs.css";
 import styled from "styled-components";
 import { history } from "../../managers/history";
+import AlertService from "../../services/alert";
+import utility from "../../utility";
+// import { alertClasses } from "@mui/material";
+import { genericConstants } from "../../constants";
 
 export default function AlertDetails() {
+  const [alertId, setAlertId] = React.useState("");
+  const [alert, setAlert] = React.useState(false);
+
+
+  const getAlert = async (request) => {
+    let requestData = {
+      alertId: request ? request : alertId
+    }
+    const [error, response] = await utility.parseResponse(AlertService.getAlertDetails(requestData));
+    if (error)
+      return;
+    setAlert(response);
+  }
+
+  useEffect(() => {
+    let alertId = window.location.href;
+    alertId = alertId.split('/');
+    alertId = alertId[alertId.length - 1];
+    setAlertId(alertId);
+    getAlert(alertId);
+  }, [alertId]);
   const backButton = () => {
     history.push("/alerting");
   };
@@ -32,14 +57,14 @@ export default function AlertDetails() {
         <CommonDiv>
           <RowData>
             <Heading>ID</Heading>
-            <SubHeading>45fej-46de-41d3-b23a-fhf783</SubHeading>
+            <SubHeading>{alert.alertId}</SubHeading>
           </RowData>
         </CommonDiv>
         <CommonDiv>
           <RowData>
             <Heading>Name</Heading>
             <SubHeading>
-              Sucessfull transaction in App_Transactions_Validator
+            {`${genericConstants.ALERT_TYPE_NAMES[alert.type]} in ${alert?.target?.name}`}
             </SubHeading>
           </RowData>
         </CommonDiv>
@@ -47,32 +72,35 @@ export default function AlertDetails() {
           <RowData>
             <Heading>Alert Type</Heading>
             <SubHeading>
-              <TextColor>Sucessfull transaction</TextColor>
+              <TextColor>{genericConstants.ALERT_TYPE_NAMES[alert.type]}</TextColor>
             </SubHeading>
           </RowData>
         </CommonDiv>
         <CommonDiv>
           <RowData>
             <Heading>Target</Heading>
-            <SubHeading>App_Transactions_Validator</SubHeading>
+            <SubHeading>{alert?.target?.type}</SubHeading>
           </RowData>
         </CommonDiv>
       </Container>
       <br />
       <b>Alert will be sent to this destination</b>
       <NewContainer>
-        <LastContainer>
-          <Row>
-            <img
-              alt=""
-              src="/images/email.svg"
-              style={{ marginRight: "4px", width: "1rem" }}
-            />
-            <Heads>Email:it@supportteam.com </Heads>
-            <SubHeading>it@supportteam.com</SubHeading>
-          </Row>
-        </LastContainer>
-        <CommonDiv>
+        {alert && alert.destinations && alert.destinations.length>0 && alert.destinations.map((destination)=>(
+           <LastContainer>
+           <Row>
+             <img
+               alt=""
+               src="/images/email.svg"
+               style={{ marginRight: "4px", width: "1rem" }}
+             />
+             <Heads>{destination.type}</Heads>
+             <SubHeading>{destination.url}</SubHeading>
+           </Row>
+         </LastContainer>
+        ))}
+       
+        {/* <CommonDiv>
           <Row>
             <img
               alt=""
@@ -82,7 +110,7 @@ export default function AlertDetails() {
             <Heads>Finance</Heads>
             <SubHeading>https:webhook.site/aOe</SubHeading>
           </Row>
-        </CommonDiv>
+        </CommonDiv> */}
         <RowContainer>
           <EditButton style={{ marginRight: "4px" }}>Edit</EditButton>
           <DisableButton style={{ marginLeft: "4px" }}>Disable</DisableButton>

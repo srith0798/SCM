@@ -12,8 +12,7 @@ import utility from "../../utility";
 import contractsService from "../../services/contractsService";
 import DestinationService from "../../services/destination";
 import AlertService from "../../services/alert";
-
-
+import AddDestination from "../popup/addDestination";
 
 export default function AddAlert() {
   const [activeButton, setActiveButton] = React.useState("Rules");
@@ -25,6 +24,8 @@ export default function AddAlert() {
   const [destinations, setDestinations] = React.useState([]);
   const [selectedDestinations, setSelectedDestinations] = React.useState([]);
   const [targetValue, setTargetValue] = React.useState("");
+  const [selectedAddress,setSelectedAddress] = React.useState([]);
+
   const [icon, setIcon] = React.useState({
     successfulTransaction: genericConstants.ALERT_TYPE_IMAGES.SUCCESSFULL_TRANSACTIONS.IMAGE,
     failedTransaction:  genericConstants.ALERT_TYPE_IMAGES.FAILED_TRANSACTIONS.IMAGE,
@@ -37,6 +38,10 @@ export default function AddAlert() {
     network:genericConstants.ALERT_TYPE_IMAGES.NETWORK.IMAGE,
     tag:genericConstants.ALERT_TYPE_IMAGES.TAG.IMAGE,
   });
+
+  const [addDestinationPopup, setAddDestinationPopup] = React.useState(false);
+  const [destinationType, setDestinationType] = React.useState("");
+
   const handleViewClick = (e) => {
     setActiveButton(e.target.id);
     history.push("/alerting");
@@ -78,7 +83,10 @@ export default function AddAlert() {
     else if(type === genericConstants.ALERT_TYPE.TAG)   
        getTags();
   }
-
+  const openDestinationPopup = (value) => {
+    setAddDestinationPopup(true);
+    setDestinationType(value)
+  }
   const getContracts = async () => {
     let userId = sessionManager.getDataFromCookies("userId");
     const requestData = {
@@ -95,7 +103,6 @@ export default function AddAlert() {
     if (response.contractList.length === 0) {
       return;
     }
-    console.log("test", response);
     setLoader(false);
     setParametersData(response.contractList);
   };
@@ -121,7 +128,8 @@ export default function AddAlert() {
   };
   const getDestinations =async () =>{
     let requestData = {
-      userId : sessionManager.getDataFromCookies("userId")
+      userId : sessionManager.getDataFromCookies("userId"),
+      isDeleted: false
     }
     const [error,response] = await utility.parseResponse(DestinationService.getDestinations(requestData));
     if(error)
@@ -137,6 +145,14 @@ export default function AddAlert() {
   }
   const selectTargetValue = (event)=>{
     setTargetValue(event.target.value);
+    if(alertTarget === genericConstants.ALERT_TYPE.ADDRESS)
+    {
+     let data = parametersData.filter((data)=>{
+        if(data.address === event.target.value)
+         return true
+      });
+      setSelectedAddress(data[0]?data[0]:[]);
+    }
   }
   const addAlert =async () =>{
     let requestData = {
@@ -145,18 +161,53 @@ export default function AddAlert() {
       target:{
         type : alertTarget,
         value : targetValue,
-        threshold:''
+        threshold:'',
       },
       destinations:selectedDestinations
     }
+    if(alertTarget === genericConstants.ALERT_TYPE.ADDRESS)
+    {
+       requestData["target"]["name"] = selectedAddress?.contractName;
+       requestData["target"]["network"] = selectedAddress?.network;
+    }
+    if(alertTarget === genericConstants.ALERT_TYPE.TAG)
+      requestData["target"]["name"] = targetValue;
+
     const [error,response] = await utility.parseResponse(AlertService.addAlert(requestData));
     if(error)
+      {
+        utility.apiFailureToast(error || "Cannot add Alert")
+        return;
+      }
+    utility.apiSuccessToast("Alert added successfully!")  
+  }
+  const addDestination = async (label, url) => {
+    let requestData = {
+      userId: sessionManager.getDataFromCookies("userId"),
+      type: destinationType,
+      label: label,
+      url: url
+    }
+    console.log(requestData);
+    const [error, response] = await utility.parseResponse(DestinationService.addDestination(requestData));
+    if (error) {
+      setAddDestinationPopup(false);
       return;
+    }
+    setDestinations(response);
+    setAddDestinationPopup(false);
   }
   
   return (
     <>
       <MainContainer>
+      {addDestinationPopup && (
+            <AddDestination
+              click={addDestination}
+              type = {destinationType}
+              close = {()=>setAddDestinationPopup(false)}
+            />
+          )}
         <Row>
           <RowCorrecter>
             <TitleHead>
@@ -255,7 +306,7 @@ export default function AddAlert() {
 
                 <ProgressHeader>
                   <TypeRow> Alert type</TypeRow>
-                  <SelectType>Select a alert triger type</SelectType>
+                  <SelectType>{alertType ? alertType : 'Select a alert triger type'}</SelectType>
                 </ProgressHeader>
               </AlertContainer>
               <SideLineProvider>
@@ -278,7 +329,7 @@ export default function AddAlert() {
                 <ProgressHeader>
                   <TypeRow> Alert target</TypeRow>
                   <SelectType>
-                    Select a address which alert will be trigger
+                    {alertTarget ? alertTarget : 'Select a address which alert will be trigger'}
                   </SelectType>
                 </ProgressHeader>
               </AlertContainer>
@@ -304,7 +355,7 @@ export default function AddAlert() {
                 )}
                 <ProgressHeader>
                   <TypeRow>Parameters</TypeRow>
-                  <SelectType>Set alert trigger Parameters</SelectType>
+                  <SelectType>{targetValue ? targetValue : `Set alert trigger Parameters`}</SelectType>
                 </ProgressHeader>
               </AlertContainer>
               <SideLineProvider>
@@ -346,6 +397,7 @@ export default function AddAlert() {
                   {progress === "DESTINATION" && (
                    <DestinationComponent destinations={destinations}
                    selectDestinations = {selectDestinations}
+                   openDestinationPopup ={openDestinationPopup}
                    ></DestinationComponent>
                   )}
                 </ProgressHeader>
@@ -542,7 +594,7 @@ const DestinationComponent = (props) =>{
           </EmailBox>
       ))}
     <RowContainer>
-      <Buttonn>
+      <Buttonn onClick={() => props.openDestinationPopup("SLACK")}>
         <img
           alt=""
           src="/images/slack.svg"
@@ -553,7 +605,7 @@ const DestinationComponent = (props) =>{
         />{" "}
         Slack
       </Buttonn>
-      <Buttonn>
+      <Buttonn onClick={() => props.openDestinationPopup("WEBHOOK")}>
         <img
           alt=""
           src="/images/webhook.svg"
@@ -564,7 +616,7 @@ const DestinationComponent = (props) =>{
         />
         Webhook
       </Buttonn>
-      <Buttonn>
+      <Buttonn onClick={() => props.openDestinationPopup("EMAIL")}>
         <img
           alt=""
           src="/images/email.svg"
