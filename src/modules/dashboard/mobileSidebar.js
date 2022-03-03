@@ -16,6 +16,9 @@ export default function Sidebar(props) {
   //   history.push("/networks");
   //   setOpen(false);
   // };
+  const redirectToFaqs = () => {
+    history.push("/faqs");
+  };
   const redirectToAnalytics = () => {
     history.push("/analytics");
     setOpen(false);
@@ -105,7 +108,7 @@ export default function Sidebar(props) {
             <Icon src={alertingIcon} />
             <Heading>Alerting</Heading>
           </Wrapper>
-          <Wrapper style={{ marginTop: "8rem" }}>
+          <Wrapper style={{ marginTop: "8rem" }} onClick={redirectToFaqs}>
             <Icon src="/images/Subtraction 2.svg" />
             <Heading>FAQs</Heading>
           </Wrapper>

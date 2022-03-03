@@ -24,7 +24,8 @@ const utility = {
   isMenuActive,
   parseResponse,
   convertToInternationalCurrencySystem,
-  truncateTxnAddressDesktop
+  truncateTxnAddressDesktop,
+  truncateTag
 };
 export default utility;
 
@@ -95,6 +96,12 @@ function truncateTxnAddress(address) {
 function truncateTxnAddressDesktop(address) {
   const start = address.slice(0, 20);
   const end = address.slice(-16);
+  // console.log(start, end);
+  return start + "..." + end;
+}
+function truncateTag(tag){
+  const start = tag.slice(0, 20);
+  const end = tag.slice(-16);
   // console.log(start, end);
   return start + "..." + end;
 }

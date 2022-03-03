@@ -358,6 +358,7 @@ export default function TransactionList() {
                   }}
                   selected={selected.address}
                 >
+                  
                   <DropDown onClick={handleClick}>
                     {selectedName || "Contract"}
                     <img
@@ -576,7 +577,7 @@ export default function TransactionList() {
              
           
         </TableContainer>
-        <PageVerifyCheck ch   eck={page}>
+        <PageVerifyCheck style={{display:address.length<10?"none":""}}  ch   eck={page}>
         <PaginationDiv>
           <BottomLabel>
             Per Page
