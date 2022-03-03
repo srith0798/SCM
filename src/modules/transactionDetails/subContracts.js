@@ -7,6 +7,7 @@ import ShowLoader from "../../common/components/showLoader";
 import { PrismAsyncLight as SyntaxHighlighter } from 'react-syntax-highlighter';
 import js from 'react-syntax-highlighter/dist/esm/languages/hljs/javascript';
 import { base16AteliersulphurpoolLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import logger from "redux-logger";
 SyntaxHighlighter.registerLanguage('javascript', js);
 
 export default function SubContracts(props) {
@@ -37,6 +38,15 @@ export default function SubContracts(props) {
   useEffect(() => {
     getContractList();
   }, []);
+
+  if(address[0]!==undefined){
+    let arr = address[0].sourceCode.split("}");
+    let final = arr.filter((row)=>{
+      return row.includes("transfer(address");
+    })
+    console.log(final[final.length-1]);
+  }
+
   
   return (
     <div>

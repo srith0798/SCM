@@ -26,8 +26,9 @@ import Faqs from "../faqs/faq";
 
 //Replace Under Development with component once developed-
 const HomeComponent = (props) => {
-  let check = window.web3.eth.accounts;
-  console.log("user", check);
+  
+
+  // currentAddress = currentAddress.replace(/,"");
   useEffect(() => {}, []);
   return (
     <>
@@ -73,6 +74,17 @@ const HomeComponent = (props) => {
 };
 
 const dashboardComponent = (props) => {
+
+  const Error = () => {
+    toast.error(httpConstants.MESSAGE.VALIDATE_BROWSER_LOGIN, {
+      duration: 4000,
+  
+      position: httpConstants.MESSAGE.TOASTS_POSITION,
+  
+      className: "toast-div-address",
+    });
+  }
+
   const loginErrorMessage = () =>
     toast.error(httpConstants.MESSAGE.VALIDATE_BROWSER_LOGIN, {
       duration: 4000,
@@ -110,6 +122,13 @@ const dashboardComponent = (props) => {
     }
     return true; //required to close the "connect wallet" popup
   };
+  
+  let check = window.web3.eth.accounts;
+  let currentAddress = sessionManager.getDataFromCookies("accountAddress");
+  if(check[0]!==currentAddress){
+  getCurrentUserDetails();
+  alert("XDCPay Account changed!!")
+  }
 
   return (
     <>
