@@ -6,27 +6,51 @@ import Tooltip from "@mui/material/Tooltip";
 import utility from "../../utility";
 import DestinationService from "../../services/destination";
 import { sessionManager } from "../../managers/sessionManager";
-
+import AddDestination from "../popup/addDestination";
 
 export default function Destination() {
-  const [destinations , setDestinations] = React.useState([]);
-  const getDestinations =async () =>{
+  const [destinations, setDestinations] = React.useState([]);
+  const [addDestinationPopup, setAddDestinationPopup] = React.useState(false);
+  const [destinationType, setDestinationType] = React.useState("");
+
+
+  const getDestinations = async () => {
     let requestData = {
-      userId : sessionManager.getDataFromCookies("userId")
+      userId: sessionManager.getDataFromCookies("userId"),
+      isDeleted:false
     }
-    const [error,response] = await utility.parseResponse(DestinationService.getDestinations(requestData));
-    if(error)
+    const [error, response] = await utility.parseResponse(DestinationService.getDestinations(requestData));
+    if (error)
       return;
     setDestinations(response);
   }
-  const addDestination =async () =>{
+  const openDestinationPopup = (value) => {
+    setAddDestinationPopup(true);
+    setDestinationType(value)
+  }
+  const addDestination = async (label, url) => {
     let requestData = {
-      userId : sessionManager.getDataFromCookies("userId")
+      userId: sessionManager.getDataFromCookies("userId"),
+      type: destinationType,
+      label: label,
+      url: url
     }
-    const [error,response] = await utility.parseResponse(DestinationService.addDestination(requestData));
-    if(error)
+    const [error, response] = await utility.parseResponse(DestinationService.addDestination(requestData));
+    if (error) {
+      utility.apiFailureToast(error || "Cannot Add Destination")
+      setAddDestinationPopup(false);
       return;
+    }
     setDestinations(response);
+    setAddDestinationPopup(false);
+    getDestinations()
+  }
+  const deleteDestination = async (destinationId) => {
+    const [error , response] = await utility.parseResponse(DestinationService.deleteDestination(destinationId));
+     if(error)
+      return;
+    utility.apiSuccessToast("Destination Deleted Successfully");
+    await getDestinations()
   }
   useEffect(() => {
     getDestinations();
@@ -43,16 +67,23 @@ export default function Destination() {
               </Tooltip>
             </ColumnOne>
           </Row>
+          {addDestinationPopup && (
+            <AddDestination
+              click={addDestination}
+              type = {destinationType}
+              close = {()=>setAddDestinationPopup(false)}
+            />
+          )}
           <RowContainer>
-            <Button>
+            <Button onClick={() => openDestinationPopup("SLACK")} >
               <ButtonIcon alt="" src="/images/slack.svg" />
               Slack
             </Button>
-            <Button>
+            <Button onClick={() => openDestinationPopup("WEBHOOK")} >
               <ButtonIcon alt="" src="/images/webhook.svg" />
               Webhook
             </Button>
-            <Button>
+            <Button onClick={() => openDestinationPopup("EMAIL")} >
               <ButtonIcon alt="" src="/images/email.svg" />
               Email
             </Button>
@@ -69,30 +100,31 @@ export default function Destination() {
           </Tooltip>
         </ColumnOne>
         <LastDiv>
-          {destinations && destinations.length >0 && destinations.map((destination)=>(
-                <Div>
-                <RowData>
-                  <Img alt="" src="/images/email.svg" />
-                  <ColumnTwo style={{ color: "#191919" }}>{destination.type}</ColumnTwo>
-                  <ColumnTwo style={{ fontWeight: "normal" }}>
-                    {destination.url}
-                  </ColumnTwo>
-                  <ColumnTwo>
-                    <ColorChanging style={{ fontWeight: "normal" }}>
-                      {destination.status}
-                    </ColorChanging>
-                  </ColumnTwo>
-                  <ColumnTwo>
-                    <Tooltip disableFocusListener title="Delete">
-                      <img
-                        alt=""
-                        src="/images/deletes.svg"
-                        style={{ width: "1.1rem" }}
-                      />
-                    </Tooltip>
-                  </ColumnTwo>
-                </RowData>
-              </Div>
+          {destinations && destinations.length > 0 && destinations.map((destination) => (
+            <Div>
+              <RowData>
+                <Img alt="" src="/images/email.svg" />
+                <ColumnTwo style={{ color: "#191919" }}>{destination.type}</ColumnTwo>
+                <ColumnTwo style={{ fontWeight: "normal" }}>
+                  {destination.url}
+                </ColumnTwo>
+                <ColumnTwo>
+                  <ColorChanging style={{ fontWeight: "normal" }}>
+                    {destination.status}
+                  </ColorChanging>
+                </ColumnTwo>
+                <ColumnTwo>
+                  <Tooltip disableFocusListener title="Delete">
+                    <img
+                      alt=""
+                      src="/images/deletes.svg"
+                      style={{ width: "1.1rem" }}
+                      onClick = {()=>deleteDestination(destination.destinationId)}
+                    />
+                  </Tooltip>
+                </ColumnTwo>
+              </RowData>
+            </Div>
           ))}
         </LastDiv>
       </MainContainer>
