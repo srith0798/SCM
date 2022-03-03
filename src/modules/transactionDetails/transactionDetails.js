@@ -536,6 +536,9 @@ const TopContainer = styled.div`
   padding-left: 1.25rem;
   display: flex;
   align-items: center;
+  @media (min-width: 300px) and (max-width: 768px) {
+    padding-left:13px !important;
+  }
 `;
 
 const TabImage = styled.img`
@@ -910,6 +913,9 @@ const SubHeading = styled.div`
   font-weight: 600;
   color: #102c78;
   display: flex;
+  @media (min-width: 300px) and (max-width: 768px) {
+    padding-left:13px !important;
+  }
 `;
 
 const CopyToClipboardImg = styled.img`
