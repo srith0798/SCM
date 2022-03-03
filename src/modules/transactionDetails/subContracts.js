@@ -7,7 +7,6 @@ import ShowLoader from "../../common/components/showLoader";
 import { PrismAsyncLight as SyntaxHighlighter } from 'react-syntax-highlighter';
 import js from 'react-syntax-highlighter/dist/esm/languages/hljs/javascript';
 import { base16AteliersulphurpoolLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import logger from "redux-logger";
 SyntaxHighlighter.registerLanguage('javascript', js);
 
 export default function SubContracts(props) {
@@ -38,27 +37,16 @@ export default function SubContracts(props) {
   useEffect(() => {
     getContractList();
   }, []);
-
-  if(address[0]!==undefined){
-    let arr = address[0].sourceCode.split("}");
-    let final = arr.filter((row)=>{
-      return row.includes("transfer(address");
-    })
-    console.log(final[final.length-1]);
-  }
-
   
   return (
     <div>
       {showContract === true ? (
         <BoxContainer>
-          <div style={{display: "flex", justifyContent: "space-between"}}>
-           <div>
+          <div style={{display: "flex"}}>
+           <div style={{width: "18%"}}>
           <DetailContainer>
-            <Row>
               <Heading>Contracts </Heading>
               <SubHead>{address[0].contractName}</SubHead>
-            </Row>
           </DetailContainer>
           <CommonDiv>
             <RowData check = {selectedContract}>
@@ -69,15 +57,16 @@ export default function SubContracts(props) {
             </RowData>
           </CommonDiv>
           </div>
-          <div style={{marginRight: "5%"}}>
-          <SyntaxHighlighter language="javascript" showLineNumbers={true} style={base16AteliersulphurpoolLight} wrapLongLines={true} customStyle = {{  backgroundColor: "#f0f2fc"}}>
-           
-          {address[0].sourceCode}
-           
-          </SyntaxHighlighter>
+          <div style={{width: "82%"}}>
+          <CodeMainContainer>
+           <CodeContainer>
+           <SyntaxHighlighter language="javascript" showLineNumbers={true} style={base16AteliersulphurpoolLight} wrapLongLines={true} customStyle = {{  backgroundColor: "#f0f2fc"}}>
+           {address[0].sourceCode}
+           </SyntaxHighlighter>
+             </CodeContainer> 
+          </CodeMainContainer>
           </div>
           </div>
-          
         </BoxContainer>
         
         
@@ -193,7 +182,8 @@ const BoxContainer = styled.div`
 const RowData = styled.div`
   display: flex;
   padding-left: 16px;
-  width: 250px;
+  width: 100%;
+  max-width: 350px;
   height: 50px;
   background-color: ${(props) => (props.check === 1 ? "#3163f0" : "")};
   color: ${(props) => (props.check === 1 ? "#ffffff" : "")};
@@ -211,6 +201,8 @@ const SubHead = styled.div`
 `;
 const DetailContainer = styled.div`
   padding: 15px;
+  display: flex;
+  justify-content: space-between;
 `;
 
 const CommonDiv = styled.div`
@@ -252,4 +244,26 @@ const TextLi = styled.div`
   font-size: 0.875rem;
   font-weight: 600;
   font-size: 0.875rem;
+`;
+
+
+
+const CodeMainContainer = styled.div`
+  width: 100%;
+  max-width: 72vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  background-color: #ffffff;
+  margin-top: 33px;
+  padding: 20px;
+`;
+const CodeContainer = styled.div`
+  background: #ffffff 0% 0% no-repeat padding-box;
+  border-radius: 6px;
+  width: 100%;
+  background-color: #ffffff;
+  height: 430px;
+  overflow-y: scroll;
 `;
