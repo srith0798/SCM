@@ -369,8 +369,8 @@ export default function TransactionDetails() {
               <Row>
                 <Heading>Gas Used</Heading>
                 <SubHead>
-                  {new Intl.NumberFormat().format(row.gasUsed)} (
-                  {((row.gas / row.gasUsed) * 100).toFixed(2)}%)
+                  {new Intl.NumberFormat().format(row.gasUsed)} 
+                  
                 </SubHead>
               </Row>
             </CommonDiv>

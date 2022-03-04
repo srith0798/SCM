@@ -149,7 +149,10 @@ export default function Contract(props) {
               getContractList={getContractList}
             />
           )}
-          <Button onClick={handleClickOpen}>Add Contract</Button>
+          {(address.length==0)?
+          (<Button title="Add your First Contract" onClick={handleClickOpen}>Add Contract</Button>)
+          :
+          (<Button  onClick={handleClickOpen}>Add Contract</Button>)}
         </IconDiv>
       </SubContainer>
 

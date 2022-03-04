@@ -440,14 +440,25 @@ export default function MainComponent(props) {
                           graphNo={1}
                           error1={transactionOverTimeError}
                         ></SelectComponent>
+                        
                       </SubContainer>
+                      {(noOfTransactions.length==0)?
+                      ( <GraphSizeError>
+                        {" "}
+                        <Line
+                          data={noOfTransactions}
+                          error={transactionOverTimeError}
+                        />
+                      </GraphSizeError>)
+                      :
                       <GraphSize>
                         {" "}
                         <Line
                           data={noOfTransactions}
                           error={transactionOverTimeError}
                         />
-                      </GraphSize>
+                      </GraphSize>}
+                      
                     </GraphContainer>
                   </Grid>
                   <Grid item xs={12} sm={12} md={6}>
@@ -463,13 +474,23 @@ export default function MainComponent(props) {
                           error1={transactionOverTimeError}
                         ></SelectComponent>
                       </SubContainer>
+                      {(noOfTransactions.length==0)?
+                      ( <GraphSizeError>
+                        {" "}
+                        <Line
+                          data={noOfTransactions}
+                          error={transactionOverTimeError}
+                        />
+                      </GraphSizeError>)
+                      :
                       <GraphSize>
                         {" "}
                         <Line
                           data={gasPriceData}
                           error={gasUsedOverTimeError}
                         />
-                      </GraphSize>
+                      </GraphSize>}
+                      
                     </GraphContainer>
                   </Grid>
                   {/* </ResponsiveRow> */}
@@ -481,8 +502,32 @@ export default function MainComponent(props) {
                   columnSpacing={{ xs: 12, sm: 2, md: 3 }}
                 >
                   <Grid item xs={12} sm={12} md={6}>
+
                     <GraphContainer>
-                      <TableData
+                      {(topCallersError.length==0)?
+                     ( <TableData
+                      style={{margin:"93px"}}
+                      heading="Top Callers"
+                      expandGraphs={expandGraphs}
+                      getAnalyticsData={getTopCallers}
+                      selectValue={topCallersSelct}
+                      data={topCallersData}
+                      graphNo={4}
+                      error={topCallersError}
+                      
+                    ></TableData>)
+                    :<TableData
+                    heading="Top Callers"
+                    expandGraphs={expandGraphs}
+                    getAnalyticsData={getTopCallers}
+                    selectValue={topCallersSelct}
+                    data={topCallersData}
+                    graphNo={4}
+                    error={topCallersError}
+                    
+                  ></TableData>
+                      }
+                      {/* <TableData
                         heading="Top Callers"
                         expandGraphs={expandGraphs}
                         getAnalyticsData={getTopCallers}
@@ -491,7 +536,7 @@ export default function MainComponent(props) {
                         graphNo={4}
                         error={topCallersError}
                         
-                      ></TableData>
+                      ></TableData> */}
                     </GraphContainer>
                   </Grid>
                   <Grid item xs={12} sm={12} md={6}>
@@ -507,10 +552,20 @@ export default function MainComponent(props) {
                           error1={transactionOverTimeError}
                         ></SelectComponent>
                       </SubContainer>
+                      {(noOfTransactions.length==0)?
+                      ( <GraphSizeError>
+                        {" "}
+                        <Line
+                          data={noOfTransactions}
+                          error={transactionOverTimeError}
+                        />
+                      </GraphSizeError>)
+                      :
                       <GraphSize>
                         {" "}
                         <Line data={activeUserData} error={activeUsersError} />
-                      </GraphSize>
+                      </GraphSize>}
+                      
                     </GraphContainer>
                   </Grid>
                 </Grid>
@@ -613,7 +668,7 @@ const TableData = (props) => {
             </TableRow>
           ))
         ) : (
-          <>{props.error}</>
+          <><TableError>{props.error}</TableError></>
         )}
       </Table>
     </>
@@ -643,7 +698,7 @@ const SelectComponent = (props) => {
       </div>
       <select
         id="dates"
-        style={{display:props.error1!=""?"none":""}}
+        style={{display:props.data.length==0?"none":""}}
         className="select"
         value={props.selectValue}
         onChange={(event) => {
@@ -750,6 +805,20 @@ const Content = styled.div`
   }
 `;
 
+const GraphSizeError = styled.div`
+height: 13.75rem;
+  width: auto;
+  margin-bottom: 1.2rem;
+  background: transparent;
+  text-align:center;
+  margin-top:113px;
+  @media (max-width: 767px) {
+    height: 250px;
+  }
+`;
+const TableError = styled.div`
+margin-top:96px;
+`;
 const TableRow = styled.div`
   display: flex;
   flex-flow: column-nowrap;
