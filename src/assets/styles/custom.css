@@ -607,9 +607,6 @@ input[type="date"]:valid::before {
   }
 }
 @media (min-width: 0px) and (max-width: 767px) {
-  #Heading-section {
-    /* margin-top:50px; */
-  }
   .heading {
     width: 45px;
     height: 21px;

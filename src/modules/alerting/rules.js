@@ -46,6 +46,8 @@ export default function Rules() {
               >
                 <img
                   alt=""
+                  id="Rules"
+                  onClick={handleViewClick}
                   style={{ marginRight: "0.375rem" }}
                   src={
                     activeButton === "Rules"
@@ -70,6 +72,8 @@ export default function Rules() {
               >
                 <img
                   alt=""
+                  id="History"
+                  onClick={handleViewClick}
                   style={{ marginRight: "0.375rem" }}
                   src={
                     activeButton === "History"
@@ -97,6 +101,8 @@ export default function Rules() {
               >
                 <img
                   alt=""
+                  id="Destination"
+                  onClick={handleViewClick}
                   style={{ marginRight: "5px" }}
                   src={
                     activeButton === "Destination"

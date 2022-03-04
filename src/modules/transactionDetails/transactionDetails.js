@@ -159,6 +159,8 @@ export default function TransactionDetails() {
           >
             <TabImage
               alt=""
+              id="Overview"
+              onClick={handleViewClick}
               style={{ marginRight: "0.375rem" }}
               src={
                 activeButton === "Overview"
@@ -181,6 +183,8 @@ export default function TransactionDetails() {
           >
             <TabImage
               alt=""
+              id="Contracts"
+              onClick={handleViewClick}
               style={{ marginRight: "0.375rem" }}
               src={
                 activeButton === "Contracts"
@@ -203,6 +207,8 @@ export default function TransactionDetails() {
           >
             <TabImage
               alt=""
+              id="EventsDetails"
+              onClick={handleViewClick}
               style={{ marginRight: "0.375rem" }}
               src={
                 activeButton === "EventsDetails"
@@ -238,6 +244,8 @@ export default function TransactionDetails() {
           >
             <TabImage
               alt=""
+              id="StateChange"
+              onClick={handleViewClick}
               style={{
                 marginRight: "0.375rem",
               }}
