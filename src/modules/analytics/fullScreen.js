@@ -86,7 +86,15 @@ export default function FullScreen(props) {
                     </option>
                   </select>
                 </FlexEnd>
-              <GraphSize>  <Line data={props.data} type= "fullScreen" error={props.error}/> </GraphSize>
+                {(props.data.length==0)?
+                      ( <GraphSizeError>
+                          <Line data={props.data} type= "fullScreen" error={props.error}/>
+                      </GraphSizeError>)
+                      :
+                      <GraphSize>
+                          <Line data={props.data} type= "fullScreen" error={props.error}/>
+                      </GraphSize>}
+              {/* <GraphSize>  <Line data={props.data} type= "fullScreen" error={props.error}/> </GraphSize> */}
               </GraphContainer>
             </Row>
           </MainContainer>
@@ -129,6 +137,19 @@ const GraphSize = styled.div`
   margin-bottom: 1.2rem;
   background: transparent;
   text-align: center;
+  @media (max-width: 767px) {
+    height: 80px;
+  }
+`;
+
+const GraphSizeError = styled.div`
+  height: 15.75rem;
+  width: auto;
+  margin-top: 1.29rem;
+  margin-bottom: 1.2rem;
+  background: transparent;
+  text-align: center;
+  padding-top: 80px;
   @media (max-width: 767px) {
     height: 80px;
   }

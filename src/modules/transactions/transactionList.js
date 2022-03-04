@@ -347,7 +347,9 @@ export default function TransactionList() {
                 picker below
               </InstructionText>
 
+            
               <ClickAwayListener onClickAway={handleClickAway}>
+                
                 <Box
                   sx={{
                     position: "relative",
@@ -357,22 +359,33 @@ export default function TransactionList() {
                   }}
                   selected={selected.address}
                 >
+                 
                   
-                  <DropDown onClick={handleClick}>
-                    {selectedName || "Contract"}
-                    <img
-                      style={{ marginLeft: "0.5rem", marginBottom: "10px," }}
-                      alt=""
-                      src="/images/XDCmainnet.svg"
-                    />
-                    <br />
-                    <TransactionHash>{selected}</TransactionHash>
-                    <Image src="/images/arrrow.svg" />
-                  </DropDown>
+                  {(contracts.length==0)?
+                  <DropDown onClick={handleClick}>                  
+                    
+                    <Span>No contract available</Span>
+                  </DropDown>:
+                  <DropDown onClick={handleClick}>                  
+                  {selectedName || "Contract"}
+                  <img
+                    style={{ marginLeft: "0.5rem", marginBottom: "10px," }}
+                    alt=""
+                    src="/images/XDCmainnet.svg"
+                  />
+                  <br />
+                  <TransactionHash>{selected}</TransactionHash>
+                  <Image src="/images/arrrow.svg" />
+                  
+                </DropDown>}
+                  
 
                   {isSetOpen ? (
                     <Box sx={styles}>
-                      <Label>Contracts</Label>
+                      {(contracts.length==0)?
+                      (<Label>No contract available</Label>):
+                      <Label>Contracts</Label>}
+                      
                       {(contracts.length!=0)?
                       (contracts.length &&
                         contracts.map((item) => (
@@ -569,7 +582,7 @@ export default function TransactionList() {
           <PlaceHolderContainer>
             <PlaceHolderImage src="/images/transactions-blue.svg" />
             No transactions found <br/>
-            add your first contract 
+            <span><a href="/contracts">add{" "} </a> your first contract </span>
           </PlaceHolderContainer>
         )}
         
@@ -770,6 +783,11 @@ const Transactions = styled.div`
   @media (min-width: 360px) and (max-width: 577px) {
     display: none;
   }
+`;
+const Span =styled.div `
+color: #A6B3D8;
+font-size:14px;
+margin-top:12px
 `;
 const TransactionMedia = styled.div`
   display: none;
