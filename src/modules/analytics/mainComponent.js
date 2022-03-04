@@ -626,7 +626,6 @@ const SelectComponent = (props) => {
     <>
       <div style={{ display: "flex", alignItems: "center" }}>
         <Head>
-          {console.log(props.data,"data")}
         {props.heading}
           <Tooltip
             disableFocusListener
