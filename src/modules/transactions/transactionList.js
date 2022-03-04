@@ -116,6 +116,8 @@ export default function TransactionList() {
     console.log('setS', address);
     console.log('searching', searchRow)
 
+
+
   const searchTransaction = async (searchValues, searchKeys) => {
     try {
       const requestData = {
@@ -170,14 +172,13 @@ export default function TransactionList() {
     fontWeight: "600",
     color: "#191919",
   };
-  const redirectToTransactionDetails = (id, status) => {
+  const redirectToTransactionDetails = (id, status, selected) => {
     history.push({
       pathname: "/transactions/transaction-details?" + id,
-      state: { id: id, status: status },
+      state: { id: id, status: status, selected: selected },
     });
   };
   const changePage = (value) => {
-    console.log("sdd.", value);
     setValueCheck(value.selected);
     if(setFrom>0 || select === 2 || select === 3){
       filterSearch(Math.ceil(value.selected * countToggle),
@@ -506,7 +507,7 @@ export default function TransactionList() {
                 <Div>
                   <RowData
                     onClick={() =>
-                      redirectToTransactionDetails(data?.hash, status)
+                      redirectToTransactionDetails(data?.hash, status, selected)
                     }
                   >
                     {toggle.transactionHash && (

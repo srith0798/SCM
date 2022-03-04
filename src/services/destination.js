@@ -3,7 +3,8 @@ import { httpService } from "../utility/httpService";
 
 export default {
   getDestinations,
-  addDestination
+  addDestination,
+  deleteDestination
 };
 
 function getHeaders() {
@@ -14,7 +15,7 @@ function getHeaders() {
 }
 
 async function addDestination(requestData) {
-  let url = "http://localhost:3001/destination";
+  let url =process.env.REACT_APP_ALERT_MICROSERVICE + "/destination";
   return httpService(
     httpConstants.METHOD_TYPE.POST,
     getHeaders(),
@@ -37,9 +38,31 @@ async function addDestination(requestData) {
 }
 
 async function getDestinations(requestData) {
-    let url = "http://localhost:3001/destination";
+    let url = process.env.REACT_APP_ALERT_MICROSERVICE + "/destination-list";
     return httpService(
-      httpConstants.METHOD_TYPE.GET,
+      httpConstants.METHOD_TYPE.POST,
+      getHeaders(),
+      requestData,
+      url
+    )
+      .then((response) => {
+        if (
+          !response.success ||
+          response.responseCode !== 200 ||
+          !response.responseData ||
+          response.responseData.length === 0
+        )
+          return Promise.reject(response);
+        return Promise.resolve(response.responseData);
+      })
+      .catch(function (err) {
+        return Promise.reject(err);
+      });
+  }
+  async function deleteDestination(requestData) {
+    let url =process.env.REACT_APP_ALERT_MICROSERVICE + "/destination/" + requestData;
+    return httpService(
+      httpConstants.METHOD_TYPE.DELETE,
       getHeaders(),
       {},
       url
@@ -58,4 +81,3 @@ async function getDestinations(requestData) {
         return Promise.reject(err);
       });
   }
-

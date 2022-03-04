@@ -1,25 +1,52 @@
-import React from "react";
+import React , {useEffect} from "react";
 import "react-tabs/style/react-tabs.css";
 import styled from "styled-components";
 import Historys from "./historys";
 import Destination from "./destination";
-
 import { history } from "../../managers/history";
 import Tooltip from "@mui/material/Tooltip";
+import utility from "../../utility";
+import AlertService from "../../services/alert";
+import { genericConstants } from "../../constants";
+import { sessionManager } from "../../managers/sessionManager";
 
 export default function Rules() {
   const [activeButton, setActiveButton] = React.useState("Rules");
   const handleViewClick = (e) => {
     setActiveButton(e.target.id);
   };
-  const redirectToAlertDetails = () => {
-    history.push("/alert-detail");
+  const redirectToAlertDetails = (alertId) => {
+    history.push(`/alert-detail/${alertId}`);
   };
 
   const [networkToolTip, setnetworkToolTip] = React.useState(false);
   const [addressToolTip, setaddressToolTip] = React.useState(false);
   const [contractNameToolTip, setcontractNameToolTip] = React.useState(false);
   const [alertTypeToolTip, setalertTypeToolTip] = React.useState(false);
+  const [alerts, setAlerts] = React.useState(false);
+
+  const getAlertList = async () => {
+    let request ={
+      userId : sessionManager.getDataFromCookies("userId"),
+      isDeleted:false
+    }
+    const [error , response] = await utility.parseResponse(AlertService.getAlertList(request));
+     if(error)
+      return;
+     setAlerts(response);
+  }
+  const deleteAlert = async (alertId) => {
+    console.log(alertId);
+    const [error , response] = await utility.parseResponse(AlertService.deleteAlert(alertId));
+     if(error)
+      return;
+    utility.apiSuccessToast("Alert Deleted Successfully");
+    await getAlertList()
+  }
+
+  useEffect(() => {
+    getAlertList();
+  }, []);
 
   return (
     <>
@@ -110,84 +137,87 @@ export default function Rules() {
           </NewDivOne>
           {activeButton === "Rules" && (
             <TableContainer>
+            
+                         <NewDiv>
+                         <RowData>
+                           <ColumnOne>
+                             Contract Name
+                             <Tooltip
+                               open={contractNameToolTip}
+                               onOpen={() => setcontractNameToolTip(true)}
+                               onClose={() => setcontractNameToolTip(false)}
+                               disableFocusListener
+                               title="Name of the smart contract"
+                             >
+                               <ToolTipIcon
+                                 onClick={() =>
+                                   setcontractNameToolTip(!contractNameToolTip)
+                                 }
+                                 src="/images/tool-tip.svg"
+                               />
+                             </Tooltip>
+                           </ColumnOne>
+                           <ColumnOne>
+                             Address
+                             <Tooltip
+                               open={addressToolTip}
+                               onOpen={() => setaddressToolTip(true)}
+                               onClose={() => setaddressToolTip(false)}
+                               disableFocusListener
+                               title="Wallet address"
+                             >
+                               <ToolTipIcon
+                                 onClick={() => setaddressToolTip(!addressToolTip)}
+                                 src="/images/tool-tip.svg"
+                               />
+                             </Tooltip>
+                           </ColumnOne>
+                           <ColumnOne>
+                             Network
+                             <Tooltip
+                               open={networkToolTip}
+                               onOpen={() => setnetworkToolTip(true)}
+                               onClose={() => setnetworkToolTip(false)}
+                               disableFocusListener
+                               title="The executing blockchain network"
+                             >
+                               <ToolTipIcon
+                                 onClick={() => setnetworkToolTip(!networkToolTip)}
+                                 src="/images/tool-tip.svg"
+                               />
+                             </Tooltip>
+                           </ColumnOne>
+                           <ColumnOne>
+                             Alert Type
+                             <Tooltip
+                               open={alertTypeToolTip}
+                               onOpen={() => setalertTypeToolTip(true)}
+                               onClose={() => setalertTypeToolTip(false)}
+                               disableFocusListener
+                               title="Transaction status"
+                             >
+                               <ToolTipIcon
+                                 onClick={() => setalertTypeToolTip(!alertTypeToolTip)}
+                                 src="/images/tool-tip.svg"
+                               />
+                             </Tooltip>
+                           </ColumnOne>
+                           <ColumnOne></ColumnOne>
+                           <ColumnOne></ColumnOne>
+                         </RowData>
+                       </NewDiv>
+            
+             {alerts && alerts.length ? alerts.map((alert)=>(
               <NewDiv>
-                <RowData onClick={redirectToAlertDetails}>
-                  <ColumnOne>
-                    Contract Name
-                    <Tooltip
-                      open={contractNameToolTip}
-                      onOpen={() => setcontractNameToolTip(true)}
-                      onClose={() => setcontractNameToolTip(false)}
-                      disableFocusListener
-                      title="Name of the smart contract"
-                    >
-                      <ToolTipIcon
-                        onClick={() =>
-                          setcontractNameToolTip(!contractNameToolTip)
-                        }
-                        src="/images/tool-tip.svg"
-                      />
-                    </Tooltip>
-                  </ColumnOne>
-                  <ColumnOne>
-                    Address
-                    <Tooltip
-                      open={addressToolTip}
-                      onOpen={() => setaddressToolTip(true)}
-                      onClose={() => setaddressToolTip(false)}
-                      disableFocusListener
-                      title="Wallet address"
-                    >
-                      <ToolTipIcon
-                        onClick={() => setaddressToolTip(!addressToolTip)}
-                        src="/images/tool-tip.svg"
-                      />
-                    </Tooltip>
-                  </ColumnOne>
-                  <ColumnOne>
-                    Network
-                    <Tooltip
-                      open={networkToolTip}
-                      onOpen={() => setnetworkToolTip(true)}
-                      onClose={() => setnetworkToolTip(false)}
-                      disableFocusListener
-                      title="The executing blockchain network"
-                    >
-                      <ToolTipIcon
-                        onClick={() => setnetworkToolTip(!networkToolTip)}
-                        src="/images/tool-tip.svg"
-                      />
-                    </Tooltip>
-                  </ColumnOne>
-                  <ColumnOne>
-                    Alert Type
-                    <Tooltip
-                      open={alertTypeToolTip}
-                      onOpen={() => setalertTypeToolTip(true)}
-                      onClose={() => setalertTypeToolTip(false)}
-                      disableFocusListener
-                      title="Transaction status"
-                    >
-                      <ToolTipIcon
-                        onClick={() => setalertTypeToolTip(!alertTypeToolTip)}
-                        src="/images/tool-tip.svg"
-                      />
-                    </Tooltip>
-                  </ColumnOne>
-                  <ColumnOne></ColumnOne>
-                  <ColumnOne></ColumnOne>
-                </RowData>
-              </NewDiv>
-              <NewDiv>
-                <RowData1 onClick={redirectToAlertDetails}>
-                  <ColumnTwo>App_Transactions</ColumnTwo>{" "}
-                  <ColumnTwo>
-                    <BackgroundChanger>xdcabfe…8b3c </BackgroundChanger>
+                <RowData1 >
+                  <ColumnTwo onClick={()=>redirectToAlertDetails(alert.alertId)}>{alert?.target?.name}</ColumnTwo>{" "}
+                  <ColumnTwo onClick={()=>redirectToAlertDetails(alert.alertId)}>
+                    <BackgroundChanger>{utility.minimizeAddress(alert?.target?.value)}</BackgroundChanger>
                   </ColumnTwo>
-                  <ColumnTwo>XDC Mainnet</ColumnTwo>
-                  <ColumnTwo>Sucessfull</ColumnTwo>
-                  <ColumnTwo style={{ fontSize: "14px", color: "#00A58C" }}>
-                    Enabled
+                  <ColumnTwo onClick={()=>redirectToAlertDetails(alert.alertId)}>{alert?.target?.network}</ColumnTwo>
+                  <ColumnTwo onClick={()=>redirectToAlertDetails(alert.alertId)}>{genericConstants.ALERT_TYPE_NAMES[alert?.type]}</ColumnTwo>
+                  <ColumnTwo style={{ fontSize: "14px", color: "#00A58C" }} onClick={()=>redirectToAlertDetails(alert.alertId)}>
+                    {alert.status ? "Enabled" : "Disabled"}
                   </ColumnTwo>
                   <ColumnTwo>
                     <Tooltip disableFocusListener title="Delete">
@@ -195,33 +225,13 @@ export default function Rules() {
                         alt=""
                         src="/images/delete-blue.svg"
                         style={{ width: "1rem" }}
+                        onClick = {()=>deleteAlert(alert.alertId)}
                       />
                     </Tooltip>
                   </ColumnTwo>
                 </RowData1>
               </NewDiv>
-              <NewDiv>
-                <RowData1 onClick={redirectToAlertDetails}>
-                  <ColumnTwo>App_Transactions</ColumnTwo>
-                  <ColumnTwo>
-                    <BackgroundChanger>xdcabfe…8b3c </BackgroundChanger>
-                  </ColumnTwo>
-                  <ColumnTwo>XDC Mainnet</ColumnTwo>
-                  <ColumnTwo>Failed</ColumnTwo>
-                  <ColumnTwo style={{ fontSize: "0.875rem", color: "#00A58C" }}>
-                    Enabled
-                  </ColumnTwo>
-                  <ColumnTwo>
-                    <Tooltip disableFocusListener title="Delete">
-                      <img
-                        alt=""
-                        src="/images/delete-blue.svg"
-                        style={{ width: "1rem" }}
-                      />
-                    </Tooltip>
-                  </ColumnTwo>
-                </RowData1>
-              </NewDiv>
+             )): ""}
             </TableContainer>
           )}
           {activeButton === "History" && <Historys />}
