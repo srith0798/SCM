@@ -4,10 +4,10 @@ import ContractsService from "../../services/contractsService";
 import { sessionManager } from "../../managers/sessionManager";
 import { Row } from "simple-flexbox";
 import ShowLoader from "../../common/components/showLoader";
-import { PrismAsyncLight as SyntaxHighlighter } from 'react-syntax-highlighter';
-import js from 'react-syntax-highlighter/dist/esm/languages/hljs/javascript';
-import { base16AteliersulphurpoolLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
-SyntaxHighlighter.registerLanguage('javascript', js);
+import { PrismAsyncLight as SyntaxHighlighter } from "react-syntax-highlighter";
+import js from "react-syntax-highlighter/dist/esm/languages/hljs/javascript";
+import { base16AteliersulphurpoolLight } from "react-syntax-highlighter/dist/esm/styles/prism";
+SyntaxHighlighter.registerLanguage("javascript", js);
 
 export default function SubContracts(props) {
   const [address, setAddress] = React.useState([]);
@@ -37,59 +37,71 @@ export default function SubContracts(props) {
   useEffect(() => {
     getContractList();
   }, []);
-  
+
   return (
     <div>
       {showContract === true ? (
         <BoxContainer>
-          <div style={{display: "flex"}}>
-           <div style={{width: "18%"}}>
-          <DetailContainer>
+          <div>
+            <DetailContainer>
               <Heading>Contracts </Heading>
               <SubHead>{address[0].contractName}</SubHead>
-          </DetailContainer>
-          <CommonDiv>
-            <RowData check = {selectedContract}>
-              <Heads>
-                <Icon alt="" src="/images/contracts.svg" />
-                <TextLi>Subcontracts name</TextLi>
-              </Heads>
-            </RowData>
-          </CommonDiv>
+            </DetailContainer>
           </div>
-          <div style={{width: "82%"}}>
-          <CodeMainContainer>
-           <CodeContainer>
-           <SyntaxHighlighter language="javascript" showLineNumbers={true} style={base16AteliersulphurpoolLight} wrapLongLines={true} customStyle = {{  backgroundColor: "#f0f2fc"}}>
-           {address[0].sourceCode}
-           </SyntaxHighlighter>
-             </CodeContainer> 
-          </CodeMainContainer>
-          </div>
-          </div>
+          <FlexDiv>
+            <SubContractDiv>
+              <CommonDiv>
+                <RowData check={selectedContract}>
+                  <Heads>
+                    <Icon alt="" src="/images/contracts.svg" />
+                    <TextLi>Subcontracts name</TextLi>
+                  </Heads>
+                </RowData>
+              </CommonDiv>
+            </SubContractDiv>
+            <CodeDiv>
+              <CodeMainContainer>
+                <CodeContainer>
+                  <SyntaxHighlighter
+                    language="javascript"
+                    showLineNumbers={true}
+                    style={base16AteliersulphurpoolLight}
+                    wrapLongLines={true}
+                    customStyle={{ backgroundColor: "#f0f2fc", margin: 0 }}
+                  >
+                    {address[0].sourceCode}
+                  </SyntaxHighlighter>
+                </CodeContainer>
+              </CodeMainContainer>
+            </CodeDiv>
+          </FlexDiv>
         </BoxContainer>
-        
-        
       ) : (
-        <MainContainer>
-          <MainBoxContainer>
-            <Container>
+        <div>
+          <MainContainer>
+            <MainBoxContainer>
               <ShowLoader state={loader} top={"33%"} />
-              <Title>{address[0]?.contractName}</Title>
-              <SubTitle>{address[0]?.address}</SubTitle>
-              <SubTitleTwo>
-                <Button onClick={() => setShowVerifiedContract(true)}>
-                  <img
-                    style={{ marginRight: "4px" }}
-                    alt=""
-                    src="/images/verified_tick.svg"
-                  />
-                  {address[0]?.status}
-                </Button>
-              </SubTitleTwo>
-            </Container>
-          </MainBoxContainer>
-        </MainContainer>
+              {address[0] !== undefined ? (
+                <Container>
+                  <Title>{address[0]?.contractName}</Title>
+                  <SubTitle>{address[0]?.address}</SubTitle>
+                  <SubTitleTwo>
+                    <Button onClick={() => setShowVerifiedContract(true)}>
+                      <img
+                        style={{ marginRight: "4px" }}
+                        alt=""
+                        src="/images/verified_tick.svg"
+                      />
+                      {address[0]?.status}
+                    </Button>
+                  </SubTitleTwo>
+                </Container>
+              ) : (
+                ""
+              )}
+            </MainBoxContainer>
+          </MainContainer>
+        </div>
       )}
     </div>
   );
@@ -107,6 +119,26 @@ const MainContainer = styled.div`
   @media (min-width: 300px) and (max-width: 414px) {
     height: 42rem;
   }
+`;
+const FlexDiv = styled.div`
+display: flex;
+@media (min-width: 300px) and (max-width: 414px) {
+display: block;
+}
+`;
+
+const SubContractDiv = styled.div`
+width: 18%;
+@media (min-width: 300px) and (max-width: 414px) {
+width: 100%;
+}
+`;
+
+const CodeDiv = styled.div`
+width: 82%;
+@media (min-width: 300px) and (max-width: 414px) {
+width: 100%;
+}
 `;
 const Container = styled.div`
   padding: 10px;
@@ -131,7 +163,6 @@ const Container = styled.div`
 
 const MainBoxContainer = styled.div`
   display: flex;
-  justify-content: space-between;
   max-width: 40.625rem;
   width: 100%;
   height: 6.5rem;
@@ -187,10 +218,10 @@ const RowData = styled.div`
   height: 50px;
   background-color: ${(props) => (props.check === 1 ? "#3163f0" : "")};
   color: ${(props) => (props.check === 1 ? "#ffffff" : "")};
-  /* &:hover {
-    background-color: #3163f0;
-    color: #ffffff;
-  } */
+  @media (min-width: 300px) and (max-width: 414px) {
+    max-width: 200px;
+    margin-left: 15px;
+  }
 `;
 const SubHead = styled.div`
   font-size: 20px;
@@ -202,7 +233,7 @@ const SubHead = styled.div`
 const DetailContainer = styled.div`
   padding: 15px;
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
 `;
 
 const CommonDiv = styled.div`
@@ -241,12 +272,13 @@ const Heading = styled.div`
 
 const TextLi = styled.div`
   text-align: left;
-  font-size: 0.875rem;
+  font-size: 15px;
   font-weight: 600;
-  font-size: 0.875rem;
+  cursor: pointer;
+  @media (min-width: 768px) and (max-width: 1024px) {
+    font-size: 10px;
+  }
 `;
-
-
 
 const CodeMainContainer = styled.div`
   width: 100%;
@@ -256,8 +288,12 @@ const CodeMainContainer = styled.div`
   align-items: center;
   border: none;
   background-color: #ffffff;
-  margin-top: 33px;
   padding: 20px;
+  padding-top: 0px;
+  @media (min-width: 300px) and (max-width: 414px) {
+    max-width: 90vw;
+    margin-top: 10px;
+  }
 `;
 const CodeContainer = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;

@@ -232,7 +232,7 @@ export default function TransactionList() {
         skip: skip,
         limit: limit,
         contractAddress: selected ? selected : defaultAddress,
-        status: "",
+        // status: "",
         date : {
           fromDate: setFrom,
           toDate: setTo
@@ -569,7 +569,7 @@ export default function TransactionList() {
 
                     {toggle.when && (
                       <ColumnSecond>
-                        {moment(data.timestamp * 1000).format("lll")}
+                        {moment(data.timestamp * 1000).utc().format("lll")}
                       </ColumnSecond>
                     )}
                   </RowData>
@@ -740,7 +740,6 @@ const PaginationDiv = styled.div`
   & .paginationBttns a {
     padding: 7px;
     font-size: 10px;
-    margin: 6px;
     border-radius: 5px;
     border: 1px solid lightgrey;
     color: skyblue;

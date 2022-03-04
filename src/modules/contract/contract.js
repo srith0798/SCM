@@ -383,7 +383,6 @@ const PaginationDiv = styled.div`
   & .paginationBttns a {
     padding: 7px;
     font-size: 10px;
-    margin: 6px;
     border-radius: 5px;
     border: 1px solid lightgrey;
     color: skyblue;
