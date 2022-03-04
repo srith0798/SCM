@@ -12,6 +12,8 @@ const useStyles = makeStyles(() => ({
     ['@media screen and (min-width: 300px) and (max-width: 580px)']:{
       height:"665px",
       marginBottom: "51px",
+      width:"88% !important",
+      overflow :"hidden"
   },
 
   },
