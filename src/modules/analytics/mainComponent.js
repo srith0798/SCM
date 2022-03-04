@@ -626,6 +626,7 @@ const SelectComponent = (props) => {
     <>
       <div style={{ display: "flex", alignItems: "center" }}>
         <Head>
+          {console.log(props.data,"data")}
         {props.heading}
           <Tooltip
             disableFocusListener
@@ -643,7 +644,7 @@ const SelectComponent = (props) => {
       </div>
       <select
         id="dates"
-        style={{display:props.error1!=""?"none":""}}
+        style={{display:props.data.length==0?"none":""}}
         className="select"
         value={props.selectValue}
         onChange={(event) => {
