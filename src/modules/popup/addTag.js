@@ -11,12 +11,20 @@ const useStyles = makeStyles(() => ({
 }));
 export default function AddTags(props) {
   const [input, setInput] = useState([]);
-
+  
   const classes = useStyles();
 
   const addContractTag = async () => {
-    let requestData = {
-      contractId: props.contract ? props.address[0]._id : props.address._id,
+    let requestData={};
+    (props.ContractId!="")?
+    
+    requestData = {
+      contractId:props.ContractId,
+      tags: input,
+    }
+    :
+    requestData = {
+      contractId: props.contract ? props.address[0]._id : props.address._id ,
       tags: input,
     };
 

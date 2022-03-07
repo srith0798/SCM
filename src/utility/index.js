@@ -105,8 +105,8 @@ function truncateTxnAddressDesktop(address) {
   return start + "..." + end;
 }
 function truncateTag(tag){
-  const start = tag.slice(0, 20);
-  const end = tag.slice(-16);
+  const start = tag.slice(0, 7);
+  const end = tag.slice(-7);
   // console.log(start, end);
   return start + "..." + end;
 }
