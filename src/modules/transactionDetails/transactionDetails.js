@@ -1109,6 +1109,10 @@ const FailButton = styled.div`
   @media (min-width: 300px) and (max-width: 767px) {
     width: 87px;
   }
+  @media (min-width: 300px) and (max-width: 650px) {
+    margin-left: auto;
+    margin-right: 9px;
+  }
 `;
 
 const SuccessButton = styled.div`
@@ -1126,8 +1130,9 @@ const SuccessButton = styled.div`
   opacity: 1;
   margin-right: 12px;
   /* justify-content: center; */
-  @media (min-width: 300px) and (max-width: 767px) {
-    margin-left: 60px;
+  @media (min-width: 300px) and (max-width: 650px) {
+    margin-left: auto;
+    margin-right: 9px;
   }
   @media (min-width: 768px) and (max-width: 1023px) {
     padding: 0px 9px 0px 13px;
