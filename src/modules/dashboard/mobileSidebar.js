@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { history } from "../../managers/history";
+import { sessionManager } from "../../managers/sessionManager";
 
 export default function Sidebar(props) {
   const [open, setOpen] = useState(false);
@@ -27,7 +28,12 @@ export default function Sidebar(props) {
     history.push("/alerting");
   };
   const redirectToLogout = () => {
-    history.push("/");
+    sessionManager.removeDataFromCookies("isLoggedIn");
+    sessionManager.removeDataFromCookies("accountAddress");
+    sessionManager.removeDataFromCookies("userId");
+    sessionManager.removeDataFromCookies("username");
+    sessionManager.removeDataFromCookies("profilePicture");
+    history.replace("/");
   };
   const redirectToAbout = () => {
     history.push("/");
@@ -112,12 +118,10 @@ export default function Sidebar(props) {
             <Icon src="/images/Subtraction 2.svg" />
             <Heading>FAQs</Heading>
           </Wrapper>
-          <LogoutTag>
           <Wrapper onClick={redirectToLogout}>
             <Icon src="/images/Log out.svg" />
             <Heading>Logout</Heading>
           </Wrapper>
-          </LogoutTag>
           <CenterDiv>
             <img alt="" src="/images/Group 12.svg" />
           </CenterDiv>
@@ -161,7 +165,7 @@ const SidebarContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 86%;
+  height: 100%;
   width: 248px;
   padding-top: 15px;
   overflow-x: hidden;
@@ -170,9 +174,10 @@ const SidebarContainer = styled.div`
   }
 `;
 const LogoutTag = styled.div`
-@media (min-width: 300px) and (max-width: 768px) {
+display: flex;
+/* @media (min-width: 300px) and (max-width: 768px) {
   display:none;
-}
+} */
 `;
 const Icon = styled.img`
   cursor: pointer;

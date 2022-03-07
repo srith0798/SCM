@@ -347,11 +347,14 @@ export default function TransactionDetails() {
                 {" "}
                 <Heading>Timestamp</Heading>
                 <SubHead>
-                  {moment(row.createdOn).format("lll") +
-                    " UTC " +
-                    moment(Number(row.createdOn) * 1000)
-                      .utc()
-                      .format("hh:mm ")}
+                  {`${
+                    (row?.createdOn &&
+                      moment(row.createdOn)
+                        .tz("Asia/Calcutta")
+
+                        .format("MMM DD, YYYY, hh:mm A")) ||
+                    ""
+                  } ${("Asia/Calcutta" && utility.getUtcOffset("Asia/Calcutta")) || ""}`}
 
                   {/* {moment(row.createdOn).fromNow() +
                   " " +
@@ -376,10 +379,7 @@ export default function TransactionDetails() {
             <CommonDiv>
               <Row>
                 <Heading>Gas Used</Heading>
-                <SubHead>
-                  {new Intl.NumberFormat().format(row.gasUsed)} 
-                  
-                </SubHead>
+                <SubHead>{new Intl.NumberFormat().format(row.gasUsed)}</SubHead>
               </Row>
             </CommonDiv>
             <CommonDiv>
@@ -560,7 +560,9 @@ export default function TransactionDetails() {
             <DataDivContainer>
               <BackgroundChangerTransfer>
                 <InputDataDiv>
-                  <SubHeadBlue>{transfer!=="" ? transfer + "}" : "No function available"}</SubHeadBlue>
+                  <SubHeadBlue>
+                    {transfer !== "" ? transfer + "}" : "No function available"}
+                  </SubHeadBlue>
                 </InputDataDiv>
               </BackgroundChangerTransfer>
             </DataDivContainer>
@@ -594,7 +596,7 @@ const TopContainer = styled.div`
   display: flex;
   align-items: center;
   @media (min-width: 300px) and (max-width: 768px) {
-    padding-left:13px !important;
+    padding-left: 13px !important;
   }
 `;
 
@@ -989,7 +991,7 @@ const SubHeading = styled.div`
   color: #102c78;
   display: flex;
   @media (min-width: 300px) and (max-width: 768px) {
-    padding-left:13px !important;
+    padding-left: 13px !important;
   }
 `;
 

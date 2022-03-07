@@ -123,12 +123,12 @@ const dashboardComponent = (props) => {
     return true; //required to close the "connect wallet" popup
   };
   
-  let check = window.web3.eth.accounts;
-  let currentAddress = sessionManager.getDataFromCookies("accountAddress");
-  if(check[0]!==currentAddress){
-  getCurrentUserDetails();
-  alert("XDCPay Account changed!!")
-  }
+  // let check = window.web3.eth.accounts;
+  // let currentAddress = sessionManager.getDataFromCookies("accountAddress");
+  // if(check[0]!==currentAddress){
+  // getCurrentUserDetails();
+  // alert("XDCPay Account changed!!")
+  // }
 
   return (
     <>
