@@ -107,10 +107,13 @@ export default function Contract(props) {
   }, []);
 
   const [addTag, setAddTag] = useState(false);
-  const Open = (e) => {
+  const [contractId, getContractId] = useState("");
+  const Open = (e,id) => {
     e.stopPropagation();
     setAddTagPopUp(true);
     setAddTag(true);
+    getContractId(id)
+    
   };
   const Close = () => {
     setAddTag(false);
@@ -248,7 +251,7 @@ export default function Contract(props) {
           return (
             <div style={{ cursor: "pointer" }}>
               <Div>
-                <RowTag>
+                <RowTag>           
                   <ColumnSecond onClick={(e) => redirectTODetails(e, data._id)}>
                     {data.contractName}
                   </ColumnSecond>
@@ -259,23 +262,24 @@ export default function Contract(props) {
                   </ColumnSecond>
 
                   <ColumnSecond onClick={(e) => redirectTODetails(e, data._id)}>
-                    {data.network}
+                    {data.network}                 
                   </ColumnSecond>
                   <ColumnSecond style={{ display: "flex" }}>
-                    <TagCol>
+                    <TagCol>                     
                       {(data.tags=="")? 
-                      (<AddTag onClick={(e) => Open(e)}>Add Tag</AddTag>) 
+                      (<AddTag onClick={(e) => Open(e, data._id)} >Add Tag</AddTag>) 
                       :
                       (address[index].tags &&
                         address[index].tags.map(
                           (tag, index) =>
-                            index <= 0 && <FinanceTag>{console.log(tag,"tag====")} {data.tags[0]}</FinanceTag>
+                            index <= 0 && (data.tags[0].length<=16)?(<FinanceTag>{data.tags[0]}</FinanceTag>):<FinanceTag>{utility.truncateTag(data.tags[0])}</FinanceTag>
                         ))}
                       {addTag && (
-                        <AddTags
+                        <AddTags                         
                           click={Close}
                           address={address}
                           contract={true}
+                          ContractId={contractId}
                         />
                       )}
                       {/* {data.tags && data.tags.length === 0 && (

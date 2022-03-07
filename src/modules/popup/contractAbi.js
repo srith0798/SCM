@@ -25,7 +25,7 @@ export default function ContractAbi(props) {
           <Container>
             <SubContainer>
               <Add>Contract ABI</Add>
-              <img alt="" src="/images/close.svg" onClick={props.click} />
+              <img alt="" src="/images/close.svg" onClick={props.click} style={{cursor:"pointer"}} />
             </SubContainer>
             <SyntaxHighlighter
               language="json"
