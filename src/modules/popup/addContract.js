@@ -61,6 +61,7 @@ export default function AddContract(props) {
       checkAddress();
     }
   };
+  console.log("check", checkBox);
   
   return (
     <div>
@@ -131,7 +132,7 @@ export default function AddContract(props) {
             )}
            
             <Button
-            disabled={address==""}
+            disabled={address==="" || checkBox === false}
               onClick={addContract}
               style={{ backgroundColor: address === "" ? "#9DB5F8" : ""  }}
             >

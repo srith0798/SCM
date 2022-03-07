@@ -40,6 +40,7 @@ export default function MainComponent(props) {
   );
   const [dropDownValue, setDropDownValue] = React.useState("30");
   const [loader, setLoader] = React.useState("30");
+  const [expanded, setExpanded] = React.useState(0);
   const [tableData, setTableData] = React.useState([]);
   const [
     transactionOverTimeError,
@@ -319,6 +320,7 @@ export default function MainComponent(props) {
   }, []);
 
   const expandGraphs = (value, data, dropDownValue) => {
+    setExpanded(value);
     if (value === 1) {
       setGraphName("Transactions over time");
       setData(data);
@@ -606,6 +608,7 @@ export default function MainComponent(props) {
           dropDownValue={dropDownValue}
           error={error}
           selected={selected}
+          expand={expanded}
         />
       )}
       {expandGraph > 3 && (

@@ -88,11 +88,11 @@ export default function FullScreen(props) {
                 </FlexEnd>
                 {(props.data.length==0)?
                       ( <GraphSizeError>
-                          <Line data={props.data} type= "fullScreen" error={props.error}/>
+                          <Line data={props.data} type= "fullScreen" error={props.error} expanded={props.expand}/>
                       </GraphSizeError>)
                       :
                       <GraphSize>
-                          <Line data={props.data} type= "fullScreen" error={props.error}/>
+                          <Line data={props.data} type= "fullScreen" error={props.error} expanded={props.expand}/>
                       </GraphSize>}
               {/* <GraphSize>  <Line data={props.data} type= "fullScreen" error={props.error}/> </GraphSize> */}
               </GraphContainer>

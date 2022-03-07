@@ -306,7 +306,7 @@ export default function AddAlert() {
 
                 <ProgressHeader>
                   <TypeRow> Alert type</TypeRow>
-                  <SelectType>{alertType ? alertType : 'Select a alert triger type'}</SelectType>
+                  <SelectType>{alertType ? alertType.toLowerCase().replace("_"," ").substring(0,1).toUpperCase() + alertType.toLowerCase().replace("_"," ").substring(1) : 'Select a alert triger type'}</SelectType>
                 </ProgressHeader>
               </AlertContainer>
               <SideLineProvider>
@@ -329,7 +329,7 @@ export default function AddAlert() {
                 <ProgressHeader>
                   <TypeRow> Alert target</TypeRow>
                   <SelectType>
-                    {alertTarget ? alertTarget : 'Select a address which alert will be trigger'}
+                    {alertTarget ? alertTarget : 'Select an address for which the alert will be triggered'}
                   </SelectType>
                 </ProgressHeader>
               </AlertContainer>
@@ -391,7 +391,7 @@ export default function AddAlert() {
                 <ProgressHeader>
                   <TypeRow>Destination</TypeRow>
                   <SelectType style={{}}>
-                    Select the destination in which alert notification will be
+                    Select the destination to which alert notifications will be
                     sent to.
                   </SelectType>
                   {progress === "DESTINATION" && (
@@ -543,7 +543,7 @@ const AlertTarget = (props) =>{
                     >
                       <img alt="" src={props.icon.address} />
                       <Title>Address</Title>
-                      <SubTitle>recieve alert for only one address</SubTitle>
+                      <SubTitle>Receive alerts for only one address</SubTitle>
                     </BoxContainer>
                     <BoxContainer
                       onClick={() => props.selectAlertTarget(genericConstants.ALERT_TYPE.NETWORK)}
@@ -555,7 +555,7 @@ const AlertTarget = (props) =>{
                       <img alt="" src={props.icon.network} />
                       <Title>Network</Title>
                       <SubTitle>
-                        recieve alert for deployment on a network
+                        Receive alerts for addresses deployed on a network
                       </SubTitle>
                     </BoxContainer>
                     <BoxContainer
@@ -567,7 +567,7 @@ const AlertTarget = (props) =>{
                     >
                       <img alt="" src={props.icon.tag} />
                       <Title>Tag</Title>
-                      <SubTitle>Recieve alert for every address</SubTitle>
+                      <SubTitle>Receive alerts for every address that has selected tag</SubTitle>
                     </BoxContainer>
                   </AlertTargetContainer>
   )

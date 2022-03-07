@@ -230,7 +230,7 @@ export default function Rules() {
                       <img
                         alt=""
                         src="/images/delete-blue.svg"
-                        style={{ width: "1rem" }}
+                        style={{ width: "1rem", cursor: "pointer"}}
                         onClick = {()=>deleteAlert(alert.alertId)}
                       />
                     </Tooltip>

@@ -3,6 +3,10 @@ import { history } from "../managers/history";
 // import Cookies from "universal-cookie";
 import ToastService from "react-material-toast";
 
+let moment = require("moment");
+
+let momentZone = require("moment-timezone");
+
 const toast = ToastService.new({
   place: "topRight",
   duration: 1,
@@ -26,7 +30,8 @@ const utility = {
   convertToInternationalCurrencySystem,
   minimizeAddress,
   truncateTxnAddressDesktop,
-  truncateTag
+  truncateTag,
+  getUtcOffset
 };
 export default utility;
 
@@ -34,6 +39,16 @@ export default utility;
 export const dispatchAction = (type, data) => {
   return (dispatch) => dispatch({ type, data });
 };
+
+function getUtcOffset(timezone) {
+
+  
+
+  let min = momentZone.tz(timezone).utcOffset()
+
+  return min > 0 ? `UTC+${Math.abs(parseInt(min / 60)) > 9 ? Math.abs(parseInt(min / 60)) : `0${Math.abs(parseInt(min / 60))}`}:${Math.abs(parseInt(min % 60)) || '00'}` : `UTC-${Math.abs(parseInt(min / 60)) > 9 ? Math.abs(parseInt(min / 60)) : `0${Math.abs(parseInt(min / 60))}`}:${Math.abs(parseInt(min % 60)) || '00'}`
+
+}
 
 function parseResponse(promise) {
   return promise
