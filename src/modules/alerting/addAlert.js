@@ -161,7 +161,7 @@ export default function AddAlert() {
       target:{
         type : alertTarget,
         value : targetValue,
-        threshold:'',
+        threshold: threshold,
       },
       destinations:selectedDestinations
     }
