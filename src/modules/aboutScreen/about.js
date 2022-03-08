@@ -12,7 +12,7 @@ import AddContract from "../popup/addContract";
 export default function About(props) {
   const [state, setState] = useState(true);
   const [address, setAddress] = React.useState({});
-
+  
   return (
     <>
       <MainBoxContainer>
@@ -133,7 +133,7 @@ export default function About(props) {
             click={() => setState(false)}
             state={state}
           />
-        )}
+        )}       
       </div>
     </>
   );

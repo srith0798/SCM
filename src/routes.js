@@ -7,13 +7,32 @@ import { history } from "./managers/history";
 import BaseComponent from "./modules/baseComponent";
 import { createTheme } from "@material-ui/core/styles";
 import ShowLoader from "./common/components/showLoader";
+import { sessionManager } from "./managers/sessionManager";
 
 const Dashboard = withRouter(
   lazy(() => import("./modules/dashboard/dashboardComponent"))
 );
 
 class Routes extends BaseComponent {
-  componentDidMount() {}
+  componentDidMount() {
+    let user = "";
+
+    try {
+      user = window.web3.eth.accounts;
+    } catch (e) {}
+
+    const redirectToLogout = () => {
+      sessionManager.removeDataFromCookies("isLoggedIn");
+      sessionManager.removeDataFromCookies("accountAddress");
+      sessionManager.removeDataFromCookies("userId");
+      sessionManager.removeDataFromCookies("username");
+      sessionManager.removeDataFromCookies("profilePicture");
+      history.replace("/");
+    };
+    if(user=="")
+      {redirectToLogout()}
+  
+  }
 
   getPublicRoutes = () => {
     return (
@@ -41,12 +60,15 @@ class Routes extends BaseComponent {
   };
 
   render() {
+    
     return (
+      <>
       <MuiThemeProvider muiTheme={createTheme()}>
         <Router history={history}>
           {true ? this.getPrivateRoutes() : this.getPublicRoutes()}
         </Router>
       </MuiThemeProvider>
+      </>
     );
   }
 }
