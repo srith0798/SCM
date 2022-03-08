@@ -1,4 +1,4 @@
-import React , {useEffect} from "react";
+import React, { useEffect } from "react";
 import "react-tabs/style/react-tabs.css";
 import styled from "styled-components";
 import Historys from "./historys";
@@ -23,26 +23,28 @@ export default function Rules() {
   const [addressToolTip, setaddressToolTip] = React.useState(false);
   const [contractNameToolTip, setcontractNameToolTip] = React.useState(false);
   const [alertTypeToolTip, setalertTypeToolTip] = React.useState(false);
-  const [alerts, setAlerts] = React.useState(false);
+  const [alerts, setAlerts] = React.useState([]);
 
   const getAlertList = async () => {
-    let request ={
-      userId : sessionManager.getDataFromCookies("userId"),
-      isDeleted:false
-    }
-    const [error , response] = await utility.parseResponse(AlertService.getAlertList(request));
-     if(error)
-      return;
-     setAlerts(response);
-  }
+    let request = {
+      userId: sessionManager.getDataFromCookies("userId"),
+      isDeleted: false,
+    };
+    const [error, response] = await utility.parseResponse(
+      AlertService.getAlertList(request)
+    );
+    if (error) return;
+    setAlerts(response);
+  };
   const deleteAlert = async (alertId) => {
     console.log(alertId);
-    const [error , response] = await utility.parseResponse(AlertService.deleteAlert(alertId));
-     if(error)
-      return;
+    const [error, response] = await utility.parseResponse(
+      AlertService.deleteAlert(alertId)
+    );
+    if (error) return;
     utility.apiSuccessToast("Alert Deleted Successfully");
-    await getAlertList()
-  }
+    await getAlertList();
+  };
 
   useEffect(() => {
     getAlertList();
@@ -143,101 +145,137 @@ export default function Rules() {
           </NewDivOne>
           {activeButton === "Rules" && (
             <TableContainer>
-            
-                         <NewDiv>
-                         <RowData>
-                           <ColumnOne>
-                             Contract Name
-                             <Tooltip
-                               open={contractNameToolTip}
-                               onOpen={() => setcontractNameToolTip(true)}
-                               onClose={() => setcontractNameToolTip(false)}
-                               disableFocusListener
-                               title="Name of the smart contract"
-                             >
-                               <ToolTipIcon
-                                 onClick={() =>
-                                   setcontractNameToolTip(!contractNameToolTip)
-                                 }
-                                 src="/images/tool-tip.svg"
-                               />
-                             </Tooltip>
-                           </ColumnOne>
-                           <ColumnOne>
-                             Address
-                             <Tooltip
-                               open={addressToolTip}
-                               onOpen={() => setaddressToolTip(true)}
-                               onClose={() => setaddressToolTip(false)}
-                               disableFocusListener
-                               title="Wallet address"
-                             >
-                               <ToolTipIcon
-                                 onClick={() => setaddressToolTip(!addressToolTip)}
-                                 src="/images/tool-tip.svg"
-                               />
-                             </Tooltip>
-                           </ColumnOne>
-                           <ColumnOne>
-                             Network
-                             <Tooltip
-                               open={networkToolTip}
-                               onOpen={() => setnetworkToolTip(true)}
-                               onClose={() => setnetworkToolTip(false)}
-                               disableFocusListener
-                               title="The executing blockchain network"
-                             >
-                               <ToolTipIcon
-                                 onClick={() => setnetworkToolTip(!networkToolTip)}
-                                 src="/images/tool-tip.svg"
-                               />
-                             </Tooltip>
-                           </ColumnOne>
-                           <ColumnOne>
-                             Alert Type
-                             <Tooltip
-                               open={alertTypeToolTip}
-                               onOpen={() => setalertTypeToolTip(true)}
-                               onClose={() => setalertTypeToolTip(false)}
-                               disableFocusListener
-                               title="Transaction status"
-                             >
-                               <ToolTipIcon
-                                 onClick={() => setalertTypeToolTip(!alertTypeToolTip)}
-                                 src="/images/tool-tip.svg"
-                               />
-                             </Tooltip>
-                           </ColumnOne>
-                           <ColumnOne></ColumnOne>
-                           <ColumnOne></ColumnOne>
-                         </RowData>
-                       </NewDiv>
-            
-             {alerts && alerts.length ? alerts.map((alert)=>(
               <NewDiv>
-                <RowData1 >
-                  <ColumnTwo onClick={()=>redirectToAlertDetails(alert.alertId)}>{alert?.target?.name}</ColumnTwo>{" "}
-                  <ColumnTwo onClick={()=>redirectToAlertDetails(alert.alertId)}>
-                    <BackgroundChanger>{utility.minimizeAddress(alert?.target?.value)}</BackgroundChanger>
-                  </ColumnTwo>
-                  <ColumnTwo onClick={()=>redirectToAlertDetails(alert.alertId)}>{alert?.target?.network}</ColumnTwo>
-                  <ColumnTwo onClick={()=>redirectToAlertDetails(alert.alertId)}>{genericConstants.ALERT_TYPE_NAMES[alert?.type]}</ColumnTwo>
-                  <ColumnTwo style={{ fontSize: "14px", color: "#00A58C" }} onClick={()=>redirectToAlertDetails(alert.alertId)}>
-                    {alert.status ? "Enabled" : "Disabled"}
-                  </ColumnTwo>
-                  <ColumnTwo>
-                    <Tooltip disableFocusListener title="Delete">
-                      <img
-                        alt=""
-                        src="/images/delete-blue.svg"
-                        style={{ width: "1rem", cursor: "pointer"}}
-                        onClick = {()=>deleteAlert(alert.alertId)}
+                <RowData>
+                  <ColumnOne>
+                    Contract Name
+                    <Tooltip
+                      open={contractNameToolTip}
+                      onOpen={() => setcontractNameToolTip(true)}
+                      onClose={() => setcontractNameToolTip(false)}
+                      disableFocusListener
+                      title="Name of the smart contract"
+                    >
+                      <ToolTipIcon
+                        onClick={() =>
+                          setcontractNameToolTip(!contractNameToolTip)
+                        }
+                        src="/images/tool-tip.svg"
                       />
                     </Tooltip>
-                  </ColumnTwo>
-                </RowData1>
+                  </ColumnOne>
+                  <ColumnOne>
+                    Address
+                    <Tooltip
+                      open={addressToolTip}
+                      onOpen={() => setaddressToolTip(true)}
+                      onClose={() => setaddressToolTip(false)}
+                      disableFocusListener
+                      title="Wallet address"
+                    >
+                      <ToolTipIcon
+                        onClick={() => setaddressToolTip(!addressToolTip)}
+                        src="/images/tool-tip.svg"
+                      />
+                    </Tooltip>
+                  </ColumnOne>
+                  <ColumnOne>
+                    Network
+                    <Tooltip
+                      open={networkToolTip}
+                      onOpen={() => setnetworkToolTip(true)}
+                      onClose={() => setnetworkToolTip(false)}
+                      disableFocusListener
+                      title="The executing blockchain network"
+                    >
+                      <ToolTipIcon
+                        onClick={() => setnetworkToolTip(!networkToolTip)}
+                        src="/images/tool-tip.svg"
+                      />
+                    </Tooltip>
+                  </ColumnOne>
+                  <ColumnOne>
+                    Alert Type
+                    <Tooltip
+                      open={alertTypeToolTip}
+                      onOpen={() => setalertTypeToolTip(true)}
+                      onClose={() => setalertTypeToolTip(false)}
+                      disableFocusListener
+                      title="Transaction status"
+                    >
+                      <ToolTipIcon
+                        onClick={() => setalertTypeToolTip(!alertTypeToolTip)}
+                        src="/images/tool-tip.svg"
+                      />
+                    </Tooltip>
+                  </ColumnOne>
+                  <ColumnOne></ColumnOne>
+                  <ColumnOne></ColumnOne>
+                </RowData>
               </NewDiv>
-             )): ""}
+
+              {alerts && alerts.length ? (
+                alerts.map((alert) => (
+                  <NewDiv>
+                    <RowData1>
+                      <ColumnTwo
+                        onClick={() => redirectToAlertDetails(alert.alertId)}
+                      >
+                        {alert?.target?.name}
+                      </ColumnTwo>{" "}
+                      <ColumnTwo
+                        onClick={() => redirectToAlertDetails(alert.alertId)}
+                      >
+                        <BackgroundChanger>
+                          {utility.minimizeAddress(alert?.target?.value)}
+                        </BackgroundChanger>
+                      </ColumnTwo>
+                      <ColumnTwo
+                        onClick={() => redirectToAlertDetails(alert.alertId)}
+                      >
+                        {alert?.target?.network}
+                      </ColumnTwo>
+                      <ColumnTwo
+                        onClick={() => redirectToAlertDetails(alert.alertId)}
+                      >
+                        {genericConstants.ALERT_TYPE_NAMES[alert?.type]}
+                      </ColumnTwo>
+                      <ColumnTwo
+                        style={{ fontSize: "14px", color: "#00A58C" }}
+                        onClick={() => redirectToAlertDetails(alert.alertId)}
+                      >
+                        {alert.status ? "Enabled" : "Disabled"}
+                      </ColumnTwo>
+                      <ColumnTwo>
+                        <Tooltip disableFocusListener title="Delete">
+                          <img
+                            alt=""
+                            src="/images/delete-blue.svg"
+                            style={{ width: "1rem", cursor: "pointer" }}
+                            onClick={() => deleteAlert(alert.alertId)}
+                          />
+                        </Tooltip>
+                      </ColumnTwo>
+                    </RowData1>
+                  </NewDiv>
+                ))
+              ) : (
+                //  <CheckDiv show={alerts.length}>
+                <div>
+                  <ImgDiv>
+                    <PlaceHolderImage src="images/set alerts.svg" alt="" />
+                  </ImgDiv>
+                  <PlaceHolderContainer>
+                    No alerts found <br />
+                    You can start monitoring by adding contracts <br />
+                    <PlaceholderSpan>
+                      Click <Link href="/contracts">here </Link> to add
+                      contracts
+                    </PlaceholderSpan>
+                  </PlaceHolderContainer>
+                </div>
+                // </CheckDiv>
+              )}
             </TableContainer>
           )}
           {activeButton === "History" && <Historys />}
@@ -247,7 +285,25 @@ export default function Rules() {
     </>
   );
 }
+const PlaceholderSpan = styled.span`
+  display: contents;
+`;
+const Link = styled.a`
+  display: contents;
+`;
 
+const ImgDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3%;
+`;
+const PlaceHolderImage = styled.img`
+  width: 60px;
+  -webkit-filter: grayscale(60%); /* Safari 6.0 - 9.   */
+  filter: grayscale(50%);
+  /* margin-bottom: 20px; */
+`;
 const TableContainer = styled.div`
   background-color: #ffffff;
   border-radius: 0.375rem;
@@ -267,12 +323,25 @@ const TableContainer = styled.div`
       border-radius: 15px;
     }
     ::-webkit-scrollbar-thumb {
-      background: #3163f0;
+      /* background: #3163f0; */
+      background-color: #d6dee1;
       border-radius: 15px;
       border: 4px solid transparent;
       background-clip: content-box;
     }
   }
+`;
+const PlaceHolderContainer = styled.div`
+  display: flex;
+  width: 100%;
+  height: 100%;
+  /* flex-direction: column; */
+  justify-content: center;
+  align-items: center;
+  opacity: 50%;
+  font-weight: 600;
+  font-size: 14px;
+  text-align: center;
 `;
 const Title = styled.div`
   font-size: 1.5rem;
@@ -281,6 +350,14 @@ const Title = styled.div`
     font-size: 1.2rem;
     font-weight: 600;
   }
+`;
+const CheckDiv = styled.div`
+  display: ${(props) => (props.show === 0 ? "flex" : "none")};
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  opacity: 50%; ;
 `;
 const Container = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;

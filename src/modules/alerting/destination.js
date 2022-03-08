@@ -28,12 +28,13 @@ export default function Destination() {
     setAddDestinationPopup(true);
     setDestinationType(value)
   }
-  const addDestination = async (label, url) => {
+  const addDestination = async (label, url, channelName) => {
     let requestData = {
       userId: sessionManager.getDataFromCookies("userId"),
       type: destinationType,
       label: label,
-      url: url
+      url: url,
+      channelName: channelName,
     }
     const [error, response] = await utility.parseResponse(DestinationService.addDestination(requestData));
     if (error) {

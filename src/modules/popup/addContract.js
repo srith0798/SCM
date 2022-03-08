@@ -218,6 +218,9 @@ const Content = styled.div`
   font-size: 0.8rem;
   font-weight: 600;
   white-space: nowrap;
+  @media (min-width: 300px) and (max-width: 767px) {
+  white-space: unset;
+  }
 `;
 const Input = styled.input`
   background-image: url("/images/search-icon.svg");

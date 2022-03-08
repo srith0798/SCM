@@ -24,19 +24,22 @@ export default function AddAlert() {
   const [destinations, setDestinations] = React.useState([]);
   const [selectedDestinations, setSelectedDestinations] = React.useState([]);
   const [targetValue, setTargetValue] = React.useState("");
-  const [selectedAddress,setSelectedAddress] = React.useState([]);
+  const [selectedAddress, setSelectedAddress] = React.useState([]);
 
   const [icon, setIcon] = React.useState({
-    successfulTransaction: genericConstants.ALERT_TYPE_IMAGES.SUCCESSFULL_TRANSACTIONS.IMAGE,
-    failedTransaction:  genericConstants.ALERT_TYPE_IMAGES.FAILED_TRANSACTIONS.IMAGE,
+    successfulTransaction:
+      genericConstants.ALERT_TYPE_IMAGES.SUCCESSFULL_TRANSACTIONS.IMAGE,
+    failedTransaction:
+      genericConstants.ALERT_TYPE_IMAGES.FAILED_TRANSACTIONS.IMAGE,
     tokenTransfer: genericConstants.ALERT_TYPE_IMAGES.TOKEN_TRANSFER.IMAGE,
-    transactionValue:  genericConstants.ALERT_TYPE_IMAGES.TRANSACTION_VALUE.IMAGE,
-    balanceToken:  genericConstants.ALERT_TYPE_IMAGES.XDC_BALANCE.IMAGE,
+    transactionValue:
+      genericConstants.ALERT_TYPE_IMAGES.TRANSACTION_VALUE.IMAGE,
+    balanceToken: genericConstants.ALERT_TYPE_IMAGES.XDC_BALANCE.IMAGE,
     stateChange: genericConstants.ALERT_TYPE_IMAGES.STATE_CHANGE.IMAGE,
     functionCall: genericConstants.ALERT_TYPE_IMAGES.FUNCTION_CALL.IMAGE,
-    address:genericConstants.ALERT_TYPE_IMAGES.ADDRESS.IMAGE,
-    network:genericConstants.ALERT_TYPE_IMAGES.NETWORK.IMAGE,
-    tag:genericConstants.ALERT_TYPE_IMAGES.TAG.IMAGE,
+    address: genericConstants.ALERT_TYPE_IMAGES.ADDRESS.IMAGE,
+    network: genericConstants.ALERT_TYPE_IMAGES.NETWORK.IMAGE,
+    tag: genericConstants.ALERT_TYPE_IMAGES.TAG.IMAGE,
   });
 
   const [addDestinationPopup, setAddDestinationPopup] = React.useState(false);
@@ -48,49 +51,50 @@ export default function AddAlert() {
   };
 
   const [progress, setProgress] = React.useState("ALERT_TYPE");
-  const changeProgress =async (value) => {
-    if(value === "DESTINATION")
-      getDestinations();
-    if(value === "Rules")
-     {
-       await addAlert();
-       history.push("/alerting");
+  const changeProgress = async (value) => {
+    if (value === "DESTINATION") getDestinations();
+    if (value === "Rules") {
+      await addAlert();
+      history.push("/alerting");
     }
     setProgress(value);
-
   };
   const backButton = () => {
     history.push("/alerting");
   };
 
-  const changeSourceForIcons = (value,type) => {
-    setIcon({ ...icon , [type] :genericConstants.ALERT_TYPE_IMAGES_WHITE[value].IMAGE});
+  const changeSourceForIcons = (value, type) => {
+    setIcon({
+      ...icon,
+      [type]: genericConstants.ALERT_TYPE_IMAGES_WHITE[value].IMAGE,
+    });
   };
 
-  const changeOriginalSourceForIcons = (value,type) => {
-    setIcon({ ...icon , [type] :genericConstants.ALERT_TYPE_IMAGES[value].IMAGE});
+  const changeOriginalSourceForIcons = (value, type) => {
+    setIcon({
+      ...icon,
+      [type]: genericConstants.ALERT_TYPE_IMAGES[value].IMAGE,
+    });
   };
 
-  const selectAlertType = (type) =>{
+  const selectAlertType = (type) => {
     setAlertType(type);
-    changeProgress("ALERT_TARGET")
-  }
-  const selectAlertTarget = (type) =>{
+    changeProgress("ALERT_TARGET");
+  };
+  const selectAlertTarget = (type) => {
     setAlertTarget(type);
-    changeProgress("PARAMETERS")
-    if(type === genericConstants.ALERT_TYPE.ADDRESS)
-       getContracts();
-    else if(type === genericConstants.ALERT_TYPE.TAG)   
-       getTags();
-  }
+    changeProgress("PARAMETERS");
+    if (type === genericConstants.ALERT_TYPE.ADDRESS) getContracts();
+    else if (type === genericConstants.ALERT_TYPE.TAG) getTags();
+  };
   const openDestinationPopup = (value) => {
     setAddDestinationPopup(true);
-    setDestinationType(value)
-  }
+    setDestinationType(value);
+  };
   const getContracts = async () => {
     let userId = sessionManager.getDataFromCookies("userId");
     const requestData = {
-      userId: userId
+      userId: userId,
     };
     setLoader(true);
     const [error, response] = await utility.parseResponse(
@@ -106,11 +110,11 @@ export default function AddAlert() {
     setLoader(false);
     setParametersData(response.contractList);
   };
-  
+
   const getTags = async () => {
     let userId = sessionManager.getDataFromCookies("userId");
     const requestData = {
-      userId: userId
+      userId: userId,
     };
     setLoader(true);
     const [error, response] = await utility.parseResponse(
@@ -126,88 +130,91 @@ export default function AddAlert() {
     setLoader(false);
     setParametersData(response);
   };
-  const getDestinations =async () =>{
+  const getDestinations = async () => {
     let requestData = {
-      userId : sessionManager.getDataFromCookies("userId"),
-      isDeleted: false
-    }
-    const [error,response] = await utility.parseResponse(DestinationService.getDestinations(requestData));
-    if(error)
-      return;
+      userId: sessionManager.getDataFromCookies("userId"),
+      isDeleted: false,
+    };
+    const [error, response] = await utility.parseResponse(
+      DestinationService.getDestinations(requestData)
+    );
+    if (error) return;
     setDestinations(response);
-  }
-  const selectDestinations =async (event) =>{
-    let id = event.target.value
-    if(event.target.checked)
-    setSelectedDestinations(prevArray => [...prevArray, id])
-    else 
-    setSelectedDestinations(selectedDestinations.filter(item => item !== id));
-  }
-  const selectTargetValue = (event)=>{
+  };
+  const selectDestinations = async (event) => {
+    let id = event.target.value;
+    if (event.target.checked)
+      setSelectedDestinations((prevArray) => [...prevArray, id]);
+    else
+      setSelectedDestinations(
+        selectedDestinations.filter((item) => item !== id)
+      );
+  };
+  const selectTargetValue = (event) => {
     setTargetValue(event.target.value);
-    if(alertTarget === genericConstants.ALERT_TYPE.ADDRESS)
-    {
-     let data = parametersData.filter((data)=>{
-        if(data.address === event.target.value)
-         return true
+    if (alertTarget === genericConstants.ALERT_TYPE.ADDRESS) {
+      let data = parametersData.filter((data) => {
+        if (data.address === event.target.value) return true;
       });
-      setSelectedAddress(data[0]?data[0]:[]);
+      setSelectedAddress(data[0] ? data[0] : []);
     }
-  }
-  const addAlert =async () =>{
+  };
+  const addAlert = async () => {
     let requestData = {
-      userId : sessionManager.getDataFromCookies("userId"),
+      userId: sessionManager.getDataFromCookies("userId"),
       type: alertType,
-      target:{
-        type : alertTarget,
-        value : targetValue,
+      target: {
+        type: alertTarget,
+        value: targetValue,
         threshold: threshold,
       },
-      destinations:selectedDestinations
+      destinations: selectedDestinations,
+    };
+    if (alertTarget === genericConstants.ALERT_TYPE.ADDRESS) {
+      requestData["target"]["name"] = selectedAddress?.contractName;
+      requestData["target"]["network"] = selectedAddress?.network;
     }
-    if(alertTarget === genericConstants.ALERT_TYPE.ADDRESS)
-    {
-       requestData["target"]["name"] = selectedAddress?.contractName;
-       requestData["target"]["network"] = selectedAddress?.network;
-    }
-    if(alertTarget === genericConstants.ALERT_TYPE.TAG)
+    if (alertTarget === genericConstants.ALERT_TYPE.TAG)
       requestData["target"]["name"] = targetValue;
 
-    const [error,response] = await utility.parseResponse(AlertService.addAlert(requestData));
-    if(error)
-      {
-        utility.apiFailureToast(error || "Cannot add Alert")
-        return;
-      }
-    utility.apiSuccessToast("Alert added successfully!")  
-  }
+    const [error, response] = await utility.parseResponse(
+      AlertService.addAlert(requestData)
+    );
+    if (error) {
+      utility.apiFailureToast(error || "Cannot add Alert");
+      return;
+    }
+    utility.apiSuccessToast("Alert added successfully!");
+  };
   const addDestination = async (label, url) => {
     let requestData = {
       userId: sessionManager.getDataFromCookies("userId"),
       type: destinationType,
       label: label,
-      url: url
-    }
+      url: url,
+    };
     console.log(requestData);
-    const [error, response] = await utility.parseResponse(DestinationService.addDestination(requestData));
+    const [error, response] = await utility.parseResponse(
+      DestinationService.addDestination(requestData)
+    );
     if (error) {
       setAddDestinationPopup(false);
       return;
     }
     setDestinations(response);
     setAddDestinationPopup(false);
-  }
-  
+  };
+
   return (
     <>
       <MainContainer>
-      {addDestinationPopup && (
-            <AddDestination
-              click={addDestination}
-              type = {destinationType}
-              close = {()=>setAddDestinationPopup(false)}
-            />
-          )}
+        {addDestinationPopup && (
+          <AddDestination
+            click={addDestination}
+            type={destinationType}
+            close={() => setAddDestinationPopup(false)}
+          />
+        )}
         <Row>
           <RowCorrecter>
             <TitleHead>
@@ -306,18 +313,28 @@ export default function AddAlert() {
 
                 <ProgressHeader>
                   <TypeRow> Alert type</TypeRow>
-                  <SelectType>{alertType ? alertType.toLowerCase().replace("_"," ").substring(0,1).toUpperCase() + alertType.toLowerCase().replace("_"," ").substring(1) : 'Select a alert triger type'}</SelectType>
+                  <SelectType>
+                    {alertType
+                      ? alertType
+                          .toLowerCase()
+                          .replace("_", " ")
+                          .substring(0, 1)
+                          .toUpperCase() +
+                        alertType.toLowerCase().replace("_", " ").substring(1)
+                      : "Select a alert triger type"}
+                  </SelectType>
                 </ProgressHeader>
               </AlertContainer>
               <SideLineProvider>
                 <Line></Line>
                 {progress === "ALERT_TYPE" && (
-                          <AlertTypeContainer
-                          selectAlertType={selectAlertType}
-                          changeOriginalSourceForIcons={changeOriginalSourceForIcons}
-                          changeSourceForIcons={changeSourceForIcons}
-                          icon={icon}
-                          ></AlertTypeContainer>       )}
+                  <AlertTypeContainer
+                    selectAlertType={selectAlertType}
+                    changeOriginalSourceForIcons={changeOriginalSourceForIcons}
+                    changeSourceForIcons={changeSourceForIcons}
+                    icon={icon}
+                  ></AlertTypeContainer>
+                )}
               </SideLineProvider>
               <AlertContainer>
                 {progress === "ALERT_TYPE" || progress === "ALERT_TARGET" ? (
@@ -329,19 +346,25 @@ export default function AddAlert() {
                 <ProgressHeader>
                   <TypeRow> Alert target</TypeRow>
                   <SelectType>
-                    {alertTarget ? alertTarget : 'Select an address for which the alert will be triggered'}
+                    {alertTarget
+                      ? alertTarget.toLowerCase()
+                      .replace("_", " ")
+                      .substring(0, 1)
+                      .toUpperCase() +
+                    alertTarget.toLowerCase().replace("_", " ").substring(1)
+                      : "Select an address for which the alert will be triggered"}
                   </SelectType>
                 </ProgressHeader>
               </AlertContainer>
               <SideLineProvider>
                 <Line></Line>
                 {progress === "ALERT_TARGET" && (
-                 <AlertTarget
-                 selectAlertTarget={selectAlertTarget}
-                 changeOriginalSourceForIcons={changeOriginalSourceForIcons}
-                 changeSourceForIcons={changeSourceForIcons}
-                 icon={icon}
-                 ></AlertTarget>
+                  <AlertTarget
+                    selectAlertTarget={selectAlertTarget}
+                    changeOriginalSourceForIcons={changeOriginalSourceForIcons}
+                    changeSourceForIcons={changeSourceForIcons}
+                    icon={icon}
+                  ></AlertTarget>
                 )}
               </SideLineProvider>
 
@@ -355,7 +378,9 @@ export default function AddAlert() {
                 )}
                 <ProgressHeader>
                   <TypeRow>Parameters</TypeRow>
-                  <SelectType>{targetValue ? targetValue : `Set alert trigger Parameters`}</SelectType>
+                  <SelectType>
+                    {targetValue ? targetValue : `Set alert trigger Parameters`}
+                  </SelectType>
                 </ProgressHeader>
               </AlertContainer>
               <SideLineProvider>
@@ -363,23 +388,45 @@ export default function AddAlert() {
                 {progress === "PARAMETERS" && (
                   <AlertTargetContainer style={{ flexDirection: "column" }}>
                     <ParameterContainer>
-                      <FilterSelect onChange={selectTargetValue}>
-                         <option value="">Filter by event </option>
-                        {parametersData && parametersData.length ? parametersData.map((option)=>(
-                          <>
-                          {alertTarget === genericConstants.ALERT_TYPE.ADDRESS ?
-                          <option value={option.address}>{option.address}</option>
-                          :  <option value={option}>{option}</option>}
-                          </>
-                        )) :   <option value="">No Data Available </option>}
+                      <FilterSelect id="selectBox" name="selectBox" className="selectBox" onChange={selectTargetValue}>
+                        <option value="">Filter by event </option>
+                        {parametersData && parametersData.length ? (
+                          parametersData.map((option) => (
+                            <>
+                              {alertTarget ===
+                              genericConstants.ALERT_TYPE.ADDRESS ? (
+                                <option value={option.address}>
+                                  {option.address}
+                                </option>
+                              ) : (
+                                <option value={option}>{option}</option>
+                              )}
+                            </>
+                          ))
+                        ) : (
+                          <option value="">No Data Available </option>
+                        )}
                       </FilterSelect>
                     </ParameterContainer>
                     <ParameterContainer>
-                    {alertType === genericConstants.ALERT_TYPE.TRANSACTION_VALUE || alertType === genericConstants.ALERT_TYPE.XDC_BALANCE ?
-                      <Threshold placeholder="Enter Threshold" value={threshold} onChange={(event)=>{setThreshold(event.target.value)}}>
-                      </Threshold> : "" }
+                      {alertType ===
+                        genericConstants.ALERT_TYPE.TRANSACTION_VALUE ||
+                      alertType === genericConstants.ALERT_TYPE.XDC_BALANCE ? (
+                        <Threshold
+                          placeholder="Enter Threshold"
+                          value={threshold}
+                          onChange={(event) => {
+                            setThreshold(event.target.value);
+                          }}
+                        ></Threshold>
+                      ) : (
+                        ""
+                      )}
                     </ParameterContainer>
-                    <ApplyButton onClick={() => changeProgress("DESTINATION")} disabled = {!parametersData.length}>
+                    <ApplyButton
+                      onClick={() => changeProgress("DESTINATION")}
+                      disabled={!parametersData.length}
+                    >
                       Next
                     </ApplyButton>
                   </AlertTargetContainer>
@@ -395,10 +442,11 @@ export default function AddAlert() {
                     sent to.
                   </SelectType>
                   {progress === "DESTINATION" && (
-                   <DestinationComponent destinations={destinations}
-                   selectDestinations = {selectDestinations}
-                   openDestinationPopup ={openDestinationPopup}
-                   ></DestinationComponent>
+                    <DestinationComponent
+                      destinations={destinations}
+                      selectDestinations={selectDestinations}
+                      openDestinationPopup={openDestinationPopup}
+                    ></DestinationComponent>
                   )}
                 </ProgressHeader>
               </AlertContainer>
@@ -428,158 +476,241 @@ export default function AddAlert() {
 }
 
 const AlertTypeContainer = (props) => {
-  return(
+  return (
     <MainBoxContainer>
-    <BoxContainer
-      onClick={() => props.selectAlertType(genericConstants.ALERT_TYPE.SUCCESSFULL_TRANSACTIONS)}
-      onMouseOver={() =>
-        props.changeSourceForIcons(genericConstants.ALERT_TYPE.SUCCESSFULL_TRANSACTIONS,"successfulTransaction")
-      }
-      onMouseOut={() =>
-        props.changeOriginalSourceForIcons(genericConstants.ALERT_TYPE.SUCCESSFULL_TRANSACTIONS,"successfulTransaction")
-      }
-    >
-      <img alt="" src={props.icon.successfulTransaction} />
-      <Title>Successful transaction</Title>
-      <SubTitle>
-        Triggers when successful transaction happen
-      </SubTitle>
-    </BoxContainer>
-    <BoxContainer
-      onClick={() => props.selectAlertType(genericConstants.ALERT_TYPE.FAILED_TRANSACTIONS)}
-      onMouseOver={() =>
-        props.changeSourceForIcons(genericConstants.ALERT_TYPE.FAILED_TRANSACTIONS,"failedTransaction")
-      }
-      onMouseOut={() =>
-        props.changeOriginalSourceForIcons(genericConstants.ALERT_TYPE.FAILED_TRANSACTIONS,"failedTransaction")
-      }
-    >
-      <img alt="" src={props.icon.failedTransaction} />
-      <Title>Failed transaction</Title>
-      <SubTitle>Triggers when transactions fails</SubTitle>
-    </BoxContainer>
-    <BoxContainer
-      onClick={() => props.selectAlertType(genericConstants.ALERT_TYPE.TOKEN_TRANSFER)}
-      onMouseOver={() => props.changeSourceForIcons(genericConstants.ALERT_TYPE.TOKEN_TRANSFER,"tokenTransfer")}
-      onMouseOut={() =>
-        props.changeOriginalSourceForIcons(genericConstants.ALERT_TYPE.TOKEN_TRANSFER,"tokenTransfer")
-      }
-    >
-      <img alt="" src={props.icon.tokenTransfer} />
-      <Title>XRC-20 Token Transfer </Title>
-      <SubTitle>
-        Triggers whenever an XRC-20 token transfer happen
-      </SubTitle>
-    </BoxContainer>
-    <BoxContainer
-      onClick={() => props.selectAlertType(genericConstants.ALERT_TYPE.TRANSACTION_VALUE)}
-      onMouseOver={() =>
-        props.changeSourceForIcons(genericConstants.ALERT_TYPE.TRANSACTION_VALUE,"transactionValue")
-      }
-      onMouseOut={() =>
-        props.changeOriginalSourceForIcons(genericConstants.ALERT_TYPE.TRANSACTION_VALUE,"transactionValue")
-      }
-    >
-      <img alt="" src={props.icon.transactionValue} />
-      <Title>Transaction Value</Title>
-      <SubTitle>
-        Triggers whenever transaction value matches
-      </SubTitle>
-    </BoxContainer>
-    <BoxContainer
-      onClick={() => props.selectAlertType(genericConstants.ALERT_TYPE.XDC_BALANCE)}
-      onMouseOver={() => props.changeSourceForIcons(genericConstants.ALERT_TYPE.XDC_BALANCE,"balanceToken")}
-      onMouseOut={() =>
-        props.changeOriginalSourceForIcons(genericConstants.ALERT_TYPE.XDC_BALANCE,"balanceToken")
-      }
-    >
-      <img alt="" src={props.icon.balanceToken} />
-      <Title>XDC Balance</Title>
-      <SubTitle>
-        Triggers when XDC balance falls below certain threshold
-      </SubTitle>
-    </BoxContainer>
+      <BoxContainer
+        onClick={() =>
+          props.selectAlertType(
+            genericConstants.ALERT_TYPE.SUCCESSFULL_TRANSACTIONS
+          )
+        }
+        onMouseOver={() =>
+          props.changeSourceForIcons(
+            genericConstants.ALERT_TYPE.SUCCESSFULL_TRANSACTIONS,
+            "successfulTransaction"
+          )
+        }
+        onMouseOut={() =>
+          props.changeOriginalSourceForIcons(
+            genericConstants.ALERT_TYPE.SUCCESSFULL_TRANSACTIONS,
+            "successfulTransaction"
+          )
+        }
+      >
+        <img alt="" src={props.icon.successfulTransaction} />
+        <Title>Successful transaction</Title>
+        <SubTitle>Triggers when successful transaction happen</SubTitle>
+      </BoxContainer>
+      <BoxContainer
+        onClick={() =>
+          props.selectAlertType(genericConstants.ALERT_TYPE.FAILED_TRANSACTIONS)
+        }
+        onMouseOver={() =>
+          props.changeSourceForIcons(
+            genericConstants.ALERT_TYPE.FAILED_TRANSACTIONS,
+            "failedTransaction"
+          )
+        }
+        onMouseOut={() =>
+          props.changeOriginalSourceForIcons(
+            genericConstants.ALERT_TYPE.FAILED_TRANSACTIONS,
+            "failedTransaction"
+          )
+        }
+      >
+        <img alt="" src={props.icon.failedTransaction} />
+        <Title>Failed transaction</Title>
+        <SubTitle>Triggers when transactions fails</SubTitle>
+      </BoxContainer>
+      <BoxContainer
+        onClick={() =>
+          props.selectAlertType(genericConstants.ALERT_TYPE.TOKEN_TRANSFER)
+        }
+        onMouseOver={() =>
+          props.changeSourceForIcons(
+            genericConstants.ALERT_TYPE.TOKEN_TRANSFER,
+            "tokenTransfer"
+          )
+        }
+        onMouseOut={() =>
+          props.changeOriginalSourceForIcons(
+            genericConstants.ALERT_TYPE.TOKEN_TRANSFER,
+            "tokenTransfer"
+          )
+        }
+      >
+        <img alt="" src={props.icon.tokenTransfer} />
+        <Title>XRC-20 Token Transfer </Title>
+        <SubTitle>Triggers whenever an XRC-20 token transfer happen</SubTitle>
+      </BoxContainer>
+      <BoxContainer
+        onClick={() =>
+          props.selectAlertType(genericConstants.ALERT_TYPE.TRANSACTION_VALUE)
+        }
+        onMouseOver={() =>
+          props.changeSourceForIcons(
+            genericConstants.ALERT_TYPE.TRANSACTION_VALUE,
+            "transactionValue"
+          )
+        }
+        onMouseOut={() =>
+          props.changeOriginalSourceForIcons(
+            genericConstants.ALERT_TYPE.TRANSACTION_VALUE,
+            "transactionValue"
+          )
+        }
+      >
+        <img alt="" src={props.icon.transactionValue} />
+        <Title>Transaction Value</Title>
+        <SubTitle>Triggers whenever transaction value matches</SubTitle>
+      </BoxContainer>
+      <BoxContainer
+        onClick={() =>
+          props.selectAlertType(genericConstants.ALERT_TYPE.XDC_BALANCE)
+        }
+        onMouseOver={() =>
+          props.changeSourceForIcons(
+            genericConstants.ALERT_TYPE.XDC_BALANCE,
+            "balanceToken"
+          )
+        }
+        onMouseOut={() =>
+          props.changeOriginalSourceForIcons(
+            genericConstants.ALERT_TYPE.XDC_BALANCE,
+            "balanceToken"
+          )
+        }
+      >
+        <img alt="" src={props.icon.balanceToken} />
+        <Title>XDC Balance</Title>
+        <SubTitle>
+          Triggers when XDC balance falls below certain threshold
+        </SubTitle>
+      </BoxContainer>
 
-    <BoxContainer
-      onClick={() => props.selectAlertType(genericConstants.ALERT_TYPE.STATE_CHANGE)}
-      onMouseOver={() => props.changeSourceForIcons(genericConstants.ALERT_TYPE.STATE_CHANGE,"stateChange")}
-      onMouseOut={() =>
-        props.changeOriginalSourceForIcons(genericConstants.ALERT_TYPE.STATE_CHANGE,"stateChange")
-      }
-    >
-      <img alt="" src={props.icon.stateChange} />
-      <Title>State Change</Title>
-      <SubTitle>
-        Triggers whenever stable variable changes
-      </SubTitle>
-    </BoxContainer>
-    <BoxContainer
-      onClick={() => props.selectAlertType(genericConstants.ALERT_TYPE.FUNCTION_CALL)}
-      onMouseOver={() => props.changeSourceForIcons(genericConstants.ALERT_TYPE.FUNCTION_CALL,"functionCall")}
-      onMouseOut={() =>
-        props.changeOriginalSourceForIcons(genericConstants.ALERT_TYPE.FUNCTION_CALL,"functionCall")
-      }
-    >
-      <img alt="" src={props.icon.functionCall} />
-      <Title>Function Call</Title>
-      <SubTitle style={{ fontSize: "22px", fontWeight: 600 }}>
-        Coming soon
-      </SubTitle>
-    </BoxContainer>
-  </MainBoxContainer>
+      <BoxContainer
+        onClick={() =>
+          props.selectAlertType(genericConstants.ALERT_TYPE.STATE_CHANGE)
+        }
+        onMouseOver={() =>
+          props.changeSourceForIcons(
+            genericConstants.ALERT_TYPE.STATE_CHANGE,
+            "stateChange"
+          )
+        }
+        onMouseOut={() =>
+          props.changeOriginalSourceForIcons(
+            genericConstants.ALERT_TYPE.STATE_CHANGE,
+            "stateChange"
+          )
+        }
+      >
+        <img alt="" src={props.icon.stateChange} />
+        <Title>State Change</Title>
+        <SubTitle>Triggers whenever stable variable changes</SubTitle>
+      </BoxContainer>
+      <BoxContainer
+        onClick={() =>
+          props.selectAlertType(genericConstants.ALERT_TYPE.FUNCTION_CALL)
+        }
+        onMouseOver={() =>
+          props.changeSourceForIcons(
+            genericConstants.ALERT_TYPE.FUNCTION_CALL,
+            "functionCall"
+          )
+        }
+        onMouseOut={() =>
+          props.changeOriginalSourceForIcons(
+            genericConstants.ALERT_TYPE.FUNCTION_CALL,
+            "functionCall"
+          )
+        }
+      >
+        <img alt="" src={props.icon.functionCall} />
+        <Title>Function Call</Title>
+        <SubTitle style={{ fontSize: "22px", fontWeight: 600 }}>
+          Coming soon
+        </SubTitle>
+      </BoxContainer>
+    </MainBoxContainer>
+  );
+};
 
-  )
-}
+const AlertTarget = (props) => {
+  return (
+    <AlertTargetContainer>
+      <BoxContainer
+        onClick={() =>
+          props.selectAlertTarget(genericConstants.ALERT_TYPE.ADDRESS)
+        }
+        onMouseOver={() =>
+          props.changeSourceForIcons(
+            genericConstants.ALERT_TYPE.ADDRESS,
+            "address"
+          )
+        }
+        onMouseOut={() =>
+          props.changeOriginalSourceForIcons(
+            genericConstants.ALERT_TYPE.ADDRESS,
+            "address"
+          )
+        }
+      >
+        <img alt="" src={props.icon.address} />
+        <Title>Address</Title>
+        <SubTitle>Receive alerts for only one address</SubTitle>
+      </BoxContainer>
+      <BoxContainer
+        onClick={() =>
+          props.selectAlertTarget(genericConstants.ALERT_TYPE.NETWORK)
+        }
+        onMouseOver={() =>
+          props.changeSourceForIcons(
+            genericConstants.ALERT_TYPE.NETWORK,
+            "network"
+          )
+        }
+        onMouseOut={() =>
+          props.changeOriginalSourceForIcons(
+            genericConstants.ALERT_TYPE.NETWORK,
+            "network"
+          )
+        }
+      >
+        <img alt="" src={props.icon.network} />
+        <Title>Network</Title>
+        <SubTitle>Receive alerts for addresses deployed on a network</SubTitle>
+      </BoxContainer>
+      <BoxContainer
+        onClick={() => props.selectAlertTarget(genericConstants.ALERT_TYPE.TAG)}
+        onMouseOver={() =>
+          props.changeSourceForIcons(genericConstants.ALERT_TYPE.TAG, "tag")
+        }
+        onMouseOut={() =>
+          props.changeOriginalSourceForIcons(
+            genericConstants.ALERT_TYPE.TAG,
+            "tag"
+          )
+        }
+      >
+        <img alt="" src={props.icon.tag} />
+        <Title>Tag</Title>
+        <SubTitle>
+          Receive alerts for every address that has selected tag
+        </SubTitle>
+      </BoxContainer>
+    </AlertTargetContainer>
+  );
+};
 
-const AlertTarget = (props) =>{
-  return(
-   <AlertTargetContainer>
-                    <BoxContainer
-                      onClick={() => props.selectAlertTarget(genericConstants.ALERT_TYPE.ADDRESS)}
-                      onMouseOver={() => props.changeSourceForIcons(genericConstants.ALERT_TYPE.ADDRESS,"address")}
-                      onMouseOut={() =>
-                        props.changeOriginalSourceForIcons(genericConstants.ALERT_TYPE.ADDRESS,"address")
-                      }
-                    >
-                      <img alt="" src={props.icon.address} />
-                      <Title>Address</Title>
-                      <SubTitle>Receive alerts for only one address</SubTitle>
-                    </BoxContainer>
-                    <BoxContainer
-                      onClick={() => props.selectAlertTarget(genericConstants.ALERT_TYPE.NETWORK)}
-                      onMouseOver={() => props.changeSourceForIcons(genericConstants.ALERT_TYPE.NETWORK,"network")}
-                      onMouseOut={() =>
-                        props.changeOriginalSourceForIcons(genericConstants.ALERT_TYPE.NETWORK,"network")
-                      }
-                    >
-                      <img alt="" src={props.icon.network} />
-                      <Title>Network</Title>
-                      <SubTitle>
-                        Receive alerts for addresses deployed on a network
-                      </SubTitle>
-                    </BoxContainer>
-                    <BoxContainer
-                      onClick={() => props.selectAlertTarget(genericConstants.ALERT_TYPE.TAG)}
-                      onMouseOver={() => props.changeSourceForIcons(genericConstants.ALERT_TYPE.TAG,"tag")}
-                      onMouseOut={() =>
-                        props.changeOriginalSourceForIcons(genericConstants.ALERT_TYPE.TAG,"tag")
-                      }
-                    >
-                      <img alt="" src={props.icon.tag} />
-                      <Title>Tag</Title>
-                      <SubTitle>Receive alerts for every address that has selected tag</SubTitle>
-                    </BoxContainer>
-                  </AlertTargetContainer>
-  )
-}
-
-const DestinationComponent = (props) =>{
-  const {destinations} =props;
-  return(
-
+const DestinationComponent = (props) => {
+  const { destinations } = props;
+  return (
     <DestinationDetail>
-      {destinations && destinations.length && destinations.map((destination)=>(
-            <EmailBox>
+      {destinations &&
+        destinations.length &&
+        destinations.map((destination) => (
+          <EmailBox>
             <EmailDetail>
               <Img alt="" src="/images/email.svg" />
               {destination.type}
@@ -587,50 +718,54 @@ const DestinationComponent = (props) =>{
             </EmailDetail>
             <SliderDiv>
               <label class="switch">
-                <input type="checkbox" value={destination.destinationId} onChange={(event)=>props.selectDestinations(event)} />
+                <input
+                  type="checkbox"
+                  value={destination.destinationId}
+                  onChange={(event) => props.selectDestinations(event)}
+                />
                 <span class="slider round"></span>
               </label>
             </SliderDiv>
           </EmailBox>
-      ))}
-    <RowContainer>
-      <Buttonn onClick={() => props.openDestinationPopup("SLACK")}>
-        <img
-          alt=""
-          src="/images/slack.svg"
-          style={{
-            marginRight: "0.25rem",
-            width: "1.3rem",
-          }}
-        />{" "}
-        Slack
-      </Buttonn>
-      <Buttonn onClick={() => props.openDestinationPopup("WEBHOOK")}>
-        <img
-          alt=""
-          src="/images/webhook.svg"
-          style={{
-            marginRight: "0.25rem",
-            width: "1.3rem",
-          }}
-        />
-        Webhook
-      </Buttonn>
-      <Buttonn onClick={() => props.openDestinationPopup("EMAIL")}>
-        <img
-          alt=""
-          src="/images/email.svg"
-          style={{
-            marginRight: "0.25rem",
-            width: "1.3rem",
-          }}
-        />
-        Email
-      </Buttonn>
-    </RowContainer>
-  </DestinationDetail>
-  )
-}
+        ))}
+      <RowContainer>
+        <Buttonn onClick={() => props.openDestinationPopup("SLACK")}>
+          <img
+            alt=""
+            src="/images/slack.svg"
+            style={{
+              marginRight: "0.25rem",
+              width: "1.3rem",
+            }}
+          />{" "}
+          Slack
+        </Buttonn>
+        <Buttonn onClick={() => props.openDestinationPopup("WEBHOOK")}>
+          <img
+            alt=""
+            src="/images/webhook.svg"
+            style={{
+              marginRight: "0.25rem",
+              width: "1.3rem",
+            }}
+          />
+          Webhook
+        </Buttonn>
+        <Buttonn onClick={() => props.openDestinationPopup("EMAIL")}>
+          <img
+            alt=""
+            src="/images/email.svg"
+            style={{
+              marginRight: "0.25rem",
+              width: "1.3rem",
+            }}
+          />
+          Email
+        </Buttonn>
+      </RowContainer>
+    </DestinationDetail>
+  );
+};
 const DestinationDetail = styled.div`
   margin-bottom: 10px;
   padding: 20px 0 0 0;
@@ -718,6 +853,7 @@ const ApplyButton = styled.button`
   font-size: 14px;
   margin-right: 15px;
   margin-left: 16px;
+  margin-bottom: 15px;
   cursor: pointer;
 `;
 const Title = styled.div`
@@ -771,7 +907,8 @@ const MainContainer = styled.div`
   height: 120vh;
   @media (min-width: 300px) and (max-width: 768px) {
     padding: 2.5rem 1.5rem 1.5rem 1.5rem;
-    height: 220vh;
+    height: 100%;
+    max-height: 150vh;
   }
 `;
 const TitleHead = styled.div`
@@ -901,7 +1038,7 @@ const NumberShowUP = styled.div`
 const ParameterContainer = styled.div`
   margin: 0px 0px 5px 20px;
   width: 100%;
-  padding: 10px 50px 10px 0;
+  padding: 10px 50px 0 0;
 `;
 const Img = styled.img`
   width: 1.3rem;
@@ -917,6 +1054,10 @@ const FilterSelect = styled.select`
   font-size: 12px;
   height: 40px;
   color: #a6aabf;
+  max-width: 1000px;
+  @media (min-width: 768px) and (max-width: 1024px) {
+    max-width: 350px;
+  }
 `;
 const Threshold = styled.input`
   outline: none;
@@ -928,4 +1069,8 @@ const Threshold = styled.input`
   font-size: 12px;
   height: 40px;
   color: #a6aabf;
+  max-width: 1000px;
+  @media (min-width: 768px) and (max-width: 1024px) {
+    max-width: 350px;
+  }
 `;
