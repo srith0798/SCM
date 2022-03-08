@@ -50,6 +50,7 @@ export default function TransactionList() {
   const [showPlaceHolder, setShowPlaceHolder] = React.useState(false);
   const [loader, setLoader] = React.useState(false);
   const [address, setAddress] = React.useState([]);
+  const [reponse, getResponse] = React.useState([]);
   const [searchRow, setSearchRow] = React.useState([]);
   const [contracts, setContracts] = React.useState([]);
   const [selected, setSelected] = React.useState("");
@@ -92,15 +93,47 @@ export default function TransactionList() {
   };
   const getTransaction = async (url, skip = 0, limit = countToggle) => {
     try {
-      let requestData = {
+      let requestData = {}
+      if (setFrom > 0 && (select === 2 || select === 3)){
+        requestData = {
+          skip: skip,
+          limit: limit,
+          contractAddress: url,
+          status: select === 2 ? true : false,
+          sortingKey:{timestamp:-1},
+        };
+        
+        }
+      else if (setFrom > 0 && select === 1){
+        requestData = {
+          skip: skip,
+          limit: limit,
+          contractAddress: url,
+          // status:,
+          sortingKey:{timestamp:-1},
+        };
+        
+      }
+      else if ((select === 2 || select === 3) && setFrom === 0){
+        requestData = {
+          skip: skip,
+          limit: limit,
+          contractAddress: url,
+          status: select === 2 ? true : false,
+          sortingKey:{timestamp:-1},
+        };}
+      else
+      {requestData = {
         skip: skip,
         limit: limit,
         contractAddress: url,
+        // status:,
         sortingKey:{timestamp:-1},
-      };
+      };}
       setLoader(true);
       const response = await ContractsService.getTransactionsList(requestData);
       setLoader(false);
+      getResponse(response);
       setAddress(response.transactionList);
       let pageCount = response.totalCount;
       if (pageCount % countToggle === 0) {
@@ -281,7 +314,7 @@ export default function TransactionList() {
     let trim = val?.split("(");
     return trim[0];
   }
-
+  
   return (
     <>
       <MainContainer>
@@ -589,7 +622,7 @@ export default function TransactionList() {
              
           
         </TableContainer>
-        <PageVerifyCheck style={{display:address.length<10?"none":""}}  ch   eck={page}>
+        <PageVerifyCheck style={{display:reponse.totalCount<10?"none":""}}  ch   eck={page}>
         <PaginationDiv>
           <BottomLabel>
             Per Page

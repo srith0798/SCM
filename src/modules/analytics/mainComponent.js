@@ -14,6 +14,7 @@ import utility from "../../utility";
 import ShowLoader from "../../common/components/showLoader";
 import { analytics } from "../../constants";
 import Grid from "@mui/material/Grid";
+import { history } from "../../managers/history";
 
 export default function MainComponent(props) {
   const [isSetOpen, setOpen] = React.useState(false);
