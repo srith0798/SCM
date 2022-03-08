@@ -22,7 +22,7 @@ const useStyles = makeStyles(() => ({
 export default function WalletPopUp(props) {
   const classes = useStyles();
   const connectWallet = () => {
-    if (props.getCurrentUserDetails()) props.click();
+    if (props.getCurrentUserDetails()) props.click(); 
   };
 
   return (

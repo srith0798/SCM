@@ -5,7 +5,7 @@ import { makeStyles } from "@material-ui/styles";
 import { PrismAsyncLight as SyntaxHighlighter } from "react-syntax-highlighter";
 import json from "react-syntax-highlighter/dist/esm/languages/hljs/json";
 import { base16AteliersulphurpoolLight } from "react-syntax-highlighter/dist/esm/styles/prism";
-SyntaxHighlighter.registerLanguage("json", json);
+//SyntaxHighlighter.registerLanguage("json", json);
 
 const useStyles = makeStyles(() => ({
   dialogBox: {

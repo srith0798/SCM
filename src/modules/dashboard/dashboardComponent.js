@@ -117,6 +117,8 @@ const dashboardComponent = (props) => {
       }
       sessionManager.setDataInCookies(true, "isLoggedIn");
       history.push("/about");
+      
+      return {user:user};
     } else {
       loginErrorMessage();
     }
