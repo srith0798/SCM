@@ -14,6 +14,7 @@ const useStyles = makeStyles(() => ({
 export default function DestinationTags(props) {
   const [label, setLabel] = useState("");
   const [url, setUrl] = useState("");
+  const [channelName, setChannelName] = useState("");
 
  const classes = useStyles();
 
@@ -43,8 +44,14 @@ console.log("propsss");
               value={url}
               onChange={(e) => setUrl(e.target.value)}
             />
+            <Input
+              type="text"
+              placeholder="channelName"
+              value={channelName}
+              onChange={(e) => setChannelName(e.target.value)}
+            />
             <SubContainer>
-              <ConfirmButton onClick={()=>props.click(label, url)}>{`Add ${genericConstants.DESTINATION_TYPE[props.type]}`}</ConfirmButton> 
+              <ConfirmButton onClick={()=>props.click(label, url, channelName)}>{`Add ${genericConstants.DESTINATION_TYPE[props.type]}`}</ConfirmButton> 
             </SubContainer>
           </Container>
         </MainContainer>

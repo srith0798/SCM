@@ -819,7 +819,7 @@ const Transactions = styled.div`
 const Span =styled.div `
 color: #A6B3D8;
 font-size:14px;
-margin-top:12px
+margin-top:12px;
 `;
 const TransactionMedia = styled.div`
   display: none;
@@ -849,11 +849,30 @@ const SearchBar = styled.input`
   width: 270px;
   height: 38px;
   margin-left: 10px;
-  @media (max-width: 767px) {
+  @media (min-width: 300px) and (max-width: 360px) {
+    width: 180px;
+    height: 37px;
+    margin-left: 0px;
+    font-size: 11px;
+  }
+  @media (min-width: 361px) and (max-width: 376px) {
+    width: 190px;
+    height: 37px;
+    margin-left: 0px;
+    font-size: 11px;
+  }
+  @media (min-width: 377px) and (max-width: 394px) {
+    width: 205px;
+    height: 37px;
+    margin-left: 0px;
+    font-size: 11px;
+  }
+  @media (min-width: 395px) and (max-width: 767px) {
     width: min-content;
     height: 37px;
     margin-left: 0px;
   }
+  
 `;
 const Icons = styled.img`
   cursor: pointer;

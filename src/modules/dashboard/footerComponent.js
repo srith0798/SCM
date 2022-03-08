@@ -177,7 +177,7 @@ function FooterComponent() {
     <FooterContainer>
       <ColumnContainer>
         <Column>
-          <FooterImg src="/images/smartHub.svg" alt="" />
+          <FooterImg src="/images/smarthub.svg" alt="" />
           <Text>
             Easily govern your smart contract deployment with end-to-end
             lifecycle utility
