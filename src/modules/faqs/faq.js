@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import FaqItem from "./faqItem";
+import { sessionManager } from "../../managers/sessionManager";
+import { history } from "../../managers/history";
 
 export default function Faqs(props) {
   const faqsList = [
@@ -42,7 +44,29 @@ export default function Faqs(props) {
     },
   ];
 
+
+  let user = "";
+
+    try {
+      user = window.web3.eth.accounts;
+    } catch (e) {}
+
+    const redirectToLogout = () => {
+      sessionManager.removeDataFromCookies("isLoggedIn");
+      sessionManager.removeDataFromCookies("accountAddress");
+      sessionManager.removeDataFromCookies("userId");
+      sessionManager.removeDataFromCookies("username");
+      sessionManager.removeDataFromCookies("profilePicture");
+      history.replace("/");
+    };
+
+
   return (
+    <>
+    {(user=="")?(
+      redirectToLogout()
+  ):""}
+
     <div className="app-container">
       <div className="faqs-container">
         <div id="Heading-section">
@@ -57,5 +81,6 @@ export default function Faqs(props) {
         </ul>
       </div>
     </div>
+    </>
   );
 }

@@ -17,6 +17,7 @@ import utility from "../../../utility";
 import { history } from "../../../managers/history";
 import AddTags from "../../popup/addTag";
 import RemoveTag from "./removeTag";
+import { sessionManager } from "../../../managers/sessionManager";
 
 export default function ContractDetails(props) {
   const [activeButton, setActiveButton] = React.useState("General");
@@ -145,8 +146,26 @@ export default function ContractDetails(props) {
   if (address.address !== undefined) {
     name = address.address;
   }
+  let user = "";
+
+    try {
+      user = window.web3.eth.accounts;
+    } catch (e) {}
+
+    const redirectToLogout = () => {
+      sessionManager.removeDataFromCookies("isLoggedIn");
+      sessionManager.removeDataFromCookies("accountAddress");
+      sessionManager.removeDataFromCookies("userId");
+      sessionManager.removeDataFromCookies("username");
+      sessionManager.removeDataFromCookies("profilePicture");
+      history.replace("/");
+    };
   return (
     <>
+    {(user=="")?
+    (
+      redirectToLogout()
+  ):""}
       <ShowLoader state={loader} />
       <MainContainer>
         <SubContainer>
