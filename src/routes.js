@@ -15,22 +15,24 @@ const Dashboard = withRouter(
 
 class Routes extends BaseComponent {
   componentDidMount() {
-    let user = "";
+    
+    // let user = "";
 
-    try {
-      user = window.web3.eth.accounts;
-    } catch (e) {}
+    // try {
+    //   user = window.web3.eth.accounts;
+    // } catch (e) {}
 
-    const redirectToLogout = () => {
-      sessionManager.removeDataFromCookies("isLoggedIn");
-      sessionManager.removeDataFromCookies("accountAddress");
-      sessionManager.removeDataFromCookies("userId");
-      sessionManager.removeDataFromCookies("username");
-      sessionManager.removeDataFromCookies("profilePicture");
-      history.replace("/");
-    };
-    if(user=="")
-      {redirectToLogout()}
+    // const redirectToLogout = () => {
+    //   sessionManager.removeDataFromCookies("isLoggedIn");
+    //   sessionManager.removeDataFromCookies("accountAddress");
+    //   sessionManager.removeDataFromCookies("userId");
+    //   sessionManager.removeDataFromCookies("username");
+    //   sessionManager.removeDataFromCookies("profilePicture");
+    //   history.replace("/");
+    // };
+    // if(props.user=="")
+    //   {redirectToLogout()
+    //   }
   
   }
 

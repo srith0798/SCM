@@ -35,6 +35,11 @@ export default function AddContract(props) {
     setVerifyAddress(address);
   };
 
+  let user = "";
+
+    try {
+      user = window.web3.eth.accounts;
+    } catch (e) {}
   const addContract = async () => {
     let userId = sessionManager.getDataFromCookies("userId");
     let requestData = {

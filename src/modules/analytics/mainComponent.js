@@ -47,6 +47,10 @@ export default function MainComponent(props) {
     transactionOverTimeError,
     setTransactionOverTimeError,
   ] = React.useState("");
+  const [
+    activeUSerGraphError,
+    setActiveUserGraphError,
+  ] = React.useState("");
   const [gasUsedOverTimeError, setGasUsedOverTimeError] = React.useState("");
   const [activeUsersError, setActiveUsersError] = React.useState("");
   const [topCallersError, setTopCallersError] = React.useState("");
@@ -124,6 +128,7 @@ export default function MainComponent(props) {
     );
     if (error || !response || response.length === 0) {
       setTransactionOverTimeError("No Transactions Available");
+      setActiveUserGraphError("No Active users available")
       setNoOfTransactions([]);
       setData([]);
       setLoader(false);
@@ -360,8 +365,27 @@ export default function MainComponent(props) {
     setOpen((prev) => !prev);
   };
 
+  let user = "";
+
+    try {
+      user = window.web3.eth.accounts;
+    } catch (e) {}
+
+    const redirectToLogout = () => {
+      sessionManager.removeDataFromCookies("isLoggedIn");
+      sessionManager.removeDataFromCookies("accountAddress");
+      sessionManager.removeDataFromCookies("userId");
+      sessionManager.removeDataFromCookies("username");
+      sessionManager.removeDataFromCookies("profilePicture");
+      history.replace("/");
+    };
+
   return (
     <>
+    {(user=="")?
+    (
+      redirectToLogout()
+  ):""}
       <ShowLoader state={loader} top={"33%"}></ShowLoader>
       {expandGraph === 0 ? (
         <div style={{ overflow: "auto" }}>
@@ -560,7 +584,7 @@ export default function MainComponent(props) {
                         {" "}
                         <Line
                           data={noOfTransactions}
-                          error={transactionOverTimeError}
+                          error={activeUSerGraphError}
                         />
                       </GraphSizeError>)
                       :
@@ -645,7 +669,7 @@ const TableData = (props) => {
       </SubContainer>
       <Table>
         {props?.data && props.data.length && props.data.length > 0 ? (
-          props.data.map((item) => (
+          props.data.map((item) => (            
             <TableRow>
               <DataColumn>
                 <Div>
@@ -914,10 +938,10 @@ const MobileNetwork = styled.div`
     margin-left: 13px;
   }
   @media (min-width: 768px) and (max-width: 1200px) {
-    display: none;
+    display: none !important;
   }
-  @media (min-width: 820px) and (max-width: 1200px) {
-    display: none;
+  @media (min-width: 820px)  {
+    display: none !important;
   }
   @media (min-width: 1200px) and (max-width: 2300px) {
     display: none;

@@ -314,9 +314,28 @@ export default function TransactionList() {
     let trim = val?.split("(");
     return trim[0];
   }
+
+  let user = "";
+
+    try {
+      user = window.web3.eth.accounts;
+    } catch (e) {}
+
+    const redirectToLogout = () => {
+      sessionManager.removeDataFromCookies("isLoggedIn");
+      sessionManager.removeDataFromCookies("accountAddress");
+      sessionManager.removeDataFromCookies("userId");
+      sessionManager.removeDataFromCookies("username");
+      sessionManager.removeDataFromCookies("profilePicture");
+      history.replace("/");
+    };
   
   return (
     <>
+    {(user=="")?
+    (
+      redirectToLogout()
+  ):""}
       <MainContainer>
         <SubContainer>
           <ShowLoader state={loader} top={"33%"} />

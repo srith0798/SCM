@@ -197,9 +197,28 @@ export default function AddAlert() {
     setDestinations(response);
     setAddDestinationPopup(false);
   }
+  let user = "";
+
+    try {
+      user = window.web3.eth.accounts;
+    } catch (e) {}
+
+    const redirectToLogout = () => {
+      sessionManager.removeDataFromCookies("isLoggedIn");
+      sessionManager.removeDataFromCookies("accountAddress");
+      sessionManager.removeDataFromCookies("userId");
+      sessionManager.removeDataFromCookies("username");
+      sessionManager.removeDataFromCookies("profilePicture");
+      history.replace("/");
+    };
   
   return (
     <>
+    {(user=="")?
+    (
+      redirectToLogout()
+  ):""}
+
       <MainContainer>
       {addDestinationPopup && (
             <AddDestination
