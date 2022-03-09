@@ -272,7 +272,7 @@ export default function Contract(props) {
               <Div>
                 <RowTag>           
                   <ColumnSecond onClick={(e) => redirectTODetails(e, data._id)}>
-                    {data.contractName}
+                    {data.contractName || "Contract"}
                   </ColumnSecond>
                   <ColumnSecond onClick={(e) => redirectTODetails(e, data._id)}>
                     <BackgroundChanger>
