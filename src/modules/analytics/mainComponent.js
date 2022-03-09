@@ -29,16 +29,13 @@ export default function MainComponent(props) {
   const [expandGraph, setExpandGraph] = React.useState(0);
   const [graphName, setGraphName] = React.useState("");
   const [data, setData] = React.useState([]);
-  const [
-    transactionOverTimeSelect,
-    setTransactionOverTimeSelect,
-  ] = React.useState("30");
+  const [transactionOverTimeSelect, setTransactionOverTimeSelect] =
+    React.useState("30");
   const [gasUsedSelect, setGasUsedSelect] = React.useState("30");
   const [activeUserSelect, setActiveUserSelect] = React.useState("30");
   const [topCallersSelct, setTopCallersSelect] = React.useState("30");
-  const [topFunctionCallsSelect, setTopFunctionCallsSelect] = React.useState(
-    "30"
-  );
+  const [topFunctionCallsSelect, setTopFunctionCallsSelect] =
+    React.useState("30");
   const [dropDownValue, setDropDownValue] = React.useState("30");
   const [loader, setLoader] = React.useState("30");
   const [expanded, setExpanded] = React.useState(0);
@@ -308,10 +305,10 @@ export default function MainComponent(props) {
     };
     let resultData = [];
     response.map((items) => {
-        resultData.push({
-          x: items[xComponent],
-          y: items[yComponent],
-        });
+      resultData.push({
+        x: items[xComponent],
+        y: items[yComponent],
+      });
       return true;
     });
     dataObject.data = resultData;
@@ -396,11 +393,10 @@ export default function MainComponent(props) {
                   <MainHeading>Analytics</MainHeading>
                   <Tooltip disableFocusListener title="Refresh">
                     <BackImage
-                     onClick={() => {
-                      getContractNames();
-                      
-                    }}
-                    src="/images/refresh.svg" 
+                      onClick={() => {
+                        getContractNames();
+                      }}
+                      src="/images/refresh.svg"
                     />
                   </Tooltip>
                 </SubContainer>
@@ -467,25 +463,24 @@ export default function MainComponent(props) {
                           graphNo={1}
                           error1={transactionOverTimeError}
                         ></SelectComponent>
-                        
                       </SubContainer>
-                      {(noOfTransactions.length==0)?
-                      ( <GraphSizeError>
-                        {" "}
-                        <Line
-                          data={noOfTransactions}
-                          error={transactionOverTimeError}
-                        />
-                      </GraphSizeError>)
-                      :
-                      <GraphSize>
-                        {" "}
-                        <Line
-                          data={noOfTransactions}
-                          error={transactionOverTimeError}
-                        />
-                      </GraphSize>}
-                      
+                      {noOfTransactions.length == 0 ? (
+                        <GraphSizeError>
+                          {" "}
+                          <Line
+                            data={noOfTransactions}
+                            error={transactionOverTimeError}
+                          />
+                        </GraphSizeError>
+                      ) : (
+                        <GraphSize>
+                          {" "}
+                          <Line
+                            data={noOfTransactions}
+                            error={transactionOverTimeError}
+                          />
+                        </GraphSize>
+                      )}
                     </GraphContainer>
                   </Grid>
                   <Grid item xs={12} sm={12} md={6}>
@@ -501,23 +496,23 @@ export default function MainComponent(props) {
                           error1={transactionOverTimeError}
                         ></SelectComponent>
                       </SubContainer>
-                      {(noOfTransactions.length==0)?
-                      ( <GraphSizeError>
-                        {" "}
-                        <Line
-                          data={noOfTransactions}
-                          error={transactionOverTimeError}
-                        />
-                      </GraphSizeError>)
-                      :
-                      <GraphSize>
-                        {" "}
-                        <Line
-                          data={gasPriceData}
-                          error={gasUsedOverTimeError}
-                        />
-                      </GraphSize>}
-                      
+                      {noOfTransactions.length == 0 ? (
+                        <GraphSizeError>
+                          {" "}
+                          <Line
+                            data={noOfTransactions}
+                            error={transactionOverTimeError}
+                          />
+                        </GraphSizeError>
+                      ) : (
+                        <GraphSize>
+                          {" "}
+                          <Line
+                            data={gasPriceData}
+                            error={gasUsedOverTimeError}
+                          />
+                        </GraphSize>
+                      )}
                     </GraphContainer>
                   </Grid>
                   {/* </ResponsiveRow> */}
@@ -529,31 +524,29 @@ export default function MainComponent(props) {
                   columnSpacing={{ xs: 12, sm: 2, md: 3 }}
                 >
                   <Grid item xs={12} sm={12} md={6}>
-
                     <GraphContainer>
-                      {(topCallersError.length==0)?
-                     ( <TableData
-                      style={{margin:"93px"}}
-                      heading="Top Callers"
-                      expandGraphs={expandGraphs}
-                      getAnalyticsData={getTopCallers}
-                      selectValue={topCallersSelct}
-                      data={topCallersData}
-                      graphNo={4}
-                      error={topCallersError}
-                      
-                    ></TableData>)
-                    :<TableData
-                    heading="Top Callers"
-                    expandGraphs={expandGraphs}
-                    getAnalyticsData={getTopCallers}
-                    selectValue={topCallersSelct}
-                    data={topCallersData}
-                    graphNo={4}
-                    error={topCallersError}
-                    
-                  ></TableData>
-                      }
+                      {topCallersError.length == 0 ? (
+                        <TableData
+                          style={{ margin: "93px" }}
+                          heading="Top Callers"
+                          expandGraphs={expandGraphs}
+                          getAnalyticsData={getTopCallers}
+                          selectValue={topCallersSelct}
+                          data={topCallersData}
+                          graphNo={4}
+                          error={topCallersError}
+                        ></TableData>
+                      ) : (
+                        <TableData
+                          heading="Top Callers"
+                          expandGraphs={expandGraphs}
+                          getAnalyticsData={getTopCallers}
+                          selectValue={topCallersSelct}
+                          data={topCallersData}
+                          graphNo={4}
+                          error={topCallersError}
+                        ></TableData>
+                      )}
                       {/* <TableData
                         heading="Top Callers"
                         expandGraphs={expandGraphs}
@@ -676,12 +669,12 @@ const TableData = (props) => {
                   {props.graphNo === 4 ? (
                     <ContractFrom>Contract from:</ContractFrom>
                   ) : (
-                    <ContractFrom>Function:</ContractFrom>
+                    <FunctionFrom>Function:</FunctionFrom>
                   )}
                   {props.graphNo === 4 ? (
                     <Network>{item.address}</Network>
                   ) : (
-                    <Network>{item.function}</Network>
+                    <FunctionAddress>{item.function}</FunctionAddress>
                   )}
                 </Div>
                 <Div>
@@ -696,7 +689,9 @@ const TableData = (props) => {
             </TableRow>
           ))
         ) : (
-          <><TableError>{props.error}</TableError></>
+          <>
+            <TableError>{props.error}</TableError>
+          </>
         )}
       </Table>
     </>
@@ -704,12 +699,11 @@ const TableData = (props) => {
 };
 
 const SelectComponent = (props) => {
-  
   return (
     <>
       <div style={{ display: "flex", alignItems: "center" }}>
         <Head>
-        {props.heading}
+          {props.heading}
           <Tooltip
             disableFocusListener
             title="Transaction executed in due course"
@@ -726,7 +720,7 @@ const SelectComponent = (props) => {
       </div>
       <select
         id="dates"
-        style={{display:props.data.length==0?"none":""}}
+        style={{ display: props.data.length == 0 ? "none" : "" }}
         className="select"
         value={props.selectValue}
         onChange={(event) => {
@@ -803,7 +797,7 @@ const GraphSize = styled.div`
   width: auto;
   margin-bottom: 1.2rem;
   background: transparent;
-  text-align:center;
+  text-align: center;
   @media (max-width: 767px) {
     height: 250px;
   }
@@ -812,7 +806,7 @@ const Table = styled.div`
   height: 15rem;
   overflow-y: hidden;
   margin-top: 1rem;
-  text-align:center;
+  text-align: center;
 `;
 const View = styled.div`
   font-size: 1rem;
@@ -834,18 +828,18 @@ const Content = styled.div`
 `;
 
 const GraphSizeError = styled.div`
-height: 13.75rem;
+  height: 13.75rem;
   width: auto;
   margin-bottom: 1.2rem;
   background: transparent;
-  text-align:center;
-  margin-top:113px;
+  text-align: center;
+  margin-top: 113px;
   @media (max-width: 767px) {
     height: 250px;
   }
 `;
 const TableError = styled.div`
-margin-top:96px;
+  margin-top: 96px;
 `;
 const TableRow = styled.div`
   display: flex;
@@ -874,9 +868,11 @@ const GraphContainer = styled.div`
   height: 356px;
   padding: 1.25rem;
   margin-top: 2.58rem;
+  /* overflow-x: hidden !important; */
+  margin-bottom: 10px;
   @media (min-width: 300px) and (max-width: 1024px) {
     width: 100%;
-    padding: 1.25rem 8px 1.25rem 8px;
+    padding: 1.25rem 12px 1.25rem 12px;
   }
 `;
 const ScrollableDiv = styled.div`
@@ -889,6 +885,7 @@ const Head = styled.div`
   color: #102c78;
   margin-right: 0.625rem;
   white-space: nowrap;
+
   @media (min-width: 300px) and (max-width: 767px) {
     font-size: 0.85rem;
   }
@@ -903,31 +900,65 @@ const ContractFrom = styled.div`
   color: #102c78;
   font-size: 14px;
   font-weight: 600;
+  display: flex ;
   @media (min-width: 300px) and (max-width: 767px) {
     word-break: break-all;
+    margin-left: 2%;
     white-space: nowrap;
   }
 `;
+
+const FunctionFrom = styled.div`
+  width: 26%;
+  color: #102c78;
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  @media (min-width: 300px) and (max-width: 767px) {
+    word-break: break-all;
+    margin-left: 2%;
+    white-space: nowrap;
+    display: flex;
+  }
+`;
+
 const NetworkHead = styled.div`
-width: 20.5%;
-color: #102c78;
-font-size: 14px;
-font-weight: 600;
-@media (min-width: 300px) and (max-width: 767px) {
-  word-break: break-all;
-  white-space: nowrap;
-}
+  width: 20.5%;
+  color: #102c78;
+  font-size: 14px;
+  font-weight: 600;
+  display: flex ;
+  @media (min-width: 300px) and (max-width: 767px) {
+    word-break: break-all;
+    white-space: nowrap;
+    margin-left: 1.5%;
+  }
 `;
 const Network = styled.div`
   color: #303134;
   font-size: 14px;
   width: 100%;
+  display: flex ;
   @media (min-width: 300px) and (max-width: 767px) {
     word-break: break-all;
     white-space: nowrap;
-    margin-left: 6px;
+    margin-left: 3%;
   }
 `;
+
+const FunctionAddress = styled.div`
+  color: #303134;
+  font-size: 14px;
+  width: 100%;
+  display: flex ;
+  @media (min-width: 300px) and (max-width: 767px) {
+    word-break: break-all;
+    white-space: nowrap;
+    margin-left: 3%;
+    display: flex;
+  }
+`;
+
 const MobileNetwork = styled.div`
   color: #303134;
   font-size: 14px;
@@ -935,7 +966,8 @@ const MobileNetwork = styled.div`
   @media (min-width: 300px) and (max-width: 767px) {
     word-break: break-all;
     white-space: nowrap;
-    margin-left: 13px;
+    margin-left: 10%;
+    display: flex;
   }
   @media (min-width: 768px) and (max-width: 1200px) {
     display: none !important;
