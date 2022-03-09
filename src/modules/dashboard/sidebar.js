@@ -88,6 +88,7 @@ export default function Sidebar(props) {
         <Icon src={aboutIcon} />
         <Heading>About Xmartly</Heading>
       </Wrapper>
+      {sessionManager.getDataFromCookies("isLoggedIn") && (
       <Wrapper
         style={{
           backgroundColor: utility.isMenuActive("transactions")
@@ -101,6 +102,8 @@ export default function Sidebar(props) {
         <Icon src={transactionIcon} />
         <Heading>Transactions</Heading>
       </Wrapper>
+      )}
+      {sessionManager.getDataFromCookies("isLoggedIn") && (
       <Wrapper
         style={{
           backgroundColor: utility.isMenuActive("contracts") ? "#1d3c93" : "",
@@ -112,6 +115,7 @@ export default function Sidebar(props) {
         <Icon src={contractsIcon} />
         <Heading>Contracts</Heading>
       </Wrapper>
+      )}
       {/* <Wrapper
         style={{
           backgroundColor: utility.isMenuActive("networks") ? "#1d3c93" : "",
@@ -123,6 +127,7 @@ export default function Sidebar(props) {
         <Icon src={networksIcon} />
         <Heading>Networks</Heading>
       </Wrapper> */}
+      {sessionManager.getDataFromCookies("isLoggedIn") && (
       <Wrapper
         style={{
           backgroundColor: utility.isMenuActive("analytics") ? "#1d3c93" : "",
@@ -134,6 +139,8 @@ export default function Sidebar(props) {
         <Icon src={analyticsIcon} />
         <Heading>Analytics</Heading>
       </Wrapper>
+      )}
+      {sessionManager.getDataFromCookies("isLoggedIn") && (
       <Wrapper
         style={{
           backgroundColor: utility.isMenuActive("rules") ? "#1d3c93" : "",
@@ -145,7 +152,7 @@ export default function Sidebar(props) {
         <Icon src={alertingIcon} />
         <Heading>Alerting</Heading>
       </Wrapper>
-
+      )}
       <Wrapper style={{ marginTop: "18rem" }} onClick={redirectToFaqs}>
         <Icon src="/images/Subtraction 2.svg" />
         <Heading>FAQs</Heading>
