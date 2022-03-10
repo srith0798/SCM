@@ -70,7 +70,7 @@ export default function FullScreen(props) {
               }}
             >
               <GraphContainer>
-                <FlexEnd style={{display: props.data.length==0?"none":""}}>
+                <FlexEnd style={{display: props.data.length===0?"none":""}}>
                   <select id="transactions"  className="select" value={props.dropDownValue} onChange={(event)=>{props.getAnalytics("", event)}}>
                     <option value="7" className="select-dropdown">
                       Last 7 days
@@ -86,7 +86,7 @@ export default function FullScreen(props) {
                     </option>
                   </select>
                 </FlexEnd>
-                {(props.data.length==0)?
+                {(props.data.length===0)?
                       ( <GraphSizeError>
                           <Line data={props.data} type= "fullScreen" error={props.error} expanded={props.expand}/>
                       </GraphSizeError>)
