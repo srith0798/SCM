@@ -6,7 +6,7 @@ import { genericConstants } from "../../constants";
 const useStyles = makeStyles(() => ({
   dialogBox: {
     width: "100% !important",
-    height: "311px",
+    height: "390px",
     position:"absolute",
     top:"5rem"
   },

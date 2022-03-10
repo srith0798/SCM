@@ -124,8 +124,27 @@ export default function Contract(props) {
     setOpen(true);
     location.state.homepageHistory = null;
   }
+  let user = "";
+
+    try {
+      user = window.web3.eth.accounts;
+    } catch (e) {}
+
+    const redirectToLogout = () => {
+      sessionManager.removeDataFromCookies("isLoggedIn");
+      sessionManager.removeDataFromCookies("accountAddress");
+      sessionManager.removeDataFromCookies("userId");
+      sessionManager.removeDataFromCookies("username");
+      sessionManager.removeDataFromCookies("profilePicture");
+      history.replace("/");
+    };
 
   return (
+    <>
+    {(user=="")?
+    (
+      redirectToLogout()
+  ):""}
     <MainContainer>
       <ShowLoader state={loader} top={"33%"} />
       <SubContainer>
@@ -253,7 +272,7 @@ export default function Contract(props) {
               <Div>
                 <RowTag>           
                   <ColumnSecond onClick={(e) => redirectTODetails(e, data._id)}>
-                    {data.contractName}
+                    {data.contractName || "Contract"}
                   </ColumnSecond>
                   <ColumnSecond onClick={(e) => redirectTODetails(e, data._id)}>
                     <BackgroundChanger>
@@ -321,6 +340,7 @@ export default function Contract(props) {
         </PaginationDiv>
       </PageVerifyCheck>
     </MainContainer>
+    </>
   );
 }
 

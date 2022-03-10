@@ -12,6 +12,7 @@ import Tooltip from "@mui/material/Tooltip";
 import ContractsService from "../../services/contractsService";
 import moment from "moment";
 import { sessionManager } from "../../managers/sessionManager";
+import AddAlerts from "../popup/addAlerts";
 
 export default function TransactionDetails() {
   const [eventToolTip, seteventToolTip] = React.useState(false);
@@ -28,8 +29,17 @@ export default function TransactionDetails() {
   const [showInputData, setShowInputData] = React.useState(false);
   const [showOutputData, setShowOutputData] = React.useState(false);
   const [contractName, setContractName] = React.useState("");
+  const [open, setOpen] = React.useState(false);
 
   const wei = 0.000000001;
+  
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const handleViewClick = (e) => {
     setActiveButton(e.target.id);
@@ -127,19 +137,31 @@ export default function TransactionDetails() {
           </CopyToClipboard>
           <FailButton check={status}>Fail</FailButton>
           <SuccessButton check={status}>Success</SuccessButton>
-          <AlertButton>
+          <AlertButton
+          onClick={handleClickOpen}>
             <img
+              onClick={handleClickOpen}
               alt=""
               style={{
                 width: "15px",
                 cursor: "pointer",
                 marginRight: "6px",
                 marginBottom: "3px",
+                cursor: "pointer",
               }}
               src="/images/addalert.svg"
             />
             Add alert
           </AlertButton>
+          {open && (
+            <AddAlerts
+              click={handleClose}
+              status={status}
+              name={contractName}
+              address={row.to ? row.to : row.contractAddress}
+              network={row.network}
+            />
+          )}
         </TopContainer>
 
         <TabLister>
@@ -454,9 +476,15 @@ export default function TransactionDetails() {
                           '"_to"' +
                           ":" +
                           '"' +
-                          row.input +
+                          row.to +
                           '"' +
                           "\n" +
+                          '"_value"'+
+                          ":" +
+                          '"'+
+                          row.value + 
+                          '"'+
+                          "\n"+
                           "}"}
                       </SubHeadBlue>
                     </InputDataDiv>
@@ -834,7 +862,7 @@ const BackgroundChanger = styled.div`
   background: #f7f8fd 0% 0% no-repeat padding-box;
   border-radius: 6px;
   opacity: 1;
-  padding: 1.875rem;
+  padding: 10px;
   @media (min-width: 300px) and (max-width: 1371px) {
     width: 100%;
     padding: 1rem;
@@ -1159,6 +1187,7 @@ const AlertButton = styled.div`
   padding-top: 2px;
   padding-left: 8px;
   white-space: nowrap;
+  cursor: pointer;
   @media (min-width: 1024px) and (max-width: 1110px) {
     display: none;
   }

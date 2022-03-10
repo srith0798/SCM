@@ -40,8 +40,14 @@ export default function MainComponent(props) {
   const [loader, setLoader] = React.useState("30");
   const [expanded, setExpanded] = React.useState(0);
   const [tableData, setTableData] = React.useState([]);
-  const [transactionOverTimeError, setTransactionOverTimeError] =
-    React.useState("");
+  const [
+    transactionOverTimeError,
+    setTransactionOverTimeError,
+  ] = React.useState("");
+  const [
+    activeUSerGraphError,
+    setActiveUserGraphError,
+  ] = React.useState("");
   const [gasUsedOverTimeError, setGasUsedOverTimeError] = React.useState("");
   const [activeUsersError, setActiveUsersError] = React.useState("");
   const [topCallersError, setTopCallersError] = React.useState("");
@@ -119,6 +125,7 @@ export default function MainComponent(props) {
     );
     if (error || !response || response.length === 0) {
       setTransactionOverTimeError("No Transactions Available");
+      setActiveUserGraphError("No Active users available")
       setNoOfTransactions([]);
       setData([]);
       setLoader(false);
@@ -355,8 +362,27 @@ export default function MainComponent(props) {
     setOpen((prev) => !prev);
   };
 
+  let user = "";
+
+    try {
+      user = window.web3.eth.accounts;
+    } catch (e) {}
+
+    const redirectToLogout = () => {
+      sessionManager.removeDataFromCookies("isLoggedIn");
+      sessionManager.removeDataFromCookies("accountAddress");
+      sessionManager.removeDataFromCookies("userId");
+      sessionManager.removeDataFromCookies("username");
+      sessionManager.removeDataFromCookies("profilePicture");
+      history.replace("/");
+    };
+
   return (
     <>
+    {(user=="")?
+    (
+      redirectToLogout()
+  ):""}
       <ShowLoader state={loader} top={"33%"}></ShowLoader>
       {expandGraph === 0 ? (
         <div style={{ overflow: "auto" }}>
@@ -546,23 +572,20 @@ export default function MainComponent(props) {
                           error1={transactionOverTimeError}
                         ></SelectComponent>
                       </SubContainer>
-                      {noOfTransactions.length == 0 ? (
-                        <GraphSizeError>
-                          {" "}
-                          <Line
-                            data={noOfTransactions}
-                            error={transactionOverTimeError}
-                          />
-                        </GraphSizeError>
-                      ) : (
-                        <GraphSize>
-                          {" "}
-                          <Line
-                            data={activeUserData}
-                            error={activeUsersError}
-                          />
-                        </GraphSize>
-                      )}
+                      {(noOfTransactions.length==0)?
+                      ( <GraphSizeError>
+                        {" "}
+                        <Line
+                          data={noOfTransactions}
+                          error={activeUSerGraphError}
+                        />
+                      </GraphSizeError>)
+                      :
+                      <GraphSize>
+                        {" "}
+                        <Line data={activeUserData} error={activeUsersError} />
+                      </GraphSize>}
+                      
                     </GraphContainer>
                   </Grid>
                 </Grid>
@@ -639,7 +662,7 @@ const TableData = (props) => {
       </SubContainer>
       <Table>
         {props?.data && props.data.length && props.data.length > 0 ? (
-          props.data.map((item) => (
+          props.data.map((item) => (            
             <TableRow>
               <DataColumn>
                 <Div>
@@ -947,10 +970,10 @@ const MobileNetwork = styled.div`
     display: flex;
   }
   @media (min-width: 768px) and (max-width: 1200px) {
-    display: none;
+    display: none !important;
   }
-  @media (min-width: 820px) and (max-width: 1200px) {
-    display: none;
+  @media (min-width: 820px)  {
+    display: none !important;
   }
   @media (min-width: 1200px) and (max-width: 2300px) {
     display: none;
