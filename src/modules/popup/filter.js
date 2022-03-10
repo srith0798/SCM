@@ -11,7 +11,10 @@ const useStyles = makeStyles(() => ({
     maxWidth: "563px",
     height: "325px",
     overflow: "hidden",
-  },
+    ['@media screen and (min-width: 300px) and (max-width: 768px)']: { 
+      width: '90% !important'
+    
+  }}
 }));
 
 export default function Filter(props) {

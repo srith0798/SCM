@@ -119,7 +119,7 @@ const dashboardComponent = (props) => {
           try {
             user = window.web3.eth.accounts;
           } catch (e) {}
-          
+          console.log(user,"user!!")
           if (user && user.length) {
             
             const response = await UserService.addUser({ accountAddress: user[0] });

@@ -712,6 +712,7 @@ const Div = styled.div`
   width: auto;
   @media (min-width: 300px) and (max-width: 767px) {
     column-gap: 70px;
+    width: 1381px !important;
   }
   @media (min-width: 768px) and (max-width: 1200px) {
     width:1111px
