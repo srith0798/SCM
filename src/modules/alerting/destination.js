@@ -51,7 +51,10 @@ export default function Destination() {
      if(error)
       return;
     utility.apiSuccessToast("Destination Deleted Successfully");
-    await getDestinations()
+    await getDestinations();
+    setTimeout(()=>{
+      window.location.reload();
+    },100);
   }
   useEffect(() => {
     getDestinations();
@@ -119,7 +122,7 @@ export default function Destination() {
                     <img
                       alt=""
                       src="/images/deletes.svg"
-                      style={{ width: "1.1rem" }}
+                      style={{ width: "1.1rem", cursor: "pointer" }}
                       onClick = {()=>deleteDestination(destination.destinationId)}
                     />
                   </Tooltip>

@@ -689,3 +689,14 @@ input[type="date"]:valid::before {
     top: 11% !important;
   }
 }
+
+.MuiDialog-container{
+ display: flex !important;
+ justify-content: center !important;
+ align-items: flex-start !important;
+ margin-top: 5% !important;
+}
+.MuiDialog-scrollPaper{
+  display: flex !;
+  justify-content: center;
+}
