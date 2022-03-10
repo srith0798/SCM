@@ -5,7 +5,9 @@ export default {
   addAlert,
   getAlertList,
   getAlertDetails,
-  deleteAlert
+  deleteAlert,
+  updateAlert,
+  getHistoryList
 };
 
 function getHeaders() {
@@ -16,7 +18,7 @@ function getHeaders() {
 }
 
 async function addAlert(requestData) {
-  let url =  process.env.REACT_APP_ALERT_MICROSERVICE + "/alert";
+  let url = process.env.REACT_APP_ALERT_MICROSERVICE + "/alert";
   return httpService(
     httpConstants.METHOD_TYPE.POST,
     getHeaders(),
@@ -89,6 +91,52 @@ async function getAlertList(requestData) {
       httpConstants.METHOD_TYPE.DELETE,
       getHeaders(),
       {},
+      url
+    )
+      .then((response) => {
+        if (
+          !response.success ||
+          response.responseCode !== 200 ||
+          !response.responseData ||
+          response.responseData.length === 0
+        )
+          return Promise.reject(response);
+        return Promise.resolve(response.responseData);
+      })
+      .catch(function (err) {
+        return Promise.reject(err);
+      });
+  }
+
+  async function updateAlert(requestData) {
+    let url = process.env.REACT_APP_ALERT_MICROSERVICE + "/alert/" + requestData.alertId;
+    return httpService(
+      httpConstants.METHOD_TYPE.PUT,
+      getHeaders(),
+      requestData,
+      url
+    )
+      .then((response) => {
+        if (
+          !response.success ||
+          response.responseCode !== 200 ||
+          !response.responseData ||
+          response.responseData.length === 0
+        )
+          return Promise.reject(response);
+        return Promise.resolve(response.responseData);
+      })
+      .catch(function (err) {
+        return Promise.reject(err);
+      });
+  }
+
+  async function getHistoryList(requestData) {
+    let url = process.env.REACT_APP_ALERT_MICROSERVICE + "/history-list";
+    return httpService(
+      httpConstants.METHOD_TYPE.POST,
+      getHeaders(),
+      requestData,
       url
     )
       .then((response) => {

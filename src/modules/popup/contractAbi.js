@@ -3,7 +3,6 @@ import styled from "styled-components";
 import Dialog from "@mui/material/Dialog";
 import { makeStyles } from "@material-ui/styles";
 import { PrismAsyncLight as SyntaxHighlighter } from "react-syntax-highlighter";
-import json from "react-syntax-highlighter/dist/esm/languages/hljs/json";
 import { base16AteliersulphurpoolLight } from "react-syntax-highlighter/dist/esm/styles/prism";
 //SyntaxHighlighter.registerLanguage("json", json);
 

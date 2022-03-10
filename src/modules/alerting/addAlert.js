@@ -173,6 +173,7 @@ export default function AddAlert() {
     if (alertTarget === genericConstants.ALERT_TYPE.ADDRESS) {
       requestData["target"]["name"] = selectedAddress?.contractName;
       requestData["target"]["network"] = selectedAddress?.network;
+      requestData["target"]["contract"] = selectedAddress?._id;
     }
     if (alertTarget === genericConstants.ALERT_TYPE.TAG)
       requestData["target"]["name"] = targetValue;

@@ -47,7 +47,7 @@ export default function Destination() {
     getDestinations()
   }
   const deleteDestination = async (destinationId) => {
-    const [error , response] = await utility.parseResponse(DestinationService.deleteDestination(destinationId));
+    const [error] = await utility.parseResponse(DestinationService.deleteDestination(destinationId));
      if(error)
       return;
     utility.apiSuccessToast("Destination Deleted Successfully");
@@ -240,9 +240,9 @@ const ColorChanging = styled.text`
   font-size: 0.875rem;
 `;
 
-const Icon = styled.img`
-  width: 1rem;
-`;
+// const Icon = styled.img`
+//   width: 1rem;
+// `;
 const Img = styled.img`
   width: 1rem;
   margin-left: 10px;

@@ -7,10 +7,20 @@ import AlertService from "../../services/alert";
 import utility from "../../utility";
 // import { alertClasses } from "@mui/material";
 import { genericConstants } from "../../constants";
+import { sessionManager } from "../../managers/sessionManager";
+import DestinationService from "../../services/destination";
+import destination from "../../services/destination";
 
 export default function AlertDetails() {
   const [alertId, setAlertId] = React.useState("");
   const [alert, setAlert] = React.useState(false);
+  const [onEdit, setOnEdit] = React.useState(false);
+  const [isSelect, setIsSelect] = React.useState(false);
+  const [destinations, setDestinations] = React.useState([]);
+  const [selectedDestinations, setSelectedDestinations] = React.useState([]);
+  const [alertDestinations, setAlertDestinations] = React.useState([]);
+
+
 
 
   const getAlert = async (request) => {
@@ -21,6 +31,92 @@ export default function AlertDetails() {
     if (error)
       return;
     setAlert(response);
+    setAlertDestinations(response?.destinations || []);
+    // let destinationIds=[];
+    // response && response.destinations && response.destinations.map((dest)=>{
+    //   destinationIds.push(dest.destinationIds)
+    //   return true;
+    // })
+    // setSelectedDestinations(destinationIds);
+  }
+  const updateAlert = async (request ) => {
+    if(!isSelect)
+      return;
+    let requestData = {
+      alertId: request ? request : alertId,
+      status: true,
+      destinations :selectedDestinations
+    }
+    if(requestData.destinations && requestData.destinations.length === 0)
+      requestData["status"] = false;
+    const [error, response] = await utility.parseResponse(AlertService.updateAlert(requestData));
+    if (error)
+      return;
+    utility.apiSuccessToast("Alert Updated Succesfully");
+    setOnEdit(false);  
+    setAlert(response);
+    setAlertDestinations(response?.destinations || []);
+    setIsSelect(false);
+    getDestinations();
+  }
+  const disableAlert = async (request , status ) => {
+    let requestData = {
+      alertId: request ? request : alertId,
+      status: status
+    }
+    const [error, response] = await utility.parseResponse(AlertService.updateAlert(requestData));
+    if (error)
+      return;
+    utility.apiSuccessToast("Alert Updated Succesfully");
+    setOnEdit(false);  
+    getAlert();
+  }
+  const getDestinations = async () => {
+    let requestData = {
+      userId: sessionManager.getDataFromCookies("userId"),
+      isDeleted: false,
+    };
+    const [error, response] = await utility.parseResponse(
+      DestinationService.getDestinations(requestData)
+    );
+    if (error) return;
+    let destinationIds=[];
+    alertDestinations.map((dest)=>{
+      destinationIds.push(dest.destinationId);
+    })
+    response.map((dest)=>{
+      console.log("destinationIds",destinationIds ,dest.destinationId);
+      if(destinationIds.includes(dest.destinationId)) 
+      dest["checked"] = true
+       else
+      dest["checked"] = false
+
+    })
+    setDestinations(response);
+    
+  };
+  const selectDestinations = async (event) => {
+    let id = event.target.value;
+    setIsSelect(true);
+    let destination =  destinations.map((dest)=>{
+      if(dest.destinationId === event.target.value)
+       dest["checked"] = event.target.checked;
+      return dest; 
+      })
+    if (event.target.checked)
+     { 
+       setSelectedDestinations((prevArray) => [...prevArray, id]);
+     }
+    else
+    { 
+       setSelectedDestinations(
+        selectedDestinations.filter((item) => item !== id)
+      );}
+      setDestinations(destination)
+  };
+  const editDestinations = () => {
+    setOnEdit(true);
+    getDestinations();
   }
 
   useEffect(() => {
@@ -85,6 +181,7 @@ export default function AlertDetails() {
       </Container>
       <br />
       <b>Alert will be sent to this destination</b>
+      {onEdit === false ? 
       <NewContainer>
         {alert && alert.destinations && alert.destinations.length>0 && alert.destinations.map((destination)=>(
            <LastContainer>
@@ -112,10 +209,42 @@ export default function AlertDetails() {
           </Row>
         </CommonDiv> */}
         <RowContainer>
-          <EditButton style={{ marginRight: "4px" }}>Edit</EditButton>
-          <DisableButton style={{ marginLeft: "4px" }}>Disable</DisableButton>
+          <EditButton style={{ marginRight: "4px" }} onClick = {editDestinations}>Edit</EditButton>
+          {alert.status === true ?
+          <DisableButton style={{ marginLeft: "4px" }} onClick = {()=>disableAlert(alert.alertId, false)}>Disable</DisableButton> : "" }
+          {alert.status === false && alert.destinations && alert.destinations.length>0 ?
+          <DisableButton style={{ marginLeft: "4px" }} onClick = {()=>disableAlert(alert.alertId, true)}>Enable</DisableButton> : "" }
         </RowContainer>
-      </NewContainer>
+      </NewContainer> :
+          <DestinationDetail>
+            {destinations &&
+              destinations.length &&
+              destinations.map((destination) => (
+                <EmailBox>
+                  <EmailDetail>
+                    <Img alt="" src="/images/email.svg" />
+                    {destination.type}
+                    <EmailShow>{destination.url}</EmailShow>
+                  </EmailDetail>
+                  <div>
+                    <label class="switch">
+                      <input
+                        checked = {destination.checked}
+                        type="checkbox"
+                        value={destination.destinationId}
+                        onChange={(event) => selectDestinations(event)}
+                      />
+                      <span class="slider round"></span>
+                    </label>
+                  </div>
+                </EmailBox>
+              ))}
+            <EditButton style={{ marginRight: "4px" }} onClick={()=>updateAlert(alert.alertId)}>Update</EditButton>
+
+          </DestinationDetail>
+        
+       
+       }
     </MainContainer>
   );
 }
@@ -298,4 +427,32 @@ const TextColor = styled.div`
   font: normal normal medium 14px/17px Inter;
   letter-spacing: 0px;
   color: #416be0;
+`;
+const DestinationDetail = styled.div`
+  margin-bottom: 10px;
+  padding: 20px 0 0 0;
+  width:35%;
+`;
+const EmailBox = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  background: #f5f6fd 0% 0% no-repeat padding-box;
+  border: 1px solid #d5e0ff;
+  border-radius: 6px;
+  display: flex;
+  height: 66px;
+  padding: 14px;
+  width: 100%;
+`;
+const EmailDetail = styled.div`
+  font-weight: 600;
+  font-size: 1rem;
+`;
+const EmailShow = styled.div`
+  font-size: 0.9rem;
+`;
+const Img = styled.img`
+  width: 1.3rem;
+  margin-right: 4px;
 `;
