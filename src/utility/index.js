@@ -3,7 +3,7 @@ import { history } from "../managers/history";
 // import Cookies from "universal-cookie";
 import ToastService from "react-material-toast";
 
-let moment = require("moment");
+// let moment = require("moment");
 
 let momentZone = require("moment-timezone");
 

@@ -1,9 +1,30 @@
-import React from "react";
+import React , {useEffect} from "react";
 import "react-tabs/style/react-tabs.css";
 import styled from "styled-components";
 import Tooltip from "@mui/material/Tooltip";
+import AlertService from "../../services/alert";
+import utility from "../../utility";
+import { sessionManager } from "../../managers/sessionManager";
+import moment from "moment"
 
 export default function Historys() {
+  const [notifications, setNotifications] = React.useState([]);
+
+  const getNotifications = async () => {
+    let request = {
+        userId: sessionManager.getDataFromCookies("userId")
+    };
+    const [error , response] = await utility.parseResponse(
+      AlertService.getHistoryList(request)
+    );
+    if (!response || error) return;
+    setNotifications(response);
+  };
+
+  useEffect(() => {
+    getNotifications();
+  }, []);
+
   return (
     <MainContainer>
       <DetailBox>
@@ -50,24 +71,18 @@ export default function Historys() {
             </ColumnOne>
           </RowContainer>
         </NewDiv>
-        <Div>
-          <RowData>
-            <ColumnTwo>Sucessfull transaction</ColumnTwo>
-            <ColumnTwo>App_Transactions</ColumnTwo>
-            <ColumnTwo>0xndfahkk57..fj9</ColumnTwo>
-            <ColumnTwo>XDC Mainnet</ColumnTwo>
-            <ColumnTwo>02.2.2022 12:02</ColumnTwo>
-          </RowData>
-        </Div>
-        <Div>
-          <RowData>
-            <ColumnTwo>Sucessfull transaction</ColumnTwo>
-            <ColumnTwo>App_Transactions</ColumnTwo>
-            <ColumnTwo>0xndfahkk57..fj9</ColumnTwo>
-            <ColumnTwo>XDC Mainnet</ColumnTwo>
-            <ColumnTwo>02.2.2022 12:02</ColumnTwo>
-          </RowData>
-        </Div>
+        {notifications && notifications.length>0 && notifications.map((notification)=>(
+            <Div>
+            <RowData>
+              <ColumnTwo>{notification.title}</ColumnTwo>
+              <ColumnTwo>{notification.payload.typeName}</ColumnTwo>
+              <ColumnTwo>{utility.minimizeAddress(notification.payload.txHash)}</ColumnTwo>
+              <ColumnTwo>{notification.payload.network}</ColumnTwo>
+              <ColumnTwo>{moment().utc(notification.payload.timestamp).format("DD.M.YYYY HH:mm")}</ColumnTwo>
+            </RowData>
+            </Div>
+        ))}
+       
       </DetailBox>
     </MainContainer>
   );
