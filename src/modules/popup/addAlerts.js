@@ -13,7 +13,8 @@ import AlertService from "../../services/alert";
 const useStyles = makeStyles(() => ({
   dialogBox: {
     width: "100% !important",
-    height: "50%",
+    height: "auto",
+    maxHeight: "fitContent",
     maxWidth: 440,
   },
 }));
@@ -174,26 +175,27 @@ export default function AddAlerts(props) {
                       </Div>
                     </BackgroundChanger>
                   ))
-                : "No alerts"}
+                : "No destination added"}
             </ContentDiv>
           </Container>
         </MainContainer>
-        <ApplyButton aria-disabled={destinations.length === 0} onClick={addAlert}>Add</ApplyButton>
+        <ApplyButton disabled={destinations.length === 0} onClick={addAlert}>Add</ApplyButton>
       </Dialog>
     </div>
   );
 }
 
-const ApplyButton = styled.div`
+const ApplyButton = styled.button`
   width: 68px;
   height: 34px;
   background: #3163f0 0% 0% no-repeat padding-box;
   border-radius: 3px;
   color: #ffffff;
-  padding-top: 6px;
+  padding: 6px;
   font-size: 14px;
   margin-right: 25px;
   text-align: center;
+  border: none ;
   cursor: pointer;
   margin: 7%;
 

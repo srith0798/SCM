@@ -332,7 +332,7 @@ export default function ContractDetails(props) {
               </Div>
               <Div>
                 <TableHeading>Optimizations</TableHeading>
-                <Enabled>{address.status}</Enabled>
+                <Enabled></Enabled>
               </Div>
 
               <PopUp>

@@ -13,6 +13,11 @@ import ContractsService from "../../services/contractsService";
 import moment from "moment";
 import { sessionManager } from "../../managers/sessionManager";
 import AddAlerts from "../popup/addAlerts";
+import { PrismAsyncLight as SyntaxHighlighter } from "react-syntax-highlighter";
+import js from "react-syntax-highlighter/dist/esm/languages/hljs/javascript";
+import ShowLoader from "../../common/components/showLoader";
+import { base16AteliersulphurpoolLight } from "react-syntax-highlighter/dist/esm/styles/prism";
+SyntaxHighlighter.registerLanguage("javascript", js);
 
 export default function TransactionDetails() {
   const [eventToolTip, seteventToolTip] = React.useState(false);
@@ -30,6 +35,7 @@ export default function TransactionDetails() {
   const [showOutputData, setShowOutputData] = React.useState(false);
   const [contractName, setContractName] = React.useState("");
   const [open, setOpen] = React.useState(false);
+  const [loader, setLoader] = React.useState(false);
 
   const wei = 0.000000001;
   
@@ -79,6 +85,7 @@ export default function TransactionDetails() {
         limit: limit,
         userId: userId,
       };
+      setLoader(true);
       const response = await ContractsService.getContractsList(requestData);
       let check = response.contractList.filter((filteredRow) => {
         return filteredRow.address === selected;
@@ -89,6 +96,7 @@ export default function TransactionDetails() {
         return row.includes("transfer(address");
       });
       setTransfer(final[final.length - 1]);
+      setLoader(false);
     } catch (e) {}
   };
   useEffect(() => {
@@ -421,7 +429,7 @@ export default function TransactionDetails() {
               <Row>
                 <Heading>Transaction Fee</Heading>
                 <SubHead>
-                  {(row.gasPrice * row.gasUsed) / 1000000000000000000 || 0} XDC
+                  {((row.gasPrice * row.gasUsed) / 1000000000000000000).toFixed(12).replace(/\.?0+$/, "") || 0} XDC
                 </SubHead>
               </Row>
             </CommonDiv>
@@ -586,13 +594,28 @@ export default function TransactionDetails() {
             />
             transfer in {contractName}
             <DataDivContainer>
-              <BackgroundChangerTransfer>
+              {/* <BackgroundChangerTransfer> */}
                 <InputDataDiv>
                   <SubHeadBlue>
-                    {transfer !== "" ? transfer + "}" : "No function available"}
+                  <ShowLoader state={loader} top={"50%"} />
+                  <CodeDiv>
+                <CodeMainContainer>
+                  <CodeContainer>
+                    <SyntaxHighlighter
+                      language="javascript"
+                      showLineNumbers={true}
+                      style={base16AteliersulphurpoolLight}
+                      wrapLongLines={true}
+                      customStyle={{ backgroundColor: "#f0f2fc", margin: 0 }}
+                    >
+                    {transfer !== undefined ? transfer + "}" : "No function available"}
+                    </SyntaxHighlighter>
+                  </CodeContainer>
+                </CodeMainContainer>
+              </CodeDiv>
                   </SubHeadBlue>
                 </InputDataDiv>
-              </BackgroundChangerTransfer>
+              {/* </BackgroundChangerTransfer> */}
             </DataDivContainer>
           </LastContainer>
         </ScrollableDiv>
@@ -600,7 +623,7 @@ export default function TransactionDetails() {
       {activeButton === "Contracts" && (
         <SubContracts address={row.contractAddress} url={url} status={status} />
       )}
-      {activeButton === "EventsDetails" && <EventsDetails />}
+      {activeButton === "EventsDetails" && <EventsDetails address={row.contractAddress} from={row.from} to={row.to ? row.to : row.contractAddress} value={row.value} logs={row.logs} />}
       {activeButton === "StateChange" && <StateChange />}
     </MainContainer>
   );
@@ -1194,4 +1217,36 @@ const AlertButton = styled.div`
   @media (max-width: 1024px) {
     display: none;
   }
+`;
+
+const CodeMainContainer = styled.div`
+  width: 100%;
+  max-width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  background-color: #ffffff;
+  padding-top: 0px;
+  @media (min-width: 300px) and (max-width: 414px) {
+    max-width: 90vw;
+    margin-top: 10px;
+  }
+`;
+const CodeContainer = styled.div`
+  background: #ffffff 0% 0% no-repeat padding-box;
+  border-radius: 6px;
+  width: 100%;
+  max-width: 100vw;
+  background-color: #ffffff;
+  height: 100%;
+  max-height: 430px;
+  overflow-y: scroll;
+`;
+
+const CodeDiv = styled.div`
+width: 100%;
+@media (min-width: 300px) and (max-width: 414px) {
+width: 100%;
+}
 `;

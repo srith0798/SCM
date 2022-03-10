@@ -1,4 +1,4 @@
-import React, { useState , useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Dialog from "@mui/material/Dialog";
 import { makeStyles } from "@material-ui/styles";
@@ -7,8 +7,8 @@ const useStyles = makeStyles(() => ({
   dialogBox: {
     width: "100% !important",
     height: "390px",
-    position:"absolute",
-    top:"5rem"
+    position: "absolute",
+    top: "5rem",
   },
 }));
 export default function DestinationTags(props) {
@@ -16,9 +16,7 @@ export default function DestinationTags(props) {
   const [url, setUrl] = useState("");
   const [channelName, setChannelName] = useState("");
 
- const classes = useStyles();
-
-console.log("propsss");
+  const classes = useStyles();
   return (
     <div>
       <Dialog classes={{ paper: classes.dialogBox }} open={true}>
@@ -33,7 +31,7 @@ console.log("propsss");
             </Content>
             <Input
               type="text"
-              placeholder="label"
+              placeholder="Label"
               value={label}
               onChange={(e) => setLabel(e.target.value)}
             />
@@ -44,14 +42,24 @@ console.log("propsss");
               value={url}
               onChange={(e) => setUrl(e.target.value)}
             />
-            <Input
-              type="text"
-              placeholder="channelName"
-              value={channelName}
-              onChange={(e) => setChannelName(e.target.value)}
-            />
+            <CheckDiv check={props?.type}>
+              <Input
+                type="text"
+                placeholder="Channel Name"
+                value={channelName}
+                onChange={(e) => setChannelName(e.target.value)}
+              />
+            </CheckDiv>
             <SubContainer>
-              <ConfirmButton onClick={()=>props.click(label, url, channelName)}>{`Add ${genericConstants.DESTINATION_TYPE[props.type]}`}</ConfirmButton> 
+              <ConfirmButton
+                onClick={() =>
+                  props?.type === "SLACK"
+                    ? props.click(label, url, channelName)
+                    : props.click(label, url)
+                }
+              >{`Add ${
+                genericConstants.DESTINATION_TYPE[props.type]
+              }`}</ConfirmButton>
             </SubContainer>
           </Container>
         </MainContainer>
@@ -72,6 +80,9 @@ const Container = styled.div`
   background-color: #ffffff;
   max-width: 700px;
   padding: 20px;
+`;
+const CheckDiv = styled.div`
+  display: ${(props) => (props.check === "SLACK" ? "block" : "none")};
 `;
 const SubContainer = styled.div`
   display: flex;
@@ -114,5 +125,5 @@ const ConfirmButton = styled.button`
   white-space: nowrap;
   padding: 7px 9px;
   margin-right: 10px;
-  margin-top:1rem;
+  margin-top: 1rem;
 `;

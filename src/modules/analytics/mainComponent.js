@@ -931,7 +931,7 @@ const NetworkHead = styled.div`
   @media (min-width: 300px) and (max-width: 767px) {
     word-break: break-all;
     white-space: nowrap;
-    margin-left: 1.5%;
+    margin-left: 2.1%;
   }
 `;
 const Network = styled.div`
