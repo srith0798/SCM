@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 export default function ButtonConfirm(props) {
-  return <RemoveButton disabled={props.input==""} onClick={props.click}>{props.text}{console.log(props.text,"text")}</RemoveButton>;
+  return <RemoveButton disabled={props.input===""} onClick={props.click}>{props.text}{console.log(props.text,"text")}</RemoveButton>;
 }
 
 const RemoveButton = styled.button`
