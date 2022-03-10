@@ -881,7 +881,7 @@ const ApplyButton = styled.button`
   padding-bottom: 12px;
   font-size: 14px;
   margin-right: 15px;
-  margin-left: 16px;
+  margin-left: 19px;
   margin-bottom: 15px;
   cursor: pointer;
 `;
@@ -1031,7 +1031,7 @@ const AlertTargetContainer = styled.div`
   flex-flow: row wrap;
   width: 100%;
   padding-top: 28px;
-  margin-left: 16px;
+  margin-left: 9px;
 `;
 
 const ProgressHeader = styled.div`

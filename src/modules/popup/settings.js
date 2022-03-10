@@ -8,6 +8,9 @@ const useStyles = makeStyles(() => ({
     width: "100% !important",
     maxWidth: "700px",
     height: "550px",
+    ['@media screen and (min-width: 300px) and (max-width: 768px)']: { 
+      width: '90% !important'
+    }
   },
 }));
 
