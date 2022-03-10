@@ -20,9 +20,11 @@ import { history } from "../../managers/history";
 import ConnectWallets from "./connectWallets";
 import utility from "../../utility";
 import toast, { Toaster } from "react-hot-toast";
-import { httpConstants } from "../../constants";
+import { httpConstants,validationsMessages } from "../../constants";
 import VerifiedContracts from "../transactionDetails/verifiedContracts";
 import Faqs from "../faqs/faq";
+import Web3 from "web3";
+
 
 //Replace Under Development with component once developed-
 const HomeComponent = (props) => {
@@ -73,6 +75,21 @@ const HomeComponent = (props) => {
   );
 };
 
+
+
+const redirectErrorMessage = () =>
+  toast.error(validationsMessages.VALIDATE_BROWSER_REDIRECTING, {
+    duration: 4000,
+    position: validationsMessages.TOASTS_POSITION,
+    className: "toast-div-address",
+  });
+const disableMetamaskMessage = () =>
+  toast.error(validationsMessages.VALIDATE_BROWSER_REDIRECTING, {
+    duration: 4000,
+    position: validationsMessages.TOASTS_POSITION,
+    className: "toast-div-address",
+});
+
 const dashboardComponent = (props) => {
 
   const Error = () => {
@@ -94,35 +111,43 @@ const dashboardComponent = (props) => {
       className: "toast-div-address",
     });
   const getCurrentUserDetails = async () => {
-    let user = "";
 
-    try {
-      user = window.web3.eth.accounts;
-    } catch (e) {}
 
-    if (user && user.length) {
+     if (window.web3.eth) {
+          let user = "";
+
+          try {
+            user = window.web3.eth.accounts;
+          } catch (e) {}
+          console.log(user,"user!!")
+          if (user && user.length) {
+            
+            const response = await UserService.addUser({ accountAddress: user[0] });
+            if (response.accountAddress) {
+              sessionManager.setDataInCookies(
+                response.accountAddress,
+                "accountAddress"
+              );
+              sessionManager.setDataInCookies(response._id, "userId");
+              sessionManager.setDataInCookies(response.username, "username");
+              sessionManager.setDataInCookies(
+                response.profilePicture,
+                "profilePicture"
+              );
+            }
+            sessionManager.setDataInCookies(true, "isLoggedIn");
+            history.push("/about");
+            
+            return {user:user};
+          } else {
+            loginErrorMessage();
+          }
+          return true; //required to close the "connect wallet" popup
       
-      const response = await UserService.addUser({ accountAddress: user[0] });
-      if (response.accountAddress) {
-        sessionManager.setDataInCookies(
-          response.accountAddress,
-          "accountAddress"
-        );
-        sessionManager.setDataInCookies(response._id, "userId");
-        sessionManager.setDataInCookies(response.username, "username");
-        sessionManager.setDataInCookies(
-          response.profilePicture,
-          "profilePicture"
-        );
-      }
-      sessionManager.setDataInCookies(true, "isLoggedIn");
-      history.push("/about");
-      
-      return {user:user};
     } else {
-      loginErrorMessage();
+      
+      redirectErrorMessage();
     }
-    return true; //required to close the "connect wallet" popup
   };
   
   // let check = window.web3.eth.accounts;

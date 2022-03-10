@@ -59,6 +59,11 @@ export const analytics = {
   ]
 }
 
+export const validationsMessages = {
+  VALIDATE_BROWSER_REDIRECTING: "XDCPay Extension Not Available",
+  TOASTS_POSITION: "top-center"
+}
+
 export const genericConstants={
   ALERT_TYPE:{
   SUCCESSFULL_TRANSACTIONS:"SUCCESSFULL_TRANSACTIONS",
