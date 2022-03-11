@@ -261,7 +261,7 @@ export default function Rules() {
                         {genericConstants.ALERT_TYPE_NAMES[alert?.type]}
                       </ColumnTwo>
                       <ColumnTwo
-                        style={{ fontSize: "14px", color: "#00A58C" }}
+                        style={{ fontSize: "14px", color: "#00A58C", marginLeft: "50px" }}
                         onClick={() => redirectToAlertDetails(alert.alertId)}
                       >
                         {alert.status ? "Enabled" : "Disabled"}

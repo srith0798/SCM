@@ -700,3 +700,7 @@ input[type="date"]:valid::before {
   display: flex !;
   justify-content: center;
 }
+
+.scroll::-webkit-scrollbar { 
+  display: none !important;  /* Safari and Chrome */
+}

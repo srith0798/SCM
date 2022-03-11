@@ -172,7 +172,7 @@ const MainBoxContainer = styled.div`
   @media (min-width: 300px) and (max-width: 414px) {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     height: 357px;
   }
 `;
@@ -185,6 +185,9 @@ const SubTitle = styled.div`
   font-size: 0.875rem;
   color: #191919;
   margin-bottom: 0.513rem;
+  @media (min-width: 300px) and (max-width: 414px) {
+  font-size: 8px;
+  }
 `;
 const SubTitleTwo = styled.div`
   height: 22px;

@@ -188,12 +188,13 @@ export default function AddAlert() {
     }
     utility.apiSuccessToast("Alert added successfully!");
   };
-  const addDestination = async (label, url) => {
+  const addDestination = async (label, url, channelName) => {
     let requestData = {
       userId: sessionManager.getDataFromCookies("userId"),
       type: destinationType,
       label: label,
       url: url,
+      channelName: channelName ? channelName : "",
     };
     console.log(requestData);
     const [error, response] = await utility.parseResponse(
@@ -205,28 +206,25 @@ export default function AddAlert() {
     }
     setDestinations(response);
     setAddDestinationPopup(false);
-  }
+  };
   let user = "";
 
-    try {
-      user = window.web3.eth.accounts;
-    } catch (e) {}
+  try {
+    user = window.web3.eth.accounts;
+  } catch (e) {}
 
-    const redirectToLogout = () => {
-      sessionManager.removeDataFromCookies("isLoggedIn");
-      sessionManager.removeDataFromCookies("accountAddress");
-      sessionManager.removeDataFromCookies("userId");
-      sessionManager.removeDataFromCookies("username");
-      sessionManager.removeDataFromCookies("profilePicture");
-      history.replace("/");
-    };
-  
+  const redirectToLogout = () => {
+    sessionManager.removeDataFromCookies("isLoggedIn");
+    sessionManager.removeDataFromCookies("accountAddress");
+    sessionManager.removeDataFromCookies("userId");
+    sessionManager.removeDataFromCookies("username");
+    sessionManager.removeDataFromCookies("profilePicture");
+    history.replace("/");
+  };
+
   return (
     <>
-    {(user=="")?
-    (
-      redirectToLogout()
-  ):""}
+      {user == "" ? redirectToLogout() : ""}
 
       <MainContainer>
         {addDestinationPopup && (
@@ -249,7 +247,7 @@ export default function AddAlert() {
             </TitleHead>
           </RowCorrecter>
         </Row>
-        <Container>
+        <Container className="scroll">
           <TabLister>
             <TabView
               id="Rules"
@@ -368,12 +366,13 @@ export default function AddAlert() {
                   <TypeRow> Alert target</TypeRow>
                   <SelectType>
                     {alertTarget
-                      ? alertTarget.toLowerCase()
-                      .replace("_", " ")
-                      .substring(0, 1)
-                      .toUpperCase() +
-                    alertTarget.toLowerCase().replace("_", " ").substring(1)
-                      : "Select an address for which the alert will be triggered"}
+                      ? alertTarget
+                          .toLowerCase()
+                          .replace("_", " ")
+                          .substring(0, 1)
+                          .toUpperCase() +
+                        alertTarget.toLowerCase().replace("_", " ").substring(1)
+                      : "Select addresses for which the alert will be triggered"}
                   </SelectType>
                 </ProgressHeader>
               </AlertContainer>
@@ -409,7 +408,12 @@ export default function AddAlert() {
                 {progress === "PARAMETERS" && (
                   <AlertTargetContainer style={{ flexDirection: "column" }}>
                     <ParameterContainer>
-                      <FilterSelect id="selectBox" name="selectBox" className="selectBox" onChange={selectTargetValue}>
+                      <FilterSelect
+                        id="selectBox"
+                        name="selectBox"
+                        className="selectBox"
+                        onChange={selectTargetValue}
+                      >
                         <option value="">Filter by event </option>
                         {parametersData && parametersData.length ? (
                           parametersData.map((option) => (
@@ -545,27 +549,6 @@ const AlertTypeContainer = (props) => {
       </BoxContainer>
       <BoxContainer
         onClick={() =>
-          props.selectAlertType(genericConstants.ALERT_TYPE.TOKEN_TRANSFER)
-        }
-        onMouseOver={() =>
-          props.changeSourceForIcons(
-            genericConstants.ALERT_TYPE.TOKEN_TRANSFER,
-            "tokenTransfer"
-          )
-        }
-        onMouseOut={() =>
-          props.changeOriginalSourceForIcons(
-            genericConstants.ALERT_TYPE.TOKEN_TRANSFER,
-            "tokenTransfer"
-          )
-        }
-      >
-        <img alt="" src={props.icon.tokenTransfer} />
-        <Title>XRC-20 Token Transfer </Title>
-        <SubTitle>Triggers whenever an XRC-20 token transfer happen</SubTitle>
-      </BoxContainer>
-      <BoxContainer
-        onClick={() =>
           props.selectAlertType(genericConstants.ALERT_TYPE.TRANSACTION_VALUE)
         }
         onMouseOver={() =>
@@ -586,9 +569,33 @@ const AlertTypeContainer = (props) => {
         <SubTitle>Triggers whenever transaction value matches</SubTitle>
       </BoxContainer>
       <BoxContainer
-        onClick={() =>
-          props.selectAlertType(genericConstants.ALERT_TYPE.XDC_BALANCE)
+        // onClick={() =>
+        //   props.selectAlertType(genericConstants.ALERT_TYPE.TOKEN_TRANSFER)
+        // }
+        onMouseOver={() =>
+          props.changeSourceForIcons(
+            genericConstants.ALERT_TYPE.TOKEN_TRANSFER,
+            "tokenTransfer"
+          )
         }
+        onMouseOut={() =>
+          props.changeOriginalSourceForIcons(
+            genericConstants.ALERT_TYPE.TOKEN_TRANSFER,
+            "tokenTransfer"
+          )
+        }
+      >
+        <img alt="" src={props.icon.tokenTransfer} />
+        <Title>XRC-20 Token Transfer </Title>
+        <SubTitle style={{ fontSize: "22px", fontWeight: 600 }}>
+          Coming soon
+        </SubTitle>
+      </BoxContainer>
+
+      <BoxContainer
+        // onClick={() =>
+        //   props.selectAlertType(genericConstants.ALERT_TYPE.XDC_BALANCE)
+        // }
         onMouseOver={() =>
           props.changeSourceForIcons(
             genericConstants.ALERT_TYPE.XDC_BALANCE,
@@ -604,15 +611,15 @@ const AlertTypeContainer = (props) => {
       >
         <img alt="" src={props.icon.balanceToken} />
         <Title>XDC Balance</Title>
-        <SubTitle>
-          Triggers when XDC balance falls below certain threshold
+        <SubTitle style={{ fontSize: "22px", fontWeight: 600 }}>
+          Coming soon
         </SubTitle>
       </BoxContainer>
 
       <BoxContainer
-        onClick={() =>
-          props.selectAlertType(genericConstants.ALERT_TYPE.STATE_CHANGE)
-        }
+        // onClick={() =>
+        //   props.selectAlertType(genericConstants.ALERT_TYPE.STATE_CHANGE)
+        // }
         onMouseOver={() =>
           props.changeSourceForIcons(
             genericConstants.ALERT_TYPE.STATE_CHANGE,
@@ -628,12 +635,14 @@ const AlertTypeContainer = (props) => {
       >
         <img alt="" src={props.icon.stateChange} />
         <Title>State Change</Title>
-        <SubTitle>Triggers whenever stable variable changes</SubTitle>
+        <SubTitle style={{ fontSize: "22px", fontWeight: 600 }}>
+          Coming soon
+        </SubTitle>
       </BoxContainer>
       <BoxContainer
-        onClick={() =>
-          props.selectAlertType(genericConstants.ALERT_TYPE.FUNCTION_CALL)
-        }
+        // onClick={() =>
+        //   props.selectAlertType(genericConstants.ALERT_TYPE.FUNCTION_CALL)
+        // }
         onMouseOver={() =>
           props.changeSourceForIcons(
             genericConstants.ALERT_TYPE.FUNCTION_CALL,
@@ -873,7 +882,7 @@ const ApplyButton = styled.button`
   padding-bottom: 12px;
   font-size: 14px;
   margin-right: 15px;
-  margin-left: 16px;
+  margin-left: 19px;
   margin-bottom: 15px;
   cursor: pointer;
 `;
@@ -1023,7 +1032,7 @@ const AlertTargetContainer = styled.div`
   flex-flow: row wrap;
   width: 100%;
   padding-top: 28px;
-  margin-left: 16px;
+  margin-left: 9px;
 `;
 
 const ProgressHeader = styled.div`

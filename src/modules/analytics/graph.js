@@ -112,6 +112,7 @@ export default function Graph(props) {
 }
 const ToolTipElement = (props) => {
   return (
+    <div style={{height:"80px"}}>
     <TooltipGraph>
       <TooltipHead>
         <TooltipDate>{moment(props.point.data.x).format("DD MMM")}</TooltipDate>
@@ -130,7 +131,12 @@ const ToolTipElement = (props) => {
         </TooltipDataHeader>
         {/* {props.point.serieId !== "ActiveUsers" ?<TooltipDataHeader><div>Deployment Status: </div> <TooltipDataValues>Success</TooltipDataValues></TooltipDataHeader>  : ""} */}
       </TooltipData>
-    </TooltipGraph>
+      </TooltipGraph>
+      <DivOval class="outer-oval-trans">
+        <Oval></Oval>
+      </DivOval>
+      </div>
+    
   );
 };
 
@@ -178,6 +184,7 @@ const MyResponsiveLine = ({ data, MouseMovePoint, CustomPoint }) => (
         : ["#3163F0"]
     }
     colorBy="index"
+    enablePoints={false}
     pointBorderWidth={2}
     pointLabelYOffset={-12}
     enableArea={true}
@@ -214,6 +221,20 @@ const LegendImg = styled.img`
 const LegendSpan = styled.span`
   margin-right: 5px;
 `;
+const Oval = styled.div`
+ width: 10px;
+  height: 10px;
+  background-color: #3763dd;
+  border-radius: 10px;
+  
+  text-align: center;
+  margin-left:60px;
+  margin-top:10px
+
+`;
+const DivOval = styled.div`
+margin-top:0px
+`;
 const GraphSize = styled.div`
   height: 9.75rem;
   width: auto;
@@ -232,6 +253,8 @@ const TooltipGraph = styled.div`
   border: solid 1px #e3e7eb;
   background-color: #fff;
   font-size: 13px;
+  margin-bottom:0px;
+  padding-bottom:10px
 `;
 const TooltipHead = styled.div`
   display: flex;
