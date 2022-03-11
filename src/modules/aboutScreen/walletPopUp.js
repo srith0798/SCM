@@ -10,7 +10,7 @@ const useStyles = makeStyles(() => ({
     marginBottom: "275px",
     height: "440px",
     ['@media screen and (min-width: 300px) and (max-width: 580px)']:{
-      height:"665px",
+      height:"522px",
       marginBottom: "51px",
       width:"88% !important",
       overflow :"hidden"
@@ -251,7 +251,7 @@ const StepsTitleMobile = styled.div`
   color: #7b7979;
   opacity: 1;
   padding-bottom: 10px;
-  margin-top: 22px;
+  margin-top: 0px;
   margin-left: 15px;
 `;
 const SubTitle = styled.div`
@@ -282,9 +282,9 @@ const IconContainerMobile = styled.div`
   padding: 6px;
   border: 0.031rem #eaf1ec solid;
   width: 96%;
-  height: 148px;
+  height: 107px;
   margin: 3px;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
   border-radius: 6px;
   margin-left: 9px;
 `;

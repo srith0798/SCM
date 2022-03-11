@@ -167,6 +167,7 @@ export default function AddAlert() {
         type: alertTarget,
         value: targetValue,
         threshold: threshold,
+        network:"XDC Mainnet"
       },
       destinations: selectedDestinations,
     };
