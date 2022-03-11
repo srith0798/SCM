@@ -12,28 +12,74 @@ function Header(props) {
     if (user) user = utility.truncateTxnAddress(user);
     return user;
   };
-  const getUserBalance = () => {
+
+  function truncateToDecimals(num, dec = 2) {
+      let decimal = dec;
+      if(num != 0 && num.toString().split('.')[0] == 0 && num.toString().split('.')[1].charAt(0) == 0 && num.toString().split('.')[1].charAt(1) == 0){
+        decimal = 4;
+      }
+      const calcDec = Math.pow(10, decimal);
+      return Math.trunc(num * calcDec) / calcDec;
+    }
+
+    const getBalance2 = async(address) => {
+      let balance = null;
+      await window.web3.eth.getBalance(address).then((res) => {
+        balance = res / Math.pow(10, 18);
+        balance = truncateToDecimals(balance);
+      });
+      return balance;
+    }
+
+
+    const [balance, getWalletBalance] = useState([]);
+  const getXDCWalletBalance = async (address) => {
+    window.web3 = new Web3(window.xdc ? window.xdc : window.ethereum);
+
+    if (
+      window.web3.currentProvider 
+    ) {
+      if (!window.web3.currentProvider.chainId) {
+          let newBalance = await getBalance2(address);
+            let balance = null;
+           let balance45= await window.web3.eth.getBalance(address)
+           .then((res) => {
+              balance = res / Math.pow(10, 18);
+              balance = truncateToDecimals(balance);
+              console.log(balance,"res#")
+              getWalletBalance(balance)
+            })
+            return await balance
+      }
+    }
+  };
+
+
+  const getUserBalance = async () => {
     let balance = sessionManager.getDataFromCookies("accountAddress");
     const web3 = new Web3(
       new Web3.providers.HttpProvider(process.env.REACT_APP_NETWORK_RPC_URL)
     );
     console.log("adadad", web3);
     let checkResult = Web3.utils.toChecksumAddress(balance);
+    
     if (checkResult)
-      web3.eth.getBalance(checkResult, function (error, result) {
-        if (error) {
-        } else {
-          let num = Number(result / 1000000000000000000);
+    getXDCWalletBalance(checkResult)
+      // web3.eth.getBalance(checkResult, function (error, result) {
+      //   if (error) {
+      //   } else {
+      //     let num = Number(result / 1000000000000000000);
 
-          getSetBalance(num.toFixed(2));
-        }
-      });
+      //     getSetBalance(num.toFixed(2));
+      //   }
+      // });
   };
   const [getBalance, getSetBalance] = useState("");
   useEffect(() => {
     getUserBalance();
   }, []);
   return (
+    <>
     <HeaderContainer>
       <SpaceBetween>
         <div style={{ display: "flex", marginLeft: "12px" }}>
@@ -45,7 +91,7 @@ function Header(props) {
         </div>
         {sessionManager.getDataFromCookies("accountAddress") ? (
           <XDCContainer>
-            <XDCInfo {...getUserBalance()}>{getBalance} XDC</XDCInfo>
+            <XDCInfo {...getUserBalance()}>{balance} XDC</XDCInfo>
             <UserContainer>
               {getUserAccountAddress()}
               <UserLogo src="/images/profile.svg" />
@@ -56,6 +102,7 @@ function Header(props) {
         )}
       </SpaceBetween>
     </HeaderContainer>
+    </>
   );
 }
 

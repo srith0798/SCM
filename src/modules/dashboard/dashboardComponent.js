@@ -118,7 +118,7 @@ const dashboardComponent = (props) => {
 
           try {
             user = window.web3.eth.accounts;
-          } catch (e) {}
+          } catch (e) {console.log(e,"error")}
           console.log(user,"user!!")
           if (user && user.length) {
             
