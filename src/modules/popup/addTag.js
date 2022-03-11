@@ -11,23 +11,26 @@ const useStyles = makeStyles(() => ({
 }));
 export default function AddTags(props) {
   const [input, setInput] = useState([]);
+  const [tagError,setTagError] = useState([]);
   
   const classes = useStyles();
+  let contractId=props.ContractId;
+  let contractId1=props.contract ? props.address[0]._id : props.address._id
 
-  const addContractTag = async () => {
+  const addContractTag = async (props) => {
     let requestData={};
-    (props.ContractId!="")?
+    (contractId!="")?
     
     requestData = {
-      contractId:props.ContractId,
+      contractId:contractId1,
       tags: input,
     }
     :
     requestData = {
-      contractId: props.contract ? props.address[0]._id : props.address._id ,
+      contractId:contractId ,
       tags: input,
     };
-
+    
     try {
       const response = await contractsService.addTags(requestData);
       console.log(response);
@@ -55,12 +58,15 @@ export default function AddTags(props) {
               value={input}
               
               onChange={(e) =>{
-                if(e.target.value.length==30) return false; 
+                if(e.target.value.length==30){ 
+                  setTagError("Tag cannot be longer than 30 characters")
+                  return false
+                }; 
                 setInput([e.target.value])
 
               } 
                 }             
-            />      
+            />  <ErrorTag>{tagError}</ErrorTag>    
             <SubContainer
               style={{ width: "100%", maxWidth: "160px", marginTop: "30px" }}
             >  
@@ -90,6 +96,9 @@ const Container = styled.div`
   background-color: #ffffff;
   max-width: 700px;
   padding: 20px;
+`;
+const ErrorTag =styled.div`
+color:red;
 `;
 const SubContainer = styled.div`
   display: flex;

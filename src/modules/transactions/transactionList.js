@@ -329,7 +329,7 @@ export default function TransactionList() {
       sessionManager.removeDataFromCookies("profilePicture");
       history.replace("/");
     };
-  
+
   return (
     <>
     {(user=="")?
