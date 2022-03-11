@@ -168,13 +168,13 @@ export default function Rules() {
               <NewDiv>
                 <RowData>
                   <ColumnOne>
-                    Contract Name
+                    Name
                     <Tooltip
                       open={contractNameToolTip}
                       onOpen={() => setcontractNameToolTip(true)}
                       onClose={() => setcontractNameToolTip(false)}
                       disableFocusListener
-                      title="Name of the smart contract"
+                      title="Name of the smart contract/tag"
                     >
                       <ToolTipIcon
                         onClick={() =>
@@ -185,13 +185,13 @@ export default function Rules() {
                     </Tooltip>
                   </ColumnOne>
                   <ColumnOne>
-                    Address
+                    Address/Tag
                     <Tooltip
                       open={addressToolTip}
                       onOpen={() => setaddressToolTip(true)}
                       onClose={() => setaddressToolTip(false)}
                       disableFocusListener
-                      title="Wallet address"
+                      title="Wallet address/Tag"
                     >
                       <ToolTipIcon
                         onClick={() => setaddressToolTip(!addressToolTip)}
