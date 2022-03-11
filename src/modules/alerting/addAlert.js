@@ -1031,7 +1031,7 @@ const AlertTargetContainer = styled.div`
   flex-flow: row wrap;
   width: 100%;
   padding-top: 28px;
-  margin-left: 9px;
+  margin-left: 20px;
 `;
 
 const ProgressHeader = styled.div`

@@ -9,6 +9,7 @@ import ShowLoader from "../../common/components/showLoader";
 import DestinationService from "../../services/destination";
 import { genericConstants } from "../../constants";
 import AlertService from "../../services/alert";
+import { history } from "../../managers/history";
 
 const useStyles = makeStyles(() => ({
   dialogBox: {
@@ -119,6 +120,10 @@ export default function AddAlerts(props) {
       return;
     }
     utility.apiSuccessToast("Alert added successfully!");
+
+    setTimeout(()=>{
+      props.click();
+    },100);
   };
 
 
@@ -175,7 +180,19 @@ export default function AddAlerts(props) {
                       </Div>
                     </BackgroundChanger>
                   ))
-                : "No destination added"}
+                : (
+                  <div>
+                    Add destination from <Link onClick={() =>
+                  history.push({
+                    pathname: "/alerting",
+                    state: {
+                      id: "add",
+                    },
+                  })
+                }>here</Link>
+
+                  </div>
+                )}
             </ContentDiv>
           </Container>
         </MainContainer>
@@ -206,6 +223,12 @@ const ApplyButton = styled.button`
     padding-top: 2px;
   }
 `;
+
+const Link = styled.a`
+  display: contents;
+  cursor: pointer ;
+`;
+
 
 const Heading = styled.div`
   text-align: left;

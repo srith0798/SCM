@@ -51,13 +51,13 @@ export default function EventsDetails(props) {
           <FilterDivision>
             <HeaderText>Event Name</HeaderText>
             <FilterSelect>
-              <option value="filter">Filter by event name</option>
+              <option value="filter">{address[0]?.contractName}</option>
             </FilterSelect>
           </FilterDivision>
           <FilterDivision>
             <HeaderText>Contract</HeaderText>
             <FilterSelect>
-              <option value="filter">Filter by contract</option>
+              <option value="filter">{props?.to}</option>
             </FilterSelect>
           </FilterDivision>
         </FilterContainer>
