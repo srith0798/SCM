@@ -9,7 +9,7 @@ import { history } from "../../managers/history";
 const useStyles = makeStyles(() => ({
   dialogBox: {
     width: "50% !important",
-    bottom: "150px",
+    top: "150px",
   },
 }));
 

@@ -153,10 +153,10 @@ export default function Sidebar(props) {
         <Heading>Alerting</Heading>
       </Wrapper>
       )}
-      <Wrapper style={{ marginTop: "18rem" }} onClick={redirectToFaqs}>
+      <WrapperFaq style={{ marginTop: "18rem" }} onClick={redirectToFaqs}>
         <Icon src="/images/Subtraction 2.svg" />
         <Heading>FAQs</Heading>
-      </Wrapper>
+      </WrapperFaq>
 
       {sessionManager.getDataFromCookies("isLoggedIn") && (
         <WrapperLogout onClick={redirectToLogout}>
@@ -205,6 +205,21 @@ const Wrapper = styled.div`
     background: #1d3c93;
   }
 `;
+
+
+const WrapperFaq = styled.div`
+  flex-wrap: wrap;
+  cursor: pointer;
+  width: 100%;
+  max-width: 240px;
+  white-space: nowrap;
+  padding: 23px;
+  &:hover {
+    background: #1d3c93;
+  }
+`;
+
+
 const WrapperLogout = styled.div`
   flex-wrap: wrap;
   cursor: pointer;

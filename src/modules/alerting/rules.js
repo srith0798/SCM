@@ -12,6 +12,7 @@ import { sessionManager } from "../../managers/sessionManager";
 
 export default function Rules() {
   const [activeButton, setActiveButton] = React.useState("Rules");
+  
   const handleViewClick = (e) => {
     setActiveButton(e.target.id);
   };
@@ -44,10 +45,18 @@ export default function Rules() {
     if (error) return;
     utility.apiSuccessToast("Alert Deleted Successfully");
     await getAlertList();
+
+    setTimeout(()=>{
+    window.location.reload();
+    },100);
   };
 
   useEffect(() => {
     getAlertList();
+    let check = history?.location?.state?.id;
+  if(check === "add") {
+    setActiveButton("Destination");
+  }
   }, []);
 
   let user = "";
@@ -470,6 +479,7 @@ const NewDiv = styled.div`
   padding-left: 0;
   @media (min-width: 300px) and (max-width: 1024px) {
     width: fit-content;
+    min-width: 1025px;
   }
 `;
 const NewDivOne = styled.div`

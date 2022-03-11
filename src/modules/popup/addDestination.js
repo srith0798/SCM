@@ -6,7 +6,8 @@ import { genericConstants } from "../../constants";
 const useStyles = makeStyles(() => ({
   dialogBox: {
     width: "100% !important",
-    height: "390px",
+    height: "fitContent",
+    maxHeight: 400,
     position: "absolute",
     top: "5rem",
   },
@@ -125,5 +126,5 @@ const ConfirmButton = styled.button`
   white-space: nowrap;
   padding: 7px 9px;
   margin-right: 10px;
-  margin-top: 1rem;
+  margin-top: 2rem;
 `;
