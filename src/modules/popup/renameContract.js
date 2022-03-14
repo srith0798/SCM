@@ -10,7 +10,7 @@ import ButtonConfirm from "../../common/components/buttonConfirm";
 const useStyles = makeStyles(() => ({
   dialogBox: {
     width: "100% !important",
-    bottom: "160px",
+    top: "160px",
   },
 }));
 
