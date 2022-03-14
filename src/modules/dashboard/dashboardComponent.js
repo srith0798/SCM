@@ -126,7 +126,7 @@ const dashboardComponent = (props) => {
                 response.accountAddress,
                 "accountAddress"
               );
-              sessionManager.setDataInCookies(response._id, "userId");
+              sessionManager.setDataInCookies(response.accountAddress, "userId");
               sessionManager.setDataInCookies(response.username, "username");
               sessionManager.setDataInCookies(
                 response.profilePicture,

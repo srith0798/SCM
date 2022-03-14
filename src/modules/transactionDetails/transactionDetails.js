@@ -36,6 +36,12 @@ export default function TransactionDetails() {
   const [contractName, setContractName] = React.useState("");
   const [open, setOpen] = React.useState(false);
   const [loader, setLoader] = React.useState(false);
+  const [url, setUrl] = React.useState("");
+  const [status, setStatus] = React.useState("");
+  const [selected, setSelected] = React.useState("");
+
+
+
 
   const wei = 0.000000001;
   
@@ -53,9 +59,7 @@ export default function TransactionDetails() {
   const backButton = () => {
     history.push("/transactions");
   };
-  let url = history.location.state.id;
-  let status = history.location.state.status;
-  let selected = history.location.state.selected;
+ 
 
   const searchTransaction = async (searchValues, searchKeys) => {
     try {
@@ -67,6 +71,7 @@ export default function TransactionDetails() {
       };
       const response = await ContractsService.getTransactionsList(requestData);
       setRow(response.transactionList[0]);
+      setSelected(response.transactionList[0].contractAddress)
       setInput(utility.truncateTxnAddress(response.transactionList[0].input));
       setInputDesktop(
         utility.truncateTxnAddressDesktop(response.transactionList[0].input)
@@ -74,10 +79,12 @@ export default function TransactionDetails() {
       setInputCopy(response.transactionList[0].input);
       setFrom(utility.truncateTxnAddress(response.transactionList[0].from));
       setTo(utility.truncateTxnAddress(response.transactionList[0].to));
+      setStatus(response.transactionList[0].status ? "Success" : "Fail")
+      getContractList(0, 10 ,response.transactionList[0].contractAddress);
     } catch (e) {}
   };
 
-  const getContractList = async (skip = 0, limit = 10) => {
+  const getContractList = async (skip = 0, limit = 10, address) => {
     try {
       let userId = sessionManager.getDataFromCookies("userId");
       const requestData = {
@@ -86,9 +93,11 @@ export default function TransactionDetails() {
         userId: userId,
       };
       setLoader(true);
+      let add = selected ? selected : address;
+
       const response = await ContractsService.getContractsList(requestData);
       let check = response.contractList.filter((filteredRow) => {
-        return filteredRow.address === selected;
+        return filteredRow.address === add;
       });
       setContractName(check[0].contractName);
       let arr = check[0].sourceCode.split("}");
@@ -100,10 +109,13 @@ export default function TransactionDetails() {
     } catch (e) {}
   };
   useEffect(() => {
-    searchTransaction(url, ["hash"]);
-    setTimeout(() => {
-      getContractList();
-    }, 2000);
+    let id=history?.location?.state?.id || history?.location?.search?.replace('?','')
+    setUrl(id);
+    let status = history?.location?.state?.status;
+    setStatus(status);
+    let selected = history?.location?.state?.selected;
+    setSelected(selected)
+    searchTransaction(id, ["hash"]);
   }, [url]);
 
   return (
