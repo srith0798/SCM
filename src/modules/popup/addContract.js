@@ -10,6 +10,7 @@ import ShowLoader from "../../common/components/showLoader";
 const useStyles = makeStyles(() => ({
   dialogBox: {
     width: "100% !important",
+    backgroundColor: "#ECF0F7",
   },
 }));
 
@@ -75,13 +76,23 @@ export default function AddContract(props) {
         <MainContainer>
           <Container>
             <SubContainer>
-              <Add>Add Contract</Add>
-              <img
+              <Add>Add Contracts</Add>
+              <Img
                 style={{ cursor: "pointer" }}
                 alt=""
                 src="/images/close.svg"
+
                 onClick={props.click}
               />
+              <CheckDivDesk>
+              <HideSteps
+                onClick={() => {
+                  setHideStep(!hideStep);
+                }}
+              >
+                Hide steps
+              </HideSteps>
+              </CheckDivDesk>
             </SubContainer>
             <div
               style={{
@@ -94,7 +105,7 @@ export default function AddContract(props) {
                 You can import contracts that have been verified publicly on
                 XDC.
               </Content>
-
+              <CheckDivMob>
               <HideSteps
                 onClick={() => {
                   setHideStep(!hideStep);
@@ -102,6 +113,7 @@ export default function AddContract(props) {
               >
                 Hide steps
               </HideSteps>
+              </CheckDivMob>
             </div>
             <Input
               type="text"
@@ -153,6 +165,22 @@ export default function AddContract(props) {
 const CheckBox = styled.input`
   outline: none;
 `;
+
+const CheckDivMob = styled.div`
+@media (min-width: 300px) and (max-width: 767px){
+  display: none;
+}
+`;
+const CheckDivDesk = styled.div`
+@media (min-width: 767px){
+  display: none;
+}
+`;
+const Img = styled.img`
+@media (min-width: 300px) and (max-width: 767px){
+  display: none;
+}
+`;
 const XDCLogo = styled.img`
   margin-bottom: 5px;
 `;
@@ -201,10 +229,10 @@ const MainContainer = styled.div`
   align-items: center;
 `;
 const Container = styled.div`
-  background: #ffffff 0% 0% no-repeat padding-box;
+  background: "#ECF0F7" 0% 0% no-repeat padding-box;
   border-radius: 6px;
   width: 100%;
-  background-color: #ffffff;
+  background-color: "#ECF0F7";
   max-width: 700px;
   padding: 20px;
 `;
@@ -260,6 +288,11 @@ const Button = styled.button`
   margin-top: 20px;
   margin-bottom: 20px;
   cursor: pointer;
+  @media(min-width: 300px) and (max-width: 767px){
+    margin-top: 50px;
+    margin-left: 24%;
+
+  }
 `;
 const HideSteps = styled.button`
   border: none;
@@ -277,4 +310,9 @@ const HideSteps = styled.button`
   background-position: right;
   position: relative;
   margin-top: 12px;
+  padding-right: 5px;
+  margin-right: 15px;
+  @media (min-width: 300px) and (max-width: 767px){
+    margin-top: 0px;
+  }
 `;

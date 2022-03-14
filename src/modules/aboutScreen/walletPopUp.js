@@ -10,7 +10,7 @@ const useStyles = makeStyles(() => ({
     marginBottom: "275px",
     height: "440px",
     ['@media screen and (min-width: 300px) and (max-width: 580px)']:{
-      height:"522px",
+      height: "540px",
       marginBottom: "51px",
       width:"88% !important",
       overflow :"hidden"
@@ -269,6 +269,9 @@ text-align: left;
   padding-top: 10px;
   font-size: 14px;
   font-weight: normal;
+  @media (min-width: 300px) and (max-width: 767px){
+    padding-top: 5px;
+  }
 `;
 
 const IconContainer = styled.div`
@@ -345,6 +348,10 @@ const Container = styled.div`
   align-items: center;
   text-align: center;
   height: 420px;
+  @media (min-width: 300px) and (max-width: 767px) {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
 `;
 const Add = styled.div`
   font-size: 1.2rem;
@@ -356,6 +363,10 @@ const Add = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
+  @media (min-width: 300px) and (max-width: 767px){
+    padding-left: 15px;
+    padding-right: 15px;
+  }
 `;
 const Line = styled.div`
   border-bottom: 0.031rem #eaf1ec solid;

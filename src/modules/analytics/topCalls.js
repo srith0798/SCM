@@ -187,6 +187,7 @@ const DataColumn = styled.div`
 const Count = styled.div`
  color: #3163F0;
  padding-top:15px;
+ padding-right: 45px;
 `;
 
 const csvLink ={

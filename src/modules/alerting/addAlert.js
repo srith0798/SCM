@@ -13,6 +13,7 @@ import contractsService from "../../services/contractsService";
 import DestinationService from "../../services/destination";
 import AlertService from "../../services/alert";
 import AddDestination from "../popup/addDestination";
+import { Dropdown } from "react-bootstrap";
 
 export default function AddAlert() {
   const [activeButton, setActiveButton] = React.useState("Rules");
@@ -401,6 +402,9 @@ export default function AddAlert() {
                   <SelectType>
                     {targetValue ? targetValue : `Set alert trigger Parameters`}
                   </SelectType>
+                  <MobType>
+                    {utility.truncateTxnAddress(targetValue)}
+                  </MobType>
                 </ProgressHeader>
               </AlertContainer>
               <SideLineProvider>
@@ -420,11 +424,11 @@ export default function AddAlert() {
                             <>
                               {alertTarget ===
                               genericConstants.ALERT_TYPE.ADDRESS ? (
-                                <option value={option.address}>
+                                <option id="optionBox" className="optionBox" value={option.address}>
                                   {option.address}
                                 </option>
                               ) : (
-                                <option value={option}>{option}</option>
+                                <option value={option}>{}</option>
                               )}
                             </>
                           ))
@@ -458,7 +462,7 @@ export default function AddAlert() {
                 )}
               </SideLineProvider>
 
-              <AlertContainer>
+              <AlertContainer className="scroll">
                 <NumberShowUP>4</NumberShowUP>
                 <ProgressHeader>
                   <TypeRow>Destination</TypeRow>
@@ -824,6 +828,10 @@ const Buttonn = styled.div`
   color: #1d3c93;
   font-size: 0.875rem;
   cursor: pointer;
+  @media(min-width: 300px) and (max-width: 767px){
+    width: 5.5rem;
+    margin-right: 10px;
+  }
 `;
 const RowContainer = styled.div`
   display: flex;
@@ -982,11 +990,22 @@ const TypeRow = styled.div`
   font-weight: 600;
   text-align: left;
 `;
+const MobType = styled.div`
+  font-size: 0.875rem;
+  color: #7c828a;
+  @media (min-width: 768px){
+    display: none;
+  }
+  @media (min-width: 300px) and (max-width: 767px) {
+    overflow: auto;
+  }
+`;
 const SelectType = styled.div`
   font-size: 0.875rem;
   color: #7c828a;
   @media (min-width: 300px) and (max-width: 768px) {
-    overflow: auto;
+    /* overflow: auto; */
+    display: none;
   }
 `;
 
