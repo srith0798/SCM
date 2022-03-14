@@ -1,0 +1,2 @@
+(window["webpackJsonpscm-web-app"]=window["webpackJsonpscm-web-app"]||[]).push([[72],{1390:function(m,e,s){"use strict";function t(m){m.languages.git={comment:/^#.*/m,deleted:/^[-\u2013].*/m,inserted:/^\+.*/m,string:/("|')(?:\\.|(?!\1)[^\\\r\n])*\1/m,command:{pattern:/^.*\$ git .*$/m,inside:{parameter:/\s--?\w+/m}},coord:/^@@.*@@$/m,"commit-sha1":/^commit \w{40}$/m}}m.exports=t,t.displayName="git",t.aliases=[]}}]);
+//# sourceMappingURL=react-syntax-highlighter_languages_refractor_git.6fb4f3e8.chunk.js.map
