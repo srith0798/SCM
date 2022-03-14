@@ -117,7 +117,7 @@ export default function MainComponent(props) {
 
     const req = {
       address: address ? address : selected.address,
-      numberOfDays: event?.target?.value || 7,
+      numberOfDays: event?.target?.value || 30,
     };
     setLoader(true);
     const [error, response] = await utility.parseResponse(
@@ -159,7 +159,7 @@ export default function MainComponent(props) {
     }
     const req = {
       address: address ? address : selected.address,
-      numberOfDays: event?.target?.value || 7,
+      numberOfDays: event?.target?.value || 30,
     };
     setLoader(true);
     const [error, response] = await utility.parseResponse(
@@ -190,7 +190,7 @@ export default function MainComponent(props) {
     }
     const req = {
       address: address ? address : selected.address,
-      numberOfDays: event?.target?.value || 7,
+      numberOfDays: event?.target?.value || 30,
     };
     setLoader(true);
     const [error, response] = await utility.parseResponse(
@@ -221,7 +221,7 @@ export default function MainComponent(props) {
     }
     const req = {
       address: address ? address : selected.address,
-      numberOfDays: event?.target?.value || 7,
+      numberOfDays: event?.target?.value || 30,
     };
     setLoader(true);
     const [error, response] = await utility.parseResponse(
@@ -246,7 +246,7 @@ export default function MainComponent(props) {
     }
     const req = {
       address: address ? address : selected.address,
-      numberOfDays: event?.target?.value || 7,
+      numberOfDays: event?.target?.value || 30,
     };
     setLoader(true);
     const [error, response] = await utility.parseResponse(
@@ -901,6 +901,7 @@ const ContractFrom = styled.div`
   font-size: 14px;
   font-weight: 600;
   display: flex ;
+  white-space: nowrap;
   @media (min-width: 300px) and (max-width: 767px) {
     word-break: break-all;
     margin-left: 2%;

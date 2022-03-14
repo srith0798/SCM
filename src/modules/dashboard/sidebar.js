@@ -214,6 +214,7 @@ const WrapperFaq = styled.div`
   max-width: 240px;
   white-space: nowrap;
   padding: 23px;
+  padding-left: 35px;
   &:hover {
     background: #1d3c93;
   }

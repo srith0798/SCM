@@ -278,6 +278,7 @@ export default function ContractDetails(props) {
               <Div>
                 <TableHeading>Verification</TableHeading>
                 <Verified>{address.status}</Verified>
+                <VerifiedButton>Get your contract verified!</VerifiedButton>
               </Div>
               <Div>
                 <TableHeading>Tags</TableHeading>
@@ -488,6 +489,21 @@ const Heading = styled.div`
     padding-bottom: 10px;
   }
 `;
+
+const VerifiedButton = styled.div`
+color: #416be0;
+  background: #ffffff 0% 0% no-repeat padding-box;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  outline: none;
+  white-space: nowrap;
+  cursor: pointer ;
+  margin-left: 10%;
+  @media(min-width: 300px) and (max-width: 767px){
+    margin-left: 5%;
+  }
+`;
 const Verified = styled.div`
   font-size: 14px;
   font-weight: 600;
@@ -560,9 +576,7 @@ const AddTag = styled.button`
   background-size: 0.875rem;
   position: relative;
   background-color: #ffffff;
-  border: none;
   border-radius: 0.25rem;
-  white-space: nowrap;
   height: 2.125rem;
 `;
 

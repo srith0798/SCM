@@ -466,11 +466,19 @@ export default function TransactionDetails() {
                 <Heading>Input:</Heading>
                 <SubHeadBlue onClick={() => setShowInputData(!showInputData)}>
                   view data
+                  {showInputData === false ? (
                   <img
+                  style={{ marginLeft: "2px" }}
+                  alt=""
+                  src="/images/arrrow.svg"
+                />
+                  ) : (
+                    <img
                     style={{ marginLeft: "2px" }}
                     alt=""
-                    src="/images/arrrow.svg"
+                    src="/images/input-up.svg"
                   />
+                  )}
                 </SubHeadBlue>
               </Row>
 
@@ -888,7 +896,7 @@ const BackgroundChanger = styled.div`
   padding: 10px;
   @media (min-width: 300px) and (max-width: 1371px) {
     width: 100%;
-    padding: 1rem;
+    padding: 1.5rem;
   }
 `;
 
@@ -941,6 +949,8 @@ const Heading = styled.div`
   max-width: 16.25rem;
   @media (min-width: 0px) and (max-width: 767px) {
     min-width: 170px;
+    max-width: fit-content;
+    
   }
   @media (min-width: 768px) and (max-width: 1023px) {
     max-width: 11.25rem;

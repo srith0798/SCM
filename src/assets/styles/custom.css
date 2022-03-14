@@ -686,7 +686,7 @@ input[type="date"]:valid::before {
     margin: 0px !important;
     height: 100%;
     max-height: max-content !important;
-    top: 11% !important;
+    top: 10.5% !important;
   }
 }
 
@@ -694,7 +694,7 @@ input[type="date"]:valid::before {
  display: flex !important;
  justify-content: center !important;
  align-items: flex-start !important;
- margin-top: 5% !important;
+ /* margin-top: 7% !important; */
 }
 .MuiDialog-scrollPaper{
   display: flex !;
@@ -704,3 +704,4 @@ input[type="date"]:valid::before {
 .scroll::-webkit-scrollbar { 
   display: none !important;  /* Safari and Chrome */
 }
+
