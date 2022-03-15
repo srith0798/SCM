@@ -15,7 +15,10 @@ export default {
   removeTags,
   addNetworks,
   getNetworksLists,
-  getTags
+  getTags,
+  getTransactionByHash,
+  getContractByAddress,
+
 };
 
 function getHeaders() {
@@ -64,6 +67,22 @@ async function getContractsById(requestData) {
       return Promise.reject(err);
     });
 }
+
+async function getContractByAddress(requestData) {
+  let url = process.env.REACT_APP_USER_CONTRACT_MICROSERVICE + httpConstants.API_END_POINT.GET_CONTRACT_BY_ADDRESS + requestData;
+  console.log("url----", url);
+  return httpService(httpConstants.METHOD_TYPE.GET, getHeaders(), requestData, url)
+    .then((response) => {
+      if (!response.success || response.responseCode !== 200 || !response.responseData || response.responseData.length === 0)
+        return Promise.reject(response);
+      return Promise.resolve(response.responseData);
+    })
+    .catch(function (err) {
+      return Promise.reject(err);
+    });
+}
+
+
 async function hideContract(requestData) {
   let url = process.env.REACT_APP_USER_CONTRACT_MICROSERVICE + httpConstants.API_END_POINT.HIDE_CONTRACT;
   console.log("url----", url);
@@ -164,6 +183,20 @@ async function getTags(requestData) {
 }
 async function getTransactionsList(requestData) {
   let url = process.env.REACT_APP_USER_TRANSACTION_MICROSERVICE + httpConstants.API_END_POINT.GET_TRANSACTIONS_LIST;
+  console.log("url----", url);
+  return httpService(httpConstants.METHOD_TYPE.POST, getHeaders(), requestData, url)
+    .then((response) => {
+      if (!response.success || response.responseCode !== 200 || !response.responseData || response.responseData.length === 0)
+        return Promise.reject(response);
+      return Promise.resolve(response.responseData);
+    })
+    .catch(function (err) {
+      return Promise.reject(err);
+    });
+}
+
+async function getTransactionByHash(requestData) {
+  let url = process.env.REACT_APP_USER_TRANSACTION_MICROSERVICE + httpConstants.API_END_POINT.GET_TRANSACTION_FROM_HASH;
   console.log("url----", url);
   return httpService(httpConstants.METHOD_TYPE.POST, getHeaders(), requestData, url)
     .then((response) => {

@@ -98,6 +98,11 @@ export default function MainComponent(props) {
       return;
     }
     if (response.contractList.length === 0) {
+      setLoader(false);
+      setTransactionOverTimeError("No Transactions Available");
+      setActiveUserGraphError("No Active users available");
+      setTopCallersError("No Top Callers Available");
+      setTopFunctionCallsError("No Top Function Calls Available");
       return;
     }
     getTransactionAnalytics(response.contractList[0].address);
