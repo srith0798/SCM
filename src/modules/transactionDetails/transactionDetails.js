@@ -61,46 +61,33 @@ export default function TransactionDetails() {
   };
  
 
-  const searchTransaction = async (searchValues, searchKeys) => {
+  const getTransaction = async (hash) => {
     try {
       const requestData = {
-        searchValue: searchValues,
-        searchKeys: searchKeys,
-        skip: 0,
-        limit: 1,
+        hash: hash,
       };
-      const response = await ContractsService.getTransactionsList(requestData);
-      setRow(response.transactionList[0]);
-      setSelected(response.transactionList[0].contractAddress)
-      setInput(utility.truncateTxnAddress(response.transactionList[0].input));
+      const response = await ContractsService.getTransactionByHash(requestData);
+      setRow(response);
+      setSelected(response.contractAddress)
+      setInput(utility.truncateTxnAddress(response.input));
       setInputDesktop(
-        utility.truncateTxnAddressDesktop(response.transactionList[0].input)
+        utility.truncateTxnAddressDesktop(response.input)
       );
-      setInputCopy(response.transactionList[0].input);
-      setFrom(utility.truncateTxnAddress(response.transactionList[0].from));
-      setTo(utility.truncateTxnAddress(response.transactionList[0].to));
-      setStatus(response.transactionList[0].status ? "Success" : "Fail")
-      getContractList(0, 10 ,response.transactionList[0].contractAddress);
+      setInputCopy(response.input);
+      setFrom(utility.truncateTxnAddress(response.from));
+      setTo(utility.truncateTxnAddress(response.to));
+      setStatus(response.status ? "Success" : "Fail")
+      getContractByAddress(response.contractAddress);
     } catch (e) {}
   };
 
-  const getContractList = async (skip = 0, limit = 10, address) => {
+  const getContractByAddress = async (address) => {
     try {
-      let userId = sessionManager.getDataFromCookies("userId");
-      const requestData = {
-        skip: skip,
-        limit: limit,
-        userId: userId,
-      };
       setLoader(true);
       let add = selected ? selected : address;
-
-      const response = await ContractsService.getContractsList(requestData);
-      let check = response.contractList.filter((filteredRow) => {
-        return filteredRow.address === add;
-      });
-      setContractName(check[0].contractName);
-      let arr = check[0].sourceCode.split("}");
+      const response = await ContractsService.getContractByAddress(add);
+      setContractName(response.contractName);
+      let arr = response.sourceCode.split("}");
       let final = arr.filter((row) => {
         return row.includes("transfer(address");
       });
@@ -115,7 +102,7 @@ export default function TransactionDetails() {
     setStatus(status);
     let selected = history?.location?.state?.selected;
     setSelected(selected)
-    searchTransaction(id, ["hash"]);
+    getTransaction(id);
   }, [url]);
 
   return (
