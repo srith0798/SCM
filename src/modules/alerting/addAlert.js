@@ -1032,7 +1032,7 @@ const BoxContainer = styled.div`
     color: white;
   }
   @media (min-width: 340px) and (max-width: 768px) {
-    margin: 0px 10px 20px 2px;
+    margin: 0px 10px 20px 10px;
   }
 `;
 

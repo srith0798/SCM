@@ -148,24 +148,21 @@ export default function ContractDetails(props) {
   }
   let user = "";
 
-    try {
-      user = window.web3.eth.accounts;
-    } catch (e) {}
+  try {
+    user = window.web3.eth.accounts;
+  } catch (e) {}
 
-    const redirectToLogout = () => {
-      sessionManager.removeDataFromCookies("isLoggedIn");
-      sessionManager.removeDataFromCookies("accountAddress");
-      sessionManager.removeDataFromCookies("userId");
-      sessionManager.removeDataFromCookies("username");
-      sessionManager.removeDataFromCookies("profilePicture");
-      history.replace("/");
-    };
+  const redirectToLogout = () => {
+    sessionManager.removeDataFromCookies("isLoggedIn");
+    sessionManager.removeDataFromCookies("accountAddress");
+    sessionManager.removeDataFromCookies("userId");
+    sessionManager.removeDataFromCookies("username");
+    sessionManager.removeDataFromCookies("profilePicture");
+    history.replace("/");
+  };
   return (
     <>
-    {(user=="")?
-    (
-      redirectToLogout()
-  ):""}
+      {user == "" ? redirectToLogout() : ""}
       <ShowLoader state={loader} />
       <MainContainer>
         <SubContainer>
@@ -278,7 +275,15 @@ export default function ContractDetails(props) {
               <Div>
                 <TableHeading>Verification</TableHeading>
                 <Verified>{address.status}</Verified>
-                <VerifiedButton>Get your contract verified!</VerifiedButton>
+                <VerifiedButton
+                  check={address.status}
+                  onClick={() =>
+                    window.open(
+                      "https://observer.xdc.org/verify-contracts")
+                  }
+                >
+                  Get your contract verified!
+                </VerifiedButton>
               </Div>
               <Div>
                 <TableHeading>Tags</TableHeading>
@@ -317,7 +322,12 @@ export default function ContractDetails(props) {
                         contract={false}
                       />
                     )}
-                    <AddTag disabled={address.tags!=""} onClick={() => Open()}>Add Tag</AddTag>
+                    <AddTag
+                      disabled={address.tags != ""}
+                      onClick={() => Open()}
+                    >
+                      Add Tag
+                    </AddTag>
                   </Row>
                 </TableData>
               </Div>
@@ -491,16 +501,17 @@ const Heading = styled.div`
 `;
 
 const VerifiedButton = styled.div`
-color: #416be0;
+  display: ${(props) => (props.check === "Unverified" ? "block" : "none")};
+  color: #416be0;
   background: #ffffff 0% 0% no-repeat padding-box;
   font-size: 14px;
   font-weight: 600;
   border: none;
   outline: none;
   white-space: nowrap;
-  cursor: pointer ;
+  cursor: pointer;
   margin-left: 10%;
-  @media(min-width: 300px) and (max-width: 767px){
+  @media (min-width: 300px) and (max-width: 767px) {
     margin-left: 5%;
   }
 `;
