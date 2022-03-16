@@ -307,9 +307,10 @@ export default function Rules() {
               )}
             </TableContainer>
           )}
-          {activeButton === "History" && <Historys />}
-          {activeButton === "Destination" && <Destination />}
+          
         </Container>
+        {activeButton === "History" && <Historys />}
+          {activeButton === "Destination" && <Destination />}
       </MainContainer>
     </>
   );

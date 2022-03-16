@@ -59,7 +59,7 @@ const  topFunctionCallheaders = [
           </FlexEnd>
           <Table>
           { props?.data && props.data.length && props.data.length>0 ? props.data.map((item)=>(
-              <TableRow>     
+              <TableRow className="noBorder">     
               <DataColumn>          
              <Div>
                  {props.graphNo === 4 ? <ContractFrom>Contract from:</ContractFrom> : <ContractFrom>Function:</ContractFrom>}
@@ -109,22 +109,22 @@ const GraphContainer = styled.div`
   padding: 20px;
 `;
 
-// const ExpandButton = styled.button`
-//   background-image: url("/images/Export.svg");
-//   background-repeat: no-repeat;
-//   background-position: 8px;
-//   padding-left: 26px;
-//   background-size: 18px;
-//   position: relative;
-//   background-color: #ffffff;
-//   border: none;
-//   border-radius: 4px;
-//   width: 100%;
-//   color: #3163f0;
-//   height: 34px;
-//   font-size: 1rem;
-//   font-weight: 500;
-// `;
+const ExpandButton = styled.button`
+  background-image: url("/images/Export.svg");
+  background-repeat: no-repeat;
+  background-position: 8px;
+  padding-left: 26px;
+  background-size: 18px;
+  position: relative;
+  background-color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  width: 100%;
+  color: #3163f0;
+  height: 34px;
+  font-size: 1rem;
+  font-weight: 500;
+`;
 const AlignmentContainer = styled.div`
   display: flex;
   align-items: center;

@@ -584,10 +584,10 @@ export default function TransactionDetails() {
                     <Heading>From</Heading>
                     <SubHeadBlue>{from}</SubHeadBlue>
                   </div>
-                  <div style={{display: "flex"}}>
+                  <FlexDivMob>
                     <Heading>To</Heading>
                     <SubHeadBlue>{to}</SubHeadBlue>
-                  </div>
+                  </FlexDivMob>
                 </FlexDiv>
               {/* </BackgroundChanger> */}
             </StackContainer>
@@ -718,6 +718,7 @@ const SubHead = styled.div`
   // overflow: hidden;
   white-space: nowrap;
 `;
+
 const SubHeadBlue = styled.div`
   font-size: 0.85rem;
   display: flex;
@@ -725,6 +726,9 @@ const SubHeadBlue = styled.div`
   cursor: pointer;
   white-space: pre;
   margin-left: 15px;
+  @media (min-width: 300px) and (max-width: 767px){
+    margin-left: 5px;
+  }
 `;
 const CommonDiv = styled.div`
   border-bottom: 0.031rem #eaf1ec solid;
@@ -923,6 +927,13 @@ const FlexDiv = styled.div`
   max-width: 350px;
 `;
 
+const FlexDivMob = styled.div`
+display: flex;
+@media (min-width: 300px) and (max-width: 767px){
+  margin-left: 10px;
+}
+`;
+
 const InputDataDiv = styled.div`
   display: flex;
   justify-content: space-between;
@@ -949,7 +960,7 @@ const Heading = styled.div`
   width: 100%;
   max-width: 16.25rem;
   @media (min-width: 0px) and (max-width: 767px) {
-    min-width: 170px;
+    /* min-width: 170px; */
     max-width: fit-content;
     
   }
