@@ -287,15 +287,15 @@ export default function ContractDetails(props) {
                     {address.tags &&
                       address.tags.map((tag, index) => (
                         <div style={{ marginRight: "9px" }}>
-                          <FinanceTag onClick={() => removeTagOpen(tag)}>
+                          <FinanceTag onClick={() => removeTagOpen(tag.name)}>
                             <ImageTag
-                              removeTagImage={removeTagImage}
+                              removeTagImage={removeTagImage}s
                               index={index}
                               address={address}
                               onMouseOver={() => setRemoveTagImage(index)}
                               onMouseOut={() => setRemoveTagImage(-1)}
                             />
-                            {tag}
+                            {tag.name}
                           </FinanceTag>
                         </div>
                       ))}

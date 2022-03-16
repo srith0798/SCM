@@ -39,7 +39,7 @@ export default function DestinationTags(props) {
 
             <Input
               type="text"
-              placeholder="URL"
+              placeholder={props?.type === "EMAIL"  ? "Email" : "URL"}
               value={url}
               onChange={(e) => setUrl(e.target.value)}
             />
