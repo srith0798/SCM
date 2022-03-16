@@ -27,9 +27,11 @@ export const httpConstants = {
     GET_USER: "/user",
     ADD_TAGS: "/tags",
     GET_TRANSACTIONS_LIST: "/get-transaction-list",
+    GET_TRANSACTION_FROM_HASH: "/get-transaction",
     REMOVE_TAG: "/tags",
     ADD_NETWORK: "/add-network",
     GET_NETWORK_LIST: "/get-network",
+    GET_CONTRACT_BY_ADDRESS: "/contract/"
   },
   MESSAGE:{
     TOASTS_POSITION:"top-center",

@@ -671,6 +671,7 @@ input[type="date"]:valid::before {
     height: 100%;
     max-height: max-content !important;
     top: 13% !important;
+    max-width: 330px !important;
   }
 }
 @media (min-width: 361px) and (max-width: 376px) {
@@ -679,6 +680,7 @@ input[type="date"]:valid::before {
     height: 100%;
     max-height: max-content !important;
     top: 14% !important;
+    max-width: 340px !important;
   }
 }
 @media (min-width: 377px) and (max-width: 767px) {
@@ -687,6 +689,7 @@ input[type="date"]:valid::before {
     height: 100%;
     max-height: max-content !important;
     top: 10.5% !important;
+    max-width: 350px !important;
   }
 }
 

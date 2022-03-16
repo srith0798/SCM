@@ -27,7 +27,7 @@ export default function Graph(props) {
     justify-content: space-between;
   `;
   const LeftLabel = styled.div`
-    margin-left: ${(props) => (props.expand > 0 ? "3%" : "4.5%")};
+    margin-left: ${(props) => (props.expand > 0 ? "2.65%" : "4.5%")};
     color: #7c828a;
     font-size: 11px;
     @media (min-width: 300px) and (max-width: 767px) {
@@ -35,7 +35,7 @@ export default function Graph(props) {
     }
   `;
   const RightLabel = styled.div`
-    margin-right: ${(props) => (props.expand > 0 ? "2%" : "3.5%")};
+    margin-right: ${(props) => (props.expand > 0 ? "1.65%" : "3.5%")};
     color: #7c828a;
     font-size: 11px;
     @media (min-width: 300px) and (max-width: 767px) {
@@ -184,7 +184,6 @@ const MyResponsiveLine = ({ data, MouseMovePoint, CustomPoint }) => (
         : ["#3163F0"]
     }
     colorBy="index"
-    enablePoints={false}
     pointBorderWidth={2}
     pointLabelYOffset={-12}
     enableArea={true}

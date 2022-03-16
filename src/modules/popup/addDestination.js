@@ -10,6 +10,7 @@ const useStyles = makeStyles(() => ({
     maxHeight: 400,
     position: "absolute",
     top: "5rem",
+    maxWidth: 360
   },
 }));
 export default function DestinationTags(props) {

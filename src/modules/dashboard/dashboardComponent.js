@@ -90,14 +90,8 @@ const disableMetamaskMessage = () =>
 
 const dashboardComponent = (props) => {
 
-  const Error = () => {
-    toast.error(httpConstants.MESSAGE.VALIDATE_BROWSER_LOGIN, {
-      duration: 4000,
-  
-      position: httpConstants.MESSAGE.TOASTS_POSITION,
-  
-      className: "toast-div-address",
-    });
+  const Reload = (value) => {
+    getCurrentUserDetails(value);
   }
 
   const loginErrorMessage = () =>
@@ -108,7 +102,8 @@ const dashboardComponent = (props) => {
 
       className: "toast-div-address",
     });
-  const getCurrentUserDetails = async () => {
+  const getCurrentUserDetails = async (value) => {
+    console.log("adad", history.location.pathname);
 
 
      if (window.web3.eth) {
@@ -134,7 +129,8 @@ const dashboardComponent = (props) => {
               );
             }
             sessionManager.setDataInCookies(true, "isLoggedIn");
-            history.push("/about");
+            // history.push("/about");
+            window.location.reload();
             
             return {user:user};
           } else {
@@ -148,12 +144,12 @@ const dashboardComponent = (props) => {
     }
   };
   
-  // let check = window.web3.eth.accounts;
-  // let currentAddress = sessionManager.getDataFromCookies("accountAddress");
-  // if(check[0]!==currentAddress){
-  // getCurrentUserDetails();
-  // alert("XDCPay Account changed!!")
-  // }
+  let check = window.web3.eth.accounts;
+  let pathname = history.location.pathname;
+  let currentAddress = sessionManager.getDataFromCookies("accountAddress");
+  if(check[0]!==currentAddress){
+    Reload(pathname);
+  }
 
   return (
     <>
