@@ -175,7 +175,7 @@ const MyResponsiveLine = ({ data, MouseMovePoint, CustomPoint }) => (
     fill={[{ match: "*", id: "gradientA" }]}
     enableGridX={true}
     enableGridY={true}
-    enablePoints={true}
+    enablePoints={false}
     pointSize={10}
     pointColor={{ from: "color", modifiers: [] }}
     colors={

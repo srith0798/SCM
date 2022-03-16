@@ -13,7 +13,7 @@ import contractsService from "../../services/contractsService";
 import DestinationService from "../../services/destination";
 import AlertService from "../../services/alert";
 import AddDestination from "../popup/addDestination";
-import { Dropdown } from "react-bootstrap";
+// import { Dropdown } from "react-bootstrap";
 
 export default function AddAlert() {
   const [activeButton, setActiveButton] = React.useState("Rules");
@@ -185,7 +185,7 @@ export default function AddAlert() {
     if (alertTarget === genericConstants.ALERT_TYPE.TAG)
       requestData["target"]["name"] = selectedTag;
 
-    const [error, response] = await utility.parseResponse(
+    const [error] = await utility.parseResponse(
       AlertService.addAlert(requestData)
     );
     if (error) {
@@ -229,7 +229,7 @@ export default function AddAlert() {
 
   return (
     <>
-      {user == "" ? redirectToLogout() : ""}
+      {user === "" ? redirectToLogout() : ""}
 
       <MainContainer>
         {addDestinationPopup && (
@@ -919,18 +919,18 @@ const SubTitle = styled.div`
   padding-top: 5px;
 `;
 
-const Title1 = styled.div`
-  width: 157px;
-  height: 26px;
-  text-align: center;
-  color: #1d3c93;
+// const Title1 = styled.div`
+//   width: 157px;
+//   height: 26px;
+//   text-align: center;
+//   color: #1d3c93;
 
-  font-size: 22px;
-  font-weight: 600;
-  &:hover {
-    color: white;
-  }
-`;
+//   font-size: 22px;
+//   font-weight: 600;
+//   &:hover {
+//     color: white;
+//   }
+// `;
 
 const Container = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;

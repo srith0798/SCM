@@ -325,6 +325,7 @@ export default function MainComponent(props) {
   };
   useEffect(() => {
     getContractNames();
+    //eslint-disable-next-line
   }, []);
 
   const expandGraphs = (value, data, dropDownValue) => {
@@ -384,7 +385,7 @@ export default function MainComponent(props) {
 
   return (
     <>
-    {(user=="")?
+    {(user==="")?
     (
       redirectToLogout()
   ):""}
@@ -469,7 +470,7 @@ export default function MainComponent(props) {
                           error1={transactionOverTimeError}
                         ></SelectComponent>
                       </SubContainer>
-                      {noOfTransactions.length == 0 ? (
+                      {noOfTransactions.length === 0 ? (
                         <GraphSizeError>
                           {" "}
                           <Line
@@ -501,7 +502,7 @@ export default function MainComponent(props) {
                           error1={transactionOverTimeError}
                         ></SelectComponent>
                       </SubContainer>
-                      {noOfTransactions.length == 0 ? (
+                      {noOfTransactions.length === 0 ? (
                         <GraphSizeError>
                           {" "}
                           <Line
@@ -530,7 +531,7 @@ export default function MainComponent(props) {
                 >
                   <Grid item xs={12} sm={12} md={6}>
                     <GraphContainer>
-                      {topCallersError.length == 0 ? (
+                      {topCallersError.length === 0 ? (
                         <TableData
                           style={{ margin: "93px" }}
                           heading="Top Callers"
@@ -577,7 +578,7 @@ export default function MainComponent(props) {
                           error1={transactionOverTimeError}
                         ></SelectComponent>
                       </SubContainer>
-                      {(noOfTransactions.length==0)?
+                      {(noOfTransactions.length===0)?
                       ( <GraphSizeError>
                         {" "}
                         <Line
@@ -725,7 +726,7 @@ const SelectComponent = (props) => {
       </div>
       <select
         id="dates"
-        style={{ display: props.data.length == 0 ? "none" : "" }}
+        style={{ display: props.data.length === 0 ? "none" : "" }}
         className="select"
         value={props.selectValue}
         onChange={(event) => {
@@ -744,15 +745,15 @@ const SelectComponent = (props) => {
   );
 };
 
-const ResponsiveRow = styled.div`
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-between;
-  width: 100%;
-  @media (min-width: 300px) and (max-width: 1024px) {
-    display: block;
-  }
-`;
+// const ResponsiveRow = styled.div`
+//   display: flex;
+//   flex-flow: row nowrap;
+//   justify-content: space-between;
+//   width: 100%;
+//   @media (min-width: 300px) and (max-width: 1024px) {
+//     display: block;
+//   }
+// `;
 const MainContainer = styled.div`
   width: 100%;
   padding-left: 71px;
@@ -880,10 +881,10 @@ const GraphContainer = styled.div`
     padding: 1.25rem 12px 1.25rem 12px;
   }
 `;
-const ScrollableDiv = styled.div`
-  // overflow: auto;
-  // height: 739px;
-`;
+// const ScrollableDiv = styled.div`
+//   // overflow: auto;
+//   // height: 739px;
+// `;
 const Head = styled.div`
   font-size: 1rem;
   font-weight: 600;
@@ -999,14 +1000,14 @@ const Div = styled.div`
   flex-flow: row nowrap;
   margin-bottom: 0.125rem;
 `;
-const ContractDiv = styled.div`
-  display: flex;
-  flex-flow: row nowrap;
-  border-top: 1px solid #e2e8fa;
+// const ContractDiv = styled.div`
+//   display: flex;
+//   flex-flow: row nowrap;
+//   border-top: 1px solid #e2e8fa;
 
-  padding-top: 10px;
-  padding-bottom: 4px;
-`;
+//   padding-top: 10px;
+//   padding-bottom: 4px;
+// `;
 const DropDown = styled.div`
   background: #f5f6fd 0% 0% no-repeat padding-box;
   border: 1px solid #d5e0ff;

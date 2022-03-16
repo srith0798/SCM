@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import ContractsService from "../../services/contractsService";
+// import ContractsService from "../../services/contractsService";
 import Dialog from "@mui/material/Dialog";
 import utility from "../../utility";
 import { makeStyles } from "@material-ui/styles";
@@ -22,56 +22,56 @@ const useStyles = makeStyles(() => ({
 
 export default function AddAlerts(props) {
   const classes = useStyles();
-  const [hideStep, setHideStep] = useState(true);
-  const [checkBox, setCheckBox] = useState(false);
-  const [address, setAddress] = React.useState("");
-  const [verifyAddress, setVerifyAddress] = React.useState("");
+  // const [hideStep, setHideStep] = useState(true);
+  // const [checkBox, setCheckBox] = useState(false);
+  // const [address, setAddress] = React.useState("");
+  // const [verifyAddress, setVerifyAddress] = React.useState("");
   const [loader, setLoader] = React.useState(false);
-  const [error, setError] = useState("");
+  // const [error, setError] = useState("");
   const [destinations, setDestinations] = React.useState([]);
   const [selectedDestinations, setSelectedDestinations] = React.useState([]);
   
 
-  const checkAddress = async () => {
-    setLoader(true);
-    const [error] = await utility.parseResponse(
-      ContractsService.checkAddress(address)
-    );
-    setLoader(false);
-    if (error) {
-      utility.apiFailureToast(error);
-      return;
-    }
-    setVerifyAddress(address);
-  };
+  // const checkAddress = async () => {
+  //   setLoader(true);
+  //   const [error] = await utility.parseResponse(
+  //     ContractsService.checkAddress(address)
+  //   );
+  //   setLoader(false);
+  //   if (error) {
+  //     utility.apiFailureToast(error);
+  //     return;
+  //   }
+  //   setVerifyAddress(address);
+  // };
 
-  const addContract = async () => {
-    let userId = sessionManager.getDataFromCookies("userId");
-    let requestData = {
-      contractAddress: address,
-      userId: userId,
-    };
-    setLoader(true);
-    const [error, response] = await utility.parseResponse(
-      ContractsService.addContract(requestData)
-    );
-    setLoader(false);
-    if (error) {
-      setError(error);
-      return;
-    }
-    if (response) {
-      props.click();
-      props.getContractList();
-    }
-  };
+  // const addContract = async () => {
+  //   let userId = sessionManager.getDataFromCookies("userId");
+  //   let requestData = {
+  //     contractAddress: address,
+  //     userId: userId,
+  //   };
+  //   setLoader(true);
+  //   const [error, response] = await utility.parseResponse(
+  //     ContractsService.addContract(requestData)
+  //   );
+  //   setLoader(false);
+  //   if (error) {
+  //     setError(error);
+  //     return;
+  //   }
+  //   if (response) {
+  //     props.click();
+  //     props.getContractList();
+  //   }
+  // };
 
-  const handleEnterKey = (e) => {
-    if (e.key === "Enter") {
-      checkAddress();
-    }
-  };
-  console.log("check", checkBox);
+  // const handleEnterKey = (e) => {
+  //   if (e.key === "Enter") {
+  //     checkAddress();
+  //   }
+  // };
+  // console.log("check", checkBox);
 
   React.useEffect(() => {
     getDestinations();
@@ -112,7 +112,7 @@ export default function AddAlerts(props) {
       },
       destinations: selectedDestinations, 
     };
-    const [error, response] = await utility.parseResponse(
+    const [error] = await utility.parseResponse(
       AlertService.addAlert(requestData)
     );
     if (error) {
@@ -240,33 +240,33 @@ const Heading = styled.div`
   margin: 5px 10px 20px 0px;
 `;
 
-const CheckBox = styled.input`
-  outline: none;
-`;
-const XDCLogo = styled.img`
-  margin-bottom: 5px;
-`;
-const BlueLine = styled.div`
-  width: 115px;
-  border-bottom: 2px solid blue;
-  margin-left: -8px;
-`;
-const AddressImport = styled.div`
-  color: #436ce0;
-  margin-left: 5px;
-  font-size: 0.8rem;
-  font-weight: 600;
-`;
-const ImportBox = styled.div`
-  background-color: #f0f2fc;
-  width: 100%;
-`;
-const ErrorTag = styled.div`
-  color: red;
-  font-size: 16px;
-  padding: 0px 0px 8px 28px;
-  margin-bottom: 0px;
-`;
+// const CheckBox = styled.input`
+//   outline: none;
+// `;
+// const XDCLogo = styled.img`
+//   margin-bottom: 5px;
+// `;
+// const BlueLine = styled.div`
+//   width: 115px;
+//   border-bottom: 2px solid blue;
+//   margin-left: -8px;
+// `;
+// const AddressImport = styled.div`
+//   color: #436ce0;
+//   margin-left: 5px;
+//   font-size: 0.8rem;
+//   font-weight: 600;
+// `;
+// const ImportBox = styled.div`
+//   background-color: #f0f2fc;
+//   width: 100%;
+// `;
+// const ErrorTag = styled.div`
+//   color: red;
+//   font-size: 16px;
+//   padding: 0px 0px 8px 28px;
+//   margin-bottom: 0px;
+// `;
 const ContentDiv = styled.div`
   margin: 30px 10px 10px 10px;
 `;
@@ -280,23 +280,23 @@ const SubHeadBlue = styled.div`
   white-space: pre;
 `;
 
-const IconImport = styled.div`
-  padding: 8px 8px 0px 8px;
-  border-bottom: 1px solid #c3c3c3;
-`;
-const SelectImport = styled.div`
-  display: flex;
-  padding: 5px;
-  align-items: center;
-  margin-top: 18px;
-`;
+// const IconImport = styled.div`
+//   padding: 8px 8px 0px 8px;
+//   border-bottom: 1px solid #c3c3c3;
+// `;
+// const SelectImport = styled.div`
+//   display: flex;
+//   padding: 5px;
+//   align-items: center;
+//   margin-top: 18px;
+// `;
 
-const Text = styled.div`
-  font-size: 0.8rem;
-  font-weight: 600;
-  margin-bottom: 15px;
-  color: #303134;
-`;
+// const Text = styled.div`
+//   font-size: 0.8rem;
+//   font-weight: 600;
+//   margin-bottom: 15px;
+//   color: #303134;
+// `;
 const MainContainer = styled.div`
   width: 100%;
   display: flex;
@@ -320,67 +320,67 @@ const Add = styled.div`
   font-size: 20px;
   font-weight: 600;
 `;
-const Content = styled.div`
-  color: #303134;
-  margin-top: 15px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  white-space: nowrap;
-  @media (min-width: 300px) and (max-width: 767px) {
-    white-space: unset;
-  }
-`;
-const Input = styled.input`
-  background-image: url("/images/search-icon.svg");
-  background-repeat: no-repeat;
-  background-position: 8px;
-  padding-left: 34px;
-  background-size: 14px;
-  position: relative;
-  background-color: #ffffff;
-  border: none;
-  border-radius: 4px;
-  width: 100%;
-  background-color: #f0f2fc;
-  height: 30px;
-  margin-bottom: 5px;
-  margin-top: 15px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  outline: none;
-  color: #436ce0;
-`;
-const Button = styled.button`
-  background: #3163f0 0% 0% no-repeat padding-box;
-  border-radius: 4px;
-  border: 0px;
-  color: #ffffff;
-  max-width: 172px;
-  width: 100%;
-  font-size: 0.9rem;
-  font-weight: 600;
-  padding: 6px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  cursor: pointer;
-`;
-const HideSteps = styled.button`
-  border: none;
-  border-radius: 4px;
-  font-size: 0.7rem;
-  font-weight: 600;
-  background-color: #ffffff;
-  color: #3163f0;
-  cursor: pointer;
-  background-image: url("/images/arrrow.svg");
-  background-repeat: no-repeat;
-  width: 100%;
-  max-width: 114px;
-  padding-left: 26px;
-  background-position: right;
-  position: relative;
-  margin-top: 12px;
-`;
+// const Content = styled.div`
+//   color: #303134;
+//   margin-top: 15px;
+//   font-size: 0.8rem;
+//   font-weight: 600;
+//   white-space: nowrap;
+//   @media (min-width: 300px) and (max-width: 767px) {
+//     white-space: unset;
+//   }
+// `;
+// const Input = styled.input`
+//   background-image: url("/images/search-icon.svg");
+//   background-repeat: no-repeat;
+//   background-position: 8px;
+//   padding-left: 34px;
+//   background-size: 14px;
+//   position: relative;
+//   background-color: #ffffff;
+//   border: none;
+//   border-radius: 4px;
+//   width: 100%;
+//   background-color: #f0f2fc;
+//   height: 30px;
+//   margin-bottom: 5px;
+//   margin-top: 15px;
+//   font-size: 0.8rem;
+//   font-weight: 600;
+//   outline: none;
+//   color: #436ce0;
+// `;
+// const Button = styled.button`
+//   background: #3163f0 0% 0% no-repeat padding-box;
+//   border-radius: 4px;
+//   border: 0px;
+//   color: #ffffff;
+//   max-width: 172px;
+//   width: 100%;
+//   font-size: 0.9rem;
+//   font-weight: 600;
+//   padding: 6px;
+//   margin-top: 20px;
+//   margin-bottom: 20px;
+//   cursor: pointer;
+// `;
+// const HideSteps = styled.button`
+//   border: none;
+//   border-radius: 4px;
+//   font-size: 0.7rem;
+//   font-weight: 600;
+//   background-color: #ffffff;
+//   color: #3163f0;
+//   cursor: pointer;
+//   background-image: url("/images/arrrow.svg");
+//   background-repeat: no-repeat;
+//   width: 100%;
+//   max-width: 114px;
+//   padding-left: 26px;
+//   background-position: right;
+//   position: relative;
+//   margin-top: 12px;
+// `;
 
 const Div = styled.div`
   padding-bottom: 0.5rem;
@@ -416,10 +416,10 @@ const RowData = styled.div`
   }
 `;
 
-const ColorChanging = styled.text`
-  color: #00a58c;
-  font-size: 0.875rem;
-`;
+// const ColorChanging = styled.text`
+//   color: #00a58c;
+//   font-size: 0.875rem;
+// `;
 
 const Img = styled.img`
   width: 1rem;

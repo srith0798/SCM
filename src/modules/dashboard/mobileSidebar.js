@@ -173,12 +173,12 @@ const SidebarContainer = styled.div`
     display: none;
   }
 `;
-const LogoutTag = styled.div`
-display: flex;
-/* @media (min-width: 300px) and (max-width: 768px) {
-  display:none;
-} */
-`;
+// const LogoutTag = styled.div`
+// display: flex;
+// /* @media (min-width: 300px) and (max-width: 768px) {
+//   display:none;
+// } */
+// `;
 const Icon = styled.img`
   cursor: pointer;
   margin-right: 13px;
