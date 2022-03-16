@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Dialog from "@mui/material/Dialog";
 import { makeStyles } from "@material-ui/styles";
@@ -40,7 +40,7 @@ export default function DestinationTags(props) {
 
             <Input
               type="text"
-              placeholder="URL"
+              placeholder={props?.type === "EMAIL"  ? "Email" : "URL"}
               value={url}
               onChange={(e) => setUrl(e.target.value)}
             />

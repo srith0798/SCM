@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Column } from "simple-flexbox";
 import LetsGetStarted from "../popup/letsGetStartedPopUp";
@@ -18,7 +18,7 @@ import moment from "moment";
 
 export default function TransactionList() {
   const [state, setState] = useState(true);
-  const [filterData, setFilterData] = React.useState(1);
+  // const [filterData, setFilterData] = React.useState(1);
   const [open, isOpen] = useState(false);
   const [filterPopupOpen, setfilterPopupOpen] = useState(false);
   const [countToggle, setCountToggle] = useState(10);
@@ -41,13 +41,13 @@ export default function TransactionList() {
 
   const filterPopupClose = (data) => {
     setfilterPopupOpen(false);
-    setFilterData(data);
+    // setFilterData(data);
   };
 
   const [TxHashToolTip, setTxHashToolTip] = React.useState(false);
   const [statusToolTip, setstatusToolTip] = React.useState(false);
   const [functionToolTip, setfunctionToolTip] = React.useState(false);
-  const [showPlaceHolder, setShowPlaceHolder] = React.useState(false);
+  // const [showPlaceHolder, setShowPlaceHolder] = React.useState(false);
   const [loader, setLoader] = React.useState(false);
   const [address, setAddress] = React.useState([]);
   const [reponse, getResponse] = React.useState([]);
@@ -56,7 +56,7 @@ export default function TransactionList() {
   const [selected, setSelected] = React.useState("");
   const [selectedName, setSelectedName] = React.useState("");
   const [page, setPage] = React.useState(1);
-  const [valueCheck, setValueCheck] = React.useState(0);
+  // const [valueCheck, setValueCheck] = React.useState(0);
   const [defaultAddress, setDefaultAddress] = React.useState("");
 
   const getContractNames = async (skip = 0, limit = 10) => {
@@ -85,9 +85,9 @@ export default function TransactionList() {
         getTransaction(url);
         setSelectedName(name);
       }
-      if (response.contractList.length === 0) setShowPlaceHolder(true);
+      // if (response.contractList.length === 0) setShowPlaceHolder(true);
     } catch (e) {
-      setShowPlaceHolder(true);
+      // setShowPlaceHolder(true);
       setLoader(false);
     }
   };
@@ -142,7 +142,7 @@ export default function TransactionList() {
         setPage(parseInt(pageCount / countToggle) + 1);
       }
     } catch (e) {
-      setShowPlaceHolder(true);
+      // setShowPlaceHolder(true);
       setLoader(false);
     }
   };
@@ -165,7 +165,7 @@ export default function TransactionList() {
       setLoader(false);
       setSearchRow(response.transactionList);
     } catch (e) {
-      setShowPlaceHolder(true);
+      // setShowPlaceHolder(true);
       setLoader(false);
     }
   };
@@ -212,7 +212,7 @@ export default function TransactionList() {
     });
   };
   const changePage = (value) => {
-    setValueCheck(value.selected);
+    // setValueCheck(value.selected);
     if(setFrom>0 || select === 2 || select === 3){
       filterSearch(Math.ceil(value.selected * countToggle),
       countToggle);
@@ -241,6 +241,7 @@ export default function TransactionList() {
     if (selected.length > 0) {
       getTransaction(selected);
     } else getContractNames();
+    //eslint-disable-next-line
   }, [countToggle]);
 
 
@@ -332,7 +333,7 @@ export default function TransactionList() {
 
   return (
     <>
-    {(user=="")?
+    {(user==="")?
     (
       redirectToLogout()
   ):""}
@@ -413,7 +414,7 @@ export default function TransactionList() {
                 >
                  
                   
-                  {(contracts.length==0)?
+                  {(contracts.length===0)?
                   <DropDown onClick={handleClick}>                  
                     
                     <Span>No contract available</Span>
@@ -434,11 +435,11 @@ export default function TransactionList() {
 
                   {isSetOpen ? (
                     <Box sx={styles}>
-                      {(contracts.length==0)?
+                      {(contracts.length===0)?
                       (<Label>No contract available</Label>):
                       <Label>Contracts</Label>}
                       
-                      {(contracts.length!=0)?
+                      {(contracts.length!==0)?
                       (contracts.length &&
                         contracts.map((item) => (
                           <div
@@ -583,7 +584,7 @@ export default function TransactionList() {
                       </ColumnSecond>
                     )}
 
-                    {status != "Success"
+                    {status !== "Success"
                       ? toggle.status && (
                           <ColumnSecond style={{ color: "red" }}>
                             {status}

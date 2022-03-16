@@ -31,6 +31,7 @@ export default function AddAlert() {
   const [selectedDestinations, setSelectedDestinations] = React.useState([]);
   const [targetValue, setTargetValue] = React.useState("");
   const [selectedAddress, setSelectedAddress] = React.useState([]);
+  const [selectedTag , setSelectedTag] = React.useState("");
 
   const [icon, setIcon] = React.useState({
     successfulTransaction:
@@ -164,6 +165,10 @@ export default function AddAlert() {
       });
       setSelectedAddress(data[0] ? data[0] : []);
     }
+    else {
+   let tag =   parametersData.find(data=> data._id === event.target.value);
+   setSelectedTag(tag.name);
+    }
   };
   const addAlert = async () => {
     let requestData = {
@@ -183,9 +188,9 @@ export default function AddAlert() {
       requestData["target"]["contract"] = selectedAddress?._id;
     }
     if (alertTarget === genericConstants.ALERT_TYPE.TAG)
-      requestData["target"]["name"] = targetValue;
+      requestData["target"]["name"] = selectedTag;
 
-    const [error, response] = await utility.parseResponse(
+    const [error] = await utility.parseResponse(
       AlertService.addAlert(requestData)
     );
     if (error) {
@@ -195,6 +200,11 @@ export default function AddAlert() {
     utility.apiSuccessToast("Alert added successfully!");
   };
   const addDestination = async (label, url, channelName) => {
+    if(destinationType === "EMAIL"){
+     if(!utility.validateEmail(url))
+     { utility.apiFailureToast("Invalid Email");
+      return;}
+    }
     let requestData = {
       userId: sessionManager.getDataFromCookies("userId"),
       type: destinationType,
@@ -202,7 +212,7 @@ export default function AddAlert() {
       url: url,
       channelName: channelName ? channelName : "",
     };
-    console.log(requestData);
+
     const [error, response] = await utility.parseResponse(
       DestinationService.addDestination(requestData)
     );
@@ -212,6 +222,7 @@ export default function AddAlert() {
     }
     setDestinations(response);
     setAddDestinationPopup(false);
+    getDestinations();
   };
   let user = "";
 
@@ -230,7 +241,7 @@ export default function AddAlert() {
 
   return (
     <>
-      {user == "" ? redirectToLogout() : ""}
+      {user === "" ? redirectToLogout() : ""}
 
       <MainContainer>
         {addDestinationPopup && (
@@ -405,7 +416,8 @@ export default function AddAlert() {
                 <ProgressHeader>
                   <TypeRow>Parameters</TypeRow>
                   <SelectType>
-                    {targetValue ? targetValue : `Set alert trigger Parameters`}
+                    { !targetValue  && !selectedTag  ? `Set alert trigger Parameters` :
+                     alertTarget === genericConstants.ALERT_TYPE.ADDRESS ? targetValue : selectedTag}
                   </SelectType>
                   <MobType>{utility.truncateTxnAddress(targetValue)}</MobType>
                 </ProgressHeader>
@@ -921,18 +933,18 @@ const SubTitle = styled.div`
   padding-top: 5px;
 `;
 
-const Title1 = styled.div`
-  width: 157px;
-  height: 26px;
-  text-align: center;
-  color: #1d3c93;
+// const Title1 = styled.div`
+//   width: 157px;
+//   height: 26px;
+//   text-align: center;
+//   color: #1d3c93;
 
-  font-size: 22px;
-  font-weight: 600;
-  &:hover {
-    color: white;
-  }
-`;
+//   font-size: 22px;
+//   font-weight: 600;
+//   &:hover {
+//     color: white;
+//   }
+// `;
 
 const Container = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;

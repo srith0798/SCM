@@ -29,6 +29,11 @@ export default function Destination() {
     setDestinationType(value)
   }
   const addDestination = async (label, url, channelName) => {
+    if(destinationType === "EMAIL"){
+     if(!utility.validateEmail(url))
+     { utility.apiFailureToast("Invalid Email");
+      return;}
+    }
     let requestData = {
       userId: sessionManager.getDataFromCookies("userId"),
       type: destinationType,

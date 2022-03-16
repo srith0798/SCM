@@ -11,7 +11,6 @@ import utility from "../../utility";
 import Tooltip from "@mui/material/Tooltip";
 import ContractsService from "../../services/contractsService";
 import moment from "moment";
-import { sessionManager } from "../../managers/sessionManager";
 import AddAlerts from "../popup/addAlerts";
 import { PrismAsyncLight as SyntaxHighlighter } from "react-syntax-highlighter";
 import js from "react-syntax-highlighter/dist/esm/languages/hljs/javascript";
@@ -27,12 +26,12 @@ export default function TransactionDetails() {
   const [activeButton, setActiveButton] = React.useState("Overview");
   const [from, setFrom] = React.useState("");
   const [to, setTo] = React.useState("");
-  const [input, setInput] = React.useState("");
+  // const [input, setInput] = React.useState("");
   const [transfer, setTransfer] = React.useState("");
   const [inputDesktop, setInputDesktop] = React.useState("");
   const [inputCopy, setInputCopy] = React.useState("");
   const [showInputData, setShowInputData] = React.useState(false);
-  const [showOutputData, setShowOutputData] = React.useState(false);
+  // const [showOutputData, setShowOutputData] = React.useState(false);
   const [contractName, setContractName] = React.useState("");
   const [open, setOpen] = React.useState(false);
   const [loader, setLoader] = React.useState(false);
@@ -69,7 +68,7 @@ export default function TransactionDetails() {
       const response = await ContractsService.getTransactionByHash(requestData);
       setRow(response);
       setSelected(response.contractAddress)
-      setInput(utility.truncateTxnAddress(response.input));
+      // setInput(utility.truncateTxnAddress(response.input));
       setInputDesktop(
         utility.truncateTxnAddressDesktop(response.input)
       );
@@ -151,7 +150,6 @@ export default function TransactionDetails() {
               alt=""
               style={{
                 width: "15px",
-                cursor: "pointer",
                 marginRight: "6px",
                 marginBottom: "3px",
                 cursor: "pointer",
@@ -310,7 +308,7 @@ export default function TransactionDetails() {
               </Row>
             </CommonDiv>
             <CommonDiv
-              style={{ display: status == "Success" ? "none" : "" }}
+              style={{ display: status === "Success" ? "none" : "" }}
               check={status}
             >
               <Row>
@@ -748,122 +746,122 @@ const CommonInputDiv = styled.div`
     row-gap: 20px;
   }
 `;
-const ErrorCheckDiv = styled.div`
-  display: ${(props) => (props.check === "Fail" ? "block" : "none")};
-  border-bottom: 0.031rem #eaf1ec solid;
-  padding: 0.813rem;
-  @media (min-width: 300px) and (max-width: 768px) {
-    column-gap: 0px;
-  }
-`;
+// const ErrorCheckDiv = styled.div`
+//   display: ${(props) => (props.check === "Fail" ? "block" : "none")};
+//   border-bottom: 0.031rem #eaf1ec solid;
+//   padding: 0.813rem;
+//   @media (min-width: 300px) and (max-width: 768px) {
+//     column-gap: 0px;
+//   }
+// `;
 
-const TimeStampDiv = styled.div`
-  border-bottom: 0.031rem #eaf1ec solid;
-  padding: 0.813rem;
-  display: flex;
-  column-gap: 0px;
-  @media (max-width: 375px) {
-    display: flex;
-    white-space: nowrap;
-    column-gap: 80px;
-  }
-  @media (min-width: 376px) and (max-width: 425px) {
-    display: flex;
-    white-space: nowrap;
-    column-gap: 100px;
-  }
-`;
-const CommonDivBlock = styled.div`
-  border-bottom: 0.031rem #eaf1ec solid;
-  padding: 0.813rem;
-  display: flex;
-  column-gap: 0px;
-  @media (min-width: 300px) and (max-width: 767px) {
-    display: flex;
-    // column-gap: 138px;
-  }
-  @media (max-width: 375px) {
-    display: flex;
-    white-space: nowrap;
-    // column-gap: 118px;
-  }
-`;
-const FeeDiv = styled.div`
-  border-bottom: 0.031rem #eaf1ec solid;
-  padding: 0.813rem;
-  display: flex;
-  white-space: nowrap;
-  @media (min-width: 300px) and (max-width: 767px) {
-    display: flex;
-    white-space: nowrap;
-    column-gap: 68px;
-  }
-  @media (max-width: 375px) {
-    display: flex;
-    white-space: nowrap;
-    column-gap: 46px;
-  }
-`;
-const CommonDivFrom = styled.div`
-  border-bottom: 0.031rem #eaf1ec solid;
-  padding: 0.813rem;
-  display: flex;
-  @media (min-width: 300px) and (max-width: 767px) {
-    display: flex;
-    column-gap: 139px;
-  }
-  @media (max-width: 375px) {
-    display: flex;
-    white-space: nowrap;
-    column-gap: 123px;
-  }
-`;
-const RawInputDiv = styled.div`
-  border-bottom: 0.031rem #eaf1ec solid;
-  padding: 0.813rem;
-  display: flex;
-  white-space: nowrap;
-  @media (min-width: 300px) and (max-width: 767px) {
-    display: flex;
-    white-space: nowrap;
-    column-gap: 0px;
-  }
-  @media (max-width: 375px) {
-    display: flex;
-    white-space: nowrap;
-    column-gap: 87px;
-  }
-`;
-const GasPriceDiv = styled.div`
-  border-bottom: 0.031rem #eaf1ec solid;
-  padding: 0.813rem;
-  display: flex;
-  white-space: nowrap;
-  @media (min-width: 300px) and (max-width: 767px) {
-    display: flex;
-    white-space: nowrap;
-    // column-gap: 111px;
-  }
-  @media (max-width: 375px) {
-    display: flex;
-    white-space: nowrap;
-    // column-gap: 91px;
-  }
-`;
-const CommonDivTo = styled.div`
-  border-bottom: 0.031rem #eaf1ec solid;
-  padding: 0.813rem;
-  display: flex;
-  @media (min-width: 300px) and (max-width: 767px) {
-    display: flex;
-    column-gap: 158px;
-  }
-  @media (max-width: 375px) {
-    display: flex;
-    white-space: nowrap;
-    column-gap: 140px;
-  }
-`;
+// const TimeStampDiv = styled.div`
+//   border-bottom: 0.031rem #eaf1ec solid;
+//   padding: 0.813rem;
+//   display: flex;
+//   column-gap: 0px;
+//   @media (max-width: 375px) {
+//     display: flex;
+//     white-space: nowrap;
+//     column-gap: 80px;
+//   }
+//   @media (min-width: 376px) and (max-width: 425px) {
+//     display: flex;
+//     white-space: nowrap;
+//     column-gap: 100px;
+//   }
+// `;
+// const CommonDivBlock = styled.div`
+//   border-bottom: 0.031rem #eaf1ec solid;
+//   padding: 0.813rem;
+//   display: flex;
+//   column-gap: 0px;
+//   @media (min-width: 300px) and (max-width: 767px) {
+//     display: flex;
+//     // column-gap: 138px;
+//   }
+//   @media (max-width: 375px) {
+//     display: flex;
+//     white-space: nowrap;
+//     // column-gap: 118px;
+//   }
+// `;
+// const FeeDiv = styled.div`
+//   border-bottom: 0.031rem #eaf1ec solid;
+//   padding: 0.813rem;
+//   display: flex;
+//   white-space: nowrap;
+//   @media (min-width: 300px) and (max-width: 767px) {
+//     display: flex;
+//     white-space: nowrap;
+//     column-gap: 68px;
+//   }
+//   @media (max-width: 375px) {
+//     display: flex;
+//     white-space: nowrap;
+//     column-gap: 46px;
+//   }
+// `;
+// const CommonDivFrom = styled.div`
+//   border-bottom: 0.031rem #eaf1ec solid;
+//   padding: 0.813rem;
+//   display: flex;
+//   @media (min-width: 300px) and (max-width: 767px) {
+//     display: flex;
+//     column-gap: 139px;
+//   }
+//   @media (max-width: 375px) {
+//     display: flex;
+//     white-space: nowrap;
+//     column-gap: 123px;
+//   }
+// `;
+// const RawInputDiv = styled.div`
+//   border-bottom: 0.031rem #eaf1ec solid;
+//   padding: 0.813rem;
+//   display: flex;
+//   white-space: nowrap;
+//   @media (min-width: 300px) and (max-width: 767px) {
+//     display: flex;
+//     white-space: nowrap;
+//     column-gap: 0px;
+//   }
+//   @media (max-width: 375px) {
+//     display: flex;
+//     white-space: nowrap;
+//     column-gap: 87px;
+//   }
+// `;
+// const GasPriceDiv = styled.div`
+//   border-bottom: 0.031rem #eaf1ec solid;
+//   padding: 0.813rem;
+//   display: flex;
+//   white-space: nowrap;
+//   @media (min-width: 300px) and (max-width: 767px) {
+//     display: flex;
+//     white-space: nowrap;
+//     // column-gap: 111px;
+//   }
+//   @media (max-width: 375px) {
+//     display: flex;
+//     white-space: nowrap;
+//     // column-gap: 91px;
+//   }
+// `;
+// const CommonDivTo = styled.div`
+//   border-bottom: 0.031rem #eaf1ec solid;
+//   padding: 0.813rem;
+//   display: flex;
+//   @media (min-width: 300px) and (max-width: 767px) {
+//     display: flex;
+//     column-gap: 158px;
+//   }
+//   @media (max-width: 375px) {
+//     display: flex;
+//     white-space: nowrap;
+//     column-gap: 140px;
+//   }
+// `;
 const MidContainer = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
   border-radius: 0.375rem;
@@ -903,20 +901,20 @@ const BackgroundChanger = styled.div`
   }
 `;
 
-const BackgroundChangerTransfer = styled.div`
-  width: 50%;
-  height: 300px;
-  /* max-height: 300px; */
-  background-repeat: no-repeat;
-  background: #f7f8fd 0% 0% no-repeat padding-box;
-  border-radius: 6px;
-  opacity: 1;
-  padding: 1.875rem;
-  @media (min-width: 300px) and (max-width: 1371px) {
-    width: 100%;
-    padding: 1rem;
-  }
-`;
+// const BackgroundChangerTransfer = styled.div`
+//   width: 50%;
+//   height: 300px;
+//   /* max-height: 300px; */
+//   background-repeat: no-repeat;
+//   background: #f7f8fd 0% 0% no-repeat padding-box;
+//   border-radius: 6px;
+//   opacity: 1;
+//   padding: 1.875rem;
+//   @media (min-width: 300px) and (max-width: 1371px) {
+//     width: 100%;
+//     padding: 1rem;
+//   }
+// `;
 
 const FlexDiv = styled.div`
   display: flex;

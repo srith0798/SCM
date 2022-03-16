@@ -21,9 +21,9 @@ const useStyles = makeStyles(() => ({
 
 export default function Filter(props) {
   const classes = useStyles();
-  const [loader, setLoader] = React.useState(false);
-  const [address, setAddress] = React.useState([]);
-  const [showPlaceHolder, setShowPlaceHolder] = React.useState(false);
+  // const [loader, setLoader] = React.useState(false);
+  // const [address, setAddress] = React.useState([]);
+  // const [showPlaceHolder, setShowPlaceHolder] = React.useState(false);
 
   React.useEffect(() => {
     getNetworkList();
@@ -45,15 +45,15 @@ export default function Filter(props) {
         limit: limit,
       };
 
-      setLoader(true);
-      const response = await contractsService.getNetworksLists(requestData);
-      setLoader(false);
-      setAddress(response.networkList);
-      if (response.networkList.length === 0) setShowPlaceHolder(true);
-      else setShowPlaceHolder(false);
+      // setLoader(true);
+       await contractsService.getNetworksLists(requestData);
+      // setLoader(false);
+      // setAddress(response.networkList);
+      // if (response.networkList.length === 0) setShowPlaceHolder(true);
+      // else setShowPlaceHolder(false);
     } catch (e) {
-      setShowPlaceHolder(true);
-      setLoader(false);
+      // setShowPlaceHolder(true);
+      // setLoader(false);
     }
   };
   return (
@@ -385,17 +385,17 @@ const LastContainer = styled.div`
     margin-left: 6px;
   }
 `;
-const NewContainerOne = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  max-width: 512px;
-  padding-bottom: 20px;
-  @media (min-width: 300px) and (max-width: 414px) {
-    flex-direction: column;
-    max-width: 460px;
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-  }
-`;
+// const NewContainerOne = styled.div`
+//   display: flex;
+//   justify-content: space-between;
+//   width: 100%;
+//   max-width: 512px;
+//   padding-bottom: 20px;
+//   @media (min-width: 300px) and (max-width: 414px) {
+//     flex-direction: column;
+//     max-width: 460px;
+//     display: flex;
+//     justify-content: space-between;
+//     width: 100%;
+//   }
+// `;

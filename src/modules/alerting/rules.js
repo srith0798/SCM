@@ -39,7 +39,7 @@ export default function Rules() {
   };
   const deleteAlert = async (alertId) => {
     console.log(alertId);
-    const [error, response] = await utility.parseResponse(
+    const [error] = await utility.parseResponse(
       AlertService.deleteAlert(alertId)
     );
     if (error) return;
@@ -76,7 +76,7 @@ export default function Rules() {
 
   return (
     <>
-    {(user=="")?
+    {(user==="")?
     (
       redirectToLogout()
   ):""}
@@ -380,14 +380,14 @@ const Title = styled.div`
     font-weight: 600;
   }
 `;
-const CheckDiv = styled.div`
-  display: ${(props) => (props.show === 0 ? "flex" : "none")};
-  width: 100%;
-  height: 100%;
-  align-items: center;
-  justify-content: center;
-  opacity: 50%; ;
-`;
+// const CheckDiv = styled.div`
+//   display: ${(props) => (props.show === 0 ? "flex" : "none")};
+//   width: 100%;
+//   height: 100%;
+//   align-items: center;
+//   justify-content: center;
+//   opacity: 50%; ;
+// `;
 const Container = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
   border-radius: 0.375rem;

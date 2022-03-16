@@ -9,7 +9,6 @@ import utility from "../../utility";
 import { genericConstants } from "../../constants";
 import { sessionManager } from "../../managers/sessionManager";
 import DestinationService from "../../services/destination";
-import destination from "../../services/destination";
 
 export default function AlertDetails() {
   const [alertId, setAlertId] = React.useState("");
@@ -44,11 +43,10 @@ export default function AlertDetails() {
       return;
     let requestData = {
       alertId: request ? request : alertId,
-      status: true,
       destinations :selectedDestinations
     }
-    if(requestData.destinations && requestData.destinations.length === 0)
-      requestData["status"] = false;
+    // if(requestData.destinations && requestData.destinations.length === 0)
+    //   requestData["status"] = false;
     const [error, response] = await utility.parseResponse(AlertService.updateAlert(requestData));
     if (error)
       return;
@@ -64,7 +62,7 @@ export default function AlertDetails() {
       alertId: request ? request : alertId,
       status: status
     }
-    const [error, response] = await utility.parseResponse(AlertService.updateAlert(requestData));
+    const [error] = await utility.parseResponse(AlertService.updateAlert(requestData));
     if (error)
       return;
     utility.apiSuccessToast("Alert Updated Succesfully");
@@ -83,13 +81,14 @@ export default function AlertDetails() {
     let destinationIds=[];
     alertDestinations.map((dest)=>{
       destinationIds.push(dest.destinationId);
+      return true;
     })
     response.map((dest)=>{
-      console.log("destinationIds",destinationIds ,dest.destinationId);
       if(destinationIds.includes(dest.destinationId)) 
       dest["checked"] = true
        else
       dest["checked"] = false
+      return true;
 
     })
     setDestinations(response);

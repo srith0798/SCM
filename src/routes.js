@@ -7,7 +7,7 @@ import { history } from "./managers/history";
 import BaseComponent from "./modules/baseComponent";
 import { createTheme } from "@material-ui/core/styles";
 import ShowLoader from "./common/components/showLoader";
-import { sessionManager } from "./managers/sessionManager";
+// import { sessionManager } from "./managers/sessionManager";
 
 const Dashboard = withRouter(
   lazy(() => import("./modules/dashboard/dashboardComponent"))

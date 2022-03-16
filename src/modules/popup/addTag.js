@@ -19,7 +19,7 @@ export default function AddTags(props) {
 
   const addContractTag = async (props) => {
     let requestData={};
-    (contractId!="")?
+    (contractId!=="")?
     
     requestData = {
       contractId:contractId1,
@@ -58,7 +58,7 @@ export default function AddTags(props) {
               value={input}
               
               onChange={(e) =>{
-                if(e.target.value.length==30){ 
+                if(e.target.value.length===30){ 
                   setTagError("Tag cannot be longer than 30 characters")
                   return false
                 }; 

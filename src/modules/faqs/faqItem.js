@@ -35,7 +35,7 @@ class FaqItem extends Component {
 
     return (
       <button className="button" type="button" onClick={this.onToggleIsActive}>
-        <img className="image" src={image} />
+        <img className="image" src={image}  alt=""/>
       </button>
     );
   };

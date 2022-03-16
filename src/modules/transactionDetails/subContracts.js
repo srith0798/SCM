@@ -1,8 +1,8 @@
-import React, { useEffect, useCallback } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import ContractsService from "../../services/contractsService";
 import { sessionManager } from "../../managers/sessionManager";
-import { Row } from "simple-flexbox";
+// import { Row } from "simple-flexbox";
 import ShowLoader from "../../common/components/showLoader";
 import { PrismAsyncLight as SyntaxHighlighter } from "react-syntax-highlighter";
 import js from "react-syntax-highlighter/dist/esm/languages/hljs/javascript";
@@ -13,7 +13,7 @@ export default function SubContracts(props) {
   const [address, setAddress] = React.useState([]);
   const [loader, setLoader] = React.useState(false);
   const [showContract, setShowVerifiedContract] = React.useState(false);
-  const [selectedContract, setSelectedContract] = React.useState(1);
+  const [selectedContract] = React.useState(1);
 
   const getContractList = async (skip = 0, limit = 10) => {
     try {
@@ -36,6 +36,7 @@ export default function SubContracts(props) {
   };
   useEffect(() => {
     getContractList();
+    //eslint-disable-next-line
   }, []);
 
   return (

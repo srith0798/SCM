@@ -17,13 +17,13 @@ import AlertDetails from "../alerting/alertDetails";
 import { sessionManager } from "../../managers/sessionManager";
 import UserService from "../../services/userService";
 import { history } from "../../managers/history";
-import ConnectWallets from "./connectWallets";
-import utility from "../../utility";
-import toast, { Toaster } from "react-hot-toast";
+// import ConnectWallets from "./connectWallets";
+// import utility from "../../utility";
+import toast from "react-hot-toast";
 import { httpConstants,validationsMessages } from "../../constants";
 import VerifiedContracts from "../transactionDetails/verifiedContracts";
 import Faqs from "../faqs/faq";
-import Web3 from "web3";
+// import Web3 from "web3";
 
 
 //Replace Under Development with component once developed-
@@ -81,12 +81,12 @@ const redirectErrorMessage = () =>
     position: validationsMessages.TOASTS_POSITION,
     className: "toast-div-address",
   });
-const disableMetamaskMessage = () =>
-  toast.error(validationsMessages.VALIDATE_BROWSER_REDIRECTING, {
-    duration: 4000,
-    position: validationsMessages.TOASTS_POSITION,
-    className: "toast-div-address",
-});
+// const disableMetamaskMessage = () =>
+//   toast.error(validationsMessages.VALIDATE_BROWSER_REDIRECTING, {
+//     duration: 4000,
+//     position: validationsMessages.TOASTS_POSITION,
+//     className: "toast-div-address",
+// });
 
 const dashboardComponent = (props) => {
 

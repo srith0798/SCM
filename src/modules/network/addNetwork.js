@@ -13,7 +13,7 @@ const useStyles = makeStyles(() => ({
 }));
 export default function AddNetwork(props) {
   const classes = useStyles();
-  const [loader, setLoader] = React.useState(false);
+  // const [loader, setLoader] = React.useState(false);
   const [isPresent, setisPresent] = React.useState(false);
 
   const addNetwork = async () => {
@@ -24,10 +24,10 @@ export default function AddNetwork(props) {
       currencySymbol: currencySymbol,
       blockExplorer: blockExplorer,
     };
-    setLoader(true);
+    // setLoader(true);
     try {
-      const response = await contractsService.addNetworks(requestData);
-      setLoader(false);
+       await contractsService.addNetworks(requestData);
+      // setLoader(false);
     } catch (e) {}
   };
   const getNetworksLists = async (skip = 0, limit) => {
@@ -37,7 +37,7 @@ export default function AddNetwork(props) {
         limit: limit,
       };
 
-      setLoader(true);
+      // setLoader(true);
       const response = await contractsService.getNetworksLists(requestData);
 
       response.map((contract) => console.log("contract", contract));
@@ -76,7 +76,7 @@ export default function AddNetwork(props) {
           utility.apiFailureToast("Invalid RPC endpoint");
           return false;
         }
-        if (networkChainId != chainId) {
+        if (networkChainId !== chainId) {
           utility.apiFailureToast("Invalid chainId");
         } else {
           setNewRpcUrl(newRpcUrl);

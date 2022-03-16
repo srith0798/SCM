@@ -15,7 +15,7 @@ function Header(props) {
 
   function truncateToDecimals(num, dec = 2) {
       let decimal = dec;
-      if(num != 0 && num.toString().split('.')[0] == 0 && num.toString().split('.')[1].charAt(0) == 0 && num.toString().split('.')[1].charAt(1) == 0){
+      if(num !== 0 && num.toString().split('.')[0] === 0 && num.toString().split('.')[1].charAt(0) === 0 && num.toString().split('.')[1].charAt(1) === 0){
         decimal = 4;
       }
       const calcDec = Math.pow(10, decimal);
@@ -40,9 +40,9 @@ function Header(props) {
       window.web3.currentProvider 
     ) {
       if (!window.web3.currentProvider.chainId) {
-          let newBalance = await getBalance2(address);
+         await getBalance2(address);
             let balance = null;
-           let balance45= await window.web3.eth.getBalance(address)
+           await window.web3.eth.getBalance(address)
            .then((res) => {
               balance = res / Math.pow(10, 18);
               balance = truncateToDecimals(balance);
@@ -74,9 +74,10 @@ function Header(props) {
       //   }
       // });
   };
-  const [getBalance, getSetBalance] = useState("");
+  // const [getBalance, getSetBalance] = useState("");
   useEffect(() => {
     getUserBalance();
+     //eslint-disable-next-line
   }, []);
   return (
     <>

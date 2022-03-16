@@ -162,7 +162,7 @@ export default function ContractDetails(props) {
   };
   return (
     <>
-      {user == "" ? redirectToLogout() : ""}
+      {user === "" ? redirectToLogout() : ""}
       <ShowLoader state={loader} />
       <MainContainer>
         <SubContainer>
@@ -292,15 +292,15 @@ export default function ContractDetails(props) {
                     {address.tags &&
                       address.tags.map((tag, index) => (
                         <div style={{ marginRight: "9px" }}>
-                          <FinanceTag onClick={() => removeTagOpen(tag)}>
+                          <FinanceTag onClick={() => removeTagOpen(tag.name)}>
                             <ImageTag
-                              removeTagImage={removeTagImage}
+                              removeTagImage={removeTagImage}s
                               index={index}
                               address={address}
                               onMouseOver={() => setRemoveTagImage(index)}
                               onMouseOut={() => setRemoveTagImage(-1)}
                             />
-                            {tag}
+                            {tag.name}
                           </FinanceTag>
                         </div>
                       ))}
@@ -323,7 +323,7 @@ export default function ContractDetails(props) {
                       />
                     )}
                     <AddTag
-                      disabled={address.tags != ""}
+                      disabled={address.tags !== ""}
                       onClick={() => Open()}
                     >
                       Add Tag
