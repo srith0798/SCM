@@ -1,2 +1,0 @@
-(window["webpackJsonpscm-web-app"]=window["webpackJsonpscm-web-app"]||[]).push([[84],{1401:function(a,e,p){"use strict";function s(a){a.languages.hpkp={directive:{pattern:/\b(?:(?:includeSubDomains|preload|strict)(?: |;)|pin-sha256="[a-zA-Z\d+=/]+"|(?:max-age|report-uri)=|report-to )/,alias:"keyword"},safe:{pattern:/\b\d{7,}\b/,alias:"selector"},unsafe:{pattern:/\b\d{1,6}\b/,alias:"function"}}}a.exports=s,s.displayName="hpkp",s.aliases=[]}}]);
-//# sourceMappingURL=react-syntax-highlighter_languages_refractor_hpkp.2fe912ff.chunk.js.map
