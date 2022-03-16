@@ -51,20 +51,20 @@ export default function EventsDetails(props) {
           <FilterDivision>
             <HeaderText>Event Name</HeaderText>
             <FilterSelect>
-              <option value="filter">{address[0]?.contractName}</option>
+              <option value="filter">{props?.func!== undefined ? "Transfer" : "Not available " }</option>
             </FilterSelect>
           </FilterDivision>
           <FilterDivision>
             <HeaderText>Contract</HeaderText>
             <FilterSelect>
-              <option value="filter">{props?.to}</option>
+              <option value="filter">{address[0]?.contractName}</option>
             </FilterSelect>
           </FilterDivision>
         </FilterContainer>
         <Line></Line>
         <MidContainer>
           <ContentWrapper>
-            <MidHeader>Transfer</MidHeader>
+            <MidHeader>{props?.func!== undefined ? "Transfer" : "Not available " }</MidHeader>
             <HeaderText>{address[0]?.contractName}</HeaderText>
             <CodeWrapper>
               &#123; <br />
@@ -76,7 +76,7 @@ export default function EventsDetails(props) {
               <br /> &#125;
               <br />
               <SubHeadBlue onClick={()=>setShowRaw(!showRaw)}>
-                Select raw data and topics
+                Show raw data and topics
                 <img
                   style={{ marginLeft: "2px" }}
                   alt=""

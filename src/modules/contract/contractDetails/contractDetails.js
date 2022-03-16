@@ -282,7 +282,7 @@ export default function ContractDetails(props) {
                       "https://observer.xdc.org/verify-contracts")
                   }
                 >
-                  Get your contract verified!
+                  Click here and get your contract verified
                 </VerifiedButton>
               </Div>
               <Div>

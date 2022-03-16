@@ -43,7 +43,7 @@ export default function TransactionDetails() {
 
 
 
-  const wei = 0.000000001;
+  const wei = 1000000000;
   
   const handleClickOpen = () => {
     setOpen(true);
@@ -420,7 +420,10 @@ export default function TransactionDetails() {
                     .toLocaleString("fullwide", { useGrouping: false })
                     .replace(/\.?0+$/, "") || 0}{" "}
                   XDC
-                  {/* ({row.gasPrice * wei || 0} Gwei) */}
+                  ({(row.gasPrice / 1000000000000000000)
+                    .toFixed(12)
+                    .toLocaleString("fullwide", { useGrouping: false })
+                    .replace(/\.?0+$/, "") * wei || 0} Gwei)
                 </SubHead>
               </Row>
             </CommonDiv>
@@ -577,18 +580,18 @@ export default function TransactionDetails() {
           <TokenTransferCheckDiv check={status}>
             <b>Token Transfer</b>
             <StackContainer>
-              <BackgroundChanger>
+              {/* <BackgroundChanger> */}
                 <FlexDiv>
-                  <div>
+                  <div style={{display: "flex"}}>
                     <Heading>From</Heading>
                     <SubHeadBlue>{from}</SubHeadBlue>
                   </div>
-                  <div>
+                  <div style={{display: "flex"}}>
                     <Heading>To</Heading>
                     <SubHeadBlue>{to}</SubHeadBlue>
                   </div>
                 </FlexDiv>
-              </BackgroundChanger>
+              {/* </BackgroundChanger> */}
             </StackContainer>
           </TokenTransferCheckDiv>
           <LastContainer>
@@ -630,7 +633,7 @@ export default function TransactionDetails() {
       {activeButton === "Contracts" && (
         <SubContracts address={row.contractAddress} url={url} status={status} />
       )}
-      {activeButton === "EventsDetails" && <EventsDetails address={row.contractAddress} from={row.from} to={row.to ? row.to : row.contractAddress} value={row.value} logs={row.logs} />}
+      {activeButton === "EventsDetails" && <EventsDetails address={row.contractAddress} from={row.from} to={row.to ? row.to : row.contractAddress} value={row.value} logs={row.logs} func={transfer} />}
       {activeButton === "StateChange" && <StateChange />}
     </MainContainer>
   );
@@ -723,6 +726,7 @@ const SubHeadBlue = styled.div`
   color: #416be0;
   cursor: pointer;
   white-space: pre;
+  margin-left: 15px;
 `;
 const CommonDiv = styled.div`
   border-bottom: 0.031rem #eaf1ec solid;
@@ -874,7 +878,7 @@ const StackContainer = styled.div`
   border-radius: 0.375rem;
   padding: 1.875rem;
   margin-top: 1.25rem;
-  height: 9.375rem;
+  height: fit-content;
 `;
 
 const DataDivContainer = styled.div`
@@ -882,7 +886,7 @@ const DataDivContainer = styled.div`
   background-repeat: no-repeat;
   border-radius: 0.375rem;
   padding: 1rem;
-  height: 8rem;
+  height: fit-content;
 `;
 
 const BackgroundChanger = styled.div`
@@ -918,7 +922,7 @@ const FlexDiv = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  max-width: 300px;
+  max-width: 350px;
 `;
 
 const InputDataDiv = styled.div`
@@ -932,7 +936,7 @@ const LastContainer = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
   border-radius: 0.375rem;
   margin-top: 1.25rem;
-  height: 100%;
+  height: fit-content;
   max-height: 30rem;
   /* height: 18.75rem; */
   padding: 2rem;

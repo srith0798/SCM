@@ -54,7 +54,7 @@ export default function SubContracts(props) {
                 <RowData check={selectedContract}>
                   <Heads>
                     <Icon alt="" src="/images/contracts.svg" />
-                    <TextLi>Subcontracts name</TextLi>
+                    <TextLi>{address[0].contractName}</TextLi>
                   </Heads>
                 </RowData>
               </CommonDiv>
@@ -69,7 +69,7 @@ export default function SubContracts(props) {
                     wrapLongLines={true}
                     customStyle={{ backgroundColor: "#f0f2fc", margin: 0 }}
                   >
-                    {address[0].sourceCode}
+                    {address[0].sourceCode ? address[0].sourceCode : "No source code available" }
                   </SyntaxHighlighter>
                 </CodeContainer>
               </CodeMainContainer>
@@ -86,13 +86,13 @@ export default function SubContracts(props) {
                   <Title>{address[0]?.contractName}</Title>
                   <SubTitle>{address[0]?.address}</SubTitle>
                   <SubTitleTwo>
-                    <Button onClick={() => setShowVerifiedContract(true)}>
-                      <img
+                    <Button check={address[0]?.status} onClick={() => setShowVerifiedContract(true)}>
+                      {address[0]?.status === "Verified" ? (<img
                         style={{ marginRight: "4px" }}
                         alt=""
                         src="/images/verified_tick.svg"
-                      />
-                      {address[0]?.status}
+                      />) : ""}
+                      {address[0]?.status} contract
                     </Button>
                   </SubTitleTwo>
                 </Container>
@@ -120,6 +120,7 @@ const MainContainer = styled.div`
     height: 42rem;
   }
 `;
+
 const FlexDiv = styled.div`
 display: flex;
 @media (min-width: 300px) and (max-width: 414px) {
@@ -194,7 +195,7 @@ const SubTitleTwo = styled.div`
 `;
 
 const Button = styled.button`
-  background: #00a58c 0% 0% no-repeat padding-box;
+  background: ${(props)=> (props.check === "Verified" ? "#00a58c" : "#FDA6A6")};
   border-radius: 0.188rem;
   border: none;
   padding: 0.288rem;
