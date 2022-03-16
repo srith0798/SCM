@@ -195,6 +195,11 @@ export default function AddAlert() {
     utility.apiSuccessToast("Alert added successfully!");
   };
   const addDestination = async (label, url, channelName) => {
+    if(destinationType === "EMAIL"){
+     if(!utility.validateEmail(url))
+     { utility.apiFailureToast("Invalid Email");
+      return;}
+    }
     let requestData = {
       userId: sessionManager.getDataFromCookies("userId"),
       type: destinationType,
@@ -202,6 +207,7 @@ export default function AddAlert() {
       url: url,
       channelName: channelName ? channelName : "",
     };
+
     const [error, response] = await utility.parseResponse(
       DestinationService.addDestination(requestData)
     );
@@ -211,6 +217,7 @@ export default function AddAlert() {
     }
     setDestinations(response);
     setAddDestinationPopup(false);
+    getDestinations();
   };
   let user = "";
 
