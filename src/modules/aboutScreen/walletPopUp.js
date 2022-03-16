@@ -349,8 +349,8 @@ const Container = styled.div`
   text-align: center;
   height: 420px;
   @media (min-width: 300px) and (max-width: 767px) {
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 17px;
+    padding-right: 17px;
   }
 `;
 const Add = styled.div`

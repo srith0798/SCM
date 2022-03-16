@@ -556,7 +556,7 @@ export default function TransactionList() {
                   When
                   <Tooltip
                     disableFocusListener
-                    title="Date and time of transaction execution"
+                    title="Date and time of transaction execution in UTC zone"
                   >
                     <ToolTipIcon src="/images/tool-tip.svg" />
                   </Tooltip>

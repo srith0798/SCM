@@ -101,7 +101,7 @@ export default function AddContract(props) {
               }}
             >
               <Content>
-                You can import contracts that have been verified publicly on
+                You can import contracts that are available publicly on
                 XDC.
               </Content>
               <CheckDivMob>
@@ -123,7 +123,7 @@ export default function AddContract(props) {
             <ErrorTag>{error}</ErrorTag>
             {hideStep && (
               <Text>
-                1. Go to XDC Observatory <br></br>
+                1. Go to XDC Observatory/Origin <br></br>
                 2. Check for an verified contract <br></br> 3. Copy contract
                 address <br></br>4. Paste it on the given field above
               </Text>

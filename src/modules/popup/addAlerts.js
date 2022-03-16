@@ -17,6 +17,7 @@ const useStyles = makeStyles(() => ({
     height: "auto",
     maxHeight: "fitContent",
     maxWidth: 440,
+    top: "150px !important",
   },
 }));
 
@@ -181,7 +182,7 @@ export default function AddAlerts(props) {
                     </BackgroundChanger>
                   ))
                 : (
-                  <div>
+                  <Heading>
                     Add destination from <Link onClick={() =>
                   history.push({
                     pathname: "/alerting",
@@ -191,7 +192,7 @@ export default function AddAlerts(props) {
                   })
                 }>here</Link>
 
-                  </div>
+                  </Heading>
                 )}
             </ContentDiv>
           </Container>

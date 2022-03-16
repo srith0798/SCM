@@ -106,11 +106,11 @@ const dashboardComponent = (props) => {
     console.log("adad", history.location.pathname);
 
 
-     if (window.web3.eth) {
+     if (window?.web3?.eth) {
           let user = "";
 
           try {
-            user = window.web3.eth.accounts;
+            user = window?.web3?.eth?.accounts;
           } catch (e) {console.log(e,"error")}
           console.log(user,"user!!")
           if (user && user.length) {
@@ -144,10 +144,10 @@ const dashboardComponent = (props) => {
     }
   };
   
-  let check = window.web3.eth.accounts;
+  let check = window?.web3?.eth?.accounts;
   let pathname = history.location.pathname;
   let currentAddress = sessionManager.getDataFromCookies("accountAddress");
-  if(check[0]!==currentAddress){
+  if(check && check[0]!==currentAddress){
     Reload(pathname);
   }
 

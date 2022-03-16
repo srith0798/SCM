@@ -13,7 +13,12 @@ import contractsService from "../../services/contractsService";
 import DestinationService from "../../services/destination";
 import AlertService from "../../services/alert";
 import AddDestination from "../popup/addDestination";
-// import { Dropdown } from "react-bootstrap";
+import { Dropdown } from "react-bootstrap";
+import Box from "@mui/material/Box";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 
 export default function AddAlert() {
   const [activeButton, setActiveButton] = React.useState("Rules");
@@ -173,7 +178,7 @@ export default function AddAlert() {
         type: alertTarget,
         value: targetValue,
         threshold: threshold,
-        network:"XDC Mainnet"
+        network: "XDC Mainnet",
       },
       destinations: selectedDestinations,
     };
@@ -414,9 +419,7 @@ export default function AddAlert() {
                     { !targetValue  && !selectedTag  ? `Set alert trigger Parameters` :
                      alertTarget === genericConstants.ALERT_TYPE.ADDRESS ? targetValue : selectedTag}
                   </SelectType>
-                  <MobType>
-                    {utility.truncateTxnAddress(targetValue)}
-                  </MobType>
+                  <MobType>{utility.truncateTxnAddress(targetValue)}</MobType>
                 </ProgressHeader>
               </AlertContainer>
               <SideLineProvider>
@@ -424,30 +427,31 @@ export default function AddAlert() {
                 {progress === "PARAMETERS" && (
                   <AlertTargetContainer style={{ flexDirection: "column" }}>
                     <ParameterContainer>
-                      <FilterSelect
-                        id="selectBox"
-                        name="selectBox"
-                        className="selectBox"
-                        onChange={selectTargetValue}
-                      >
-                        <option value="">Filter by event </option>
-                        {parametersData && parametersData.length ? (
-                          parametersData.map((option) => (
-                            <>
-                              {alertTarget ===
-                              genericConstants.ALERT_TYPE.ADDRESS ? (
-                                <option id="optionBox" className="optionBox" value={option.address}>
-                                  {option.address}
-                                </option>
-                              ) : (
-                                <option value={option._id}>{option.name}</option>
-                              )}
-                            </>
-                          ))
-                        ) : (
-                          <option value="">No Data Available </option>
-                        )}
-                      </FilterSelect>
+                      <Box sx={{ minWidth: 120 }}>
+                        <FormControl sx={{ width: "100%", maxWidth: 1000 }}>
+                          <InputLabel>Filter by event</InputLabel>
+                          <Select
+                            value={targetValue}
+                            label="Filter by event"
+                            onChange={selectTargetValue}
+                          >
+                            {parametersData && parametersData.length ? (
+                              parametersData.map((option) =>
+                                alertTarget ===
+                                genericConstants.ALERT_TYPE.ADDRESS ? (
+                                  <MenuItem value={option.address}>
+                                    {option.address}
+                                  </MenuItem>
+                                ) : (
+                                  <MenuItem value={option}>{}</MenuItem>
+                                )
+                              )
+                            ) : (
+                              <MenuItem value="">No Data Available </MenuItem>
+                            )}
+                          </Select>
+                        </FormControl>
+                      </Box>
                     </ParameterContainer>
                     <ParameterContainer>
                       {alertType ===
@@ -753,7 +757,7 @@ const DestinationComponent = (props) => {
   const { destinations } = props;
   return (
     <DestinationDetail>
-      {destinations &&
+      {destinations.length !== 0 ? (
         destinations.length &&
         destinations.map((destination) => (
           <EmailBox>
@@ -773,7 +777,10 @@ const DestinationComponent = (props) => {
               </label>
             </SliderDiv>
           </EmailBox>
-        ))}
+        ))
+      ) : (
+        <SelectType>No destination is added</SelectType>
+      )}
       <RowContainer>
         <Buttonn onClick={() => props.openDestinationPopup("SLACK")}>
           <img
@@ -840,7 +847,7 @@ const Buttonn = styled.div`
   color: #1d3c93;
   font-size: 0.875rem;
   cursor: pointer;
-  @media(min-width: 300px) and (max-width: 767px){
+  @media (min-width: 300px) and (max-width: 767px) {
     width: 5.5rem;
     margin-right: 10px;
   }
@@ -1005,7 +1012,7 @@ const TypeRow = styled.div`
 const MobType = styled.div`
   font-size: 0.875rem;
   color: #7c828a;
-  @media (min-width: 768px){
+  @media (min-width: 768px) {
     display: none;
   }
   @media (min-width: 300px) and (max-width: 767px) {

@@ -11,8 +11,10 @@ const useStyles = makeStyles(() => ({
     maxWidth: "563px",
     height: "325px",
     overflow: "hidden",
+    top: "200px !important",
     ['@media screen and (min-width: 300px) and (max-width: 768px)']: { 
-      width: '90% !important'
+      width: '90% !important',
+      top: "300px !important",
     
   }}
 }));
