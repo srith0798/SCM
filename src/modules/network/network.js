@@ -19,7 +19,7 @@ export default function Network() {
   }, []);
 
   const [address, setAddress] = React.useState([]);
-  const [showPlaceHolder, setShowPlaceHolder] = React.useState(false);
+  // const [showPlaceHolder, setShowPlaceHolder] = React.useState(false);
   const [loader, setLoader] = React.useState(false);
   const [networkToolTip, setnetworkToolTip] = React.useState(false);
   const [urlToolTip, seturlToolTip] = React.useState(false);
@@ -35,10 +35,10 @@ export default function Network() {
       const response = await contractsService.getNetworksLists(requestData);
       setLoader(false);
       setAddress(response.networkList);
-      if (response.networkList.length === 0) setShowPlaceHolder(true);
-      else setShowPlaceHolder(false);
+      // if (response.networkList.length === 0) setShowPlaceHolder(true);
+      // else setShowPlaceHolder(false);
     } catch (e) {
-      setShowPlaceHolder(true);
+      // setShowPlaceHolder(true);
       setLoader(false);
     }
   };

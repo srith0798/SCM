@@ -23,7 +23,7 @@ export default function Contract(props) {
   const [page, setPage] = useState(1);
   const [address, setAddress] = useState([]);
   const [searchRow, setSearchRow] = useState([]);
-  const [showplaceholder, setShowPlaceHolder] = useState([]);
+  // const [showplaceholder, setShowPlaceHolder] = useState([]);
   const [addTagPopUp, setAddTagPopUp] = useState(false);
   let redirectDetails = false;
 
@@ -67,8 +67,8 @@ export default function Contract(props) {
       } else {
         setPage(parseInt(pageCount / 10) + 1);
       }
-      if (response.contractList.length === 0) setShowPlaceHolder(true);
-      else setShowPlaceHolder(false);
+      // if (response.contractList.length === 0) setShowPlaceHolder(true);
+      // // else setShowPlaceHolder(false);
     } catch (e) {
       setLoader(false);
     }
@@ -141,7 +141,7 @@ export default function Contract(props) {
 
   return (
     <>
-    {(user=="")?
+    {(user==="")?
     (
       redirectToLogout()
   ):""}
@@ -171,7 +171,7 @@ export default function Contract(props) {
               getContractList={getContractList}
             />
           )}
-          {(address.length==0)?
+          {(address.length===0)?
           (<Button title="Add your First Contract" onClick={handleClickOpen}>Add Contract</Button>)
           :
           (<Button  onClick={handleClickOpen}>Add Contract</Button>)}
@@ -285,7 +285,7 @@ export default function Contract(props) {
                   </ColumnSecond>
                   <ColumnSecond style={{ display: "flex" }}>
                     <TagCol>                     
-                      {(data.tags=="")? 
+                      {(data.tags==="")? 
                       (<AddTag onClick={(e) => Open(e, data._id)} >Add Tag</AddTag>) 
                       :
                       (address[index].tags &&

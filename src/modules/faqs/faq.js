@@ -1,5 +1,4 @@
-import React, { Component } from "react";
-import styled from "styled-components";
+import React from "react";
 import FaqItem from "./faqItem";
 import { sessionManager } from "../../managers/sessionManager";
 import { history } from "../../managers/history";
@@ -63,7 +62,7 @@ export default function Faqs(props) {
 
   return (
     <>
-    {(user=="")?(
+    {(user==="")?(
       redirectToLogout()
   ):""}
 

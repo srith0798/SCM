@@ -223,16 +223,16 @@ const CodeWrapper = styled.div`
 
   }
 `;
-const InCodeSelect = styled.select`
-  outline: none;
-  border: none;
-  border-radius: 3px;
-  padding: 0px 00px 0px 10px;
-  font-size: 15px;
-  height: 25px;
-  color: #416be0;
-  background: transparent;
-`;
+// const InCodeSelect = styled.select`
+//   outline: none;
+//   border: none;
+//   border-radius: 3px;
+//   padding: 0px 00px 0px 10px;
+//   font-size: 15px;
+//   height: 25px;
+//   color: #416be0;
+//   background: transparent;
+// `;
 
 const CodeMainContainer = styled.div`
   width: 100%;

@@ -162,7 +162,7 @@ export default function ContractDetails(props) {
   };
   return (
     <>
-      {user == "" ? redirectToLogout() : ""}
+      {user === "" ? redirectToLogout() : ""}
       <ShowLoader state={loader} />
       <MainContainer>
         <SubContainer>
@@ -323,7 +323,7 @@ export default function ContractDetails(props) {
                       />
                     )}
                     <AddTag
-                      disabled={address.tags != ""}
+                      disabled={address.tags !== ""}
                       onClick={() => Open()}
                     >
                       Add Tag

@@ -7,11 +7,10 @@ import Tooltip from "@mui/material/Tooltip";
 import FooterComponent from "../dashboard/footerComponent";
 import ReactPlayer from "react-player";
 import { history } from "../../managers/history";
-import AddContract from "../popup/addContract";
 
 export default function About(props) {
   const [state, setState] = useState(true);
-  const [address, setAddress] = React.useState({});
+  const [address] = React.useState({});
   
   return (
     <>
@@ -138,10 +137,10 @@ export default function About(props) {
     </>
   );
 }
-const MainContainer = styled.div`
-  display: flex;
-  justify-content: center;
-`;
+// const MainContainer = styled.div`
+//   display: flex;
+//   justify-content: center;
+// `;
 const MainBoxContainer = styled.div`
   background: #ecf0f7 0% 0% no-repeat padding-box;
   width: 100%;
