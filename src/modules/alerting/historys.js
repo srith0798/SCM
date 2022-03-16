@@ -21,7 +21,7 @@ export default function Historys() {
       AlertService.getHistoryList(request)
     );
     if (!response || error) return;
-    setNotifications(response);
+    setNotifications(response?.historyList);
   };
 
   const changePage = (value) => {

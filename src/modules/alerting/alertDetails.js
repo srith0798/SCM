@@ -211,7 +211,7 @@ export default function AlertDetails() {
           <EditButton style={{ marginRight: "4px" }} onClick = {editDestinations}>Edit</EditButton>
           {alert.status === true ?
           <DisableButton style={{ marginLeft: "4px" }} onClick = {()=>disableAlert(alert.alertId, false)}>Disable</DisableButton> : "" }
-          {alert.status === false && alert.destinations && alert.destinations.length>0 ?
+          {alert.status === false ?
           <DisableButton style={{ marginLeft: "4px" }} onClick = {()=>disableAlert(alert.alertId, true)}>Enable</DisableButton> : "" }
         </RowContainer>
       </NewContainer> :
