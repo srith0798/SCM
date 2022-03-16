@@ -22,7 +22,7 @@ const utility = {
   navigateToPath,
   toggleDropDown,
   // validateName,
-  // validateEmail,
+  validateEmail,
   // isPasswordValid,
   isEmpty,
   isMenuActive,
@@ -139,10 +139,10 @@ function toggleDropDown(dropdownID) {
 //     return reg.test(name)
 // }
 
-// function validateEmail(email) {
-//     let reg =/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-//     return reg.test(email);
-// }
+function validateEmail(email) {
+    let reg =/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return reg.test(email);
+}
 
 // function isPasswordValid(password) {
 //     let reg = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;

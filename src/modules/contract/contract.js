@@ -291,7 +291,7 @@ export default function Contract(props) {
                       (address[index].tags &&
                         address[index].tags.map(
                           (tag, index) =>
-                            index <= 0 && (data.tags[0].length<=16)?(<FinanceTag>{data.tags[0]}</FinanceTag>):<FinanceTag>{utility.truncateTag(data.tags[0])}</FinanceTag>
+                            index <= 0 && (data.tags[0].name.length<=16)?(<FinanceTag>{data.tags[0].name}</FinanceTag>):<FinanceTag>{utility.truncateTag(data.tags[0].name)}</FinanceTag>
                         ))}
                       {addTag && (
                         <AddTags                         

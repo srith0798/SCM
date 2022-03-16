@@ -26,6 +26,7 @@ export default function AddAlert() {
   const [selectedDestinations, setSelectedDestinations] = React.useState([]);
   const [targetValue, setTargetValue] = React.useState("");
   const [selectedAddress, setSelectedAddress] = React.useState([]);
+  const [selectedTag , setSelectedTag] = React.useState("");
 
   const [icon, setIcon] = React.useState({
     successfulTransaction:
@@ -159,6 +160,10 @@ export default function AddAlert() {
       });
       setSelectedAddress(data[0] ? data[0] : []);
     }
+    else {
+   let tag =   parametersData.find(data=> data._id === event.target.value);
+   setSelectedTag(tag.name);
+    }
   };
   const addAlert = async () => {
     let requestData = {
@@ -178,7 +183,7 @@ export default function AddAlert() {
       requestData["target"]["contract"] = selectedAddress?._id;
     }
     if (alertTarget === genericConstants.ALERT_TYPE.TAG)
-      requestData["target"]["name"] = targetValue;
+      requestData["target"]["name"] = selectedTag;
 
     const [error, response] = await utility.parseResponse(
       AlertService.addAlert(requestData)
@@ -197,7 +202,6 @@ export default function AddAlert() {
       url: url,
       channelName: channelName ? channelName : "",
     };
-    console.log(requestData);
     const [error, response] = await utility.parseResponse(
       DestinationService.addDestination(requestData)
     );
@@ -400,7 +404,8 @@ export default function AddAlert() {
                 <ProgressHeader>
                   <TypeRow>Parameters</TypeRow>
                   <SelectType>
-                    {targetValue ? targetValue : `Set alert trigger Parameters`}
+                    { !targetValue  && !selectedTag  ? `Set alert trigger Parameters` :
+                     alertTarget === genericConstants.ALERT_TYPE.ADDRESS ? targetValue : selectedTag}
                   </SelectType>
                   <MobType>
                     {utility.truncateTxnAddress(targetValue)}
@@ -428,7 +433,7 @@ export default function AddAlert() {
                                   {option.address}
                                 </option>
                               ) : (
-                                <option value={option}>{}</option>
+                                <option value={option._id}>{option.name}</option>
                               )}
                             </>
                           ))
