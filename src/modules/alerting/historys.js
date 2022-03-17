@@ -97,7 +97,7 @@ export default function Historys() {
               <ColumnTwo>{notification.payload.typeName}</ColumnTwo>
               <ColumnTwo>{utility.minimizeAddress(notification.payload.txHash)}</ColumnTwo>
               <ColumnTwo>{notification.payload.network}</ColumnTwo>
-              <ColumnTwo>{moment().utc(notification.payload.timestamp).format("DD.M.YYYY HH:mm")}</ColumnTwo>
+              <ColumnTwo>{moment.utc(notification.payload.timestamp * 1000).format("DD.M.YYYY HH:mm")}</ColumnTwo>
             </RowData>
             </Div>
         ))}
