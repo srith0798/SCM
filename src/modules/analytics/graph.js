@@ -5,14 +5,16 @@ import "../../assets/styles/custom.css";
 import moment from "moment";
 import styled from "styled-components";
 import utility from "../../utility";
+import commaNumber from 'comma-number';
+
 
 export default function Graph(props) {
   const [points, setPoints] = useState({ x: 0, y: 0 });
   const [data, setData] = useState([]);
-  const [type, setType] = useState("");
-  const [expandCheck, setExpandedCheck] = useState(0);
+  // const [type, setType] = useState("");
+  // const [expandCheck, setExpandedCheck] = useState(0);
 
-  const [graphAccounts] = useState([]);
+  // const [graphAccounts] = useState([]);
   // let length = graphAccounts.length;
   // const firstDate =
   //   graphAccounts.length === 0
@@ -50,8 +52,8 @@ export default function Graph(props) {
 
   useEffect(() => {
     setData(props?.data);
-    setType(props?.type);
-    setExpandedCheck(props?.expanded)
+    // setType(props?.type);
+    // setExpandedCheck(props?.expanded)
   }, [props.data]);
   let fisrtValue = data[0]?.data[0]?.x,
     lastValue = data[0]?.data[data[0].data.length - 1]?.x;
@@ -116,7 +118,7 @@ const ToolTipElement = (props) => {
     <TooltipGraph>
       <TooltipHead>
         <TooltipDate>{moment(props.point.data.x).format("DD MMM")}</TooltipDate>
-        <Count>{props.point.data.y}</Count>
+         <Count>{commaNumber(props.point.data.y)}</Count>
       </TooltipHead>
       <TooltipData>
         {props.point.serieId !== "ActiveUsers" ? (
@@ -262,6 +264,7 @@ const TooltipHead = styled.div`
 `;
 const TooltipDate = styled.div`
   color: #303134;
+  padding-right:5px;
 `;
 const Count = styled.div`
   color: #3163f0;
