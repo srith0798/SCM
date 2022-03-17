@@ -261,7 +261,7 @@ const Input = styled.input`
   padding-left: 34px;
   background-size: 14px;
   position: relative;
-  background-color: #ffffff;
+  background-color: #ffffff !important;
   border: none;
   border-radius: 4px;
   width: 100%;
@@ -298,7 +298,7 @@ const HideSteps = styled.button`
   border-radius: 4px;
   font-size: 0.7rem;
   font-weight: 600;
-  background-color: #ffffff;
+  background-color: #ECF0F7;
   color: #3163f0;
   cursor: pointer;
   background-image: url("/images/arrrow.svg");

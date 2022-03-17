@@ -23,7 +23,8 @@ import toast from "react-hot-toast";
 import { httpConstants,validationsMessages } from "../../constants";
 import VerifiedContracts from "../transactionDetails/verifiedContracts";
 import Faqs from "../faqs/faq";
-// import Web3 from "web3";
+import Web3 from "web3";
+import { NETWORKS } from "../../constants";
 
 
 //Replace Under Development with component once developed-
@@ -81,6 +82,15 @@ const redirectErrorMessage = () =>
     position: validationsMessages.TOASTS_POSITION,
     className: "toast-div-address",
   });
+
+  function truncateToDecimals(num, dec = 2) {
+    let decimal = dec;
+    if(num !== 0 && num.toString().split('.')[0] === 0 && num.toString().split('.')[1].charAt(0) === 0 && num.toString().split('.')[1].charAt(1) === 0){
+      decimal = 4;
+    }
+    const calcDec = Math.pow(10, decimal);
+    return Math.trunc(num * calcDec) / calcDec;
+  }
 // const disableMetamaskMessage = () =>
 //   toast.error(validationsMessages.VALIDATE_BROWSER_REDIRECTING, {
 //     duration: 4000,
@@ -103,53 +113,117 @@ const dashboardComponent = (props) => {
       className: "toast-div-address",
     });
   const getCurrentUserDetails = async (value) => {
-    console.log("adad", history.location.pathname);
+    window.web3 = new Web3(window.xdc ? window.xdc : window.ethereum);
 
 
-     if (window?.web3?.eth) {
-          let user = "";
-
-          try {
-            user = window?.web3?.eth?.accounts;
-          } catch (e) {console.log(e,"error")}
-          console.log(user,"user!!")
-          if (user && user.length) {
-            
-            const response = await UserService.addUser({ accountAddress: user[0] });
-            if (response.accountAddress) {
-              sessionManager.setDataInCookies(
-                response.accountAddress,
-                "accountAddress"
-              );
-              sessionManager.setDataInCookies(response.accountAddress, "userId");
-              sessionManager.setDataInCookies(response.username, "username");
-              sessionManager.setDataInCookies(
-                response.profilePicture,
-                "profilePicture"
-              );
-            }
-            sessionManager.setDataInCookies(true, "isLoggedIn");
-            // history.push("/about");
-            window.location.reload();
-            
-            return {user:user};
-          } else {
-            loginErrorMessage();
+      if (window.web3.currentProvider) {
+        if (!window.web3.currentProvider.hasOwnProperty("chainId")) {
+          if(!window.xdc){
+            console.log("Error");
           }
-          return true; //required to close the "connect wallet" popup
+          else{
+            //when metamask is not in effect
+            const state = window.web3.givenProvider.publicConfigStore ? window.web3.givenProvider.publicConfigStore._state : window.web3.currentProvider.publicConfigStore._state;
+            let address = state.selectedAddress;
+            let network =
+                state.networkVersion === "50" ? NETWORKS.XDC_MAINNET : NETWORKS.XDC_APOTHEM_TESTNET;
+            let account = false;
+
+            await window.web3.eth.getAccounts((err, accounts) => {
+              if (err !== null) console.error("");
+              else if (accounts.length === 0) {
+                account = false;
+              } else {
+                account = true;
+              }
+            });
+
+            if (!account) {
+              loginErrorMessage();
+            } else if (address || network) {
+              let balance = null;
+
+              await window.web3.eth.getBalance(address).then((res) => {
+                balance = res / Math.pow(10, 18);
+                balance = truncateToDecimals(balance);
+              });
+
+              let accountDetails = {
+                address: address,
+                network: network,
+                balance: balance,
+                isLoggedIn: true,
+              };
+              sessionManager.setDataInCookies(address, "accountAddress");
+              sessionManager.setDataInCookies(address, "userId");
+              sessionManager.setDataInCookies(network, "network");
+              sessionManager.setDataInCookies(balance, "balance");
+              sessionManager.setDataInCookies(true, "isLoggedIn");
+              history.replace("/about");
+              // props.login(accountDetails);
+              console.log("Check", accountDetails);
+              // handleDialogClose();
+            }
+          }
+
+        } else {
+          //metamask is also enabled with xdcpay
+          // disableMetamaskMessage();
+          console.log("Error");
+        }
+      } else {
+        // For mobile and tab - redirect to App Store
+        redirectErrorMessage();
+      }
+    //}
+    // console.log("adad", history.location.pathname);
+
+
+    //  if (window?.web3?.eth) {
+    //       let user = "";
+
+    //       try {
+    //         user = window?.web3?.eth?.accounts;
+    //         console.log(user[0],"userssss!!")
+    //       } catch (e) {console.log(e,"error")}
+    //       console.log(user,"user!!")
+    //       if (user && user.length) {
+            
+    //         const response = await UserService.addUser({ accountAddress: user[0] });
+    //         if (response.accountAddress) {
+    //           sessionManager.setDataInCookies(
+    //             response.accountAddress,
+    //             "accountAddress"
+    //           );
+    //           sessionManager.setDataInCookies(response.accountAddress, "userId");
+    //           sessionManager.setDataInCookies(response.username, "username");
+    //           sessionManager.setDataInCookies(
+    //             response.profilePicture,
+    //             "profilePicture"
+    //           );
+    //         }
+    //         sessionManager.setDataInCookies(true, "isLoggedIn");
+    //         // history.push("/about");
+    //         window.location.reload();
+            
+    //         return {user:user};
+    //       } else {
+    //         loginErrorMessage();
+    //       }
+    //       return true; //required to close the "connect wallet" popup
       
-    } else {
+    // } else {
       
-      redirectErrorMessage();
-    }
+    //   redirectErrorMessage();
+    // }
   };
   
-  let check = window?.web3?.eth?.accounts;
-  let pathname = history.location.pathname;
-  let currentAddress = sessionManager.getDataFromCookies("accountAddress");
-  if(check && check[0]!==currentAddress){
-    Reload(pathname);
-  }
+  // let check = window?.web3?.eth?.accounts;
+  // let pathname = history.location.pathname;
+  // let currentAddress = sessionManager.getDataFromCookies("accountAddress");
+  // if(check && check[0]!==currentAddress){
+  //   Reload(pathname);
+  // }
 
   return (
     <>

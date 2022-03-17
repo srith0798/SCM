@@ -34,6 +34,7 @@ export default function Sidebar(props) {
     sessionManager.removeDataFromCookies("username");
     sessionManager.removeDataFromCookies("profilePicture");
     history.replace("/");
+    // window.location.reload();
   };
 
   const [aboutIcon, setAboutIcon] = React.useState(

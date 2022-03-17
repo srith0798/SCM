@@ -14,7 +14,7 @@ const useStyles = makeStyles(() => ({
     top: "200px !important",
     ['@media screen and (min-width: 300px) and (max-width: 768px)']: { 
       width: '90% !important',
-      top: "300px !important",
+      top: "0px !important",
     
   }}
 }));
@@ -270,19 +270,18 @@ const Input = styled.input`
   color: #b7b7b7;
   height: 34px;
   padding-left: 9px;
-
   margin-left: 18px;
   width: 160px;
-  @media (min-width: 300px) and (max-width: 414px) {
-    margin-left: 0px;
+  @media (min-width: 300px) and (max-width: 767px) {
+    margin-left: 5px;
     margin-right: 20px;
-    width: 50%;
+    width: 35%;
   }
 `;
 const InputDiv = styled.div`
   margin-right: 42px;
   padding-bottom: 15px;
-  @media (min-width: 300px) and (max-width: 414px) {
+  @media (min-width: 300px) and (max-width: 767px) {
     display: flex;
     padding-bottom: 30px;
     margin-right: 0px;
@@ -323,7 +322,7 @@ const Content = styled.div`
   font-weight: 600;
   color: #303134;
   white-space: nowrap;
-  @media (min-width: 300px) and (max-width: 414px) {
+  @media (min-width: 300px) and (max-width: 767px) {
     padding-bottom: 10px;
     font-size: 14px;
     font-weight: 500;
@@ -370,7 +369,7 @@ const NewContainerStatus = styled.div`
   width: 100%;
   column-gap: 103px;
   padding-bottom: 20px;
-  @media (min-width: 300px) and (max-width: 414px) {
+  @media (min-width: 300px) and (max-width: 767px) {
     // flex-direction: column;
     column-gap: 10px;
   }
@@ -379,10 +378,10 @@ const LastContainer = styled.div`
   display: flex;
   justify-content: end;
   max-width: 479px;
-  @media (min-width: 300px) and (max-width: 414px) {
+  @media (min-width: 300px) and (max-width: 767px) {
     justify-content: start;
     margin-top: -18px;
-    margin-left: 6px;
+    margin-left: 135px;
   }
 `;
 // const NewContainerOne = styled.div`

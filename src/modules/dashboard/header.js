@@ -3,15 +3,28 @@ import styled from "styled-components";
 import "../../assets/styles/custom.css";
 import { sessionManager } from "../../managers/sessionManager";
 import utility from "../../utility";
+import { NETWORKS } from "../../constants";
 const Web3 = require("web3");
 
 function Header(props) {
+
+  const [forceUpdate, setForceUpdate] = useState(false);
+
   const getUserAccountAddress = () => {
     let user = "";
     user = sessionManager.getDataFromCookies("accountAddress");
     if (user) user = utility.truncateTxnAddress(user);
     return user;
   };
+
+  const getBalance = async(address) => {
+    let balance = null;
+    await window.web3.eth.getBalance(address).then((res) => {
+      balance = res / Math.pow(10, 18);
+      balance = truncateToDecimals(balance);
+    });
+    return balance;
+  }
 
   function truncateToDecimals(num, dec = 2) {
       let decimal = dec;
@@ -60,7 +73,8 @@ function Header(props) {
     const web3 = new Web3(
       new Web3.providers.HttpProvider(process.env.REACT_APP_NETWORK_RPC_URL)
     );
-    console.log("adadad", web3);
+    // console.log("adadad", web3);
+    
     let checkResult = Web3.utils.toChecksumAddress(balance);
     
     if (checkResult)
@@ -74,11 +88,65 @@ function Header(props) {
       //   }
       // });
   };
+
+
+  const handleXDCPayWalletChange = async () => {
+    console.log("check1");
+    window.web3 = new Web3(window.xdc ? window.xdc : window.ethereum);
+    if (
+      window.web3.currentProvider &&
+      sessionManager.getDataFromCookies("isLoggedIn")
+    ) {
+      console.log("check2");
+      if (!window.web3.currentProvider.chainId) {
+        console.log("check3");
+        //when metamask is disabled
+        const state = window.web3.givenProvider.publicConfigStore ? window.web3.givenProvider.publicConfigStore._state : window.web3.currentProvider.publicConfigStore._state;
+        if (state.selectedAddress !== undefined) {
+          let address = state.selectedAddress;
+          let network =
+            state.networkVersion === "50"
+              ? NETWORKS.XDC_MAINNET
+              : NETWORKS.XDC_APOTHEM_TESTNET;
+
+          let newBalance = await getBalance(address);
+
+          console.log("check4", address, network, newBalance);
+          if ((address || network) && (address !== sessionManager.getDataFromCookies("accountAddress")  || newBalance !== balance)) {
+            let balance = null;
+
+            await window.web3.eth.getBalance(address).then((res) => {
+              balance = res / Math.pow(10, 18);
+              balance = truncateToDecimals(balance);
+            });
+
+            let accountDetails = {
+              address: address,
+              network: network,
+              balance: balance,
+              isLoggedIn: true,
+            };
+
+            
+            
+            // props.updateAccountDetails(accountDetails);
+            // setForceUpdate(true);
+          }
+        } else {
+          //metamask is also enabled with xdcpay
+        }
+      }
+    }
+  };
   // const [getBalance, getSetBalance] = useState("");
   useEffect(() => {
     getUserBalance();
+    handleXDCPayWalletChange();
+    // window.addEventListener("load", handleXDCPayWalletChange);
      //eslint-disable-next-line
   }, []);
+
+  
   return (
     <>
     <HeaderContainer>
