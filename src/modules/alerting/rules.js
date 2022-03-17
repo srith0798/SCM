@@ -9,6 +9,8 @@ import utility from "../../utility";
 import AlertService from "../../services/alert";
 import { genericConstants } from "../../constants";
 import { sessionManager } from "../../managers/sessionManager";
+import ShowLoader from "../../common/components/showLoader";
+
 
 export default function Rules() {
   const [activeButton, setActiveButton] = React.useState("Rules");
@@ -25,23 +27,28 @@ export default function Rules() {
   const [contractNameToolTip, setcontractNameToolTip] = React.useState(false);
   const [alertTypeToolTip, setalertTypeToolTip] = React.useState(false);
   const [alerts, setAlerts] = React.useState([]);
+  const [loader, setLoader] = React.useState(false);
+
 
   const getAlertList = async () => {
     let request = {
       userId: sessionManager.getDataFromCookies("userId"),
       isDeleted: false,
     };
+    setLoader(true)
     const [error, response] = await utility.parseResponse(
       AlertService.getAlertList(request)
     );
+    setLoader(false)
     if (error) return;
     setAlerts(response);
   };
   const deleteAlert = async (alertId) => {
-    console.log(alertId);
+    setLoader(true)
     const [error] = await utility.parseResponse(
       AlertService.deleteAlert(alertId)
     );
+    setLoader(false)
     if (error) return;
     utility.apiSuccessToast("Alert Deleted Successfully");
     await getAlertList();
@@ -80,7 +87,7 @@ export default function Rules() {
     (
       redirectToLogout()
   ):""}
-
+        <ShowLoader state={loader} top={"33%"}></ShowLoader>
       <MainContainer>
         <TitleContainer>
           <Title style={{ color: "#191919" }}>Alerting</Title>
