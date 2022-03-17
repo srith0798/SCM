@@ -9,6 +9,8 @@ import utility from "../../utility";
 import { genericConstants } from "../../constants";
 import { sessionManager } from "../../managers/sessionManager";
 import DestinationService from "../../services/destination";
+import ShowLoader from "../../common/components/showLoader";
+
 
 export default function AlertDetails() {
   const [alertId, setAlertId] = React.useState("");
@@ -18,6 +20,7 @@ export default function AlertDetails() {
   const [destinations, setDestinations] = React.useState([]);
   const [selectedDestinations, setSelectedDestinations] = React.useState([]);
   const [alertDestinations, setAlertDestinations] = React.useState([]);
+  const [loader, setLoader] = React.useState(false);
 
 
 
@@ -74,9 +77,11 @@ export default function AlertDetails() {
       userId: sessionManager.getDataFromCookies("userId"),
       isDeleted: false,
     };
+    setLoader(true)
     const [error, response] = await utility.parseResponse(
       DestinationService.getDestinations(requestData)
     );
+    setLoader(false)
     if (error) return;
     let destinationIds=[];
     alertDestinations.map((dest)=>{
@@ -129,6 +134,9 @@ export default function AlertDetails() {
     history.push("/alerting");
   };
   return (
+    <>
+          <ShowLoader state={loader} top={"33%"}></ShowLoader>
+
     <MainContainer>
       <Row
         style={{
@@ -245,6 +253,7 @@ export default function AlertDetails() {
        
        }
     </MainContainer>
+    </>
   );
 }
 

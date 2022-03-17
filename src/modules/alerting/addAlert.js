@@ -19,6 +19,8 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import ShowLoader from "../../common/components/showLoader";
+
 
 export default function AddAlert() {
   const [activeButton, setActiveButton] = React.useState("Rules");
@@ -189,12 +191,15 @@ export default function AddAlert() {
     }
     if (alertTarget === genericConstants.ALERT_TYPE.TAG)
       requestData["target"]["name"] = selectedTag;
-
+    setLoader(true)
     const [error] = await utility.parseResponse(
       AlertService.addAlert(requestData)
     );
+    setLoader(false)
+
     if (error) {
       utility.apiFailureToast(error || "Cannot add Alert");
+      setLoader(false)
       return;
     }
     utility.apiSuccessToast("Alert added successfully!");
@@ -242,7 +247,7 @@ export default function AddAlert() {
   return (
     <>
       {user === "" ? redirectToLogout() : ""}
-
+      <ShowLoader state={loader} top={"33%"}></ShowLoader>
       <MainContainer>
         {addDestinationPopup && (
           <AddDestination
