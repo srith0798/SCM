@@ -154,7 +154,9 @@ export default function Sidebar(props) {
         <Heading>Alerting</Heading>
       </Wrapper>
       )}
-      <WrapperFaq style={{ marginTop: "18rem" }} onClick={redirectToFaqs}>
+      <WrapperFaq style={{ marginTop: sessionManager.getDataFromCookies("isLoggedIn") ? "12rem" : "35rem", paddingLeft: sessionManager.getDataFromCookies("isLoggedIn")
+                ? "22px"
+                : "50px" }} onClick={redirectToFaqs}>
         <Icon src="/images/Subtraction 2.svg" />
         <Heading>FAQs</Heading>
       </WrapperFaq>
@@ -187,6 +189,7 @@ const SidebarContainer = styled.div`
   height: 100%;
   width: 248px;
   padding-top: 15px;
+  overflow-x: hidden;
   @media (max-width: 1023px) {
     display: none;
   }
@@ -215,7 +218,7 @@ const WrapperFaq = styled.div`
   max-width: 240px;
   white-space: nowrap;
   padding: 23px;
-  padding-left: 35px;
+  /* padding-left: 35px; */
   &:hover {
     background: #1d3c93;
   }

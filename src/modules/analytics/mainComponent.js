@@ -417,6 +417,11 @@ export default function MainComponent(props) {
                       sx={{ position: "relative" }}
                       selected={selected?.address}
                     >
+                      {(contracts.length === 0) ? 
+                      <DropDown onClick={handleClick}>                  
+                    
+                      <Span>No contract available</Span>
+                    </DropDown> : 
                       <DropDown onClick={handleClick}>
                         {selected?.contractName
                           ? selected.contractName
@@ -429,7 +434,7 @@ export default function MainComponent(props) {
                         <br />
                         <TransactionHash>{selected?.address}</TransactionHash>
                         <Image src="/images/arrrow.svg" />
-                      </DropDown>
+                      </DropDown> }
                       {isSetOpen ? (
                         <Box sx={styles}>
                           {contracts.length &&
@@ -831,6 +836,12 @@ const Content = styled.div`
   @media (min-width: 300px) and (max-width: 767px) {
     font-size: 0.85rem;
   }
+`;
+
+const Span =styled.div `
+color: #A6B3D8;
+font-size:14px;
+margin-top:12px;
 `;
 
 const GraphSizeError = styled.div`

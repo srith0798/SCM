@@ -142,7 +142,8 @@ const MainContainer = styled.div`
   border-radius: 0.375rem;
   opacity: 1;
   margin-top: 1.25rem;
-  height: 15.625rem;
+  min-height: 15.625rem;
+  height: fit-content;
   overflow-y: hidden;
   @media (min-width: 300px) and (max-width: 767px) {
     width: 100%;

@@ -992,7 +992,7 @@ text-align: left;
 font-size: 0.875rem;
 font-weight: 600;
 color: #102c78;
-width: 50%;`;
+width: 16.5%;`;
 
 const Button = styled.button`
   background-image: url("/images/globe.svg");
@@ -1083,9 +1083,6 @@ const SubHeading = styled.div`
   font-weight: 600;
   color: #102c78;
   display: flex;
-  @media (min-width: 300px) and (max-width: 768px) {
-    padding-left: 13px !important;
-  }
 `;
 
 const CopyToClipboardImg = styled.img`

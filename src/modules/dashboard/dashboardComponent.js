@@ -98,11 +98,7 @@ const redirectErrorMessage = () =>
 //     className: "toast-div-address",
 // });
 
-const dashboardComponent = (props) => {
-
-  const Reload = (value) => {
-    getCurrentUserDetails(value);
-  }
+const dashboardComponent = (props)=>{
 
   const loginErrorMessage = () =>
     toast.error(httpConstants.MESSAGE.VALIDATE_BROWSER_LOGIN, {
@@ -112,7 +108,18 @@ const dashboardComponent = (props) => {
 
       className: "toast-div-address",
     });
-  const getCurrentUserDetails = async (value) => {
+
+    const getBalance = async(address) => {
+      let balance = null;
+      await window.web3.eth.getBalance(address).then((res) => {
+        balance = res / Math.pow(10, 18);
+        balance = truncateToDecimals(balance);
+      });
+      return balance;
+    }
+
+
+  const getCurrentUserDetails = async () => {
     window.web3 = new Web3(window.xdc ? window.xdc : window.ethereum);
 
 
@@ -148,21 +155,15 @@ const dashboardComponent = (props) => {
                 balance = truncateToDecimals(balance);
               });
 
-              let accountDetails = {
-                address: address,
-                network: network,
-                balance: balance,
-                isLoggedIn: true,
-              };
+              const response = await UserService.addUser({ accountAddress: address });
+              if(response){
               sessionManager.setDataInCookies(address, "accountAddress");
               sessionManager.setDataInCookies(address, "userId");
               sessionManager.setDataInCookies(network, "network");
               sessionManager.setDataInCookies(balance, "balance");
               sessionManager.setDataInCookies(true, "isLoggedIn");
               history.replace("/about");
-              // props.login(accountDetails);
-              console.log("Check", accountDetails);
-              // handleDialogClose();
+              }
             }
           }
 
@@ -175,55 +176,7 @@ const dashboardComponent = (props) => {
         // For mobile and tab - redirect to App Store
         redirectErrorMessage();
       }
-    //}
-    // console.log("adad", history.location.pathname);
-
-
-    //  if (window?.web3?.eth) {
-    //       let user = "";
-
-    //       try {
-    //         user = window?.web3?.eth?.accounts;
-    //         console.log(user[0],"userssss!!")
-    //       } catch (e) {console.log(e,"error")}
-    //       console.log(user,"user!!")
-    //       if (user && user.length) {
-            
-    //         const response = await UserService.addUser({ accountAddress: user[0] });
-    //         if (response.accountAddress) {
-    //           sessionManager.setDataInCookies(
-    //             response.accountAddress,
-    //             "accountAddress"
-    //           );
-    //           sessionManager.setDataInCookies(response.accountAddress, "userId");
-    //           sessionManager.setDataInCookies(response.username, "username");
-    //           sessionManager.setDataInCookies(
-    //             response.profilePicture,
-    //             "profilePicture"
-    //           );
-    //         }
-    //         sessionManager.setDataInCookies(true, "isLoggedIn");
-    //         // history.push("/about");
-    //         window.location.reload();
-            
-    //         return {user:user};
-    //       } else {
-    //         loginErrorMessage();
-    //       }
-    //       return true; //required to close the "connect wallet" popup
-      
-    // } else {
-      
-    //   redirectErrorMessage();
-    // }
   };
-  
-  // let check = window?.web3?.eth?.accounts;
-  // let pathname = history.location.pathname;
-  // let currentAddress = sessionManager.getDataFromCookies("accountAddress");
-  // if(check && check[0]!==currentAddress){
-  //   Reload(pathname);
-  // }
 
   return (
     <>

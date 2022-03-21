@@ -7,9 +7,7 @@ import { NETWORKS } from "../../constants";
 const Web3 = require("web3");
 
 function Header(props) {
-
-  const [forceUpdate, setForceUpdate] = useState(false);
-
+  const [wallet, setWallet] = useState();
   const getUserAccountAddress = () => {
     let user = "";
     user = sessionManager.getDataFromCookies("accountAddress");
@@ -17,91 +15,79 @@ function Header(props) {
     return user;
   };
 
-  const getBalance = async(address) => {
+  const getBalance = async (address) => {
     let balance = null;
     await window.web3.eth.getBalance(address).then((res) => {
       balance = res / Math.pow(10, 18);
       balance = truncateToDecimals(balance);
     });
     return balance;
-  }
+  };
 
   function truncateToDecimals(num, dec = 2) {
-      let decimal = dec;
-      if(num !== 0 && num.toString().split('.')[0] === 0 && num.toString().split('.')[1].charAt(0) === 0 && num.toString().split('.')[1].charAt(1) === 0){
-        decimal = 4;
-      }
-      const calcDec = Math.pow(10, decimal);
-      return Math.trunc(num * calcDec) / calcDec;
+    let decimal = dec;
+    if (
+      num !== 0 &&
+      num.toString().split(".")[0] === 0 &&
+      num.toString().split(".")[1].charAt(0) === 0 &&
+      num.toString().split(".")[1].charAt(1) === 0
+    ) {
+      decimal = 4;
     }
+    const calcDec = Math.pow(10, decimal);
+    return Math.trunc(num * calcDec) / calcDec;
+  }
 
-    const getBalance2 = async(address) => {
-      let balance = null;
-      await window.web3.eth.getBalance(address).then((res) => {
-        balance = res / Math.pow(10, 18);
-        balance = truncateToDecimals(balance);
-      });
-      return balance;
-    }
+  const getBalance2 = async (address) => {
+    let balance = null;
+    await window.web3.eth.getBalance(address).then((res) => {
+      balance = res / Math.pow(10, 18);
+      balance = truncateToDecimals(balance);
+    });
+    return balance;
+  };
 
-
-    const [balance, getWalletBalance] = useState([]);
+  const [balance, getWalletBalance] = useState([]);
   const getXDCWalletBalance = async (address) => {
     window.web3 = new Web3(window.xdc ? window.xdc : window.ethereum);
 
-    if (
-      window.web3.currentProvider 
-    ) {
+    if (window.web3.currentProvider) {
       if (!window.web3.currentProvider.chainId) {
-         await getBalance2(address);
-            let balance = null;
-           await window.web3.eth.getBalance(address)
-           .then((res) => {
-              balance = res / Math.pow(10, 18);
-              balance = truncateToDecimals(balance);
-              console.log(balance,"res#")
-              getWalletBalance(balance)
-            })
-            return await balance
+        await getBalance2(address);
+        let balance = null;
+        await window.web3.eth.getBalance(address).then((res) => {
+          balance = res / Math.pow(10, 18);
+          balance = truncateToDecimals(balance);
+          console.log(balance, "res#");
+          getWalletBalance(balance);
+        });
+        return await balance;
       }
     }
   };
-
 
   const getUserBalance = async () => {
     let balance = sessionManager.getDataFromCookies("accountAddress");
     const web3 = new Web3(
       new Web3.providers.HttpProvider(process.env.REACT_APP_NETWORK_RPC_URL)
     );
-    // console.log("adadad", web3);
-    
     let checkResult = Web3.utils.toChecksumAddress(balance);
-    
-    if (checkResult)
-    getXDCWalletBalance(checkResult)
-      // web3.eth.getBalance(checkResult, function (error, result) {
-      //   if (error) {
-      //   } else {
-      //     let num = Number(result / 1000000000000000000);
 
-      //     getSetBalance(num.toFixed(2));
-      //   }
-      // });
+    if (checkResult) getXDCWalletBalance(checkResult);
   };
-
-
-  const handleXDCPayWalletChange = async () => {
-    console.log("check1");
+  const HandleWalletChange = async () => {
+    console.log();
     window.web3 = new Web3(window.xdc ? window.xdc : window.ethereum);
+
     if (
       window.web3.currentProvider &&
       sessionManager.getDataFromCookies("isLoggedIn")
     ) {
-      console.log("check2");
       if (!window.web3.currentProvider.chainId) {
-        console.log("check3");
         //when metamask is disabled
-        const state = window.web3.givenProvider.publicConfigStore ? window.web3.givenProvider.publicConfigStore._state : window.web3.currentProvider.publicConfigStore._state;
+        const state = window.web3.givenProvider.publicConfigStore
+          ? window.web3.givenProvider.publicConfigStore._state
+          : window.web3.currentProvider.publicConfigStore._state;
         if (state.selectedAddress !== undefined) {
           let address = state.selectedAddress;
           let network =
@@ -111,8 +97,12 @@ function Header(props) {
 
           let newBalance = await getBalance(address);
 
-          console.log("check4", address, network, newBalance);
-          if ((address || network) && (address !== sessionManager.getDataFromCookies("accountAddress")  || newBalance !== balance)) {
+          if (
+            (address || network) &&
+            (address !== sessionManager.getDataFromCookies("accountAddress") ||
+              network !== sessionManager.getDataFromCookies("network") ||
+              newBalance !== sessionManager.getDataFromCookies("balance"))
+          ) {
             let balance = null;
 
             await window.web3.eth.getBalance(address).then((res) => {
@@ -120,17 +110,11 @@ function Header(props) {
               balance = truncateToDecimals(balance);
             });
 
-            let accountDetails = {
-              address: address,
-              network: network,
-              balance: balance,
-              isLoggedIn: true,
-            };
-
-            
-            
-            // props.updateAccountDetails(accountDetails);
-            // setForceUpdate(true);
+            sessionManager.setDataInCookies(address, "accountAddress");
+            sessionManager.setDataInCookies(address, "userId");
+            sessionManager.setDataInCookies(network, "network");
+            sessionManager.setDataInCookies(balance, "balance");
+            sessionManager.setDataInCookies(true, "isLoggedIn");
           }
         } else {
           //metamask is also enabled with xdcpay
@@ -138,39 +122,89 @@ function Header(props) {
       }
     }
   };
-  // const [getBalance, getSetBalance] = useState("");
+
   useEffect(() => {
-    getUserBalance();
-    handleXDCPayWalletChange();
-    // window.addEventListener("load", handleXDCPayWalletChange);
-     //eslint-disable-next-line
+    
+    const handleWalletSession = () => {
+      if (!window.xdc) {
+        sessionManager.removeDataFromCookies("isLoggedIn");
+        sessionManager.removeDataFromCookies("accountAddress");
+        sessionManager.removeDataFromCookies("balance");
+        sessionManager.removeDataFromCookies("network");
+        
+        // eslint-disable-next-line no-restricted-globals
+        // history.push("/about");
+      } else {
+        window.web3 = new Web3(window.xdc ? window.xdc : window.ethereum);
+  
+        if (window.web3.currentProvider) {
+          if (!window.web3.currentProvider.chainId) {
+            const state = window.web3.givenProvider.publicConfigStore
+              ? window.web3.givenProvider.publicConfigStore._state
+              : window.web3.currentProvider.publicConfigStore._state;
+            if (!state.selectedAddress) {
+              sessionManager.removeDataFromCookies("isLoggedIn");
+              sessionManager.removeDataFromCookies("accountAddress");
+              sessionManager.removeDataFromCookies("balance");
+              sessionManager.removeDataFromCookies("network");
+
+              // eslint-disable-next-line no-restricted-globals
+              // history.push("/about");
+            }
+          } else {
+            sessionManager.removeDataFromCookies("isLoggedIn");
+            sessionManager.removeDataFromCookies("accountAddress");
+            sessionManager.removeDataFromCookies("balance");
+            sessionManager.removeDataFromCookies("network");
+            // eslint-disable-next-line no-restricted-globals
+            // history.push("/about");
+          }
+        } else {
+          sessionManager.removeDataFromCookies("isLoggedIn");
+          sessionManager.removeDataFromCookies("accountAddress");
+          sessionManager.removeDataFromCookies("balance");
+          sessionManager.removeDataFromCookies("network");
+          // eslint-disable-next-line no-restricted-globals
+          // history.push("/about");
+        }
+      }
+    };
+   
+
+    setTimeout(() => {
+      handleWalletSession();
+    }, 1000);
+    HandleWalletChange();
+    window.addEventListener("load", HandleWalletChange);
+    //eslint-disable-next-line
   }, []);
 
-  
   return (
     <>
-    <HeaderContainer>
-      <SpaceBetween>
-        <div style={{ display: "flex", marginLeft: "12px" }}>
-          {/* <GridLogo
+      <HeaderContainer>
+        <SpaceBetween>
+          <div style={{ display: "flex", marginLeft: "12px" }}>
+            {/* <GridLogo
             src="/images/Grid.svg"
             onClick={() => setOpenHumburger(openHumburger)}
           /> */}
-          <XmartlyLogo src="/images/Logo.svg" />
-        </div>
-        {sessionManager.getDataFromCookies("accountAddress") ? (
-          <XDCContainer>
-            <XDCInfo {...getUserBalance()}>{balance} XDC</XDCInfo>
-            <UserContainer>
-              {getUserAccountAddress()}
-              <UserLogo src="/images/profile.svg" />
-            </UserContainer>
-          </XDCContainer>
-        ) : (
-          <Button onClick={props.getCurrentUserDetails}>Connect Wallet</Button>
-        )}
-      </SpaceBetween>
-    </HeaderContainer>
+            <XmartlyLogo src="/images/Logo.svg" />
+          </div>
+          {sessionManager.getDataFromCookies("accountAddress") ? (
+            <XDCContainer>
+              <XDCInfo {...getUserBalance()}>{balance} XDC</XDCInfo>
+              <UserContainer>
+                {getUserAccountAddress()}
+                <UserLogo src="/images/profile.svg" />
+              </UserContainer>
+            </XDCContainer>
+          ) : (
+            <Button onClick={props.getCurrentUserDetails}>
+              Connect Wallet
+            </Button>
+          )}
+        </SpaceBetween>
+      </HeaderContainer>
     </>
   );
 }
@@ -198,9 +232,8 @@ const HeaderContainer = styled.div`
 const XmartlyLogo = styled.img`
   margin-right: 17px;
   @media (min-width: 300px) and (max-width: 1024px) {
-    margin-left:50px
+    margin-left: 50px;
   }
-  
 `;
 // const GridLogo = styled.img`
 //   margin-right: 17px;
