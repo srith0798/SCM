@@ -11,7 +11,10 @@ const useStyles = makeStyles(() => ({
   dialogBox: {
     width: "100% !important",
     top: "160px",
-  },
+  ['@media screen and (min-width: 300px) and (max-width: 768px)']: { 
+    top: "0px !important",
+  
+}}
 }));
 
 export default function RenameContract(props) {

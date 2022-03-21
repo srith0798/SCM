@@ -11,10 +11,10 @@ const useStyles = makeStyles(() => ({
     maxWidth: "563px",
     height: "325px",
     overflow: "hidden",
-    top: "200px !important",
+    // top: "50px !important",
     ['@media screen and (min-width: 300px) and (max-width: 768px)']: { 
       width: '90% !important',
-      top: "300px !important",
+      top: "0px !important",
     
   }}
 }));
@@ -147,7 +147,7 @@ const ApplyButton = styled.div`
   @media (min-width: 300px) and (max-width: 414px) {
     margin-left: 13px;
     height: 27px;
-    width: 116px;
+    width: 70px;
     padding-top: 2px;
   }
 `;
@@ -169,7 +169,7 @@ const CancelButton = styled.div`
   color: #3163f0;
   @media (min-width: 300px) and (max-width: 414px) {
     height: 27px;
-    width: 116px;
+    width: 70px;
     padding-top: 2px;
   }
 `;
@@ -270,23 +270,52 @@ const Input = styled.input`
   color: #b7b7b7;
   height: 34px;
   padding-left: 9px;
-
   margin-left: 18px;
   width: 160px;
-  @media (min-width: 300px) and (max-width: 414px) {
-    margin-left: 0px;
+  @media (min-width: 300px) and (max-width: 767px) {
+    margin-left: 5px;
     margin-right: 20px;
-    width: 50%;
+    width: 35%;
   }
 `;
 const InputDiv = styled.div`
   margin-right: 42px;
   padding-bottom: 15px;
-  @media (min-width: 300px) and (max-width: 414px) {
+  @media (min-width: 300px) and (max-width: 360px) {
     display: flex;
     padding-bottom: 30px;
     margin-right: 0px;
-    width: 275px;
+    width: 290px;
+  }
+  @media (min-width: 361px) and (max-width: 376px) {
+    display: flex;
+    padding-bottom: 30px;
+    margin-right: 0px;
+    width: 310px;
+  }
+  @media (min-width: 377px) and (max-width: 391px) {
+    display: flex;
+    padding-bottom: 30px;
+    margin-right: 0px;
+    width: 335px;
+  }
+  @media (min-width: 392px) and (max-width: 394px) {
+    display: flex;
+    padding-bottom: 30px;
+    margin-right: 0px;
+    width: 340px;
+  }
+  @media (min-width: 395px) and (max-width: 413px) {
+    display: flex;
+    padding-bottom: 30px;
+    margin-right: 0px;
+    width: 356px;
+  }
+  @media (min-width: 414px) and (max-width: 767px) {
+    display: flex;
+    padding-bottom: 30px;
+    margin-right: 0px;
+    width: 256px;
   }
 `;
 const MainContainer = styled.div`
@@ -323,7 +352,7 @@ const Content = styled.div`
   font-weight: 600;
   color: #303134;
   white-space: nowrap;
-  @media (min-width: 300px) and (max-width: 414px) {
+  @media (min-width: 300px) and (max-width: 767px) {
     padding-bottom: 10px;
     font-size: 14px;
     font-weight: 500;
@@ -335,8 +364,29 @@ const RowBoxOne = styled.div`
   justify-content: start;
   width: 100%;
   max-width: 403px;
-  @media (min-width: 300px) and (max-width: 414px) {
+  /* @media (min-width: 300px) and (max-width: 414px) {
     max-width: 240px;
+    margin-right: 10px;
+  } */
+  @media (min-width: 300px) and (max-width: 360px) {
+    
+    max-width: 185px;
+    margin-right: 20px;
+  }
+  @media (min-width: 361px) and (max-width: 376px) {
+    
+    max-width: 200px;
+    margin-right: 20px;
+  }
+  @media (min-width: 377px) and (max-width: 394px) {
+    max-width: 240px;
+    margin-right: 10px;
+    
+  }
+
+  @media (min-width: 395px) and (max-width: 767px) {
+    max-width: 240px;
+    margin-right: 10px;
   }
 `;
 const RowContainer = styled.div`
@@ -370,7 +420,7 @@ const NewContainerStatus = styled.div`
   width: 100%;
   column-gap: 103px;
   padding-bottom: 20px;
-  @media (min-width: 300px) and (max-width: 414px) {
+  @media (min-width: 300px) and (max-width: 767px) {
     // flex-direction: column;
     column-gap: 10px;
   }
@@ -379,10 +429,30 @@ const LastContainer = styled.div`
   display: flex;
   justify-content: end;
   max-width: 479px;
-  @media (min-width: 300px) and (max-width: 414px) {
+  @media (min-width: 300px) and (max-width: 360px) {
+    
     justify-content: start;
     margin-top: -18px;
-    margin-left: 6px;
+    margin-left: 60px;
+  }
+  @media (min-width: 361px) and (max-width: 376px) {
+    
+    justify-content: start;
+    margin-top: -18px;
+    margin-left: 75px;
+  }
+  @media (min-width: 377px) and (max-width: 394px) {
+   
+    justify-content: start;
+    margin-top: -18px;
+    margin-left: 95px;
+  }
+
+  @media (min-width: 395px) and (max-width: 767px) {
+    display: flex;
+    justify-content: start;
+    margin-top: -18px;
+    margin-left: 115px;
   }
 `;
 // const NewContainerOne = styled.div`

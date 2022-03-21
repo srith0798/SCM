@@ -118,3 +118,7 @@ DESTINATION_TYPE :{
   EMAIL:"Email"
 }
 }
+export const NETWORKS = {
+  XDC_MAINNET: "XDC Mainnet",
+  XDC_APOTHEM_TESTNET: "XDC Apothem Testnet",
+};

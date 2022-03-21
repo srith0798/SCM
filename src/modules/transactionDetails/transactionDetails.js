@@ -463,7 +463,7 @@ export default function TransactionDetails() {
             </CommonDiv>
             <CommonDiv>
               <Row>
-                <Heading>Input:</Heading>
+                <InputHeading>Input:</InputHeading>
                 <SubHeadBlue onClick={() => setShowInputData(!showInputData)}>
                   view data
                   {showInputData === false ? (
@@ -512,7 +512,7 @@ export default function TransactionDetails() {
             </CommonDiv>
             <CommonDiv>
               <Row>
-                <Heading>Output </Heading>
+                <InputHeading>Output </InputHeading>
                 <SubHeadBlue>
                   veiw data
                   <img
@@ -581,11 +581,11 @@ export default function TransactionDetails() {
               {/* <BackgroundChanger> */}
                 <FlexDiv>
                   <div style={{display: "flex"}}>
-                    <Heading>From</Heading>
+                    <From>From</From>
                     <SubHeadBlue>{from}</SubHeadBlue>
                   </div>
                   <FlexDivMob>
-                    <Heading>To</Heading>
+                    <From>To</From>
                     <SubHeadBlue>{to}</SubHeadBlue>
                   </FlexDivMob>
                 </FlexDiv>
@@ -946,7 +946,7 @@ const LastContainer = styled.div`
   border-radius: 0.375rem;
   margin-top: 1.25rem;
   height: fit-content;
-  max-height: 30rem;
+  max-height: 70rem;
   /* height: 18.75rem; */
   padding: 2rem;
   font-weight: 600;
@@ -960,8 +960,8 @@ const Heading = styled.div`
   width: 100%;
   max-width: 16.25rem;
   @media (min-width: 0px) and (max-width: 767px) {
-    /* min-width: 170px; */
-    max-width: fit-content;
+    min-width: 170px;
+    /* max-width: max-content; */
     
   }
   @media (min-width: 768px) and (max-width: 1023px) {
@@ -973,6 +973,26 @@ const TransactionNumber = styled.div`
   color: #416be0;
   font-weight: 600;
 `;
+
+const From = styled.div`
+  text-align: left;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #102c78;
+  width: 100%;
+  max-width: 16.25rem;
+  @media (min-width: 0px) and (max-width: 767px) {
+    /* min-width: 170px; */
+    max-width: max-content;
+    
+  }`;
+
+const InputHeading = styled.div`
+text-align: left;
+font-size: 0.875rem;
+font-weight: 600;
+color: #102c78;
+width: 16.5%;`;
 
 const Button = styled.button`
   background-image: url("/images/globe.svg");
@@ -1063,9 +1083,6 @@ const SubHeading = styled.div`
   font-weight: 600;
   color: #102c78;
   display: flex;
-  @media (min-width: 300px) and (max-width: 768px) {
-    padding-left: 13px !important;
-  }
 `;
 
 const CopyToClipboardImg = styled.img`
