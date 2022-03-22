@@ -13,9 +13,11 @@ export default function Historys() {
   const [page, setPage] = React.useState(1);
   const [countToggle, setCountToggle] = React.useState(10);
 
-  const getNotifications = async () => {
+  const getNotifications = async (skip = 0, limit = countToggle) => {
     let request = {
-        userId: sessionManager.getDataFromCookies("userId")
+        userId: sessionManager.getDataFromCookies("userId"),
+        skip: skip,
+        limit: limit,
     };
     const [error , response] = await utility.parseResponse(
       AlertService.getHistoryList(request)
@@ -25,23 +27,13 @@ export default function Historys() {
   };
 
   const changePage = (value) => {
-    // setValueCheck(value.selected);
-    // if(setFrom>0 || select === 2 || select === 3){
-    //   filterSearch(Math.ceil(value.selected * countToggle),
-    //   countToggle);
-    // }
-    // else if(selected.length > 0) {
-    //   getTransaction(
-    //         selected,
-    //         Math.ceil(value.selected * countToggle),
-    //         countToggle
-    //       );
-    // }
+    getNotifications(Math.ceil(value.selected * countToggle),
+    countToggle);
   };
 
   useEffect(() => {
     getNotifications();
-  }, []);
+  }, [countToggle]);
 
   return (
     <div>
@@ -150,7 +142,8 @@ const MainContainer = styled.div`
   border-radius: 0.375rem;
   opacity: 1;
   margin-top: 1.25rem;
-  height: 15.625rem;
+  min-height: 15.625rem;
+  height: fit-content;
   overflow-y: hidden;
   @media (min-width: 300px) and (max-width: 767px) {
     width: 100%;

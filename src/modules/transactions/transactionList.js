@@ -56,7 +56,7 @@ export default function TransactionList() {
   const [selected, setSelected] = React.useState("");
   const [selectedName, setSelectedName] = React.useState("");
   const [page, setPage] = React.useState(1);
-  // const [valueCheck, setValueCheck] = React.useState(0);
+  const [valueCheck, setValueCheck] = React.useState(0);
   const [defaultAddress, setDefaultAddress] = React.useState("");
 
   const getContractNames = async (skip = 0, limit = 10) => {
@@ -94,42 +94,41 @@ export default function TransactionList() {
   const getTransaction = async (url, skip = 0, limit = countToggle) => {
     try {
       let requestData = {}
-      if (setFrom > 0 && (select === 2 || select === 3)){
-        requestData = {
-          skip: skip,
-          limit: limit,
-          contractAddress: url,
-          status: select === 2 ? true : false,
-          sortingKey:{timestamp:-1},
-        };
-        
-        }
-      else if (setFrom > 0 && select === 1){
-        requestData = {
-          skip: skip,
-          limit: limit,
-          contractAddress: url,
-          // status:,
-          sortingKey:{timestamp:-1},
-        };
-        
-      }
-      else if ((select === 2 || select === 3) && setFrom === 0){
-        requestData = {
-          skip: skip,
-          limit: limit,
-          contractAddress: url,
-          status: select === 2 ? true : false,
-          sortingKey:{timestamp:-1},
-        };}
-      else
-      {requestData = {
+      if (setFrom > 0 && (select === 2 || select === 3))
+      requestData = {
         skip: skip,
         limit: limit,
         contractAddress: url,
-        // status:,
-        sortingKey:{timestamp:-1},
-      };}
+        status: select === 2 ? true : false,
+        date : {
+          fromDate: setFrom,
+          toDate: setTo
+       },
+      };
+    else if (setFrom > 0 && select === 1)
+      requestData = {
+        skip: skip,
+        limit: limit,
+        contractAddress: url,
+        // status: "",
+        date : {
+          fromDate: setFrom,
+          toDate: setTo
+       },
+      };
+    else if ((select === 2 || select === 3) && setFrom === 0)
+      requestData = {
+        skip: skip,
+        limit: limit,
+        contractAddress: url,
+        status: select === 2 ? true : false,
+      };
+    else
+      requestData = {
+        skip: skip,
+        limit: limit,
+        contractAddress: url,
+      };
       setLoader(true);
       const response = await ContractsService.getTransactionsList(requestData);
       setLoader(false);
@@ -212,7 +211,7 @@ export default function TransactionList() {
     });
   };
   const changePage = (value) => {
-    // setValueCheck(value.selected);
+    setValueCheck(value.selected);
     if(setFrom>0 || select === 2 || select === 3){
       filterSearch(Math.ceil(value.selected * countToggle),
       countToggle);
@@ -239,6 +238,7 @@ export default function TransactionList() {
   const [select, setSelect] = React.useState(1);
   useEffect(() => {
     if (selected.length > 0) {
+      console.log("check");
       getTransaction(selected);
     } else getContractNames();
     //eslint-disable-next-line
@@ -631,15 +631,13 @@ export default function TransactionList() {
             })}
            
           </div>
-        {((input === "" && address.length === 0) || (input !== "" && searchRow.length === 0)) && (
+        {loader === false ? ((input === "" && address.length === 0) || (input !== "" && searchRow.length === 0)) && (
           <PlaceHolderContainer>
             <PlaceHolderImage src="/images/transactions-blue.svg" />
             No transactions found <br/>
             <span><a href="/contracts">add{" "} </a> your first contract </span>
           </PlaceHolderContainer>
-        )}
-        
-             
+        ) : ""}
           
         </TableContainer>
         <PageVerifyCheck style={{display:reponse.totalCount<10?"none":""}}  ch   eck={page}>

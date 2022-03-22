@@ -970,7 +970,7 @@ const MainContainer = styled.div`
   @media (min-width: 300px) and (max-width: 768px) {
     padding: 2.5rem 1.5rem 1.5rem 1.5rem;
     height: 100%;
-    max-height: 150vh;
+    max-height: 1000vh;
   }
 `;
 const TitleHead = styled.div`

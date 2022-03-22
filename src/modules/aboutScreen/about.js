@@ -39,14 +39,16 @@ export default function About(props) {
               title="Click to get started with Xmartly"
             >
               <Button
-                onClick={() =>
+                onClick={() => 
+                  sessionManager.getDataFromCookies("isLoggedIn") ? 
                   history.push({
                     pathname: "/contracts",
                     state: {
                       id: address.address,
                       homepageHistory: "from-home-page",
                     },
-                  })
+                  }) : 
+                  history.push("/")
                 }
               >
                 Add Your Smart Contract
@@ -69,13 +71,15 @@ export default function About(props) {
             </VideoBox>
             <SmartButton
              onClick={() =>
+              sessionManager.getDataFromCookies("isLoggedIn") ? 
               history.push({
                 pathname: "/contracts",
                 state: {
                   id: address.address,
                   homepageHistory: "from-home-page",
                 },
-              })
+              }) :
+              history.push("/")
             }
             >
               Add Your Smart Contract

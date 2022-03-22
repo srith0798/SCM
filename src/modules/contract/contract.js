@@ -314,13 +314,13 @@ export default function Contract(props) {
             </div>
           );
         })}
-        {((input === "" && address.length === 0) ||
+        {loader === false ?  ((input === "" && address.length === 0) ||
           (input !== "" && searchRow.length === 0)) && (
           <PlaceHolderContainer>
             <PlaceHolderImage src="/images/contracts.svg" />
             No Contracts Available
           </PlaceHolderContainer>
-        )}
+        ) : ""}
       </TableContainer>
       <PageVerifyCheck check={page}>
         <PaginationDiv>

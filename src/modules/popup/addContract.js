@@ -124,7 +124,7 @@ export default function AddContract(props) {
             {hideStep && (
               <Text>
                 1. Go to XDC Observatory/Origin <br></br>
-                2. Check for an verified contract <br></br> 3. Copy contract
+                2. Check for contract <br></br> 3. Copy contract
                 address <br></br>4. Paste it on the given field above
               </Text>
             )}
@@ -261,7 +261,7 @@ const Input = styled.input`
   padding-left: 34px;
   background-size: 14px;
   position: relative;
-  background-color: #ffffff;
+  background-color: #ffffff !important;
   border: none;
   border-radius: 4px;
   width: 100%;
@@ -298,7 +298,7 @@ const HideSteps = styled.button`
   border-radius: 4px;
   font-size: 0.7rem;
   font-weight: 600;
-  background-color: #ffffff;
+  background-color: #ECF0F7;
   color: #3163f0;
   cursor: pointer;
   background-image: url("/images/arrrow.svg");
