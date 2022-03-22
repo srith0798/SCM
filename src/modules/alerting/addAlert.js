@@ -448,7 +448,7 @@ export default function AddAlert() {
                                     {option.address}
                                   </MenuItem>
                                 ) : (
-                                  <MenuItem value={option}>{}</MenuItem>
+                                  <MenuItem value={option._id}>{option.name}</MenuItem>
                                 )
                               )
                             ) : (

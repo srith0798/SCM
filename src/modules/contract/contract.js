@@ -285,7 +285,7 @@ export default function Contract(props) {
                   </ColumnSecond>
                   <ColumnSecond style={{ display: "flex" }}>
                     <TagCol>                     
-                      {(data.tags==="")? 
+                      {(data.tags.length === 0)? 
                       (<AddTag onClick={(e) => Open(e, data._id)} >Add Tag</AddTag>) 
                       :
                       (address[index].tags &&
