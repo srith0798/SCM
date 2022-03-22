@@ -19,8 +19,67 @@ export default function DestinationTags(props) {
   const [channelName, setChannelName] = useState("");
 
   const classes = useStyles();
+  return (
+    <div>
+      <Dialog classes={{ paper: classes.dialogBox }} open={true}>
+        <MainContainer>
+          <Container>
+            <SubContainer>
+              <Add>Add Destination</Add>
+              <img
+                style={{ cursor: "pointer" }}
+                alt=""
+                src="/images/close.svg"
+                onClick={props.close}
+              />
+            </SubContainer>
+            <Content>
+              Add an URL that can receive alert notifications from Xmartly.
+            </Content>
+            <Input
+              type="text"
+              placeholder="Label"
+              value={label}
+              onChange={(e) => setLabel(e.target.value)}
+            />
 
-  const MainContainer = styled.div`
+            <Input
+              type="text"
+              placeholder={props?.type === "EMAIL" ? "Email" : "URL"}
+              value={url}
+              onChange={(e) => setUrl(e.target.value)}
+            />
+            <CheckDiv check={props?.type}>
+              <Input
+                type="text"
+                placeholder="Channel Name"
+                value={channelName}
+                onChange={(e) => setChannelName(e.target.value)}
+              />
+            </CheckDiv>
+            <SubContainer>
+              <ConfirmButton
+                disabled={
+                  props?.type === "SLACK"
+                    ? label === "" || url === "" || channelName === ""
+                    : label === "" || url === ""
+                }
+                onClick={() =>
+                  props?.type === "SLACK"
+                    ? props.click(label, url, channelName)
+                    : props.click(label, url)
+                }
+              >{`Add ${
+                genericConstants.DESTINATION_TYPE[props.type]
+              }`}</ConfirmButton>
+            </SubContainer>
+          </Container>
+        </MainContainer>
+      </Dialog>
+    </div>
+  );
+}
+const MainContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
@@ -79,55 +138,5 @@ const ConfirmButton = styled.button`
   padding: 7px 9px;
   margin-right: 10px;
   margin-top: 2rem;
+  cursor: pointer;
 `;
-
-  return (
-    <div>
-      <Dialog classes={{ paper: classes.dialogBox }} open={true}>
-        <MainContainer>
-          <Container>
-            <SubContainer>
-              <Add>Add Destination</Add>
-              <img alt="" src="/images/close.svg" onClick={props.close} />
-            </SubContainer>
-            <Content>
-              Add an URL that can receive alert notifications from Xmartly.
-            </Content>
-            <Input
-              type="text"
-              placeholder="Label"
-              value={label}
-              onChange={(e) => setLabel(e.target.value)}
-            />
-
-            <Input
-              type="text"
-              placeholder={props?.type === "EMAIL" ? "Email" : "URL"}
-              value={url}
-              onChange={(e) => setUrl(e.target.value)}
-            />
-            <CheckDiv check={props?.type}>
-              <Input
-                type="text"
-                placeholder="Channel Name"
-                value={channelName}
-                onChange={(e) => setChannelName(e.target.value)}
-              />
-            </CheckDiv>
-            <SubContainer>
-              <ConfirmButton
-                onClick={() =>
-                  props?.type === "SLACK"
-                    ? props.click(label, url, channelName)
-                    : props.click(label, url)
-                }
-              >{`Add ${
-                genericConstants.DESTINATION_TYPE[props.type]
-              }`}</ConfirmButton>
-            </SubContainer>
-          </Container>
-        </MainContainer>
-      </Dialog>
-    </div>
-  );
-}

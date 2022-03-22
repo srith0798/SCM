@@ -67,6 +67,8 @@ export default function Contract(props) {
       } else {
         setPage(parseInt(pageCount / 10) + 1);
       }
+      // if (response.contractList.length === 0) setShowPlaceHolder(true);
+      // // else setShowPlaceHolder(false);
     } catch (e) {
       setLoader(false);
     }
@@ -93,7 +95,7 @@ export default function Contract(props) {
   const [input, setInput] = useState("");
   const search = (e) => {
     setInput(e.target.value);
-    searching(e.target.value, ["address", "contractName"]); //debouncing logic
+    searching(e.target.value, ["address", "contractName"]);
   };
 
   const changePage = (value) => {

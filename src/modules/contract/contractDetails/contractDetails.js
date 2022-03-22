@@ -673,7 +673,6 @@ const Button = styled.button`
                       />
                     )}
                     <AddTag
-                      disabled={address.tags !== ""}
                       onClick={() => Open()}
                     >
                       Add Tag

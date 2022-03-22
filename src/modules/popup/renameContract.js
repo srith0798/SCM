@@ -57,7 +57,7 @@ export default function RenameContract(props) {
             <SubContainer
               style={{ width: "100%", maxWidth: "160px", marginTop: "30px" }}
             >
-              <ButtonConfirm click={renameContract} text={"Rename"} />
+              <ButtonConfirm input={newName} click={renameContract} text={"Rename"} />
               <CancelButton onClick={props.click}>Cancel</CancelButton>
             </SubContainer>
           </Container>

@@ -404,6 +404,9 @@ const Img = styled.img`
            </Row>
          </LastContainer>
         ))}
+        {alert?.destinations?.length === 0 && (
+               <Heading>No alert destination is enabled</Heading> 
+             )}
         <RowContainer>
           <EditButton style={{ marginRight: "4px" }} onClick = {editDestinations}>Edit</EditButton>
           {alert.status === true ?

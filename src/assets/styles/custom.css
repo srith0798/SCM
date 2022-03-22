@@ -665,16 +665,12 @@ input[type="date"]:valid::before {
     margin: 0px !important;
     } */
 }
-/* @media (min-width: 300px) and (max-width: 360px) {
-  .MuiPaper-root {
-    margin: 0px !important;
-    height: 100%;
-    max-height: max-content !important;
-    top: 13% !important;
-    max-width: 330px !important;
+ @media (min-width: 300px) and (max-width: 767px) {
+  .app-container{
+    height: 100vh;
   }
 }
-@media (min-width: 361px) and (max-width: 376px) {
+/*@media (min-width: 361px) and (max-width: 376px) {
   .MuiPaper-root {
     margin: 0px !important;
     height: 100%;

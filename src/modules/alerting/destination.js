@@ -145,7 +145,7 @@ const ColumnTwo = styled.div`
   min-width: 200px;
   color: #102c78;
   width: 100%;
-  max-width: 11.25rem;
+  max-width: fit-content;
   margin: 0.25rem;
 `;
 const RowData = styled.div`
@@ -236,7 +236,7 @@ const Img = styled.img`
                     {destination.status}
                   </ColorChanging>
                 </ColumnTwo>
-                <ColumnTwo>
+                <ColumnTwo >
                   <Tooltip disableFocusListener title="Delete">
                     <img
                       alt=""

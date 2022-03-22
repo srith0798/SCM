@@ -39,7 +39,51 @@ export default function AddTags(props) {
     }
     props.click(window.location.reload());
   };
-  const MainContainer = styled.div`
+
+  return (
+    <div>
+      <Dialog classes={{ paper: classes.dialogBox }} open={true}>
+        <MainContainer>
+          <Container>
+            <SubContainer>
+              <Add>Add Tag to the selected contract</Add>
+            </SubContainer>
+            <Content>
+              Add unique tags to your contracts to help you filter your
+              transactions pinpoint key events that happened more easily.
+            </Content>
+            <Input
+              type="text"
+              placeholder="E.g. v1.3.37"
+              value={input}
+              
+              onChange={(e) =>{
+                if(e.target.value.length===30){ 
+                  setTagError("Tag cannot be longer than 30 characters")
+                  return false
+                }; 
+                setInput([e.target.value])
+
+              } 
+                }             
+            />  <ErrorTag>{tagError}</ErrorTag>    
+            <SubContainer
+              style={{ width: "100%", maxWidth: "160px", marginTop: "30px" }}
+            >  
+              <ButtonConfirm
+                input={input}
+                text={"Add Tag"}
+                click={addContractTag}
+                /> 
+              <CancelButton onClick={props.click}>Cancel</CancelButton>
+            </SubContainer>
+          </Container>
+        </MainContainer>
+      </Dialog>
+    </div>
+  );
+}
+const MainContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
@@ -94,49 +138,3 @@ const Content = styled.div`
   color: #303134;
   margin-top: 20px;
 `;
-
-
-  return (
-    <div>
-      <Dialog classes={{ paper: classes.dialogBox }} open={true}>
-        <MainContainer>
-          <Container>
-            <SubContainer>
-              <Add>Add Tag to the selected contract</Add>
-            </SubContainer>
-            <Content>
-              Add unique tags to your contracts to help you filter your
-              transactions pinpoint key events that happened more easily.
-            </Content>
-            <Input
-              type="text"
-              placeholder="E.g. v1.3.37"
-              value={input}
-              
-              onChange={(e) =>{
-                if(e.target.value.length===30){ 
-                  setTagError("Tag cannot be longer than 30 characters")
-                  return false
-                }; 
-                setInput([e.target.value])
-
-              } 
-                }             
-            />  <ErrorTag>{tagError}</ErrorTag>    
-            <SubContainer
-              style={{ width: "100%", maxWidth: "160px", marginTop: "30px" }}
-            >  
-              <ButtonConfirm
-                input={input}
-                text={"Add Tag"}
-                click={addContractTag}
-                /> 
-              <CancelButton onClick={props.click}>Cancel</CancelButton>
-            </SubContainer>
-          </Container>
-        </MainContainer>
-      </Dialog>
-    </div>
-  );
-}
-
