@@ -18,36 +18,7 @@ export default function HideContract(props) {
   console.log(props);
 
   const classes = useStyles();
-  return (
-    <div>
-      <Dialog classes={{ paper: classes.dialogBox }} open={true}>
-        <MainContainer>
-          <Container>
-            <SubContainer>
-              <Add>Hide Contract</Add>
-              {/* <img alt="" src="/images/close.svg" onClick={props.click} /> */}
-            </SubContainer>
-            <Content>
-              Are you sure you wish to hide this contract from the transaction
-              listing?
-            </Content>
-            <SubContainer
-              style={{ width: "100%", maxWidth: "200px", marginTop: "30px" }}
-            >
-              <ButtonConfirm
-                click={props.hideContract}
-                text={"Hide contract"}
-              />
-              <CancelButton onClick={props.click}>Cancel</CancelButton>
-            </SubContainer>
-          </Container>
-        </MainContainer>
-      </Dialog>
-    </div>
-  );
-}
-
-const MainContainer = styled.div`
+  const MainContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
@@ -84,3 +55,33 @@ const Content = styled.div`
   color: #303134;
   margin-top: 20px;
 `;
+
+  return (
+    <div>
+      <Dialog classes={{ paper: classes.dialogBox }} open={true}>
+        <MainContainer>
+          <Container>
+            <SubContainer>
+              <Add>Hide Contract</Add>
+              {/* <img alt="" src="/images/close.svg" onClick={props.click} /> */}
+            </SubContainer>
+            <Content>
+              Are you sure you wish to hide this contract from the transaction
+              listing?
+            </Content>
+            <SubContainer
+              style={{ width: "100%", maxWidth: "200px", marginTop: "30px" }}
+            >
+              <ButtonConfirm
+                click={props.hideContract}
+                text={"Hide contract"}
+              />
+              <CancelButton onClick={props.click}>Cancel</CancelButton>
+            </SubContainer>
+          </Container>
+        </MainContainer>
+      </Dialog>
+    </div>
+  );
+}
+

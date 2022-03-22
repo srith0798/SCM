@@ -205,8 +205,6 @@ const DashboardContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  /* overflow-y: hidden;
-  overflow-x: hidden; */
   height: 100vh;
 `;
 const Container = styled.div`

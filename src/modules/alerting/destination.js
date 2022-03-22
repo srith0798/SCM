@@ -64,83 +64,8 @@ export default function Destination() {
   useEffect(() => {
     getDestinations();
   }, []);
-  return (
-    <>
-      <MainContainer>
-        <Div>
-          <Row>
-            <ColumnOne style={{ borderBottom: "none" }}>
-              Destinations
-              <Tooltip disableFocusListener title="Notifications destination">
-                <ToolTipIcon src="/images/tool-tip.svg" />
-              </Tooltip>
-            </ColumnOne>
-          </Row>
-          {addDestinationPopup && (
-            <AddDestination
-              click={addDestination}
-              type = {destinationType}
-              close = {()=>setAddDestinationPopup(false)}
-            />
-          )}
-          <RowContainer>
-            <Button onClick={() => openDestinationPopup("SLACK")} >
-              <ButtonIcon alt="" src="/images/slack.svg" />
-              Slack
-            </Button>
-            <Button onClick={() => openDestinationPopup("WEBHOOK")} >
-              <ButtonIcon alt="" src="/images/webhook.svg" />
-              Webhook
-            </Button>
-            <Button onClick={() => openDestinationPopup("EMAIL")} >
-              <ButtonIcon alt="" src="/images/email.svg" />
-              Email
-            </Button>
-          </RowContainer>
-        </Div>
 
-        <ColumnOne>
-          Active Destination
-          <Tooltip
-            disableFocusListener
-            title="Users' active notifications destination "
-          >
-            <ToolTipIcon src="/images/tool-tip.svg" />
-          </Tooltip>
-        </ColumnOne>
-        <LastDiv>
-          {destinations && destinations.length > 0 && destinations.map((destination) => (
-            <Div>
-              <RowData>
-                <Img alt="" src="/images/email.svg" />
-                <ColumnTwo style={{ color: "#191919" }}>{destination.type}</ColumnTwo>
-                <ColumnTwo style={{ fontWeight: "normal" }}>
-                  {destination.url}
-                </ColumnTwo>
-                <ColumnTwo>
-                  <ColorChanging style={{ fontWeight: "normal" }}>
-                    {destination.status}
-                  </ColorChanging>
-                </ColumnTwo>
-                <ColumnTwo>
-                  <Tooltip disableFocusListener title="Delete">
-                    <img
-                      alt=""
-                      src="/images/deletes.svg"
-                      style={{ width: "1.1rem", cursor: "pointer" }}
-                      onClick = {()=>deleteDestination(destination.destinationId)}
-                    />
-                  </Tooltip>
-                </ColumnTwo>
-              </RowData>
-            </Div>
-          ))}
-        </LastDiv>
-      </MainContainer>
-    </>
-  );
-}
-const MainContainer = styled.div`
+  const MainContainer = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
   border-radius: 0.375rem;
   margin-top: 1.25rem;
@@ -244,10 +169,6 @@ const ColorChanging = styled.text`
   color: #00a58c;
   font-size: 0.875rem;
 `;
-
-// const Icon = styled.img`
-//   width: 1rem;
-// `;
 const Img = styled.img`
   width: 1rem;
   margin-left: 10px;
@@ -256,3 +177,81 @@ const Img = styled.img`
     width: 1rem;
   }
 `;
+
+  return (
+    <>
+      <MainContainer>
+        <Div>
+          <Row>
+            <ColumnOne style={{ borderBottom: "none" }}>
+              Destinations
+              <Tooltip disableFocusListener title="Notifications destination">
+                <ToolTipIcon src="/images/tool-tip.svg" />
+              </Tooltip>
+            </ColumnOne>
+          </Row>
+          {addDestinationPopup && (
+            <AddDestination
+              click={addDestination}
+              type = {destinationType}
+              close = {()=>setAddDestinationPopup(false)}
+            />
+          )}
+          <RowContainer>
+            <Button onClick={() => openDestinationPopup("SLACK")} >
+              <ButtonIcon alt="" src="/images/slack.svg" />
+              Slack
+            </Button>
+            <Button onClick={() => openDestinationPopup("WEBHOOK")} >
+              <ButtonIcon alt="" src="/images/webhook.svg" />
+              Webhook
+            </Button>
+            <Button onClick={() => openDestinationPopup("EMAIL")} >
+              <ButtonIcon alt="" src="/images/email.svg" />
+              Email
+            </Button>
+          </RowContainer>
+        </Div>
+
+        <ColumnOne>
+          Active Destination
+          <Tooltip
+            disableFocusListener
+            title="Users' active notifications destination "
+          >
+            <ToolTipIcon src="/images/tool-tip.svg" />
+          </Tooltip>
+        </ColumnOne>
+        <LastDiv>
+          {destinations && destinations.length > 0 && destinations.map((destination) => (
+            <Div>
+              <RowData>
+                <Img alt="" src="/images/email.svg" />
+                <ColumnTwo style={{ color: "#191919" }}>{destination.type}</ColumnTwo>
+                <ColumnTwo style={{ fontWeight: "normal" }}>
+                  {destination.url}
+                </ColumnTwo>
+                <ColumnTwo>
+                  <ColorChanging style={{ fontWeight: "normal" }}>
+                    {destination.status}
+                  </ColorChanging>
+                </ColumnTwo>
+                <ColumnTwo>
+                  <Tooltip disableFocusListener title="Delete">
+                    <img
+                      alt=""
+                      src="/images/deletes.svg"
+                      style={{ width: "1.1rem", cursor: "pointer" }}
+                      onClick = {()=>deleteDestination(destination.destinationId)}
+                    />
+                  </Tooltip>
+                </ColumnTwo>
+              </RowData>
+            </Div>
+          ))}
+        </LastDiv>
+      </MainContainer>
+    </>
+  );
+}
+

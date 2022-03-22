@@ -14,9 +14,6 @@ export default function Sidebar(props) {
   const redirectToContract = () => {
     history.push("/contracts");
   };
-  // const redirectToNetwork = () => {
-  //   history.push("/networks");
-  // };
   const redirectToAnalytics = () => {
     history.push("/analytics");
   };
@@ -34,7 +31,6 @@ export default function Sidebar(props) {
     sessionManager.removeDataFromCookies("username");
     sessionManager.removeDataFromCookies("profilePicture");
     history.replace("/");
-    // window.location.reload();
   };
 
   const [aboutIcon, setAboutIcon] = React.useState(
@@ -46,9 +42,6 @@ export default function Sidebar(props) {
   const [contractsIcon, setContractsIcon] = React.useState(
     "/images/contracts.svg"
   );
-  // const [networksIcon, setNetworksIcon] = React.useState(
-  //   "/images/networks.svg"
-  // );
   const [analyticsIcon, setAnalyticsIcon] = React.useState(
     "/images/analytics-blue.svg"
   );
@@ -75,106 +68,7 @@ export default function Sidebar(props) {
     if (value === "alerting") setAlertingIcon("/images/alerting-blue.svg");
   };
 
-  return (
-    <SidebarContainer>
-      <Wrapper
-        onClick={redirectToAbout}
-        style={{
-          marginTop: "4rem",
-          backgroundColor: utility.isMenuActive("about") ? "#1d3c93" : "",
-        }}
-        onMouseOver={() => changeSourceForIcons("about")}
-        onMouseOut={() => changeOriginalSourceForIcons("about")}
-      >
-        <Icon src={aboutIcon} />
-        <Heading>About Xmartly</Heading>
-      </Wrapper>
-      {sessionManager.getDataFromCookies("isLoggedIn") && (
-      <Wrapper
-        style={{
-          backgroundColor: utility.isMenuActive("transactions")
-            ? "#1d3c93"
-            : "",
-        }}
-        onClick={redirectToTransaction}
-        onMouseOver={() => changeSourceForIcons("transactions")}
-        onMouseOut={() => changeOriginalSourceForIcons("transactions")}
-      >
-        <Icon src={transactionIcon} />
-        <Heading>Transactions</Heading>
-      </Wrapper>
-      )}
-      {sessionManager.getDataFromCookies("isLoggedIn") && (
-      <Wrapper
-        style={{
-          backgroundColor: utility.isMenuActive("contracts") ? "#1d3c93" : "",
-        }}
-        onClick={redirectToContract}
-        onMouseOver={() => changeSourceForIcons("contracts")}
-        onMouseOut={() => changeOriginalSourceForIcons("contracts")}
-      >
-        <Icon src={contractsIcon} />
-        <Heading>Contracts</Heading>
-      </Wrapper>
-      )}
-      {/* <Wrapper
-        style={{
-          backgroundColor: utility.isMenuActive("networks") ? "#1d3c93" : "",
-        }}
-        onClick={redirectToNetwork}
-        onMouseOver={() => changeSourceForIcons("networks")}
-        onMouseOut={() => changeOriginalSourceForIcons("networks")}
-      >
-        <Icon src={networksIcon} />
-        <Heading>Networks</Heading>
-      </Wrapper> */}
-      {sessionManager.getDataFromCookies("isLoggedIn") && (
-      <Wrapper
-        style={{
-          backgroundColor: utility.isMenuActive("analytics") ? "#1d3c93" : "",
-        }}
-        onClick={redirectToAnalytics}
-        onMouseOver={() => changeSourceForIcons("analytics")}
-        onMouseOut={() => changeOriginalSourceForIcons("analytics")}
-      >
-        <Icon src={analyticsIcon} />
-        <Heading>Analytics</Heading>
-      </Wrapper>
-      )}
-      {sessionManager.getDataFromCookies("isLoggedIn") && (
-      <Wrapper
-        style={{
-          backgroundColor: utility.isMenuActive("rules") ? "#1d3c93" : "",
-        }}
-        onClick={redirectToAlerting}
-        onMouseOver={() => changeSourceForIcons("alerting")}
-        onMouseOut={() => changeOriginalSourceForIcons("alerting")}
-      >
-        <Icon src={alertingIcon} />
-        <Heading>Alerting</Heading>
-      </Wrapper>
-      )}
-      <WrapperFaq style={{ marginTop: sessionManager.getDataFromCookies("isLoggedIn") ? "12rem" : "35rem", paddingLeft: sessionManager.getDataFromCookies("isLoggedIn")
-                ? "22px"
-                : "50px" }} onClick={redirectToFaqs}>
-        <Icon src="/images/Subtraction 2.svg" />
-        <Heading>FAQs</Heading>
-      </WrapperFaq>
-
-      {sessionManager.getDataFromCookies("isLoggedIn") && (
-        <WrapperLogout onClick={redirectToLogout}>
-          <Icon src="/images/Log out.svg" />
-          <Heading>Logout</Heading>
-        </WrapperLogout>
-      )}
-      <CenterDiv>
-        <img alt="" src="/images/Group 12.svg" />
-      </CenterDiv>
-    </SidebarContainer>
-  );
-}
-
-const CenterDiv = styled.div`
+  const CenterDiv = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 2rem;
@@ -240,3 +134,93 @@ const WrapperLogout = styled.div`
 const Heading = styled.span`
   color: #ffffff;
 `;
+
+
+  return (
+    <SidebarContainer>
+      <Wrapper
+        onClick={redirectToAbout}
+        style={{
+          marginTop: "4rem",
+          backgroundColor: utility.isMenuActive("about") ? "#1d3c93" : "",
+        }}
+        onMouseOver={() => changeSourceForIcons("about")}
+        onMouseOut={() => changeOriginalSourceForIcons("about")}
+      >
+        <Icon src={aboutIcon} />
+        <Heading>About Xmartly</Heading>
+      </Wrapper>
+      {sessionManager.getDataFromCookies("isLoggedIn") && (
+      <Wrapper
+        style={{
+          backgroundColor: utility.isMenuActive("transactions")
+            ? "#1d3c93"
+            : "",
+        }}
+        onClick={redirectToTransaction}
+        onMouseOver={() => changeSourceForIcons("transactions")}
+        onMouseOut={() => changeOriginalSourceForIcons("transactions")}
+      >
+        <Icon src={transactionIcon} />
+        <Heading>Transactions</Heading>
+      </Wrapper>
+      )}
+      {sessionManager.getDataFromCookies("isLoggedIn") && (
+      <Wrapper
+        style={{
+          backgroundColor: utility.isMenuActive("contracts") ? "#1d3c93" : "",
+        }}
+        onClick={redirectToContract}
+        onMouseOver={() => changeSourceForIcons("contracts")}
+        onMouseOut={() => changeOriginalSourceForIcons("contracts")}
+      >
+        <Icon src={contractsIcon} />
+        <Heading>Contracts</Heading>
+      </Wrapper>
+      )}
+      {sessionManager.getDataFromCookies("isLoggedIn") && (
+      <Wrapper
+        style={{
+          backgroundColor: utility.isMenuActive("analytics") ? "#1d3c93" : "",
+        }}
+        onClick={redirectToAnalytics}
+        onMouseOver={() => changeSourceForIcons("analytics")}
+        onMouseOut={() => changeOriginalSourceForIcons("analytics")}
+      >
+        <Icon src={analyticsIcon} />
+        <Heading>Analytics</Heading>
+      </Wrapper>
+      )}
+      {sessionManager.getDataFromCookies("isLoggedIn") && (
+      <Wrapper
+        style={{
+          backgroundColor: utility.isMenuActive("rules") ? "#1d3c93" : "",
+        }}
+        onClick={redirectToAlerting}
+        onMouseOver={() => changeSourceForIcons("alerting")}
+        onMouseOut={() => changeOriginalSourceForIcons("alerting")}
+      >
+        <Icon src={alertingIcon} />
+        <Heading>Alerting</Heading>
+      </Wrapper>
+      )}
+      <WrapperFaq style={{ marginTop: sessionManager.getDataFromCookies("isLoggedIn") ? "12rem" : "35rem", paddingLeft: sessionManager.getDataFromCookies("isLoggedIn")
+                ? "22px"
+                : "50px" }} onClick={redirectToFaqs}>
+        <Icon src="/images/Subtraction 2.svg" />
+        <Heading>FAQs</Heading>
+      </WrapperFaq>
+
+      {sessionManager.getDataFromCookies("isLoggedIn") && (
+        <WrapperLogout onClick={redirectToLogout}>
+          <Icon src="/images/Log out.svg" />
+          <Heading>Logout</Heading>
+        </WrapperLogout>
+      )}
+      <CenterDiv>
+        <img alt="" src="/images/Group 12.svg" />
+      </CenterDiv>
+    </SidebarContainer>
+  );
+}
+

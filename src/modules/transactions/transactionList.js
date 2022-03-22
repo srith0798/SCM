@@ -104,6 +104,7 @@ export default function TransactionList() {
           fromDate: setFrom,
           toDate: setTo
        },
+       sortingKey : { date : -1 }
       };
     else if (setFrom > 0 && select === 1)
       requestData = {
@@ -115,6 +116,7 @@ export default function TransactionList() {
           fromDate: setFrom,
           toDate: setTo
        },
+       sortingKey : { date : -1 }
       };
     else if ((select === 2 || select === 3) && setFrom === 0)
       requestData = {
@@ -122,12 +124,14 @@ export default function TransactionList() {
         limit: limit,
         contractAddress: url,
         status: select === 2 ? true : false,
+        sortingKey : { date : -1 }
       };
     else
       requestData = {
         skip: skip,
         limit: limit,
         contractAddress: url,
+        sortingKey : { date : -1 }
       };
       setLoader(true);
       const response = await ContractsService.getTransactionsList(requestData);
@@ -145,8 +149,6 @@ export default function TransactionList() {
       setLoader(false);
     }
   };
-    console.log('setS', address);
-    console.log('searching', searchRow)
 
 
 
@@ -238,7 +240,6 @@ export default function TransactionList() {
   const [select, setSelect] = React.useState(1);
   useEffect(() => {
     if (selected.length > 0) {
-      console.log("check");
       getTransaction(selected);
     } else getContractNames();
     //eslint-disable-next-line
@@ -260,6 +261,7 @@ export default function TransactionList() {
           fromDate: setFrom,
           toDate: setTo
        },
+       sortingKey : { date : -1 }
       };
     else if (setFrom > 0 && select === 1)
       requestData = {
@@ -271,6 +273,7 @@ export default function TransactionList() {
           fromDate: setFrom,
           toDate: setTo
        },
+       sortingKey : { date : -1 }
       };
     else if ((select === 2 || select === 3) && setFrom === 0)
       requestData = {
@@ -278,12 +281,14 @@ export default function TransactionList() {
         limit: limit,
         contractAddress: selected ? selected : defaultAddress,
         status: select === 2 ? true : false,
+        sortingKey : { date : -1 }
       };
     else
       requestData = {
         skip: skip,
         limit: limit,
         contractAddress: selected ? selected : defaultAddress,
+        sortingKey : { date : -1 }
       };
     try {
       setLoader(true);

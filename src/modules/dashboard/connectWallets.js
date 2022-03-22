@@ -10,41 +10,8 @@ export default function ConnectWallets(props) {
     props.getCurrentUserDetails();
     // props.click();
   };
-  return (
-    <>
-      <MainContainer>
-        <Heading>{location.pathname.split("/")[2]}</Heading>
-        <Div>
-          <ConnectWalletTitle>Connect Wallet</ConnectWalletTitle>
-          <DetailBox>
-            You are not connected to XDCPay please connect XDCPay and start
-            creating alerts for your contracts. If you are not having XDCPay
-            download it from{" "}
-            <p>
-              <a
-                href="https://chrome.google.com/webstore/detail/xdcpay/bocpokimicclpaiekenaeelehdjllofo?hl=en-GB"
-                target="blank"
-                rel="noreferrer"
-              >
-                here
-              </a>
-            </p>
-          </DetailBox>
-          <Button onClick={() => ConnectWallet()}>
-            <img
-              style={{ paddingLeft: "30px", marginRight: "15px" }}
-              alt=""
-              src="/images/xdc-logo-white.svg"
-            />
-            Connect Wallet
-          </Button>
-        </Div>
-      </MainContainer>
-    </>
-  );
-}
 
-const ConnectWalletTitle = styled.div`
+  const ConnectWalletTitle = styled.div`
   font-size: 18px;
   font-weight: 600;
 `;
@@ -120,3 +87,38 @@ const DetailBox = styled.div`
     width: 100%;
   }
 `;
+  return (
+    <>
+      <MainContainer>
+        <Heading>{location.pathname.split("/")[2]}</Heading>
+        <Div>
+          <ConnectWalletTitle>Connect Wallet</ConnectWalletTitle>
+          <DetailBox>
+            You are not connected to XDCPay please connect XDCPay and start
+            creating alerts for your contracts. If you are not having XDCPay
+            download it from{" "}
+            <p>
+              <a
+                href="https://chrome.google.com/webstore/detail/xdcpay/bocpokimicclpaiekenaeelehdjllofo?hl=en-GB"
+                target="blank"
+                rel="noreferrer"
+              >
+                here
+              </a>
+            </p>
+          </DetailBox>
+          <Button onClick={() => ConnectWallet()}>
+            <img
+              style={{ paddingLeft: "30px", marginRight: "15px" }}
+              alt=""
+              src="/images/xdc-logo-white.svg"
+            />
+            Connect Wallet
+          </Button>
+        </Div>
+      </MainContainer>
+    </>
+  );
+}
+
+

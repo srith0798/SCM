@@ -13,6 +13,47 @@ const useStyles = makeStyles(() => ({
 export default function HideContract(props) {
   console.log(props);
   const classes = useStyles();
+
+  const MainContainer = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  `;
+  const Container = styled.div`
+    background: #ffffff 0% 0% no-repeat padding-box;
+
+    border-radius: 6px;
+    width: 100%;
+    background-color: #ffffff;
+    max-width: 700px;
+    padding: 20px;
+  `;
+  const SubContainer = styled.div`
+    display: flex;
+    justify-content: space-between;
+  `;
+  const Add = styled.div`
+    font: normal normal 600 24px/29px Inter;
+    color: #303134;
+  `;
+
+  const CancelButton = styled.button`
+    font: normal normal medium 14px/17px Inter;
+    color: #3163f0;
+    border-radius: 4px;
+    background-color: #ffffff;
+    border: 1px solid #3163f0;
+    text-align: center;
+    padding: 8px;
+  `;
+  const Content = styled.div`
+    font: normal normal medium 16px/20px Inter;
+    letter-spacing: 0px;
+    color: #303134;
+    margin-top: 20px;
+  `;
+
   return (
     <div>
       <Dialog classes={{ paper: classes.dialogBox }} open={true}>
@@ -46,43 +87,3 @@ export default function HideContract(props) {
     </div>
   );
 }
-
-const MainContainer = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-const Container = styled.div`
-  background: #ffffff 0% 0% no-repeat padding-box;
-
-  border-radius: 6px;
-  width: 100%;
-  background-color: #ffffff;
-  max-width: 700px;
-  padding: 20px;
-`;
-const SubContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-const Add = styled.div`
-  font: normal normal 600 24px/29px Inter;
-  color: #303134;
-`;
-
-const CancelButton = styled.button`
-  font: normal normal medium 14px/17px Inter;
-  color: #3163f0;
-  border-radius: 4px;
-  background-color: #ffffff;
-  border: 1px solid #3163f0;
-  text-align: center;
-  padding: 8px;
-`;
-const Content = styled.div`
-  font: normal normal medium 16px/20px Inter;
-  letter-spacing: 0px;
-  color: #303134;
-  margin-top: 20px;
-`;

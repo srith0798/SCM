@@ -58,7 +58,6 @@ function Header(props) {
         await window.web3.eth.getBalance(address).then((res) => {
           balance = res / Math.pow(10, 18);
           balance = truncateToDecimals(balance);
-          console.log(balance, "res#");
           getWalletBalance(balance);
         });
         return await balance;
@@ -179,39 +178,7 @@ function Header(props) {
     //eslint-disable-next-line
   }, []);
 
-  return (
-    <>
-      <HeaderContainer>
-        <SpaceBetween>
-          <div style={{ display: "flex", marginLeft: "12px" }}>
-            {/* <GridLogo
-            src="/images/Grid.svg"
-            onClick={() => setOpenHumburger(openHumburger)}
-          /> */}
-            <XmartlyLogo src="/images/Logo.svg" />
-          </div>
-          {sessionManager.getDataFromCookies("accountAddress") ? (
-            <XDCContainer>
-              <XDCInfo {...getUserBalance()}>{balance} XDC</XDCInfo>
-              <UserContainer>
-                {getUserAccountAddress()}
-                <UserLogo src="/images/profile.svg" />
-              </UserContainer>
-            </XDCContainer>
-          ) : (
-            <Button onClick={props.getCurrentUserDetails}>
-              Connect Wallet
-            </Button>
-          )}
-        </SpaceBetween>
-      </HeaderContainer>
-    </>
-  );
-}
-
-export default Header;
-
-const UserLogo = styled.img`
+  const UserLogo = styled.img`
   width: 30px;
   height: 30px;
   border-radius: 50%;
@@ -235,12 +202,6 @@ const XmartlyLogo = styled.img`
     margin-left: 50px;
   }
 `;
-// const GridLogo = styled.img`
-//   margin-right: 17px;
-//   @media (max-width: 1024px) {
-//     display: none;
-//   }
-// `;
 const XDCContainer = styled.div`
   background: #3e579a;
   display: flex;
@@ -301,3 +262,33 @@ const XDCInfo = styled.button`
     display: none;
   }
 `;
+
+  return (
+    <>
+      <HeaderContainer>
+        <SpaceBetween>
+          <div style={{ display: "flex", marginLeft: "12px" }}>
+            <XmartlyLogo src="/images/Logo.svg" />
+          </div>
+          {sessionManager.getDataFromCookies("accountAddress") ? (
+            <XDCContainer>
+              <XDCInfo {...getUserBalance()}>{balance} XDC</XDCInfo>
+              <UserContainer>
+                {getUserAccountAddress()}
+                <UserLogo src="/images/profile.svg" />
+              </UserContainer>
+            </XDCContainer>
+          ) : (
+            <Button onClick={props.getCurrentUserDetails}>
+              Connect Wallet
+            </Button>
+          )}
+        </SpaceBetween>
+      </HeaderContainer>
+    </>
+  );
+}
+
+export default Header;
+
+

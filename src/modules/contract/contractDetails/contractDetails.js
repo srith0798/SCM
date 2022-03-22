@@ -160,312 +160,8 @@ export default function ContractDetails(props) {
     sessionManager.removeDataFromCookies("profilePicture");
     history.replace("/");
   };
-  return (
-    <>
-      {user === "" ? redirectToLogout() : ""}
-      <ShowLoader state={loader} />
-      <MainContainer>
-        <SubContainer>
-          <MainHeading>
-            <Heading>
-              <img
-                alt=""
-                src="/images/back.svg"
-                style={{ marginRight: "8px", marginBottom: "3px" }}
-                onClick={() => backButton()}
-              />
-              Contract Details
-            </Heading>
-            <Button
-              onClick={() =>
-                window.open(
-                  `https://observer.xdc.org/address/${address.address}`
-                )
-              }
-            >
-              View in Observatory
-            </Button>
-          </MainHeading>
-        </SubContainer>
-        <Container>
-          <SubHeading style={{ paddingTop: "1rem", paddingLeft: "1.3rem" }}>
-            {address.contractName}
-          </SubHeading>
-          <div
-            style={{
-              paddingLeft: "1.25rem",
-              display: "flex",
-              alignItems: "center",
-            }}
-          >
-            {/* <Hash>{name}</Hash> */}
-            <HashMobile>{utility.truncateTxnAddress(name)}</HashMobile>
-            <HashDesktop>{name}</HashDesktop>
-            <CopyToClipboard text={name} onCopy={() => setcopyToolTip(true)}>
-              <Tooltip title={copyToolTip ? "copied" : "copy to clipboard"}>
-                <CopyImg src="/images/copy.svg" />
-              </Tooltip>
-            </CopyToClipboard>
-          </div>
 
-          <TabLister>
-            <TabView
-              id="General"
-              onClick={handleViewClick}
-              style={{
-                color: activeButton === "General" ? "#3163F0" : "#AEB7D0",
-                display: "flex",
-                paddingBottom: "0.875rem",
-                paddingright: "16px",
-                alignItems: "center",
-                borderBottom:
-                  activeButton === "General"
-                    ? "0.25rem solid #3163F0"
-                    : "#AEB7D0",
-              }}
-            >
-              <img
-                alt=""
-                style={{ marginRight: "0.375rem" }}
-                src={
-                  activeButton === "General"
-                    ? "/images/genrl.svg"
-                    : "/images/general_grey.svg"
-                }
-              />
-              General
-            </TabView>
-            <TabView
-              id="Source Code"
-              onClick={handleViewClick}
-              style={{
-                color: activeButton === "Source Code" ? "#3163F0" : "#AEB7D0",
-                display: "flex",
-                paddingBottom: "0.875rem",
-                paddingright: "16px",
-                alignItems: "center",
-                borderBottom:
-                  activeButton === "Source Code" ? "0.25rem solid blue" : "",
-              }}
-            >
-              <img
-                alt=""
-                style={{ marginRight: "0.375rem" }}
-                src={
-                  activeButton === "Source Code"
-                    ? "/images/source code_blue.svg"
-                    : "/images/source code_grey.svg"
-                }
-              />
-              {address.status === "Unverified" ? "Byte Code" : "Source Code"}
-            </TabView>
-          </TabLister>
-          {activeButton === "General" && (
-            <DetailsSection>
-              <Div>
-                <TableHeading>Network</TableHeading>
-                <TableData>{address.network}</TableData>
-              </Div>
-              <VerifyDiv check={address.status}>
-                <Div>
-                  <TableHeading>Solidity version</TableHeading>
-                  <SolidityData>{Solidity}</SolidityData>
-                </Div>
-              </VerifyDiv>
-              <Div>
-                <TableHeading>Verification</TableHeading>
-                <Verified>{address.status}</Verified>
-                <VerifiedButton
-                  check={address.status}
-                  onClick={() =>
-                    window.open(
-                      "https://observer.xdc.org/verify-contracts")
-                  }
-                >
-                  Click here and get your contract verified
-                </VerifiedButton>
-              </Div>
-              <Div>
-                <TableHeading>Tags</TableHeading>
-                <TableData>
-                  <Row>
-                    {address.tags &&
-                      address.tags.map((tag, index) => (
-                        <div style={{ marginRight: "9px" }}>
-                          <FinanceTag onClick={() => removeTagOpen(tag.name)}>
-                            <ImageTag
-                              removeTagImage={removeTagImage}s
-                              index={index}
-                              address={address}
-                              onMouseOver={() => setRemoveTagImage(index)}
-                              onMouseOut={() => setRemoveTagImage(-1)}
-                            />
-                            {tag.name}
-                          </FinanceTag>
-                        </div>
-                      ))}
-                    {removeTag ? (
-                      <RemoveTag
-                        click={() => setRemoveTag(false)}
-                        contractAddress={contractAddress}
-                        tag={tagStore}
-                        getContractById={getContractById}
-                      />
-                    ) : (
-                      ""
-                    )}
-
-                    {addTag && (
-                      <AddTags
-                        click={Close}
-                        address={address}
-                        contract={false}
-                      />
-                    )}
-                    <AddTag
-                      disabled={address.tags !== ""}
-                      onClick={() => Open()}
-                    >
-                      Add Tag
-                    </AddTag>
-                  </Row>
-                </TableData>
-              </Div>
-              <VerifyDiv check={address.status}>
-                <Div>
-                  <TableHeading>Compiler</TableHeading>
-                  <TableData>{address.compilerVersion}</TableData>
-                </Div>
-              </VerifyDiv>
-              <Div>
-                <TableHeading>EVM version</TableHeading>
-                <EvmData>Default</EvmData>
-              </Div>
-              <Div>
-                <TableHeading>Optimizations</TableHeading>
-                <Enabled></Enabled>
-              </Div>
-
-              <PopUp>
-                <PopUpBlock
-                  onClick={() =>
-                    history.push({
-                      pathname: "/transactions",
-                      state: {
-                        id: address.address,
-                        name: address.contractName,
-                      },
-                    })
-                  }
-                >
-                  <RowProperty>
-                    <img alt="" src="/images/cube.svg" />
-                  </RowProperty>
-                  <RowProperty>View transactions</RowProperty>
-                </PopUpBlock>
-                <VerifyDiv check={address.status}>
-                  <PopUpBlock>
-                    {open && (
-                      <ContractAbi click={handleClose} data={address.abi} />
-                    )}
-                    <RowProperty
-                      onClick={() => {
-                        handleClickOpen();
-                      }}
-                    >
-                      <img alt="" src="/images/code.svg" />
-                    </RowProperty>
-
-                    <div>
-                      <RowProperty
-                        onClick={() => {
-                          handleClickOpen();
-                        }}
-                      >
-                        Contract ABI
-                      </RowProperty>
-                    </div>
-                  </PopUpBlock>
-                </VerifyDiv>
-
-                <PopUpBlock>
-                  {renameState && (
-                    <RenameContract
-                      address={address}
-                      click={renameHandleClose}
-                    />
-                  )}
-                  <RowProperty onClick={() => renameHandleOpen()}>
-                    <img alt="" src="/images/edit.svg" />
-                  </RowProperty>
-                  <RowProperty onClick={() => renameHandleOpen()}>
-                    Rename Contract
-                  </RowProperty>
-                </PopUpBlock>
-
-                <PopUpBlock>
-                  {hide && (
-                    <HideContract
-                      hideContract={hideContract}
-                      click={hideHandleClose}
-                    />
-                  )}
-                  {show && (
-                    <ShowContract
-                      showContract={showContract}
-                      click={() => setShowBox(false)}
-                    />
-                  )}
-                  {address.isHidden ? (
-                    <>
-                      <RowProperty onClick={() => hideShowOpen()}>
-                        <img alt="" src="/images/hide.svg" />
-                      </RowProperty>
-                      <RowProperty onClick={() => hideShowOpen()}>
-                        Show Contract
-                      </RowProperty>
-                    </>
-                  ) : (
-                    <>
-                      <RowProperty onClick={() => hideHandleOpen()}>
-                        <img alt="" src="/images/hide.svg" />
-                      </RowProperty>
-                      <RowProperty onClick={() => hideHandleOpen()}>
-                        Hide Contract
-                      </RowProperty>
-                    </>
-                  )}
-                </PopUpBlock>
-                <PopUpBlock>
-                  {remove && (
-                    <Remove click={removeHandleClose} contract={address} />
-                  )}
-                  <RowProperty onClick={() => removeHandleOpen()}>
-                    <img alt="" src="/images/delete.svg" />
-                  </RowProperty>
-                  <RowProperty onClick={() => removeHandleOpen()}>
-                    Remove Contract
-                  </RowProperty>
-                </PopUpBlock>
-              </PopUp>
-            </DetailsSection>
-          )}
-          {activeButton === "Source Code" && (
-            <SourceCode
-              data={
-                address.status === "Verified"
-                  ? address.sourceCode
-                  : address.byteCode
-              }
-            ></SourceCode>
-          )}
-        </Container>
-      </MainContainer>
-    </>
-  );
-}
-
-const MainHeading = styled.div`
+  const MainHeading = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -814,3 +510,309 @@ const Button = styled.button`
     display: none;
   }
 `;
+  return (
+    <>
+      {user === "" ? redirectToLogout() : ""}
+      <ShowLoader state={loader} />
+      <MainContainer>
+        <SubContainer>
+          <MainHeading>
+            <Heading>
+              <img
+                alt=""
+                src="/images/back.svg"
+                style={{ marginRight: "8px", marginBottom: "3px" }}
+                onClick={() => backButton()}
+              />
+              Contract Details
+            </Heading>
+            <Button
+              onClick={() =>
+                window.open(
+                  `https://observer.xdc.org/address/${address.address}`
+                )
+              }
+            >
+              View in Observatory
+            </Button>
+          </MainHeading>
+        </SubContainer>
+        <Container>
+          <SubHeading style={{ paddingTop: "1rem", paddingLeft: "1.3rem" }}>
+            {address.contractName}
+          </SubHeading>
+          <div
+            style={{
+              paddingLeft: "1.25rem",
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            {/* <Hash>{name}</Hash> */}
+            <HashMobile>{utility.truncateTxnAddress(name)}</HashMobile>
+            <HashDesktop>{name}</HashDesktop>
+            <CopyToClipboard text={name} onCopy={() => setcopyToolTip(true)}>
+              <Tooltip title={copyToolTip ? "copied" : "copy to clipboard"}>
+                <CopyImg src="/images/copy.svg" />
+              </Tooltip>
+            </CopyToClipboard>
+          </div>
+
+          <TabLister>
+            <TabView
+              id="General"
+              onClick={handleViewClick}
+              style={{
+                color: activeButton === "General" ? "#3163F0" : "#AEB7D0",
+                display: "flex",
+                paddingBottom: "0.875rem",
+                paddingright: "16px",
+                alignItems: "center",
+                borderBottom:
+                  activeButton === "General"
+                    ? "0.25rem solid #3163F0"
+                    : "#AEB7D0",
+              }}
+            >
+              <img
+                alt=""
+                style={{ marginRight: "0.375rem" }}
+                src={
+                  activeButton === "General"
+                    ? "/images/genrl.svg"
+                    : "/images/general_grey.svg"
+                }
+              />
+              General
+            </TabView>
+            <TabView
+              id="Source Code"
+              onClick={handleViewClick}
+              style={{
+                color: activeButton === "Source Code" ? "#3163F0" : "#AEB7D0",
+                display: "flex",
+                paddingBottom: "0.875rem",
+                paddingright: "16px",
+                alignItems: "center",
+                borderBottom:
+                  activeButton === "Source Code" ? "0.25rem solid blue" : "",
+              }}
+            >
+              <img
+                alt=""
+                style={{ marginRight: "0.375rem" }}
+                src={
+                  activeButton === "Source Code"
+                    ? "/images/source code_blue.svg"
+                    : "/images/source code_grey.svg"
+                }
+              />
+              {address.status === "Unverified" ? "Byte Code" : "Source Code"}
+            </TabView>
+          </TabLister>
+          {activeButton === "General" && (
+            <DetailsSection>
+              <Div>
+                <TableHeading>Network</TableHeading>
+                <TableData>{address.network}</TableData>
+              </Div>
+              <VerifyDiv check={address.status}>
+                <Div>
+                  <TableHeading>Solidity version</TableHeading>
+                  <SolidityData>{Solidity}</SolidityData>
+                </Div>
+              </VerifyDiv>
+              <Div>
+                <TableHeading>Verification</TableHeading>
+                <Verified>{address.status}</Verified>
+                <VerifiedButton
+                  check={address.status}
+                  onClick={() =>
+                    window.open(
+                      "https://observer.xdc.org/verify-contracts")
+                  }
+                >
+                  Click here and get your contract verified
+                </VerifiedButton>
+              </Div>
+              <Div>
+                <TableHeading>Tags</TableHeading>
+                <TableData>
+                  <Row>
+                    {address.tags &&
+                      address.tags.map((tag, index) => (
+                        <div style={{ marginRight: "9px" }}>
+                          <FinanceTag onClick={() => removeTagOpen(tag.name)}>
+                            <ImageTag
+                              removeTagImage={removeTagImage}s
+                              index={index}
+                              address={address}
+                              onMouseOver={() => setRemoveTagImage(index)}
+                              onMouseOut={() => setRemoveTagImage(-1)}
+                            />
+                            {tag.name}
+                          </FinanceTag>
+                        </div>
+                      ))}
+                    {removeTag ? (
+                      <RemoveTag
+                        click={() => setRemoveTag(false)}
+                        contractAddress={contractAddress}
+                        tag={tagStore}
+                        getContractById={getContractById}
+                      />
+                    ) : (
+                      ""
+                    )}
+
+                    {addTag && (
+                      <AddTags
+                        click={Close}
+                        address={address}
+                        contract={false}
+                      />
+                    )}
+                    <AddTag
+                      disabled={address.tags !== ""}
+                      onClick={() => Open()}
+                    >
+                      Add Tag
+                    </AddTag>
+                  </Row>
+                </TableData>
+              </Div>
+              <VerifyDiv check={address.status}>
+                <Div>
+                  <TableHeading>Compiler</TableHeading>
+                  <TableData>{address.compilerVersion}</TableData>
+                </Div>
+              </VerifyDiv>
+              <Div>
+                <TableHeading>EVM version</TableHeading>
+                <EvmData>Default</EvmData>
+              </Div>
+              <Div>
+                <TableHeading>Optimizations</TableHeading>
+                <Enabled></Enabled>
+              </Div>
+
+              <PopUp>
+                <PopUpBlock
+                  onClick={() =>
+                    history.push({
+                      pathname: "/transactions",
+                      state: {
+                        id: address.address,
+                        name: address.contractName,
+                      },
+                    })
+                  }
+                >
+                  <RowProperty>
+                    <img alt="" src="/images/cube.svg" />
+                  </RowProperty>
+                  <RowProperty>View transactions</RowProperty>
+                </PopUpBlock>
+                <VerifyDiv check={address.status}>
+                  <PopUpBlock>
+                    {open && (
+                      <ContractAbi click={handleClose} data={address.abi} />
+                    )}
+                    <RowProperty
+                      onClick={() => {
+                        handleClickOpen();
+                      }}
+                    >
+                      <img alt="" src="/images/code.svg" />
+                    </RowProperty>
+
+                    <div>
+                      <RowProperty
+                        onClick={() => {
+                          handleClickOpen();
+                        }}
+                      >
+                        Contract ABI
+                      </RowProperty>
+                    </div>
+                  </PopUpBlock>
+                </VerifyDiv>
+
+                <PopUpBlock>
+                  {renameState && (
+                    <RenameContract
+                      address={address}
+                      click={renameHandleClose}
+                    />
+                  )}
+                  <RowProperty onClick={() => renameHandleOpen()}>
+                    <img alt="" src="/images/edit.svg" />
+                  </RowProperty>
+                  <RowProperty onClick={() => renameHandleOpen()}>
+                    Rename Contract
+                  </RowProperty>
+                </PopUpBlock>
+
+                <PopUpBlock>
+                  {hide && (
+                    <HideContract
+                      hideContract={hideContract}
+                      click={hideHandleClose}
+                    />
+                  )}
+                  {show && (
+                    <ShowContract
+                      showContract={showContract}
+                      click={() => setShowBox(false)}
+                    />
+                  )}
+                  {address.isHidden ? (
+                    <>
+                      <RowProperty onClick={() => hideShowOpen()}>
+                        <img alt="" src="/images/hide.svg" />
+                      </RowProperty>
+                      <RowProperty onClick={() => hideShowOpen()}>
+                        Show Contract
+                      </RowProperty>
+                    </>
+                  ) : (
+                    <>
+                      <RowProperty onClick={() => hideHandleOpen()}>
+                        <img alt="" src="/images/hide.svg" />
+                      </RowProperty>
+                      <RowProperty onClick={() => hideHandleOpen()}>
+                        Hide Contract
+                      </RowProperty>
+                    </>
+                  )}
+                </PopUpBlock>
+                <PopUpBlock>
+                  {remove && (
+                    <Remove click={removeHandleClose} contract={address} />
+                  )}
+                  <RowProperty onClick={() => removeHandleOpen()}>
+                    <img alt="" src="/images/delete.svg" />
+                  </RowProperty>
+                  <RowProperty onClick={() => removeHandleOpen()}>
+                    Remove Contract
+                  </RowProperty>
+                </PopUpBlock>
+              </PopUp>
+            </DetailsSection>
+          )}
+          {activeButton === "Source Code" && (
+            <SourceCode
+              data={
+                address.status === "Verified"
+                  ? address.sourceCode
+                  : address.byteCode
+              }
+            ></SourceCode>
+          )}
+        </Container>
+      </MainContainer>
+    </>
+  );
+}
+
+
