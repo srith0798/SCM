@@ -207,7 +207,9 @@ export default function Rules() {
     opacity: 1;
     width: 100%;
     padding: 3.5rem;
-    height: 100vh;
+    height: max-content;
+    min-height: 100%;
+    /* max-height: 200vh; */
     @media (min-width: 340px) and (max-width: 768px) {
       padding: 38px 20px 20px 20px;
     }

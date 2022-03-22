@@ -14,6 +14,9 @@ export default function Sidebar(props) {
   const redirectToContract = () => {
     history.push("/contracts");
   };
+  // const redirectToNetwork = () => {
+  //   history.push("/networks");
+  // };
   const redirectToAnalytics = () => {
     history.push("/analytics");
   };
@@ -31,6 +34,7 @@ export default function Sidebar(props) {
     sessionManager.removeDataFromCookies("username");
     sessionManager.removeDataFromCookies("profilePicture");
     history.replace("/");
+    // window.location.reload();
   };
 
   const [aboutIcon, setAboutIcon] = React.useState(
@@ -42,6 +46,9 @@ export default function Sidebar(props) {
   const [contractsIcon, setContractsIcon] = React.useState(
     "/images/contracts.svg"
   );
+  // const [networksIcon, setNetworksIcon] = React.useState(
+  //   "/images/networks.svg"
+  // );
   const [analyticsIcon, setAnalyticsIcon] = React.useState(
     "/images/analytics-blue.svg"
   );
@@ -67,74 +74,6 @@ export default function Sidebar(props) {
     if (value === "analytics") setAnalyticsIcon("/images/analytics-blue.svg");
     if (value === "alerting") setAlertingIcon("/images/alerting-blue.svg");
   };
-
-  const CenterDiv = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-top: 2rem;
-  margin-bottom: 3rem;
-`;
-
-const SidebarContainer = styled.div`
-  background: #102c78 0% 0% no-repeat padding-box;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 100%;
-  width: 248px;
-  padding-top: 15px;
-  overflow-x: hidden;
-  @media (max-width: 1023px) {
-    display: none;
-  }
-`;
-const Icon = styled.img`
-  cursor: pointer;
-  margin-right: 13px;
-`;
-const Wrapper = styled.div`
-  flex-wrap: wrap;
-  cursor: pointer;
-  width: 100%;
-  max-width: 240px;
-  white-space: nowrap;
-  padding: 23px;
-  &:hover {
-    background: #1d3c93;
-  }
-`;
-
-
-const WrapperFaq = styled.div`
-  flex-wrap: wrap;
-  cursor: pointer;
-  width: 100%;
-  max-width: 240px;
-  white-space: nowrap;
-  padding: 23px;
-  /* padding-left: 35px; */
-  &:hover {
-    background: #1d3c93;
-  }
-`;
-
-
-const WrapperLogout = styled.div`
-  flex-wrap: wrap;
-  cursor: pointer;
-  width: 100%;
-  max-width: 240px;
-  white-space: nowrap;
-  padding: 23px;
-  &:hover {
-    background: #1d3c93;
-  }
-`;
-
-const Heading = styled.span`
-  color: #ffffff;
-`;
-
 
   return (
     <SidebarContainer>
@@ -224,3 +163,67 @@ const Heading = styled.span`
   );
 }
 
+const CenterDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  margin-bottom: 3rem;
+`;
+
+const SidebarContainer = styled.div`
+  background: #102c78 0% 0% no-repeat padding-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  width: 248px;
+  padding-top: 15px;
+  overflow-x: hidden;
+  @media (max-width: 1023px) {
+    display: none;
+  }
+`;
+const Icon = styled.img`
+  cursor: pointer;
+  margin-right: 13px;
+`;
+const Wrapper = styled.div`
+  flex-wrap: wrap;
+  cursor: pointer;
+  width: 100%;
+  max-width: 240px;
+  white-space: nowrap;
+  padding: 23px;
+  &:hover {
+    background: #1d3c93;
+  }
+`;
+
+const WrapperFaq = styled.div`
+  flex-wrap: wrap;
+  cursor: pointer;
+  width: 100%;
+  max-width: 240px;
+  white-space: nowrap;
+  padding: 23px;
+  /* padding-left: 35px; */
+  &:hover {
+    background: #1d3c93;
+  }
+`;
+
+const WrapperLogout = styled.div`
+  flex-wrap: wrap;
+  cursor: pointer;
+  width: 100%;
+  max-width: 240px;
+  white-space: nowrap;
+  padding: 23px;
+  &:hover {
+    background: #1d3c93;
+  }
+`;
+
+const Heading = styled.span`
+  color: #ffffff;
+`;

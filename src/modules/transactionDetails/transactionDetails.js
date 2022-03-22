@@ -67,7 +67,7 @@ export default function TransactionDetails() {
       };
       const response = await ContractsService.getTransactionByHash(requestData);
       setRow(response);
-      setSelected(response.contractAddress)
+      setSelected(response.contractAddress) //validation
       // setInput(utility.truncateTxnAddress(response.input));
       setInputDesktop(
         utility.truncateTxnAddressDesktop(response.input)
@@ -960,7 +960,7 @@ width: 100%;
                 <Heading>Raw input</Heading>
                 <SubHead>
                   <Input>
-                    <TransactionNumber>{inputDesktop}</TransactionNumber>
+                    <TransactionNumber>{inputDesktop}</TransactionNumber> //directly set utility function
                   </Input>
                   <CopyToClipboard
                     text={inputCopy}
@@ -1052,7 +1052,7 @@ width: 100%;
                 </Row>
                 <Row>
                   <SubHeading
-                    style={{ fontWeight: "400", marginRight: "40px" }}
+                    style={{ fontWeight: "400", marginRight: "40px" }} 
                   >
                     {row.from}
                   </SubHeading>

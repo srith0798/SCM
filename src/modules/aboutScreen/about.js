@@ -34,10 +34,7 @@ export default function About(props) {
               lifecycle utility, empowering the entire on-chain critical
               business logic.
             </DataBox>
-            <Tooltip
-              disableFocusListener
-              title="Click to get started with Xmartly"
-            >
+            
               <Button
                 onClick={() => 
                   sessionManager.getDataFromCookies("isLoggedIn") ? 
@@ -52,13 +49,18 @@ export default function About(props) {
                 }
               >
                 Add Your Smart Contract
+                <Tooltip
+              disableFocusListener
+              title="Click to get started with Xmartly"
+            >
                 <img
                   style={{ marginLeft: "0.375rem" }}
                   alt=""
                   src="/images/question-mark.svg"
                 />
-              </Button>
             </Tooltip>
+
+              </Button>
           </LeftContainer>
           <RightContainer>
             <VideoBox>
@@ -172,17 +174,17 @@ const MainBoxContainer = styled.div`
     height:128vh;
   }
   @media (min-width: 800px) and (max-width: 1024px) {
-    height:117vh;!important;
+    height:117vh!important;
   }
   @media (min-width: 1024px) and (max-width: 1200px) {
-    height:175vh;!important;
+    height:120vh !important;
   }
   @media (min-height: 1024px) and (max-height: 1190px) {
     padding: 16px;
     height:108vh;
   }
   @media (min-width:1200px){
-    height:127vh
+    height:110vh;
   }
 `;
 const Container = styled.div`

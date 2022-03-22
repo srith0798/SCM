@@ -4,6 +4,8 @@ import "../../assets/styles/custom.css";
 import { sessionManager } from "../../managers/sessionManager";
 import utility from "../../utility";
 import { NETWORKS } from "../../constants";
+import { history } from "../../managers/history";
+
 const Web3 = require("web3");
 
 function Header(props) {
@@ -130,6 +132,7 @@ function Header(props) {
         sessionManager.removeDataFromCookies("accountAddress");
         sessionManager.removeDataFromCookies("balance");
         sessionManager.removeDataFromCookies("network");
+        history.replace("/about");
       } else {
         window.web3 = new Web3(window.xdc ? window.xdc : window.ethereum);
   
@@ -143,18 +146,21 @@ function Header(props) {
               sessionManager.removeDataFromCookies("accountAddress");
               sessionManager.removeDataFromCookies("balance");
               sessionManager.removeDataFromCookies("network");
+              history.replace("/about");
             }
           } else {
             sessionManager.removeDataFromCookies("isLoggedIn");
             sessionManager.removeDataFromCookies("accountAddress");
             sessionManager.removeDataFromCookies("balance");
             sessionManager.removeDataFromCookies("network");
+            history.replace("/about");
           }
         } else {
           sessionManager.removeDataFromCookies("isLoggedIn");
           sessionManager.removeDataFromCookies("accountAddress");
           sessionManager.removeDataFromCookies("balance");
           sessionManager.removeDataFromCookies("network");
+          history.replace("/about");
         }
       }
     };
