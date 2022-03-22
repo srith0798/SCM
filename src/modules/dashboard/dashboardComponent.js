@@ -17,8 +17,6 @@ import AlertDetails from "../alerting/alertDetails";
 import { sessionManager } from "../../managers/sessionManager";
 import UserService from "../../services/userService";
 import { history } from "../../managers/history";
-// import ConnectWallets from "./connectWallets";
-// import utility from "../../utility";
 import toast from "react-hot-toast";
 import { httpConstants,validationsMessages } from "../../constants";
 import VerifiedContracts from "../transactionDetails/verifiedContracts";
@@ -91,12 +89,6 @@ const redirectErrorMessage = () =>
     const calcDec = Math.pow(10, decimal);
     return Math.trunc(num * calcDec) / calcDec;
   }
-// const disableMetamaskMessage = () =>
-//   toast.error(validationsMessages.VALIDATE_BROWSER_REDIRECTING, {
-//     duration: 4000,
-//     position: validationsMessages.TOASTS_POSITION,
-//     className: "toast-div-address",
-// });
 
 const dashboardComponent = (props)=>{
 
@@ -108,15 +100,6 @@ const dashboardComponent = (props)=>{
 
       className: "toast-div-address",
     });
-
-    const getBalance = async(address) => {
-      let balance = null;
-      await window.web3.eth.getBalance(address).then((res) => {
-        balance = res / Math.pow(10, 18);
-        balance = truncateToDecimals(balance);
-      });
-      return balance;
-    }
 
 
   const getCurrentUserDetails = async () => {

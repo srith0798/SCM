@@ -130,9 +130,6 @@ function Header(props) {
         sessionManager.removeDataFromCookies("accountAddress");
         sessionManager.removeDataFromCookies("balance");
         sessionManager.removeDataFromCookies("network");
-        
-        // eslint-disable-next-line no-restricted-globals
-        // history.push("/about");
       } else {
         window.web3 = new Web3(window.xdc ? window.xdc : window.ethereum);
   
@@ -146,25 +143,18 @@ function Header(props) {
               sessionManager.removeDataFromCookies("accountAddress");
               sessionManager.removeDataFromCookies("balance");
               sessionManager.removeDataFromCookies("network");
-
-              // eslint-disable-next-line no-restricted-globals
-              // history.push("/about");
             }
           } else {
             sessionManager.removeDataFromCookies("isLoggedIn");
             sessionManager.removeDataFromCookies("accountAddress");
             sessionManager.removeDataFromCookies("balance");
             sessionManager.removeDataFromCookies("network");
-            // eslint-disable-next-line no-restricted-globals
-            // history.push("/about");
           }
         } else {
           sessionManager.removeDataFromCookies("isLoggedIn");
           sessionManager.removeDataFromCookies("accountAddress");
           sessionManager.removeDataFromCookies("balance");
           sessionManager.removeDataFromCookies("network");
-          // eslint-disable-next-line no-restricted-globals
-          // history.push("/about");
         }
       }
     };
@@ -175,7 +165,6 @@ function Header(props) {
     }, 1000);
     HandleWalletChange();
     window.addEventListener("load", HandleWalletChange);
-    //eslint-disable-next-line
   }, []);
 
   const UserLogo = styled.img`

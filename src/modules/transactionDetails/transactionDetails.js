@@ -256,21 +256,6 @@ const BackgroundChanger = styled.div`
   }
 `;
 
-// const BackgroundChangerTransfer = styled.div`
-//   width: 50%;
-//   height: 300px;
-//   /* max-height: 300px; */
-//   background-repeat: no-repeat;
-//   background: #f7f8fd 0% 0% no-repeat padding-box;
-//   border-radius: 6px;
-//   opacity: 1;
-//   padding: 1.875rem;
-//   @media (min-width: 300px) and (max-width: 1371px) {
-//     width: 100%;
-//     padding: 1rem;
-//   }
-// `;
-
 const FlexDiv = styled.div`
   display: flex;
   justify-content: space-between;
