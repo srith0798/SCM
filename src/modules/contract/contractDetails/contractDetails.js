@@ -48,8 +48,34 @@ export default function ContractDetails(props) {
       setLoader(false);
     }
   };
+  const updateContract = async (contractAddress) => {
+   const request = {
+     contractAddress :contractAddress,
+     userId : sessionManager.getDataFromCookies("userId")
+   }
+    setContractAddress(contractAddress);
+    try {
+      setLoader(true);
+      const response = await ContractsService.updateContract(request);
+      setLoader(false);
+      setAddress(response);
+      let version = response.sourceCode || "";
+      version = version.includes("pragma solidity")
+        ? version.substr(version.indexOf("pragma solidity"))
+        : "";
+      version = version.substring(16, version.indexOf(";"));
+      setSolidity(version);
+    } catch (err) {
+      setLoader(false);
+    }
+  };
   React.useEffect(() => {
-    getContractById();
+    const urlParams = new URLSearchParams(window.location.search);
+    const contractAddress = urlParams.get('contractAddress')
+    if(contractAddress)
+      updateContract(contractAddress);
+    else  
+      getContractById();
   }, []);
 
   const [open, setOpen] = useState(false);
