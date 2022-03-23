@@ -18,6 +18,7 @@ export default {
   getTags,
   getTransactionByHash,
   getContractByAddress,
+  updateContract
 
 };
 
@@ -143,6 +144,20 @@ async function removeContract(requestData) {
   let url = process.env.REACT_APP_USER_CONTRACT_MICROSERVICE + httpConstants.API_END_POINT.ADD_CONTRACT;
   console.log("url----", url);
   return httpService(httpConstants.METHOD_TYPE.DELETE, getHeaders(), requestData, url)
+    .then((response) => {
+      if (!response.success || response.responseCode !== 200 || !response.responseData || response.responseData.length === 0)
+        return Promise.reject(response);
+      return Promise.resolve(response.responseData);
+    })
+    .catch(function (err) {
+      return Promise.reject(err);
+    });
+}
+
+async function updateContract(requestData) {
+  let url = process.env.REACT_APP_USER_CONTRACT_MICROSERVICE + httpConstants.API_END_POINT.ADD_CONTRACT;
+  console.log("url----", url);
+  return httpService(httpConstants.METHOD_TYPE.PUT, getHeaders(), requestData, url)
     .then((response) => {
       if (!response.success || response.responseCode !== 200 || !response.responseData || response.responseData.length === 0)
         return Promise.reject(response);
