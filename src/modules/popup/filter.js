@@ -14,7 +14,8 @@ const useStyles = makeStyles(() => ({
     // top: "50px !important",
     ['@media screen and (min-width: 300px) and (max-width: 768px)']: { 
       width: '90% !important',
-      top: "0px !important",
+      bottom: "85px !important",
+
     
   }}
 }));
@@ -31,6 +32,7 @@ export default function Filter(props) {
   };
   const Apply = () => {
     props.filterSearch();
+    props.reset();
     setTimeout(()=> {
       props.click();
     },500)

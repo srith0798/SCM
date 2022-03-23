@@ -960,7 +960,8 @@ width: 100%;
                 <Heading>Raw input</Heading>
                 <SubHead>
                   <Input>
-                    <TransactionNumber>{inputDesktop}</TransactionNumber> //directly set utility function
+                  {/* directly set utility function */}
+                    <TransactionNumber>{inputDesktop}</TransactionNumber> 
                   </Input>
                   <CopyToClipboard
                     text={inputCopy}

@@ -536,6 +536,8 @@ const Button = styled.button`
     display: none;
   }
 `;
+
+console.log(`https://observer.xdc.org/verify-contracts/${name}/scm`, "asdadada")
   return (
     <>
       {user === "" ? redirectToLogout() : ""}
@@ -655,7 +657,7 @@ const Button = styled.button`
                   check={address.status}
                   onClick={() =>
                     window.open(
-                      "https://observer.xdc.org/verify-contracts")
+                      `https://observer.xdc.org/verify-contracts/${name}/scm`)
                   }
                 >
                   Click here and get your contract verified

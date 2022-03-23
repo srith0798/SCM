@@ -57,7 +57,9 @@ export default function TransactionList() {
   const [selectedName, setSelectedName] = React.useState("");
   const [page, setPage] = React.useState(1);
   const [valueCheck, setValueCheck] = React.useState(0);
+  const [initialPage, setInitialPage] = React.useState();
   const [defaultAddress, setDefaultAddress] = React.useState("");
+
 
   const getContractNames = async (skip = 0, limit = 10) => {
     let userId = sessionManager.getDataFromCookies("userId");
@@ -74,6 +76,7 @@ export default function TransactionList() {
       response.contractList.forEach((row) => {
         if (row.isHidden === false) dropDownSelect.push(row);
       });
+      dropDownSelect.reverse();
       setContracts(dropDownSelect);
       if (!url) {
         setSelected(dropDownSelect[0].address);
@@ -104,7 +107,7 @@ export default function TransactionList() {
           fromDate: setFrom,
           toDate: setTo
        },
-       sortingKey : { date : -1 }
+       sortingKey : { createdOn : -1 }
       };
     else if (setFrom > 0 && select === 1)
       requestData = {
@@ -116,7 +119,7 @@ export default function TransactionList() {
           fromDate: setFrom,
           toDate: setTo
        },
-       sortingKey : { date : -1 }
+       sortingKey : { createdOn : -1 }
       };
     else if ((select === 2 || select === 3) && setFrom === 0)
       requestData = {
@@ -124,14 +127,14 @@ export default function TransactionList() {
         limit: limit,
         contractAddress: url,
         status: select === 2 ? true : false,
-        sortingKey : { date : -1 }
+        sortingKey : { createdOn : -1 }
       };
     else
       requestData = {
         skip: skip,
         limit: limit,
         contractAddress: url,
-        sortingKey : { date : -1 }
+        sortingKey : { createdOn : -1 }
       };
       setLoader(true);
       const response = await ContractsService.getTransactionsList(requestData);
@@ -224,6 +227,7 @@ export default function TransactionList() {
             Math.ceil(value.selected * countToggle),
             countToggle
           );
+
     }
   };
   
@@ -245,12 +249,15 @@ export default function TransactionList() {
     //eslint-disable-next-line
   }, [countToggle]);
 
-
-
+  const resetPage = ()=>{
+    console.log("Ran");
+    setInitialPage(0);
+  };
   const [selectDrop, setSelectDrop] = React.useState([]);
 
   const filterSearch = async (skip = 0, limit = countToggle) => {
     let requestData = [];
+
     if (setFrom > 0 && (select === 2 || select === 3))
       requestData = {
         skip: skip,
@@ -261,7 +268,7 @@ export default function TransactionList() {
           fromDate: setFrom,
           toDate: setTo
        },
-       sortingKey : { date : -1 }
+       sortingKey : { createdOn : -1 }
       };
     else if (setFrom > 0 && select === 1)
       requestData = {
@@ -273,7 +280,7 @@ export default function TransactionList() {
           fromDate: setFrom,
           toDate: setTo
        },
-       sortingKey : { date : -1 }
+       sortingKey : { createdOn : -1 }
       };
     else if ((select === 2 || select === 3) && setFrom === 0)
       requestData = {
@@ -281,14 +288,14 @@ export default function TransactionList() {
         limit: limit,
         contractAddress: selected ? selected : defaultAddress,
         status: select === 2 ? true : false,
-        sortingKey : { date : -1 }
+        sortingKey : { createdOn : -1 }
       };
     else
       requestData = {
         skip: skip,
         limit: limit,
         contractAddress: selected ? selected : defaultAddress,
-        sortingKey : { date : -1 }
+        sortingKey : { createdOn : -1 }
       };
     try {
       setLoader(true);
@@ -296,6 +303,9 @@ export default function TransactionList() {
         requestData
       );
       setLoader(false);
+      setTimeout(()=>{
+      setInitialPage();
+      },100);
       let pageCount = response.totalCount;
       if (pageCount % countToggle === 0) {
         setPage(parseInt(pageCount / countToggle));
@@ -380,6 +390,7 @@ export default function TransactionList() {
               {filterPopupOpen && (
                 <Filter
                   click={filterPopupClose}
+                  reset={resetPage}
                   select={select}
                   filterSearch={filterSearch}
                   setSelect={setSelect}
@@ -645,7 +656,7 @@ export default function TransactionList() {
         ) : ""}
           
         </TableContainer>
-        <PageVerifyCheck style={{display:reponse.totalCount<10?"none":""}}  ch   eck={page}>
+        <PageVerifyCheck style={{display:reponse.totalCount<=10?"none":""}}  ch   eck={page}>
         <PaginationDiv>
           <BottomLabel>
             Per Page
@@ -673,13 +684,14 @@ export default function TransactionList() {
             nextLabel={"->"}
             pageCount={page === 0 ? 1 : page}
             breakLabel={"..."}
-            initialPage={0}
+            // initialPage={initialPage}
             onPageChange={changePage}
             containerClassName={"paginationBttns"}
             disabledClassName={"paginationDisabled"}
             activeClassName={"paginationActive"}
             pageRangeDisplayed={0}
             marginPagesDisplayed={0}
+            forcePage={initialPage}
           />
         </PaginationDiv>
         </PageVerifyCheck>

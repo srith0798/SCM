@@ -11,6 +11,9 @@ const useStyles = makeStyles(() => ({
     position: "absolute",
     top: "5rem",
     maxWidth: 360,
+    ['@media screen and (min-width: 300px) and (max-width: 768px)']: { 
+     top: "12rem"
+  }
   },
 }));
 export default function DestinationTags(props) {
@@ -34,7 +37,7 @@ export default function DestinationTags(props) {
               />
             </SubContainer>
             <Content>
-              Add an URL that can receive alert notifications from Xmartly.
+              Add an {props?.type === "EMAIL" ? "email" : "url"} that can receive alert notifications from Xmartly.
             </Content>
             <Input
               type="text"

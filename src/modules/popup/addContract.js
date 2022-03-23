@@ -10,7 +10,8 @@ import ShowLoader from "../../common/components/showLoader";
 const useStyles = makeStyles(() => ({
   dialogBox: {
     width: "100% !important",
-    backgroundColor: "#ECF0F7",
+    backgroundColor: "#FFFFFF",
+    bottom: "180px",
   },
 }));
 
@@ -66,8 +67,102 @@ export default function AddContract(props) {
       checkAddress();
     }
   };
+  console.log("check", checkBox);
+  
+  return (
+    <div>
+      <ShowLoader state={loader} top={"33%"} />
+      <Dialog classes={{ paper: classes.dialogBox }} open>
+        <MainContainer>
+          <Container>
+            <SubContainer>
+              <Add>Add Contracts</Add>
+              <Img
+                style={{ cursor: "pointer" }}
+                alt=""
+                src="/images/close.svg"
 
-  const CheckBox = styled.input`
+                onClick={props.click}
+              />
+              <CheckDivDesk>
+              <HideSteps
+                onClick={() => {
+                  setHideStep(!hideStep);
+                }}
+              >
+                Hide steps
+              </HideSteps>
+              </CheckDivDesk>
+            </SubContainer>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+              }}
+            >
+              <Content>
+                You can import contracts that are available publicly on
+                XDC.
+              </Content>
+              <CheckDivMob>
+              <HideSteps
+                onClick={() => {
+                  setHideStep(!hideStep);
+                }}
+              >
+                Hide steps
+              </HideSteps>
+              </CheckDivMob>
+            </div>
+            <Input
+              type="text"
+              placeholder="Find a public contract by name or address"
+              onChange={(e) => setAddress(e.target.value)}
+              onKeyDown={(e) => handleEnterKey(e)}
+            />
+            <ErrorTag>{error}</ErrorTag>
+            {hideStep && (
+              <Text>
+                1. Go to XDC Observatory/Origin <br></br>
+                2. Check for contract <br></br> 3. Copy contract
+                address <br></br>4. Paste it on the given field above
+              </Text>
+            )}
+            {verifyAddress === "" ? (
+              ""
+            ) : (
+              <ImportBox>
+                <IconImport>
+                  <XDCLogo src="/images/network_xdc.svg"></XDCLogo>
+                  <BlueLine></BlueLine>
+                </IconImport>
+
+                <SelectImport>
+                  <CheckBox
+                    type="checkbox"
+                    onChange={(e) => setCheckBox(e.target.checked)}
+                  />
+                  <AddressImport>{address}</AddressImport>
+                </SelectImport>
+              </ImportBox>
+            )}
+           
+            <Button
+            disabled={address==="" || checkBox === false}
+              onClick={addContract}
+              style={{ backgroundColor: address === "" ? "#9DB5F8" : ""  }}
+            >
+              Import Contracts
+            </Button>
+          </Container>
+        </MainContainer>
+      </Dialog>
+    </div>
+  );
+}
+
+const CheckBox = styled.input`
   outline: none;
 `;
 
@@ -204,7 +299,7 @@ const HideSteps = styled.button`
   border-radius: 4px;
   font-size: 0.7rem;
   font-weight: 600;
-  background-color: #ECF0F7;
+  background-color: #FFFFFF;
   color: #3163f0;
   cursor: pointer;
   background-image: url("/images/arrrow.svg");
@@ -221,98 +316,3 @@ const HideSteps = styled.button`
     margin-top: 0px;
   }
 `;
-
-  
-  return (
-    <div>
-      <ShowLoader state={loader} top={"33%"} />
-      <Dialog classes={{ paper: classes.dialogBox }} open>
-        <MainContainer>
-          <Container>
-            <SubContainer>
-              <Add>Add Contracts</Add>
-              <Img
-                style={{ cursor: "pointer" }}
-                alt=""
-                src="/images/close.svg"
-
-                onClick={props.click}
-              />
-              <CheckDivDesk>
-              <HideSteps
-                onClick={() => {
-                  setHideStep(!hideStep);
-                }}
-              >
-                Hide steps
-              </HideSteps>
-              </CheckDivDesk>
-            </SubContainer>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-              }}
-            >
-              <Content>
-                You can import contracts that are available publicly on
-                XDC.
-              </Content>
-              <CheckDivMob>
-              <HideSteps
-                onClick={() => {
-                  setHideStep(!hideStep);
-                }}
-              >
-                Hide steps
-              </HideSteps>
-              </CheckDivMob>
-            </div>
-            <Input
-              type="text"
-              placeholder="Find a public contract by name or address"
-              onChange={(e) => setAddress(e.target.value)}
-              onKeyDown={(e) => handleEnterKey(e)}
-            />
-            <ErrorTag>{error}</ErrorTag>
-            {hideStep && (
-              <Text>
-                1. Go to XDC Observatory/Origin <br></br>
-                2. Check for contract <br></br> 3. Copy contract
-                address <br></br>4. Paste it on the given field above
-              </Text>
-            )}
-            {verifyAddress === "" ? (
-              ""
-            ) : (
-              <ImportBox>
-                <IconImport>
-                  <XDCLogo src="/images/network_xdc.svg"></XDCLogo>
-                  <BlueLine></BlueLine>
-                </IconImport>
-
-                <SelectImport>
-                  <CheckBox
-                    type="checkbox"
-                    onChange={(e) => setCheckBox(e.target.checked)}
-                  />
-                  <AddressImport>{address}</AddressImport>
-                </SelectImport>
-              </ImportBox>
-            )}
-           
-            <Button
-            disabled={address==="" || checkBox === false}
-              onClick={addContract}
-              style={{ backgroundColor: address === "" ? "#9DB5F8" : ""  }}
-            >
-              Import Contracts
-            </Button>
-          </Container>
-        </MainContainer>
-      </Dialog>
-    </div>
-  );
-}
-

@@ -10,9 +10,9 @@ import ButtonConfirm from "../../common/components/buttonConfirm";
 const useStyles = makeStyles(() => ({
   dialogBox: {
     width: "100% !important",
-    top: "160px",
+    top: "0px",
   ['@media screen and (min-width: 300px) and (max-width: 768px)']: { 
-    top: "0px !important",
+    top: "-5% !important",
   
 }}
 }));
