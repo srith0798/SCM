@@ -6,20 +6,7 @@ import { base16AteliersulphurpoolLight } from 'react-syntax-highlighter/dist/esm
 SyntaxHighlighter.registerLanguage('javascript', js);
 
 export default function SourceCode(props) {
-  return (
-    <MainContainer>
-      <Container>
-      <SyntaxHighlighter language="javascript" showLineNumbers={true} style={base16AteliersulphurpoolLight} wrapLongLines={true} customStyle = {{  backgroundColor: "#f0f2fc"}}>
-            {
-               props.data
-               }
-           
-          </SyntaxHighlighter>
-      </Container>
-    </MainContainer>
-  );
-}
-const MainContainer = styled.div`
+  const MainContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
@@ -37,20 +24,17 @@ const Container = styled.div`
   height: 430px;
   overflow-y: scroll;
 `;
+  return (
+    <MainContainer>
+      <Container>
+      <SyntaxHighlighter language="javascript" showLineNumbers={true} style={base16AteliersulphurpoolLight} wrapLongLines={true} customStyle = {{  backgroundColor: "#f0f2fc"}}>
+            {
+               props.data
+               }
+           
+          </SyntaxHighlighter>
+      </Container>
+    </MainContainer>
+  );
+}
 
-// const Div = styled.div`
-//   background-color: #f0f2fc;
-//   border-radius: 4px;
-//   width: 100%;
-//   height: 424px;
-//   /* display: flex; */
-//   align-items: center;
-//   text-align: center;
-//   justify-content: center;
-//   color: #aaadc4;
-//   overflow-x: scroll;
-//   line-break: anywhere;
-//   white-space: pre-line;
-//   text-align: left;
-//   padding-left: 12px;
-// `;

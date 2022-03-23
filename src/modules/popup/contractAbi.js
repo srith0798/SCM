@@ -17,31 +17,7 @@ const useStyles = makeStyles(() => ({
 
 export default function ContractAbi(props) {
   const classes = useStyles();
-  return (
-    <div>
-      <Dialog classes={{ paper: classes.dialogBox }} open>
-        <MainContainer>
-          <Container>
-            <SubContainer>
-              <Add>Contract ABI</Add>
-              <img alt="" src="/images/close.svg" onClick={props.click} style={{cursor:"pointer"}} />
-            </SubContainer>
-            <SyntaxHighlighter
-              language="json"
-              style={base16AteliersulphurpoolLight}
-              wrapLongLines={true}
-              customStyle={{ backgroundColor: "#f0f2fc", height: "530px" }}
-            >
-              {props.data}
-            </SyntaxHighlighter>
-          </Container>
-        </MainContainer>
-      </Dialog>
-    </div>
-  );
-}
-
-const MainContainer = styled.div`
+  const MainContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
@@ -66,15 +42,31 @@ const Add = styled.div`
   font: normal normal 600 24px/29px Inter;
   color: #303134;
 `;
-// const Div = styled.div`
-//   background-color: #f0f2fc;
-//   border-radius: 4px;
-//   width: 100%;
-//   max-width: 650px;
-//   height: auto;
-//   margin-top: 8px;
-//   padding: 10px;
-//   display: inline-block;
-//   color: #aaadc4;
-//   overflow-x: scroll;
-// `;
+  return (
+    <div>
+      <Dialog classes={{ paper: classes.dialogBox }} open>
+        <MainContainer>
+          <Container>
+            <SubContainer>
+              <Add>Contract ABI</Add>
+              <img
+                alt=""
+                src="/images/close.svg"
+                onClick={props.click}
+                style={{ cursor: "pointer" }}
+              />
+            </SubContainer>
+            <SyntaxHighlighter
+              language="json"
+              style={base16AteliersulphurpoolLight}
+              wrapLongLines={true}
+              customStyle={{ backgroundColor: "#f0f2fc", height: "530px" }}
+            >
+              {props.data}
+            </SyntaxHighlighter>
+          </Container>
+        </MainContainer>
+      </Dialog>
+    </div>
+  );
+}

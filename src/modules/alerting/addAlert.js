@@ -21,7 +21,6 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import ShowLoader from "../../common/components/showLoader";
 
-
 export default function AddAlert() {
   const [activeButton, setActiveButton] = React.useState("Rules");
   const [alertType, setAlertType] = React.useState("");
@@ -33,7 +32,7 @@ export default function AddAlert() {
   const [selectedDestinations, setSelectedDestinations] = React.useState([]);
   const [targetValue, setTargetValue] = React.useState("");
   const [selectedAddress, setSelectedAddress] = React.useState([]);
-  const [selectedTag , setSelectedTag] = React.useState("");
+  const [selectedTag, setSelectedTag] = React.useState("");
 
   const [icon, setIcon] = React.useState({
     successfulTransaction:
@@ -166,10 +165,9 @@ export default function AddAlert() {
         if (data.address === event.target.value) return true;
       });
       setSelectedAddress(data[0] ? data[0] : []);
-    }
-    else {
-   let tag =   parametersData.find(data=> data._id === event.target.value);
-   setSelectedTag(tag.name);
+    } else {
+      let tag = parametersData.find((data) => data._id === event.target.value);
+      setSelectedTag(tag.name);
     }
   };
   const addAlert = async () => {
@@ -191,24 +189,25 @@ export default function AddAlert() {
     }
     if (alertTarget === genericConstants.ALERT_TYPE.TAG)
       requestData["target"]["name"] = selectedTag;
-    setLoader(true)
+    setLoader(true);
     const [error] = await utility.parseResponse(
       AlertService.addAlert(requestData)
     );
-    setLoader(false)
+    setLoader(false);
 
     if (error) {
       utility.apiFailureToast(error || "Cannot add Alert");
-      setLoader(false)
+      setLoader(false);
       return;
     }
     utility.apiSuccessToast("Alert added successfully!");
   };
   const addDestination = async (label, url, channelName) => {
-    if(destinationType === "EMAIL"){
-     if(!utility.validateEmail(url))
-     { utility.apiFailureToast("Invalid Email");
-      return;}
+    if (destinationType === "EMAIL") {
+      if (!utility.validateEmail(url)) {
+        utility.apiFailureToast("Invalid Email");
+        return;
+      }
     }
     let requestData = {
       userId: sessionManager.getDataFromCookies("userId"),
@@ -421,8 +420,11 @@ export default function AddAlert() {
                 <ProgressHeader>
                   <TypeRow>Parameters</TypeRow>
                   <SelectType>
-                    { !targetValue  && !selectedTag  ? `Set alert trigger Parameters` :
-                     alertTarget === genericConstants.ALERT_TYPE.ADDRESS ? targetValue : selectedTag}
+                    {!targetValue && !selectedTag
+                      ? `Set alert trigger Parameters`
+                      : alertTarget === genericConstants.ALERT_TYPE.ADDRESS
+                      ? targetValue
+                      : selectedTag}
                   </SelectType>
                   <MobType>{utility.truncateTxnAddress(targetValue)}</MobType>
                 </ProgressHeader>
@@ -758,72 +760,6 @@ const AlertTarget = (props) => {
   );
 };
 
-const DestinationComponent = (props) => {
-  const { destinations } = props;
-  return (
-    <DestinationDetail>
-      {destinations.length !== 0 ? (
-        destinations.length &&
-        destinations.map((destination) => (
-          <EmailBox>
-            <EmailDetail>
-              <Img alt="" src="/images/email.svg" />
-              {destination.type}
-              <EmailShow>{destination.url}</EmailShow>
-            </EmailDetail>
-            <SliderDiv>
-              <label class="switch">
-                <input
-                  type="checkbox"
-                  value={destination.destinationId}
-                  onChange={(event) => props.selectDestinations(event)}
-                />
-                <span class="slider round"></span>
-              </label>
-            </SliderDiv>
-          </EmailBox>
-        ))
-      ) : (
-        <SelectType>No destination is added</SelectType>
-      )}
-      <RowContainer>
-        <Buttonn onClick={() => props.openDestinationPopup("SLACK")}>
-          <img
-            alt=""
-            src="/images/slack.svg"
-            style={{
-              marginRight: "0.25rem",
-              width: "1.3rem",
-            }}
-          />{" "}
-          Slack
-        </Buttonn>
-        <Buttonn onClick={() => props.openDestinationPopup("WEBHOOK")}>
-          <img
-            alt=""
-            src="/images/webhook.svg"
-            style={{
-              marginRight: "0.25rem",
-              width: "1.3rem",
-            }}
-          />
-          Webhook
-        </Buttonn>
-        <Buttonn onClick={() => props.openDestinationPopup("EMAIL")}>
-          <img
-            alt=""
-            src="/images/email.svg"
-            style={{
-              marginRight: "0.25rem",
-              width: "1.3rem",
-            }}
-          />
-          Email
-        </Buttonn>
-      </RowContainer>
-    </DestinationDetail>
-  );
-};
 const DestinationDetail = styled.div`
   margin-bottom: 10px;
   padding: 20px 0 0 0;
@@ -937,19 +873,6 @@ const SubTitle = styled.div`
   max-width: 16.25rem;
   padding-top: 5px;
 `;
-
-// const Title1 = styled.div`
-//   width: 157px;
-//   height: 26px;
-//   text-align: center;
-//   color: #1d3c93;
-
-//   font-size: 22px;
-//   font-weight: 600;
-//   &:hover {
-//     color: white;
-//   }
-// `;
 
 const Container = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
@@ -1147,3 +1070,70 @@ const Threshold = styled.input`
     max-width: 350px;
   }
 `;
+
+const DestinationComponent = (props) => {
+  const { destinations } = props;
+  return (
+    <DestinationDetail>
+      {destinations.length !== 0 ? (
+        destinations.length &&
+        destinations.map((destination) => (
+          <EmailBox>
+            <EmailDetail>
+              <Img alt="" src="/images/email.svg" />
+              {destination.type}
+              <EmailShow>{destination.url}</EmailShow>
+            </EmailDetail>
+            <SliderDiv>
+              <label class="switch">
+                <input
+                  type="checkbox"
+                  value={destination.destinationId}
+                  onChange={(event) => props.selectDestinations(event)}
+                />
+                <span class="slider round"></span>
+              </label>
+            </SliderDiv>
+          </EmailBox>
+        ))
+      ) : (
+        <SelectType>No destination is added</SelectType>
+      )}
+      <RowContainer>
+        <Buttonn onClick={() => props.openDestinationPopup("SLACK")}>
+          <img
+            alt=""
+            src="/images/slack.svg"
+            style={{
+              marginRight: "0.25rem",
+              width: "1.3rem",
+            }}
+          />{" "}
+          Slack
+        </Buttonn>
+        <Buttonn onClick={() => props.openDestinationPopup("WEBHOOK")}>
+          <img
+            alt=""
+            src="/images/webhook.svg"
+            style={{
+              marginRight: "0.25rem",
+              width: "1.3rem",
+            }}
+          />
+          Webhook
+        </Buttonn>
+        <Buttonn onClick={() => props.openDestinationPopup("EMAIL")}>
+          <img
+            alt=""
+            src="/images/email.svg"
+            style={{
+              marginRight: "0.25rem",
+              width: "1.3rem",
+            }}
+          />
+          Email
+        </Buttonn>
+      </RowContainer>
+    </DestinationDetail>
+  );
+};

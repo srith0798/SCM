@@ -65,93 +65,7 @@ export default function Sidebar(props) {
     if (value === "alerting") setAlertingIcon("/images/alerting-blue.svg");
   };
 
-  return (
-    <>
-      <Hamburger src="/images/hamburger.svg" onClick={() => setOpen(!open)} />
-      {open && (
-        <SidebarContainer>
-          <Wrapper onClick={redirectToAbout} style={{ marginTop: "20px" }}>
-            <Icon src="/images/Xmartly.svg" />
-            <Heading>About Xmartly</Heading>
-          </Wrapper>
-          {sessionManager.getDataFromCookies("isLoggedIn") && (
-            <Wrapper
-              onClick={redirectToTransaction}
-              onMouseOver={() => changeSourceForIcons("transactions")}
-              onMouseOut={() => changeOriginalSourceForIcons("transactions")}
-            >
-              <Icon src={transactionIcon} />
-              <Heading>Transactions</Heading>
-            </Wrapper>
-          )}
-          {sessionManager.getDataFromCookies("isLoggedIn") && (
-            <Wrapper
-              onClick={redirectToContract}
-              onMouseOver={() => changeSourceForIcons("contracts")}
-              onMouseOut={() => changeOriginalSourceForIcons("contracts")}
-            >
-              <Icon src={contractsIcon} />
-              <Heading>Contracts</Heading>
-            </Wrapper>
-          )}
-          {/* <Wrapper
-            onClick={redirectToNetwork}
-            onMouseOver={() => changeSourceForIcons("networks")}
-            onMouseOut={() => changeOriginalSourceForIcons("networks")}
-          >
-            <Icon src={networksIcon} />
-            <Heading>Networks</Heading>
-          </Wrapper> */}
-          {sessionManager.getDataFromCookies("isLoggedIn") && (
-            <Wrapper
-              onClick={redirectToAnalytics}
-              onMouseOver={() => changeSourceForIcons("analytics")}
-              onMouseOut={() => changeOriginalSourceForIcons("analytics")}
-            >
-              <Icon src={analyticsIcon} />
-              <Heading>Analytics</Heading>
-            </Wrapper>
-          )}
-          {sessionManager.getDataFromCookies("isLoggedIn") && (
-            <Wrapper
-              onClick={redirectToAlerting}
-              onMouseOver={() => changeSourceForIcons("alerting")}
-              onMouseOut={() => changeOriginalSourceForIcons("alerting")}
-            >
-              <Icon src={alertingIcon} />
-              <Heading>Alerting</Heading>
-            </Wrapper>
-          )}
-          <WrapperFaq
-            style={{
-              marginTop: sessionManager.getDataFromCookies("isLoggedIn")
-                ? "10rem"
-                : "35rem",
-              paddingLeft: sessionManager.getDataFromCookies("isLoggedIn")
-                ? "22px"
-                : "50px",
-            }}
-            onClick={redirectToFaqs}
-          >
-            <Icon src="/images/Subtraction 2.svg" />
-            <Heading>FAQs</Heading>
-          </WrapperFaq>
-          {sessionManager.getDataFromCookies("isLoggedIn") && (
-            <Wrapper onClick={redirectToLogout}>
-              <Icon src="/images/Log out.svg" />
-              <Heading>Logout</Heading>
-            </Wrapper>
-          )}
-          <CenterDiv>
-            <img alt="" src="/images/Group 12.svg" />
-          </CenterDiv>
-        </SidebarContainer>
-      )}
-    </>
-  );
-}
-
-const CenterDiv = styled.div`
+  const CenterDiv = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 2rem;
@@ -231,3 +145,84 @@ const WrapperFaq = styled.div`
 const Heading = styled.span`
   color: #ffffff;
 `;
+
+  return (
+    <>
+      <Hamburger src="/images/hamburger.svg" onClick={() => setOpen(!open)} />
+      {open && (
+        <SidebarContainer>
+          <Wrapper onClick={redirectToAbout} style={{ marginTop: "20px" }}>
+            <Icon src="/images/Xmartly.svg" />
+            <Heading>About Xmartly</Heading>
+          </Wrapper>
+          {sessionManager.getDataFromCookies("isLoggedIn") && (
+            <Wrapper
+              onClick={redirectToTransaction}
+              onMouseOver={() => changeSourceForIcons("transactions")}
+              onMouseOut={() => changeOriginalSourceForIcons("transactions")}
+            >
+              <Icon src={transactionIcon} />
+              <Heading>Transactions</Heading>
+            </Wrapper>
+          )}
+          {sessionManager.getDataFromCookies("isLoggedIn") && (
+            <Wrapper
+              onClick={redirectToContract}
+              onMouseOver={() => changeSourceForIcons("contracts")}
+              onMouseOut={() => changeOriginalSourceForIcons("contracts")}
+            >
+              <Icon src={contractsIcon} />
+              <Heading>Contracts</Heading>
+            </Wrapper>
+          )}
+          
+          {sessionManager.getDataFromCookies("isLoggedIn") && (
+            <Wrapper
+              onClick={redirectToAnalytics}
+              onMouseOver={() => changeSourceForIcons("analytics")}
+              onMouseOut={() => changeOriginalSourceForIcons("analytics")}
+            >
+              <Icon src={analyticsIcon} />
+              <Heading>Analytics</Heading>
+            </Wrapper>
+          )}
+          {sessionManager.getDataFromCookies("isLoggedIn") && (
+            <Wrapper
+              onClick={redirectToAlerting}
+              onMouseOver={() => changeSourceForIcons("alerting")}
+              onMouseOut={() => changeOriginalSourceForIcons("alerting")}
+            >
+              <Icon src={alertingIcon} />
+              <Heading>Alerting</Heading>
+            </Wrapper>
+          )}
+          <WrapperFaq
+            style={{
+              marginTop: sessionManager.getDataFromCookies("isLoggedIn")
+                ? "10rem"
+                : "35rem",
+              paddingLeft: sessionManager.getDataFromCookies("isLoggedIn")
+                ? "22px"
+                : "50px",
+            }}
+            onClick={redirectToFaqs}
+          >
+            <Icon src="/images/Subtraction 2.svg" />
+            <Heading>FAQs</Heading>
+          </WrapperFaq>
+          {sessionManager.getDataFromCookies("isLoggedIn") && (
+            <Wrapper onClick={redirectToLogout}>
+              <Icon src="/images/Log out.svg" />
+              <Heading>Logout</Heading>
+            </Wrapper>
+          )}
+          <CenterDiv>
+            <img alt="" src="/images/Group 12.svg" />
+          </CenterDiv>
+        </SidebarContainer>
+      )}
+    </>
+  );
+}
+
+

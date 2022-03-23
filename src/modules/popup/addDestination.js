@@ -10,7 +10,10 @@ const useStyles = makeStyles(() => ({
     maxHeight: 400,
     position: "absolute",
     top: "5rem",
-    maxWidth: 360
+    maxWidth: 360,
+    ['@media screen and (min-width: 300px) and (max-width: 768px)']: { 
+     top: "12rem"
+  }
   },
 }));
 export default function DestinationTags(props) {
@@ -26,10 +29,15 @@ export default function DestinationTags(props) {
           <Container>
             <SubContainer>
               <Add>Add Destination</Add>
-              <img alt="" src="/images/close.svg" onClick={props.close} />
+              <img
+                style={{ cursor: "pointer" }}
+                alt=""
+                src="/images/close.svg"
+                onClick={props.close}
+              />
             </SubContainer>
             <Content>
-              Add an URL that can receive alert notifications from Xmartly.
+              Add an {props?.type === "EMAIL" ? "email" : "url"} that can receive alert notifications from Xmartly.
             </Content>
             <Input
               type="text"
@@ -40,7 +48,7 @@ export default function DestinationTags(props) {
 
             <Input
               type="text"
-              placeholder={props?.type === "EMAIL"  ? "Email" : "URL"}
+              placeholder={props?.type === "EMAIL" ? "Email" : "URL"}
               value={url}
               onChange={(e) => setUrl(e.target.value)}
             />
@@ -54,6 +62,11 @@ export default function DestinationTags(props) {
             </CheckDiv>
             <SubContainer>
               <ConfirmButton
+                disabled={
+                  props?.type === "SLACK"
+                    ? label === "" || url === "" || channelName === ""
+                    : label === "" || url === ""
+                }
                 onClick={() =>
                   props?.type === "SLACK"
                     ? props.click(label, url, channelName)
@@ -128,4 +141,5 @@ const ConfirmButton = styled.button`
   padding: 7px 9px;
   margin-right: 10px;
   margin-top: 2rem;
+  cursor: pointer;
 `;

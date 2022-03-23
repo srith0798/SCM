@@ -133,131 +133,8 @@ export default function AlertDetails() {
   const backButton = () => {
     history.push("/alerting");
   };
-  return (
-    <>
-          <ShowLoader state={loader} top={"33%"}></ShowLoader>
 
-    <MainContainer>
-      <Row
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          marginBottom: "20px",
-        }}
-      >
-        <div>
-          <img
-            alt=""
-            src="/images/back.svg"
-            style={{ marginRight: "10px", marginBottom: "10px" }}
-            onClick={() => backButton()}
-          />
-          <b style={{ fontSize: "24px", fontWeight: 600 }}>Alert Details</b>
-        </div>
-        <Button>Add Alert</Button>
-      </Row>
-      <Container>
-        <CommonDiv>
-          <RowData>
-            <Heading>ID</Heading>
-            <SubHeading>{alert.alertId}</SubHeading>
-          </RowData>
-        </CommonDiv>
-        <CommonDiv>
-          <RowData>
-            <Heading>Name</Heading>
-            <SubHeading>
-            {`${genericConstants.ALERT_TYPE_NAMES[alert.type]} in ${alert?.target?.name}`}
-            </SubHeading>
-          </RowData>
-        </CommonDiv>
-        <CommonDiv>
-          <RowData>
-            <Heading>Alert Type</Heading>
-            <SubHeading>
-              <TextColor>{genericConstants.ALERT_TYPE_NAMES[alert.type]}</TextColor>
-            </SubHeading>
-          </RowData>
-        </CommonDiv>
-        <CommonDiv>
-          <RowData>
-            <Heading>Target</Heading>
-            <SubHeading>{alert?.target?.type}</SubHeading>
-          </RowData>
-        </CommonDiv>
-      </Container>
-      <br />
-      <b>Alert will be sent to this destination</b>
-      {onEdit === false ? 
-      <NewContainer>
-        {alert && alert.destinations && alert.destinations.length>0 && alert.destinations.map((destination)=>(
-           <LastContainer>
-           <Row>
-             <img
-               alt=""
-               src="/images/email.svg"
-               style={{ marginRight: "4px", width: "1rem" }}
-             />
-             <Heads>{destination.type}</Heads>
-             <SubHeading>{destination.url}</SubHeading>
-           </Row>
-         </LastContainer>
-        ))}
-       
-        {/* <CommonDiv>
-          <Row>
-            <img
-              alt=""
-              src="/images/webhook.svg"
-              style={{ marginRight: "4px", width: "1rem" }}
-            />
-            <Heads>Finance</Heads>
-            <SubHeading>https:webhook.site/aOe</SubHeading>
-          </Row>
-        </CommonDiv> */}
-        <RowContainer>
-          <EditButton style={{ marginRight: "4px" }} onClick = {editDestinations}>Edit</EditButton>
-          {alert.status === true ?
-          <DisableButton style={{ marginLeft: "4px" }} onClick = {()=>disableAlert(alert.alertId, false)}>Disable</DisableButton> : "" }
-          {alert.status === false ?
-          <DisableButton style={{ marginLeft: "4px" }} onClick = {()=>disableAlert(alert.alertId, true)}>Enable</DisableButton> : "" }
-        </RowContainer>
-      </NewContainer> :
-          <DestinationDetail>
-            {destinations &&
-              destinations.length &&
-              destinations.map((destination) => (
-                <EmailBox>
-                  <EmailDetail>
-                    <Img alt="" src="/images/email.svg" />
-                    {destination.type}
-                    <EmailShow>{destination.url}</EmailShow>
-                  </EmailDetail>
-                  <div>
-                    <label class="switch">
-                      <input
-                        checked = {destination.checked}
-                        type="checkbox"
-                        value={destination.destinationId}
-                        onChange={(event) => selectDestinations(event)}
-                      />
-                      <span class="slider round"></span>
-                    </label>
-                  </div>
-                </EmailBox>
-              ))}
-            <EditButton style={{ marginRight: "4px" }} onClick={()=>updateAlert(alert.alertId)}>Update</EditButton>
-
-          </DestinationDetail>
-        
-       
-       }
-    </MainContainer>
-    </>
-  );
-}
-
-const MainContainer = styled.div`
+  const MainContainer = styled.div`
   background: #ecf0f7 0% 0% no-repeat padding-box;
   opacity: 1;
   width: 100%;
@@ -272,11 +149,6 @@ const RowData = styled.div`
   display: flex;
   width: 100%;
   min-width: 200px;
-  // overflow-x: auto;
-  // @media (min-width: 300px) and (max-width: 768px) {
-  //   column-gap: 80px;
-  //   text-align: left;
-  // }
 `;
 const NewContainer = styled.div`
   background-color: #ffffff;
@@ -382,9 +254,6 @@ const Heads = styled.div`
 `;
 const SubHeading = styled.div`
   font-size: 13px;
-  //   @media (min-width: 300px) and (max-width: 768px) {
-  //     margin-left:5px;
-  //
 `;
 
 const RowContainer = styled.div`
@@ -464,3 +333,119 @@ const Img = styled.img`
   width: 1.3rem;
   margin-right: 4px;
 `;
+
+  return (
+    <>
+          <ShowLoader state={loader} top={"33%"}></ShowLoader>
+
+    <MainContainer>
+      <Row
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          marginBottom: "20px",
+        }}
+      >
+        <div>
+          <img
+            alt=""
+            src="/images/back.svg"
+            style={{ marginRight: "10px", marginBottom: "10px" }}
+            onClick={() => backButton()}
+          />
+          <b style={{ fontSize: "24px", fontWeight: 600 }}>Alert Details</b>
+        </div>
+        <Button>Add Alert</Button>
+      </Row>
+      <Container>
+        <CommonDiv>
+          <RowData>
+            <Heading>ID</Heading>
+            <SubHeading>{alert.alertId}</SubHeading>
+          </RowData>
+        </CommonDiv>
+        <CommonDiv>
+          <RowData>
+            <Heading>Name</Heading>
+            <SubHeading>
+            {`${genericConstants.ALERT_TYPE_NAMES[alert.type]} in ${alert?.target?.name}`}
+            </SubHeading>
+          </RowData>
+        </CommonDiv>
+        <CommonDiv>
+          <RowData>
+            <Heading>Alert Type</Heading>
+            <SubHeading>
+              <TextColor>{genericConstants.ALERT_TYPE_NAMES[alert.type]}</TextColor>
+            </SubHeading>
+          </RowData>
+        </CommonDiv>
+        <CommonDiv>
+          <RowData>
+            <Heading>Target</Heading>
+            <SubHeading>{alert?.target?.type}</SubHeading>
+          </RowData>
+        </CommonDiv>
+      </Container>
+      <br />
+      <b>Alert will be sent to this destination</b>
+      {onEdit === false ? 
+      <NewContainer>
+        {alert && alert.destinations && alert.destinations.length>0 && alert.destinations.map((destination)=>(
+           <LastContainer>
+           <Row>
+             <img
+               alt=""
+               src="/images/email.svg"
+               style={{ marginRight: "4px", width: "1rem" }}
+             />
+             <Heads>{destination.type}</Heads>
+             <SubHeading>{destination.url}</SubHeading>
+           </Row>
+         </LastContainer>
+        ))}
+        {alert?.destinations?.length === 0 && (
+               <Heading>No alert destination is enabled</Heading> 
+             )}
+        <RowContainer>
+          <EditButton style={{ marginRight: "4px" }} onClick = {editDestinations}>Edit</EditButton>
+          {alert.status === true ?
+          <DisableButton style={{ marginLeft: "4px" }} onClick = {()=>disableAlert(alert.alertId, false)}>Disable</DisableButton> : "" }
+          {alert.status === false ?
+          <DisableButton style={{ marginLeft: "4px" }} onClick = {()=>disableAlert(alert.alertId, true)}>Enable</DisableButton> : "" }
+        </RowContainer>
+      </NewContainer> :
+          <DestinationDetail>
+            {destinations &&
+              destinations.length &&
+              destinations.map((destination) => (
+                <EmailBox>
+                  <EmailDetail>
+                    <Img alt="" src="/images/email.svg" />
+                    {destination.type}
+                    <EmailShow>{destination.url}</EmailShow>
+                  </EmailDetail>
+                  <div>
+                    <label class="switch">
+                      <input
+                        checked = {destination.checked}
+                        type="checkbox"
+                        value={destination.destinationId}
+                        onChange={(event) => selectDestinations(event)}
+                      />
+                      <span class="slider round"></span>
+                    </label>
+                  </div>
+                </EmailBox>
+              ))}
+            <EditButton style={{ marginRight: "4px" }} onClick={()=>updateAlert(alert.alertId)}>Update</EditButton>
+
+          </DestinationDetail>
+        
+       
+       }
+    </MainContainer>
+    </>
+  );
+}
+

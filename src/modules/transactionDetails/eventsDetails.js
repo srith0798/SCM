@@ -13,10 +13,12 @@ export default function EventsDetails(props) {
   const [loader, setLoader] = React.useState(false);
   const [showRaw, setShowRaw] = React.useState(false);
 
-  let rawObject = [{
-    data: props?.logs[0]?.data,
-    topics: props?.logs[0]?.topics,
-  }];
+  let rawObject = [
+    {
+      data: props?.logs[0]?.data,
+      topics: props?.logs[0]?.topics,
+    },
+  ];
 
   const getContractList = async (skip = 0, limit = 10) => {
     try {
@@ -43,89 +45,7 @@ export default function EventsDetails(props) {
     //eslint-disable-next-line
   }, []);
 
-  return (
-    <div>
-      <ShowLoader state={loader} top={"33%"} />
-      <MainContainer className="scroll">
-        <FilterContainer>
-          <FilterDivision>
-            <HeaderText>Event Name</HeaderText>
-            <FilterSelect>
-              <option value="filter">{props?.func!== undefined ? "Transfer" : "Not available " }</option>
-            </FilterSelect>
-          </FilterDivision>
-          <FilterDivision>
-            <HeaderText>Contract</HeaderText>
-            <FilterSelect>
-              <option value="filter">{address[0]?.contractName}</option>
-            </FilterSelect>
-          </FilterDivision>
-        </FilterContainer>
-        <Line></Line>
-        <MidContainer>
-          <ContentWrapper>
-            <MidHeader>{props?.func!== undefined ? "Transfer" : "Not available " }</MidHeader>
-            <HeaderText>{address[0]?.contractName}</HeaderText>
-            <CodeWrapper>
-              &#123; <br />
-              <SubHeadBlue>"From"</SubHeadBlue>: "{props?.from}"
-              <br />
-              <SubHeadBlue>"To"</SubHeadBlue>: "{props?.to}"
-              <br />
-              <SubHeadBlue>"Value"</SubHeadBlue>: "{props?.value}"
-              <br /> &#125;
-              <br />
-              <SubHeadBlue onClick={()=>setShowRaw(!showRaw)}>
-                Show raw data and topics
-                <img
-                  style={{ marginLeft: "2px" }}
-                  alt=""
-                  src="/images/arrrow.svg"
-                />
-              </SubHeadBlue>
-              {showRaw === true ? (
-                <CodeDiv>
-                <CodeMainContainer>
-                  <CodeContainer>
-                    <SyntaxHighlighter
-                      language="javascript"
-                      showLineNumbers={true}
-                      style={base16AteliersulphurpoolLight}
-                      wrapLongLines={true}
-                      customStyle={{ backgroundColor: "#f0f2fc", margin: 0 }}
-                    >
-                      {JSON.stringify(rawObject)}
-                    </SyntaxHighlighter>
-                  </CodeContainer>
-                </CodeMainContainer>
-              </CodeDiv>
-              ) : ""}
-            </CodeWrapper>
-          </ContentWrapper>
-          {/* <ContentWrapper>
-            <MidHeader>Approval</MidHeader>
-            <HeaderText>App_Transactions_Validator</HeaderText>
-            <CodeWrapper>
-              &#123; <br />
-              "From": xdcabfe4184e5f9f60061768b3c
-              <br />
-              "to"
-              <br />
-              "Value"
-              <br /> &#125;
-              <br />
-              <InCodeSelect>
-                <option value="filter">Select raw data and topics</option>
-              </InCodeSelect>
-            </CodeWrapper>
-          </ContentWrapper> */}
-        </MidContainer>
-      </MainContainer>
-    </div>
-  );
-}
-
-const MainContainer = styled.div`
+  const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin: 20px 0 20px 0;
@@ -218,9 +138,8 @@ const CodeWrapper = styled.div`
   background-color: #f5f6fd;
   margin: 15px 15px 15px 0px;
   padding: 15px;
-  @media(min-width: 300px) and (max-width: 767px){
+  @media (min-width: 300px) and (max-width: 767px) {
     font-size: 10px;
-
   }
 `;
 // const InCodeSelect = styled.select`
@@ -260,8 +179,81 @@ const CodeContainer = styled.div`
 `;
 
 const CodeDiv = styled.div`
-width: 100%;
-@media (min-width: 300px) and (max-width: 414px) {
-width: 100%;
-}
+  width: 100%;
+  @media (min-width: 300px) and (max-width: 414px) {
+    width: 100%;
+  }
 `;
+
+  return (
+    <div>
+      <ShowLoader state={loader} top={"33%"} />
+      <MainContainer className="scroll">
+        <FilterContainer>
+          <FilterDivision>
+            <HeaderText>Event Name</HeaderText>
+            <FilterSelect>
+              <option value="filter">
+                {props?.func !== undefined ? "Transfer" : "Not available "}
+              </option>
+            </FilterSelect>
+          </FilterDivision>
+          <FilterDivision>
+            <HeaderText>Contract</HeaderText>
+            <FilterSelect>
+              <option value="filter">{address[0]?.contractName}</option>
+            </FilterSelect>
+          </FilterDivision>
+        </FilterContainer>
+        <Line></Line>
+        <MidContainer>
+          <ContentWrapper>
+            <MidHeader>
+              {props?.func !== undefined ? "Transfer" : "Not available "}
+            </MidHeader>
+            <HeaderText>{address[0]?.contractName}</HeaderText>
+            <CodeWrapper>
+              &#123; <br />
+              <SubHeadBlue>"From"</SubHeadBlue>: "{props?.from}"
+              <br />
+              <SubHeadBlue>"To"</SubHeadBlue>: "{props?.to}"
+              <br />
+              <SubHeadBlue>"Value"</SubHeadBlue>: "{props?.value}"
+              <br /> &#125;
+              <br />
+              <SubHeadBlue onClick={() => setShowRaw(!showRaw)}>
+                Show raw data and topics
+                <img
+                  style={{ marginLeft: "2px" }}
+                  alt=""
+                  src="/images/arrrow.svg"
+                />
+              </SubHeadBlue>
+              {showRaw === true ? (
+                <CodeDiv>
+                  <CodeMainContainer>
+                    <CodeContainer>
+                      <SyntaxHighlighter
+                        language="javascript"
+                        showLineNumbers={true}
+                        style={base16AteliersulphurpoolLight}
+                        wrapLongLines={true}
+                        customStyle={{ backgroundColor: "#f0f2fc", margin: 0 }}
+                      >
+                        {JSON.stringify(rawObject)}
+                      </SyntaxHighlighter>
+                    </CodeContainer>
+                  </CodeMainContainer>
+                </CodeDiv>
+              ) : (
+                ""
+              )}
+            </CodeWrapper>
+          </ContentWrapper>
+        </MidContainer>
+      </MainContainer>
+    </div>
+  );
+}
+
+

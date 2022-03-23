@@ -20,7 +20,6 @@ export default function RemoveTag(props) {
 
     try {
       const response = await contractsService.removeTags(requestData);
-      console.log("removeResponse", response);
       props.click();
       props.getContractById();
       window.location.reload();
@@ -29,32 +28,7 @@ export default function RemoveTag(props) {
     }
   };
   const classes = useStyles();
-
-  return (
-    <div>
-      <Dialog classes={{ paper: classes.dialogBox }} open={true}>
-        <MainContainer>
-          <Container>
-            <SubContainer>
-              <Add>Remove tag from contract</Add>
-            </SubContainer>
-            <Content>
-              Are you sure you want to remove this tag from the contract?
-            </Content>
-
-            <SubContainer
-              style={{ width: "100%", maxWidth: "160px", marginTop: "30px" }}
-            >
-              <ButtonConfirm text={"Remove"} click={removeTags} />
-              <CancelButton onClick={props.click}>Cancel</CancelButton>
-            </SubContainer>
-          </Container>
-        </MainContainer>
-      </Dialog>
-    </div>
-  );
-}
-const MainContainer = styled.div`
+  const MainContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
@@ -92,3 +66,28 @@ const Content = styled.div`
   color: #303134;
   margin-top: 20px;
 `;
+
+  return (
+    <div>
+      <Dialog classes={{ paper: classes.dialogBox }} open={true}>
+        <MainContainer>
+          <Container>
+            <SubContainer>
+              <Add>Remove tag from contract</Add>
+            </SubContainer>
+            <Content>
+              Are you sure you want to remove this tag from the contract?
+            </Content>
+
+            <SubContainer
+              style={{ width: "100%", maxWidth: "160px", marginTop: "30px" }}
+            >
+              <ButtonConfirm text={"Remove"} click={removeTags} />
+              <CancelButton onClick={props.click}>Cancel</CancelButton>
+            </SubContainer>
+          </Container>
+        </MainContainer>
+      </Dialog>
+    </div>
+  );
+}

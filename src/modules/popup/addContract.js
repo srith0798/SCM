@@ -10,7 +10,8 @@ import ShowLoader from "../../common/components/showLoader";
 const useStyles = makeStyles(() => ({
   dialogBox: {
     width: "100% !important",
-    backgroundColor: "#ECF0F7",
+    backgroundColor: "#FFFFFF",
+    bottom: "180px",
   },
 }));
 
@@ -298,7 +299,7 @@ const HideSteps = styled.button`
   border-radius: 4px;
   font-size: 0.7rem;
   font-weight: 600;
-  background-color: #ECF0F7;
+  background-color: #FFFFFF;
   color: #3163f0;
   cursor: pointer;
   background-image: url("/images/arrrow.svg");

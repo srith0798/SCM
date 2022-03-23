@@ -14,74 +14,7 @@ const useStyles = makeStyles(() => ({
 
 export default function LetsGetStarted(props) {
   const classes = useStyles();
-
-  return (
-    <div>
-      {props.state ? (
-        <Dialog classes={{ paper: classes.dialogBox }} open>
-          <MainContainer>
-            <Container>
-              <SubContainer>
-                <Add>Get Started</Add>
-                <CrossIcon
-                  alt=""
-                  src="/images/close.svg"
-                  onClick={props.click}
-                />
-              </SubContainer>
-              <Content>Great to have you onboard! Feel free to explore</Content>
-
-              <SpaceBetween>
-                <Between>
-                  <RowProperty>
-                    <Icon src="/images/contracts.svg" />
-                  </RowProperty>
-                  <RowProperty>Manage contracts</RowProperty>
-                  <SubHeading>
-                    You can add and manage any contract deployed on XDC Network.
-                  </SubHeading>
-                </Between>
-                <Between>
-                  <RowProperty>
-                    <Icon src="/images/Analytics.svg" />
-                  </RowProperty>
-                  <RowProperty>Analytics</RowProperty>
-                  <SubHeading>
-                    View analytics like number of transactions, gas fee etc for
-                    the added contract.
-                  </SubHeading>
-                </Between>
-                <Between>
-                  <RowProperty>
-                    <Icon src="/images/Alerting.svg" />
-                  </RowProperty>
-                  <RowProperty>Set Alerts</RowProperty>
-                  <SubHeading>
-                    {" "}
-                    You can set different types of alert for your contracts,
-                    without missing any information.
-                  </SubHeading>
-                </Between>
-              </SpaceBetween>
-              <CenterDiv>
-                <Button>Add your first contract</Button>
-              </CenterDiv>
-              <CenterDiv>
-                <input type="checkbox" />
-                &nbsp;
-                <Toast>Don’t show this message again</Toast>
-              </CenterDiv>
-              <br />
-              <br />
-            </Container>
-          </MainContainer>
-        </Dialog>
-      ) : null}
-    </div>
-  );
-}
-
-const CrossIcon = styled.img`
+  const CrossIcon = styled.img`
   cursor: pointer;
   width: 16px;
   transition: width 0.1s;
@@ -187,3 +120,71 @@ const RowProperty = styled.div`
   justify-content: center;
   color: #102c78;
 `;
+
+  return (
+    <div>
+      {props.state ? (
+        <Dialog classes={{ paper: classes.dialogBox }} open>
+          <MainContainer>
+            <Container>
+              <SubContainer>
+                <Add>Get Started</Add>
+                <CrossIcon
+                  alt=""
+                  src="/images/close.svg"
+                  onClick={props.click}
+                />
+              </SubContainer>
+              <Content>Great to have you onboard! Feel free to explore</Content>
+
+              <SpaceBetween>
+                <Between>
+                  <RowProperty>
+                    <Icon src="/images/contracts.svg" />
+                  </RowProperty>
+                  <RowProperty>Manage contracts</RowProperty>
+                  <SubHeading>
+                    You can add and manage any contract deployed on XDC Network.
+                  </SubHeading>
+                </Between>
+                <Between>
+                  <RowProperty>
+                    <Icon src="/images/Analytics.svg" />
+                  </RowProperty>
+                  <RowProperty>Analytics</RowProperty>
+                  <SubHeading>
+                    View analytics like number of transactions, gas fee etc for
+                    the added contract.
+                  </SubHeading>
+                </Between>
+                <Between>
+                  <RowProperty>
+                    <Icon src="/images/Alerting.svg" />
+                  </RowProperty>
+                  <RowProperty>Set Alerts</RowProperty>
+                  <SubHeading>
+                    {" "}
+                    You can set different types of alert for your contracts,
+                    without missing any information.
+                  </SubHeading>
+                </Between>
+              </SpaceBetween>
+              <CenterDiv>
+                <Button>Add your first contract</Button>
+              </CenterDiv>
+              <CenterDiv>
+                <input type="checkbox" />
+                &nbsp;
+                <Toast>Don’t show this message again</Toast>
+              </CenterDiv>
+              <br />
+              <br />
+            </Container>
+          </MainContainer>
+        </Dialog>
+      ) : null}
+    </div>
+  );
+}
+
+

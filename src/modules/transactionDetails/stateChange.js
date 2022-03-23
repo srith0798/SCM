@@ -19,34 +19,7 @@ export default function StateChange() {
     },
   ];
 
-  return (
-    <>
-      <ValidatorContainer>
-        <HeaderName>
-          <TitleHead>Apps Transaction Validator</TitleHead>
-          <TransactionHash>
-            xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c
-          </TransactionHash>
-        </HeaderName>
-        <TargetButtons>
-          <Mapping>mapping (address = uint256)</Mapping>
-          <Balances>Balances</Balances>
-        </TargetButtons>
-
-        {listData.map((item) => (
-          <ValidatorList>
-            <HashList>{item.transactionHash}</HashList>
-            <RedButton>{item.value1}</RedButton>
-            <img style={{ width: "10px" }} src="/images/arrow.svg" alt="" />
-            <GreenButton>{item.value2}</GreenButton>
-          </ValidatorList>
-        ))}
-      </ValidatorContainer>
-    </>
-  );
-}
-
-const ValidatorContainer = styled.div`
+  const ValidatorContainer = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
   border-radius: 6px;
   margin-top: 1.25rem;
@@ -165,3 +138,32 @@ const ValidatorList = styled.div`
     margin-top: 0.625rem;
     align-items: center;
 }`;
+
+
+  return (
+    <>
+      <ValidatorContainer>
+        <HeaderName>
+          <TitleHead>Apps Transaction Validator</TitleHead>
+          <TransactionHash>
+            xdcabfe4184e5f9f600fe86d20e2a32c99be1768b3c
+          </TransactionHash>
+        </HeaderName>
+        <TargetButtons>
+          <Mapping>mapping (address = uint256)</Mapping>
+          <Balances>Balances</Balances>
+        </TargetButtons>
+
+        {listData.map((item) => (
+          <ValidatorList>
+            <HashList>{item.transactionHash}</HashList>
+            <RedButton>{item.value1}</RedButton>
+            <img style={{ width: "10px" }} src="/images/arrow.svg" alt="" />
+            <GreenButton>{item.value2}</GreenButton>
+          </ValidatorList>
+        ))}
+      </ValidatorContainer>
+    </>
+  );
+}
+

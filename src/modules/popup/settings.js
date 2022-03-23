@@ -16,7 +16,62 @@ const useStyles = makeStyles(() => ({
 
 export default function Settings(props) {
   const classes = useStyles();
-  console.log("props", props.toggle);
+  const MainContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+`;
+const Container = styled.div`
+  background: #ffffff 0% 0% no-repeat padding-box;
+  border-radius: 0.375rem;
+  width: 100%;
+  background-color: #ffffff;
+  max-width: 43.75rem;
+  height: auto;
+`;
+const SubContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-left: 9px;
+  margin-right: 5px;
+`;
+const Add = styled.div`
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #303134;
+  margin-left: 1.5px;
+`;
+
+const MainHeading = styled.div`
+  font-size: 1rem;
+  font-weight: 600;
+  color: #102c78;
+
+  margin-left: 9px;
+`;
+const BorderDiv = styled.div`
+  border-bottom: 1px solid #ededed;
+  width: 100%;
+`;
+const Content = styled.div`
+  font-size: 1rem;
+  font-weight: 600;
+  color: #303134;
+  margin-top: 0.625rem;
+  padding: 15px 12px 8px 10px;
+  margin-left: 9px;
+`;
+const Heading = styled.div`
+  text-align: left;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #303134;
+  margin-top: 1.25rem;
+`;
+
   return (
     <div>
       <Dialog classes={{ paper: classes.dialogBox }} open={true}>
@@ -153,58 +208,4 @@ export default function Settings(props) {
   );
 }
 
-const MainContainer = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-`;
-const Container = styled.div`
-  background: #ffffff 0% 0% no-repeat padding-box;
-  border-radius: 0.375rem;
-  width: 100%;
-  background-color: #ffffff;
-  max-width: 43.75rem;
-  height: auto;
-`;
-const SubContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  margin-left: 9px;
-  margin-right: 5px;
-`;
-const Add = styled.div`
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: #303134;
-  margin-left: 1.5px;
-`;
 
-const MainHeading = styled.div`
-  font-size: 1rem;
-  font-weight: 600;
-  color: #102c78;
-
-  margin-left: 9px;
-`;
-const BorderDiv = styled.div`
-  border-bottom: 1px solid #ededed;
-  width: 100%;
-`;
-const Content = styled.div`
-  font-size: 1rem;
-  font-weight: 600;
-  color: #303134;
-  margin-top: 0.625rem;
-  padding: 15px 12px 8px 10px;
-  margin-left: 9px;
-`;
-const Heading = styled.div`
-  text-align: left;
-  font-size: 1rem;
-  font-weight: 600;
-  color: #303134;
-  margin-top: 1.25rem;
-`;

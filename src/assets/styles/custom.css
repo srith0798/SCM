@@ -518,7 +518,7 @@ input[type="date"]:valid::before {
 }
 .button {
   margin-right: 15px;
-  margin-top: 5px;
+  margin-top: 20px;
   background-color: transparent;
   border: none;
   outline: none;
@@ -630,12 +630,9 @@ input[type="date"]:valid::before {
   }
   .faqs-container {
     width: 100%;
-    margin-left: 10px;
   }
   .question {
     justify-content: center;
-
-    padding-bottom: 40px;
     padding-left: 10px;
     display: flex;
     font-size: 14px;
@@ -655,26 +652,24 @@ input[type="date"]:valid::before {
   .ui-margin {
     width: 100%;
     padding: 0 15px;
-    padding-right: 30px;
   }
   .faq-item {
-    padding: 5px 0px 32px 5px;
+    padding: 20px 0px 23px 5px;
     margin-bottom: 22px;
   }
-  /* .MuiDialog-root {
-    margin: 0px !important;
-    } */
 }
-/* @media (min-width: 300px) and (max-width: 360px) {
-  .MuiPaper-root {
-    margin: 0px !important;
-    height: 100%;
-    max-height: max-content !important;
-    top: 13% !important;
-    max-width: 330px !important;
+ @media (min-width: 300px) and (max-width: 767px) {
+  .app-container{
+    height: 92vh !important;
+    /* position: fixed; */
+  }
+  .ibfOAg{
+    width: 100% !important;
+    height: fit-content !important;
+    min-height: 100% !important;
   }
 }
-@media (min-width: 361px) and (max-width: 376px) {
+/*@media (min-width: 361px) and (max-width: 376px) {
   .MuiPaper-root {
     margin: 0px !important;
     height: 100%;

@@ -39,76 +39,7 @@ export default function SubContracts(props) {
     //eslint-disable-next-line
   }, []);
 
-  return (
-    <div>
-      {showContract === true ? (
-        <BoxContainer>
-          <div>
-            <DetailContainer>
-              <Heading>Contracts </Heading>
-              <SubHead>{address[0].contractName}</SubHead>
-            </DetailContainer>
-          </div>
-          <FlexDiv>
-            <SubContractDiv>
-              <CommonDiv>
-                <RowData check={selectedContract}>
-                  <Heads>
-                    <Icon alt="" src="/images/contracts.svg" />
-                    <TextLi>{address[0].contractName}</TextLi>
-                  </Heads>
-                </RowData>
-              </CommonDiv>
-            </SubContractDiv>
-            <CodeDiv>
-              <CodeMainContainer>
-                <CodeContainer>
-                  <SyntaxHighlighter
-                    language="javascript"
-                    showLineNumbers={true}
-                    style={base16AteliersulphurpoolLight}
-                    wrapLongLines={true}
-                    customStyle={{ backgroundColor: "#f0f2fc", margin: 0 }}
-                  >
-                    {address[0].sourceCode ? address[0].sourceCode : "No source code available" }
-                  </SyntaxHighlighter>
-                </CodeContainer>
-              </CodeMainContainer>
-            </CodeDiv>
-          </FlexDiv>
-        </BoxContainer>
-      ) : (
-        <div>
-          <MainContainer>
-            <MainBoxContainer>
-              <ShowLoader state={loader} top={"33%"} />
-              {address[0] !== undefined ? (
-                <Container>
-                  <Title>{address[0]?.contractName}</Title>
-                  <SubTitle>{address[0]?.address}</SubTitle>
-                  <SubTitleTwo>
-                    <Button check={address[0]?.status} onClick={() => setShowVerifiedContract(true)}>
-                      {address[0]?.status === "Verified" ? (<img
-                        style={{ marginRight: "4px" }}
-                        alt=""
-                        src="/images/verified_tick.svg"
-                      />) : ""}
-                      {address[0]?.status} contract
-                    </Button>
-                  </SubTitleTwo>
-                </Container>
-              ) : (
-                ""
-              )}
-            </MainBoxContainer>
-          </MainContainer>
-        </div>
-      )}
-    </div>
-  );
-}
-
-const MainContainer = styled.div`
+  const MainContainer = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -308,3 +239,74 @@ const CodeContainer = styled.div`
   height: 430px;
   overflow-y: scroll;
 `;
+
+  return (
+    <div>
+      {showContract === true ? (
+        <BoxContainer>
+          <div>
+            <DetailContainer>
+              <Heading>Contracts </Heading>
+              <SubHead>{address[0].contractName}</SubHead>
+            </DetailContainer>
+          </div>
+          <FlexDiv>
+            <SubContractDiv>
+              <CommonDiv>
+                <RowData check={selectedContract}>
+                  <Heads>
+                    <Icon alt="" src="/images/contracts.svg" />
+                    <TextLi>{address[0].contractName}</TextLi>
+                  </Heads>
+                </RowData>
+              </CommonDiv>
+            </SubContractDiv>
+            <CodeDiv>
+              <CodeMainContainer>
+                <CodeContainer>
+                  <SyntaxHighlighter
+                    language="javascript"
+                    showLineNumbers={true}
+                    style={base16AteliersulphurpoolLight}
+                    wrapLongLines={true}
+                    customStyle={{ backgroundColor: "#f0f2fc", margin: 0 }}
+                  >
+                    {address[0].sourceCode ? address[0].sourceCode : "No source code available" }
+                  </SyntaxHighlighter>
+                </CodeContainer>
+              </CodeMainContainer>
+            </CodeDiv>
+          </FlexDiv>
+        </BoxContainer>
+      ) : (
+        <div>
+          <MainContainer>
+            <MainBoxContainer>
+              <ShowLoader state={loader} top={"33%"} />
+              {address[0] !== undefined ? (
+                <Container>
+                  <Title>{address[0]?.contractName}</Title>
+                  <SubTitle>{address[0]?.address}</SubTitle>
+                  <SubTitleTwo>
+                    <Button check={address[0]?.status} onClick={() => setShowVerifiedContract(true)}>
+                      {address[0]?.status === "Verified" ? (<img
+                        style={{ marginRight: "4px" }}
+                        alt=""
+                        src="/images/verified_tick.svg"
+                      />) : ""}
+                      {address[0]?.status} contract
+                    </Button>
+                  </SubTitleTwo>
+                </Container>
+              ) : (
+                ""
+              )}
+            </MainBoxContainer>
+          </MainContainer>
+        </div>
+      )}
+    </div>
+  );
+}
+
+

@@ -117,17 +117,6 @@ export default function Sidebar(props) {
         <Heading>Contracts</Heading>
       </Wrapper>
       )}
-      {/* <Wrapper
-        style={{
-          backgroundColor: utility.isMenuActive("networks") ? "#1d3c93" : "",
-        }}
-        onClick={redirectToNetwork}
-        onMouseOver={() => changeSourceForIcons("networks")}
-        onMouseOut={() => changeOriginalSourceForIcons("networks")}
-      >
-        <Icon src={networksIcon} />
-        <Heading>Networks</Heading>
-      </Wrapper> */}
       {sessionManager.getDataFromCookies("isLoggedIn") && (
       <Wrapper
         style={{
@@ -210,7 +199,6 @@ const Wrapper = styled.div`
   }
 `;
 
-
 const WrapperFaq = styled.div`
   flex-wrap: wrap;
   cursor: pointer;
@@ -223,7 +211,6 @@ const WrapperFaq = styled.div`
     background: #1d3c93;
   }
 `;
-
 
 const WrapperLogout = styled.div`
   flex-wrap: wrap;

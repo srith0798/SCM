@@ -266,7 +266,7 @@ export default function Contract(props) {
             </ColumnOne>
           </RowContainer>
         </Div>
-        {(input === "" ? address : searchRow).map((data, index) => {
+        {(input === "" ? address.reverse() : searchRow).map((data, index) => {
           return (
             <div style={{ cursor: "pointer" }}>
               <Div>

@@ -709,56 +709,6 @@ const TableData = (props) => {
   );
 };
 
-const SelectComponent = (props) => {
-  return (
-    <>
-      <div style={{ display: "flex", alignItems: "center" }}>
-        <Head>
-          {props.heading}
-          <Tooltip
-            disableFocusListener
-            title="Transaction executed in due course"
-          >
-            <ToolTipIcon src="/images/tool-tip.svg" />
-          </Tooltip>
-        </Head>
-        <BackImage
-          src="/images/expand.svg"
-          onClick={() =>
-            props.expandGraphs(props.graphNo, props.data, props.selectValue)
-          }
-        />
-      </div>
-      <select
-        id="dates"
-        style={{ display: props.data.length === 0 ? "none" : "" }}
-        className="select"
-        value={props.selectValue}
-        onChange={(event) => {
-          props.getAnalyticsData("", event);
-        }}
-      >
-        {analytics &&
-          analytics.ANALYTICS_DROPDOWN &&
-          analytics.ANALYTICS_DROPDOWN.map((option) => (
-            <option value={option.VALUE} className="select-dropdown">
-              {option.TEXT}
-            </option>
-          ))}
-      </select>
-    </>
-  );
-};
-
-// const ResponsiveRow = styled.div`
-//   display: flex;
-//   flex-flow: row nowrap;
-//   justify-content: space-between;
-//   width: 100%;
-//   @media (min-width: 300px) and (max-width: 1024px) {
-//     display: block;
-//   }
-// `;
 const MainContainer = styled.div`
   width: 100%;
   padding-left: 71px;
@@ -1067,3 +1017,46 @@ const BackImage = styled.img`
     display: none;
   }
 `;
+
+const SelectComponent = (props) => {
+  return (
+    <>
+      <div style={{ display: "flex", alignItems: "center" }}>
+        <Head>
+          {props.heading}
+          <Tooltip
+            disableFocusListener
+            title="Transaction executed in due course"
+          >
+            <ToolTipIcon src="/images/tool-tip.svg" />
+          </Tooltip>
+        </Head>
+        <BackImage
+          src="/images/expand.svg"
+          onClick={() =>
+            props.expandGraphs(props.graphNo, props.data, props.selectValue)
+          }
+        />
+      </div>
+      <select
+        id="dates"
+        style={{ display: props.data.length === 0 ? "none" : "" }}
+        className="select"
+        value={props.selectValue}
+        onChange={(event) => {
+          props.getAnalyticsData("", event);
+        }}
+      >
+        {analytics &&
+          analytics.ANALYTICS_DROPDOWN &&
+          analytics.ANALYTICS_DROPDOWN.map((option) => (
+            <option value={option.VALUE} className="select-dropdown">
+              {option.TEXT}
+            </option>
+          ))}
+      </select>
+    </>
+  );
+};
+
+

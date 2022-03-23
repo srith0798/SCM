@@ -9,15 +9,15 @@ import { history } from "../../managers/history";
 const useStyles = makeStyles(() => ({
   dialogBox: {
     width: "50% !important",
-    top: "150px",
+    ['@media screen and (min-width: 300px) and (max-width: 768px)']: { 
+    width: "85% !important",
+  }
   },
 }));
 
 export default function Remove(props) {
   const classes = useStyles();
-  console.log(props.contract);
   const executeRemoveContract = async () => {
-    console.log("HERE");
     const request = {
       id: props.contract._id,
     };
@@ -31,45 +31,7 @@ export default function Remove(props) {
     // window.location.reload();
   };
 
-  return (
-    <div>
-      <Dialog
-        classes={{ paper: classes.dialogBox }}
-        open={true}
-        fullWidth
-        maxWidth="xm"
-      >
-        <MainContainer>
-          <Container>
-            <SubContainer style={{ justifyContent: "space-between" }}>
-              <Add>Remove Contract</Add>
-              {/* <img
-                alt=""
-                src="/images/close.svg"
-                onClick={props.click}
-                style={{ cursor: "pointer" }}
-              /> */}
-            </SubContainer>
-            <Content>
-              Are you sure you wish to remove the contract? This will remove the
-              contract from the transaction listing, and affect all the alerts
-              that use this contract.
-            </Content>
-            <SubContainer style={{ width: "100%", marginTop: "30px" }}>
-              <ButtonConfirm
-                text={"Remove contract"}
-                click={executeRemoveContract}
-              />
-              <CancelButton onClick={props.click}>Cancel</CancelButton>
-            </SubContainer>
-          </Container>
-        </MainContainer>
-      </Dialog>
-    </div>
-  );
-}
-
-const MainContainer = styled.div`
+  const MainContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
@@ -105,3 +67,36 @@ const Content = styled.div`
   color: #303134;
   margin-top: 20px;
 `;
+
+  return (
+    <div>
+      <Dialog
+        classes={{ paper: classes.dialogBox }}
+        open={true}
+        fullWidth
+        maxWidth="xm"
+      >
+        <MainContainer>
+          <Container>
+            <SubContainer style={{ justifyContent: "space-between" }}>
+              <Add>Remove Contract</Add>
+            </SubContainer>
+            <Content>
+              Are you sure you wish to remove the contract? This will remove the
+              contract from the transaction listing, and affect all the alerts
+              that use this contract.
+            </Content>
+            <SubContainer style={{ width: "100%", marginTop: "30px" }}>
+              <ButtonConfirm
+                text={"Remove contract"}
+                click={executeRemoveContract}
+              />
+              <CancelButton onClick={props.click}>Cancel</CancelButton>
+            </SubContainer>
+          </Container>
+        </MainContainer>
+      </Dialog>
+    </div>
+  );
+}
+

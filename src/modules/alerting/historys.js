@@ -35,109 +35,7 @@ export default function Historys() {
     getNotifications();
   }, [countToggle]);
 
-  return (
-    <div>
-    <MainContainer>
-      <DetailBox>
-        <NewDiv>
-          <RowContainer>
-            <ColumnOne style={{ paddingLeft: "2px" }}>
-              Alert Type
-              <Tooltip disableFocusListener title="Transaction status">
-                <ToolTipIcon src="/images/tool-tip.svg" />
-              </Tooltip>
-            </ColumnOne>
-            <ColumnOne>
-              Contract
-              <Tooltip disableFocusListener title="Name of the smart contract">
-                <ToolTipIcon src="/images/tool-tip.svg" />
-              </Tooltip>
-            </ColumnOne>
-            <ColumnOne>
-              Tx Hash
-              <Tooltip
-                disableFocusListener
-                title="Unique transaction identifier, also known as the Transaction ID"
-              >
-                <ToolTipIcon src="/images/tool-tip.svg" />
-              </Tooltip>
-            </ColumnOne>
-            <ColumnOne>
-              Network
-              <Tooltip
-                disableFocusListener
-                title="The executing blockchain network"
-              >
-                <ToolTipIcon src="/images/tool-tip.svg" />
-              </Tooltip>
-            </ColumnOne>
-            <ColumnOne>
-              When
-              <Tooltip
-                disableFocusListener
-                title="Date and time of transaction execution"
-              >
-                <ToolTipIcon src="/images/tool-tip.svg" />
-              </Tooltip>
-            </ColumnOne>
-          </RowContainer>
-        </NewDiv>
-        {notifications && notifications.length>0 && notifications.map((notification)=>(
-            <Div>
-            <RowData>
-              <ColumnTwo>{notification.title}</ColumnTwo>
-              <ColumnTwo>{notification.payload.typeName}</ColumnTwo>
-              <ColumnTwo>{utility.minimizeAddress(notification.payload.txHash)}</ColumnTwo>
-              <ColumnTwo>{notification.payload.network}</ColumnTwo>
-              <ColumnTwo>{moment.utc(notification.payload.timestamp * 1000).format("DD.M.YYYY HH:mm")}</ColumnTwo>
-            </RowData>
-            </Div>
-        ))}
-       
-      </DetailBox>
-    </MainContainer>
-    <PageVerifyCheck>
-        <PaginationDiv>
-          <BottomLabel>
-            Per Page
-            <SelectionDivStyle
-              buttonToggle={countToggle}
-              onClick={() => setCountToggle(10)}
-            >
-              10
-            </SelectionDivStyle>
-            <SelectionDivStyleTwo
-              buttonToggle={countToggle}
-              onClick={() => setCountToggle(20)}
-            >
-              20
-            </SelectionDivStyleTwo>
-            <SelectionDivStyleThree
-              buttonToggle={countToggle}
-              onClick={() => setCountToggle(50)}
-            >
-              50
-            </SelectionDivStyleThree>
-          </BottomLabel>
-          <ReactPaginate
-            previousLabel={"<-"}
-            nextLabel={"->"}
-            pageCount={page === 0 ? 1 : page}
-            breakLabel={"..."}
-            initialPage={0}
-            onPageChange={changePage}
-            containerClassName={"paginationBttns"}
-            disabledClassName={"paginationDisabled"}
-            activeClassName={"paginationActive"}
-            pageRangeDisplayed={0}
-            marginPagesDisplayed={0}
-          />
-        </PaginationDiv>
-        </PageVerifyCheck>
-    </div>
-  );
-}
-const MainContainer = styled.div`
+  const MainContainer = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
   border-radius: 0.375rem;
   opacity: 1;
@@ -319,4 +217,108 @@ const SelectionDivStyleThree = styled.div`
   background-color: ${(props) =>
     props.buttonToggle === 50 ? "#3163F0" : "#FFFFFF"};
 `;
+
+  return (
+    <div>
+    <MainContainer>
+      <DetailBox>
+        <NewDiv>
+          <RowContainer>
+            <ColumnOne style={{ paddingLeft: "2px" }}>
+              Alert Type
+              <Tooltip disableFocusListener title="Transaction status">
+                <ToolTipIcon src="/images/tool-tip.svg" />
+              </Tooltip>
+            </ColumnOne>
+            <ColumnOne>
+              Contract
+              <Tooltip disableFocusListener title="Name of the smart contract">
+                <ToolTipIcon src="/images/tool-tip.svg" />
+              </Tooltip>
+            </ColumnOne>
+            <ColumnOne>
+              Tx Hash
+              <Tooltip
+                disableFocusListener
+                title="Unique transaction identifier, also known as the Transaction ID"
+              >
+                <ToolTipIcon src="/images/tool-tip.svg" />
+              </Tooltip>
+            </ColumnOne>
+            <ColumnOne>
+              Network
+              <Tooltip
+                disableFocusListener
+                title="The executing blockchain network"
+              >
+                <ToolTipIcon src="/images/tool-tip.svg" />
+              </Tooltip>
+            </ColumnOne>
+            <ColumnOne>
+              When
+              <Tooltip
+                disableFocusListener
+                title="Date and time of transaction execution"
+              >
+                <ToolTipIcon src="/images/tool-tip.svg" />
+              </Tooltip>
+            </ColumnOne>
+          </RowContainer>
+        </NewDiv>
+        {notifications && notifications.length>0 && notifications.map((notification)=>(
+            <Div>
+            <RowData>
+              <ColumnTwo>{notification.title}</ColumnTwo>
+              <ColumnTwo>{notification.payload.typeName}</ColumnTwo>
+              <ColumnTwo>{utility.minimizeAddress(notification.payload.txHash)}</ColumnTwo>
+              <ColumnTwo>{notification.payload.network}</ColumnTwo>
+              <ColumnTwo>{moment().utc(notification.payload.timestamp).format("DD.M.YYYY HH:mm")}</ColumnTwo>
+            </RowData>
+            </Div>
+        ))}
+       
+      </DetailBox>
+    </MainContainer>
+    <PageVerifyCheck>
+        <PaginationDiv>
+          <BottomLabel>
+            Per Page
+            <SelectionDivStyle
+              buttonToggle={countToggle}
+              onClick={() => setCountToggle(10)}
+            >
+              10
+            </SelectionDivStyle>
+            <SelectionDivStyleTwo
+              buttonToggle={countToggle}
+              onClick={() => setCountToggle(20)}
+            >
+              20
+            </SelectionDivStyleTwo>
+            <SelectionDivStyleThree
+              buttonToggle={countToggle}
+              onClick={() => setCountToggle(50)}
+            >
+              50
+            </SelectionDivStyleThree>
+          </BottomLabel>
+          <ReactPaginate
+            previousLabel={"<-"}
+            nextLabel={"->"}
+            pageCount={page === 0 ? 1 : page}
+            breakLabel={"..."}
+            initialPage={0}
+            onPageChange={changePage}
+            containerClassName={"paginationBttns"}
+            disabledClassName={"paginationDisabled"}
+            activeClassName={"paginationActive"}
+            pageRangeDisplayed={0}
+            marginPagesDisplayed={0}
+          />
+        </PaginationDiv>
+        </PageVerifyCheck>
+    </div>
+  );
+}
+
 

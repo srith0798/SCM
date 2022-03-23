@@ -67,7 +67,7 @@ export default function TransactionDetails() {
       };
       const response = await ContractsService.getTransactionByHash(requestData);
       setRow(response);
-      setSelected(response.contractAddress)
+      setSelected(response.contractAddress) //validation
       // setInput(utility.truncateTxnAddress(response.input));
       setInputDesktop(
         utility.truncateTxnAddressDesktop(response.input)
@@ -104,540 +104,7 @@ export default function TransactionDetails() {
     getTransaction(id);
   }, [url]);
 
-  return (
-    <MainContainer>
-      <SubContainer>
-        <TitleDiv>
-          <Title>
-            <img
-              alt=""
-              src="/images/back.svg"
-              style={{ marginRight: "8px" }}
-              onClick={() => backButton()}
-            />
-            Transaction Details
-          </Title>
-        </TitleDiv>
-        <Button
-          onClick={() =>
-            window.open(
-              `https://observer.xdc.org/transaction-details/${row.hash}`
-            )
-          }
-        >
-          View in Observatory
-        </Button>
-      </SubContainer>
-
-      <Container>
-        <SubHeading style={{ paddingTop: "0.625rem", paddingLeft: "1.25rem" }}>
-          Txn hash
-        </SubHeading>
-        <TopContainer>
-          <HashMobile>{utility.truncateTxnAddress(`${row.hash}`)}</HashMobile>
-          <HashDesktop>{row.hash}</HashDesktop>
-          <CopyToClipboard text={row.hash} onCopy={() => setcopyToolTip(true)}>
-            <Tooltip title={copyToolTip ? "copied" : "copy to clipboard"}>
-              <CopyToClipboardImage src="/images/copy.svg" />
-            </Tooltip>
-          </CopyToClipboard>
-          <FailButton check={status}>Fail</FailButton>
-          <SuccessButton check={status}>Success</SuccessButton>
-          <AlertButton
-          onClick={handleClickOpen}>
-            <img
-              onClick={handleClickOpen}
-              alt=""
-              style={{
-                width: "15px",
-                marginRight: "6px",
-                marginBottom: "3px",
-                cursor: "pointer",
-              }}
-              src="/images/addalert.svg"
-            />
-            Add alert
-          </AlertButton>
-          {open && (
-            <AddAlerts
-              click={handleClose}
-              status={status}
-              name={contractName}
-              address={row.to ? row.to : row.contractAddress}
-              network={row.network}
-            />
-          )}
-        </TopContainer>
-
-        <TabLister>
-          <TabView
-            id="Overview"
-            onClick={handleViewClick}
-            style={{
-              color: activeButton === "Overview" ? "#3163F0" : "#AEB7D0",
-              display: "flex",
-              paddingBottom: "1rem",
-              paddingLeft: "10px",
-              borderBottom:
-                activeButton === "Overview"
-                  ? "0.3rem solid #3163F0"
-                  : "#AEB7D0",
-            }}
-          >
-            <TabImage
-              alt=""
-              id="Overview"
-              onClick={handleViewClick}
-              style={{ marginRight: "0.375rem" }}
-              src={
-                activeButton === "Overview"
-                  ? "/images/overview.svg"
-                  : "/images/overview_grey.svg"
-              }
-            />
-            Overview
-          </TabView>
-          <TabView
-            id="Contracts"
-            onClick={handleViewClick}
-            style={{
-              color: activeButton === "Contracts" ? "#3163F0" : "#AEB7D0",
-              display: "flex",
-              paddingBottom: "1rem",
-              borderBottom:
-                activeButton === "Contracts" ? "0.3rem solid #3163F0" : "",
-            }}
-          >
-            <TabImage
-              alt=""
-              id="Contracts"
-              onClick={handleViewClick}
-              style={{ marginRight: "0.375rem" }}
-              src={
-                activeButton === "Contracts"
-                  ? "/images/contract_blue.svg"
-                  : "/images/contract_grey.svg"
-              }
-            />
-            Contracts
-          </TabView>
-          <TabView
-            id="EventsDetails"
-            onClick={handleViewClick}
-            style={{
-              color: activeButton === "EventsDetails" ? "#3163F0" : "#AEB7D0",
-              display: "flex",
-              paddingBottom: "1rem",
-              borderBottom:
-                activeButton === "EventsDetails" ? "0.3rem solid #3163F0" : "",
-            }}
-          >
-            <TabImage
-              alt=""
-              id="EventsDetails"
-              onClick={handleViewClick}
-              style={{ marginRight: "0.375rem" }}
-              src={
-                activeButton === "EventsDetails"
-                  ? "/images/event_blue.svg"
-                  : "/images/event_grey.svg"
-              }
-            />
-            Events
-            <Tooltip
-              open={eventToolTip}
-              onOpen={() => seteventToolTip(true)}
-              onClose={() => seteventToolTip(false)}
-              disableFocusListener
-              title="events details"
-            >
-              <ToolTipIcon
-                onClick={() => seteventToolTip(!eventToolTip)}
-                src="/images/tool-tip.svg"
-              />
-            </Tooltip>
-          </TabView>
-          <TabView
-            id="StateChange"
-            onClick={handleViewClick}
-            style={{
-              color: activeButton === "StateChange" ? "#3163F0" : "#AEB7D0",
-              display: "flex",
-              paddingBottom: "1rem",
-              whiteSpace: "nowrap",
-              borderBottom:
-                activeButton === "StateChange" ? "0.3rem solid #3163F0" : "",
-            }}
-          >
-            <TabImage
-              alt=""
-              id="StateChange"
-              onClick={handleViewClick}
-              style={{
-                marginRight: "0.375rem",
-              }}
-              src={
-                activeButton === "StateChange"
-                  ? "/images/statechange_blue.svg"
-                  : "/images/statechange_grey.svg"
-              }
-            />
-            State changes
-            <Tooltip
-              open={statusToolTip}
-              onOpen={() => setstatusToolTip(true)}
-              onClose={() => setstatusToolTip(false)}
-              disableFocusListener
-              title="state Change details"
-            >
-              <ToolTipIcon
-                onClick={() => setstatusToolTip(!statusToolTip)}
-                src="/images/tool-tip.svg"
-              />
-            </Tooltip>
-          </TabView>
-        </TabLister>
-      </Container>
-      {activeButton === "Overview" && (
-        <ScrollableDiv>
-          <MidContainer>
-            <CommonDiv>
-              <Row>
-                <Heading>Network</Heading>
-                <SubHead>{row.network}</SubHead>
-              </Row>
-            </CommonDiv>
-            <CommonDiv
-              style={{ display: status === "Success" ? "none" : "" }}
-              check={status}
-            >
-              <Row>
-                <Heading>Error</Heading>
-                {/* <SubHead>Out of Gas</SubHead> */}
-              </Row>
-            </CommonDiv>
-            <CommonDiv>
-              <Row>
-                <Heading>Block</Heading>
-                <SubHead style={{ color: "#416BE0" }}>
-                  {row.blockNumber}
-                </SubHead>
-              </Row>
-            </CommonDiv>
-            <CommonDiv>
-              <Row>
-                <Heading>Transactions index</Heading>
-                <SubHead>{row.transactionIndex}</SubHead>
-              </Row>
-            </CommonDiv>
-            <CommonDiv>
-              <Row>
-                <Heading>From</Heading>
-                <SubHead>
-                  <TransactionNumber>{row.from}</TransactionNumber>
-                  <CopyToClipboard
-                    text={row.from}
-                    onCopy={() => setcopyToolTip(true)}
-                  >
-                    <Tooltip
-                      title={copyToolTip ? "copied" : "copy to clipboard"}
-                    >
-                      <CopyToClipboardImg
-                        // onClick={() => setcopyToolTip(true)}
-                        src="/images/copy.svg"
-                      />
-                    </Tooltip>
-                  </CopyToClipboard>
-                </SubHead>
-              </Row>
-            </CommonDiv>
-            <CommonDiv>
-              <Row>
-                <Heading>To</Heading>
-                <SubHead>
-                  <TransactionNumber>{row.to}</TransactionNumber>
-                  <CopyToClipboard
-                    text={row.to}
-                    onCopy={() => setcopyToolTip(true)}
-                  >
-                    <Tooltip
-                      title={copyToolTip ? "copied" : "copy to clipboard"}
-                    >
-                      <CopyToClipboardImg src="/images/copy.svg" />
-                    </Tooltip>
-                  </CopyToClipboard>
-                </SubHead>
-              </Row>
-            </CommonDiv>
-            <CommonDiv>
-              <Row>
-                {" "}
-                <Heading>Timestamp</Heading>
-                <SubHead>
-                  {`${
-                    (row?.createdOn &&
-                      moment(row.createdOn)
-                        .tz("Asia/Calcutta")
-
-                        .format("MMM DD, YYYY, hh:mm A")) ||
-                    ""
-                  } ${("Asia/Calcutta" && utility.getUtcOffset("Asia/Calcutta")) || ""}`}
-
-                  {/* {moment(row.createdOn).fromNow() +
-                  " " +
-                  "(" +
-                  new Date(row.createdOn).toLocaleString("en-US") +
-                  ")"} */}
-                </SubHead>
-              </Row>
-            </CommonDiv>
-            <CommonDiv>
-              <Row>
-                <Heading>Value</Heading>
-                <SubHead>{row.value} XDC</SubHead>
-              </Row>
-            </CommonDiv>
-            <CommonDiv>
-              <Row>
-                <Heading>Nonce</Heading>
-                <SubHead>{row.nonce}</SubHead>
-              </Row>
-            </CommonDiv>
-            <CommonDiv>
-              <Row>
-                <Heading>Gas Used</Heading>
-                <SubHead>{new Intl.NumberFormat().format(row.gasUsed)}</SubHead>
-              </Row>
-            </CommonDiv>
-            <CommonDiv>
-              <Row>
-                <Heading>Gas Price</Heading>
-                <SubHead>
-                  {(row.gasPrice / 1000000000000000000)
-                    .toFixed(12)
-                    .toLocaleString("fullwide", { useGrouping: false })
-                    .replace(/\.?0+$/, "") || 0}{" "}
-                  XDC
-                  ({(row.gasPrice / 1000000000000000000)
-                    .toFixed(12)
-                    .toLocaleString("fullwide", { useGrouping: false })
-                    .replace(/\.?0+$/, "") * wei || 0} Gwei)
-                </SubHead>
-              </Row>
-            </CommonDiv>
-            <CommonDiv>
-              <Row>
-                <Heading>Transaction Fee</Heading>
-                <SubHead>
-                  {((row.gasPrice * row.gasUsed) / 1000000000000000000).toFixed(12).replace(/\.?0+$/, "") || 0} XDC
-                </SubHead>
-              </Row>
-            </CommonDiv>
-            <CommonDiv>
-              <Row>
-                <Heading>Raw input</Heading>
-                <SubHead>
-                  <Input>
-                    <TransactionNumber>{inputDesktop}</TransactionNumber>
-                  </Input>
-                  <CopyToClipboard
-                    text={inputCopy}
-                    onCopy={() => setcopyToolTip(true)}
-                  >
-                    <Tooltip
-                      title={copyToolTip ? "copied" : "copy to clipboard"}
-                    >
-                      <CopyToClipboardImg src="/images/copy.svg" />
-                    </Tooltip>
-                  </CopyToClipboard>{" "}
-                </SubHead>
-              </Row>
-            </CommonDiv>
-          </MidContainer>
-          <FunctionContainer>
-            <CommonDiv>
-              <Row>
-                <Heading>Function: </Heading>
-                <SubHeadBlue>{row.function}</SubHeadBlue>
-              </Row>
-            </CommonDiv>
-            <CommonDiv>
-              <Row>
-                <InputHeading>Input:</InputHeading>
-                <SubHeadBlue onClick={() => setShowInputData(!showInputData)}>
-                  view data
-                  {showInputData === false ? (
-                  <img
-                  style={{ marginLeft: "2px" }}
-                  alt=""
-                  src="/images/arrrow.svg"
-                />
-                  ) : (
-                    <img
-                    style={{ marginLeft: "2px" }}
-                    alt=""
-                    src="/images/input-up.svg"
-                  />
-                  )}
-                </SubHeadBlue>
-              </Row>
-
-              {showInputData === true ? (
-                <DataDivContainer>
-                  <BackgroundChanger>
-                    <InputDataDiv>
-                      <SubHeadBlue>
-                        {"{" +
-                          "\n" +
-                          '"_to"' +
-                          ":" +
-                          '"' +
-                          row.to +
-                          '"' +
-                          "\n" +
-                          '"_value"'+
-                          ":" +
-                          '"'+
-                          row.value + 
-                          '"'+
-                          "\n"+
-                          "}"}
-                      </SubHeadBlue>
-                    </InputDataDiv>
-                  </BackgroundChanger>
-                </DataDivContainer>
-              ) : (
-                ""
-              )}
-            </CommonDiv>
-            <CommonDiv>
-              <Row>
-                <InputHeading>Output </InputHeading>
-                <SubHeadBlue>
-                  veiw data
-                  <img
-                    style={{ marginLeft: "2px" }}
-                    alt=""
-                    src="/images/arrrow.svg"
-                  />
-                </SubHeadBlue>
-              </Row>
-            </CommonDiv>
-            <CommonInputDiv>
-              <div>
-                <Row>
-                  <Heading>Caller Address </Heading>
-                </Row>
-                <Row>
-                  <SubHeading
-                    style={{ fontWeight: "400", marginRight: "40px" }}
-                  >
-                    {row.from}
-                  </SubHeading>
-                </Row>
-              </div>
-              <div>
-                <Row>
-                  <Heading>Contract Address </Heading>
-                </Row>
-                <Row>
-                  <SubHeading
-                    style={{ fontWeight: "400", marginRight: "40px" }}
-                  >
-                    {row.contractAddress}
-                  </SubHeading>
-                </Row>
-              </div>
-            </CommonInputDiv>
-          </FunctionContainer>
-          <TokenTransferDiv>
-            <CommonDiv>
-              <Row>
-                <Heading>From:</Heading>
-                <SubHeadBlue>xdcabfe4184e5f9.....fsfbsgsgsa768b3</SubHeadBlue>
-              </Row>
-            </CommonDiv>
-            <CommonDiv>
-              <Row>
-                <Heading>To:</Heading>
-                <SubHeadBlue>xdcabfe4184e5f9......2fsfbsgsgsa768b3</SubHeadBlue>
-              </Row>
-            </CommonDiv>
-          </TokenTransferDiv>
-          <StackTraceCheckDiv check={status}>
-            <b>Stack Trace</b> <ToolTipIcon src="/images/tool-tip.svg" />
-            <StackContainer>
-              <BackgroundChanger>
-                {/* <TextLine>Error Messege:out of gas</TextLine>
-              <img alt="" src="/images/error.svg" /> balances[_to] =
-              balances[_to].add(_value);
-              <br /> */}
-              </BackgroundChanger>
-            </StackContainer>
-          </StackTraceCheckDiv>
-          <TokenTransferCheckDiv check={status}>
-            <b>Token Transfer</b>
-            <StackContainer>
-              {/* <BackgroundChanger> */}
-                <FlexDiv>
-                  <div style={{display: "flex"}}>
-                    <From>From</From>
-                    <SubHeadBlue>{from}</SubHeadBlue>
-                  </div>
-                  <FlexDivMob>
-                    <From>To</From>
-                    <SubHeadBlue>{to}</SubHeadBlue>
-                  </FlexDivMob>
-                </FlexDiv>
-              {/* </BackgroundChanger> */}
-            </StackContainer>
-          </TokenTransferCheckDiv>
-          <LastContainer>
-            <SearchBar placeholder="Execution trace" />
-            <br />
-            <img
-              alt=""
-              src="/images/contracts.svg"
-              style={{ width: "1rem", marginRight: "3px" }}
-            />
-            transfer in {contractName}
-            <DataDivContainer>
-              {/* <BackgroundChangerTransfer> */}
-                <InputDataDiv>
-                  <SubHeadBlue>
-                  <ShowLoader state={loader} top={"50%"} />
-                  <CodeDiv>
-                <CodeMainContainer>
-                  <CodeContainer>
-                    <SyntaxHighlighter
-                      language="javascript"
-                      showLineNumbers={true}
-                      style={base16AteliersulphurpoolLight}
-                      wrapLongLines={true}
-                      customStyle={{ backgroundColor: "#f0f2fc", margin: 0 }}
-                    >
-                    {transfer !== undefined ? transfer + "}" : "No function available"}
-                    </SyntaxHighlighter>
-                  </CodeContainer>
-                </CodeMainContainer>
-              </CodeDiv>
-                  </SubHeadBlue>
-                </InputDataDiv>
-              {/* </BackgroundChangerTransfer> */}
-            </DataDivContainer>
-          </LastContainer>
-        </ScrollableDiv>
-      )}
-      {activeButton === "Contracts" && (
-        <SubContracts address={row.contractAddress} url={url} status={status} />
-      )}
-      {activeButton === "EventsDetails" && <EventsDetails address={row.contractAddress} from={row.from} to={row.to ? row.to : row.contractAddress} value={row.value} logs={row.logs} func={transfer} />}
-      {activeButton === "StateChange" && <StateChange />}
-    </MainContainer>
-  );
-}
-
-const MainContainer = styled.div`
+  const MainContainer = styled.div`
   background: #ecf0f7 0% 0% no-repeat padding-box;
   width: 100%;
   padding: 2.125rem;
@@ -750,122 +217,6 @@ const CommonInputDiv = styled.div`
     row-gap: 20px;
   }
 `;
-// const ErrorCheckDiv = styled.div`
-//   display: ${(props) => (props.check === "Fail" ? "block" : "none")};
-//   border-bottom: 0.031rem #eaf1ec solid;
-//   padding: 0.813rem;
-//   @media (min-width: 300px) and (max-width: 768px) {
-//     column-gap: 0px;
-//   }
-// `;
-
-// const TimeStampDiv = styled.div`
-//   border-bottom: 0.031rem #eaf1ec solid;
-//   padding: 0.813rem;
-//   display: flex;
-//   column-gap: 0px;
-//   @media (max-width: 375px) {
-//     display: flex;
-//     white-space: nowrap;
-//     column-gap: 80px;
-//   }
-//   @media (min-width: 376px) and (max-width: 425px) {
-//     display: flex;
-//     white-space: nowrap;
-//     column-gap: 100px;
-//   }
-// `;
-// const CommonDivBlock = styled.div`
-//   border-bottom: 0.031rem #eaf1ec solid;
-//   padding: 0.813rem;
-//   display: flex;
-//   column-gap: 0px;
-//   @media (min-width: 300px) and (max-width: 767px) {
-//     display: flex;
-//     // column-gap: 138px;
-//   }
-//   @media (max-width: 375px) {
-//     display: flex;
-//     white-space: nowrap;
-//     // column-gap: 118px;
-//   }
-// `;
-// const FeeDiv = styled.div`
-//   border-bottom: 0.031rem #eaf1ec solid;
-//   padding: 0.813rem;
-//   display: flex;
-//   white-space: nowrap;
-//   @media (min-width: 300px) and (max-width: 767px) {
-//     display: flex;
-//     white-space: nowrap;
-//     column-gap: 68px;
-//   }
-//   @media (max-width: 375px) {
-//     display: flex;
-//     white-space: nowrap;
-//     column-gap: 46px;
-//   }
-// `;
-// const CommonDivFrom = styled.div`
-//   border-bottom: 0.031rem #eaf1ec solid;
-//   padding: 0.813rem;
-//   display: flex;
-//   @media (min-width: 300px) and (max-width: 767px) {
-//     display: flex;
-//     column-gap: 139px;
-//   }
-//   @media (max-width: 375px) {
-//     display: flex;
-//     white-space: nowrap;
-//     column-gap: 123px;
-//   }
-// `;
-// const RawInputDiv = styled.div`
-//   border-bottom: 0.031rem #eaf1ec solid;
-//   padding: 0.813rem;
-//   display: flex;
-//   white-space: nowrap;
-//   @media (min-width: 300px) and (max-width: 767px) {
-//     display: flex;
-//     white-space: nowrap;
-//     column-gap: 0px;
-//   }
-//   @media (max-width: 375px) {
-//     display: flex;
-//     white-space: nowrap;
-//     column-gap: 87px;
-//   }
-// `;
-// const GasPriceDiv = styled.div`
-//   border-bottom: 0.031rem #eaf1ec solid;
-//   padding: 0.813rem;
-//   display: flex;
-//   white-space: nowrap;
-//   @media (min-width: 300px) and (max-width: 767px) {
-//     display: flex;
-//     white-space: nowrap;
-//     // column-gap: 111px;
-//   }
-//   @media (max-width: 375px) {
-//     display: flex;
-//     white-space: nowrap;
-//     // column-gap: 91px;
-//   }
-// `;
-// const CommonDivTo = styled.div`
-//   border-bottom: 0.031rem #eaf1ec solid;
-//   padding: 0.813rem;
-//   display: flex;
-//   @media (min-width: 300px) and (max-width: 767px) {
-//     display: flex;
-//     column-gap: 158px;
-//   }
-//   @media (max-width: 375px) {
-//     display: flex;
-//     white-space: nowrap;
-//     column-gap: 140px;
-//   }
-// `;
 const MidContainer = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
   border-radius: 0.375rem;
@@ -904,21 +255,6 @@ const BackgroundChanger = styled.div`
     padding: 1.5rem;
   }
 `;
-
-// const BackgroundChangerTransfer = styled.div`
-//   width: 50%;
-//   height: 300px;
-//   /* max-height: 300px; */
-//   background-repeat: no-repeat;
-//   background: #f7f8fd 0% 0% no-repeat padding-box;
-//   border-radius: 6px;
-//   opacity: 1;
-//   padding: 1.875rem;
-//   @media (min-width: 300px) and (max-width: 1371px) {
-//     width: 100%;
-//     padding: 1rem;
-//   }
-// `;
 
 const FlexDiv = styled.div`
   display: flex;
@@ -1289,3 +625,539 @@ width: 100%;
 width: 100%;
 }
 `;
+
+  return (
+    <MainContainer>
+      <SubContainer>
+        <TitleDiv>
+          <Title>
+            <img
+              alt=""
+              src="/images/back.svg"
+              style={{ marginRight: "8px" }}
+              onClick={() => backButton()}
+            />
+            Transaction Details
+          </Title>
+        </TitleDiv>
+        <Button
+          onClick={() =>
+            window.open(
+              `https://observer.xdc.org/transaction-details/${row.hash}`
+            )
+          }
+        >
+          View in Observatory
+        </Button>
+      </SubContainer>
+
+      <Container>
+        <SubHeading style={{ paddingTop: "0.625rem", paddingLeft: "1.25rem" }}>
+          Txn hash
+        </SubHeading>
+        <TopContainer>
+          <HashMobile>{utility.truncateTxnAddress(`${row.hash}`)}</HashMobile>
+          <HashDesktop>{row.hash}</HashDesktop>
+          <CopyToClipboard text={row.hash} onCopy={() => setcopyToolTip(true)}>
+            <Tooltip title={copyToolTip ? "copied" : "copy to clipboard"}>
+              <CopyToClipboardImage src="/images/copy.svg" />
+            </Tooltip>
+          </CopyToClipboard>
+          <FailButton check={status}>Fail</FailButton>
+          <SuccessButton check={status}>Success</SuccessButton>
+          <AlertButton
+          onClick={handleClickOpen}>
+            <img
+              onClick={handleClickOpen}
+              alt=""
+              style={{
+                width: "15px",
+                marginRight: "6px",
+                marginBottom: "3px",
+                cursor: "pointer",
+              }}
+              src="/images/addalert.svg"
+            />
+            Add alert
+          </AlertButton>
+          {open && (
+            <AddAlerts
+              click={handleClose}
+              status={status}
+              name={contractName}
+              address={row.to ? row.to : row.contractAddress}
+              network={row.network}
+            />
+          )}
+        </TopContainer>
+
+        <TabLister>
+          <TabView
+            id="Overview"
+            onClick={handleViewClick}
+            style={{
+              color: activeButton === "Overview" ? "#3163F0" : "#AEB7D0",
+              display: "flex",
+              paddingBottom: "1rem",
+              paddingLeft: "10px",
+              borderBottom:
+                activeButton === "Overview"
+                  ? "0.3rem solid #3163F0"
+                  : "#AEB7D0",
+            }}
+          >
+            <TabImage
+              alt=""
+              id="Overview"
+              onClick={handleViewClick}
+              style={{ marginRight: "0.375rem" }}
+              src={
+                activeButton === "Overview"
+                  ? "/images/overview.svg"
+                  : "/images/overview_grey.svg"
+              }
+            />
+            Overview
+          </TabView>
+          <TabView
+            id="Contracts"
+            onClick={handleViewClick}
+            style={{
+              color: activeButton === "Contracts" ? "#3163F0" : "#AEB7D0",
+              display: "flex",
+              paddingBottom: "1rem",
+              borderBottom:
+                activeButton === "Contracts" ? "0.3rem solid #3163F0" : "",
+            }}
+          >
+            <TabImage
+              alt=""
+              id="Contracts"
+              onClick={handleViewClick}
+              style={{ marginRight: "0.375rem" }}
+              src={
+                activeButton === "Contracts"
+                  ? "/images/contract_blue.svg"
+                  : "/images/contract_grey.svg"
+              }
+            />
+            Contracts
+          </TabView>
+          <TabView
+            id="EventsDetails"
+            onClick={handleViewClick}
+            style={{
+              color: activeButton === "EventsDetails" ? "#3163F0" : "#AEB7D0",
+              display: "flex",
+              paddingBottom: "1rem",
+              borderBottom:
+                activeButton === "EventsDetails" ? "0.3rem solid #3163F0" : "",
+            }}
+          >
+            <TabImage
+              alt=""
+              id="EventsDetails"
+              onClick={handleViewClick}
+              style={{ marginRight: "0.375rem" }}
+              src={
+                activeButton === "EventsDetails"
+                  ? "/images/event_blue.svg"
+                  : "/images/event_grey.svg"
+              }
+            />
+            Events
+            <Tooltip
+              open={eventToolTip}
+              onOpen={() => seteventToolTip(true)}
+              onClose={() => seteventToolTip(false)}
+              disableFocusListener
+              title="events details"
+            >
+              <ToolTipIcon
+                onClick={() => seteventToolTip(!eventToolTip)}
+                src="/images/tool-tip.svg"
+              />
+            </Tooltip>
+          </TabView>
+          <TabView
+            id="StateChange"
+            onClick={handleViewClick}
+            style={{
+              color: activeButton === "StateChange" ? "#3163F0" : "#AEB7D0",
+              display: "flex",
+              paddingBottom: "1rem",
+              whiteSpace: "nowrap",
+              borderBottom:
+                activeButton === "StateChange" ? "0.3rem solid #3163F0" : "",
+            }}
+          >
+            <TabImage
+              alt=""
+              id="StateChange"
+              onClick={handleViewClick}
+              style={{
+                marginRight: "0.375rem",
+              }}
+              src={
+                activeButton === "StateChange"
+                  ? "/images/statechange_blue.svg"
+                  : "/images/statechange_grey.svg"
+              }
+            />
+            State changes
+            <Tooltip
+              open={statusToolTip}
+              onOpen={() => setstatusToolTip(true)}
+              onClose={() => setstatusToolTip(false)}
+              disableFocusListener
+              title="state Change details"
+            >
+              <ToolTipIcon
+                onClick={() => setstatusToolTip(!statusToolTip)}
+                src="/images/tool-tip.svg"
+              />
+            </Tooltip>
+          </TabView>
+        </TabLister>
+      </Container>
+      {activeButton === "Overview" && (
+        <ScrollableDiv>
+          <MidContainer>
+            <CommonDiv>
+              <Row>
+                <Heading>Network</Heading>
+                <SubHead>{row.network}</SubHead>
+              </Row>
+            </CommonDiv>
+            <CommonDiv
+              style={{ display: status === "Success" ? "none" : "" }}
+              check={status}
+            >
+              <Row>
+                <Heading>Error</Heading>
+                {/* <SubHead>Out of Gas</SubHead> */}
+              </Row>
+            </CommonDiv>
+            <CommonDiv>
+              <Row>
+                <Heading>Block</Heading>
+                <SubHead style={{ color: "#416BE0" }}>
+                  {row.blockNumber}
+                </SubHead>
+              </Row>
+            </CommonDiv>
+            <CommonDiv>
+              <Row>
+                <Heading>Transactions index</Heading>
+                <SubHead>{row.transactionIndex}</SubHead>
+              </Row>
+            </CommonDiv>
+            <CommonDiv>
+              <Row>
+                <Heading>From</Heading>
+                <SubHead>
+                  <TransactionNumber>{row.from}</TransactionNumber>
+                  <CopyToClipboard
+                    text={row.from}
+                    onCopy={() => setcopyToolTip(true)}
+                  >
+                    <Tooltip
+                      title={copyToolTip ? "copied" : "copy to clipboard"}
+                    >
+                      <CopyToClipboardImg
+                        // onClick={() => setcopyToolTip(true)}
+                        src="/images/copy.svg"
+                      />
+                    </Tooltip>
+                  </CopyToClipboard>
+                </SubHead>
+              </Row>
+            </CommonDiv>
+            <CommonDiv>
+              <Row>
+                <Heading>To</Heading>
+                <SubHead>
+                  <TransactionNumber>{row.to}</TransactionNumber>
+                  <CopyToClipboard
+                    text={row.to}
+                    onCopy={() => setcopyToolTip(true)}
+                  >
+                    <Tooltip
+                      title={copyToolTip ? "copied" : "copy to clipboard"}
+                    >
+                      <CopyToClipboardImg src="/images/copy.svg" />
+                    </Tooltip>
+                  </CopyToClipboard>
+                </SubHead>
+              </Row>
+            </CommonDiv>
+            <CommonDiv>
+              <Row>
+                {" "}
+                <Heading>Timestamp</Heading>
+                <SubHead>
+                  {`${
+                    (row?.createdOn &&
+                      moment(row.createdOn)
+                        .tz("Asia/Calcutta")
+
+                        .format("MMM DD, YYYY, hh:mm A")) ||
+                    ""
+                  } ${("Asia/Calcutta" && utility.getUtcOffset("Asia/Calcutta")) || ""}`}
+
+                  {/* {moment(row.createdOn).fromNow() +
+                  " " +
+                  "(" +
+                  new Date(row.createdOn).toLocaleString("en-US") +
+                  ")"} */}
+                </SubHead>
+              </Row>
+            </CommonDiv>
+            <CommonDiv>
+              <Row>
+                <Heading>Value</Heading>
+                <SubHead>{row.value} XDC</SubHead>
+              </Row>
+            </CommonDiv>
+            <CommonDiv>
+              <Row>
+                <Heading>Nonce</Heading>
+                <SubHead>{row.nonce}</SubHead>
+              </Row>
+            </CommonDiv>
+            <CommonDiv>
+              <Row>
+                <Heading>Gas Used</Heading>
+                <SubHead>{new Intl.NumberFormat().format(row.gasUsed)}</SubHead>
+              </Row>
+            </CommonDiv>
+            <CommonDiv>
+              <Row>
+                <Heading>Gas Price</Heading>
+                <SubHead>
+                  {(row.gasPrice / 1000000000000000000)
+                    .toFixed(12)
+                    .toLocaleString("fullwide", { useGrouping: false })
+                    .replace(/\.?0+$/, "") || 0}{" "}
+                  XDC
+                  ({(row.gasPrice / 1000000000000000000)
+                    .toFixed(12)
+                    .toLocaleString("fullwide", { useGrouping: false })
+                    .replace(/\.?0+$/, "") * wei || 0} Gwei)
+                </SubHead>
+              </Row>
+            </CommonDiv>
+            <CommonDiv>
+              <Row>
+                <Heading>Transaction Fee</Heading>
+                <SubHead>
+                  {((row.gasPrice * row.gasUsed) / 1000000000000000000).toFixed(12).replace(/\.?0+$/, "") || 0} XDC
+                </SubHead>
+              </Row>
+            </CommonDiv>
+            <CommonDiv>
+              <Row>
+                <Heading>Raw input</Heading>
+                <SubHead>
+                  <Input>
+                  {/* directly set utility function */}
+                    <TransactionNumber>{inputDesktop}</TransactionNumber> 
+                  </Input>
+                  <CopyToClipboard
+                    text={inputCopy}
+                    onCopy={() => setcopyToolTip(true)}
+                  >
+                    <Tooltip
+                      title={copyToolTip ? "copied" : "copy to clipboard"}
+                    >
+                      <CopyToClipboardImg src="/images/copy.svg" />
+                    </Tooltip>
+                  </CopyToClipboard>{" "}
+                </SubHead>
+              </Row>
+            </CommonDiv>
+          </MidContainer>
+          <FunctionContainer>
+            <CommonDiv>
+              <Row>
+                <Heading>Function: </Heading>
+                <SubHeadBlue>{row.function}</SubHeadBlue>
+              </Row>
+            </CommonDiv>
+            <CommonDiv>
+              <Row>
+                <InputHeading>Input:</InputHeading>
+                <SubHeadBlue onClick={() => setShowInputData(!showInputData)}>
+                  view data
+                  {showInputData === false ? (
+                  <img
+                  style={{ marginLeft: "2px" }}
+                  alt=""
+                  src="/images/arrrow.svg"
+                />
+                  ) : (
+                    <img
+                    style={{ marginLeft: "2px" }}
+                    alt=""
+                    src="/images/input-up.svg"
+                  />
+                  )}
+                </SubHeadBlue>
+              </Row>
+
+              {showInputData === true ? (
+                <DataDivContainer>
+                  <BackgroundChanger>
+                    <InputDataDiv>
+                      <SubHeadBlue>
+                        {"{" +
+                          "\n" +
+                          '"_to"' +
+                          ":" +
+                          '"' +
+                          row.to +
+                          '"' +
+                          "\n" +
+                          '"_value"'+
+                          ":" +
+                          '"'+
+                          row.value + 
+                          '"'+
+                          "\n"+
+                          "}"}
+                      </SubHeadBlue>
+                    </InputDataDiv>
+                  </BackgroundChanger>
+                </DataDivContainer>
+              ) : (
+                ""
+              )}
+            </CommonDiv>
+            <CommonDiv>
+              <Row>
+                <InputHeading>Output </InputHeading>
+                <SubHeadBlue>
+                  veiw data
+                  <img
+                    style={{ marginLeft: "2px" }}
+                    alt=""
+                    src="/images/arrrow.svg"
+                  />
+                </SubHeadBlue>
+              </Row>
+            </CommonDiv>
+            <CommonInputDiv>
+              <div>
+                <Row>
+                  <Heading>Caller Address </Heading>
+                </Row>
+                <Row>
+                  <SubHeading
+                    style={{ fontWeight: "400", marginRight: "40px" }} 
+                  >
+                    {row.from}
+                  </SubHeading>
+                </Row>
+              </div>
+              <div>
+                <Row>
+                  <Heading>Contract Address </Heading>
+                </Row>
+                <Row>
+                  <SubHeading
+                    style={{ fontWeight: "400", marginRight: "40px" }}
+                  >
+                    {row.contractAddress}
+                  </SubHeading>
+                </Row>
+              </div>
+            </CommonInputDiv>
+          </FunctionContainer>
+          <TokenTransferDiv>
+            <CommonDiv>
+              <Row>
+                <Heading>From:</Heading>
+                <SubHeadBlue>xdcabfe4184e5f9.....fsfbsgsgsa768b3</SubHeadBlue>
+              </Row>
+            </CommonDiv>
+            <CommonDiv>
+              <Row>
+                <Heading>To:</Heading>
+                <SubHeadBlue>xdcabfe4184e5f9......2fsfbsgsgsa768b3</SubHeadBlue>
+              </Row>
+            </CommonDiv>
+          </TokenTransferDiv>
+          <StackTraceCheckDiv check={status}>
+            <b>Stack Trace</b> <ToolTipIcon src="/images/tool-tip.svg" />
+            <StackContainer>
+              <BackgroundChanger>
+                {/* <TextLine>Error Messege:out of gas</TextLine>
+              <img alt="" src="/images/error.svg" /> balances[_to] =
+              balances[_to].add(_value);
+              <br /> */}
+              </BackgroundChanger>
+            </StackContainer>
+          </StackTraceCheckDiv>
+          <TokenTransferCheckDiv check={status}>
+            <b>Token Transfer</b>
+            <StackContainer>
+              {/* <BackgroundChanger> */}
+                <FlexDiv>
+                  <div style={{display: "flex"}}>
+                    <From>From</From>
+                    <SubHeadBlue>{from}</SubHeadBlue>
+                  </div>
+                  <FlexDivMob>
+                    <From>To</From>
+                    <SubHeadBlue>{to}</SubHeadBlue>
+                  </FlexDivMob>
+                </FlexDiv>
+              {/* </BackgroundChanger> */}
+            </StackContainer>
+          </TokenTransferCheckDiv>
+          <LastContainer>
+            <SearchBar placeholder="Execution trace" />
+            <br />
+            <img
+              alt=""
+              src="/images/contracts.svg"
+              style={{ width: "1rem", marginRight: "3px" }}
+            />
+            transfer in {contractName}
+            <DataDivContainer>
+              {/* <BackgroundChangerTransfer> */}
+                <InputDataDiv>
+                  <SubHeadBlue>
+                  <ShowLoader state={loader} top={"50%"} />
+                  <CodeDiv>
+                <CodeMainContainer>
+                  <CodeContainer>
+                    <SyntaxHighlighter
+                      language="javascript"
+                      showLineNumbers={true}
+                      style={base16AteliersulphurpoolLight}
+                      wrapLongLines={true}
+                      customStyle={{ backgroundColor: "#f0f2fc", margin: 0 }}
+                    >
+                    {transfer !== undefined ? transfer + "}" : "No function available"}
+                    </SyntaxHighlighter>
+                  </CodeContainer>
+                </CodeMainContainer>
+              </CodeDiv>
+                  </SubHeadBlue>
+                </InputDataDiv>
+              {/* </BackgroundChangerTransfer> */}
+            </DataDivContainer>
+          </LastContainer>
+        </ScrollableDiv>
+      )}
+      {activeButton === "Contracts" && (
+        <SubContracts address={row.contractAddress} url={url} status={status} />
+      )}
+      {activeButton === "EventsDetails" && <EventsDetails address={row.contractAddress} from={row.from} to={row.to ? row.to : row.contractAddress} value={row.value} logs={row.logs} func={transfer} />}
+      {activeButton === "StateChange" && <StateChange />}
+    </MainContainer>
+  );
+}
+
+

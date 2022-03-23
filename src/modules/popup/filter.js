@@ -14,16 +14,14 @@ const useStyles = makeStyles(() => ({
     // top: "50px !important",
     ['@media screen and (min-width: 300px) and (max-width: 768px)']: { 
       width: '90% !important',
-      top: "0px !important",
+      bottom: "85px !important",
+
     
   }}
 }));
 
 export default function Filter(props) {
   const classes = useStyles();
-  // const [loader, setLoader] = React.useState(false);
-  // const [address, setAddress] = React.useState([]);
-  // const [showPlaceHolder, setShowPlaceHolder] = React.useState(false);
 
   React.useEffect(() => {
     getNetworkList();
@@ -34,6 +32,7 @@ export default function Filter(props) {
   };
   const Apply = () => {
     props.filterSearch();
+    props.reset();
     setTimeout(()=> {
       props.click();
     },500)
@@ -45,94 +44,12 @@ export default function Filter(props) {
         limit: limit,
       };
 
-      // setLoader(true);
        await contractsService.getNetworksLists(requestData);
-      // setLoader(false);
-      // setAddress(response.networkList);
-      // if (response.networkList.length === 0) setShowPlaceHolder(true);
-      // else setShowPlaceHolder(false);
     } catch (e) {
-      // setShowPlaceHolder(true);
-      // setLoader(false);
     }
   };
-  return (
-    <div>
-      <Dialog classes={{ paper: classes.dialogBox }} open={true}>
-        <MainContainer>
-          <Container>
-            <RowContainer>
-              <Add>Filter Transactions</Add>
-            </RowContainer>
-            <NewContainerStatus>
-              <Content>Status</Content>
-              <RowBoxOne>
-                <ButtonA tag={props.select} onClick={() => props.setSelect(1)}>
-                  All
-                </ButtonA>
-                <ButtonB tag={props.select} onClick={() => props.setSelect(2)}>
-                  Success
-                </ButtonB>
-                <ButtonC tag={props.select} onClick={() => props.setSelect(3)}>
-                  Fail
-                </ButtonC>
-              </RowBoxOne>
-            </NewContainerStatus>
-            {/* <NewContainerOne>
-              <Content>Network</Content>
 
-              <select
-                className="select-filter"
-                placeholder="select network"
-                onChange={(e) => props.setSelectDrop([e.target.value])}
-                value={props.selectDrop}
-              >
-                {/* <option className="options-select">
-                  https://rpc.xinfin.network
-                </option>
-                <option className="options-select">
-                  https://rpc.apothem.network
-                </option> */}
-            {/* {address &&
-                  address.map((items) => <option>{items.newRpcUrl}</option>)}
-              </select> */}
-            {/* </NewContainerOne> */}
-            <NewContainer style={{ paddingBottom: "20px" }}>
-              <Content>Date Range</Content>
-
-              <InputDiv>
-                <Input
-                  data-placeholder="From"
-                  type="date"
-                  onChange={(e) => props.setFromInput([e.target.value])}
-                  value={props.fromInput}
-                  required
-                  aria-required="true"
-                />
-                <Input
-                  data-placeholder="To"
-                  type="date"
-                  onChange={(e) => props.setToInput([e.target.value])}
-                  value={props.toInput}
-                  required
-                  aria-required="true"
-                />
-              </InputDiv>
-            </NewContainer>
-            <LastContainer>
-              <ApplyButton onClick={() => Apply()}>
-                Apply
-              </ApplyButton>
-              <CancelButton onClick={() => Close()}>Cancel</CancelButton>
-            </LastContainer>
-          </Container>
-        </MainContainer>
-      </Dialog>
-    </div>
-  );
-}
-
-const ApplyButton = styled.div`
+  const ApplyButton = styled.div`
   width: 68px;
   height: 34px;
   background: #3163f0 0% 0% no-repeat padding-box;
@@ -455,17 +372,59 @@ const LastContainer = styled.div`
     margin-left: 115px;
   }
 `;
-// const NewContainerOne = styled.div`
-//   display: flex;
-//   justify-content: space-between;
-//   width: 100%;
-//   max-width: 512px;
-//   padding-bottom: 20px;
-//   @media (min-width: 300px) and (max-width: 414px) {
-//     flex-direction: column;
-//     max-width: 460px;
-//     display: flex;
-//     justify-content: space-between;
-//     width: 100%;
-//   }
-// `;
+  return (
+    <div>
+      <Dialog classes={{ paper: classes.dialogBox }} open={true}>
+        <MainContainer>
+          <Container>
+            <RowContainer>
+              <Add>Filter Transactions</Add>
+            </RowContainer>
+            <NewContainerStatus>
+              <Content>Status</Content>
+              <RowBoxOne>
+                <ButtonA tag={props.select} onClick={() => props.setSelect(1)}>
+                  All
+                </ButtonA>
+                <ButtonB tag={props.select} onClick={() => props.setSelect(2)}>
+                  Success
+                </ButtonB>
+                <ButtonC tag={props.select} onClick={() => props.setSelect(3)}>
+                  Fail
+                </ButtonC>
+              </RowBoxOne>
+            </NewContainerStatus>
+            <NewContainer style={{ paddingBottom: "20px" }}>
+              <Content>Date Range</Content>
+
+              <InputDiv>
+                <Input
+                  data-placeholder="From"
+                  type="date"
+                  onChange={(e) => props.setFromInput([e.target.value])}
+                  value={props.fromInput}
+                  required
+                  aria-required="true"
+                />
+                <Input
+                  data-placeholder="To"
+                  type="date"
+                  onChange={(e) => props.setToInput([e.target.value])}
+                  value={props.toInput}
+                  required
+                  aria-required="true"
+                />
+              </InputDiv>
+            </NewContainer>
+            <LastContainer>
+              <ApplyButton onClick={() => Apply()}>
+                Apply
+              </ApplyButton>
+              <CancelButton onClick={() => Close()}>Cancel</CancelButton>
+            </LastContainer>
+          </Container>
+        </MainContainer>
+      </Dialog>
+    </div>
+  );
+}
