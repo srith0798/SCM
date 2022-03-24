@@ -355,7 +355,7 @@ const Img = styled.img`
           />
           <b style={{ fontSize: "24px", fontWeight: 600 }}>Alert Details</b>
         </div>
-        <Button>Add Alert</Button>
+        <Button onClick={() => history.push("/add-alert")}>Add Alert</Button>
       </Row>
       <Container>
         <CommonDiv>

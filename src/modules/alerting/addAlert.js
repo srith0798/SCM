@@ -20,8 +20,10 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import ShowLoader from "../../common/components/showLoader";
+import ScreenSizeDetector from "screen-size-detector";
 
 export default function AddAlert() {
+  const screen = new ScreenSizeDetector();
   const [activeButton, setActiveButton] = React.useState("Rules");
   const [alertType, setAlertType] = React.useState("");
   const [alertTarget, setAlertTarget] = React.useState("");
@@ -103,6 +105,7 @@ export default function AddAlert() {
     let userId = sessionManager.getDataFromCookies("userId");
     const requestData = {
       userId: userId,
+      sortingKey: { addedOn: -1 },
     };
     setLoader(true);
     const [error, response] = await utility.parseResponse(
@@ -447,10 +450,16 @@ export default function AddAlert() {
                                 alertTarget ===
                                 genericConstants.ALERT_TYPE.ADDRESS ? (
                                   <MenuItem value={option.address}>
-                                    {option.address}
+                                    {screen.width > 300 && screen.width <= 767
+                                      ? utility.truncateTxnAddress(
+                                          option.address
+                                        )
+                                      : option.address}
                                   </MenuItem>
                                 ) : (
-                                  <MenuItem value={option._id}>{option.name}</MenuItem>
+                                  <MenuItem value={option._id}>
+                                    {option.name}
+                                  </MenuItem>
                                 )
                               )
                             ) : (

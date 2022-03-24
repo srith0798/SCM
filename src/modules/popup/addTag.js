@@ -17,10 +17,9 @@ export default function AddTags(props) {
   let contractId=props.ContractId;
   let contractId1=props.contract ? props.address[0]._id : props.address._id
 
-  const addContractTag = async (props) => {
+  const addContractTag = async () => {
     let requestData={};
-    (contractId!=="")?
-    
+    (contractId)?
     requestData = {
       contractId:contractId1,
       tags: input,
@@ -37,7 +36,7 @@ export default function AddTags(props) {
     } catch (e) {
       console.log("Error", e);
     }
-    props.click(window.location.reload());
+    props.click();
   };
 
   return (

@@ -262,11 +262,10 @@ const Input = styled.input`
   padding-left: 34px;
   background-size: 14px;
   position: relative;
-  background-color: #ffffff !important;
+  background-color: #F0F2FC !important;
   border: none;
   border-radius: 4px;
   width: 100%;
-  background-color: #f0f2fc;
   height: 30px;
   margin-bottom: 5px;
   margin-top: 15px;

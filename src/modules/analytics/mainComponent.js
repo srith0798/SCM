@@ -88,6 +88,7 @@ export default function MainComponent(props) {
       skip: skip,
       limit: limit,
       userId: userId,
+      sortingKey: {addedOn: -1}
     };
     setLoader(true);
     const [error, response] = await utility.parseResponse(
