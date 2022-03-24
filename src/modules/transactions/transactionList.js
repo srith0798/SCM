@@ -69,6 +69,7 @@ export default function TransactionList() {
         skip: skip,
         limit: limit,
         userId: userId,
+        sortingKey: { addedOn : -1}
       };
       setLoader(true);
       const response = await ContractsService.getContractsList(requestData);
@@ -76,7 +77,6 @@ export default function TransactionList() {
       response.contractList.forEach((row) => {
         if (row.isHidden === false) dropDownSelect.push(row);
       });
-      dropDownSelect.reverse();
       setContracts(dropDownSelect);
       if (!url) {
         setSelected(dropDownSelect[0].address);
@@ -354,7 +354,7 @@ export default function TransactionList() {
   ):""}
       <MainContainer>
         <SubContainer>
-          <ShowLoader state={loader} top={"33%"} />
+          <ShowLoader state={loader} top={"80%"} />
           <TransactionMedia>Transactions</TransactionMedia>
           <TransactionBox>
             <NewDiv>

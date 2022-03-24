@@ -136,6 +136,10 @@ const Button = styled.div`
   font-size: 0.875rem;
   cursor: pointer;
   padding-top: 4px;
+  @media(min-width: 300px) and (max-width: 400px){
+    width: 80px;
+    font-size: 11px;
+  }
 `;
 const ColumnTwo = styled.div`
   display: flex;
@@ -164,6 +168,11 @@ const RowContainer = styled.div`
   width: 100%;
   max-width: 21.25rem;
   margin-bottom: 1.25rem;
+  @media (min-width: 300px) and (max-width: 767px){
+  margin: 0rem;
+  padding: 20px;
+  max-width: initial;
+  }
 `;
 const ColorChanging = styled.text`
   color: #00a58c;
