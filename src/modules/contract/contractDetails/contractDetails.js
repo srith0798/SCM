@@ -657,7 +657,7 @@ console.log(`https://observer.xdc.org/verify-contracts/${name}/scm`, "asdadada")
                   check={address.status}
                   onClick={() =>
                     window.open(
-                      `https://observer.xdc.org/verify-contracts/${name}/scm`)
+                      `https://observer-dev.xdc.org/verify-contracts/${name}?scm`)
                   }
                 >
                   Click here and get your contract verified
