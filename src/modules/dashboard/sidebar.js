@@ -90,62 +90,71 @@ export default function Sidebar(props) {
         <Heading>About Xmartly</Heading>
       </Wrapper>
       {sessionManager.getDataFromCookies("isLoggedIn") && (
-      <Wrapper
-        style={{
-          backgroundColor: utility.isMenuActive("transactions")
-            ? "#1d3c93"
-            : "",
-        }}
-        onClick={redirectToTransaction}
-        onMouseOver={() => changeSourceForIcons("transactions")}
-        onMouseOut={() => changeOriginalSourceForIcons("transactions")}
-      >
-        <Icon src={transactionIcon} />
-        <Heading>Transactions</Heading>
-      </Wrapper>
+        <Wrapper
+          style={{
+            backgroundColor: utility.isMenuActive("transactions")
+              ? "#1d3c93"
+              : "",
+          }}
+          onClick={redirectToTransaction}
+          onMouseOver={() => changeSourceForIcons("transactions")}
+          onMouseOut={() => changeOriginalSourceForIcons("transactions")}
+        >
+          <Icon src={transactionIcon} />
+          <Heading>Transactions</Heading>
+        </Wrapper>
       )}
       {sessionManager.getDataFromCookies("isLoggedIn") && (
-      <Wrapper
-        style={{
-          backgroundColor: utility.isMenuActive("contracts") ? "#1d3c93" : "",
-        }}
-        onClick={redirectToContract}
-        onMouseOver={() => changeSourceForIcons("contracts")}
-        onMouseOut={() => changeOriginalSourceForIcons("contracts")}
-      >
-        <Icon src={contractsIcon} />
-        <Heading>Contracts</Heading>
-      </Wrapper>
+        <Wrapper
+          style={{
+            backgroundColor: utility.isMenuActive("contracts") ? "#1d3c93" : "",
+          }}
+          onClick={redirectToContract}
+          onMouseOver={() => changeSourceForIcons("contracts")}
+          onMouseOut={() => changeOriginalSourceForIcons("contracts")}
+        >
+          <Icon src={contractsIcon} />
+          <Heading>Contracts</Heading>
+        </Wrapper>
       )}
       {sessionManager.getDataFromCookies("isLoggedIn") && (
-      <Wrapper
-        style={{
-          backgroundColor: utility.isMenuActive("analytics") ? "#1d3c93" : "",
-        }}
-        onClick={redirectToAnalytics}
-        onMouseOver={() => changeSourceForIcons("analytics")}
-        onMouseOut={() => changeOriginalSourceForIcons("analytics")}
-      >
-        <Icon src={analyticsIcon} />
-        <Heading>Analytics</Heading>
-      </Wrapper>
+        <Wrapper
+          style={{
+            backgroundColor: utility.isMenuActive("analytics") ? "#1d3c93" : "",
+          }}
+          onClick={redirectToAnalytics}
+          onMouseOver={() => changeSourceForIcons("analytics")}
+          onMouseOut={() => changeOriginalSourceForIcons("analytics")}
+        >
+          <Icon src={analyticsIcon} />
+          <Heading>Analytics</Heading>
+        </Wrapper>
       )}
       {sessionManager.getDataFromCookies("isLoggedIn") && (
-      <Wrapper
-        style={{
-          backgroundColor: utility.isMenuActive("rules") ? "#1d3c93" : "",
-        }}
-        onClick={redirectToAlerting}
-        onMouseOver={() => changeSourceForIcons("alerting")}
-        onMouseOut={() => changeOriginalSourceForIcons("alerting")}
-      >
-        <Icon src={alertingIcon} />
-        <Heading>Alerting</Heading>
-      </Wrapper>
+        <Wrapper
+          style={{
+            backgroundColor: utility.isMenuActive("alerting") ? "#1d3c93" : "",
+          }}
+          onClick={redirectToAlerting}
+          onMouseOver={() => changeSourceForIcons("alerting")}
+          onMouseOut={() => changeOriginalSourceForIcons("alerting")}
+        >
+          <Icon src={alertingIcon} />
+          <Heading>Alerting</Heading>
+        </Wrapper>
       )}
-      <WrapperFaq style={{ marginTop: sessionManager.getDataFromCookies("isLoggedIn") ? "12rem" : "35rem", paddingLeft: sessionManager.getDataFromCookies("isLoggedIn")
-                ? "22px"
-                : "50px" }} onClick={redirectToFaqs}>
+      <WrapperFaq
+        style={{
+          marginTop: sessionManager.getDataFromCookies("isLoggedIn")
+            ? "12rem"
+            : "35rem",
+          paddingLeft: sessionManager.getDataFromCookies("isLoggedIn")
+            ? "22px"
+            : "50px",
+          backgroundColor: utility.isMenuActive("faqs") ? "#1d3c93" : "",
+        }}
+        onClick={redirectToFaqs}
+      >
         <Icon src="/images/Subtraction 2.svg" />
         <Heading>FAQs</Heading>
       </WrapperFaq>

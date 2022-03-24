@@ -6,16 +6,51 @@ import utility from "../../utility";
 import { makeStyles } from "@material-ui/styles";
 import { sessionManager } from "../../managers/sessionManager";
 import ShowLoader from "../../common/components/showLoader";
+import ScreenSizeDetector from "screen-size-detector";
 
 const useStyles = makeStyles(() => ({
   dialogBox: {
     width: "100% !important",
     backgroundColor: "#FFFFFF",
     bottom: "180px",
+    ['@media screen and (min-width: 300px) and (max-width: 360px)']: { 
+      backgroundColor: "#ECF0F7 !important",
+      margin: "0px !important",
+      top: "9% !important",
+      height: "100% !important"
+    },
+    ['@media screen and (min-width: 361px) and (max-width: 376px)']: { 
+    backgroundColor: "#ECF0F7 !important",
+    margin: "0px !important",
+    top: "10% !important",
+    height: "100% !important"
+  },
+  ['@media screen and (min-width: 377px) and (max-width: 389px)']: { 
+    backgroundColor: "#ECF0F7 !important",
+    margin: "0px !important",
+    top: "8% !important",
+    height: "100% !important"
+  },
+  ['@media screen and (min-width: 390px) and (max-width: 411px)']: { 
+    backgroundColor: "#ECF0F7 !important",
+    margin: "0px !important",
+    top: "7.5% !important",
+    height: "100% !important"
+  },
+  ['@media screen and (min-width: 412px) and (max-width: 767px)']: { 
+    backgroundColor: "#ECF0F7 !important",
+    margin: "0px !important",
+    top: "7% !important",
+    height: "100% !important"
+  },
+  
+
+  
   },
 }));
 
 export default function AddContract(props) {
+  const screen = new ScreenSizeDetector();
   const classes = useStyles();
   const [hideStep, setHideStep] = useState(true);
   const [checkBox, setCheckBox] = useState(false);
@@ -67,12 +102,10 @@ export default function AddContract(props) {
       checkAddress();
     }
   };
-  console.log("check", checkBox);
-  
   return (
     <div>
       <ShowLoader state={loader} top={"33%"} />
-      <Dialog classes={{ paper: classes.dialogBox }} open>
+      <Dialog hideBackdrop={screen.width>300 && screen.width <768 ? true : false} classes={{ paper: classes.dialogBox }} open>
         <MainContainer>
           <Container>
             <SubContainer>
@@ -273,6 +306,9 @@ const Input = styled.input`
   font-weight: 600;
   outline: none;
   color: #436ce0;
+  @media (min-width: 300px) and (max-width: 767px) {
+  background-color: #FFFFFF !important ;
+  }
 `;
 const Button = styled.button`
   background: #3163f0 0% 0% no-repeat padding-box;
@@ -289,7 +325,7 @@ const Button = styled.button`
   cursor: pointer;
   @media(min-width: 300px) and (max-width: 767px){
     margin-top: 50px;
-    margin-left: 24%;
+    margin-left: 26%;
 
   }
 `;
@@ -313,5 +349,6 @@ const HideSteps = styled.button`
   margin-right: 15px;
   @media (min-width: 300px) and (max-width: 767px){
     margin-top: 0px;
+    background-color: #ECF0F7;
   }
 `;
