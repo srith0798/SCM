@@ -439,11 +439,12 @@ export default function AddAlert() {
                     <ParameterContainer>
                       <Box sx={{ minWidth: 120 }}>
                         <FormControl sx={{ width: "100%", maxWidth: 1000 }}>
-                          <InputLabel>Filter by event</InputLabel>
+                          <InputLabel shrink={false} >{targetValue ==="" && 'Select Address'}</InputLabel>
                           <Select
                             value={targetValue}
-                            label="Filter by event"
                             onChange={selectTargetValue}
+                            sx={{backgroundColor: "#ECF0F7", color: "black"}}
+                            
                           >
                             {parametersData && parametersData.length ? (
                               parametersData.map((option) =>

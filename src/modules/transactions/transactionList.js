@@ -1022,9 +1022,9 @@ const DropDown = styled.div`
   width: 100%;
   max-width: 453px;
   position: relative;
-  @media (max-width: 375px) {
-    margin-right: 14px;
-    height: auto;
+  @media (min-width: 300px) and (max-width: 767px) {
+    font-size: 11px;
+
   }
 `;
 const TransactionHash = styled.div`
@@ -1048,18 +1048,11 @@ const Image = styled.img`
   top: 36px;
   right: 17px;
   cursor: pointer;
-  @media (max-width: 375px) {
-    width: 0.85rem;
-    position: absolute;
-    top: 32px;
-    right: 16px;
-    cursor: pointer;
-  }
-  @media (max-width: 768px) {
+  @media (min-width: 300px) and (max-width: 767px) {
     width: 0.95rem;
     position: absolute;
-    top: 29px;
-    right: 23px;
+    top: 37px;
+    right: 10px;
     cursor: pointer;
   }
 `;

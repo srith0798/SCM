@@ -8,6 +8,7 @@ export default function TopCalls(props) {
   const ClickMe = () => {
     props.changeExpand(0);
   };
+  console.log("props", props);
 
 const  topCallersheaders = [
     { label: 'Address', key: 'address' },
@@ -19,8 +20,70 @@ const  topFunctionCallheaders = [
     { label: 'Network', key: 'network' },
     { label: 'Count', key: 'count' },
   ]; 
+  return (
+    <MainContainer>
+      <SubContainer>
+        <AlignmentContainer>
+          <img
+            style={{ marginRight: "8px" }}
+            alt=""
+            src="/images/back.svg"
+            onClick={ClickMe}
+          />
+          <MainHeading>{props.graphName}</MainHeading>
+        </AlignmentContainer>
+        <AlignmentContainer>
+        {props.graphNo === 4 ?  <CSVLink style={csvLink} data={props.data} headers={topCallersheaders}
+        filename="Top Callers"
+        >Export Data</CSVLink>:
+        <CSVLink data={props.data} headers={topFunctionCallheaders} filename="Top Function Calls"
+        >Export Data</CSVLink>}
+          <Icon src="/images/refresh.svg" />
+        </AlignmentContainer>
+      </SubContainer>
 
-  const MainContainer = styled.div`
+      <Row
+        style={{
+          width: "100%",
+          justifyContent: "space-between",
+        }}
+      >
+        <GraphContainer>
+          <FlexEnd>
+          <select id="dates" className="select" value={props.dropDownValue} onChange={(event)=>{props.getAnalytics("", event)}}>
+        {analytics && analytics.ANALYTICS_DROPDOWN  && analytics.ANALYTICS_DROPDOWN.map((option)=>(
+          <option value={option.VALUE} className="select-dropdown">
+            {option.TEXT}
+          </option>
+        ))}
+        </select>
+          </FlexEnd>
+          <Table>
+          { props?.data && props.data.length && props.data.length>0 ? props.data.map((item)=>(
+              <TableRow className="noBorder">     
+              <DataColumn>          
+             <Div>
+                 {props.graphNo === 4 ? <ContractFrom>Contract from:</ContractFrom> : <ContractFrom>Function:</ContractFrom>}
+                 {props.graphNo === 4 ? <Network>{item.address}</Network> : <Network>{item.function}</Network>}
+               </Div>
+               <Div>
+                 <ContractFrom>Network:</ContractFrom>
+                 <Network>{item.network}</Network>
+               </Div>
+               </DataColumn>
+               <Count>{item.count}</Count>
+               </TableRow>
+                   )):<>
+                   <SubTable>{props.error}</SubTable>
+                   </>}
+              </Table>
+        </GraphContainer>
+      </Row>
+    </MainContainer>
+  );
+}
+
+const MainContainer = styled.div`
   width: 100%;
   padding: 50px;
   background-color: #ecf0f7;
@@ -148,66 +211,3 @@ const csvLink ={
   paddingTop: "5px",
   paddingRight: "15px"
 }
-  return (
-    <MainContainer>
-      <SubContainer>
-        <AlignmentContainer>
-          <img
-            style={{ marginRight: "8px" }}
-            alt=""
-            src="/images/back.svg"
-            onClick={ClickMe}
-          />
-          <MainHeading>{props.graphName}</MainHeading>
-        </AlignmentContainer>
-        <AlignmentContainer>
-        {props.graphNo === 4 ?  <CSVLink style={csvLink} data={props.data} headers={topCallersheaders}
-        filename="Top Callers"
-        >Export Data</CSVLink>:
-        <CSVLink data={props.data} headers={topFunctionCallheaders} filename="Top Function Calls"
-        >Export Data</CSVLink>}
-          <Icon src="/images/refresh.svg" />
-        </AlignmentContainer>
-      </SubContainer>
-
-      <Row
-        style={{
-          width: "100%",
-          justifyContent: "space-between",
-        }}
-      >
-        <GraphContainer>
-          <FlexEnd>
-          <select id="dates" className="select" value={props.dropDownValue} onChange={(event)=>{props.getAnalytics("", event)}}>
-        {analytics && analytics.ANALYTICS_DROPDOWN  && analytics.ANALYTICS_DROPDOWN.map((option)=>(
-          <option value={option.VALUE} className="select-dropdown">
-            {option.TEXT}
-          </option>
-        ))}
-        </select>
-          </FlexEnd>
-          <Table>
-          { props?.data && props.data.length && props.data.length>0 ? props.data.map((item)=>(
-              <TableRow className="noBorder">     
-              <DataColumn>          
-             <Div>
-                 {props.graphNo === 4 ? <ContractFrom>Contract from:</ContractFrom> : <ContractFrom>Function:</ContractFrom>}
-                 {props.graphNo === 4 ? <Network>{item.address}</Network> : <Network>{item.function}</Network>}
-               </Div>
-               <Div>
-                 <ContractFrom>Network:</ContractFrom>
-                 <Network>{item.network}</Network>
-               </Div>
-               </DataColumn>
-               <Count>{item.count}</Count>
-               </TableRow>
-                   )):<>
-                   <SubTable>{props.error}</SubTable>
-                   </>}
-              </Table>
-        </GraphContainer>
-      </Row>
-    </MainContainer>
-  );
-}
-
