@@ -270,12 +270,14 @@ export default function MainComponent(props) {
     setTableData(response);
   };
   const callAnalyticsFunctions = async (address, event) => {
+    console.log("log", event, address);
     if (expandGraph === 1) await getTransactionAnalytics(address, event);
     if (expandGraph === 2) await getGasUsedAnalytics(address, event);
     if (expandGraph === 3) await getActiveUsersAnalytics(address, event);
     if (expandGraph === 4) await getTopCallers(address, event);
     if (expandGraph === 5) await getTopFunctionCalls(address, event);
   };
+  
 
   const getGraphData = (id, response, xComponent, yComponent) => {
     let arr = [
@@ -644,7 +646,7 @@ export default function MainComponent(props) {
       {expandGraph > 3 && (
         <TopCalls
           graphName={graphName}
-          data={tableData}
+          data={expandGraph === 4 ? topCallersData : tableData}
           graphNo={expandGraph}
           changeExpand={expandGraphs}
           getAnalytics={callAnalyticsFunctions}
@@ -923,7 +925,7 @@ const FunctionAddress = styled.div`
   @media (min-width: 300px) and (max-width: 767px) {
     word-break: break-all;
     white-space: nowrap;
-    margin-left: 3%;
+    margin-left: 5.5%;
     display: flex;
   }
 `;
@@ -935,7 +937,7 @@ const MobileNetwork = styled.div`
   @media (min-width: 300px) and (max-width: 767px) {
     word-break: break-all;
     white-space: nowrap;
-    margin-left: 10%;
+    margin-left: 9.5%;
     display: flex;
   }
   @media (min-width: 768px) and (max-width: 1200px) {

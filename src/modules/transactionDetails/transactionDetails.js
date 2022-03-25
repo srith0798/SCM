@@ -122,7 +122,7 @@ const TopContainer = styled.div`
   display: flex;
   align-items: center;
   @media (min-width: 300px) and (max-width: 768px) {
-    padding-left: 13px !important;
+    margin-left: 2px !important;
   }
 `;
 
@@ -163,6 +163,7 @@ const FunctionContainer = styled.div`
   @media (min-width: 300px) and (max-width: 485px) {
     flex-direction: column;
     display: flex;
+    overflow-y: hidden;
   }
 `;
 const TokenTransferDiv = styled.div`
@@ -197,10 +198,27 @@ const SubHeadBlue = styled.div`
     margin-left: 5px;
   }
 `;
+const SubHeadBlueMob = styled.div`
+  font-size: 0.85rem;
+  display: flex;
+  color: #416be0;
+  cursor: pointer;
+  white-space: pre;
+  margin-left: 15px;
+  @media (min-width: 300px) and (max-width: 767px){
+    margin-left: 125px;
+  }
+`;
 const CommonDiv = styled.div`
   border-bottom: 0.031rem #eaf1ec solid;
   padding: 0.813rem;
-  @media (min-width: 300px) and (max-width: 767px) {
+  @media (min-width: 300px) and (max-width: 394px) {
+    width: 100%;
+    min-width: 200px;
+    max-width: 600px;
+    margin-right: 10%;
+  }
+  @media (min-width: 395px) and (max-width: 767px) {
     width: 100%;
     min-width: 200px;
     max-width: 600px;
@@ -987,7 +1005,7 @@ width: 100%;
             <CommonDiv>
               <Row>
                 <InputHeading>Input:</InputHeading>
-                <SubHeadBlue onClick={() => setShowInputData(!showInputData)}>
+                <SubHeadBlueMob onClick={() => setShowInputData(!showInputData)}>
                   view data
                   {showInputData === false ? (
                   <img
@@ -1002,7 +1020,7 @@ width: 100%;
                     src="/images/input-up.svg"
                   />
                   )}
-                </SubHeadBlue>
+                </SubHeadBlueMob>
               </Row>
 
               {showInputData === true ? (
@@ -1036,14 +1054,14 @@ width: 100%;
             <CommonDiv>
               <Row>
                 <InputHeading>Output </InputHeading>
-                <SubHeadBlue>
+                <SubHeadBlueMob>
                   veiw data
                   <img
                     style={{ marginLeft: "2px" }}
                     alt=""
                     src="/images/arrrow.svg"
                   />
-                </SubHeadBlue>
+                </SubHeadBlueMob>
               </Row>
             </CommonDiv>
             <CommonInputDiv>

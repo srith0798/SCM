@@ -53,7 +53,7 @@ export default function Contract(props) {
         skip: skip,
         limit: limit,
         userId: userId,
-        sortingKey: {addedOn: -1}
+        sortingKey: { addedOn: -1 },
       };
 
       setLoader(true);
@@ -109,12 +109,11 @@ export default function Contract(props) {
 
   const [addTag, setAddTag] = useState(false);
   const [contractId, getContractId] = useState("");
-  const Open = (e,id) => {
+  const Open = (e, id) => {
     e.stopPropagation();
     setAddTagPopUp(true);
     setAddTag(true);
-    getContractId(id)
-    
+    getContractId(id);
   };
   const Close = () => {
     setAddTag(false);
@@ -127,220 +126,238 @@ export default function Contract(props) {
   }
   let user = "";
 
-    try {
-      user = window.web3.eth.accounts;
-    } catch (e) {}
+  try {
+    user = window.web3.eth.accounts;
+  } catch (e) {}
 
-    const redirectToLogout = () => {
-      sessionManager.removeDataFromCookies("isLoggedIn");
-      sessionManager.removeDataFromCookies("accountAddress");
-      sessionManager.removeDataFromCookies("userId");
-      sessionManager.removeDataFromCookies("username");
-      sessionManager.removeDataFromCookies("profilePicture");
-      history.replace("/");
-    };
+  const redirectToLogout = () => {
+    sessionManager.removeDataFromCookies("isLoggedIn");
+    sessionManager.removeDataFromCookies("accountAddress");
+    sessionManager.removeDataFromCookies("userId");
+    sessionManager.removeDataFromCookies("username");
+    sessionManager.removeDataFromCookies("profilePicture");
+    history.replace("/");
+  };
 
   return (
     <>
-    {(user==="")?
-    (
-      redirectToLogout()
-  ):""}
-    <MainContainer>
-      <ShowLoader state={loader} top={"33%"} />
-      <SubContainer>
-        <MainHeading>
-          <Heading>Contracts</Heading>
-          <Input
-            placeholder="Search by address or name"
-            value={input}
-            onChange={search}
-          />
-        </MainHeading>
-        <IconDiv>
-          <Tooltip disableFocusListener title="Refresh">
-            <RefreshImage
-              onClick={() => getContractList()}
-              alt=""
-              src="/images/refresh.svg"
-              style={{ marginRight: "0.625rem" }}
+      {user === "" ? redirectToLogout() : ""}
+      <MainContainer>
+        <ShowLoader state={loader} top={"33%"} />
+        <SubContainer>
+          <MainHeading>
+            <Heading>Contracts</Heading>
+            <Input
+              placeholder="Search by address or name"
+              value={input}
+              onChange={search}
             />
-          </Tooltip>
-          {open && (
-            <AddContract
-              click={handleClose}
-              getContractList={getContractList}
-            />
-          )}
-          {(address.length===0)?
-          (<Button title="Add your First Contract" onClick={handleClickOpen}>Add Contract</Button>)
-          :
-          (<Button  onClick={handleClickOpen}>Add Contract</Button>)}
-        </IconDiv>
-      </SubContainer>
+          </MainHeading>
+          <IconDiv>
+            <Tooltip disableFocusListener title="Refresh">
+              <RefreshImage
+                onClick={() => getContractList()}
+                alt=""
+                src="/images/refresh.svg"
+                style={{ marginRight: "0.625rem" }}
+              />
+            </Tooltip>
+            {open && (
+              <AddContract
+                click={handleClose}
+                getContractList={getContractList}
+              />
+            )}
+            {address.length === 0 ? (
+              <Button title="Add your First Contract" onClick={handleClickOpen}>
+                Add Contract
+              </Button>
+            ) : (
+              <Button onClick={handleClickOpen}>Add Contract</Button>
+            )}
+          </IconDiv>
+        </SubContainer>
 
-      <TableContainer>
-        <Div>
-          <RowContainer style={{ alignItems: "center" }}>
-            <ColumnOne>
-              Contract Name
-              <Tooltip
-                open={contractNameToolTip}
-                onOpen={() => setcontractNameToolTip(true)}
-                onClose={() => setcontractNameToolTip(false)}
-                disableFocusListener
-                title="Name of the smart contract"
-              >
-                <ToolTipIcon
-                  onClick={() => setcontractNameToolTip(!contractNameToolTip)}
-                  src="/images/tool-tip.svg"
-                />
-              </Tooltip>
-            </ColumnOne>
-            <ColumnOne>
-              <ColOne>
-                Address
+        <TableContainer>
+          <Div>
+            <RowContainer style={{ alignItems: "center" }}>
+              <ColumnOne>
+                Contract Name
                 <Tooltip
-                  open={addressToolTip}
-                  onOpen={() => setaddressToolTip(true)}
-                  onClose={() => setaddressToolTip(false)}
+                  open={contractNameToolTip}
+                  onOpen={() => setcontractNameToolTip(true)}
+                  onClose={() => setcontractNameToolTip(false)}
                   disableFocusListener
-                  title="Wallet address"
+                  title="Name of the smart contract"
                 >
                   <ToolTipIcon
-                    onClick={() => setaddressToolTip(!addressToolTip)}
+                    onClick={() => setcontractNameToolTip(!contractNameToolTip)}
                     src="/images/tool-tip.svg"
                   />
                 </Tooltip>
-              </ColOne>
-            </ColumnOne>
-            <ColumnOne>
-              <ColOne>
-                Network
-                <Tooltip
-                  open={networkToolTip}
-                  onOpen={() => setnetworkToolTip(true)}
-                  onClose={() => setnetworkToolTip(false)}
-                  disableFocusListener
-                  title="Network on which the contract is executed"
-                >
-                  <ToolTipIcon
-                    onClick={() => setnetworkToolTip(!networkToolTip)}
-                    src="/images/tool-tip.svg"
-                  />
-                </Tooltip>
-              </ColOne>
-            </ColumnOne>
-            <ColumnOne>
-              <ColOne>
-                Tag
-                <Tooltip
-                  open={tagToolTip}
-                  onOpen={() => settagToolTip(true)}
-                  onClose={() => settagToolTip(false)}
-                  disableFocusListener
-                  title="Tag name associated with the contract"
-                >
-                  <ToolTipIcon
-                    onClick={() => settagToolTip(!tagToolTip)}
-                    src="/images/tool-tip.svg"
-                  />
-                </Tooltip>
-              </ColOne>
-            </ColumnOne>
-            <ColumnOne>
-              <ColOneVisibility>
-                Visibility
-                <Tooltip
-                  open={visibilityToolTip}
-                  onOpen={() => setvisibilityToolTip(true)}
-                  onClose={() => setvisibilityToolTip(false)}
-                  disableFocusListener
-                  title="Is the contract visible to the users or not"
-                >
-                  <ToolTipIcon
-                    onClick={() => setvisibilityToolTip(!visibilityToolTip)}
-                    src="/images/tool-tip.svg"
-                  />
-                </Tooltip>
-              </ColOneVisibility>
-            </ColumnOne>
-          </RowContainer>
-        </Div>
-        {(input === "" ? address : searchRow).map((data, index) => {
-          return (
-            <div style={{ cursor: "pointer" }}>
-              <Div>
-                <RowTag>           
-                  <ColumnSecond onClick={(e) => redirectTODetails(e, data._id)}>
-                    {data.contractName || "Contract"}
-                  </ColumnSecond>
-                  <ColumnSecond onClick={(e) => redirectTODetails(e, data._id)}>
-                    <BackgroundChanger>
-                      {utility.truncateTxnAddress(data.address)}
-                    </BackgroundChanger>
-                  </ColumnSecond>
+              </ColumnOne>
+              <ColumnOne>
+                <ColOne>
+                  Address
+                  <Tooltip
+                    open={addressToolTip}
+                    onOpen={() => setaddressToolTip(true)}
+                    onClose={() => setaddressToolTip(false)}
+                    disableFocusListener
+                    title="Wallet address"
+                  >
+                    <ToolTipIcon
+                      onClick={() => setaddressToolTip(!addressToolTip)}
+                      src="/images/tool-tip.svg"
+                    />
+                  </Tooltip>
+                </ColOne>
+              </ColumnOne>
+              <ColumnOne>
+                <ColOne>
+                  Network
+                  <Tooltip
+                    open={networkToolTip}
+                    onOpen={() => setnetworkToolTip(true)}
+                    onClose={() => setnetworkToolTip(false)}
+                    disableFocusListener
+                    title="Network on which the contract is executed"
+                  >
+                    <ToolTipIcon
+                      onClick={() => setnetworkToolTip(!networkToolTip)}
+                      src="/images/tool-tip.svg"
+                    />
+                  </Tooltip>
+                </ColOne>
+              </ColumnOne>
+              <ColumnOne>
+                <ColOne>
+                  Tag
+                  <Tooltip
+                    open={tagToolTip}
+                    onOpen={() => settagToolTip(true)}
+                    onClose={() => settagToolTip(false)}
+                    disableFocusListener
+                    title="Tag name associated with the contract"
+                  >
+                    <ToolTipIcon
+                      onClick={() => settagToolTip(!tagToolTip)}
+                      src="/images/tool-tip.svg"
+                    />
+                  </Tooltip>
+                </ColOne>
+              </ColumnOne>
+              <ColumnOne>
+                <ColOneVisibility>
+                  Visibility
+                  <Tooltip
+                    open={visibilityToolTip}
+                    onOpen={() => setvisibilityToolTip(true)}
+                    onClose={() => setvisibilityToolTip(false)}
+                    disableFocusListener
+                    title="Is the contract visible to the users or not"
+                  >
+                    <ToolTipIcon
+                      onClick={() => setvisibilityToolTip(!visibilityToolTip)}
+                      src="/images/tool-tip.svg"
+                    />
+                  </Tooltip>
+                </ColOneVisibility>
+              </ColumnOne>
+            </RowContainer>
+          </Div>
+          {(input === "" ? address : searchRow).map((data, index) => {
+            return (
+              <div style={{ cursor: "pointer" }}>
+                <Div>
+                  <RowTag>
+                    <ColumnSecond
+                      onClick={(e) => redirectTODetails(e, data._id)}
+                    >
+                      {data.contractName || "Contract"}
+                    </ColumnSecond>
+                    <ColumnSecond
+                      onClick={(e) => redirectTODetails(e, data._id)}
+                    >
+                      <BackgroundChanger>
+                        {utility.truncateTxnAddress(data.address)}
+                      </BackgroundChanger>
+                    </ColumnSecond>
 
-                  <ColumnSecond onClick={(e) => redirectTODetails(e, data._id)}>
-                    {data.network}                 
-                  </ColumnSecond>
-                  <ColumnSecond style={{ display: "flex" }}>
-                    <TagCol>                     
-                      {(data.tags.length === 0)? 
-                      (<AddTag onClick={(e) => Open(e, data._id)} >Add Tag</AddTag>) 
-                      :
-                      (address[index].tags &&
-                        address[index].tags.map(
-                          (tag, index) =>
-                            index <= 0 && (data.tags[0].name.length<=16)?(<FinanceTag>{data.tags[0].name}</FinanceTag>):<FinanceTag>{utility.truncateTag(data.tags[0].name)}</FinanceTag>
-                        ))}
-                      {addTag && (
-                        <AddTags                         
-                          click={Close}
-                          address={address}
-                          contract={true}
-                          ContractId={contractId}
-                        />
-                      )}
-                      {/* {data.tags && data.tags.length === 0 && (
+                    <ColumnSecond
+                      onClick={(e) => redirectTODetails(e, data._id)}
+                    >
+                      {data.network}
+                    </ColumnSecond>
+                    <ColumnSecond style={{ display: "flex" }}>
+                      <TagCol>
+                        {data.tags.length === 0 ? (
+                          <AddTag onClick={(e) => Open(e, data._id)}>
+                            Add Tag
+                          </AddTag>
+                        ) : (
+                          address[index].tags &&
+                          address[index].tags.map((tag, index) =>
+                            index <= 0 && data.tags[0].name.length <= 16 ? (
+                              <FinanceTag>{data.tags[0].name}</FinanceTag>
+                            ) : (
+                              <FinanceTag>
+                                {utility.truncateTag(data.tags[0].name)}
+                              </FinanceTag>
+                            )
+                          )
+                        )}
+                        {addTag && (
+                          <AddTags
+                            click={Close}
+                            address={address}
+                            contract={true}
+                            ContractId={contractId}
+                          />
+                        )}
+                        {/* {data.tags && data.tags.length === 0 && (
                         <AddTag onClick={(e) => Open(e)}>Add Tag</AddTag>
                       )} */}
-                    </TagCol>
-                  </ColumnSecond>
-                  <ColumnSecond onClick={(e) => redirectTODetails(e, data._id)}>
-                    {data.isHidden ? "Hidden" : "Visible"}
-                  </ColumnSecond>
-                </RowTag>
-              </Div>
-            </div>
-          );
-        })}
-        {loader === false ?  ((input === "" && address.length === 0) ||
-          (input !== "" && searchRow.length === 0)) && (
-          <PlaceHolderContainer>
-            <PlaceHolderImage src="/images/contracts.svg" />
-            No Contracts Available
-          </PlaceHolderContainer>
-        ) : ""}
-      </TableContainer>
-      <PageVerifyCheck check={page}>
-        <PaginationDiv>
-          <ReactPaginate
-            previousLabel={"<"}
-            nextLabel={">"}
-            pageCount={page}
-            breakLabel={"..."}
-            initialPage={0}
-            onPageChange={changePage}
-            containerClassName={"paginationBttns"}
-            disabledClassName={"paginationDisabled"}
-            activeClassName={"paginationActive"}
-            pageRangeDisplayed={0}
-            marginPagesDisplayed={0}
-          />
-        </PaginationDiv>
-      </PageVerifyCheck>
-    </MainContainer>
+                      </TagCol>
+                    </ColumnSecond>
+                    <ColumnSecond
+                      onClick={(e) => redirectTODetails(e, data._id)}
+                    >
+                      {data.isHidden ? "Hidden" : "Visible"}
+                    </ColumnSecond>
+                  </RowTag>
+                </Div>
+              </div>
+            );
+          })}
+          {loader === false
+            ? ((input === "" && address.length === 0) ||
+                (input !== "" && searchRow.length === 0)) && (
+                <PlaceHolderContainer>
+                  <PlaceHolderImage src="/images/contracts.svg" />
+                  No Contracts Available
+                </PlaceHolderContainer>
+              )
+            : ""}
+        </TableContainer>
+        <PageVerifyCheck check={page}>
+          <PaginationDiv>
+            <ReactPaginate
+              previousLabel={"<"}
+              nextLabel={">"}
+              pageCount={page}
+              breakLabel={"..."}
+              initialPage={0}
+              onPageChange={changePage}
+              containerClassName={"paginationBttns"}
+              disabledClassName={"paginationDisabled"}
+              activeClassName={"paginationActive"}
+              pageRangeDisplayed={0}
+              marginPagesDisplayed={0}
+            />
+          </PaginationDiv>
+        </PageVerifyCheck>
+      </MainContainer>
     </>
   );
 }
@@ -633,6 +650,10 @@ const ColumnOne = styled.div`
     width: fit-content;
     min-width: 180px;
   }
+  @media (min-width: 768px) and (max-width: 1024px) {
+    width: 100%;
+    min-width: 210px;
+  }
 `;
 
 const ColOneVisibility = styled.div`
@@ -655,6 +676,10 @@ const ColumnSecond = styled.div`
   @media (min-width: 300px) and (max-width: 750px) {
     width: 100%;
     min-width: 180px;
+  }
+  @media (min-width: 768px) and (max-width: 1024px) {
+    width: 100%;
+    min-width: 210px;
   }
 `;
 const TagCol = styled.div`

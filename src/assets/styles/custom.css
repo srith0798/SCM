@@ -703,3 +703,12 @@ input[type="date"]:valid::before {
   display: none !important;  /* Safari and Chrome */
 }
 
+.MuiOutlinedInput-notchedOutline{
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.MuiOutlinedInput-input {
+padding: 12.5px 10px !important;
+}
