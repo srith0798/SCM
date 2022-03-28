@@ -40,14 +40,9 @@ export default function MainComponent(props) {
   const [loader, setLoader] = React.useState("30");
   const [expanded, setExpanded] = React.useState(0);
   const [tableData, setTableData] = React.useState([]);
-  const [
-    transactionOverTimeError,
-    setTransactionOverTimeError,
-  ] = React.useState("");
-  const [
-    activeUSerGraphError,
-    setActiveUserGraphError,
-  ] = React.useState("");
+  const [transactionOverTimeError, setTransactionOverTimeError] =
+    React.useState("");
+  const [activeUSerGraphError, setActiveUserGraphError] = React.useState("");
   const [gasUsedOverTimeError, setGasUsedOverTimeError] = React.useState("");
   const [activeUsersError, setActiveUsersError] = React.useState("");
   const [topCallersError, setTopCallersError] = React.useState("");
@@ -88,7 +83,7 @@ export default function MainComponent(props) {
       skip: skip,
       limit: limit,
       userId: userId,
-      sortingKey: {addedOn: -1}
+      sortingKey: { addedOn: -1 },
     };
     setLoader(true);
     const [error, response] = await utility.parseResponse(
@@ -131,7 +126,7 @@ export default function MainComponent(props) {
     );
     if (error || !response || response.length === 0) {
       setTransactionOverTimeError("No Transactions Available");
-      setActiveUserGraphError("No Active users available")
+      setActiveUserGraphError("No Active users available");
       setNoOfTransactions([]);
       setData([]);
       setLoader(false);
@@ -277,7 +272,6 @@ export default function MainComponent(props) {
     if (expandGraph === 4) await getTopCallers(address, event);
     if (expandGraph === 5) await getTopFunctionCalls(address, event);
   };
-  
 
   const getGraphData = (id, response, xComponent, yComponent) => {
     let arr = [
@@ -373,25 +367,22 @@ export default function MainComponent(props) {
 
   let user = "";
 
-    try {
-      user = window.web3.eth.accounts;
-    } catch (e) {}
+  try {
+    user = window.web3.eth.accounts;
+  } catch (e) {}
 
-    const redirectToLogout = () => {
-      sessionManager.removeDataFromCookies("isLoggedIn");
-      sessionManager.removeDataFromCookies("accountAddress");
-      sessionManager.removeDataFromCookies("userId");
-      sessionManager.removeDataFromCookies("username");
-      sessionManager.removeDataFromCookies("profilePicture");
-      history.replace("/");
-    };
+  const redirectToLogout = () => {
+    sessionManager.removeDataFromCookies("isLoggedIn");
+    sessionManager.removeDataFromCookies("accountAddress");
+    sessionManager.removeDataFromCookies("userId");
+    sessionManager.removeDataFromCookies("username");
+    sessionManager.removeDataFromCookies("profilePicture");
+    history.replace("/");
+  };
 
   return (
     <>
-    {(user==="")?
-    (
-      redirectToLogout()
-  ):""}
+      {user === "" ? redirectToLogout() : ""}
       <ShowLoader state={loader} top={"33%"}></ShowLoader>
       {expandGraph === 0 ? (
         <div style={{ overflow: "auto" }}>
@@ -420,24 +411,33 @@ export default function MainComponent(props) {
                       sx={{ position: "relative" }}
                       selected={selected?.address}
                     >
-                      {(contracts.length === 0) ? 
-                      <DropDown onClick={handleClick}>                  
-                    
-                      <Span>No contract available</Span>
-                    </DropDown> : 
-                      <DropDown onClick={handleClick}>
-                        {selected?.contractName
-                          ? selected.contractName
-                          : "Contract"}
-                        <img
-                          style={{ marginLeft: "0.5rem" }}
-                          alt=""
-                          src="/images/XDCmainnet.svg"
-                        />
-                        <br />
-                        <TransactionHash>{selected?.address}</TransactionHash>
-                        <Image src="/images/arrrow.svg" />
-                      </DropDown> }
+                      {contracts.length === 0 ? (
+                        <DropDown onClick={handleClick}>
+                          <Span
+                            style={{
+                              marginTop:
+                                contracts.length === 0 ? "10px" : "12px",
+                            }}
+                          >
+                            No contract available
+                          </Span>
+                          <Image src="/images/arrrow.svg" />
+                        </DropDown>
+                      ) : (
+                        <DropDown onClick={handleClick}>
+                          {selected?.contractName
+                            ? selected.contractName
+                            : "Contract"}
+                          <img
+                            style={{ marginLeft: "0.5rem" }}
+                            alt=""
+                            src="/images/XDCmainnet.svg"
+                          />
+                          <br />
+                          <TransactionHash>{selected?.address}</TransactionHash>
+                          <Image src="/images/arrrow.svg" />
+                        </DropDown>
+                      )}
                       {isSetOpen ? (
                         <Box sx={styles}>
                           {contracts.length &&
@@ -586,20 +586,23 @@ export default function MainComponent(props) {
                           error1={transactionOverTimeError}
                         ></SelectComponent>
                       </SubContainer>
-                      {(noOfTransactions.length===0)?
-                      ( <GraphSizeError>
-                        {" "}
-                        <Line
-                          data={noOfTransactions}
-                          error={activeUSerGraphError}
-                        />
-                      </GraphSizeError>)
-                      :
-                      <GraphSize>
-                        {" "}
-                        <Line data={activeUserData} error={activeUsersError} />
-                      </GraphSize>}
-                      
+                      {noOfTransactions.length === 0 ? (
+                        <GraphSizeError>
+                          {" "}
+                          <Line
+                            data={noOfTransactions}
+                            error={activeUSerGraphError}
+                          />
+                        </GraphSizeError>
+                      ) : (
+                        <GraphSize>
+                          {" "}
+                          <Line
+                            data={activeUserData}
+                            error={activeUsersError}
+                          />
+                        </GraphSize>
+                      )}
                     </GraphContainer>
                   </Grid>
                 </Grid>
@@ -676,7 +679,7 @@ const TableData = (props) => {
       </SubContainer>
       <Table>
         {props?.data && props.data.length && props.data.length > 0 ? (
-          props.data.map((item) => (            
+          props.data.map((item) => (
             <TableRow>
               <DataColumn>
                 <Div>
@@ -791,10 +794,9 @@ const Content = styled.div`
   }
 `;
 
-const Span =styled.div `
-color: #A6B3D8;
-font-size:14px;
-margin-top:12px;
+const Span = styled.div`
+  color: #a6b3d8;
+  font-size: 14px;
 `;
 
 const GraphSizeError = styled.div`
@@ -870,7 +872,7 @@ const ContractFrom = styled.div`
   color: #102c78;
   font-size: 14px;
   font-weight: 600;
-  display: flex ;
+  display: flex;
   white-space: nowrap;
   @media (min-width: 300px) and (max-width: 767px) {
     word-break: break-all;
@@ -898,7 +900,7 @@ const NetworkHead = styled.div`
   color: #102c78;
   font-size: 14px;
   font-weight: 600;
-  display: flex ;
+  display: flex;
   @media (min-width: 300px) and (max-width: 767px) {
     word-break: break-all;
     white-space: nowrap;
@@ -909,7 +911,7 @@ const Network = styled.div`
   color: #303134;
   font-size: 14px;
   width: 100%;
-  display: flex ;
+  display: flex;
   @media (min-width: 300px) and (max-width: 767px) {
     word-break: break-all;
     white-space: nowrap;
@@ -921,7 +923,7 @@ const FunctionAddress = styled.div`
   color: #303134;
   font-size: 14px;
   width: 100%;
-  display: flex ;
+  display: flex;
   @media (min-width: 300px) and (max-width: 767px) {
     word-break: break-all;
     white-space: nowrap;
@@ -943,7 +945,7 @@ const MobileNetwork = styled.div`
   @media (min-width: 768px) and (max-width: 1200px) {
     display: none !important;
   }
-  @media (min-width: 820px)  {
+  @media (min-width: 820px) {
     display: none !important;
   }
   @media (min-width: 1200px) and (max-width: 2300px) {
@@ -984,6 +986,7 @@ const DropDown = styled.div`
   width: 100%;
   max-width: 453px;
   position: relative;
+  min-height: 63px;
   @media (min-width: 300px) and (max-width: 767px) {
     font-size: 0.85rem;
   }
@@ -1061,5 +1064,3 @@ const SelectComponent = (props) => {
     </>
   );
 };
-
-

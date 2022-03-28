@@ -834,6 +834,7 @@ console.log(`https://observer.xdc.org/verify-contracts/${name}/scm`, "asdadada")
                   ? address.sourceCode
                   : address.byteCode
               }
+              status= {address.status}
             ></SourceCode>
           )}
         </Container>
