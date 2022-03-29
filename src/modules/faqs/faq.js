@@ -2,6 +2,7 @@ import React from "react";
 import FaqItem from "./faqItem";
 import { sessionManager } from "../../managers/sessionManager";
 import { history } from "../../managers/history";
+import { cookiesConstants } from "../../constants";
 
 export default function Faqs(props) {
   const faqsList = [
@@ -51,9 +52,9 @@ export default function Faqs(props) {
     } catch (e) {}
 
     const redirectToLogout = () => {
-      sessionManager.removeDataFromCookies("isLoggedIn");
-      sessionManager.removeDataFromCookies("accountAddress");
-      sessionManager.removeDataFromCookies("userId");
+      sessionManager.removeDataFromCookies(cookiesConstants.IS_LOGGED_IN);
+      sessionManager.removeDataFromCookies(cookiesConstants.ACCOUNT_ADDRESS);
+      sessionManager.removeDataFromCookies(cookiesConstants.USER_ID);
       sessionManager.removeDataFromCookies("username");
       sessionManager.removeDataFromCookies("profilePicture");
       history.replace("/");

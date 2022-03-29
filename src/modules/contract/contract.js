@@ -11,6 +11,7 @@ import utility from "../../utility";
 import { sessionManager } from "../../managers/sessionManager";
 import AddTags from "../popup/addTag";
 import { useLocation } from "react-router";
+import { cookiesConstants } from "../../constants";
 
 export default function Contract(props) {
   const [open, setOpen] = useState(false);
@@ -47,7 +48,7 @@ export default function Contract(props) {
   };
 
   const getContractList = async (skip = 0, limit = 10) => {
-    let userId = sessionManager.getDataFromCookies("userId");
+    let userId = sessionManager.getDataFromCookies(cookiesConstants.USER_ID);
     try {
       const requestData = {
         skip: skip,
@@ -76,7 +77,7 @@ export default function Contract(props) {
   };
 
   const searching = async (searchValues, searchKeys) => {
-    let userId = sessionManager.getDataFromCookies("userId");
+    let userId = sessionManager.getDataFromCookies(cookiesConstants.USER_ID);
     try {
       const requestData = {
         searchValue: searchValues,
@@ -131,9 +132,9 @@ export default function Contract(props) {
   } catch (e) {}
 
   const redirectToLogout = () => {
-    sessionManager.removeDataFromCookies("isLoggedIn");
-    sessionManager.removeDataFromCookies("accountAddress");
-    sessionManager.removeDataFromCookies("userId");
+    sessionManager.removeDataFromCookies(cookiesConstants.IS_LOGGED_IN);
+    sessionManager.removeDataFromCookies(cookiesConstants.ACCOUNT_ADDRESS);
+    sessionManager.removeDataFromCookies(cookiesConstants.USER_ID);
     sessionManager.removeDataFromCookies("username");
     sessionManager.removeDataFromCookies("profilePicture");
     history.replace("/");
@@ -297,12 +298,12 @@ export default function Contract(props) {
                           </AddTag>
                         ) : (
                           address[index].tags &&
-                          address[index].tags.map((tag, index) =>
-                            index <= 0 && data.tags[0].name.length <= 16 ? (
-                              <FinanceTag>{data.tags[0].name}</FinanceTag>
+                          address[index].tags.map((tag, index) => 
+                            index <= 0 && data.tags[index].name.length > 16 ? (
+                              <FinanceTag>{utility.truncateTag(tag.name)}</FinanceTag>
                             ) : (
                               <FinanceTag>
-                                {utility.truncateTag(data.tags[0].name)}
+                                {tag.name}
                               </FinanceTag>
                             )
                           )
@@ -312,7 +313,7 @@ export default function Contract(props) {
                             click={Close}
                             address={address}
                             contract={true}
-                            ContractId={contractId}
+                            contractId={contractId}
                           />
                         )}
                         {/* {data.tags && data.tags.length === 0 && (
@@ -683,6 +684,7 @@ const ColumnSecond = styled.div`
   }
 `;
 const TagCol = styled.div`
+  display: flex;
   @media (min-width: 300px) and (max-width: 767px) {
   }
   @media (min-width: 768px) and (max-width: 1128px) {

@@ -18,6 +18,7 @@ import { history } from "../../../managers/history";
 import AddTags from "../../popup/addTag";
 import RemoveTag from "./removeTag";
 import { sessionManager } from "../../../managers/sessionManager";
+import { cookiesConstants } from "../../../constants";
 
 export default function ContractDetails(props) {
   const [activeButton, setActiveButton] = React.useState("General");
@@ -51,7 +52,7 @@ export default function ContractDetails(props) {
   const updateContract = async (contractAddress) => {
    const request = {
      contractAddress :contractAddress,
-     userId : sessionManager.getDataFromCookies("userId")
+     userId : sessionManager.getDataFromCookies(cookiesConstants.USER_ID)
    }
     setContractAddress(contractAddress);
     try {
@@ -179,9 +180,9 @@ export default function ContractDetails(props) {
   } catch (e) {}
 
   const redirectToLogout = () => {
-    sessionManager.removeDataFromCookies("isLoggedIn");
-    sessionManager.removeDataFromCookies("accountAddress");
-    sessionManager.removeDataFromCookies("userId");
+    sessionManager.removeDataFromCookies(cookiesConstants.IS_LOGGED_IN);
+    sessionManager.removeDataFromCookies(cookiesConstants.ACCOUNT_ADDRESS);
+    sessionManager.removeDataFromCookies(cookiesConstants.USER_ID);
     sessionManager.removeDataFromCookies("username");
     sessionManager.removeDataFromCookies("profilePicture");
     history.replace("/");
@@ -698,6 +699,7 @@ console.log(`https://observer.xdc.org/verify-contracts/${name}/scm`, "asdadada")
                         click={Close}
                         address={address}
                         contract={false}
+                        contractId={address._id}
                       />
                     )}
                     <AddTag

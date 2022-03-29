@@ -1,4 +1,5 @@
-import { httpConstants } from "../constants";
+import { httpConstants, cookiesConstants } from "../constants";
+import { sessionManager } from "../managers/sessionManager";
 import { httpService } from "../utility/httpService";
 
 export default {
@@ -25,6 +26,7 @@ export default {
 function getHeaders() {
   return {
     "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON,
+    "authorization": `Bearer ${sessionManager.getDataFromCookies(cookiesConstants.SESSION_TOKEN)}`,
     skip: true,
   };
 }
@@ -69,10 +71,10 @@ async function getContractsById(requestData) {
     });
 }
 
-async function getContractByAddress(requestData) {
-  let url = process.env.REACT_APP_USER_CONTRACT_MICROSERVICE + httpConstants.API_END_POINT.GET_CONTRACT_BY_ADDRESS + requestData;
+async function getContractByAddress(requestData, id) {
+  let url = process.env.REACT_APP_USER_CONTRACT_MICROSERVICE + httpConstants.API_END_POINT.GET_CONTRACT_BY_ADDRESS + id;
   console.log("url----", url);
-  return httpService(httpConstants.METHOD_TYPE.GET, getHeaders(), requestData, url)
+  return httpService(httpConstants.METHOD_TYPE.POST, getHeaders(), requestData, url)
     .then((response) => {
       if (!response.success || response.responseCode !== 200 || !response.responseData || response.responseData.length === 0)
         return Promise.reject(response);

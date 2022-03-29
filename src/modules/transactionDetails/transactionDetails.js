@@ -16,6 +16,8 @@ import { PrismAsyncLight as SyntaxHighlighter } from "react-syntax-highlighter";
 import js from "react-syntax-highlighter/dist/esm/languages/hljs/javascript";
 import ShowLoader from "../../common/components/showLoader";
 import { base16AteliersulphurpoolLight } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { sessionManager } from "../../managers/sessionManager";
+import { cookiesConstants } from "../../constants";
 SyntaxHighlighter.registerLanguage("javascript", js);
 
 export default function TransactionDetails() {
@@ -81,10 +83,15 @@ export default function TransactionDetails() {
   };
 
   const getContractByAddress = async (address) => {
+    let userId = sessionManager.getDataFromCookies(cookiesConstants.USER_ID);
     try {
+      let requestData = {
+        userId: userId,
+      }
       setLoader(true);
       let add = selected ? selected : address;
-      const response = await ContractsService.getContractByAddress(add);
+      const response = await ContractsService.getContractByAddress(requestData, add);
+      console.log("res", response);
       setContractName(response.contractName);
       let arr = response.sourceCode.split("}");
       let final = arr.filter((row) => {

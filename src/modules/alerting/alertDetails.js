@@ -6,7 +6,7 @@ import { history } from "../../managers/history";
 import AlertService from "../../services/alert";
 import utility from "../../utility";
 // import { alertClasses } from "@mui/material";
-import { genericConstants } from "../../constants";
+import { cookiesConstants, genericConstants } from "../../constants";
 import { sessionManager } from "../../managers/sessionManager";
 import DestinationService from "../../services/destination";
 import ShowLoader from "../../common/components/showLoader";
@@ -74,7 +74,7 @@ export default function AlertDetails() {
   }
   const getDestinations = async () => {
     let requestData = {
-      userId: sessionManager.getDataFromCookies("userId"),
+      userId: sessionManager.getDataFromCookies(cookiesConstants.USER_ID),
       isDeleted: false,
     };
     setLoader(true)

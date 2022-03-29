@@ -7,11 +7,12 @@ import Tooltip from "@mui/material/Tooltip";
 import FooterComponent from "../dashboard/footerComponent";
 import ReactPlayer from "react-player";
 import { history } from "../../managers/history";
+import { cookiesConstants } from "../../constants";
 
 export default function About(props) {
   const [state, setState] = useState(true);
   const [address] = React.useState({});
-  
+
   return (
     <>
       <MainBoxContainer>
@@ -34,33 +35,32 @@ export default function About(props) {
               lifecycle utility, empowering the entire on-chain critical
               business logic.
             </DataBox>
-            
-              <Button
-                onClick={() => 
-                  sessionManager.getDataFromCookies("isLoggedIn") ? 
-                  history.push({
-                    pathname: "/contracts",
-                    state: {
-                      id: address.address,
-                      homepageHistory: "from-home-page",
-                    },
-                  }) : 
-                  history.push("/")
-                }
-              >
-                Add Your Smart Contract
-                <Tooltip
-              disableFocusListener
-              title="Click to get started with Xmartly"
+
+            <Button
+              onClick={() =>
+                sessionManager.getDataFromCookies(cookiesConstants.IS_LOGGED_IN)
+                  ? history.push({
+                      pathname: "/contracts",
+                      state: {
+                        id: address.address,
+                        homepageHistory: "from-home-page",
+                      },
+                    })
+                  : history.push("/")
+              }
             >
+              Add Your Smart Contract
+              <Tooltip
+                disableFocusListener
+                title="Click to get started with Xmartly"
+              >
                 <img
                   style={{ marginLeft: "0.375rem" }}
                   alt=""
                   src="/images/question-mark.svg"
                 />
-            </Tooltip>
-
-              </Button>
+              </Tooltip>
+            </Button>
           </LeftContainer>
           <RightContainer>
             <VideoBox>
@@ -71,26 +71,35 @@ export default function About(props) {
                 height="100%"
               />
             </VideoBox>
-            <SmartButton
-             onClick={() =>
-              sessionManager.getDataFromCookies("isLoggedIn") ? 
-              history.push({
-                pathname: "/contracts",
-                state: {
-                  id: address.address,
-                  homepageHistory: "from-home-page",
-                },
-              }) :
-              history.push("/")
-            }
-            >
-              Add Your Smart Contract
-              <img
-                style={{ marginLeft: "0.375rem" }}
-                alt=""
-                src="/images/question-mark.svg"
-              />
-            </SmartButton>
+            <div style={{ display: "flex", marginBottom: "30px" }}>
+              <SmartButton
+                onClick={() =>
+                  sessionManager.getDataFromCookies(
+                    cookiesConstants.IS_LOGGED_IN
+                  )
+                    ? history.push({
+                        pathname: "/contracts",
+                        state: {
+                          id: address.address,
+                          homepageHistory: "from-home-page",
+                        },
+                      })
+                    : history.push("/")
+                }
+              >
+                Add Your Smart Contract
+              </SmartButton>
+              <Tooltip
+                disableFocusListener
+                title="Click to get started with Xmartly"
+              >
+                <TooltipImg
+                  style={{ width: "15px", height: "13px", marginTop: "35px" }}
+                  alt=""
+                  src="/images/Subtraction 2.svg"
+                />
+              </Tooltip>
+            </div>
           </RightContainer>
         </Container>
 
@@ -132,13 +141,13 @@ export default function About(props) {
       </DivFooter>
 
       <div>
-        {!sessionManager.getDataFromCookies("isLoggedIn") && (
+        {!sessionManager.getDataFromCookies(cookiesConstants.IS_LOGGED_IN) && (
           <WalletPopUp
             getCurrentUserDetails={props.getCurrentUserDetails}
             click={() => setState(false)}
             state={state}
           />
-        )}       
+        )}
       </div>
     </>
   );
@@ -171,21 +180,29 @@ const MainBoxContainer = styled.div`
   }
   @media (min-width: 768px) and (max-width: 1200px) {
     padding: 16px;
-    height:128vh;
+    height: 128vh;
   }
   @media (min-width: 800px) and (max-width: 1024px) {
-    height:117vh!important;
+    height: 117vh !important;
   }
   @media (min-width: 1024px) and (max-width: 1200px) {
-    height:120vh !important;
+    height: 120vh !important;
   }
   @media (min-height: 1024px) and (max-height: 1190px) {
     padding: 16px;
-    height:108vh;
+    height: 108vh;
   }
-  @media (min-width:1200px){
-    height:110vh;
+  @media (min-width: 1200px) {
+    height: 110vh;
   }
+`;
+const TooltipImg = styled.img`
+width: 15px; 
+height: 13px;
+margin-top: 35px;
+@media (min-width: 1023px) {
+  display: none;
+}
 `;
 const Container = styled.div`
   background-color: #ffffff;
@@ -203,8 +220,8 @@ const Container = styled.div`
     padding-left: 46px;
     height: 778px;
   }
-  @media (min-width:800px) and (max-width: 1200px){
-    height:668px !important;
+  @media (min-width: 800px) and (max-width: 1200px) {
+    height: 668px !important;
   }
   @media (min-width: 300px) and (max-width: 414px) {
     flex-direction: column;
@@ -265,9 +282,9 @@ const DivDesktop = styled.div`
   }
 `;
 const MobileSpan = styled.div`
-@media (min-width: 300px) and (max-width: 768px) {
-  text-align:center;
-}
+  @media (min-width: 300px) and (max-width: 768px) {
+    text-align: center;
+  }
   @media (min-width: 414px) and (max-width: 2300px) {
     display: none;
   }
@@ -459,9 +476,9 @@ const SmartButton = styled.div`
     margin-left: 30px;
     font-size: 0.6rem;
     height: 40px;
-    margin-right: 64px;
-    margin-left: 48px;
-    width: 181px;
+    margin-right: 5px;
+    margin-left: 75px;
+    width: 146px;
   }
 
   @media (max-width: 375px) {

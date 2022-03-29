@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { history } from "../../managers/history";
 import utility from "../../utility";
 import { sessionManager } from "../../managers/sessionManager";
+import { cookiesConstants } from "../../constants";
 
 export default function Sidebar(props) {
   const redirectToAbout = () => {
@@ -28,9 +29,9 @@ export default function Sidebar(props) {
   };
 
   const redirectToLogout = () => {
-    sessionManager.removeDataFromCookies("isLoggedIn");
-    sessionManager.removeDataFromCookies("accountAddress");
-    sessionManager.removeDataFromCookies("userId");
+    sessionManager.removeDataFromCookies(cookiesConstants.IS_LOGGED_IN);
+    sessionManager.removeDataFromCookies(cookiesConstants.ACCOUNT_ADDRESS);
+    sessionManager.removeDataFromCookies(cookiesConstants.USER_ID);
     sessionManager.removeDataFromCookies("username");
     sessionManager.removeDataFromCookies("profilePicture");
     history.replace("/");
@@ -89,7 +90,7 @@ export default function Sidebar(props) {
         <Icon src={aboutIcon} />
         <Heading>About Xmartly</Heading>
       </Wrapper>
-      {sessionManager.getDataFromCookies("isLoggedIn") && (
+      {sessionManager.getDataFromCookies(cookiesConstants.IS_LOGGED_IN) && (
         <Wrapper
           style={{
             backgroundColor: utility.isMenuActive("transactions")
@@ -104,7 +105,7 @@ export default function Sidebar(props) {
           <Heading>Transactions</Heading>
         </Wrapper>
       )}
-      {sessionManager.getDataFromCookies("isLoggedIn") && (
+      {sessionManager.getDataFromCookies(cookiesConstants.IS_LOGGED_IN) && (
         <Wrapper
           style={{
             backgroundColor: utility.isMenuActive("contracts") ? "#1d3c93" : "",
@@ -117,7 +118,7 @@ export default function Sidebar(props) {
           <Heading>Contracts</Heading>
         </Wrapper>
       )}
-      {sessionManager.getDataFromCookies("isLoggedIn") && (
+      {sessionManager.getDataFromCookies(cookiesConstants.IS_LOGGED_IN) && (
         <Wrapper
           style={{
             backgroundColor: utility.isMenuActive("analytics") ? "#1d3c93" : "",
@@ -130,7 +131,7 @@ export default function Sidebar(props) {
           <Heading>Analytics</Heading>
         </Wrapper>
       )}
-      {sessionManager.getDataFromCookies("isLoggedIn") && (
+      {sessionManager.getDataFromCookies(cookiesConstants.IS_LOGGED_IN) && (
         <Wrapper
           style={{
             backgroundColor: utility.isMenuActive("alerting") ? "#1d3c93" : "",
@@ -145,10 +146,10 @@ export default function Sidebar(props) {
       )}
       <WrapperFaq
         style={{
-          marginTop: sessionManager.getDataFromCookies("isLoggedIn")
+          marginTop: sessionManager.getDataFromCookies(cookiesConstants.IS_LOGGED_IN)
             ? "12rem"
             : "35rem",
-          paddingLeft: sessionManager.getDataFromCookies("isLoggedIn")
+          paddingLeft: sessionManager.getDataFromCookies(cookiesConstants.IS_LOGGED_IN)
             ? "22px"
             : "50px",
           backgroundColor: utility.isMenuActive("faqs") ? "#1d3c93" : "",
@@ -159,7 +160,7 @@ export default function Sidebar(props) {
         <Heading>FAQs</Heading>
       </WrapperFaq>
 
-      {sessionManager.getDataFromCookies("isLoggedIn") && (
+      {sessionManager.getDataFromCookies(cookiesConstants.IS_LOGGED_IN) && (
         <WrapperLogout onClick={redirectToLogout}>
           <Icon src="/images/Log out.svg" />
           <Heading>Logout</Heading>

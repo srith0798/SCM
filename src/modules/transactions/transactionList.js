@@ -15,6 +15,7 @@ import Filter from "../popup/filter";
 import "moment-timezone";
 import ReactPaginate from "react-paginate";
 import moment from "moment";
+import { cookiesConstants } from "../../constants";
 
 export default function TransactionList() {
   const [state, setState] = useState(true);
@@ -62,7 +63,7 @@ export default function TransactionList() {
 
 
   const getContractNames = async (skip = 0, limit = 10) => {
-    let userId = sessionManager.getDataFromCookies("userId");
+    let userId = sessionManager.getDataFromCookies(cookiesConstants.USER_ID);
     let dropDownSelect = [];
     try {
       const requestData = {
@@ -338,9 +339,9 @@ export default function TransactionList() {
     } catch (e) {}
 
     const redirectToLogout = () => {
-      sessionManager.removeDataFromCookies("isLoggedIn");
-      sessionManager.removeDataFromCookies("accountAddress");
-      sessionManager.removeDataFromCookies("userId");
+      sessionManager.removeDataFromCookies(cookiesConstants.IS_LOGGED_IN);
+      sessionManager.removeDataFromCookies(cookiesConstants.ACCOUNT_ADDRESS);
+      sessionManager.removeDataFromCookies(cookiesConstants.USER_ID);
       sessionManager.removeDataFromCookies("username");
       sessionManager.removeDataFromCookies("profilePicture");
       history.replace("/");

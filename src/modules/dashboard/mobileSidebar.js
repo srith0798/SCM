@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { history } from "../../managers/history";
 import { sessionManager } from "../../managers/sessionManager";
+import { cookiesConstants } from "../../constants";
 
 export default function Sidebar(props) {
   const [open, setOpen] = useState(false);
@@ -28,9 +29,9 @@ export default function Sidebar(props) {
     history.push("/alerting");
   };
   const redirectToLogout = () => {
-    sessionManager.removeDataFromCookies("isLoggedIn");
-    sessionManager.removeDataFromCookies("accountAddress");
-    sessionManager.removeDataFromCookies("userId");
+    sessionManager.removeDataFromCookies(cookiesConstants.IS_LOGGED_IN);
+    sessionManager.removeDataFromCookies(cookiesConstants.ACCOUNT_ADDRESS);
+    sessionManager.removeDataFromCookies(cookiesConstants.USER_ID);
     sessionManager.removeDataFromCookies("username");
     sessionManager.removeDataFromCookies("profilePicture");
     history.replace("/");
@@ -155,7 +156,7 @@ const Heading = styled.span`
             <Icon src="/images/Xmartly.svg" />
             <Heading>About Xmartly</Heading>
           </Wrapper>
-          {sessionManager.getDataFromCookies("isLoggedIn") && (
+          {sessionManager.getDataFromCookies(cookiesConstants.IS_LOGGED_IN) && (
             <Wrapper
               onClick={redirectToTransaction}
               onMouseOver={() => changeSourceForIcons("transactions")}
@@ -165,7 +166,7 @@ const Heading = styled.span`
               <Heading>Transactions</Heading>
             </Wrapper>
           )}
-          {sessionManager.getDataFromCookies("isLoggedIn") && (
+          {sessionManager.getDataFromCookies(cookiesConstants.IS_LOGGED_IN) && (
             <Wrapper
               onClick={redirectToContract}
               onMouseOver={() => changeSourceForIcons("contracts")}
@@ -176,7 +177,7 @@ const Heading = styled.span`
             </Wrapper>
           )}
           
-          {sessionManager.getDataFromCookies("isLoggedIn") && (
+          {sessionManager.getDataFromCookies(cookiesConstants.IS_LOGGED_IN) && (
             <Wrapper
               onClick={redirectToAnalytics}
               onMouseOver={() => changeSourceForIcons("analytics")}
@@ -186,7 +187,7 @@ const Heading = styled.span`
               <Heading>Analytics</Heading>
             </Wrapper>
           )}
-          {sessionManager.getDataFromCookies("isLoggedIn") && (
+          {sessionManager.getDataFromCookies(cookiesConstants.IS_LOGGED_IN) && (
             <Wrapper
               onClick={redirectToAlerting}
               onMouseOver={() => changeSourceForIcons("alerting")}
@@ -198,10 +199,10 @@ const Heading = styled.span`
           )}
           <WrapperFaq
             style={{
-              marginTop: sessionManager.getDataFromCookies("isLoggedIn")
+              marginTop: sessionManager.getDataFromCookies(cookiesConstants.IS_LOGGED_IN)
                 ? "10rem"
                 : "35rem",
-              paddingLeft: sessionManager.getDataFromCookies("isLoggedIn")
+              paddingLeft: sessionManager.getDataFromCookies(cookiesConstants.IS_LOGGED_IN)
                 ? "22px"
                 : "50px",
             }}
@@ -210,7 +211,7 @@ const Heading = styled.span`
             <Icon src="/images/Subtraction 2.svg" />
             <Heading>FAQs</Heading>
           </WrapperFaq>
-          {sessionManager.getDataFromCookies("isLoggedIn") && (
+          {sessionManager.getDataFromCookies(cookiesConstants.IS_LOGGED_IN) && (
             <Wrapper onClick={redirectToLogout}>
               <Icon src="/images/Log out.svg" />
               <Heading>Logout</Heading>

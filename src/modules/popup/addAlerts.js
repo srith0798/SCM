@@ -10,6 +10,7 @@ import DestinationService from "../../services/destination";
 import { genericConstants } from "../../constants";
 import AlertService from "../../services/alert";
 import { history } from "../../managers/history";
+import { cookiesConstants } from "../../constants";
 
 const useStyles = makeStyles(() => ({
   dialogBox: {
@@ -32,7 +33,7 @@ export default function AddAlerts(props) {
 
   const getDestinations = async () => {
     let requestData = {
-      userId: sessionManager.getDataFromCookies("userId"),
+      userId: sessionManager.getDataFromCookies(cookiesConstants.USER_ID),
       isDeleted: false,
     };
     const [error, response] = await utility.parseResponse(
@@ -54,7 +55,7 @@ export default function AddAlerts(props) {
 
   const addAlert = async () => {
     let requestData = {
-      userId: sessionManager.getDataFromCookies("userId"),
+      userId: sessionManager.getDataFromCookies(cookiesConstants.USER_ID),
       type: props.status === "Success" ? genericConstants.ALERT_TYPE.SUCCESSFULL_TRANSACTIONS : genericConstants.ALERT_TYPE.FAILED_TRANSACTIONS, //successfull transaction (constant)
       target: {
         type: genericConstants.ALERT_TYPE.ADDRESS,

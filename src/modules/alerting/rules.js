@@ -10,6 +10,7 @@ import AlertService from "../../services/alert";
 import { genericConstants } from "../../constants";
 import { sessionManager } from "../../managers/sessionManager";
 import ShowLoader from "../../common/components/showLoader";
+import { cookiesConstants } from "../../constants";
 
 export default function Rules() {
   const [activeButton, setActiveButton] = React.useState("Rules");
@@ -30,7 +31,7 @@ export default function Rules() {
 
   const getAlertList = async () => {
     let request = {
-      userId: sessionManager.getDataFromCookies("userId"),
+      userId: sessionManager.getDataFromCookies(cookiesConstants.USER_ID),
       isDeleted: false,
     };
     setLoader(true);
@@ -71,9 +72,9 @@ export default function Rules() {
   } catch (e) {}
 
   const redirectToLogout = () => {
-    sessionManager.removeDataFromCookies("isLoggedIn");
-    sessionManager.removeDataFromCookies("accountAddress");
-    sessionManager.removeDataFromCookies("userId");
+    sessionManager.removeDataFromCookies(cookiesConstants.IS_LOGGED_IN);
+    sessionManager.removeDataFromCookies(cookiesConstants.ACCOUNT_ADDRESS);
+    sessionManager.removeDataFromCookies(cookiesConstants.USER_ID);
     sessionManager.removeDataFromCookies("username");
     sessionManager.removeDataFromCookies("profilePicture");
     history.replace("/");

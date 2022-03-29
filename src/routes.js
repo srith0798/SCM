@@ -23,9 +23,9 @@ class Routes extends BaseComponent {
     // } catch (e) {}
 
     // const redirectToLogout = () => {
-    //   sessionManager.removeDataFromCookies("isLoggedIn");
-    //   sessionManager.removeDataFromCookies("accountAddress");
-    //   sessionManager.removeDataFromCookies("userId");
+    //   sessionManager.removeDataFromCookies(cookiesConstants.IS_LOGGED_IN);
+    //   sessionManager.removeDataFromCookies(cookiesConstants.ACCOUNT_ADDRESS);
+    //   sessionManager.removeDataFromCookies(cookiesConstants.USER_ID);
     //   sessionManager.removeDataFromCookies("username");
     //   sessionManager.removeDataFromCookies("profilePicture");
     //   history.replace("/");

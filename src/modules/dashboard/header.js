@@ -5,6 +5,7 @@ import { sessionManager } from "../../managers/sessionManager";
 import utility from "../../utility";
 import { NETWORKS } from "../../constants";
 import { history } from "../../managers/history";
+import { cookiesConstants } from "../../constants";
 
 const Web3 = require("web3");
 
@@ -12,7 +13,7 @@ function Header(props) {
   const [wallet, setWallet] = useState();
   const getUserAccountAddress = () => {
     let user = "";
-    user = sessionManager.getDataFromCookies("accountAddress");
+    user = sessionManager.getDataFromCookies(cookiesConstants.ACCOUNT_ADDRESS);
     if (user) user = utility.truncateTxnAddress(user);
     return user;
   };
@@ -68,7 +69,7 @@ function Header(props) {
   };
 
   const getUserBalance = async () => {
-    let balance = sessionManager.getDataFromCookies("accountAddress");
+    let balance = sessionManager.getDataFromCookies(cookiesConstants.ACCOUNT_ADDRESS);
     const web3 = new Web3(
       new Web3.providers.HttpProvider(process.env.REACT_APP_NETWORK_RPC_URL)
     );
@@ -82,7 +83,7 @@ function Header(props) {
 
     if (
       window.web3.currentProvider &&
-      sessionManager.getDataFromCookies("isLoggedIn")
+      sessionManager.getDataFromCookies(cookiesConstants.IS_LOGGED_IN)
     ) {
       if (!window.web3.currentProvider.chainId) {
         //when metamask is disabled
@@ -100,9 +101,9 @@ function Header(props) {
 
           if (
             (address || network) &&
-            (address !== sessionManager.getDataFromCookies("accountAddress") ||
-              network !== sessionManager.getDataFromCookies("network") ||
-              newBalance !== sessionManager.getDataFromCookies("balance"))
+            (address !== sessionManager.getDataFromCookies(cookiesConstants.ACCOUNT_ADDRESS) ||
+              network !== sessionManager.getDataFromCookies(cookiesConstants.NETWORK) ||
+              newBalance !== sessionManager.getDataFromCookies(cookiesConstants.BALANCE))
           ) {
             let balance = null;
 
@@ -111,11 +112,11 @@ function Header(props) {
               balance = truncateToDecimals(balance);
             });
 
-            sessionManager.setDataInCookies(address, "accountAddress");
-            sessionManager.setDataInCookies(address, "userId");
-            sessionManager.setDataInCookies(network, "network");
-            sessionManager.setDataInCookies(balance, "balance");
-            sessionManager.setDataInCookies(true, "isLoggedIn");
+            sessionManager.setDataInCookies(address, cookiesConstants.ACCOUNT_ADDRESS);
+            sessionManager.setDataInCookies(address, cookiesConstants.USER_ID);
+            sessionManager.setDataInCookies(network, cookiesConstants.NETWORK);
+            sessionManager.setDataInCookies(balance, cookiesConstants.BALANCE);
+            sessionManager.setDataInCookies(true, cookiesConstants.IS_LOGGED_IN);
           }
         } else {
           //metamask is also enabled with xdcpay
@@ -128,10 +129,10 @@ function Header(props) {
     
     const handleWalletSession = () => {
       if (!window.xdc) {
-        sessionManager.removeDataFromCookies("isLoggedIn");
-        sessionManager.removeDataFromCookies("accountAddress");
-        sessionManager.removeDataFromCookies("balance");
-        sessionManager.removeDataFromCookies("network");
+        sessionManager.removeDataFromCookies(cookiesConstants.IS_LOGGED_IN);
+        sessionManager.removeDataFromCookies(cookiesConstants.ACCOUNT_ADDRESS);
+        sessionManager.removeDataFromCookies(cookiesConstants.BALANCE);
+        sessionManager.removeDataFromCookies(cookiesConstants.NETWORK);
         history.replace("/about");
       } else {
         window.web3 = new Web3(window.xdc ? window.xdc : window.ethereum);
@@ -142,24 +143,24 @@ function Header(props) {
               ? window.web3.givenProvider.publicConfigStore._state
               : window.web3.currentProvider.publicConfigStore._state;
             if (!state.selectedAddress) {
-              sessionManager.removeDataFromCookies("isLoggedIn");
-              sessionManager.removeDataFromCookies("accountAddress");
-              sessionManager.removeDataFromCookies("balance");
-              sessionManager.removeDataFromCookies("network");
+              sessionManager.removeDataFromCookies(cookiesConstants.IS_LOGGED_IN);
+              sessionManager.removeDataFromCookies(cookiesConstants.ACCOUNT_ADDRESS);
+              sessionManager.removeDataFromCookies(cookiesConstants.BALANCE);
+              sessionManager.removeDataFromCookies(cookiesConstants.NETWORK);
               history.replace("/about");
             }
           } else {
-            sessionManager.removeDataFromCookies("isLoggedIn");
-            sessionManager.removeDataFromCookies("accountAddress");
-            sessionManager.removeDataFromCookies("balance");
-            sessionManager.removeDataFromCookies("network");
+            sessionManager.removeDataFromCookies(cookiesConstants.IS_LOGGED_IN);
+            sessionManager.removeDataFromCookies(cookiesConstants.ACCOUNT_ADDRESS);
+            sessionManager.removeDataFromCookies(cookiesConstants.BALANCE);
+            sessionManager.removeDataFromCookies(cookiesConstants.NETWORK);
             history.replace("/about");
           }
         } else {
-          sessionManager.removeDataFromCookies("isLoggedIn");
-          sessionManager.removeDataFromCookies("accountAddress");
-          sessionManager.removeDataFromCookies("balance");
-          sessionManager.removeDataFromCookies("network");
+          sessionManager.removeDataFromCookies(cookiesConstants.IS_LOGGED_IN);
+          sessionManager.removeDataFromCookies(cookiesConstants.ACCOUNT_ADDRESS);
+          sessionManager.removeDataFromCookies(cookiesConstants.BALANCE);
+          sessionManager.removeDataFromCookies(cookiesConstants.NETWORK);
           history.replace("/about");
         }
       }
@@ -265,7 +266,7 @@ const XDCInfo = styled.button`
           <div style={{ display: "flex", marginLeft: "12px" }}>
             <XmartlyLogo src="/images/Logo.svg" />
           </div>
-          {sessionManager.getDataFromCookies("accountAddress") ? (
+          {sessionManager.getDataFromCookies(cookiesConstants.ACCOUNT_ADDRESS) ? (
             <XDCContainer>
               <XDCInfo {...getUserBalance()}>{balance} XDC</XDCInfo>
               <UserContainer>

@@ -7,6 +7,7 @@ import utility from "../../utility";
 import { sessionManager } from "../../managers/sessionManager";
 import moment from "moment"
 import ReactPaginate from "react-paginate";
+import { cookiesConstants } from "../../constants";
 
 export default function Historys() {
   const [notifications, setNotifications] = React.useState([]);
@@ -15,7 +16,7 @@ export default function Historys() {
 
   const getNotifications = async (skip = 0, limit = countToggle) => {
     let request = {
-        userId: sessionManager.getDataFromCookies("userId"),
+        userId: sessionManager.getDataFromCookies(cookiesConstants.USER_ID),
         skip: skip,
         limit: limit,
     };
