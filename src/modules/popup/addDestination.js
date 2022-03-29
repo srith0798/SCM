@@ -10,7 +10,7 @@ const useStyles = makeStyles(() => ({
     maxHeight: 400,
     position: "absolute",
     top: "5rem",
-    maxWidth: 360,
+    maxWidth: 570,
     ['@media screen and (min-width: 300px) and (max-width: 768px)']: { 
      top: "12rem"
   }

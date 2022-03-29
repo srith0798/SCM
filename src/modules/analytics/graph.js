@@ -5,8 +5,7 @@ import "../../assets/styles/custom.css";
 import moment from "moment";
 import styled from "styled-components";
 import utility from "../../utility";
-import commaNumber from 'comma-number';
-
+import commaNumber from "comma-number";
 
 export default function Graph(props) {
   const [points, setPoints] = useState({ x: 0, y: 0 });
@@ -33,7 +32,7 @@ export default function Graph(props) {
     color: #7c828a;
     font-size: 11px;
     @media (min-width: 300px) and (max-width: 767px) {
-    margin-left: 9.5%;
+      margin-left: 9.5%;
     }
   `;
   const RightLabel = styled.div`
@@ -41,7 +40,7 @@ export default function Graph(props) {
     color: #7c828a;
     font-size: 11px;
     @media (min-width: 300px) and (max-width: 767px) {
-    margin-right: 5.5%;
+      margin-right: 5.5%;
     }
   `;
   const MouseMovePoint = (event) => {
@@ -101,8 +100,12 @@ export default function Graph(props) {
             // }}
           />
           <FlexDiv>
-            <LeftLabel expand={props.expanded}>{moment(fisrtValue).format("DD MMM")}</LeftLabel>
-            <RightLabel expand={props.expanded}>{moment(lastValue).format("DD MMM")}</RightLabel>
+            <LeftLabel expand={props.expanded}>
+              {moment(fisrtValue).format("DD MMM")}
+            </LeftLabel>
+            <RightLabel expand={props.expanded}>
+              {moment(lastValue).format("DD MMM")}
+            </RightLabel>
           </FlexDiv>
           {data[0]?.id.includes("Transactions") ? <Legend></Legend> : ""}
         </>
@@ -114,31 +117,32 @@ export default function Graph(props) {
 }
 const ToolTipElement = (props) => {
   return (
-    <div style={{height:"80px"}}>
-    <TooltipGraph>
-      <TooltipHead>
-        <TooltipDate>{moment(props.point.data.x).format("DD MMM")}</TooltipDate>
-         <Count>{commaNumber(props.point.data.y)}</Count>
-      </TooltipHead>
-      <TooltipData>
-        {props.point.serieId !== "ActiveUsers" ? (
+    <div style={{ height: "80px" }}>
+      <TooltipGraph>
+        <TooltipHead>
+          <TooltipDate>
+            {moment(props.point.data.x).format("DD MMM")}
+          </TooltipDate>
+          <Count>{commaNumber(props.point.data.y)}</Count>
+        </TooltipHead>
+        <TooltipData>
+          {props.point.serieId !== "ActiveUsers" ? (
+            <TooltipDataHeader>
+              <div>Account: </div> <TooltipDataValues>XDC</TooltipDataValues>
+            </TooltipDataHeader>
+          ) : (
+            ""
+          )}
           <TooltipDataHeader>
-            <div>Account: </div> <TooltipDataValues>XDC</TooltipDataValues>
+            <div>Network: </div> <TooltipDataValues>Mainnet</TooltipDataValues>
           </TooltipDataHeader>
-        ) : (
-          ""
-        )}
-        <TooltipDataHeader>
-          <div>Network: </div> <TooltipDataValues>Mainnet</TooltipDataValues>
-        </TooltipDataHeader>
-        {/* {props.point.serieId !== "ActiveUsers" ?<TooltipDataHeader><div>Deployment Status: </div> <TooltipDataValues>Success</TooltipDataValues></TooltipDataHeader>  : ""} */}
-      </TooltipData>
+          {/* {props.point.serieId !== "ActiveUsers" ?<TooltipDataHeader><div>Deployment Status: </div> <TooltipDataValues>Success</TooltipDataValues></TooltipDataHeader>  : ""} */}
+        </TooltipData>
       </TooltipGraph>
       <DivOval class="outer-oval-trans">
         <Oval></Oval>
       </DivOval>
-      </div>
-    
+    </div>
   );
 };
 
@@ -223,18 +227,17 @@ const LegendSpan = styled.span`
   margin-right: 5px;
 `;
 const Oval = styled.div`
- width: 10px;
+  width: 10px;
   height: 10px;
   background-color: #3763dd;
   border-radius: 10px;
-  
-  text-align: center;
-  margin-left:60px;
-  margin-top:10px
 
+  text-align: center;
+  margin-left: 60px;
+  margin-top: 10px;
 `;
 const DivOval = styled.div`
-margin-top:0px
+  margin-top: 0px;
 `;
 const GraphSize = styled.div`
   height: 9.75rem;
@@ -254,8 +257,10 @@ const TooltipGraph = styled.div`
   border: solid 1px #e3e7eb;
   background-color: #fff;
   font-size: 13px;
-  margin-bottom:0px;
-  padding-bottom:10px
+  margin-bottom: 0px;
+  padding-bottom: 10px;
+  min-height: 80px;
+  height: fit-content;
 `;
 const TooltipHead = styled.div`
   display: flex;
@@ -264,7 +269,7 @@ const TooltipHead = styled.div`
 `;
 const TooltipDate = styled.div`
   color: #303134;
-  padding-right:5px;
+  padding-right: 5px;
 `;
 const Count = styled.div`
   color: #3163f0;
