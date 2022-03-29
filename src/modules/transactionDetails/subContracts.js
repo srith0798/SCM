@@ -7,6 +7,8 @@ import ShowLoader from "../../common/components/showLoader";
 import { PrismAsyncLight as SyntaxHighlighter } from "react-syntax-highlighter";
 import js from "react-syntax-highlighter/dist/esm/languages/hljs/javascript";
 import { base16AteliersulphurpoolLight } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { cookiesConstants } from "../../constants";
+
 SyntaxHighlighter.registerLanguage("javascript", js);
 
 export default function SubContracts(props) {
@@ -17,7 +19,7 @@ export default function SubContracts(props) {
 
   const getContractList = async (skip = 0, limit = 10) => {
     try {
-      let userId = sessionManager.getDataFromCookies("userId");
+      let userId = sessionManager.getDataFromCookies(cookiesConstants.USER_ID);
       const requestData = {
         skip: skip,
         limit: limit,

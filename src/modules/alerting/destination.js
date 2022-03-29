@@ -7,6 +7,7 @@ import utility from "../../utility";
 import DestinationService from "../../services/destination";
 import { sessionManager } from "../../managers/sessionManager";
 import AddDestination from "../popup/addDestination";
+import { cookiesConstants } from "../../constants";
 
 export default function Destination() {
   const [destinations, setDestinations] = React.useState([]);
@@ -16,7 +17,7 @@ export default function Destination() {
 
   const getDestinations = async () => {
     let requestData = {
-      userId: sessionManager.getDataFromCookies("userId"),
+      userId: sessionManager.getDataFromCookies(cookiesConstants.USER_ID),
       isDeleted:false
     }
     const [error, response] = await utility.parseResponse(DestinationService.getDestinations(requestData));
@@ -35,7 +36,7 @@ export default function Destination() {
       return;}
     }
     let requestData = {
-      userId: sessionManager.getDataFromCookies("userId"),
+      userId: sessionManager.getDataFromCookies(cookiesConstants.USER_ID),
       type: destinationType,
       label: label,
       url: url,
@@ -74,6 +75,8 @@ export default function Destination() {
 const Div = styled.div`
   padding-bottom: 0.5rem;
   padding-left: 10px;
+  border-bottom: 0.063rem solid #e3e7eb;
+  height: fit-content ;
   @media (min-width: 300px) and (max-width: 768px) {
     padding-left: 0px;
   }
@@ -85,7 +88,7 @@ const ButtonIcon = styled.img`
 `;
 const LastDiv = styled.div`
   overflow-y: hidden;
-  height: 109px;
+  height: fit-content;
   @media (min-width: 300px) and (max-width: 767px) {
     width: 100%;
     ::-webkit-scrollbar {
@@ -122,6 +125,11 @@ const ColumnOne = styled.div`
   border-bottom: 0.125rem solid #e3e7eb;
   padding-bottom: 10px;
   padding-left: 15px;
+  margin-top: 1.5rem;
+  @media (min-width: 300px) and (max-width: 767px) {
+    margin-top: 1.5rem;
+    margin-bottom: 0px;
+  }
 `;
 const Button = styled.div`
   width: 6.3rem;
@@ -137,7 +145,7 @@ const Button = styled.div`
   cursor: pointer;
   padding-top: 4px;
   @media(min-width: 300px) and (max-width: 400px){
-    width: 80px;
+    width: 90px;
     font-size: 11px;
   }
 `;
@@ -146,10 +154,9 @@ const ColumnTwo = styled.div`
   flex-flow: column nowrap;
   font-size: 0.875rem;
   font-weight: 600;
-  min-width: 200px;
+  max-width: 250px;
   color: #102c78;
   width: 100%;
-  max-width: fit-content;
   margin: 0.25rem;
 `;
 const RowData = styled.div`
@@ -181,6 +188,7 @@ const ColorChanging = styled.text`
 const Img = styled.img`
   width: 1rem;
   margin-left: 10px;
+  height: 30px;
   @media (min-width: 300px) and (max-width: 768px) {
     margin-right: -49px;
     width: 1rem;

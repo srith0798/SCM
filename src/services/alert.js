@@ -1,5 +1,6 @@
-import { httpConstants } from "../constants";
+import { httpConstants, cookiesConstants } from "../constants";
 import { httpService } from "../utility/httpService";
+import { sessionManager } from "../managers/sessionManager";
 
 export default {
   addAlert,
@@ -13,6 +14,7 @@ export default {
 function getHeaders() {
   return {
     "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON,
+    "authorization": `Bearer ${sessionManager.getDataFromCookies(cookiesConstants.SESSION_TOKEN)}`,
     skip: true,
   };
 }

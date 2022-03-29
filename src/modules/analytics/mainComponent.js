@@ -15,6 +15,7 @@ import ShowLoader from "../../common/components/showLoader";
 import { analytics } from "../../constants";
 import Grid from "@mui/material/Grid";
 import { history } from "../../managers/history";
+import { cookiesConstants } from "../../constants";
 
 export default function MainComponent(props) {
   const [isSetOpen, setOpen] = React.useState(false);
@@ -78,7 +79,7 @@ export default function MainComponent(props) {
   };
 
   const getContractNames = async (skip = 0, limit = 10) => {
-    let userId = sessionManager.getDataFromCookies("userId");
+    let userId = sessionManager.getDataFromCookies(cookiesConstants.USER_ID);
     const requestData = {
       skip: skip,
       limit: limit,
@@ -372,9 +373,9 @@ export default function MainComponent(props) {
   } catch (e) {}
 
   const redirectToLogout = () => {
-    sessionManager.removeDataFromCookies("isLoggedIn");
-    sessionManager.removeDataFromCookies("accountAddress");
-    sessionManager.removeDataFromCookies("userId");
+    sessionManager.removeDataFromCookies(cookiesConstants.IS_LOGGED_IN);
+    sessionManager.removeDataFromCookies(cookiesConstants.ACCOUNT_ADDRESS);
+    sessionManager.removeDataFromCookies(cookiesConstants.USER_ID);
     sessionManager.removeDataFromCookies("username");
     sessionManager.removeDataFromCookies("profilePicture");
     history.replace("/");

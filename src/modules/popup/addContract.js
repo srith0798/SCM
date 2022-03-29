@@ -7,6 +7,7 @@ import { makeStyles } from "@material-ui/styles";
 import { sessionManager } from "../../managers/sessionManager";
 import ShowLoader from "../../common/components/showLoader";
 import ScreenSizeDetector from "screen-size-detector";
+import { cookiesConstants } from "../../constants";
 
 const useStyles = makeStyles(() => ({
   dialogBox: {
@@ -77,7 +78,7 @@ export default function AddContract(props) {
       user = window.web3.eth.accounts;
     } catch (e) {}
   const addContract = async () => {
-    let userId = sessionManager.getDataFromCookies("userId");
+    let userId = sessionManager.getDataFromCookies(cookiesConstants.USER_ID);
     let requestData = {
       contractAddress: address,
       userId: userId,

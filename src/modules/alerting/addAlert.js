@@ -21,6 +21,7 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import ShowLoader from "../../common/components/showLoader";
 import ScreenSizeDetector from "screen-size-detector";
+import { cookiesConstants } from "../../constants";
 
 export default function AddAlert() {
   const screen = new ScreenSizeDetector();
@@ -102,7 +103,7 @@ export default function AddAlert() {
     setDestinationType(value);
   };
   const getContracts = async () => {
-    let userId = sessionManager.getDataFromCookies("userId");
+    let userId = sessionManager.getDataFromCookies(cookiesConstants.USER_ID);
     const requestData = {
       userId: userId,
       sortingKey: { addedOn: -1 },
@@ -123,7 +124,7 @@ export default function AddAlert() {
   };
 
   const getTags = async () => {
-    let userId = sessionManager.getDataFromCookies("userId");
+    let userId = sessionManager.getDataFromCookies(cookiesConstants.USER_ID);
     const requestData = {
       userId: userId,
     };
@@ -143,7 +144,7 @@ export default function AddAlert() {
   };
   const getDestinations = async () => {
     let requestData = {
-      userId: sessionManager.getDataFromCookies("userId"),
+      userId: sessionManager.getDataFromCookies(cookiesConstants.USER_ID),
       isDeleted: false,
     };
     const [error, response] = await utility.parseResponse(
@@ -175,7 +176,7 @@ export default function AddAlert() {
   };
   const addAlert = async () => {
     let requestData = {
-      userId: sessionManager.getDataFromCookies("userId"),
+      userId: sessionManager.getDataFromCookies(cookiesConstants.USER_ID),
       type: alertType,
       target: {
         type: alertTarget,
@@ -213,7 +214,7 @@ export default function AddAlert() {
       }
     }
     let requestData = {
-      userId: sessionManager.getDataFromCookies("userId"),
+      userId: sessionManager.getDataFromCookies(cookiesConstants.USER_ID),
       type: destinationType,
       label: label,
       url: url,
@@ -238,11 +239,9 @@ export default function AddAlert() {
   } catch (e) {}
 
   const redirectToLogout = () => {
-    sessionManager.removeDataFromCookies("isLoggedIn");
-    sessionManager.removeDataFromCookies("accountAddress");
-    sessionManager.removeDataFromCookies("userId");
-    sessionManager.removeDataFromCookies("username");
-    sessionManager.removeDataFromCookies("profilePicture");
+    sessionManager.removeDataFromCookies(cookiesConstants.IS_LOGGED_IN);
+    sessionManager.removeDataFromCookies(cookiesConstants.ACCOUNT_ADDRESS);
+    sessionManager.removeDataFromCookies(cookiesConstants.USER_ID);
     history.replace("/");
   };
 

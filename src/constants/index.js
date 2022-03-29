@@ -122,3 +122,12 @@ export const NETWORKS = {
   XDC_MAINNET: "XDC Mainnet",
   XDC_APOTHEM_TESTNET: "XDC Apothem Testnet",
 };
+
+export const cookiesConstants = {
+  SESSION_TOKEN: "SESSION TOKEN",
+  ACCOUNT_ADDRESS: "ACCOUNT ADDRESS",
+  USER_ID: "USER ID",
+  NETWORK: "NETWORK",
+  BALANCE: "BALANCE",
+  IS_LOGGED_IN: "IS LOGGED IN"
+};
