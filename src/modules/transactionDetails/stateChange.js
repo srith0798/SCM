@@ -26,7 +26,7 @@ export default function StateChange() {
   height: 27.5rem;
   padding: 1.25rem;
   margin-top: 1.25rem;
-  overflow-y: hidden;
+  overflow-y: scroll;
   @media (min-width: 300px) and (max-width: 767px) {
     width: 100%;
     ::-webkit-scrollbar {
@@ -141,7 +141,6 @@ const ValidatorList = styled.div`
 
 
   return (
-    <>
       <ValidatorContainer>
         <HeaderName>
           <TitleHead>Apps Transaction Validator</TitleHead>
@@ -163,7 +162,6 @@ const ValidatorList = styled.div`
           </ValidatorList>
         ))}
       </ValidatorContainer>
-    </>
   );
 }
 

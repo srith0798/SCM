@@ -55,8 +55,9 @@ export default function AddTags(props) {
               type="text"
               placeholder="E.g. v1.3.37"
               value={input}
+              maxLength={30}
               onChange={(e) => {
-                if (e.target.value.length === 30) {
+                if (e.target.value.length >= 30) {
                   setTagError("Tag cannot be longer than 30 characters");
                   return false;
                 }

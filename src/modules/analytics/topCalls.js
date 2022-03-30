@@ -145,7 +145,7 @@ const Icon = styled.img`
 
 const Table =styled.div`
   height:30rem;
-  overflow-y:scroll;
+  overflow-y:hidden;
   margin-top:1rem;
   //text-align: center;
 `;

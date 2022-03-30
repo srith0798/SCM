@@ -191,7 +191,7 @@ const Input = styled.input`
   width: 160px;
   @media (min-width: 300px) and (max-width: 767px) {
     margin-left: 5px;
-    margin-right: 20px;
+    margin-right: 36px;
     width: 35%;
   }
 `;
