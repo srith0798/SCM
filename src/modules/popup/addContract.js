@@ -14,39 +14,36 @@ const useStyles = makeStyles(() => ({
     width: "100% !important",
     backgroundColor: "#FFFFFF",
     bottom: "180px",
-    ['@media screen and (min-width: 300px) and (max-width: 360px)']: { 
+    "@media screen and (min-width: 300px) and (max-width: 360px)": {
       backgroundColor: "#ECF0F7 !important",
       margin: "0px !important",
       top: "9% !important",
-      height: "100% !important"
+      height: "100% !important",
     },
-    ['@media screen and (min-width: 361px) and (max-width: 376px)']: { 
-    backgroundColor: "#ECF0F7 !important",
-    margin: "0px !important",
-    top: "10% !important",
-    height: "100% !important"
-  },
-  ['@media screen and (min-width: 377px) and (max-width: 389px)']: { 
-    backgroundColor: "#ECF0F7 !important",
-    margin: "0px !important",
-    top: "8% !important",
-    height: "100% !important"
-  },
-  ['@media screen and (min-width: 390px) and (max-width: 411px)']: { 
-    backgroundColor: "#ECF0F7 !important",
-    margin: "0px !important",
-    top: "7.5% !important",
-    height: "100% !important"
-  },
-  ['@media screen and (min-width: 412px) and (max-width: 767px)']: { 
-    backgroundColor: "#ECF0F7 !important",
-    margin: "0px !important",
-    top: "7% !important",
-    height: "100% !important"
-  },
-  
-
-  
+    "@media screen and (min-width: 361px) and (max-width: 376px)": {
+      backgroundColor: "#ECF0F7 !important",
+      margin: "0px !important",
+      top: "10% !important",
+      height: "100% !important",
+    },
+    "@media screen and (min-width: 377px) and (max-width: 389px)": {
+      backgroundColor: "#ECF0F7 !important",
+      margin: "0px !important",
+      top: "8% !important",
+      height: "100% !important",
+    },
+    "@media screen and (min-width: 390px) and (max-width: 411px)": {
+      backgroundColor: "#ECF0F7 !important",
+      margin: "0px !important",
+      top: "7.5% !important",
+      height: "100% !important",
+    },
+    "@media screen and (min-width: 412px) and (max-width: 767px)": {
+      backgroundColor: "#ECF0F7 !important",
+      margin: "0px !important",
+      top: "7% !important",
+      height: "100% !important",
+    },
   },
 }));
 
@@ -58,7 +55,7 @@ export default function AddContract(props) {
   const [address, setAddress] = React.useState("");
   const [verifyAddress, setVerifyAddress] = React.useState("");
   const [loader, setLoader] = React.useState(false);
-  const [error,setError]=useState("")
+  const [error, setError] = useState("");
 
   const checkAddress = async () => {
     setLoader(true);
@@ -74,9 +71,9 @@ export default function AddContract(props) {
   };
 
   let user = "";
-    try {
-      user = window.web3.eth.accounts;
-    } catch (e) {}
+  try {
+    user = window.web3.eth.accounts;
+  } catch (e) {}
   const addContract = async () => {
     let userId = sessionManager.getDataFromCookies(cookiesConstants.USER_ID);
     let requestData = {
@@ -89,7 +86,7 @@ export default function AddContract(props) {
     );
     setLoader(false);
     if (error) {
-      setError(error)
+      setError(error);
       return;
     }
     if (response) {
@@ -106,7 +103,11 @@ export default function AddContract(props) {
   return (
     <div>
       <ShowLoader state={loader} top={"33%"} />
-      <Dialog hideBackdrop={screen.width>300 && screen.width <768 ? true : false} classes={{ paper: classes.dialogBox }} open>
+      <Dialog
+        hideBackdrop={screen.width > 300 && screen.width < 768 ? true : false}
+        classes={{ paper: classes.dialogBox }}
+        open
+      >
         <MainContainer>
           <Container>
             <SubContainer>
@@ -115,17 +116,16 @@ export default function AddContract(props) {
                 style={{ cursor: "pointer" }}
                 alt=""
                 src="/images/close.svg"
-
                 onClick={props.click}
               />
               <CheckDivDesk>
-              <HideSteps
-                onClick={() => {
-                  setHideStep(!hideStep);
-                }}
-              >
-                Hide steps
-              </HideSteps>
+                <HideSteps
+                  onClick={() => {
+                    setHideStep(!hideStep);
+                  }}
+                >
+                  Hide steps
+                </HideSteps>
               </CheckDivDesk>
             </SubContainer>
             <div
@@ -136,17 +136,16 @@ export default function AddContract(props) {
               }}
             >
               <Content>
-                You can import contracts that are available publicly on
-                XDC.
+                You can import contracts that are available publicly on XDC.
               </Content>
               <CheckDivMob>
-              <HideSteps
-                onClick={() => {
-                  setHideStep(!hideStep);
-                }}
-              >
-                Hide steps
-              </HideSteps>
+                <HideSteps
+                  onClick={() => {
+                    setHideStep(!hideStep);
+                  }}
+                >
+                  Hide steps
+                </HideSteps>
               </CheckDivMob>
             </div>
             <Input
@@ -159,8 +158,8 @@ export default function AddContract(props) {
             {hideStep && (
               <Text>
                 1. Go to XDC Observatory/Origin <br></br>
-                2. Check for contract <br></br> 3. Copy contract
-                address <br></br>4. Paste it on the given field above
+                2. Check for contract <br></br> 3. Copy contract address{" "}
+                <br></br>4. Paste it on the given field above
               </Text>
             )}
             {verifyAddress === "" ? (
@@ -181,11 +180,11 @@ export default function AddContract(props) {
                 </SelectImport>
               </ImportBox>
             )}
-           
+
             <Button
-            disabled={address==="" || checkBox === false}
+              disabled={address === "" || checkBox === false}
               onClick={addContract}
-              style={{ backgroundColor: address === "" ? "#9DB5F8" : ""  }}
+              style={{ backgroundColor: address === "" ? "#9DB5F8" : "" }}
             >
               Import Contracts
             </Button>
@@ -201,19 +200,19 @@ const CheckBox = styled.input`
 `;
 
 const CheckDivMob = styled.div`
-@media (min-width: 300px) and (max-width: 767px){
-  display: none;
-}
+  @media (min-width: 300px) and (max-width: 767px) {
+    display: none;
+  }
 `;
 const CheckDivDesk = styled.div`
-@media (min-width: 767px){
-  display: none;
-}
+  @media (min-width: 767px) {
+    display: none;
+  }
 `;
 const Img = styled.img`
-@media (min-width: 300px) and (max-width: 767px){
-  display: none;
-}
+  @media (min-width: 300px) and (max-width: 767px) {
+    display: none;
+  }
 `;
 const XDCLogo = styled.img`
   margin-bottom: 5px;
@@ -233,8 +232,8 @@ const ImportBox = styled.div`
   background-color: #f0f2fc;
   width: 100%;
 `;
-const ErrorTag= styled.div`
-  color:red;
+const ErrorTag = styled.div`
+  color: red;
   font-size: 16px;
   padding: 0px 0px 8px 28px;
   margin-bottom: 0px;
@@ -286,7 +285,7 @@ const Content = styled.div`
   font-weight: 600;
   white-space: nowrap;
   @media (min-width: 300px) and (max-width: 767px) {
-  white-space: unset;
+    white-space: unset;
   }
 `;
 const Input = styled.input`
@@ -296,7 +295,7 @@ const Input = styled.input`
   padding-left: 34px;
   background-size: 14px;
   position: relative;
-  background-color: #F0F2FC !important;
+  background-color: #f0f2fc !important;
   border: none;
   border-radius: 4px;
   width: 100%;
@@ -308,7 +307,7 @@ const Input = styled.input`
   outline: none;
   color: #436ce0;
   @media (min-width: 300px) and (max-width: 767px) {
-  background-color: #FFFFFF !important ;
+    background-color: #ffffff !important ;
   }
 `;
 const Button = styled.button`
@@ -324,10 +323,9 @@ const Button = styled.button`
   margin-top: 20px;
   margin-bottom: 20px;
   cursor: pointer;
-  @media(min-width: 300px) and (max-width: 767px){
+  @media (min-width: 300px) and (max-width: 767px) {
     margin-top: 50px;
     margin-left: 26%;
-
   }
 `;
 const HideSteps = styled.button`
@@ -335,7 +333,7 @@ const HideSteps = styled.button`
   border-radius: 4px;
   font-size: 0.7rem;
   font-weight: 600;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   color: #3163f0;
   cursor: pointer;
   background-image: url("/images/arrrow.svg");
@@ -348,8 +346,8 @@ const HideSteps = styled.button`
   margin-top: 12px;
   padding-right: 5px;
   margin-right: 15px;
-  @media (min-width: 300px) and (max-width: 767px){
+  @media (min-width: 300px) and (max-width: 767px) {
     margin-top: 0px;
-    background-color: #ECF0F7;
+    background-color: #ecf0f7;
   }
 `;

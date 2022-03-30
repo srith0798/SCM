@@ -18,7 +18,6 @@ const useStyles = makeStyles(() => ({
     height: "auto",
     maxHeight: "fitContent",
     maxWidth: 440,
-    top: "150px !important",
   },
 }));
 
@@ -36,11 +35,13 @@ export default function AddAlerts(props) {
       userId: sessionManager.getDataFromCookies(cookiesConstants.USER_ID),
       isDeleted: false,
     };
+    setLoader(true);
     const [error, response] = await utility.parseResponse(
       DestinationService.getDestinations(requestData)
     );
     if (error) return;
     setDestinations(response);
+    setLoader(false);
   };
 
   const selectDestinations = async (event) => {
@@ -66,6 +67,7 @@ export default function AddAlerts(props) {
       },
       destinations: selectedDestinations, 
     };
+    setLoader(true);
     const [error] = await utility.parseResponse(
       AlertService.addAlert(requestData)
     );
@@ -74,6 +76,7 @@ export default function AddAlerts(props) {
       return;
     }
     utility.apiSuccessToast("Alert added successfully!");
+    setLoader(false);
 
     setTimeout(()=>{
       props.click();
@@ -175,7 +178,7 @@ const SubColumn = styled.div`
   font-weight: 600;
   color: #102c78;
   width: 100%;
-  max-width: 11.25rem;
+  max-width: fit-content;
   margin-left: 20px;
 `;
 const RowData = styled.div`

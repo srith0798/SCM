@@ -10,10 +10,9 @@ import { cookiesConstants } from "../../constants";
 const Web3 = require("web3");
 
 function Header(props) {
-  const [wallet, setWallet] = useState();
   const getUserAccountAddress = () => {
     let user = "";
-    user = sessionManager.getDataFromCookies(cookiesConstants.ACCOUNT_ADDRESS);
+    user = sessionManager.getDataFromCookies(cookiesConstants.ACCOUNT_ADDRESS)?.replace('0x', 'xdc');
     if (user) user = utility.truncateTxnAddress(user);
     return user;
   };
@@ -172,6 +171,7 @@ function Header(props) {
     }, 1000);
     HandleWalletChange();
     window.addEventListener("load", HandleWalletChange);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const UserLogo = styled.img`
@@ -266,7 +266,7 @@ const XDCInfo = styled.button`
           <div style={{ display: "flex", marginLeft: "12px" }}>
             <XmartlyLogo src="/images/Logo.svg" />
           </div>
-          {sessionManager.getDataFromCookies(cookiesConstants.ACCOUNT_ADDRESS) ? (
+          {sessionManager.getDataFromCookies(cookiesConstants.ACCOUNT_ADDRESS)?.replace('0x', 'xdc') ? (
             <XDCContainer>
               <XDCInfo {...getUserBalance()}>{balance} XDC</XDCInfo>
               <UserContainer>

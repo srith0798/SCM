@@ -40,12 +40,10 @@ export default function TransactionDetails() {
   const [url, setUrl] = React.useState("");
   const [status, setStatus] = React.useState("");
   const [selected, setSelected] = React.useState("");
-
-
-
+  const [gasPriceUSD, setGasPriceUSD] = React.useState(0);
 
   const wei = 1000000000;
-  
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -60,7 +58,6 @@ export default function TransactionDetails() {
   const backButton = () => {
     history.push("/transactions");
   };
- 
 
   const getTransaction = async (hash) => {
     try {
@@ -69,16 +66,15 @@ export default function TransactionDetails() {
       };
       const response = await ContractsService.getTransactionByHash(requestData);
       setRow(response);
-      setSelected(response.contractAddress) //validation
+      setSelected(response.contractAddress); //validation
       // setInput(utility.truncateTxnAddress(response.input));
-      setInputDesktop(
-        utility.truncateTxnAddressDesktop(response.input)
-      );
+      setInputDesktop(utility.truncateTxnAddressDesktop(response.input));
       setInputCopy(response.input);
       setFrom(utility.truncateTxnAddress(response.from));
       setTo(utility.truncateTxnAddress(response.to));
-      setStatus(response.status ? "Success" : "Fail")
+      setStatus(response.status ? "Success" : "Fail");
       getContractByAddress(response.contractAddress);
+      getGasPriceInUSD(response.gasPrice);
     } catch (e) {}
   };
 
@@ -87,10 +83,13 @@ export default function TransactionDetails() {
     try {
       let requestData = {
         userId: userId,
-      }
+      };
       setLoader(true);
       let add = selected ? selected : address;
-      const response = await ContractsService.getContractByAddress(requestData, add);
+      const response = await ContractsService.getContractByAddress(
+        requestData,
+        add
+      );
       console.log("res", response);
       setContractName(response.contractName);
       let arr = response.sourceCode.split("}");
@@ -101,555 +100,576 @@ export default function TransactionDetails() {
       setLoader(false);
     } catch (e) {}
   };
+
+  const getGasPriceInUSD = async (value) => {
+    let requestData = {
+      gasPrice: value,
+    };
+    setLoader(true);
+    const [error, response] = await utility.parseResponse(
+      ContractsService.getGasPriceInUSD(requestData)
+    );
+    if (error || !response || response.length === 0) {
+      setLoader(false);
+      setGasPriceUSD("");
+      return;
+    }
+    setLoader(false);
+    setGasPriceUSD(response);
+  };
+
   useEffect(() => {
-    let id=history?.location?.state?.id || history?.location?.search?.replace('?','')
+    let id =
+      history?.location?.state?.id ||
+      history?.location?.search?.replace("?", "");
     setUrl(id);
     let status = history?.location?.state?.status;
     setStatus(status);
     let selected = history?.location?.state?.selected;
-    setSelected(selected)
+    setSelected(selected);
     getTransaction(id);
   }, [url]);
+  
 
   const MainContainer = styled.div`
-  background: #ecf0f7 0% 0% no-repeat padding-box;
-  width: 100%;
-  padding: 2.125rem;
-  display: 100%;
-  height: 123vh;
-  @media (min-width: 340px) and (max-width: 768px) {
-    padding: 1.2rem;
-  }
-`;
-const Input = styled.div`
-  margin-right: 20px;
-`;
-const TopContainer = styled.div`
-  padding-left: 1.25rem;
-  display: flex;
-  align-items: center;
-  @media (min-width: 300px) and (max-width: 768px) {
-    margin-left: 2px !important;
-  }
-`;
-
-const TabImage = styled.img`
-  width: 22px;
-  @media (min-width: 300px) and (max-width: 500px) {
-    width: 13px;
-    margin-bottom: 2px;
-  }
-`;
-
-const TitleDiv = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  max-width: 267px;
-  font-size: 24px;
-  font-weight: 600;
-  @media (max-width: 375px) {
-    font-size: 18px;
-    margin-left: 10px;
-  }
-`;
-const Title = styled.div`
-  white-space: nowrap;
-  @media (min-width: 340px) and (max-width: 767px) {
-    align-items: left;
-  }
-`;
-const FunctionContainer = styled.div`
-  background: #ffffff 0% 0% no-repeat padding-box;
-  border-radius: 0.375rem;
-  opacity: 1;
-  margin-top: 1.25rem;
-  height: auto;
-  white-space: nowrap;
-  margin-bottom: 20px;
-  @media (min-width: 300px) and (max-width: 485px) {
-    flex-direction: column;
+    background: #ecf0f7 0% 0% no-repeat padding-box;
+    width: 100%;
+    padding: 2.125rem;
+    display: 100%;
+    height: 123vh;
+    @media (min-width: 340px) and (max-width: 768px) {
+      padding: 1.2rem;
+    }
+  `;
+  const Input = styled.div`
+    margin-right: 20px;
+  `;
+  const TopContainer = styled.div`
+    padding-left: 1.25rem;
     display: flex;
-    overflow-y: hidden;
-  }
-`;
-const TokenTransferDiv = styled.div`
-  background: #ffffff 0% 0% no-repeat padding-box;
-  border-radius: 0.375rem;
-  opacity: 1;
-  margin-top: 1.25rem;
-  height: auto;
-  white-space: nowrap;
-  margin-bottom: 20px;
-  display: none;
-`;
+    align-items: center;
+    @media (min-width: 300px) and (max-width: 768px) {
+      margin-left: 2px !important;
+    }
+  `;
 
-const SubHead = styled.div`
-  font-size: 14px;
-  display: flex;
-  font-weight: 500;
-  justify-content: start;
-  width: 100%;
-  // overflow: hidden;
-  white-space: nowrap;
-`;
+  const TabImage = styled.img`
+    width: 22px;
+    @media (min-width: 300px) and (max-width: 500px) {
+      width: 13px;
+      margin-bottom: 2px;
+    }
+  `;
 
-const SubHeadBlue = styled.div`
-  font-size: 0.85rem;
-  display: flex;
-  color: #416be0;
-  cursor: pointer;
-  white-space: pre;
-  margin-left: 15px;
-  @media (min-width: 300px) and (max-width: 767px){
-    margin-left: 5px;
-  }
-`;
-const SubHeadBlueMob = styled.div`
-  font-size: 0.85rem;
-  display: flex;
-  color: #416be0;
-  cursor: pointer;
-  white-space: pre;
-  margin-left: 15px;
-  @media (min-width: 300px) and (max-width: 767px){
-    margin-left: 125px;
-  }
-`;
-const CommonDiv = styled.div`
-  border-bottom: 0.031rem #eaf1ec solid;
-  padding: 0.813rem;
-  @media (min-width: 300px) and (max-width: 394px) {
+  const TitleDiv = styled.div`
+    display: flex;
+    justify-content: space-between;
     width: 100%;
-    min-width: 200px;
-    max-width: 600px;
-    margin-right: 10%;
-  }
-  @media (min-width: 395px) and (max-width: 767px) {
-    width: 100%;
-    min-width: 200px;
-    max-width: 600px;
-  }
-`;
-const CommonInputDiv = styled.div`
-  border-bottom: 0.031rem #eaf1ec solid;
-  padding: 0.813rem;
-  display: flex;
-  max-width: fit-content;
-  justify-content: space-between;
-  @media (min-width: 300px) and (max-width: 1023px) {
-    flex-direction: column;
-    row-gap: 20px;
-  }
-`;
-const MidContainer = styled.div`
-  background: #ffffff 0% 0% no-repeat padding-box;
-  border-radius: 0.375rem;
-  margin-top: 1.25rem;
-  height: auto;
-  overflow: auto;
-`;
-const StackContainer = styled.div`
-  background: #ffffff 0% 0% no-repeat padding-box;
-  background-repeat: no-repeat;
-  // background-color: #f5f6fd;
-  border-radius: 0.375rem;
-  padding: 1.875rem;
-  margin-top: 1.25rem;
-  height: fit-content;
-`;
-
-const DataDivContainer = styled.div`
-  background: #ffffff 0% 0% no-repeat padding-box;
-  background-repeat: no-repeat;
-  border-radius: 0.375rem;
-  padding: 1rem;
-  height: fit-content;
-`;
-
-const BackgroundChanger = styled.div`
-  width: 50%;
-  height: 106px;
-  background-repeat: no-repeat;
-  background: #f7f8fd 0% 0% no-repeat padding-box;
-  border-radius: 6px;
-  opacity: 1;
-  padding: 10px;
-  @media (min-width: 300px) and (max-width: 1371px) {
-    width: 100%;
-    padding: 1.5rem;
-  }
-`;
-
-const FlexDiv = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  max-width: 350px;
-`;
-
-const FlexDivMob = styled.div`
-display: flex;
-@media (min-width: 300px) and (max-width: 767px){
-  margin-left: 10px;
-}
-`;
-
-const InputDataDiv = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  overflow-y: scroll;
-`;
-
-const LastContainer = styled.div`
-  background: #ffffff 0% 0% no-repeat padding-box;
-  border-radius: 0.375rem;
-  margin-top: 1.25rem;
-  height: fit-content;
-  max-height: 70rem;
-  /* height: 18.75rem; */
-  padding: 2rem;
-  font-weight: 600;
-`;
-
-const Heading = styled.div`
-  text-align: left;
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: #102c78;
-  width: 100%;
-  max-width: 16.25rem;
-  @media (min-width: 0px) and (max-width: 767px) {
-    min-width: 170px;
-    /* max-width: max-content; */
-    
-  }
-  @media (min-width: 768px) and (max-width: 1023px) {
-    max-width: 11.25rem;
-  }
-`;
-
-const TransactionNumber = styled.div`
-  color: #416be0;
-  font-weight: 600;
-`;
-
-const From = styled.div`
-  text-align: left;
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: #102c78;
-  width: 100%;
-  max-width: 16.25rem;
-  @media (min-width: 0px) and (max-width: 767px) {
-    /* min-width: 170px; */
-    max-width: max-content;
-    
-  }`;
-
-const InputHeading = styled.div`
-text-align: left;
-font-size: 0.875rem;
-font-weight: 600;
-color: #102c78;
-width: 16.5%;`;
-
-const Button = styled.button`
-  background-image: url("/images/globe.svg");
-  background-repeat: no-repeat;
-  background-position: 0.5rem;
-  padding-left: 1.75rem;
-  background-size: 1rem;
-  position: relative;
-  background-color: #ffffff;
-  color: #3163f0;
-  border: none;
-  border-radius: 0.25rem;
-  width: 170px;
-  white-space: nowrap;
-  height: 2.125rem;
-  font-size: 0.875rem;
-  @media (min-width: 300px) and (max-width: 485px) {
+    max-width: 267px;
+    font-size: 24px;
+    font-weight: 600;
+    @media (max-width: 375px) {
+      font-size: 18px;
+      margin-left: 10px;
+    }
+  `;
+  const Title = styled.div`
+    white-space: nowrap;
+    @media (min-width: 340px) and (max-width: 767px) {
+      align-items: left;
+    }
+  `;
+  const FunctionContainer = styled.div`
+    background: #ffffff 0% 0% no-repeat padding-box;
+    border-radius: 0.375rem;
+    opacity: 1;
+    margin-top: 1.25rem;
+    height: auto;
+    white-space: nowrap;
+    margin-bottom: 20px;
+    @media (min-width: 300px) and (max-width: 485px) {
+      flex-direction: column;
+      display: flex;
+      overflow-y: hidden;
+    }
+  `;
+  const TokenTransferDiv = styled.div`
+    background: #ffffff 0% 0% no-repeat padding-box;
+    border-radius: 0.375rem;
+    opacity: 1;
+    margin-top: 1.25rem;
+    height: auto;
+    white-space: nowrap;
+    margin-bottom: 20px;
     display: none;
-  }
-`;
-const SubContainer = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  height: 3.125rem;
-  align-items: center;
-  padding-bottom: 15px;
+  `;
 
-  @media (min-width: 300px) and (max-width: 485px) {
-  }
-`;
-const ScrollableDiv = styled.div`
-  overflow: auto;
-  height: 760px;
-`;
+  const SubHead = styled.div`
+    font-size: 14px;
+    display: flex;
+    font-weight: 500;
+    justify-content: start;
+    width: 100%;
+    // overflow: hidden;
+    white-space: nowrap;
+  `;
 
-const Container = styled.div`
-  background-color: #ffffff;
-  border-radius: 0.375rem;
-  width: 100%;
-  height: 9.2rem;
-  margin-top: 0.5rem;
-  width: 100%;
-  overflow: hidden;
-  @media (min-width: 300px) and (max-width: 768px) {
+  const SubHeadBlue = styled.div`
+    font-size: 0.85rem;
+    display: flex;
+    color: #416be0;
+    cursor: pointer;
+    white-space: pre;
+    margin-left: 15px;
+    @media (min-width: 300px) and (max-width: 767px) {
+      margin-left: 5px;
+    }
+  `;
+  const SubHeadBlueMob = styled.div`
+    font-size: 0.85rem;
+    display: flex;
+    color: #416be0;
+    cursor: pointer;
+    white-space: pre;
+    margin-left: 15px;
+    @media (min-width: 300px) and (max-width: 767px) {
+      margin-left: 125px;
+    }
+  `;
+  const CommonDiv = styled.div`
+    border-bottom: 0.031rem #eaf1ec solid;
+    padding: 0.813rem;
+    @media (min-width: 300px) and (max-width: 394px) {
+      width: 100%;
+      min-width: 200px;
+      max-width: 600px;
+      margin-right: 10%;
+    }
+    @media (min-width: 395px) and (max-width: 767px) {
+      width: 100%;
+      min-width: 200px;
+      max-width: 600px;
+    }
+  `;
+  const CommonInputDiv = styled.div`
+    border-bottom: 0.031rem #eaf1ec solid;
+    padding: 0.813rem;
+    display: flex;
+    max-width: fit-content;
+    justify-content: space-between;
+    @media (min-width: 300px) and (max-width: 1023px) {
+      flex-direction: column;
+      row-gap: 20px;
+    }
+  `;
+  const MidContainer = styled.div`
+    background: #ffffff 0% 0% no-repeat padding-box;
+    border-radius: 0.375rem;
+    margin-top: 1.25rem;
+    height: auto;
+    overflow: auto;
+  `;
+  const StackContainer = styled.div`
+    background: #ffffff 0% 0% no-repeat padding-box;
+    background-repeat: no-repeat;
+    // background-color: #f5f6fd;
+    border-radius: 0.375rem;
+    padding: 1.875rem;
+    margin-top: 1.25rem;
+    height: fit-content;
+  `;
+
+  const DataDivContainer = styled.div`
+    background: #ffffff 0% 0% no-repeat padding-box;
+    background-repeat: no-repeat;
+    border-radius: 0.375rem;
+    padding: 1rem;
+    height: fit-content;
+  `;
+
+  const BackgroundChanger = styled.div`
+    width: 50%;
+    height: 106px;
+    background-repeat: no-repeat;
+    background: #f7f8fd 0% 0% no-repeat padding-box;
+    border-radius: 6px;
+    opacity: 1;
+    padding: 10px;
+    @media (min-width: 300px) and (max-width: 1371px) {
+      width: 100%;
+      padding: 1.5rem;
+    }
+  `;
+
+  const FlexDiv = styled.div`
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 350px;
+  `;
+
+  const FlexDivMob = styled.div`
+    display: flex;
+    @media (min-width: 300px) and (max-width: 767px) {
+      margin-left: 10px;
+    }
+  `;
+
+  const InputDataDiv = styled.div`
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    overflow-y: scroll;
+  `;
+
+  const LastContainer = styled.div`
+    background: #ffffff 0% 0% no-repeat padding-box;
+    border-radius: 0.375rem;
+    margin-top: 1.25rem;
+    height: fit-content;
+    max-height: 70rem;
+    /* height: 18.75rem; */
+    padding: 2rem;
+    font-weight: 600;
+  `;
+
+  const Heading = styled.div`
+    text-align: left;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #102c78;
+    width: 100%;
+    max-width: 16.25rem;
+    @media (min-width: 0px) and (max-width: 767px) {
+      min-width: 170px;
+      /* max-width: max-content; */
+    }
+    @media (min-width: 768px) and (max-width: 1023px) {
+      max-width: 11.25rem;
+    }
+  `;
+
+  const TransactionNumber = styled.div`
+    color: #416be0;
+    font-weight: 600;
+  `;
+
+  const From = styled.div`
+    text-align: left;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #102c78;
+    width: 100%;
+    max-width: 16.25rem;
+    @media (min-width: 0px) and (max-width: 767px) {
+      /* min-width: 170px; */
+      max-width: max-content;
+    }
+  `;
+
+  const InputHeading = styled.div`
+    text-align: left;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #102c78;
+    width: 16.5%;
+  `;
+
+  const Button = styled.button`
+    background-image: url("/images/globe.svg");
+    background-repeat: no-repeat;
+    background-position: 0.5rem;
+    padding-left: 1.75rem;
+    background-size: 1rem;
+    position: relative;
+    background-color: #ffffff;
+    color: #3163f0;
+    border: none;
+    border-radius: 0.25rem;
+    width: 170px;
+    white-space: nowrap;
+    height: 2.125rem;
+    font-size: 0.875rem;
+    @media (min-width: 300px) and (max-width: 485px) {
+      display: none;
+    }
+  `;
+  const SubContainer = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    height: 3.125rem;
+    align-items: center;
+    padding-bottom: 15px;
+
+    @media (min-width: 300px) and (max-width: 485px) {
+    }
+  `;
+  const ScrollableDiv = styled.div`
+    overflow: auto;
+    height: 760px;
+  `;
+
+  const Container = styled.div`
     background-color: #ffffff;
     border-radius: 0.375rem;
     width: 100%;
-    height: 8rem;
-    margin-top: 1.25rem;
-    flex-direction: column;
+    height: 9.2rem;
+    margin-top: 0.5rem;
     width: 100%;
-  }
-  @media (max-width: 375px) {
-    height: 7.4rem;
-  }
-`;
+    overflow: hidden;
+    @media (min-width: 300px) and (max-width: 768px) {
+      background-color: #ffffff;
+      border-radius: 0.375rem;
+      width: 100%;
+      height: 8rem;
+      margin-top: 1.25rem;
+      flex-direction: column;
+      width: 100%;
+    }
+    @media (max-width: 375px) {
+      height: 7.4rem;
+    }
+  `;
 
-const HashDesktop = styled.div`
-  display: flex;
-  font-size: 14px;
-  flex-flow: row nowrap;
-  margin-top: 0.625rem;
-  margin-bottom: 10px;
-  border: none;
-  color: #191919;
-  font-weight: 500;
-  width: 100%;
-  max-width: 30.063rem;
-  @media (max-width: 767px) {
-    display: none;
-  }
-`;
-const HashMobile = styled.div`
-  display: flex;
-  flex-flow: row nowrap;
-  margin-top: 0.625rem;
-  margin-bottom: 10px;
-  border: none;
-  width: 40%;
-  max-width: 30.063rem;
-  @media (min-width: 767px) {
-    display: none;
-  }
-`;
-const SubHeading = styled.div`
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: #102c78;
-  display: flex;
-`;
+  const HashDesktop = styled.div`
+    display: flex;
+    font-size: 14px;
+    flex-flow: row nowrap;
+    margin-top: 0.625rem;
+    margin-bottom: 10px;
+    border: none;
+    color: #191919;
+    font-weight: 500;
+    width: 100%;
+    max-width: 30.063rem;
+    @media (max-width: 767px) {
+      display: none;
+    }
+  `;
+  const HashMobile = styled.div`
+    display: flex;
+    flex-flow: row nowrap;
+    margin-top: 0.625rem;
+    margin-bottom: 10px;
+    border: none;
+    width: 40%;
+    max-width: 30.063rem;
+    @media (min-width: 767px) {
+      display: none;
+    }
+  `;
+  const SubHeading = styled.div`
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #102c78;
+    display: flex;
+  `;
 
-const CopyToClipboardImg = styled.img`
-  margin-left: 150px;
-  cursor: pointer;
-  @media (min-width: 340px) and (max-width: 767px) {
-    margin-left: 10px;
-  }
-  @media (min-width: 767px) and (max-width: 1024px) {
-    margin-left: 70px;
-  }
-`;
-const CopyToClipboardImage = styled.img`
-  margin-left: 100px;
-  cursor: pointer;
-  @media (min-width: 340px) and (max-width: 767px) {
-    margin-left: 2px;
-  }
-  @media (min-width: 768px) and (max-width: 1023px) {
-    margin-left: 83px;
-  }
-  @media (min-width: 1024px) and (max-width: 1075px) {
-    margin-left: 84px;
-  }
-`;
+  const CopyToClipboardImg = styled.img`
+    margin-left: 150px;
+    cursor: pointer;
+    @media (min-width: 340px) and (max-width: 767px) {
+      margin-left: 10px;
+    }
+    @media (min-width: 767px) and (max-width: 1024px) {
+      margin-left: 70px;
+    }
+  `;
+  const CopyToClipboardImage = styled.img`
+    margin-left: 100px;
+    cursor: pointer;
+    @media (min-width: 340px) and (max-width: 767px) {
+      margin-left: 2px;
+    }
+    @media (min-width: 768px) and (max-width: 1023px) {
+      margin-left: 83px;
+    }
+    @media (min-width: 1024px) and (max-width: 1075px) {
+      margin-left: 84px;
+    }
+  `;
 
-const StackTraceCheckDiv = styled.div`
-  display: ${(props) => (props.check === "Fail" ? "block" : "none")};
-`;
+  const StackTraceCheckDiv = styled.div`
+    display: ${(props) => (props.check === "Fail" ? "block" : "none")};
+  `;
 
-const TokenTransferCheckDiv = styled.div`
-  display: ${(props) => (props.check === "Success" ? "block" : "none")};
-`;
+  const TokenTransferCheckDiv = styled.div`
+    display: ${(props) => (props.check === "Success" ? "block" : "none")};
+  `;
 
-const SearchBar = styled.input`
-  height: 2.188rem;
-  width: 12.5rem;
-  border: none;
-  margin-bottom: 1.5rem;
-  border-radius: 0.25rem;
-  background-image: url("/images/search-icon.svg");
-  background-repeat: no-repeat;
-  background-color: #f5f6fd;
-  background-position: 0.5rem;
-  padding-left: 1.875rem;
-  background-size: 0.75rem;
-  position: relative;
-  /* &:focus: {
+  const SearchBar = styled.input`
+    height: 2.188rem;
+    width: 12.5rem;
+    border: none;
+    margin-bottom: 1.5rem;
+    border-radius: 0.25rem;
+    background-image: url("/images/search-icon.svg");
+    background-repeat: no-repeat;
+    background-color: #f5f6fd;
+    background-position: 0.5rem;
+    padding-left: 1.875rem;
+    background-size: 0.75rem;
+    position: relative;
+    /* &:focus: {
     outline: none;
     border: none;
   } */
-`;
-const TabLister = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  max-width: 37.125rem;
-  margin: 1.563rem 0rem 0.625rem 1.063rem;
-  cursor: pointer;
-  @media (max-width: 768px) {
+  `;
+  const TabLister = styled.div`
     display: flex;
     justify-content: space-between;
-    min-height: 45px;
-    font-size: 13px;
-    overflow-y: hidden;
-    margin: 0rem 0rem 0rem 0rem;
-    white-space: nowrap;
-    padding-left: 10px;
-    max-width: 34.125rem;
-  }
-  @media (max-width: 500px) {
+    width: 100%;
+    max-width: 37.125rem;
+    margin: 1.563rem 0rem 0.625rem 1.063rem;
+    cursor: pointer;
+    @media (max-width: 768px) {
+      display: flex;
+      justify-content: space-between;
+      min-height: 45px;
+      font-size: 13px;
+      overflow-y: hidden;
+      margin: 0rem 0rem 0rem 0rem;
+      white-space: nowrap;
+      padding-left: 10px;
+      max-width: 34.125rem;
+    }
+    @media (max-width: 500px) {
+      display: flex;
+      justify-content: space-between;
+      min-height: 45px;
+      font-size: 0.6rem;
+      overflow-y: hidden;
+      margin: 0rem 0rem 0rem 0rem;
+      white-space: nowrap;
+      padding-left: 0px;
+    }
+  `;
+  const TabView = styled.div`
+    padding: 0.313rem 0.5rem 0.313rem 0.5rem;
     display: flex;
-    justify-content: space-between;
-    min-height: 45px;
-    font-size: 0.6rem;
-    overflow-y: hidden;
-    margin: 0rem 0rem 0rem 0rem;
-    white-space: nowrap;
-    padding-left: 0px;
-  }
-`;
-const TabView = styled.div`
-  padding: 0.313rem 0.5rem 0.313rem 0.5rem;
-  display: flex;
-  padding-bottom: 1.2rem;
-  @media (min-width: 320px) and (max-width: 425px) {
-    padding: 1rem 0.5rem 0.313rem 0.5rem;
     padding-bottom: 1.2rem;
-  }
-`;
-const ToolTipIcon = styled.img`
-  width: 0.75rem;
-  cursor: pointer;
-  margin-left: 0.513rem;
-  @media (min-width: 300px) and (max-width: 767px) {
-    margin-bottom: 6px;
-    display: none;
-  }
-`;
-const FailButton = styled.div`
-  color: #ce1a1a;
-  padding: 0px 0px 0px 18px;
-  width: 100%;
-  margin-left: 1rem;
-  display: ${(props) => (props.check === "Fail" ? "flex" : "none")};
-  align-items: center;
-  width: 69px;
-  height: 25px;
-  background: #fde7e7 0% 0% no-repeat padding-box;
-  border: 1px solid #fda6a6;
-  border-radius: 4px;
-  opacity: 1;
-  margin-right: 12px;
-  @media (min-width: 300px) and (max-width: 767px) {
-    width: 87px;
-  }
-  @media (min-width: 300px) and (max-width: 650px) {
-    margin-left: auto;
-    margin-right: 9px;
-  }
-`;
+    @media (min-width: 320px) and (max-width: 425px) {
+      padding: 1rem 0.5rem 0.313rem 0.5rem;
+      padding-bottom: 1.2rem;
+    }
+  `;
+  const ToolTipIcon = styled.img`
+    width: 0.75rem;
+    cursor: pointer;
+    margin-left: 0.513rem;
+    @media (min-width: 300px) and (max-width: 767px) {
+      margin-bottom: 6px;
+      display: none;
+    }
+  `;
+  const FailButton = styled.div`
+    color: #ce1a1a;
+    padding: 0px 0px 0px 18px;
+    width: 100%;
+    margin-left: 1rem;
+    display: ${(props) => (props.check === "Fail" ? "flex" : "none")};
+    align-items: center;
+    width: 69px;
+    height: 25px;
+    background: #fde7e7 0% 0% no-repeat padding-box;
+    border: 1px solid #fda6a6;
+    border-radius: 4px;
+    opacity: 1;
+    margin-right: 12px;
+    @media (min-width: 300px) and (max-width: 767px) {
+      width: 87px;
+    }
+    @media (min-width: 300px) and (max-width: 650px) {
+      margin-left: auto;
+      margin-right: 9px;
+    }
+  `;
 
-const SuccessButton = styled.div`
-  color: #00a58c;
-  padding: 0px 18px 0px 18px;
-  width: 100%;
-  margin-left: 1rem;
-  display: ${(props) => (props.check === "Success" ? "flex" : "none")};
-  align-items: center;
-  width: 99px;
-  height: 25px;
-  background: #e0fffa 0% 0% no-repeat padding-box;
-  border: 1px solid #99c7c0;
-  border-radius: 4px;
-  opacity: 1;
-  margin-right: 12px;
-  /* justify-content: center; */
-  @media (min-width: 300px) and (max-width: 650px) {
-    margin-left: auto;
-    margin-right: 9px;
-  }
-  @media (min-width: 768px) and (max-width: 1023px) {
-    padding: 0px 9px 0px 13px;
-    margin-left: 1.7rem;
-    width: 92px;
-  }
-  @media (max-width: 820px) {
-    padding: 0px 9px 0px 13px;
-    // margin-left: 1rem;
-  }
-`;
+  const SuccessButton = styled.div`
+    color: #00a58c;
+    padding: 0px 18px 0px 18px;
+    width: 100%;
+    margin-left: 1rem;
+    display: ${(props) => (props.check === "Success" ? "flex" : "none")};
+    align-items: center;
+    width: 99px;
+    height: 25px;
+    background: #e0fffa 0% 0% no-repeat padding-box;
+    border: 1px solid #99c7c0;
+    border-radius: 4px;
+    opacity: 1;
+    margin-right: 12px;
+    /* justify-content: center; */
+    @media (min-width: 300px) and (max-width: 650px) {
+      margin-left: auto;
+      margin-right: 9px;
+    }
+    @media (min-width: 768px) and (max-width: 1023px) {
+      padding: 0px 9px 0px 13px;
+      margin-left: 1.7rem;
+      width: 92px;
+    }
+    @media (max-width: 820px) {
+      padding: 0px 9px 0px 13px;
+      // margin-left: 1rem;
+    }
+  `;
 
-const AlertButton = styled.div`
-  top: 202px;
-  left: 1016px;
-  width: 100px;
-  height: 27px;
-  font-size: 14px;
-  background: #ffffff 0% 0% no-repeat padding-box;
-  border: 1px solid #3163f0;
-  border-radius: 4px;
-  color: #3163f0;
-  margin-left: 2px;
-  padding-top: 2px;
-  padding-left: 8px;
-  white-space: nowrap;
-  cursor: pointer;
-  @media (min-width: 1024px) and (max-width: 1110px) {
-    display: none;
-  }
-  @media (max-width: 1024px) {
-    display: none;
-  }
-`;
+  const AlertButton = styled.div`
+    top: 202px;
+    left: 1016px;
+    width: 100px;
+    height: 27px;
+    font-size: 14px;
+    background: #ffffff 0% 0% no-repeat padding-box;
+    border: 1px solid #3163f0;
+    border-radius: 4px;
+    color: #3163f0;
+    margin-left: 2px;
+    padding-top: 2px;
+    padding-left: 8px;
+    white-space: nowrap;
+    cursor: pointer;
+    @media (min-width: 1024px) and (max-width: 1110px) {
+      display: none;
+    }
+    @media (max-width: 1024px) {
+      display: none;
+    }
+  `;
 
-const CodeMainContainer = styled.div`
-  width: 100%;
-  max-width: 100vw;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: none;
-  background-color: #ffffff;
-  padding-top: 0px;
-  @media (min-width: 300px) and (max-width: 414px) {
-    max-width: 90vw;
-    margin-top: 10px;
-  }
-`;
-const CodeContainer = styled.div`
-  background: #ffffff 0% 0% no-repeat padding-box;
-  border-radius: 6px;
-  width: 100%;
-  max-width: 100vw;
-  background-color: #ffffff;
-  height: 100%;
-  max-height: 430px;
-  overflow-y: scroll;
-`;
+  const CodeMainContainer = styled.div`
+    width: 100%;
+    max-width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    background-color: #ffffff;
+    padding-top: 0px;
+    @media (min-width: 300px) and (max-width: 414px) {
+      max-width: 90vw;
+      margin-top: 10px;
+    }
+  `;
+  const CodeContainer = styled.div`
+    background: #ffffff 0% 0% no-repeat padding-box;
+    border-radius: 6px;
+    width: 100%;
+    max-width: 100vw;
+    background-color: #ffffff;
+    height: 100%;
+    max-height: 430px;
+    overflow-y: scroll;
+  `;
 
-const CodeDiv = styled.div`
-width: 100%;
-@media (min-width: 300px) and (max-width: 414px) {
-width: 100%;
-}
-`;
+  const CodeDiv = styled.div`
+    width: 100%;
+    @media (min-width: 300px) and (max-width: 414px) {
+      width: 100%;
+    }
+  `;
 
   return (
     <MainContainer>
@@ -690,8 +710,7 @@ width: 100%;
           </CopyToClipboard>
           <FailButton check={status}>Fail</FailButton>
           <SuccessButton check={status}>Success</SuccessButton>
-          <AlertButton
-          onClick={handleClickOpen}>
+          <AlertButton onClick={handleClickOpen}>
             <img
               onClick={handleClickOpen}
               alt=""
@@ -921,15 +940,18 @@ width: 100%;
                 {" "}
                 <Heading>Timestamp</Heading>
                 <SubHead>
-                  {`${
+                  {/* {`${
                     (row?.createdOn &&
                       moment(row.createdOn)
                         .tz("Asia/Calcutta")
 
                         .format("MMM DD, YYYY, hh:mm A")) ||
                     ""
-                  } ${("Asia/Calcutta" && utility.getUtcOffset("Asia/Calcutta")) || ""}`}
-
+                  } ${("Asia/Calcutta" && utility.getUtcOffset("Asia/Calcutta")) || ""}`} */}
+                  {moment(row.timestamp * 1000)
+                    .utc()
+                    .format("lll")}
+                  {" " + "UTC"}
                   {/* {moment(row.createdOn).fromNow() +
                   " " +
                   "(" +
@@ -964,11 +986,8 @@ width: 100%;
                     .toFixed(12)
                     .toLocaleString("fullwide", { useGrouping: false })
                     .replace(/\.?0+$/, "") || 0}{" "}
-                  XDC
-                  ({(row.gasPrice / 1000000000000000000)
-                    .toFixed(12)
-                    .toLocaleString("fullwide", { useGrouping: false })
-                    .replace(/\.?0+$/, "") * wei || 0} Gwei)
+                  XDC ($
+                  {gasPriceUSD.toFixed(12) || 0}{" "} )
                 </SubHead>
               </Row>
             </CommonDiv>
@@ -976,7 +995,10 @@ width: 100%;
               <Row>
                 <Heading>Transaction Fee</Heading>
                 <SubHead>
-                  {((row.gasPrice * row.gasUsed) / 1000000000000000000).toFixed(12).replace(/\.?0+$/, "") || 0} XDC
+                  {((row.gasPrice * row.gasUsed) / 1000000000000000000)
+                    .toFixed(12)
+                    .replace(/\.?0+$/, "") || 0}{" "}
+                  XDC
                 </SubHead>
               </Row>
             </CommonDiv>
@@ -985,8 +1007,8 @@ width: 100%;
                 <Heading>Raw input</Heading>
                 <SubHead>
                   <Input>
-                  {/* directly set utility function */}
-                    <TransactionNumber>{inputDesktop}</TransactionNumber> 
+                    {/* directly set utility function */}
+                    <TransactionNumber>{inputDesktop}</TransactionNumber>
                   </Input>
                   <CopyToClipboard
                     text={inputCopy}
@@ -1012,20 +1034,22 @@ width: 100%;
             <CommonDiv>
               <Row>
                 <InputHeading>Input:</InputHeading>
-                <SubHeadBlueMob onClick={() => setShowInputData(!showInputData)}>
+                <SubHeadBlueMob
+                  onClick={() => setShowInputData(!showInputData)}
+                >
                   view data
                   {showInputData === false ? (
-                  <img
-                  style={{ marginLeft: "2px" }}
-                  alt=""
-                  src="/images/arrrow.svg"
-                />
+                    <img
+                      style={{ marginLeft: "2px" }}
+                      alt=""
+                      src="/images/arrrow.svg"
+                    />
                   ) : (
                     <img
-                    style={{ marginLeft: "2px" }}
-                    alt=""
-                    src="/images/input-up.svg"
-                  />
+                      style={{ marginLeft: "2px" }}
+                      alt=""
+                      src="/images/input-up.svg"
+                    />
                   )}
                 </SubHeadBlueMob>
               </Row>
@@ -1043,12 +1067,12 @@ width: 100%;
                           row.to +
                           '"' +
                           "\n" +
-                          '"_value"'+
+                          '"_value"' +
                           ":" +
-                          '"'+
-                          row.value + 
-                          '"'+
-                          "\n"+
+                          '"' +
+                          row.value +
+                          '"' +
+                          "\n" +
                           "}"}
                       </SubHeadBlue>
                     </InputDataDiv>
@@ -1078,7 +1102,7 @@ width: 100%;
                 </Row>
                 <Row>
                   <SubHeading
-                    style={{ fontWeight: "400", marginRight: "40px" }} 
+                    style={{ fontWeight: "400", marginRight: "40px" }}
                   >
                     {row.from}
                   </SubHeading>
@@ -1127,16 +1151,16 @@ width: 100%;
             <b>Token Transfer</b>
             <StackContainer>
               {/* <BackgroundChanger> */}
-                <FlexDiv>
-                  <div style={{display: "flex"}}>
-                    <From>From</From>
-                    <SubHeadBlue>{from}</SubHeadBlue>
-                  </div>
-                  <FlexDivMob>
-                    <From>To</From>
-                    <SubHeadBlue>{to}</SubHeadBlue>
-                  </FlexDivMob>
-                </FlexDiv>
+              <FlexDiv>
+                <div style={{ display: "flex" }}>
+                  <From>From</From>
+                  <SubHeadBlue>{from}</SubHeadBlue>
+                </div>
+                <FlexDivMob>
+                  <From>To</From>
+                  <SubHeadBlue>{to}</SubHeadBlue>
+                </FlexDivMob>
+              </FlexDiv>
               {/* </BackgroundChanger> */}
             </StackContainer>
           </TokenTransferCheckDiv>
@@ -1151,26 +1175,31 @@ width: 100%;
             transfer in {contractName}
             <DataDivContainer>
               {/* <BackgroundChangerTransfer> */}
-                <InputDataDiv>
-                  <SubHeadBlue>
+              <InputDataDiv>
+                <SubHeadBlue>
                   <ShowLoader state={loader} top={"50%"} />
                   <CodeDiv>
-                <CodeMainContainer>
-                  <CodeContainer>
-                    <SyntaxHighlighter
-                      language="javascript"
-                      showLineNumbers={true}
-                      style={base16AteliersulphurpoolLight}
-                      wrapLongLines={true}
-                      customStyle={{ backgroundColor: "#f0f2fc", margin: 0 }}
-                    >
-                    {transfer !== undefined ? transfer + "}" : "No function available"}
-                    </SyntaxHighlighter>
-                  </CodeContainer>
-                </CodeMainContainer>
-              </CodeDiv>
-                  </SubHeadBlue>
-                </InputDataDiv>
+                    <CodeMainContainer>
+                      <CodeContainer>
+                        <SyntaxHighlighter
+                          language="javascript"
+                          showLineNumbers={true}
+                          style={base16AteliersulphurpoolLight}
+                          wrapLongLines={true}
+                          customStyle={{
+                            backgroundColor: "#f0f2fc",
+                            margin: 0,
+                          }}
+                        >
+                          {transfer !== undefined
+                            ? transfer + "}"
+                            : "No function available"}
+                        </SyntaxHighlighter>
+                      </CodeContainer>
+                    </CodeMainContainer>
+                  </CodeDiv>
+                </SubHeadBlue>
+              </InputDataDiv>
               {/* </BackgroundChangerTransfer> */}
             </DataDivContainer>
           </LastContainer>
@@ -1179,10 +1208,17 @@ width: 100%;
       {activeButton === "Contracts" && (
         <SubContracts address={row.contractAddress} url={url} status={status} />
       )}
-      {activeButton === "EventsDetails" && <EventsDetails address={row.contractAddress} from={row.from} to={row.to ? row.to : row.contractAddress} value={row.value} logs={row.logs} func={transfer} />}
+      {activeButton === "EventsDetails" && (
+        <EventsDetails
+          address={row.contractAddress}
+          from={row.from}
+          to={row.to ? row.to : row.contractAddress}
+          value={row.value}
+          logs={row.logs}
+          func={transfer}
+        />
+      )}
       {activeButton === "StateChange" && <StateChange />}
     </MainContainer>
   );
 }
-
-

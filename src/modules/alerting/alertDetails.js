@@ -320,7 +320,7 @@ const EmailBox = styled.div`
   display: flex;
   height: 66px;
   padding: 14px;
-  width: 100%;
+  width: fit-content;
 `;
 const EmailDetail = styled.div`
   font-weight: 600;

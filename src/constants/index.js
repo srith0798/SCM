@@ -31,7 +31,8 @@ export const httpConstants = {
     REMOVE_TAG: "/tags",
     ADD_NETWORK: "/add-network",
     GET_NETWORK_LIST: "/get-network",
-    GET_CONTRACT_BY_ADDRESS: "/contract/"
+    GET_CONTRACT_BY_ADDRESS: "/contract/",
+    GET_GASPRICE_IN_USD: "/get-gasprice-in-USD"
   },
   MESSAGE:{
     TOASTS_POSITION:"top-center",
@@ -62,7 +63,7 @@ export const analytics = {
 }
 
 export const validationsMessages = {
-  VALIDATE_BROWSER_REDIRECTING: "XDCPay Extension Not Available",
+  VALIDATE_BROWSER_REDIRECTING: "Enable XDCPay Extension",
   TOASTS_POSITION: "top-center"
 }
 
