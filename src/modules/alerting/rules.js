@@ -11,6 +11,7 @@ import { genericConstants } from "../../constants";
 import { sessionManager } from "../../managers/sessionManager";
 import ShowLoader from "../../common/components/showLoader";
 import { cookiesConstants } from "../../constants";
+import ContractsService from "../../services/contractsService";
 
 export default function Rules() {
   const [activeButton, setActiveButton] = React.useState("Rules");
@@ -27,7 +28,28 @@ export default function Rules() {
   const [contractNameToolTip, setcontractNameToolTip] = React.useState(false);
   const [alertTypeToolTip, setalertTypeToolTip] = React.useState(false);
   const [alerts, setAlerts] = React.useState([]);
+  const [contracts, setContracts] = React.useState([]);
+  const [rows, setRows] = React.useState([]);
   const [loader, setLoader] = React.useState(false);
+
+  const getContractList = async (skip = 0, limit = 10) => {
+    let userId = sessionManager.getDataFromCookies(cookiesConstants.USER_ID);
+    const requestData = {
+      skip: skip,
+      limit: limit,
+      userId: userId,
+      sortingKey: { addedOn: -1 },
+    };
+
+    setLoader(true);
+    const [error, response] = await utility.parseResponse(
+      ContractsService.getContractsList(requestData)
+    );
+    if (error) return;
+    setLoader(false);
+    setContracts(response.contractList);
+    getAlertList();
+  };
 
   const getAlertList = async () => {
     let request = {
@@ -58,12 +80,25 @@ export default function Rules() {
   };
 
   useEffect(() => {
-    getAlertList();
+    getContractList();
     let check = history?.location?.state?.id;
     if (check === "add") {
       setActiveButton("Destination");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    let final = [];
+    alerts.forEach((alert) => {
+      contracts.forEach((contract) => {
+        if (alert?.target?.value === contract.address) {
+          final.push(alert);
+        }
+      });
+    });
+    setRows(final);
+  }, [alerts, contracts]);
 
   let user = "";
 
@@ -432,8 +467,8 @@ export default function Rules() {
                 </RowData>
               </NewDiv>
 
-              {alerts && alerts.length ? (
-                alerts.map((alert) => (
+              {rows && rows.length ? (
+                rows.map((alert) => (
                   <NewDiv>
                     <RowData1>
                       <ColumnTwo

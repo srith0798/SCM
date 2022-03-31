@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 // import ContractsService from "../../services/contractsService";
 import Dialog from "@mui/material/Dialog";
@@ -26,11 +26,34 @@ export default function AddAlerts(props) {
   const [loader, setLoader] = React.useState(false);
   const [destinations, setDestinations] = React.useState([]);
   const [selectedDestinations, setSelectedDestinations] = React.useState([]);
+  const [alertList, setAlertList] = React.useState([]);
+  const [rows, setRows] = React.useState([]);
   React.useEffect(() => {
     getDestinations();
   }, []);
 
+  const getAlertList = async () => {
+    let request = {
+      userId: sessionManager.getDataFromCookies(cookiesConstants.USER_ID),
+      isDeleted: false,
+    };
+    setLoader(true);
+    const [error, response] = await utility.parseResponse(
+      AlertService.getAlertList(request)
+    );
+    setLoader(false);
+    if (error) return;
+    let filter = [];
+    response.map((dest)=> {
+    if(dest.target.value === props?.address && dest.type === (props.status === "Success" ? genericConstants.ALERT_TYPE.SUCCESSFULL_TRANSACTIONS : genericConstants.ALERT_TYPE.FAILED_TRANSACTIONS)){
+      filter.push(dest.destinations);
+    }
+    return true;
+    })
+    setAlertList(filter);
+  };
   const getDestinations = async () => {
+    getAlertList();
     let requestData = {
       userId: sessionManager.getDataFromCookies(cookiesConstants.USER_ID),
       isDeleted: false,
@@ -52,6 +75,8 @@ export default function AddAlerts(props) {
       setSelectedDestinations(
         selectedDestinations.filter((item) => item !== id)
       );
+
+      console.log("select", event.target.checked);
   };
 
   const addAlert = async () => {
@@ -82,6 +107,24 @@ export default function AddAlerts(props) {
       props.click();
     },100);
   };
+
+
+  useEffect(()=>{
+  let ids = [];
+  alertList.map((main)=>{
+    main.map((dest)=>{
+    ids.push(dest.destinationId);
+    })
+  })
+  destinations.map((dest)=>{
+    if(ids.includes(dest.destinationId)) 
+      dest["checked"] = true
+       else
+      dest["checked"] = false
+      return true;
+    })
+  setRows(destinations);
+  },[destinations, alertList]);
 
   const ApplyButton = styled.button`
   width: 68px;
@@ -222,7 +265,7 @@ const BackgroundChanger = styled.div`
             <SubContainer>
               <Add>
                 Alert for{" "}
-                {props.status === "Success" ? "successfull" : "failed"}{" "}
+                {props.status === "Success" ? "successful" : "failed"}{" "}
                 transaction
               </Add>
               <img
@@ -238,9 +281,9 @@ const BackgroundChanger = styled.div`
               <SubHeadBlue>Address</SubHeadBlue>
               <Heading>{props?.address}</Heading>
               <SubHeadBlue>Choose Destination</SubHeadBlue>
-              {destinations.length > 0
-                ? destinations.length > 0 &&
-                  destinations.map((destination) => (
+              {rows.length > 0
+                ? rows.length > 0 &&
+                  rows.map((destination) => (
                     <BackgroundChanger>
                       <Div>
                         <RowData>
@@ -251,6 +294,7 @@ const BackgroundChanger = styled.div`
                           <div>
                             <label class="switch">
                               <input
+                                checked={destination.checked}
                                 type="checkbox"
                                 value={destination.destinationId}
                                 onChange={(event) => selectDestinations(event)}

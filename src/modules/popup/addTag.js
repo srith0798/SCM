@@ -73,7 +73,7 @@ export default function AddTags(props) {
                 text={"Add Tag"}
                 click={addContractTag}
               />
-              <CancelButton onClick={props.click}>Cancel</CancelButton>
+              <CancelButton onClick={props.close}>Cancel</CancelButton>
             </SubContainer>
           </Container>
         </MainContainer>
