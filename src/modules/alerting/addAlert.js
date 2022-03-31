@@ -438,12 +438,13 @@ export default function AddAlert() {
                     <ParameterContainer>
                       <Box sx={{ minWidth: 120 }}>
                         <FormControl sx={{ width: "100%", maxWidth: 1000 }}>
-                          <InputLabel shrink={false} >{targetValue ==="" && 'Select Address'}</InputLabel>
+                          <InputLabel shrink={false}>
+                            {targetValue === "" && "Select Address"}
+                          </InputLabel>
                           <Select
                             value={targetValue}
                             onChange={selectTargetValue}
-                            sx={{backgroundColor: "#ECF0F7", color: "black"}}
-                            
+                            sx={{ backgroundColor: "#ECF0F7", color: "black" }}
                           >
                             {parametersData && parametersData.length ? (
                               parametersData.map((option) =>
@@ -604,6 +605,29 @@ const AlertTypeContainer = (props) => {
         <Title>Transaction Value</Title>
         <SubTitle>Triggers whenever transaction value matches</SubTitle>
       </BoxContainer>
+
+      <BoxContainer
+        onClick={() =>
+          props.selectAlertType(genericConstants.ALERT_TYPE.XDC_BALANCE)
+        }
+        onMouseOver={() =>
+          props.changeSourceForIcons(
+            genericConstants.ALERT_TYPE.XDC_BALANCE,
+            "balanceToken"
+          )
+        }
+        onMouseOut={() =>
+          props.changeOriginalSourceForIcons(
+            genericConstants.ALERT_TYPE.XDC_BALANCE,
+            "balanceToken"
+          )
+        }
+      >
+        <img alt="" src={props.icon.balanceToken} />
+        <Title>XDC Balance</Title>
+        <SubTitle style={{ fontSize: "22px", fontWeight: 600 }}></SubTitle>
+      </BoxContainer>
+
       <BoxContainer
         // onClick={() =>
         //   props.selectAlertType(genericConstants.ALERT_TYPE.TOKEN_TRANSFER)
@@ -623,30 +647,6 @@ const AlertTypeContainer = (props) => {
       >
         <img alt="" src={props.icon.tokenTransfer} />
         <Title>XRC-20 Token Transfer </Title>
-        <SubTitle style={{ fontSize: "22px", fontWeight: 600 }}>
-          Coming soon
-        </SubTitle>
-      </BoxContainer>
-
-      <BoxContainer
-        // onClick={() =>
-        //   props.selectAlertType(genericConstants.ALERT_TYPE.XDC_BALANCE)
-        // }
-        onMouseOver={() =>
-          props.changeSourceForIcons(
-            genericConstants.ALERT_TYPE.XDC_BALANCE,
-            "balanceToken"
-          )
-        }
-        onMouseOut={() =>
-          props.changeOriginalSourceForIcons(
-            genericConstants.ALERT_TYPE.XDC_BALANCE,
-            "balanceToken"
-          )
-        }
-      >
-        <img alt="" src={props.icon.balanceToken} />
-        <Title>XDC Balance</Title>
         <SubTitle style={{ fontSize: "22px", fontWeight: 600 }}>
           Coming soon
         </SubTitle>

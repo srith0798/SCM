@@ -97,7 +97,9 @@ export default function Contract(props) {
   const [input, setInput] = useState("");
   const search = (e) => {
     setInput(e.target.value);
+    if(e.target.value.length % 3 ===0) {
     searching(e.target.value, ["address", "contractName"]);
+    }
   };
 
   const changePage = (value) => {
@@ -118,8 +120,12 @@ export default function Contract(props) {
   };
   const Close = () => {
     setAddTag(false);
-    getContractList();
   };
+
+  const Click = () =>{
+    setAddTag(false);
+    getContractList();
+  }
 
   if (location.state && location.state.homepageHistory) {
     setOpen(true);
@@ -310,10 +316,11 @@ export default function Contract(props) {
                         )}
                         {addTag && (
                           <AddTags
-                            click={Close}
+                            click={Click}
                             address={address}
                             contract={true}
                             contractId={contractId}
+                            close={Close}
                           />
                         )}
                         {/* {data.tags && data.tags.length === 0 && (

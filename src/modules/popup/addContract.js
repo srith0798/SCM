@@ -94,11 +94,15 @@ export default function AddContract(props) {
       props.getContractList();
     }
   };
+  React.useEffect(()=>{
+  if(address.length >=40)
+  handleEnterKey();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[address])
 
-  const handleEnterKey = (e) => {
-    if (e.key === "Enter") {
+
+  const handleEnterKey = () => {
       checkAddress();
-    }
   };
   return (
     <div>
@@ -152,7 +156,6 @@ export default function AddContract(props) {
               type="text"
               placeholder="Find a public contract by name or address"
               onChange={(e) => setAddress(e.target.value)}
-              onKeyDown={(e) => handleEnterKey(e)}
             />
             <ErrorTag>{error}</ErrorTag>
             {hideStep && (
