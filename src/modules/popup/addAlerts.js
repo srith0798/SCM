@@ -30,6 +30,7 @@ export default function AddAlerts(props) {
   const [rows, setRows] = React.useState([]);
   React.useEffect(() => {
     getDestinations();
+    setLoader(true);
   }, []);
 
   const getAlertList = async () => {
@@ -223,6 +224,7 @@ const SubColumn = styled.div`
   width: 100%;
   max-width: fit-content;
   margin-left: 20px;
+  word-break: break-all;
 `;
 const RowData = styled.div`
   display: flex;
@@ -242,7 +244,7 @@ const Img = styled.img`
 
 const BackgroundChanger = styled.div`
   width: 100%;
-  height: 80px;
+  height: fit-content;
   background-repeat: no-repeat;
   background: #f7f8fd 0% 0% no-repeat padding-box;
   border-radius: 6px;

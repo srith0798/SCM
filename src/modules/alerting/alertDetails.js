@@ -140,7 +140,6 @@ export default function AlertDetails() {
   width: 100%;
   padding: 3rem;
   height: 100vh;
-  white-space: nowrap;
   @media (min-width: 340px) and (max-width: 768px) {
     padding: 43px 23px 23px 23px;
   }
@@ -308,7 +307,7 @@ const TextColor = styled.div`
 const DestinationDetail = styled.div`
   margin-bottom: 10px;
   padding: 20px 0 0 0;
-  width:35%;
+  width:100%;
 `;
 const EmailBox = styled.div`
   display: flex;
@@ -318,9 +317,11 @@ const EmailBox = styled.div`
   border: 1px solid #d5e0ff;
   border-radius: 6px;
   display: flex;
-  height: 66px;
+  height: fit-content;
   padding: 14px;
-  width: fit-content;
+  width: 100%;
+  max-width: 270px;
+  word-break: break-all;
 `;
 const EmailDetail = styled.div`
   font-weight: 600;

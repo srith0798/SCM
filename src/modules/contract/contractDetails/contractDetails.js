@@ -158,9 +158,12 @@ export default function ContractDetails(props) {
   const Open = () => {
     setAddTag(true);
   };
-  const Close = () => {
+  const Click = () => {
     setAddTag(false);
     getContractById();
+  };
+  const Close = () => {
+    setAddTag(false);
   };
   const [removeTagImage, setRemoveTagImage] = useState();
   const [removeTag, setRemoveTag] = useState(false);
@@ -696,10 +699,11 @@ console.log(`https://observer.xdc.org/verify-contracts/${name}/scm`, "asdadada")
 
                     {addTag && (
                       <AddTags
-                        click={Close}
+                        click={Click}
                         address={address}
                         contract={false}
                         contractId={address._id}
+                        close={Close}
                       />
                     )}
                     <AddTag

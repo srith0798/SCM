@@ -1,31 +1,185 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { history } from "../../managers/history";
 import utility from "../../utility";
 import { sessionManager } from "../../managers/sessionManager";
 import { cookiesConstants } from "../../constants";
+import { NETWORKS } from "../../constants";
+const Web3 = require("web3");
 
 export default function Sidebar(props) {
+  const getBalance = async (address) => {
+    let balance = null;
+    await window.web3.eth.getBalance(address).then((res) => {
+      balance = res / Math.pow(10, 18);
+      balance = truncateToDecimals(balance);
+    });
+    return balance;
+  };
+
+  const [wallet, setWallet] = React.useState(false);
+
+  function truncateToDecimals(num, dec = 2) {
+    let decimal = dec;
+    if (
+      num !== 0 &&
+      num.toString().split(".")[0] === 0 &&
+      num.toString().split(".")[1].charAt(0) === 0 &&
+      num.toString().split(".")[1].charAt(1) === 0
+    ) {
+      decimal = 4;
+    }
+    const calcDec = Math.pow(10, decimal);
+    return Math.trunc(num * calcDec) / calcDec;
+  }
+
+  const HandleWalletChange = async () => {
+    console.log();
+    window.web3 = new Web3(window.xdc ? window.xdc : window.ethereum);
+
+    if (
+      window.web3.currentProvider &&
+      sessionManager.getDataFromCookies(cookiesConstants.IS_LOGGED_IN)
+    ) {
+      if (!window.web3.currentProvider.chainId) {
+        //when metamask is disabled
+        const state = window.web3.givenProvider.publicConfigStore
+          ? window.web3.givenProvider.publicConfigStore._state
+          : window.web3.currentProvider.publicConfigStore._state;
+        if (state.selectedAddress !== undefined) {
+          let address = state.selectedAddress;
+          let network =
+            state.networkVersion === "50"
+              ? NETWORKS.XDC_MAINNET
+              : NETWORKS.XDC_APOTHEM_TESTNET;
+
+          let newBalance = await getBalance(address);
+
+          if (
+            (address || network) &&
+            (address !==
+              sessionManager.getDataFromCookies(
+                cookiesConstants.ACCOUNT_ADDRESS
+              ) ||
+              network !==
+                sessionManager.getDataFromCookies(cookiesConstants.NETWORK) ||
+              newBalance !==
+                sessionManager.getDataFromCookies(cookiesConstants.BALANCE))
+          ) {
+            let balance = null;
+
+            await window.web3.eth.getBalance(address).then((res) => {
+              balance = res / Math.pow(10, 18);
+              balance = truncateToDecimals(balance);
+            });
+
+            sessionManager.setDataInCookies(
+              address,
+              cookiesConstants.ACCOUNT_ADDRESS
+            );
+            sessionManager.setDataInCookies(address, cookiesConstants.USER_ID);
+            sessionManager.setDataInCookies(network, cookiesConstants.NETWORK);
+            sessionManager.setDataInCookies(balance, cookiesConstants.BALANCE);
+            sessionManager.setDataInCookies(
+              true,
+              cookiesConstants.IS_LOGGED_IN
+            );
+          }
+        } else {
+          //metamask is also enabled with xdcpay
+        }
+      }
+    }
+  };
+
+  //   useEffect(()=>{
+  // setTimeout(() => {
+  //     handleWalletSession();
+  //     console.log("working");
+  //   }, 500);
+  //   }, [])
+  useEffect(() => {
+    const handleWalletSession = () => {
+      if (!window.xdc) {
+        sessionManager.removeDataFromCookies(cookiesConstants.IS_LOGGED_IN);
+        sessionManager.removeDataFromCookies(cookiesConstants.ACCOUNT_ADDRESS);
+        sessionManager.removeDataFromCookies(cookiesConstants.BALANCE);
+        sessionManager.removeDataFromCookies(cookiesConstants.NETWORK);
+        history.replace("/about");
+      } else {
+        window.web3 = new Web3(window.xdc ? window.xdc : window.ethereum);
+
+        if (window.web3.currentProvider) {
+          if (!window.web3.currentProvider.chainId) {
+            const state = window.web3.givenProvider.publicConfigStore
+              ? window.web3.givenProvider.publicConfigStore._state
+              : window.web3.currentProvider.publicConfigStore._state;
+            if (!state.selectedAddress) {
+              sessionManager.removeDataFromCookies(
+                cookiesConstants.IS_LOGGED_IN
+              );
+              sessionManager.removeDataFromCookies(
+                cookiesConstants.ACCOUNT_ADDRESS
+              );
+              sessionManager.removeDataFromCookies(cookiesConstants.BALANCE);
+              sessionManager.removeDataFromCookies(cookiesConstants.NETWORK);
+              history.replace("/about");
+            }
+          } else {
+            sessionManager.removeDataFromCookies(cookiesConstants.IS_LOGGED_IN);
+            sessionManager.removeDataFromCookies(
+              cookiesConstants.ACCOUNT_ADDRESS
+            );
+            sessionManager.removeDataFromCookies(cookiesConstants.BALANCE);
+            sessionManager.removeDataFromCookies(cookiesConstants.NETWORK);
+            history.replace("/about");
+          }
+        } else {
+          sessionManager.removeDataFromCookies(cookiesConstants.IS_LOGGED_IN);
+          sessionManager.removeDataFromCookies(
+            cookiesConstants.ACCOUNT_ADDRESS
+          );
+          sessionManager.removeDataFromCookies(cookiesConstants.BALANCE);
+          sessionManager.removeDataFromCookies(cookiesConstants.NETWORK);
+          history.replace("/about");
+        }
+      }
+    };
+
+    setTimeout(() => {
+      handleWalletSession();
+    }, 500);
+    window.addEventListener("load", HandleWalletChange);
+  }, [wallet]);
+
+  HandleWalletChange();
+
   const redirectToAbout = () => {
     history.push("/about");
+    setWallet(!wallet);
   };
   const redirectToTransaction = () => {
     history.push("/transactions");
+    setWallet(!wallet);
   };
   const redirectToContract = () => {
     history.push("/contracts");
+    setWallet(!wallet);
   };
   // const redirectToNetwork = () => {
   //   history.push("/networks");
   // };
   const redirectToAnalytics = () => {
     history.push("/analytics");
+    setWallet(!wallet);
   };
   const redirectToAlerting = () => {
     history.push("/alerting");
+    setWallet(!wallet);
   };
   const redirectToFaqs = () => {
     history.push("/faqs");
+    setWallet(!wallet);
   };
 
   const redirectToLogout = () => {
@@ -146,10 +300,14 @@ export default function Sidebar(props) {
       )}
       <WrapperFaq
         style={{
-          marginTop: sessionManager.getDataFromCookies(cookiesConstants.IS_LOGGED_IN)
+          marginTop: sessionManager.getDataFromCookies(
+            cookiesConstants.IS_LOGGED_IN
+          )
             ? "12rem"
             : "35rem",
-          paddingLeft: sessionManager.getDataFromCookies(cookiesConstants.IS_LOGGED_IN)
+          paddingLeft: sessionManager.getDataFromCookies(
+            cookiesConstants.IS_LOGGED_IN
+          )
             ? "22px"
             : "50px",
           backgroundColor: utility.isMenuActive("faqs") ? "#1d3c93" : "",

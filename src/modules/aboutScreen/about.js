@@ -8,6 +8,7 @@ import FooterComponent from "../dashboard/footerComponent";
 import ReactPlayer from "react-player";
 import { history } from "../../managers/history";
 import { cookiesConstants } from "../../constants";
+import ReactTooltip from "react-tooltip";
 
 export default function About(props) {
   const [state, setState] = useState(true);
@@ -89,16 +90,28 @@ export default function About(props) {
               >
                 Add Your Smart Contract
               </SmartButton>
-              <Tooltip
-                disableFocusListener
-                title="Click to get started with Xmartly"
+              <ReactTooltip
+                className="extra"
+                id="button"
+                arrowColor="transparent"
+                textColor="black"
+                borderColor="white"
+                border={true}
+                delayHide={0}
+                delayShow={0}
+                clickable={true}
+                place="bottom"
+                effect="solid"
               >
+                Click to get started with Xmartly
+              </ReactTooltip>
                 <TooltipImg
                   style={{ width: "15px", height: "13px", marginTop: "35px" }}
+                  data-tip="button"
+                  data-for="button"
                   alt=""
                   src="/images/Subtraction 2.svg"
                 />
-              </Tooltip>
             </div>
           </RightContainer>
         </Container>
@@ -197,12 +210,12 @@ const MainBoxContainer = styled.div`
   }
 `;
 const TooltipImg = styled.img`
-width: 15px; 
-height: 13px;
-margin-top: 35px;
-@media (min-width: 1023px) {
-  display: none;
-}
+  width: 15px;
+  height: 13px;
+  margin-top: 35px;
+  @media (min-width: 1023px) {
+    display: none;
+  }
 `;
 const Container = styled.div`
   background-color: #ffffff;

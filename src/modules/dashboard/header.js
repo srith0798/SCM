@@ -17,15 +17,6 @@ function Header(props) {
     return user;
   };
 
-  const getBalance = async (address) => {
-    let balance = null;
-    await window.web3.eth.getBalance(address).then((res) => {
-      balance = res / Math.pow(10, 18);
-      balance = truncateToDecimals(balance);
-    });
-    return balance;
-  };
-
   function truncateToDecimals(num, dec = 2) {
     let decimal = dec;
     if (
@@ -76,104 +67,7 @@ function Header(props) {
 
     if (checkResult) getXDCWalletBalance(checkResult);
   };
-  const HandleWalletChange = async () => {
-    console.log();
-    window.web3 = new Web3(window.xdc ? window.xdc : window.ethereum);
-
-    if (
-      window.web3.currentProvider &&
-      sessionManager.getDataFromCookies(cookiesConstants.IS_LOGGED_IN)
-    ) {
-      if (!window.web3.currentProvider.chainId) {
-        //when metamask is disabled
-        const state = window.web3.givenProvider.publicConfigStore
-          ? window.web3.givenProvider.publicConfigStore._state
-          : window.web3.currentProvider.publicConfigStore._state;
-        if (state.selectedAddress !== undefined) {
-          let address = state.selectedAddress;
-          let network =
-            state.networkVersion === "50"
-              ? NETWORKS.XDC_MAINNET
-              : NETWORKS.XDC_APOTHEM_TESTNET;
-
-          let newBalance = await getBalance(address);
-
-          if (
-            (address || network) &&
-            (address !== sessionManager.getDataFromCookies(cookiesConstants.ACCOUNT_ADDRESS) ||
-              network !== sessionManager.getDataFromCookies(cookiesConstants.NETWORK) ||
-              newBalance !== sessionManager.getDataFromCookies(cookiesConstants.BALANCE))
-          ) {
-            let balance = null;
-
-            await window.web3.eth.getBalance(address).then((res) => {
-              balance = res / Math.pow(10, 18);
-              balance = truncateToDecimals(balance);
-            });
-
-            sessionManager.setDataInCookies(address, cookiesConstants.ACCOUNT_ADDRESS);
-            sessionManager.setDataInCookies(address, cookiesConstants.USER_ID);
-            sessionManager.setDataInCookies(network, cookiesConstants.NETWORK);
-            sessionManager.setDataInCookies(balance, cookiesConstants.BALANCE);
-            sessionManager.setDataInCookies(true, cookiesConstants.IS_LOGGED_IN);
-          }
-        } else {
-          //metamask is also enabled with xdcpay
-        }
-      }
-    }
-  };
-
-  useEffect(() => {
-    
-    const handleWalletSession = () => {
-      if (!window.xdc) {
-        sessionManager.removeDataFromCookies(cookiesConstants.IS_LOGGED_IN);
-        sessionManager.removeDataFromCookies(cookiesConstants.ACCOUNT_ADDRESS);
-        sessionManager.removeDataFromCookies(cookiesConstants.BALANCE);
-        sessionManager.removeDataFromCookies(cookiesConstants.NETWORK);
-        history.replace("/about");
-      } else {
-        window.web3 = new Web3(window.xdc ? window.xdc : window.ethereum);
   
-        if (window.web3.currentProvider) {
-          if (!window.web3.currentProvider.chainId) {
-            const state = window.web3.givenProvider.publicConfigStore
-              ? window.web3.givenProvider.publicConfigStore._state
-              : window.web3.currentProvider.publicConfigStore._state;
-            if (!state.selectedAddress) {
-              sessionManager.removeDataFromCookies(cookiesConstants.IS_LOGGED_IN);
-              sessionManager.removeDataFromCookies(cookiesConstants.ACCOUNT_ADDRESS);
-              sessionManager.removeDataFromCookies(cookiesConstants.BALANCE);
-              sessionManager.removeDataFromCookies(cookiesConstants.NETWORK);
-              history.replace("/about");
-            }
-          } else {
-            sessionManager.removeDataFromCookies(cookiesConstants.IS_LOGGED_IN);
-            sessionManager.removeDataFromCookies(cookiesConstants.ACCOUNT_ADDRESS);
-            sessionManager.removeDataFromCookies(cookiesConstants.BALANCE);
-            sessionManager.removeDataFromCookies(cookiesConstants.NETWORK);
-            history.replace("/about");
-          }
-        } else {
-          sessionManager.removeDataFromCookies(cookiesConstants.IS_LOGGED_IN);
-          sessionManager.removeDataFromCookies(cookiesConstants.ACCOUNT_ADDRESS);
-          sessionManager.removeDataFromCookies(cookiesConstants.BALANCE);
-          sessionManager.removeDataFromCookies(cookiesConstants.NETWORK);
-          history.replace("/about");
-        }
-      }
-    };
-   
-
-    setTimeout(() => {
-      handleWalletSession();
-    }, 1000);
-    HandleWalletChange();
-    window.addEventListener("load", HandleWalletChange);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   const UserLogo = styled.img`
   width: 30px;
   height: 30px;
