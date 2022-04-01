@@ -31,8 +31,8 @@ export default function ContractDetails(props) {
   const [address, setAddress] = React.useState({});
   const [Solidity, setSolidity] = React.useState("");
 
-  const getContractById = async () => {
-    let url = history.location.state.id;
+  const getContractById = async (id) => {
+    let url = history?.location?.state?.id || id;
     setContractAddress(url);
     try {
       setLoader(true);
@@ -71,11 +71,6 @@ export default function ContractDetails(props) {
     }
   };
   React.useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const contractAddress = urlParams.get('contractAddress')
-    if(contractAddress)
-      updateContract(contractAddress);
-    else  
       getContractById();
   }, []);
 
@@ -187,6 +182,18 @@ export default function ContractDetails(props) {
     sessionManager.removeDataFromCookies("profilePicture");
     history.replace("/");
   };
+
+  const verifyContract = async (address , id) =>
+  {
+     const [error ] =await utility.parseResponse(ContractsService.checkIfContractVerified(address));
+     if(error && error  === "Contract Not Verified")
+      { window.open(`${process.env.REACT_APP_OBSERVER_WEBAPP}/${address}?reference=scm`);
+       return;}
+     else if(error && error !== "Contract Not Verified")   
+       return;
+     getContractById(id)
+
+  }
 
   const MainHeading = styled.div`
   display: flex;
@@ -656,9 +663,9 @@ console.log(`https://observer.xdc.org/verify-contracts/${name}/scm`, "asdadada")
                 <Verified>{address.status}</Verified>
                 <VerifiedButton
                   check={address.status}
-                  onClick={() =>
-                    window.open(
-                      `https://observer-dev.xdc.org/verify-contracts/${name}?scm`)
+                  onClick={() => verifyContract(name , address._id)
+                    // window.open(
+                    //   `https://observer-dev.xdc.org/verify-contracts/${name}?reference=scm`)
                   }
                 >
                   Click here and get your contract verified
