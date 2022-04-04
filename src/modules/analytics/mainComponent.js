@@ -524,7 +524,7 @@ export default function MainComponent(props) {
                           {" "}
                           <Line
                             data={gasPriceData}
-                            error={gasUsedOverTimeError}
+                            error={transactionOverTimeError}
                           />
                         </GraphSize>
                       )}
@@ -1033,7 +1033,7 @@ const SelectComponent = (props) => {
           {props.heading}
           <Tooltip
             disableFocusListener
-            title="Transaction executed in due course"
+            title="This is a default Graph that was created for your added contract and cannot be edited"
           >
             <ToolTipIcon src="/images/tool-tip.svg" />
           </Tooltip>

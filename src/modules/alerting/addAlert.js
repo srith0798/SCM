@@ -585,9 +585,9 @@ const AlertTypeContainer = (props) => {
         <SubTitle>Triggers when transactions fails</SubTitle>
       </BoxContainer>
       <BoxContainer
-        onClick={() =>
-          props.selectAlertType(genericConstants.ALERT_TYPE.TRANSACTION_VALUE)
-        }
+        // onClick={() =>
+        //   props.selectAlertType(genericConstants.ALERT_TYPE.TRANSACTION_VALUE)
+        // }
         onMouseOver={() =>
           props.changeSourceForIcons(
             genericConstants.ALERT_TYPE.TRANSACTION_VALUE,
@@ -603,13 +603,16 @@ const AlertTypeContainer = (props) => {
       >
         <img alt="" src={props.icon.transactionValue} />
         <Title>Transaction Value</Title>
-        <SubTitle>Triggers whenever transaction value matches</SubTitle>
+        <SubTitle style={{ fontSize: "22px", fontWeight: 600 }}>
+          Coming soon
+        </SubTitle>
+        {/* <SubTitle>Triggers whenever transaction value matches</SubTitle> */}
       </BoxContainer>
 
       <BoxContainer
-        onClick={() =>
-          props.selectAlertType(genericConstants.ALERT_TYPE.XDC_BALANCE)
-        }
+        // onClick={() =>
+        //   props.selectAlertType(genericConstants.ALERT_TYPE.XDC_BALANCE)
+        // }
         onMouseOver={() =>
           props.changeSourceForIcons(
             genericConstants.ALERT_TYPE.XDC_BALANCE,
@@ -625,7 +628,9 @@ const AlertTypeContainer = (props) => {
       >
         <img alt="" src={props.icon.balanceToken} />
         <Title>XDC Balance</Title>
-        <SubTitle style={{ fontSize: "22px", fontWeight: 600 }}></SubTitle>
+        <SubTitle style={{ fontSize: "22px", fontWeight: 600 }}>
+          Coming soon
+        </SubTitle>
       </BoxContainer>
 
       <BoxContainer
@@ -726,7 +731,7 @@ const AlertTarget = (props) => {
         <Title>Address</Title>
         <SubTitle>Receive alerts for only one address</SubTitle>
       </BoxContainer>
-      <BoxContainer
+      {/* <BoxContainer
         onClick={() =>
           props.selectAlertTarget(genericConstants.ALERT_TYPE.NETWORK)
         }
@@ -746,7 +751,7 @@ const AlertTarget = (props) => {
         <img alt="" src={props.icon.network} />
         <Title>Network</Title>
         <SubTitle>Receive alerts for addresses deployed on a network</SubTitle>
-      </BoxContainer>
+      </BoxContainer> */}
       <BoxContainer
         onClick={() => props.selectAlertTarget(genericConstants.ALERT_TYPE.TAG)}
         onMouseOver={() =>
@@ -781,9 +786,11 @@ const EmailBox = styled.div`
   border: 1px solid #d5e0ff;
   border-radius: 6px;
   display: flex;
-  height: 66px;
+  height: fit-content;
   padding: 14px;
   width: 100%;
+  max-width: 350px;
+  word-break: break-all;
 `;
 const Buttonn = styled.div`
   width: 6rem;
@@ -898,7 +905,7 @@ const MainContainer = styled.div`
   opacity: 1;
   width: 100%;
   padding: 2.5rem;
-  height: 120vh;
+  height: fit-content;
   @media (min-width: 300px) and (max-width: 768px) {
     padding: 2.5rem 1.5rem 1.5rem 1.5rem;
     height: 100%;

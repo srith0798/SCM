@@ -33,10 +33,10 @@ const  topFunctionCallheaders = [
           <MainHeading>{props.graphName}</MainHeading>
         </AlignmentContainer>
         <AlignmentContainer>
-        {props.graphNo === 4 ?  <CSVLink style={csvLink} data={props.data} headers={topCallersheaders}
+        {props.graphNo === 4 ?  <CSVLink style={props?.data?.length > 0 ? csvLink : csvLinkDisabled} data={props.data} headers={topCallersheaders}
         filename="Top Callers"
         >Export Data</CSVLink>:
-        <CSVLink style={csvLink} data={props.data} headers={topFunctionCallheaders} filename="Top Function Calls"
+        <CSVLink style={props?.data?.length > 0 ? csvLink : csvLinkDisabled} data={props.data} headers={topFunctionCallheaders} filename="Top Function Calls"
         >Export Data</CSVLink>}
           <Icon src="/images/refresh.svg" />
         </AlignmentContainer>
@@ -199,15 +199,36 @@ const csvLink ={
   paddingLeft: "26px",
   backgroundSize: "18px",
   position: "relative",
-  backgroundColor: "#ffffff",
+  backgroundColor: "#3163f0",
   border: "none",
   borderRadius: "4px",
   width: "100%",
-  color: "#3163f0",
+  color: "#ffffff",
   height: "34px",
   fontSize: "1rem",
   fontWeight: "500",
   textDecoration: "none",
   paddingTop: "5px",
   paddingRight: "15px"
+}
+const csvLinkDisabled ={
+
+  backgroundImage: `url("/images/Export.svg")`,
+  backgroundRepeat: "no-repeat",
+  backgroundPosition: "8px",
+  paddingLeft: "26px",
+  backgroundSize: "18px",
+  position: "relative",
+  backgroundColor: "#8DA8F3",
+  border: "none",
+  borderRadius: "4px",
+  width: "100%",
+  color: "#ffffff",
+  height: "34px",
+  fontSize: "1rem",
+  fontWeight: "500",
+  textDecoration: "none",
+  paddingTop: "5px",
+  paddingRight: "15px",
+  pointerEvents: "none"
 }

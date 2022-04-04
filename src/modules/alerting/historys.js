@@ -28,8 +28,8 @@ export default function Historys() {
   };
 
   const changePage = (value) => {
-    getNotifications(Math.ceil(value.selected * countToggle),
-    countToggle);
+    // getNotifications(Math.ceil(value.selected * countToggle),
+    // countToggle);
   };
 
   useEffect(() => {
@@ -40,7 +40,6 @@ export default function Historys() {
   background: #ffffff 0% 0% no-repeat padding-box;
   border-radius: 0.375rem;
   opacity: 1;
-  margin-top: 1.25rem;
   min-height: 15.625rem;
   height: fit-content;
   overflow-y: hidden;
