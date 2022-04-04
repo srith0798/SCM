@@ -279,9 +279,9 @@ const BackgroundChanger = styled.div`
             </SubContainer>
             <ContentDiv>
               <SubHeadBlue>Contract Name</SubHeadBlue>
-              <Heading>{props?.name}</Heading>
+              <Heading>{loader === false ? props?.name: ""}</Heading>
               <SubHeadBlue>Address</SubHeadBlue>
-              <Heading>{props?.address}</Heading>
+              <Heading>{loader === false ? props?.address : ""}</Heading>
               <SubHeadBlue>Choose Destination</SubHeadBlue>
               {rows.length > 0
                 ? rows.length > 0 &&

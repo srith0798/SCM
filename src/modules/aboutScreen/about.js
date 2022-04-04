@@ -65,12 +65,13 @@ export default function About(props) {
           </LeftContainer>
           <RightContainer>
             <VideoBox>
-              <ReactPlayer
+              {/* <ReactPlayer
                 url="https://www.youtube.com/watch?v=qfXJKTkXzD8"
                 controls
                 width="100%"
                 height="100%"
-              />
+              /> */}
+              <ImgMain src="/images/smart-contract-manger-infographic.svg" alt="img" style={{width: "fitContent",  height: "fitContent"}}/>
             </VideoBox>
             <div style={{ display: "flex", marginBottom: "30px" }}>
               <SmartButton
@@ -191,12 +192,12 @@ const MainBoxContainer = styled.div`
   @media (max-width: 768px) {
     padding: 30px;
   }
-  @media (min-width: 768px) and (max-width: 1200px) {
+  /* @media (min-width: 768px) and (max-width: 1200px) {
     padding: 16px;
     height: 128vh;
-  }
-  @media (min-width: 800px) and (max-width: 1024px) {
-    height: 117vh !important;
+  } */
+  @media (min-width: 768px) and (max-width: 1200px) {
+    height: 128vh !important;
   }
   @media (min-width: 1024px) and (max-width: 1200px) {
     height: 120vh !important;
@@ -275,6 +276,16 @@ const LeftContainer = styled.div`
     padding-bottom: 16px;
   }
 `;
+const ImgMain = styled.img`
+@media (min-width: 300px) and (max-width: 767px) {
+  width: 260px;
+ }
+
+ @media (min-width: 768px) and (max-width: 1024px) {
+  width: 350px;
+ }
+
+`;
 const Span = styled.span`
   color: #0089ff;
   white-space: nowrap;
@@ -307,7 +318,7 @@ const IconRow = styled.div`
   justify-content: space-between;
   max-width: 47.438rem;
   width: 100%;
-  @media (min-width: 300px) and (max-width: 768px) {
+  @media (min-width: 300px) and (max-width: 767px) {
     max-width: 47.438rem;
     flex-direction: column;
     align-items: center;
@@ -378,7 +389,6 @@ const Button = styled.button`
 `;
 const VideoBox = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
-  border: 0.125rem solid #d8d8d8;
   border-radius: 0.125rem;
   opacity: 1;
   position: relative;
@@ -396,7 +406,7 @@ const HeadingContainer = styled.div`
   font-weight: 600;
   color: #1f1f1f;
   padding: 3.75rem;
-  @media (min-width: 300px) and (max-width: 768px) {
+  @media (min-width: 300px) and (max-width: 767px) {
     font-size: 1rem;
     padding: 0rem;
     white-space: nowrap;
