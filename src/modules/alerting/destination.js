@@ -158,6 +158,7 @@ const ColumnTwo = styled.div`
   color: #102c78;
   width: 100%;
   margin: 0.25rem;
+  word-break: break-all;
 `;
 const RowData = styled.div`
   display: flex;

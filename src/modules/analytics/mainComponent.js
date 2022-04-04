@@ -60,7 +60,7 @@ export default function MainComponent(props) {
 
   const styles = {
     position: "absolute",
-    top: 90,
+    top: 70,
     right: 0,
     left: 0,
     zIndex: 1,
@@ -413,7 +413,7 @@ export default function MainComponent(props) {
                       selected={selected?.address}
                     >
                       {contracts.length === 0 ? (
-                        <DropDown onClick={handleClick}>
+                        <DropDown>
                           <Span
                             style={{
                               marginTop:
