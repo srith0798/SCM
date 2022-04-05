@@ -13,6 +13,7 @@ export default function Historys() {
   const [notifications, setNotifications] = React.useState([]);
   const [page, setPage] = React.useState(1);
   const [countToggle, setCountToggle] = React.useState(10);
+  const [totalCount, setTotalCount] = React.useState(0);
 
   const getNotifications = async (skip = 0, limit = countToggle) => {
     let request = {
@@ -25,6 +26,7 @@ export default function Historys() {
     );
     if (!response || error) return;
     setNotifications(response?.historyList);
+    setTotalCount(response?.totalCount);
   };
 
   const changePage = (value) => {
@@ -64,6 +66,18 @@ export default function Historys() {
   }
 `;
 
+
+const PlaceHolderContainer = styled.div`
+  display: flex;
+  width: 100%;
+  height: 16rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 50%;
+  font-weight: 600;
+  font-size: 13px;
+`;
 const NewDiv = styled.div`
   padding: 0.738rem;
   border-bottom: 0.063rem solid #e3e7eb;
@@ -278,8 +292,15 @@ const SelectionDivStyleThree = styled.div`
         ))}
        
       </DetailBox>
+      {notifications && notifications.length === 0 ? (
+        <PlaceHolderContainer>
+        No history data is available
+      </PlaceHolderContainer>
+    )
+  : (""
+      )}
     </MainContainer>
-    <PageVerifyCheck>
+    <PageVerifyCheck style={{display: totalCount<=10? "none": ""}}>
         <PaginationDiv>
           <BottomLabel>
             Per Page

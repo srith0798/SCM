@@ -105,7 +105,7 @@ export const genericConstants={
   TAG:{TYPE: "tag", IMAGE :  "/images/tag-logo-white.svg"}
 },
 ALERT_TYPE_NAMES:{
-  SUCCESSFULL_TRANSACTIONS:"Successfull Transaction",
+  SUCCESSFULL_TRANSACTIONS:"Successful Transaction",
   FAILED_TRANSACTIONS:"Failed Transaction",
   TOKEN_TRANSFER:"Token Transfer",
   TRANSACTION_VALUE:"Value",

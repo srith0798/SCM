@@ -78,13 +78,11 @@ export default function TransactionDetails() {
       setfunctionName(check);
       getContractByAddress(response.contractAddress, check);
       getGasPriceInUSD(response.gasPrice);
-      
     } catch (e) {}
   };
 
   function getfunction(val) {
-    let trim = val?.split("(");
-    return trim[0];
+    return val?.substring(0,10);
   }
   const getContractByAddress = async (address, func) => {
     let userId = sessionManager.getDataFromCookies(cookiesConstants.USER_ID);
@@ -101,9 +99,9 @@ export default function TransactionDetails() {
       setContractName(response.contractName);
       let arr = response.sourceCode.split("}");
       let final = arr.filter((row) => {
-        return row.includes(`${func}(address`);
+        return row.includes(`${func}`);
       });
-      console.log("final", final[1].length);
+
       setFunctionOccured(final[final.length - 1]);
       setLoader(false);
     } catch (e) {}
@@ -137,7 +135,6 @@ export default function TransactionDetails() {
     setSelected(selected);
     getTransaction(id);
   }, [url]);
-  
 
   const MainContainer = styled.div`
     background: #ecf0f7 0% 0% no-repeat padding-box;
@@ -231,15 +228,15 @@ export default function TransactionDetails() {
     margin-left: 15px;
   `;
   const SubHeadBlueFunc = styled.div`
-  font-size: 0.85rem;
-  display: flex;
-  color: #416be0;
-  cursor: pointer;
-  white-space: pre;
-  @media (min-width: 300px) and (max-width: 767px) {
-    margin-left: 5px;
-  }
-`;
+    font-size: 0.85rem;
+    display: flex;
+    color: #416be0;
+    cursor: pointer;
+    white-space: pre;
+    @media (min-width: 300px) and (max-width: 767px) {
+      margin-left: 5px;
+    }
+  `;
   const SubHeadBlueMob = styled.div`
     font-size: 0.85rem;
     display: flex;
@@ -392,7 +389,6 @@ export default function TransactionDetails() {
     @media (min-width: 768px) and (max-width: 1024px) {
       max-width: 11.25rem;
     }
-
   `;
 
   const Button = styled.button`
@@ -1007,7 +1003,7 @@ export default function TransactionDetails() {
                     .toLocaleString("fullwide", { useGrouping: false })
                     .replace(/\.?0+$/, "") || 0}{" "}
                   XDC ($
-                  {gasPriceUSD.toFixed(12) || 0}{" "} )
+                  {gasPriceUSD.toFixed(12) || 0} )
                 </SubHead>
               </Row>
             </CommonDiv>
@@ -1192,7 +1188,7 @@ export default function TransactionDetails() {
               src="/images/contracts.svg"
               style={{ width: "1rem", marginRight: "3px" }}
             />
-            {functionName} in {contractName}
+            {row.function?.split("(")[0]} in {contractName}
             <DataDivContainer>
               {/* <BackgroundChangerTransfer> */}
               <InputDataDiv>
