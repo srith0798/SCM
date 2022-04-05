@@ -5,7 +5,9 @@ import { sessionManager } from "../managers/sessionManager";
 export default {
   getDestinations,
   addDestination,
-  deleteDestination
+  deleteDestination,
+  verifyEmail,
+  resendEmail
 };
 
 function getHeaders() {
@@ -67,6 +69,50 @@ async function getDestinations(requestData) {
       httpConstants.METHOD_TYPE.DELETE,
       getHeaders(),
       {},
+      url
+    )
+      .then((response) => {
+        if (
+          !response.success ||
+          response.responseCode !== 200 ||
+          !response.responseData ||
+          response.responseData.length === 0
+        )
+          return Promise.reject(response);
+        return Promise.resolve(response.responseData);
+      })
+      .catch(function (err) {
+        return Promise.reject(err);
+      });
+  }
+  async function verifyEmail(requestData) {
+    let url = process.env.REACT_APP_ALERT_MICROSERVICE + "/verify-email";
+    return httpService(
+      httpConstants.METHOD_TYPE.POST,
+      getHeaders(),
+      requestData,
+      url
+    )
+      .then((response) => {
+        if (
+          !response.success ||
+          response.responseCode !== 200 ||
+          !response.responseData ||
+          response.responseData.length === 0
+        )
+          return Promise.reject(response);
+        return Promise.resolve(response.responseData);
+      })
+      .catch(function (err) {
+        return Promise.reject(err);
+      });
+  }
+  async function resendEmail(requestData) {
+    let url = process.env.REACT_APP_ALERT_MICROSERVICE + "/resend-email";
+    return httpService(
+      httpConstants.METHOD_TYPE.POST,
+      getHeaders(),
+      requestData,
       url
     )
       .then((response) => {

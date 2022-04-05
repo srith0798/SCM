@@ -12,9 +12,10 @@ import { sessionManager } from "../../managers/sessionManager";
 import ShowLoader from "../../common/components/showLoader";
 import { cookiesConstants } from "../../constants";
 import ContractsService from "../../services/contractsService";
+import DestinationService from "../../services/destination";
 
 export default function Rules() {
-  const [activeButton, setActiveButton] = React.useState("Rules");
+  const [activeButton, setActiveButton] = React.useState("");
 
   const handleViewClick = (e) => {
     setActiveButton(e.target.id);
@@ -78,8 +79,26 @@ export default function Rules() {
       window.location.reload();
     }, 100);
   };
+  const verifyEmail = async (destinationId , sessionToken) =>{
+    let req = {
+      destinationId : destinationId,
+      sessionToken : sessionToken
+    }
+    const [error , response] = await utility.parseResponse(DestinationService.verifyEmail(req))
+  }
 
   useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const reference = urlParams.get('type');
+    const destinationId = urlParams.get('destinationId');
+    const token = urlParams.get('sessionToken');
+    if(reference && reference === "Destination" && destinationId && token)
+    { verifyEmail(destinationId , token);
+      history.push("/alerting")
+      setActiveButton("Destination");
+      return;
+    }
+    setActiveButton("Rules")  
     getContractList();
     let check = history?.location?.state?.id;
     if (check === "add") {

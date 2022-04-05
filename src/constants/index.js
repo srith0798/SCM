@@ -117,7 +117,14 @@ DESTINATION_TYPE :{
   SLACK:"Slack",
   WEBHOOK:"Webhook",
   EMAIL:"Email"
+},
+DESTINATION_STATUS:{
+  VERIFIED:{type: "VERIFIED" , name: "Verified"}, 
+  UNVERIFIED: {type: "UNVERIFIED" , name: "Unverified"}, 
+  CONNECTED: {type: "CONNECTED" , name: "Connected"}, 
+  NOT_CONNECTED: {type: "NOT_CONNECTED" , name: "Not Connected"}, 
 }
+
 }
 export const NETWORKS = {
   XDC_MAINNET: "XDC Mainnet",
