@@ -7,7 +7,7 @@ import utility from "../../utility";
 import DestinationService from "../../services/destination";
 import { sessionManager } from "../../managers/sessionManager";
 import AddDestination from "../popup/addDestination";
-import { cookiesConstants } from "../../constants";
+import { cookiesConstants, genericConstants } from "../../constants";
 
 export default function Destination() {
   const [destinations, setDestinations] = React.useState([]);
@@ -41,6 +41,7 @@ export default function Destination() {
       label: label,
       url: url,
       channelName: channelName,
+      status: destinationType === "EMAIL" ? genericConstants.DESTINATION_STATUS.UNVERIFIED.type : genericConstants.DESTINATION_STATUS.NOT_CONNECTED.type
     }
     const [error, response] = await utility.parseResponse(DestinationService.addDestination(requestData));
     if (error) {
@@ -62,8 +63,22 @@ export default function Destination() {
       window.location.reload();
     },100);
   }
+  const resendEmail = async (destination) =>{
+    let req = {
+      destinationId : destination.destinationId,
+      sessionToken : destination.sessionToken,
+      url : destination.url
+    }
+    const [error] = await utility.parseResponse(DestinationService.resendEmail(req))
+    if(error){
+      utility.apiFailureToast(error ? error : "Cannot Resend Email")
+      return;
+    }
+    utility.apiSuccessToast("Email Sent");
+  }
   useEffect(() => {
     getDestinations();
+ 
   }, []);
 
   const MainContainer = styled.div`
@@ -160,6 +175,17 @@ const ColumnTwo = styled.div`
   margin: 0.25rem;
   word-break: break-all;
 `;
+const ResendEmail = styled.div`
+  display: flex;
+  flex-flow: column nowrap;
+  font-size: 0.875rem;
+  font-weight: 600;
+  max-width: 250px;
+  color: rgb(49, 99, 240);
+  width: 100%;
+  margin: 0.25rem;
+  word-break: break-all;
+`;
 const RowData = styled.div`
   display: flex;
   @media (min-width: 300px) and (max-width: 768px) {
@@ -251,9 +277,10 @@ const Img = styled.img`
                 </ColumnTwo>
                 <ColumnTwo>
                   <ColorChanging style={{ fontWeight: "normal" }}>
-                    {destination.status}
+                    {destination?.status ? genericConstants.DESTINATION_STATUS[destination?.status].name : ""}
                   </ColorChanging>
                 </ColumnTwo>
+               {destination.type === "EMAIL" && destination.status !== genericConstants.DESTINATION_STATUS.VERIFIED.type ? <ResendEmail onClick={()=>resendEmail(destination)}>Resend Email</ResendEmail> : <ColumnTwo></ColumnTwo>}
                 <ColumnTwo >
                   <Tooltip disableFocusListener title="Delete">
                     <img
