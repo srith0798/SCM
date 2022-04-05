@@ -29,7 +29,7 @@ export default function TransactionDetails() {
   const [from, setFrom] = React.useState("");
   const [to, setTo] = React.useState("");
   // const [input, setInput] = React.useState("");
-  const [transfer, setTransfer] = React.useState("");
+  const [functionOccured, setFunctionOccured] = React.useState("");
   const [inputDesktop, setInputDesktop] = React.useState("");
   const [inputCopy, setInputCopy] = React.useState("");
   const [showInputData, setShowInputData] = React.useState(false);
@@ -41,6 +41,7 @@ export default function TransactionDetails() {
   const [status, setStatus] = React.useState("");
   const [selected, setSelected] = React.useState("");
   const [gasPriceUSD, setGasPriceUSD] = React.useState(0);
+  const [functionName, setfunctionName] = React.useState("");
 
   const wei = 1000000000;
 
@@ -73,12 +74,19 @@ export default function TransactionDetails() {
       setFrom(utility.truncateTxnAddress(response.from));
       setTo(utility.truncateTxnAddress(response.to));
       setStatus(response.status ? "Success" : "Fail");
-      getContractByAddress(response.contractAddress);
+      let check = getfunction(response.function);
+      setfunctionName(check);
+      getContractByAddress(response.contractAddress, check);
       getGasPriceInUSD(response.gasPrice);
+      
     } catch (e) {}
   };
 
-  const getContractByAddress = async (address) => {
+  function getfunction(val) {
+    let trim = val?.split("(");
+    return trim[0];
+  }
+  const getContractByAddress = async (address, func) => {
     let userId = sessionManager.getDataFromCookies(cookiesConstants.USER_ID);
     try {
       let requestData = {
@@ -90,13 +98,13 @@ export default function TransactionDetails() {
         requestData,
         add
       );
-      console.log("res", response);
       setContractName(response.contractName);
       let arr = response.sourceCode.split("}");
       let final = arr.filter((row) => {
-        return row.includes("transfer(address");
+        return row.includes(`${func}(address`);
       });
-      setTransfer(final[final.length - 1]);
+      console.log("final", final[1].length);
+      setFunctionOccured(final[final.length - 1]);
       setLoader(false);
     } catch (e) {}
   };
@@ -221,19 +229,26 @@ export default function TransactionDetails() {
     cursor: pointer;
     white-space: pre;
     margin-left: 15px;
-    @media (min-width: 300px) and (max-width: 767px) {
-      margin-left: 5px;
-    }
   `;
+  const SubHeadBlueFunc = styled.div`
+  font-size: 0.85rem;
+  display: flex;
+  color: #416be0;
+  cursor: pointer;
+  white-space: pre;
+  @media (min-width: 300px) and (max-width: 767px) {
+    margin-left: 5px;
+  }
+`;
   const SubHeadBlueMob = styled.div`
     font-size: 0.85rem;
     display: flex;
     color: #416be0;
     cursor: pointer;
     white-space: pre;
-    margin-left: 15px;
     @media (min-width: 300px) and (max-width: 767px) {
-      margin-left: 125px;
+      /* margin-left: 125px; */
+      margin-right: 25%;
     }
   `;
   const CommonDiv = styled.div`
@@ -341,7 +356,7 @@ export default function TransactionDetails() {
     width: 100%;
     max-width: 16.25rem;
     @media (min-width: 0px) and (max-width: 767px) {
-      min-width: 170px;
+      min-width: 180px;
       /* max-width: max-content; */
     }
     @media (min-width: 768px) and (max-width: 1023px) {
@@ -372,7 +387,12 @@ export default function TransactionDetails() {
     font-size: 0.875rem;
     font-weight: 600;
     color: #102c78;
-    width: 16.5%;
+    width: 100%;
+    max-width: 16.25rem;
+    @media (min-width: 768px) and (max-width: 1024px) {
+      max-width: 11.25rem;
+    }
+
   `;
 
   const Button = styled.button`
@@ -1028,7 +1048,7 @@ export default function TransactionDetails() {
             <CommonDiv>
               <Row>
                 <Heading>Function: </Heading>
-                <SubHeadBlue>{row.function}</SubHeadBlue>
+                <SubHeadBlueFunc>{row.function}</SubHeadBlueFunc>
               </Row>
             </CommonDiv>
             <CommonDiv>
@@ -1172,7 +1192,7 @@ export default function TransactionDetails() {
               src="/images/contracts.svg"
               style={{ width: "1rem", marginRight: "3px" }}
             />
-            transfer in {contractName}
+            {functionName} in {contractName}
             <DataDivContainer>
               {/* <BackgroundChangerTransfer> */}
               <InputDataDiv>
@@ -1191,8 +1211,8 @@ export default function TransactionDetails() {
                             margin: 0,
                           }}
                         >
-                          {transfer !== undefined
-                            ? transfer + "}"
+                          {functionOccured !== undefined
+                            ? functionOccured + "}"
                             : "No function available"}
                         </SyntaxHighlighter>
                       </CodeContainer>
@@ -1215,7 +1235,7 @@ export default function TransactionDetails() {
           to={row.to ? row.to : row.contractAddress}
           value={row.value}
           logs={row.logs}
-          func={transfer}
+          func={functionName}
         />
       )}
       {/* {activeButton === "StateChange" && <StateChange />} */}
