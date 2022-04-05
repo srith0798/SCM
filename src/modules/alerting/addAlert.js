@@ -200,11 +200,11 @@ export default function AddAlert() {
     setLoader(false);
 
     if (error) {
-      utility.apiFailureToast(error || "Cannot add Alert");
+      // utility.apiFailureToast(error || "Cannot add Alert");
       setLoader(false);
       return;
     }
-    utility.apiSuccessToast("Alert added successfully!");
+    // utility.apiSuccessToast("Alert added successfully!");
   };
   const addDestination = async (label, url, channelName) => {
     if (destinationType === "EMAIL") {

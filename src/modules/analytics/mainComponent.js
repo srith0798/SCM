@@ -96,8 +96,10 @@ export default function MainComponent(props) {
     }
     if (response.contractList.length === 0) {
       setLoader(false);
+      console.log("insideee");
       setTransactionOverTimeError("No Transactions Available");
-      setActiveUserGraphError("No Active users available");
+      setActiveUserGraphError("No active users available");
+      setGasUsedOverTimeError("No gas used data available ")
       setTopCallersError("No Top Callers Available");
       setTopFunctionCallsError("No Top Function Calls Available");
       return;
@@ -341,7 +343,7 @@ export default function MainComponent(props) {
     if (value === 3) {
       setGraphName("Active users");
       setData(data);
-      setError(activeUsersError);
+      setError(activeUSerGraphError);
     }
     if (value === 4) {
       setGraphName("Top Callers");
@@ -508,7 +510,7 @@ export default function MainComponent(props) {
                           selectValue={gasUsedSelect}
                           data={gasPriceData}
                           graphNo={2}
-                          error1={transactionOverTimeError}
+                          error1={gasUsedOverTimeError}
                         ></SelectComponent>
                       </SubContainer>
                       {noOfTransactions.length === 0 ? (
@@ -516,7 +518,7 @@ export default function MainComponent(props) {
                           {" "}
                           <Line
                             data={noOfTransactions}
-                            error={transactionOverTimeError}
+                            error={gasUsedOverTimeError}
                           />
                         </GraphSizeError>
                       ) : (
@@ -524,7 +526,7 @@ export default function MainComponent(props) {
                           {" "}
                           <Line
                             data={gasPriceData}
-                            error={transactionOverTimeError}
+                            error={gasUsedOverTimeError}
                           />
                         </GraphSize>
                       )}

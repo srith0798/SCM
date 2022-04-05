@@ -195,7 +195,7 @@ const CodeDiv = styled.div`
             <HeaderText>Event Name</HeaderText>
             <FilterSelect>
               <option value="filter">
-                {props?.func !== undefined ? props?.func : "Not available "}
+                {props?.func !== undefined ? props?.func?.split("(")[0] : "Not available "}
               </option>
             </FilterSelect>
           </FilterDivision>
@@ -210,7 +210,7 @@ const CodeDiv = styled.div`
         <MidContainer>
           <ContentWrapper>
             <MidHeader>
-              {props?.func !== undefined ? props?.func : "Not available "}
+              {props?.func !== undefined ? props?.func?.split("(")[0] : "Not available "}
             </MidHeader>
             <HeaderText>{address[0]?.contractName}</HeaderText>
             <CodeWrapper>
