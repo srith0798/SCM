@@ -10,6 +10,7 @@ function getHeaders() {
   return {
     "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON,
     skip: true,
+    "X-API-key": process.env.REACT_APP_X_API_KEY
   };
 }
 

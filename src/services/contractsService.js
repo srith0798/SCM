@@ -29,6 +29,7 @@ function getHeaders() {
     "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON,
     "authorization": `Bearer ${sessionManager.getDataFromCookies(cookiesConstants.SESSION_TOKEN)}`,
     skip: true,
+    "X-API-key": process.env.REACT_APP_X_API_KEY
   };
 }
 
