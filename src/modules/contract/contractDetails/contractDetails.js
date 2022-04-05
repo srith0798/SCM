@@ -615,6 +615,8 @@ console.log(`https://observer.xdc.org/verify-contracts/${name}/scm`, "asdadada")
             >
               <img
                 alt=""
+                id="General"
+                onClick={handleViewClick}
                 style={{ marginRight: "0.375rem" }}
                 src={
                   activeButton === "General"
@@ -639,6 +641,8 @@ console.log(`https://observer.xdc.org/verify-contracts/${name}/scm`, "asdadada")
             >
               <img
                 alt=""
+                id="Source Code"
+                onClick={handleViewClick}
                 style={{ marginRight: "0.375rem" }}
                 src={
                   activeButton === "Source Code"

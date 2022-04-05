@@ -147,11 +147,11 @@ const Table =styled.div`
   height:30rem;
   overflow-y:hidden;
   margin-top:1rem;
-  //text-align: center;
 `;
 
 const SubTable = styled.div`
 text-align: center;
+margin-top: 11.5rem;
 `;
 const ContractFrom = styled.div`
   width: 26%;
@@ -193,7 +193,7 @@ const Count = styled.div`
 
 const csvLink ={
 
-  backgroundImage: `url("/images/Export.svg")`,
+  backgroundImage: `url("/images/export.svg")`,
   backgroundRepeat: "no-repeat",
   backgroundPosition: "8px",
   paddingLeft: "26px",
@@ -213,7 +213,7 @@ const csvLink ={
 }
 const csvLinkDisabled ={
 
-  backgroundImage: `url("/images/Export.svg")`,
+  backgroundImage: `url("/images/export.svg")`,
   backgroundRepeat: "no-repeat",
   backgroundPosition: "8px",
   paddingLeft: "26px",

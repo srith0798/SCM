@@ -101,7 +101,7 @@ export default function AddAlerts(props) {
       utility.apiFailureToast(error || "Cannot add Alert");
       return;
     }
-    utility.apiSuccessToast("Alert added successfully!");
+    // utility.apiSuccessToast("Alert added successfully!");
     setLoader(false);
 
     setTimeout(()=>{

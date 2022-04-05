@@ -72,7 +72,7 @@ export default function Rules() {
     );
     setLoader(false);
     if (error) return;
-    utility.apiSuccessToast("Alert Deleted Successfully");
+    // utility.apiSuccessToast("Alert Deleted Successfully");
     await getAlertList();
 
     setTimeout(() => {

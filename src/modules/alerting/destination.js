@@ -57,7 +57,7 @@ export default function Destination() {
     const [error] = await utility.parseResponse(DestinationService.deleteDestination(destinationId));
      if(error)
       return;
-    utility.apiSuccessToast("Destination Deleted Successfully");
+    // utility.apiSuccessToast("Destination Deleted Successfully");
     await getDestinations();
     setTimeout(()=>{
       window.location.reload();
@@ -74,7 +74,7 @@ export default function Destination() {
       utility.apiFailureToast(error ? error : "Cannot Resend Email")
       return;
     }
-    utility.apiSuccessToast("Email Sent");
+    // utility.apiSuccessToast("Email Sent");
   }
   useEffect(() => {
     getDestinations();
@@ -168,12 +168,26 @@ const ColumnTwo = styled.div`
   flex-flow: column nowrap;
   font-size: 0.875rem;
   font-weight: 600;
-  max-width: 200px;
+  max-width: 250px;
   color: #102c78;
   width: 100%;
   margin: 0.25rem;
   word-break: break-all;
 `;
+const DeleteDiv = styled.div`
+  display: flex;
+  flex-flow: column nowrap;
+  font-size: 0.875rem;
+  font-weight: 600;
+  max-width: 250px;
+  color: #102c78;
+  width: 100%;
+  margin: 0.25rem;
+  word-break: break-all;
+  justify-content: center;
+  align-items: center;
+`;
+
 const ResendEmail = styled.div`
   display: flex;
   flex-flow: column nowrap;
@@ -280,7 +294,7 @@ const Img = styled.img`
                   </ColorChanging>
                 </ColumnTwo>
                {destination.type === "EMAIL" && destination.status !== genericConstants.DESTINATION_STATUS.VERIFIED.type ? <ResendEmail onClick={()=>resendEmail(destination)}>Resend Email</ResendEmail> : <ColumnTwo></ColumnTwo>}
-                <ColumnTwo >
+                <DeleteDiv >
                   <Tooltip disableFocusListener title="Delete">
                     <img
                       alt=""
@@ -289,7 +303,7 @@ const Img = styled.img`
                       onClick = {()=>deleteDestination(destination.destinationId)}
                     />
                   </Tooltip>
-                </ColumnTwo>
+                </DeleteDiv>
               </RowData>
             </Div>
           ))}

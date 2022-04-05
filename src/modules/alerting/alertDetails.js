@@ -53,7 +53,7 @@ export default function AlertDetails() {
     const [error, response] = await utility.parseResponse(AlertService.updateAlert(requestData));
     if (error)
       return;
-    utility.apiSuccessToast("Alert Updated Succesfully");
+    // utility.apiSuccessToast("Alert Updated Succesfully");
     setOnEdit(false);  
     setAlert(response);
     setAlertDestinations(response?.destinations || []);
@@ -68,7 +68,7 @@ export default function AlertDetails() {
     const [error] = await utility.parseResponse(AlertService.updateAlert(requestData));
     if (error)
       return;
-    utility.apiSuccessToast("Alert Updated Succesfully");
+    // utility.apiSuccessToast("Alert Updated Succesfully");
     setOnEdit(false);  
     getAlert();
   }
