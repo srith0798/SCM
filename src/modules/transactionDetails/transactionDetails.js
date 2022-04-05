@@ -103,7 +103,7 @@ export default function TransactionDetails() {
       let final = arr.filter((row) => {
         return row.includes(`${func}(address`);
       });
-      console.log("final", final[1].length);
+      
       setFunctionOccured(final[final.length - 1]);
       setLoader(false);
     } catch (e) {}
