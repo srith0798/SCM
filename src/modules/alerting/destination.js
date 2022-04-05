@@ -84,7 +84,6 @@ export default function Destination() {
   const MainContainer = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
   border-radius: 0.375rem;
-  margin-top: 1.25rem;
   height: auto;
 `;
 const Div = styled.div`
@@ -169,7 +168,7 @@ const ColumnTwo = styled.div`
   flex-flow: column nowrap;
   font-size: 0.875rem;
   font-weight: 600;
-  max-width: 250px;
+  max-width: 200px;
   color: #102c78;
   width: 100%;
   margin: 0.25rem;

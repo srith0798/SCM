@@ -516,7 +516,6 @@ export default function Rules() {
                         style={{
                           fontSize: "14px",
                           color: "#00A58C",
-                          marginLeft: "50px",
                         }}
                         onClick={() => redirectToAlertDetails(alert.alertId)}
                       >
@@ -536,7 +535,6 @@ export default function Rules() {
                   </NewDiv>
                 ))
               ) : (
-                //  <CheckDiv show={alerts.length}>
                 <div>
                   <ImgDiv>
                     <PlaceHolderImage src="images/set alerts.svg" alt="" />
@@ -561,5 +559,3 @@ export default function Rules() {
     </>
   );
 }
-
-// const DetailBox = styled.div``;

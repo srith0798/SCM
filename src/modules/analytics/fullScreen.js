@@ -6,6 +6,7 @@ import Tooltip from "@mui/material/Tooltip";
 import { ExportToCsv } from 'export-to-csv';
 
 export default function FullScreen(props) {
+  console.log("props", props);
   const ClickMe = () => {
     props.expandGraphs(0);
   };
@@ -56,7 +57,7 @@ export default function FullScreen(props) {
                 <MainHeading>{props.graphName}</MainHeading>
               </AlignmentContainer>
               <AlignmentContainer>
-                <ExpandButton onClick={()=>exportToCSV(props?.data)}>Export Data</ExpandButton>
+                <ExpandButton check={props?.data?.length} disabled={props?.data?.length === 0 ? true : false} onClick={()=>exportToCSV(props?.data)}>Export Data</ExpandButton>
                 <Tooltip disableFocusListener title="Refresh">
                   <Icon src="/images/refresh.svg" />
                 </Tooltip>
@@ -155,17 +156,17 @@ const GraphSizeError = styled.div`
   }
 `;
 const ExpandButton = styled.button`
-  background-image: url("/images/Export.svg");
+  background-image: url("/images/export.svg");
   background-repeat: no-repeat;
   background-position: 8px;
   padding-left: 26px;
   background-size: 19px;
   position: relative;
-  background-color: #ffffff;
+  background-color: ${(props) => (props.check > 0 ? "#3163f0" : "#8DA8F3")};
   border: none;
   border-radius: 4px;
   width: 132px;
-  color: #3163f0;
+  color: #ffffff;
   height: 34px;
   font-size: 1rem;
   font-weight: 600;

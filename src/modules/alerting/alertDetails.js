@@ -252,7 +252,8 @@ const Heads = styled.div`
   max-width: 250px;
 `;
 const SubHeading = styled.div`
-  font-size: 13px;
+  font-size: 0.875rem;
+  color: #191919;
 `;
 
 const RowContainer = styled.div`
@@ -384,7 +385,14 @@ const Img = styled.img`
         <CommonDiv>
           <RowData>
             <Heading>Target</Heading>
-            <SubHeading>{alert?.target?.type}</SubHeading>
+            <SubHeading>{
+            alert?.target?.type
+            .toLowerCase()
+            .replace("_", " ")
+            .substring(0, 1)
+            .toUpperCase() +
+          alert?.target?.type.toLowerCase().replace("_", " ").substring(1)
+            }</SubHeading>
           </RowData>
         </CommonDiv>
       </Container>

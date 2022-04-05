@@ -823,7 +823,7 @@ export default function TransactionDetails() {
               />
             </Tooltip>
           </TabView>
-          <TabView
+          {/* <TabView
             id="StateChange"
             onClick={handleViewClick}
             style={{
@@ -861,7 +861,7 @@ export default function TransactionDetails() {
                 src="/images/tool-tip.svg"
               />
             </Tooltip>
-          </TabView>
+          </TabView> */}
         </TabLister>
       </Container>
       {activeButton === "Overview" && (
@@ -1218,7 +1218,7 @@ export default function TransactionDetails() {
           func={transfer}
         />
       )}
-      {activeButton === "StateChange" && <StateChange />}
+      {/* {activeButton === "StateChange" && <StateChange />} */}
     </MainContainer>
   );
 }
