@@ -173,8 +173,8 @@ export default function TransactionDetails() {
     max-width: 267px;
     font-size: 24px;
     font-weight: 600;
-    @media (max-width: 375px) {
-      font-size: 18px;
+    @media (min-width: 300px) and (max-width: 767px) {
+      font-size: 15px;
       margin-left: 10px;
     }
   `;
@@ -407,7 +407,8 @@ export default function TransactionDetails() {
     height: 2.125rem;
     font-size: 0.875rem;
     @media (min-width: 300px) and (max-width: 485px) {
-      display: none;
+    font-size: 11px;
+    width: 140px;
     }
   `;
   const SubContainer = styled.div`
@@ -539,26 +540,16 @@ export default function TransactionDetails() {
     max-width: 37.125rem;
     margin: 1.563rem 0rem 0.625rem 1.063rem;
     cursor: pointer;
-    @media (max-width: 768px) {
-      display: flex;
-      justify-content: space-between;
-      min-height: 45px;
-      font-size: 13px;
-      overflow-y: hidden;
-      margin: 0rem 0rem 0rem 0rem;
-      white-space: nowrap;
-      padding-left: 10px;
-      max-width: 34.125rem;
-    }
-    @media (max-width: 500px) {
+    @media (min-width: 300px) and (max-width: 767px) {
       display: flex;
       justify-content: space-between;
       min-height: 45px;
       font-size: 0.6rem;
       overflow-y: hidden;
-      margin: 0rem 0rem 0rem 0rem;
+      margin: 0rem 0rem 0rem 0.75rem;
       white-space: nowrap;
       padding-left: 0px;
+      max-width: 20.125rem;
     }
   `;
   const TabView = styled.div`
@@ -713,7 +704,7 @@ export default function TransactionDetails() {
       </SubContainer>
 
       <Container>
-        <SubHeading style={{ paddingTop: "0.625rem", paddingLeft: "1.25rem" }}>
+        <SubHeading style={{ paddingTop: "8px", paddingLeft: "1.25rem" }}>
           Txn hash
         </SubHeading>
         <TopContainer>
@@ -889,15 +880,15 @@ export default function TransactionDetails() {
                 <SubHead>{row.network}</SubHead>
               </Row>
             </CommonDiv>
-            <CommonDiv
+            {/* <CommonDiv
               style={{ display: status === "Success" ? "none" : "" }}
               check={status}
             >
               <Row>
                 <Heading>Error</Heading>
-                {/* <SubHead>Out of Gas</SubHead> */}
+                <SubHead>Out of Gas</SubHead>
               </Row>
-            </CommonDiv>
+            </CommonDiv> */}
             <CommonDiv>
               <Row>
                 <Heading>Block</Heading>
@@ -1152,17 +1143,13 @@ export default function TransactionDetails() {
               </Row>
             </CommonDiv>
           </TokenTransferDiv>
-          <StackTraceCheckDiv check={status}>
+          {/* <StackTraceCheckDiv check={status}>
             <b>Stack Trace</b> <ToolTipIcon src="/images/tool-tip.svg" />
             <StackContainer>
               <BackgroundChanger>
-                {/* <TextLine>Error Messege:out of gas</TextLine>
-              <img alt="" src="/images/error.svg" /> balances[_to] =
-              balances[_to].add(_value);
-              <br /> */}
               </BackgroundChanger>
             </StackContainer>
-          </StackTraceCheckDiv>
+          </StackTraceCheckDiv> */}
           <TokenTransferCheckDiv check={status}>
             <b>Token Transfer</b>
             <StackContainer>

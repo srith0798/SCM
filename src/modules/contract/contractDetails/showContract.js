@@ -54,6 +54,13 @@ export default function HideContract(props) {
     margin-top: 20px;
   `;
 
+  const handleClick = ()=>{
+    props.showContract();
+    // setTimeout(()=>{
+      props.click();
+    // },100);
+  }
+
   return (
     <div>
       <Dialog classes={{ paper: classes.dialogBox }} open={true}>
@@ -76,7 +83,7 @@ export default function HideContract(props) {
               style={{ width: "100%", maxWidth: "200px", marginTop: "30px" }}
             >
               <ButtonConfirm
-                click={props.showContract}
+                click={handleClick}
                 text={"Show Contract"}
               />
               <CancelButton onClick={props.click}>Cancel</CancelButton>

@@ -13,6 +13,7 @@ import ShowLoader from "../../common/components/showLoader";
 import { cookiesConstants } from "../../constants";
 import ContractsService from "../../services/contractsService";
 import DestinationService from "../../services/destination";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 
 export default function Rules() {
   const [activeButton, setActiveButton] = React.useState("");
@@ -32,6 +33,7 @@ export default function Rules() {
   const [contracts, setContracts] = React.useState([]);
   const [rows, setRows] = React.useState([]);
   const [loader, setLoader] = React.useState(false);
+  const [copyToolTip, setcopyToolTip] = React.useState(false);
 
   const getContractList = async (skip = 0, limit = 10) => {
     let userId = sessionManager.getDataFromCookies(cookiesConstants.USER_ID);
@@ -79,26 +81,28 @@ export default function Rules() {
       window.location.reload();
     }, 100);
   };
-  const verifyEmail = async (destinationId , sessionToken) =>{
+  const verifyEmail = async (destinationId, sessionToken) => {
     let req = {
-      destinationId : destinationId,
-      sessionToken : sessionToken
-    }
-    const [error , response] = await utility.parseResponse(DestinationService.verifyEmail(req))
-  }
+      destinationId: destinationId,
+      sessionToken: sessionToken,
+    };
+    const [error, response] = await utility.parseResponse(
+      DestinationService.verifyEmail(req)
+    );
+  };
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
-    const reference = urlParams.get('type');
-    const destinationId = urlParams.get('destinationId');
-    const token = urlParams.get('sessionToken');
-    if(reference && reference === "Destination" && destinationId && token)
-    { verifyEmail(destinationId , token);
-      history.push("/alerting")
+    const reference = urlParams.get("type");
+    const destinationId = urlParams.get("destinationId");
+    const token = urlParams.get("sessionToken");
+    if (reference && reference === "Destination" && destinationId && token) {
+      verifyEmail(destinationId, token);
+      history.push("/alerting");
       setActiveButton("Destination");
       return;
     }
-    setActiveButton("Rules")  
+    setActiveButton("Rules");
     getContractList();
     let check = history?.location?.state?.id;
     if (check === "add") {
@@ -211,6 +215,20 @@ export default function Rules() {
     display: flex;
   `;
 
+const CopyToClipboardImage = styled.img`
+margin-left: 1%
+cursor: pointer;
+@media (min-width: 340px) and (max-width: 767px) {
+  margin-left: 2px;
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+  margin-left: 83px;
+}
+@media (min-width: 1024px) and (max-width: 1075px) {
+  margin-left: 84px;
+}
+`;
+
   const RowData1 = styled.div`
     display: flex;
   `;
@@ -233,6 +251,11 @@ export default function Rules() {
       width: 100%;
       min-width: 160px;
     }
+  `;
+  const FlexDiv = styled.div`
+    display: flex !important;
+    justify-content: space-between !important;
+    width: 30%;
   `;
   const BackgroundChanger = styled.div`
     width: fit-content;
@@ -491,24 +514,30 @@ export default function Rules() {
                   <NewDiv>
                     <RowData1>
                       <ColumnTwo
-                        onClick={() => redirectToAlertDetails(alert.alertId)}
                       >
                         {alert?.target?.name}
                       </ColumnTwo>{" "}
                       <ColumnTwo
-                        onClick={() => redirectToAlertDetails(alert.alertId)}
                       >
                         <BackgroundChanger>
                           {utility.minimizeAddress(alert?.target?.value)}
+                          <CopyToClipboard
+                          text={alert?.target?.value}
+                          onCopy={() => setcopyToolTip(true)}
+                        >
+                          <Tooltip
+                            title={copyToolTip ? "Copied" : "Copy to clipboard"}
+                          >
+                            <CopyToClipboardImage src="/images/copy.svg" />
+                          </Tooltip>
+                        </CopyToClipboard>
                         </BackgroundChanger>
                       </ColumnTwo>
                       <ColumnTwo
-                        onClick={() => redirectToAlertDetails(alert.alertId)}
                       >
                         {alert?.target?.network}
                       </ColumnTwo>
                       <ColumnTwo
-                        onClick={() => redirectToAlertDetails(alert.alertId)}
                       >
                         {genericConstants.ALERT_TYPE_NAMES[alert?.type]}
                       </ColumnTwo>
@@ -517,19 +546,28 @@ export default function Rules() {
                           fontSize: "14px",
                           color: "#00A58C",
                         }}
-                        onClick={() => redirectToAlertDetails(alert.alertId)}
                       >
                         {alert.status ? "Enabled" : "Disabled"}
                       </ColumnTwo>
                       <ColumnTwo>
-                        <Tooltip disableFocusListener title="Delete">
+                        <FlexDiv>
                           <img
-                            alt=""
-                            src="/images/delete-blue.svg"
+                            onClick={() =>
+                              redirectToAlertDetails(alert.alertId)
+                            }
                             style={{ width: "1rem", cursor: "pointer" }}
-                            onClick={() => deleteAlert(alert.alertId)}
+                            src="/images/edit.svg"
+                            alt="edit"
                           />
-                        </Tooltip>
+                          <Tooltip disableFocusListener title="Delete">
+                            <img
+                              alt=""
+                              src="/images/delete-blue.svg"
+                              style={{ width: "1rem", cursor: "pointer" }}
+                              onClick={() => deleteAlert(alert.alertId)}
+                            />
+                          </Tooltip>
+                        </FlexDiv>
                       </ColumnTwo>
                     </RowData1>
                   </NewDiv>

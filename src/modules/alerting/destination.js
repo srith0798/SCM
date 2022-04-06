@@ -88,6 +88,7 @@ export default function Destination() {
 `;
 const Div = styled.div`
   padding-bottom: 0.5rem;
+  padding-top: 0.5rem;
   padding-left: 10px;
   border-bottom: 0.063rem solid #e3e7eb;
   height: fit-content ;
@@ -135,11 +136,26 @@ const ColumnOne = styled.div`
   font-weight: 600;
   color: #102c78;
   width: 100%;
-  margin-bottom: 1.25rem;
   border-bottom: 0.125rem solid #e3e7eb;
   padding-bottom: 10px;
   padding-left: 15px;
   margin-top: 1.5rem;
+  @media (min-width: 300px) and (max-width: 767px) {
+    margin-top: 1.5rem;
+    margin-bottom: 0px;
+  }
+`;
+const ColumnActive = styled.div`
+  display: flex;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #102c78;
+  width: 100%;
+  border-bottom: 0.125rem solid #e3e7eb;
+  padding-bottom: 10px;
+  padding-left: 15px;
+  margin-top: 1.5rem;
+  margin-left: 1%;
   @media (min-width: 300px) and (max-width: 767px) {
     margin-top: 1.5rem;
     margin-bottom: 0px;
@@ -215,6 +231,7 @@ const RowContainer = styled.div`
   width: 100%;
   max-width: 21.25rem;
   margin-bottom: 1.25rem;
+  margin-left: 1.5%;
   @media (min-width: 300px) and (max-width: 767px){
   margin: 0rem;
   padding: 20px;
@@ -227,7 +244,7 @@ const ColorChanging = styled.text`
 `;
 const Img = styled.img`
   width: 1rem;
-  margin-left: 10px;
+  margin-left: 18px;
   height: 30px;
   @media (min-width: 300px) and (max-width: 768px) {
     margin-right: -49px;
@@ -270,7 +287,7 @@ const Img = styled.img`
           </RowContainer>
         </Div>
 
-        <ColumnOne>
+        <ColumnActive>
           Active Destination
           <Tooltip
             disableFocusListener
@@ -278,7 +295,7 @@ const Img = styled.img`
           >
             <ToolTipIcon src="/images/tool-tip.svg" />
           </Tooltip>
-        </ColumnOne>
+        </ColumnActive>
         <LastDiv>
           {destinations && destinations.length > 0 && destinations.map((destination) => (
             <Div>

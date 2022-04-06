@@ -64,7 +64,7 @@ export default function AddContract(props) {
     );
     setLoader(false);
     if (error) {
-      utility.apiFailureToast(error);
+      setError(error);
       return;
     }
     setVerifyAddress(address);
@@ -104,6 +104,8 @@ export default function AddContract(props) {
   const handleEnterKey = () => {
       checkAddress();
   };
+
+  console.log("check", error);
   return (
     <div>
       <ShowLoader state={loader} top={"33%"} />
@@ -238,7 +240,7 @@ const ImportBox = styled.div`
 const ErrorTag = styled.div`
   color: red;
   font-size: 16px;
-  padding: 0px 0px 8px 28px;
+  padding: 0px 0px 8px 10px;
   margin-bottom: 0px;
 `;
 const IconImport = styled.div`
