@@ -12,6 +12,7 @@ import { sessionManager } from "../../managers/sessionManager";
 import AddTags from "../popup/addTag";
 import { useLocation } from "react-router";
 import { cookiesConstants } from "../../constants";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 
 export default function Contract(props) {
   const [open, setOpen] = useState(false);
@@ -26,6 +27,7 @@ export default function Contract(props) {
   const [searchRow, setSearchRow] = useState([]);
   // const [showplaceholder, setShowPlaceHolder] = useState([]);
   const [addTagPopUp, setAddTagPopUp] = useState(false);
+  const [copyToolTip, setcopyToolTip] = React.useState(false);
   let redirectDetails = false;
 
   const location = useLocation();
@@ -97,8 +99,8 @@ export default function Contract(props) {
   const [input, setInput] = useState("");
   const search = (e) => {
     setInput(e.target.value);
-    if(e.target.value.length % 3 ===0) {
-    searching(e.target.value, ["address", "contractName"]);
+    if (e.target.value.length % 3 === 0) {
+      searching(e.target.value, ["address", "contractName"]);
     }
   };
 
@@ -122,10 +124,10 @@ export default function Contract(props) {
     setAddTag(false);
   };
 
-  const Click = () =>{
+  const Click = () => {
     setAddTag(false);
     getContractList();
-  }
+  };
 
   if (location.state && location.state.homepageHistory) {
     setOpen(true);
@@ -284,10 +286,19 @@ export default function Contract(props) {
                       {data.contractName || "Contract"}
                     </ColumnSecond>
                     <ColumnSecond
-                      onClick={(e) => redirectTODetails(e, data._id)}
                     >
                       <BackgroundChanger>
                         {utility.truncateTxnAddress(data.address)}
+                        <CopyToClipboard
+                          text={data.address}
+                          onCopy={() => setcopyToolTip(true)}
+                        >
+                          <Tooltip
+                            title={copyToolTip ? "Copied" : "Copy to clipboard"}
+                          >
+                            <CopyToClipboardImage src="/images/copy.svg" />
+                          </Tooltip>
+                        </CopyToClipboard>
                       </BackgroundChanger>
                     </ColumnSecond>
 
@@ -304,13 +315,13 @@ export default function Contract(props) {
                           </AddTag>
                         ) : (
                           address[index].tags &&
-                          address[index].tags.map((tag, index) => 
+                          address[index].tags.map((tag, index) =>
                             index <= 0 && data.tags[index].name.length > 16 ? (
-                              <FinanceTag>{utility.truncateTag(tag.name)}</FinanceTag>
-                            ) : (
                               <FinanceTag>
-                                {tag.name}
+                                {utility.truncateTag(tag.name)}
                               </FinanceTag>
+                            ) : (
+                              <FinanceTag>{tag.name}</FinanceTag>
                             )
                           )
                         )}
@@ -328,11 +339,12 @@ export default function Contract(props) {
                       )} */}
                       </TagCol>
                     </ColumnSecond>
-                    <ColumnSecond
+                    <ColumnVisible
+                      check={data.isHidden}
                       onClick={(e) => redirectTODetails(e, data._id)}
                     >
                       {data.isHidden ? "Hidden" : "Visible"}
-                    </ColumnSecond>
+                    </ColumnVisible>
                   </RowTag>
                 </Div>
               </div>
@@ -385,7 +397,7 @@ const FinanceTag = styled.div`
   background-color: #eaefff;
   border: 1px solid #eaefff;
   border-radius: 0.25rem;
-  pointer: cursor;
+  cursor: pointer;
   max-width: 17.75rem;
   white-space: nowrap;
   height: 2.125rem;
@@ -397,6 +409,21 @@ const FinanceTag = styled.div`
   font-weight: 400;
   margin-right: 13px;
 `;
+
+const CopyToClipboardImage = styled.img`
+    margin-left: 1%
+    cursor: pointer;
+    @media (min-width: 340px) and (max-width: 767px) {
+      margin-left: 2px;
+    }
+    @media (min-width: 768px) and (max-width: 1023px) {
+      margin-left: 83px;
+    }
+    @media (min-width: 1024px) and (max-width: 1075px) {
+      margin-left: 84px;
+    }
+  `;
+
 const AddTag = styled.button`
   color: #416be0;
   z-index: 99;
@@ -679,6 +706,22 @@ const ColumnSecond = styled.div`
   min-width: 130px;
   font-weight: 400;
   color: #191919;
+  width: 100%;
+  white-space: nowrap;
+  @media (min-width: 300px) and (max-width: 750px) {
+    width: 100%;
+    min-width: 180px;
+  }
+  @media (min-width: 768px) and (max-width: 1024px) {
+    width: 100%;
+    min-width: 210px;
+  }
+`;
+const ColumnVisible = styled.div`
+  font-size: 0.875rem;
+  min-width: 130px;
+  font-weight: 400;
+  color: ${(props) => (props.check ? "#CE1A1A" : "#00A58C")};
   width: 100%;
   white-space: nowrap;
   @media (min-width: 300px) and (max-width: 750px) {
