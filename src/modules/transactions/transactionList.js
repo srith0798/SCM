@@ -16,12 +16,14 @@ import "moment-timezone";
 import ReactPaginate from "react-paginate";
 import moment from "moment";
 import { cookiesConstants } from "../../constants";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 
 export default function TransactionList() {
   const [state, setState] = useState(true);
   // const [filterData, setFilterData] = React.useState(1);
   const [open, isOpen] = useState(false);
   const [filterPopupOpen, setfilterPopupOpen] = useState(false);
+  const [copyToolTip, setcopyToolTip] = React.useState(false);
   const [countToggle, setCountToggle] = useState(10);
   let url = history?.location?.state?.id;
   let name = history?.location?.state?.name;
@@ -31,7 +33,7 @@ export default function TransactionList() {
   let getFrom = new Date(fromInput).toUTCString();
   let setFrom = new Date(getFrom).getTime();
 
-  let setTo = moment.utc(toInput[0]).endOf('day').valueOf();
+  let setTo = moment.utc(toInput[0]).endOf("day").valueOf();
   const handleClickOpen = () => {
     isOpen(true);
   };
@@ -61,7 +63,6 @@ export default function TransactionList() {
   const [initialPage, setInitialPage] = React.useState();
   const [defaultAddress, setDefaultAddress] = React.useState("");
 
-
   const getContractNames = async (skip = 0, limit = 10) => {
     let userId = sessionManager.getDataFromCookies(cookiesConstants.USER_ID);
     let dropDownSelect = [];
@@ -70,7 +71,7 @@ export default function TransactionList() {
         skip: skip,
         limit: limit,
         userId: userId,
-        sortingKey: { addedOn : -1}
+        sortingKey: { addedOn: -1 },
       };
       setLoader(true);
       const response = await ContractsService.getContractsList(requestData);
@@ -97,46 +98,46 @@ export default function TransactionList() {
   };
   const getTransaction = async (url, skip = 0, limit = countToggle) => {
     try {
-      let requestData = {}
+      let requestData = {};
       if (setFrom > 0 && (select === 2 || select === 3))
-      requestData = {
-        skip: skip,
-        limit: limit,
-        contractAddress: url,
-        status: select === 2 ? true : false,
-        date : {
-          fromDate: setFrom,
-          toDate: setTo
-       },
-       sortingKey : { createdOn : -1 }
-      };
-    else if (setFrom > 0 && select === 1)
-      requestData = {
-        skip: skip,
-        limit: limit,
-        contractAddress: url,
-        // status: "",
-        date : {
-          fromDate: setFrom,
-          toDate: setTo
-       },
-       sortingKey : { createdOn : -1 }
-      };
-    else if ((select === 2 || select === 3) && setFrom === 0)
-      requestData = {
-        skip: skip,
-        limit: limit,
-        contractAddress: url,
-        status: select === 2 ? true : false,
-        sortingKey : { createdOn : -1 }
-      };
-    else
-      requestData = {
-        skip: skip,
-        limit: limit,
-        contractAddress: url,
-        sortingKey : { createdOn : -1 }
-      };
+        requestData = {
+          skip: skip,
+          limit: limit,
+          contractAddress: url,
+          status: select === 2 ? true : false,
+          date: {
+            fromDate: setFrom,
+            toDate: setTo,
+          },
+          sortingKey: { createdOn: -1 },
+        };
+      else if (setFrom > 0 && select === 1)
+        requestData = {
+          skip: skip,
+          limit: limit,
+          contractAddress: url,
+          // status: "",
+          date: {
+            fromDate: setFrom,
+            toDate: setTo,
+          },
+          sortingKey: { createdOn: -1 },
+        };
+      else if ((select === 2 || select === 3) && setFrom === 0)
+        requestData = {
+          skip: skip,
+          limit: limit,
+          contractAddress: url,
+          status: select === 2 ? true : false,
+          sortingKey: { createdOn: -1 },
+        };
+      else
+        requestData = {
+          skip: skip,
+          limit: limit,
+          contractAddress: url,
+          sortingKey: { createdOn: -1 },
+        };
       setLoader(true);
       const response = await ContractsService.getTransactionsList(requestData);
       setLoader(false);
@@ -154,8 +155,6 @@ export default function TransactionList() {
     }
   };
 
-
-
   const searchTransaction = async (searchValues, searchKeys) => {
     try {
       const requestData = {
@@ -163,7 +162,7 @@ export default function TransactionList() {
         searchKeys: searchKeys,
         skip: 0,
         limit: countToggle,
-        contractAddress:selected
+        contractAddress: selected,
       };
       setLoader(true);
       const response = await ContractsService.getTransactionsList(requestData);
@@ -180,7 +179,7 @@ export default function TransactionList() {
     setInput(event.target.value);
     searchTransaction(event.target.value, ["hash"]);
   };
-  
+
   const [isSetOpen, setOpen] = React.useState(false);
   const handleClick = (e) => {
     setOpen((prev) => !prev);
@@ -218,20 +217,17 @@ export default function TransactionList() {
   };
   const changePage = (value) => {
     setValueCheck(value.selected);
-    if(setFrom>0 || select === 2 || select === 3){
-      filterSearch(Math.ceil(value.selected * countToggle),
-      countToggle);
-    }
-    else if(selected.length > 0) {
+    if (setFrom > 0 || select === 2 || select === 3) {
+      filterSearch(Math.ceil(value.selected * countToggle), countToggle);
+    } else if (selected.length > 0) {
       getTransaction(
-            selected,
-            Math.ceil(value.selected * countToggle),
-            countToggle
-          );
-
+        selected,
+        Math.ceil(value.selected * countToggle),
+        countToggle
+      );
     }
   };
-  
+
   const [toggle, setToggle] = React.useState({
     transactionHash: true,
     status: true,
@@ -250,7 +246,7 @@ export default function TransactionList() {
     //eslint-disable-next-line
   }, [countToggle]);
 
-  const resetPage = ()=>{
+  const resetPage = () => {
     console.log("Ran");
     setInitialPage(0);
   };
@@ -265,11 +261,11 @@ export default function TransactionList() {
         limit: limit,
         contractAddress: selected ? selected : defaultAddress,
         status: select === 2 ? true : false,
-        date : {
+        date: {
           fromDate: setFrom,
-          toDate: setTo
-       },
-       sortingKey : { createdOn : -1 }
+          toDate: setTo,
+        },
+        sortingKey: { createdOn: -1 },
       };
     else if (setFrom > 0 && select === 1)
       requestData = {
@@ -277,11 +273,11 @@ export default function TransactionList() {
         limit: limit,
         contractAddress: selected ? selected : defaultAddress,
         // status: "",
-        date : {
+        date: {
           fromDate: setFrom,
-          toDate: setTo
-       },
-       sortingKey : { createdOn : -1 }
+          toDate: setTo,
+        },
+        sortingKey: { createdOn: -1 },
       };
     else if ((select === 2 || select === 3) && setFrom === 0)
       requestData = {
@@ -289,24 +285,22 @@ export default function TransactionList() {
         limit: limit,
         contractAddress: selected ? selected : defaultAddress,
         status: select === 2 ? true : false,
-        sortingKey : { createdOn : -1 }
+        sortingKey: { createdOn: -1 },
       };
     else
       requestData = {
         skip: skip,
         limit: limit,
         contractAddress: selected ? selected : defaultAddress,
-        sortingKey : { createdOn : -1 }
+        sortingKey: { createdOn: -1 },
       };
     try {
       setLoader(true);
-      const response = await ContractsService.getTransactionsList(
-        requestData
-      );
+      const response = await ContractsService.getTransactionsList(requestData);
       setLoader(false);
-      setTimeout(()=>{
-      setInitialPage();
-      },100);
+      setTimeout(() => {
+        setInitialPage();
+      }, 100);
       let pageCount = response.totalCount;
       if (pageCount % countToggle === 0) {
         setPage(parseInt(pageCount / countToggle));
@@ -334,25 +328,22 @@ export default function TransactionList() {
 
   let user = "";
 
-    try {
-      user = window.web3.eth.accounts;
-    } catch (e) {}
+  try {
+    user = window.web3.eth.accounts;
+  } catch (e) {}
 
-    const redirectToLogout = () => {
-      sessionManager.removeDataFromCookies(cookiesConstants.IS_LOGGED_IN);
-      sessionManager.removeDataFromCookies(cookiesConstants.ACCOUNT_ADDRESS);
-      sessionManager.removeDataFromCookies(cookiesConstants.USER_ID);
-      sessionManager.removeDataFromCookies("username");
-      sessionManager.removeDataFromCookies("profilePicture");
-      history.replace("/");
-    };
+  const redirectToLogout = () => {
+    sessionManager.removeDataFromCookies(cookiesConstants.IS_LOGGED_IN);
+    sessionManager.removeDataFromCookies(cookiesConstants.ACCOUNT_ADDRESS);
+    sessionManager.removeDataFromCookies(cookiesConstants.USER_ID);
+    sessionManager.removeDataFromCookies("username");
+    sessionManager.removeDataFromCookies("profilePicture");
+    history.replace("/");
+  };
 
   return (
     <>
-    {(user==="")?
-    (
-      redirectToLogout()
-  ):""}
+      {user === "" ? redirectToLogout() : ""}
       <MainContainer>
         <SubContainer>
           <ShowLoader state={loader} top={"80%"} />
@@ -417,9 +408,7 @@ export default function TransactionList() {
                 picker below
               </InstructionText>
 
-            
               <ClickAwayListener onClickAway={handleClickAway}>
-                
                 <Box
                   sx={{
                     position: "relative",
@@ -429,54 +418,55 @@ export default function TransactionList() {
                   }}
                   selected={selected.address}
                 >
-                 
-                  
-                  {(contracts.length===0)?
-                  <DropDown onClick={handleClick}>                  
-                    
-                    <Span>No contract available</Span>
-                  </DropDown>:
-                  <DropDown onClick={handleClick}>                  
-                  {selectedName || "Contract"}
-                  <img
-                    style={{ marginLeft: "0.5rem", marginBottom: "10px," }}
-                    alt=""
-                    src="/images/XDCmainnet.svg"
-                  />
-                  <br />
-                  <TransactionHash>{selected}</TransactionHash>
-                  <Image src="/images/arrrow.svg" />
-                  
-                </DropDown>}
-                  
+                  {contracts.length === 0 ? (
+                    <DropDown>
+                      <Span>No contract available</Span>
+                      <Image src="/images/arrrow.svg" />
+                    </DropDown>
+                  ) : (
+                    <DropDown onClick={handleClick}>
+                      {selectedName || "Contract"}
+                      <img
+                        style={{ marginLeft: "0.5rem", marginBottom: "10px," }}
+                        alt=""
+                        src="/images/XDCmainnet.svg"
+                      />
+                      <br />
+                      <TransactionHash>{selected}</TransactionHash>
+                      <Image src="/images/arrrow.svg" />
+                    </DropDown>
+                  )}
 
                   {isSetOpen ? (
                     <Box sx={styles}>
-                      {(contracts.length===0)?
-                      (<Label>No contract available</Label>):
-                      <Label>Contracts</Label>}
-                      
-                      {(contracts.length!==0)?
-                      (contracts.length &&
-                        contracts.map((item) => (
-                          <div
-                            onClick={() => {
-                              setOpen(false);
-                              getTransaction(item.address);
-                              setSelected(item.address);
-                              setSelectedName(item.contractName);
-                            }}
-                          >
-                            {item.contractName || "Contract"}
-                            <img
-                              style={{ marginLeft: "0.5rem" }}
-                              alt=""
-                              src="/images/XDCmainnet.svg"
-                            />
-                            <br />
-                            <TransactionHash>{item.address}</TransactionHash>
-                          </div>
-                        ))):""}
+                      {contracts.length === 0 ? (
+                        <Label>No contract available</Label>
+                      ) : (
+                        <Label>Contracts</Label>
+                      )}
+
+                      {contracts.length !== 0
+                        ? contracts.length &&
+                          contracts.map((item) => (
+                            <div
+                              onClick={() => {
+                                setOpen(false);
+                                getTransaction(item.address);
+                                setSelected(item.address);
+                                setSelectedName(item.contractName);
+                              }}
+                            >
+                              {item.contractName || "Contract"}
+                              <img
+                                style={{ marginLeft: "0.5rem" }}
+                                alt=""
+                                src="/images/XDCmainnet.svg"
+                              />
+                              <br />
+                              <TransactionHash>{item.address}</TransactionHash>
+                            </div>
+                          ))
+                        : ""}
                     </Box>
                   ) : null}
                 </Box>
@@ -589,33 +579,58 @@ export default function TransactionList() {
               return (
                 <Div>
                   <RowData
-                    onClick={() =>
-                      redirectToTransactionDetails(data?.hash, status, selected)
-                    }
+                    
                   >
                     {toggle.transactionHash && (
                       <ColumnSecond>
                         <BackgroundChangerTxhash>
                           {utility.truncateTxnAddress(data.hash)}
+                          <CopyToClipboard
+                            text={data.hash}
+                            onCopy={() => setcopyToolTip(true)}
+                          >
+                            <Tooltip
+                              title={
+                                copyToolTip ? "Copied" : "Copy to clipboard"
+                              }
+                            >
+                              <CopyToClipboardImage src="/images/copy.svg" />
+                            </Tooltip>
+                          </CopyToClipboard>
                         </BackgroundChangerTxhash>
                       </ColumnSecond>
                     )}
 
                     {status !== "Success"
                       ? toggle.status && (
-                          <ColumnSecond style={{ color: "red" }}>
+                          <ColumnSecond  
+                          onClick={() =>
+                            redirectToTransactionDetails(data?.hash, status, selected)
+                          }
+                          style={{ color: "red" }}>
                             {status}
                           </ColumnSecond>
                         )
                       : toggle.status && (
-                          <ColumnSecond style={{ color: "green" }}>
+                          <ColumnSecond
+                          onClick={() =>
+                            redirectToTransactionDetails(data?.hash, status, selected)
+                          }
+                          style={{ color: "green" }}>
                             {status}
                           </ColumnSecond>
                         )}
 
-                    {toggle.function && <ColumnSecond>{func}</ColumnSecond>}
+                    {toggle.function && <ColumnSecond
+                    onClick={() =>
+                      redirectToTransactionDetails(data?.hash, status, selected)
+                    }
+                    >{func}</ColumnSecond>}
                     {toggle.contracts && (
-                      <ColumnSecond>
+                      <ColumnSecond
+                      onClick={() =>
+                        redirectToTransactionDetails(data?.hash, status, selected)
+                      }>
                         {/* {utility.truncateTxnAddress(data.contractAddress)} */}
                         {selectedName || "Contract"}
                       </ColumnSecond>
@@ -625,6 +640,18 @@ export default function TransactionList() {
                       <ColumnSecond>
                         <BackgroundChangerFrom>
                           {utility.truncateTxnAddress(data.from)}
+                          <CopyToClipboard
+                            text={data.from}
+                            onCopy={() => setcopyToolTip(true)}
+                          >
+                            <Tooltip
+                              title={
+                                copyToolTip ? "copied" : "copy to clipboard"
+                              }
+                            >
+                              <CopyToClipboardImage src="/images/copy.svg" />
+                            </Tooltip>
+                          </CopyToClipboard>
                         </BackgroundChangerFrom>
                       </ColumnSecond>
                     )}
@@ -633,68 +660,89 @@ export default function TransactionList() {
                       <ColumnSecond>
                         <BackgroundChangerTo>
                           {utility.truncateTxnAddress(data.to)}
+                          <CopyToClipboard
+                            text={data.to}
+                            onCopy={() => setcopyToolTip(true)}
+                          >
+                            <Tooltip
+                              title={
+                                copyToolTip ? "copied" : "copy to clipboard"
+                              }
+                            >
+                              <CopyToClipboardImage src="/images/copy.svg" />
+                            </Tooltip>
+                          </CopyToClipboard>
                         </BackgroundChangerTo>
                       </ColumnSecond>
                     )}
 
                     {toggle.when && (
                       <ColumnSecond>
-                        {moment(data.timestamp * 1000).utc().format("lll")}
+                        {moment(data.timestamp * 1000)
+                          .utc()
+                          .format("lll")}
                       </ColumnSecond>
                     )}
                   </RowData>
                 </Div>
               );
             })}
-           
           </div>
-        {loader === false ? ((input === "" && address.length === 0) || (input !== "" && searchRow.length === 0)) && (
-          <PlaceHolderContainer>
-            <PlaceHolderImage src="/images/transactions-blue.svg" />
-            No transactions found <br/>
-            <span><a href="/contracts">add{" "} </a> your first contract </span>
-          </PlaceHolderContainer>
-        ) : ""}
-          
+          {loader === false
+            ? ((input === "" && address.length === 0) ||
+                (input !== "" && searchRow.length === 0)) && (
+                <PlaceHolderContainer>
+                  <PlaceHolderImage src="/images/transactions-blue.svg" />
+                  No transactions found <br />
+                  <span>
+                    <a href="/contracts">add </a> your first contract{" "}
+                  </span>
+                </PlaceHolderContainer>
+              )
+            : ""}
         </TableContainer>
-        <PageVerifyCheck style={{display:reponse.totalCount<=10?"none":""}}  ch   eck={page}>
-        <PaginationDiv>
-          <BottomLabel>
-            Per Page
-            <SelectionDivStyle
-              buttonToggle={countToggle}
-              onClick={() => setCountToggle(10)}
-            >
-              10
-            </SelectionDivStyle>
-            <SelectionDivStyleTwo
-              buttonToggle={countToggle}
-              onClick={() => setCountToggle(20)}
-            >
-              20
-            </SelectionDivStyleTwo>
-            <SelectionDivStyleThree
-              buttonToggle={countToggle}
-              onClick={() => setCountToggle(50)}
-            >
-              50
-            </SelectionDivStyleThree>
-          </BottomLabel>
-          <ReactPaginate
-            previousLabel={"<-"}
-            nextLabel={"->"}
-            pageCount={page === 0 ? 1 : page}
-            breakLabel={"..."}
-            // initialPage={initialPage}
-            onPageChange={changePage}
-            containerClassName={"paginationBttns"}
-            disabledClassName={"paginationDisabled"}
-            activeClassName={"paginationActive"}
-            pageRangeDisplayed={0}
-            marginPagesDisplayed={0}
-            forcePage={initialPage}
-          />
-        </PaginationDiv>
+        <PageVerifyCheck
+          style={{ display: reponse.totalCount <= 10 ? "none" : "" }}
+          ch
+          eck={page}
+        >
+          <PaginationDiv>
+            <BottomLabel>
+              Per Page
+              <SelectionDivStyle
+                buttonToggle={countToggle}
+                onClick={() => setCountToggle(10)}
+              >
+                10
+              </SelectionDivStyle>
+              <SelectionDivStyleTwo
+                buttonToggle={countToggle}
+                onClick={() => setCountToggle(20)}
+              >
+                20
+              </SelectionDivStyleTwo>
+              <SelectionDivStyleThree
+                buttonToggle={countToggle}
+                onClick={() => setCountToggle(50)}
+              >
+                50
+              </SelectionDivStyleThree>
+            </BottomLabel>
+            <ReactPaginate
+              previousLabel={"<-"}
+              nextLabel={"->"}
+              pageCount={page === 0 ? 1 : page}
+              breakLabel={"..."}
+              // initialPage={initialPage}
+              onPageChange={changePage}
+              containerClassName={"paginationBttns"}
+              disabledClassName={"paginationDisabled"}
+              activeClassName={"paginationActive"}
+              pageRangeDisplayed={0}
+              marginPagesDisplayed={0}
+              forcePage={initialPage}
+            />
+          </PaginationDiv>
         </PageVerifyCheck>
       </MainContainer>
       <div>
@@ -707,7 +755,7 @@ export default function TransactionList() {
 }
 
 const PageVerifyCheck = styled.div`
-  display: ${(props) => (props.check === 1? "none" : "block")};
+  display: ${(props) => (props.check === 1 ? "none" : "block")};
   height: auto;
 `;
 const SubContainer = styled.div``;
@@ -721,7 +769,6 @@ const BottomLabel = styled.div`
   font-family: "Inter", Medium;
 `;
 const Div = styled.div`
-
   padding: 0.75rem;
   border-bottom: 1px solid #e3e7eb;
   white-space: nowrap;
@@ -732,7 +779,7 @@ const Div = styled.div`
     width: 1381px !important;
   }
   @media (min-width: 768px) and (max-width: 1200px) {
-    width:1111px
+    width: 1111px;
   }
 `;
 const RowData = styled.div`
@@ -797,6 +844,21 @@ const TableContainer = styled.div`
     }
   }
 `;
+
+const CopyToClipboardImage = styled.img`
+    margin-left: 1%
+    cursor: pointer;
+    @media (min-width: 340px) and (max-width: 767px) {
+      margin-left: 2px;
+    }
+    @media (min-width: 768px) and (max-width: 1023px) {
+      margin-left: 83px;
+    }
+    @media (min-width: 1024px) and (max-width: 1075px) {
+      margin-left: 84px;
+    }
+  `;
+
 const PaginationDiv = styled.div`
   display: flex;
   justify-content: space-between;
@@ -853,10 +915,10 @@ const Transactions = styled.div`
     display: none;
   }
 `;
-const Span =styled.div `
-color: #A6B3D8;
-font-size:14px;
-margin-top:12px;
+const Span = styled.div`
+  color: #a6b3d8;
+  font-size: 14px;
+  margin-top: 12px;
 `;
 const TransactionMedia = styled.div`
   display: none;
@@ -909,7 +971,6 @@ const SearchBar = styled.input`
     height: 37px;
     margin-left: 0px;
   }
-  
 `;
 const Icons = styled.img`
   cursor: pointer;
@@ -962,6 +1023,7 @@ const ColumnSecond = styled.div`
   min-width: 120px;
   white-space: nowrap;
   width: 100%;
+  cursor: pointer;
 `;
 
 const BackgroundChangerTxhash = styled.div`
@@ -973,7 +1035,9 @@ const BackgroundChangerTxhash = styled.div`
   opacity: 1;
   padding: 1px 6px 1px 4px;
   cursor: pointer;
-
+  min-width: 140px;
+  display: flex;
+  justify-content: space-between;
   // @media (min-width: 300px) and (max-width: 1371px) {
   //   margin-left: 0px;
   //   background-repeat: no-repeat;
@@ -1025,7 +1089,6 @@ const DropDown = styled.div`
   position: relative;
   @media (min-width: 300px) and (max-width: 767px) {
     font-size: 11px;
-
   }
 `;
 const TransactionHash = styled.div`

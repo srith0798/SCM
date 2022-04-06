@@ -61,10 +61,10 @@ export default function Filter(props) {
   text-align: center;
   cursor: pointer;
 
-  @media (min-width: 300px) and (max-width: 414px) {
+  @media (min-width: 300px) and (max-width: 767px) {
     margin-left: 13px;
     height: 27px;
-    width: 70px;
+    width: 100px;
     padding-top: 2px;
   }
 `;
@@ -84,9 +84,9 @@ const CancelButton = styled.div`
   margin-left: -5px;
   margin-right: -11px;
   color: #3163f0;
-  @media (min-width: 300px) and (max-width: 414px) {
+  @media (min-width: 300px) and (max-width: 767px) {
     height: 27px;
-    width: 70px;
+    width: 100px;
     padding-top: 2px;
   }
 `;
@@ -162,7 +162,7 @@ const ButtonC = styled.div`
   cursor: pointer;
   color: ${(props) => (props.tag === 3 ? "#3062ef" : "#303134")};
   @media (min-width: 300px) and (max-width: 414px) {
-    width: 68px;
+    width: 74px;
     height: 24px;
     background: #ffffff 0% 0% no-repeat padding-box;
     border: ${(props) =>
@@ -350,26 +350,25 @@ const LastContainer = styled.div`
     
     justify-content: start;
     margin-top: -18px;
-    margin-left: 60px;
   }
   @media (min-width: 361px) and (max-width: 376px) {
     
     justify-content: start;
     margin-top: -18px;
-    margin-left: 75px;
+    margin-left: 6px;
   }
   @media (min-width: 377px) and (max-width: 394px) {
    
     justify-content: start;
     margin-top: -18px;
-    margin-left: 95px;
+    margin-left: 18px;
   }
 
   @media (min-width: 395px) and (max-width: 767px) {
     display: flex;
     justify-content: start;
     margin-top: -18px;
-    margin-left: 115px;
+    margin-left: 26px;
   }
 `;
   return (

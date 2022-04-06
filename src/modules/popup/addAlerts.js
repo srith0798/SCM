@@ -196,6 +196,7 @@ const Add = styled.div`
   color: #303134;
   font-size: 20px;
   font-weight: 600;
+  margin-left: 2%;
 `;
 
 const Div = styled.div`

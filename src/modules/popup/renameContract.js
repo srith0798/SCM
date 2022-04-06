@@ -18,6 +18,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 export default function RenameContract(props) {
+  console.log("id", props?.address._id);
   const classes = useStyles();
   const [newName, setNewName] = useState(props.address.contractName || "");
   const [loader, setLoader] = useState(false);

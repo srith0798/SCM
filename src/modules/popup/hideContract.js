@@ -56,6 +56,13 @@ const Content = styled.div`
   margin-top: 20px;
 `;
 
+const handleClick = ()=>{
+  props.hideContract();
+  // setTimeout(()=>{
+    props.click();
+  // },100);
+}
+
   return (
     <div>
       <Dialog classes={{ paper: classes.dialogBox }} open={true}>
@@ -73,7 +80,7 @@ const Content = styled.div`
               style={{ width: "100%", maxWidth: "200px", marginTop: "30px" }}
             >
               <ButtonConfirm
-                click={props.hideContract}
+                click={handleClick}
                 text={"Hide contract"}
               />
               <CancelButton onClick={props.click}>Cancel</CancelButton>

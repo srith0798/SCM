@@ -29,9 +29,11 @@ export default function AlertDetails() {
     let requestData = {
       alertId: request ? request : alertId
     }
+    setLoader(true);
     const [error, response] = await utility.parseResponse(AlertService.getAlertDetails(requestData));
     if (error)
       return;
+    setLoader(false);
     setAlert(response);
     setAlertDestinations(response?.destinations || []);
     // let destinationIds=[];

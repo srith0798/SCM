@@ -735,10 +735,10 @@ console.log(`https://observer.xdc.org/verify-contracts/${name}/scm`, "asdadada")
                 <TableHeading>EVM version</TableHeading>
                 <EvmData>Default</EvmData>
               </Div>
-              <Div>
+              {/* <Div>
                 <TableHeading>Optimizations</TableHeading>
                 <Enabled></Enabled>
-              </Div>
+              </Div> */}
 
               <PopUp>
                 <PopUpBlock
