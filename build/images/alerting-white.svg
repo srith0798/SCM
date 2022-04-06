@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g id="Alerting" transform="translate(-81 -153)">
+    <rect id="Rectangle_455" data-name="Rectangle 455" width="24" height="24" transform="translate(81 153)" fill="none"/>
+    <g id="Group_280" data-name="Group 280" transform="translate(-183 -92)">
+      <g id="Notification" transform="translate(274.25 265.25)">
+        <g id="Group_5" data-name="Group 5" transform="translate(0 0)">
+          <path id="Path_11" data-name="Path 11" d="M45,1030.362v1.031a1.719,1.719,0,1,0,3.437,0v-1.031Z" transform="translate(-45 -1030.362)" fill="#fff"/>
+        </g>
+      </g>
+      <g id="Notification-2" data-name="Notification" transform="translate(266 261.125)">
+        <g id="Group_5-2" data-name="Group 5" transform="translate(0 0)">
+          <path id="Path_11-2" data-name="Path 11" d="M22.719,1018.362a1.719,1.719,0,1,0,0,3.437h16.5a1.719,1.719,0,1,0,0-3.437Z" transform="translate(-21 -1018.362)" fill="#fff"/>
+        </g>
+      </g>
+      <g id="Notification-3" data-name="Notification" transform="translate(268.406 246)">
+        <g id="Group_5-3" data-name="Group 5" transform="translate(0 0)">
+          <path id="Path_11-3" data-name="Path 11" d="M35.562,974.362A7.546,7.546,0,0,0,28,981.925V988.8H43.125v-6.875A7.546,7.546,0,0,0,35.562,974.362Z" transform="translate(-28 -974.362)" fill="#fff"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
