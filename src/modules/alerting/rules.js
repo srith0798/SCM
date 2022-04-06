@@ -89,6 +89,8 @@ export default function Rules() {
     const [error, response] = await utility.parseResponse(
       DestinationService.verifyEmail(req)
     );
+    history.push("/alerting");
+    setActiveButton("Destination");
   };
 
   useEffect(() => {
@@ -98,8 +100,6 @@ export default function Rules() {
     const token = urlParams.get("sessionToken");
     if (reference && reference === "Destination" && destinationId && token) {
       verifyEmail(destinationId, token);
-      history.push("/alerting");
-      setActiveButton("Destination");
       return;
     }
     setActiveButton("Rules");
