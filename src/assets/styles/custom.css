@@ -672,31 +672,13 @@ input[type="date"]:valid::before {
     padding:1px 22px !important;
   }
 }
-/*@media (min-width: 361px) and (max-width: 376px) {
-  .MuiPaper-root {
-    margin: 0px !important;
-    height: 100%;
-    max-height: max-content !important;
-    top: 14% !important;
-    max-width: 340px !important;
-  }
-}
-@media (min-width: 377px) and (max-width: 767px) {
-  .MuiPaper-root {
-    margin: 0px !important;
-    height: 100%;
-    max-height: max-content !important;
-    top: 10.5% !important;
-    max-width: 350px !important;
+@media (min-width: 360px) and (max-width: 767px) {
+  .Formalert{
+   width: 200px !important;
   }
 }
 
-.MuiDialog-container{
- display: flex !important;
- justify-content: center !important;
- align-items: flex-start !important;
- /* margin-top: 7% !important; */
-/* } */ */
+
 .MuiDialog-scrollPaper{
   display: flex !;
   justify-content: center;
