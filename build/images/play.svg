@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="66" height="66" viewBox="0 0 66 66">
-  <g id="play" transform="translate(-1076 -582)">
-    <rect id="Rectangle_553" data-name="Rectangle 553" width="66" height="66" transform="translate(1076 582)" fill="none"/>
-    <g id="Polygon_1" data-name="Polygon 1" transform="translate(1131 590) rotate(90)" fill="#fff">
-      <path d="M 50.13232803344727 43.5 L 0.8676705956459045 43.5 L 25.5 0.9971570372581482 L 50.13232803344727 43.5 Z" stroke="none"/>
-      <path d="M 25.5 1.994312286376953 L 1.735340118408203 43 L 49.2646598815918 43 L 25.5 1.994312286376953 M 25.5 0 L 51 44 L 0 44 L 25.5 0 Z" stroke="none" fill="#707070"/>
-    </g>
-  </g>
-</svg>
