@@ -34,6 +34,7 @@ export default function AddAlert() {
   const [destinations, setDestinations] = React.useState([]);
   const [selectedDestinations, setSelectedDestinations] = React.useState([]);
   const [targetValue, setTargetValue] = React.useState("");
+  const [targetComparator, setTargetComparator] = React.useState("");
   const [selectedAddress, setSelectedAddress] = React.useState([]);
   const [selectedTag, setSelectedTag] = React.useState("");
 
@@ -173,6 +174,10 @@ export default function AddAlert() {
       let tag = parametersData.find((data) => data._id === event.target.value);
       setSelectedTag(tag.name);
     }
+  };
+
+  const selectTargetComparator = (event) => {
+    console.log("event", event);
   };
   const addAlert = async () => {
     let requestData = {
@@ -440,7 +445,7 @@ export default function AddAlert() {
                   <AlertTargetContainer style={{ flexDirection: "column" }}>
                     <ParameterContainer>
                       <Box sx={{ minWidth: 120 }}>
-                        <FormControl sx={{ width: "100%", maxWidth: 1000 }}>
+                        <FormControl sx={{ width: "100%", maxWidth: 1000 }} className="Formalert">
                           <InputLabel shrink={false}>
                             {targetValue === "" && "Select Address"}
                           </InputLabel>
@@ -473,10 +478,8 @@ export default function AddAlert() {
                         </FormControl>
                       </Box>
                     </ParameterContainer>
-                    <ParameterContainer>
-                      {alertType ===
-                        genericConstants.ALERT_TYPE.TRANSACTION_VALUE ||
-                      alertType === genericConstants.ALERT_TYPE.XDC_BALANCE ? (
+                    {alertType === genericConstants.ALERT_TYPE.XDC_BALANCE ? (
+                      <ParameterContainer>
                         <Threshold
                           placeholder="Enter Threshold"
                           value={threshold}
@@ -484,10 +487,54 @@ export default function AddAlert() {
                             setThreshold(event.target.value);
                           }}
                         ></Threshold>
-                      ) : (
-                        ""
-                      )}
-                    </ParameterContainer>
+                      </ParameterContainer>
+                    ) : (
+                      ""
+                    )}
+                    {alertType ===
+                    genericConstants.ALERT_TYPE.TRANSACTION_VALUE ? (
+                      <div>
+                        <ParameterContainer>
+                          <Box sx={{ minWidth: 120 }}>
+                            <FormControl sx={{ width: "100%", maxWidth: 1000 }} className="Formalert">
+                              <InputLabel shrink={false}>
+                                {targetComparator === "" && "Select Comparator"}
+                              </InputLabel>
+                              <Select
+                                value={targetComparator}
+                                onChange={selectTargetComparator}
+                                sx={{
+                                  backgroundColor: "#ECF0F7",
+                                  color: "black",
+                                }}
+                              >
+                                <MenuItem value="">Equal to </MenuItem>
+                                <MenuItem value="">Not equal to </MenuItem>
+                                <MenuItem value="">
+                                  Greater than or equal to{" "}
+                                </MenuItem>
+                                <MenuItem value="">Greater than </MenuItem>
+                                <MenuItem value="">
+                                  Less than or equal to{" "}
+                                </MenuItem>
+                                <MenuItem value="">Less than </MenuItem>
+                              </Select>
+                            </FormControl>
+                          </Box>
+                        </ParameterContainer>
+                        <ParameterContainer>
+                        <Threshold
+                          placeholder="Enter Threshold"
+                          value={threshold}
+                          onChange={(event) => {
+                            setThreshold(event.target.value);
+                          }}
+                        ></Threshold>
+                        </ParameterContainer>
+                      </div>
+                    ) : (
+                      ""
+                    )}
                     <ApplyButton
                       onClick={() => changeProgress("DESTINATION")}
                       disabled={!parametersData.length}
@@ -819,7 +866,7 @@ const RowContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  max-width: 21.25rem;
+  max-width: 13.25rem;
   margin-bottom: 1.25rem;
   padding-top: 1rem;
   @media (min-width: 300px) and (max-width: 768px) {
@@ -852,9 +899,8 @@ const CancelButton = styled.div`
   font-size: 14px;
   text-align: center;
   cursor: pointer;
-  margin-left: -5px;
-  margin-right: -11px;
   color: #3163f0;
+  margin-top: 12px;
 `;
 const ApplyButton = styled.button`
   width: 68px;
@@ -871,6 +917,7 @@ const ApplyButton = styled.button`
   margin-right: 15px;
   margin-left: 19px;
   margin-bottom: 15px;
+  margin-top: 12px;
   cursor: pointer;
 `;
 const Title = styled.div`
@@ -1077,12 +1124,12 @@ const FilterSelect = styled.select`
 const Threshold = styled.input`
   outline: none;
   border: none;
-  background-color: #f5f6fd;
+  background-color: #ECF0F7;
   border-radius: 3px;
   width: 100%;
   padding: 0px 10px 0px 10px;
-  font-size: 12px;
-  height: 40px;
+  font-size: 15.5px;
+  height: 3rem;
   color: #a6aabf;
   max-width: 1000px;
   @media (min-width: 768px) and (max-width: 1024px) {
@@ -1130,7 +1177,7 @@ const DestinationComponent = (props) => {
           />{" "}
           Slack
         </Buttonn>
-        <Buttonn onClick={() => props.openDestinationPopup("WEBHOOK")}>
+        {/* <Buttonn onClick={() => props.openDestinationPopup("WEBHOOK")}>
           <img
             alt=""
             src="/images/webhook.svg"
@@ -1140,7 +1187,7 @@ const DestinationComponent = (props) => {
             }}
           />
           Webhook
-        </Buttonn>
+        </Buttonn> */}
         <Buttonn onClick={() => props.openDestinationPopup("EMAIL")}>
           <img
             alt=""

@@ -285,8 +285,7 @@ export default function Contract(props) {
                     >
                       {data.contractName || "Contract"}
                     </ColumnSecond>
-                    <ColumnSecond
-                    >
+                    <ColumnSecond>
                       <BackgroundChanger>
                         {utility.truncateTxnAddress(data.address)}
                         <CopyToClipboard
@@ -343,6 +342,15 @@ export default function Contract(props) {
                       check={data.isHidden}
                       onClick={(e) => redirectTODetails(e, data._id)}
                     >
+                      {data.isHidden ? (
+                        ""
+                      ) : (
+                        <img
+                          style={{ marginRight: "5px" }}
+                          src="/images/check.svg"
+                          alt=""
+                        />
+                      )}
                       {data.isHidden ? "Hidden" : "Visible"}
                     </ColumnVisible>
                   </RowTag>
