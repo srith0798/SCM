@@ -229,7 +229,7 @@ const RowContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  max-width: 21.25rem;
+  max-width: 13.25rem;
   margin-bottom: 1.25rem;
   margin-left: 1.5%;
   @media (min-width: 300px) and (max-width: 767px){
@@ -276,10 +276,10 @@ const Img = styled.img`
               <ButtonIcon alt="" src="/images/slack.svg" />
               Slack
             </Button>
-            <Button onClick={() => openDestinationPopup("WEBHOOK")} >
+            {/* <Button onClick={() => openDestinationPopup("WEBHOOK")} >
               <ButtonIcon alt="" src="/images/webhook.svg" />
               Webhook
-            </Button>
+            </Button> */}
             <Button onClick={() => openDestinationPopup("EMAIL")} >
               <ButtonIcon alt="" src="/images/email.svg" />
               Email

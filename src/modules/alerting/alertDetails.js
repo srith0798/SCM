@@ -365,14 +365,14 @@ const Img = styled.img`
         <CommonDiv>
           <RowData>
             <Heading>ID</Heading>
-            <SubHeading>{alert.alertId}</SubHeading>
+            <SubHeading>{loader === false ? alert.alertId : ""}</SubHeading>
           </RowData>
         </CommonDiv>
         <CommonDiv>
           <RowData>
             <Heading>Name</Heading>
             <SubHeading>
-            {`${genericConstants.ALERT_TYPE_NAMES[alert.type]} in ${alert?.target?.name}`}
+            {loader === false ? `${genericConstants.ALERT_TYPE_NAMES[alert.type]} in ${alert?.target?.name}` : ""}
             </SubHeading>
           </RowData>
         </CommonDiv>
@@ -380,21 +380,21 @@ const Img = styled.img`
           <RowData>
             <Heading>Alert Type</Heading>
             <SubHeading>
-              <TextColor>{genericConstants.ALERT_TYPE_NAMES[alert.type]}</TextColor>
+              <TextColor>{loader === false ? genericConstants.ALERT_TYPE_NAMES[alert.type]: ""}</TextColor>
             </SubHeading>
           </RowData>
         </CommonDiv>
         <CommonDiv>
           <RowData>
             <Heading>Target</Heading>
-            <SubHeading>{
+            <SubHeading>{loader === false ?
             alert?.target?.type
             .toLowerCase()
             .replace("_", " ")
             .substring(0, 1)
             .toUpperCase() +
           alert?.target?.type.toLowerCase().replace("_", " ").substring(1)
-            }</SubHeading>
+            : ""}</SubHeading>
           </RowData>
         </CommonDiv>
       </Container>
