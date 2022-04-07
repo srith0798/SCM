@@ -36,12 +36,12 @@ export default function AlertDetails() {
     setLoader(false);
     setAlert(response);
     setAlertDestinations(response?.destinations || []);
-    // let destinationIds=[];
-    // response && response.destinations && response.destinations.map((dest)=>{
-    //   destinationIds.push(dest.destinationIds)
-    //   return true;
-    // })
-    // setSelectedDestinations(destinationIds);
+    let destinationIds=[];
+    response && response.destinations && response.destinations.map((dest)=>{
+      destinationIds.push(dest.destinationId)
+      return true;
+    })
+    setSelectedDestinations(destinationIds);
   }
   const updateAlert = async (request ) => {
     if(!isSelect)
