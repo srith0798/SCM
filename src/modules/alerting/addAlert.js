@@ -219,6 +219,8 @@ export default function AddAlert() {
       label: label,
       url: url,
       channelName: channelName ? channelName : "",
+      status: destinationType === "EMAIL" ? genericConstants.DESTINATION_STATUS.UNVERIFIED.type : genericConstants.DESTINATION_STATUS.NOT_CONNECTED.type
+
     };
 
     const [error, response] = await utility.parseResponse(
