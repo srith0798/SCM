@@ -227,6 +227,7 @@ export default function AddAlert() {
       DestinationService.addDestination(requestData)
     );
     if (error) {
+      utility.apiFailureToast(error ? error : "Not able to add destination")
       setAddDestinationPopup(false);
       return;
     }
