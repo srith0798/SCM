@@ -221,9 +221,6 @@ cursor: pointer;
 @media (min-width: 340px) and (max-width: 767px) {
   margin-left: 2px;
 }
-@media (min-width: 768px) and (max-width: 1023px) {
-  margin-left: 83px;
-}
 @media (min-width: 1024px) and (max-width: 1075px) {
   margin-left: 84px;
 }
@@ -255,7 +252,7 @@ cursor: pointer;
   const FlexDiv = styled.div`
     display: flex !important;
     justify-content: space-between !important;
-    width: 30%;
+    width: 20%;
   `;
   const BackgroundChanger = styled.div`
     width: fit-content;
@@ -279,6 +276,19 @@ cursor: pointer;
       min-width: 160px;
     }
   `;
+
+const ColumnLast = styled.div`
+display: flex;
+flex-flow: column nowrap;
+font-size: 0.875rem;
+color: #191919;
+width: 100%;
+min-width: 130px;
+@media (min-width: 300px) and (max-width: 1024px) {
+  width: 100%;
+  min-width: 160px;
+}
+`;
 
   const MainContainer = styled.div`
     background: #ecf0f7 0% 0% no-repeat padding-box;
@@ -541,15 +551,17 @@ cursor: pointer;
                       >
                         {genericConstants.ALERT_TYPE_NAMES[alert?.type]}
                       </ColumnTwo>
-                      <ColumnTwo
+                      <ColumnLast
                         style={{
                           fontSize: "14px",
                           color: "#00A58C",
                         }}
                       >
+                        <div style={{paddingLeft: 75}}>
                         {alert.status ? "Enabled" : "Disabled"}
-                      </ColumnTwo>
-                      <ColumnTwo>
+                        </div>
+                      </ColumnLast>
+                      <ColumnLast>
                         <FlexDiv>
                           <img
                             onClick={() =>
@@ -568,7 +580,7 @@ cursor: pointer;
                             />
                           </Tooltip>
                         </FlexDiv>
-                      </ColumnTwo>
+                      </ColumnLast>
                     </RowData1>
                   </NewDiv>
                 ))

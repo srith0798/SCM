@@ -19,9 +19,6 @@ const FooterContainer = styled.div`
 `;
 const ColumnContainer = styled.div`
   display: flex;
-  @media screen and (min-width: 375px) and (max-width: 768px) {
-    flex-direction: column;
-  }
 `;
 const Column = styled.div`
   width: 277px;
@@ -37,7 +34,7 @@ const Column = styled.div`
     margin: 50px 23px 0 0.5px;
   } 
   @media (min-width: 768px) and (max-width: 1200px) {
-    margin: 50px 23px 0px 61.5px;
+    margin: 50px 23px 0px 10px;
   }
 `;
 const FooterImg = styled.img`
@@ -116,6 +113,7 @@ const Link = styled.a`
   color: #8ca6f0;
   opacity: 1;
   cursor: pointer;
+  white-space: nowrap;
 `;
 const ContactRow = styled.div`
   margin: 116px 0 0 407px;
@@ -187,13 +185,16 @@ function FooterComponent() {
           <SubColOne>
             <ColHeading>Tools</ColHeading>
             <LinkContainer>
+            <br/>
               <Link href="https://observer.xdc.org/" target="_blank">
                 Observatory
               </Link>
+              <br/>
               <Link href="https://stats.xdc.org/" target="_blank">
                 {" "}
                 NetworkStats{" "}
               </Link>
+              <br/>
               <Link
                 href="https://chrome.google.com/webstore/detail/xdcpay/bocpokimicclpaiekenaeelehdjllofo?hl=en-US"
                 target="_blank"
@@ -201,6 +202,7 @@ function FooterComponent() {
                 {" "}
                 XDCPay{" "}
               </Link>
+              <br/>
             </LinkContainer>
           </SubColOne>
 
@@ -213,13 +215,16 @@ function FooterComponent() {
               >
                 About XDC
               </Link>
+              <br/>
               <Link href="https://docs.xdc.org/" target="_blank">
                 {" "}
                 Documentation{" "}
               </Link>
+              <br/>
               <Link> Privacy Policy</Link>
-
+              <br/>
               <Link> Terms and Conditions</Link>
+              <br/>
             </LinkContainerSecond>
           </SubColTwo>
         </SecondColumn>
