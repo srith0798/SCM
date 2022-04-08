@@ -22,6 +22,7 @@ html,
 body {
   width: 100%;
   height: 100%;
+  /* letter-spacing: 0px; */
 }
 
 body,
@@ -563,6 +564,7 @@ input[type="date"]:valid::before {
   letter-spacing: 0px;
   color: #1f1f1f;
   opacity: 1;
+  margin-left: 10px;
 }
 .faq-item {
   padding: 10px 0px 20px 30px;
@@ -589,7 +591,7 @@ input[type="date"]:valid::before {
 @media (min-width: 768px) and (max-width: 1024px) {
   .faq-item {
     width: 100% !important;
-    padding: 4px 0px 36px 10px;
+    padding: 4px 0px 15px 10px;
   }
   .ui-margin {
     width: 100%;

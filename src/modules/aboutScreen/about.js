@@ -107,7 +107,7 @@ export default function About(props) {
                 Click to get started with Xmartly
               </ReactTooltip>
                 <TooltipImg
-                  style={{ width: "15px", height: "13px", marginTop: "35px" }}
+                  style={{ width: "15px", height: "13px", marginTop: "35px", marginLeft: "5px" }}
                   data-tip="button"
                   data-for="button"
                   alt=""
@@ -196,7 +196,7 @@ const MainBoxContainer = styled.div`
     padding: 16px;
     height: 128vh;
   } */
-  @media (min-width: 768px) and (max-width: 1200px) {
+  @media (min-width: 768px) and (max-width: 800px) {
     height: 128vh !important;
   }
   @media (min-width: 1024px) and (max-width: 1200px) {
@@ -235,7 +235,7 @@ const Container = styled.div`
     height: 778px;
   }
   @media (min-width: 800px) and (max-width: 1200px) {
-    height: 668px !important;
+    height: 800px !important;
   }
   @media (min-width: 300px) and (max-width: 414px) {
     flex-direction: column;
@@ -414,6 +414,7 @@ const HeadingContainer = styled.div`
   }
   @media (min-width: 768px) and (max-width: 1200px) {
     white-space: nowrap;
+    padding-top: 2rem;
   }
 `;
 const GreyContainer = styled.div`
@@ -490,9 +491,13 @@ const SmartButton = styled.div`
   font-size: 1rem;
   font-weight: 600;
   white-space: nowrap;
-  @media (min-width: 340px) and (max-width: 1023px) {
+  @media (min-width: 340px) and (max-width: 767px) {
     margin-left: auto;
     margin-right: auto;
+    margin-top: 21px;
+  }
+  @media (min-width: 768px) and (max-width: 1024px) {
+    margin-left: 30%;
     margin-top: 21px;
   }
   @media (max-width: 414px) {

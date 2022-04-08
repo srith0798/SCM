@@ -1098,6 +1098,7 @@ const TransactionHash = styled.div`
   margin-top: 0.5rem;
   cursor: pointer;
   width: 100%;
+  margin-bottom: 1rem;
   @media (min-width: 300px) and (max-width: 767px) {
     font-size: 0.6rem;
   }
