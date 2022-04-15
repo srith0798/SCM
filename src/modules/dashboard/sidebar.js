@@ -389,4 +389,5 @@ const WrapperLogout = styled.div`
 
 const Heading = styled.span`
   color: #ffffff;
+  font-weight: 500;
 `;

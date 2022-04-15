@@ -40,14 +40,14 @@ const SubContainer = styled.div`
 `;
 const Add = styled.div`
   font-size: 1.5rem;
-  font-weight: 600;
+  font-weight: 700;
   color: #303134;
   margin-left: 1.5px;
 `;
 
 const MainHeading = styled.div`
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 700;
   color: #102c78;
 
   margin-left: 9px;
@@ -58,7 +58,8 @@ const BorderDiv = styled.div`
 `;
 const Content = styled.div`
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 500;
+  font-family: 'Inter', Medium;
   color: #303134;
   margin-top: 0.625rem;
   padding: 15px 12px 8px 10px;
@@ -67,7 +68,7 @@ const Content = styled.div`
 const Heading = styled.div`
   text-align: left;
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 500;
   color: #303134;
   margin-top: 1.25rem;
 `;

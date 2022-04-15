@@ -763,7 +763,7 @@ const MainContainer = styled.div`
 const MainHeading = styled.div`
   text-align: left;
   font-size: 1.5rem;
-  font-weight: 600;
+  font-weight: 700;
   color: #191919;
   @media (min-width: 300px) and (max-width: 767px) {
     font-size: 1.2rem;
@@ -810,14 +810,14 @@ const Table = styled.div`
 `;
 const View = styled.div`
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 500;
   color: #102c78;
   @media (min-width: 300px) and (max-width: 767px) {
     font-size: 0.85rem;
   }
 `;
 const Content = styled.div`
-  font-weight: 600;
+  font-weight: 500;
   font-size: 0.875rem;
   color: #191919;
   margin-top: 0.625rem;

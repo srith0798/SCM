@@ -197,7 +197,7 @@ export default function Rules() {
   `;
   const Title = styled.div`
     font-size: 1.5rem;
-    font-weight: 600;
+    font-weight: 700;
     @media (min-width: 300px) and (max-width: 768px) {
       font-size: 1.2rem;
       font-weight: 600;

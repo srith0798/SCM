@@ -30,12 +30,6 @@ export default function Destination() {
     setDestinationType(value);
   };
   const addDestination = async (label, url, channelName) => {
-    if (destinationType === "EMAIL") {
-      if (!utility.validateEmail(url)) {
-        utility.apiFailureToast("Invalid Email");
-        return;
-      }
-    }
     let requestData = {
       userId: sessionManager.getDataFromCookies(cookiesConstants.USER_ID),
       type: destinationType,
@@ -141,7 +135,7 @@ export default function Destination() {
   const ColumnOne = styled.div`
     display: flex;
     font-size: 0.875rem;
-    font-weight: 600;
+    font-weight: 500;
     color: #102c78;
     width: 100%;
     border-bottom: 0.125rem solid #e3e7eb;
@@ -156,7 +150,7 @@ export default function Destination() {
   const ColumnActive = styled.div`
     display: flex;
     font-size: 0.875rem;
-    font-weight: 600;
+    font-weight: 500;
     color: #102c78;
     width: 100%;
     border-bottom: 0.125rem solid #e3e7eb;
@@ -191,7 +185,7 @@ export default function Destination() {
     display: flex;
     flex-flow: column nowrap;
     font-size: 0.875rem;
-    font-weight: 600;
+    font-weight: 400;
     max-width: 250px;
     color: #102c78;
     width: 100%;
@@ -202,7 +196,7 @@ export default function Destination() {
   display: flex;
   flex-flow: column nowrap;
   font-size: 0.875rem;
-  font-weight: 600;
+  font-weight: 400;
   max-width: 100px;
   color: #102c78;
   width: 100%;
@@ -227,7 +221,7 @@ export default function Destination() {
     display: flex;
     flex-flow: column nowrap;
     font-size: 0.875rem;
-    font-weight: 600;
+    font-weight: 400;
     max-width: 250px;
     color: rgb(49, 99, 240);
     width: 100%;
