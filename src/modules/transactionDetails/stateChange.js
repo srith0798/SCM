@@ -27,6 +27,7 @@ export default function StateChange() {
   padding: 1.25rem;
   margin-top: 1.25rem;
   overflow-y: scroll;
+  margin-right: 7px;
   @media (min-width: 300px) and (max-width: 767px) {
     width: 100%;
     ::-webkit-scrollbar {

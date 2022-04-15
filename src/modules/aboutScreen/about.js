@@ -9,10 +9,15 @@ import ReactPlayer from "react-player";
 import { history } from "../../managers/history";
 import { cookiesConstants } from "../../constants";
 import ReactTooltip from "react-tooltip";
+import ScreenSizeDetector from "screen-size-detector";
+import IpadPopup from "./ipadPopup";
 
 export default function About(props) {
+  const screen = new ScreenSizeDetector();
   const [state, setState] = useState(true);
   const [address] = React.useState({});
+
+  console.log("proops", props);
 
   return (
     <>
@@ -71,7 +76,11 @@ export default function About(props) {
                 width="100%"
                 height="100%"
               /> */}
-              <ImgMain src="/images/smart-contract-manger-infographic.svg" alt="img" style={{width: "fitContent",  height: "fitContent"}}/>
+              <ImgMain
+                src="/images/smart-contract-manger-infographic.svg"
+                alt="img"
+                style={{ width: "fitContent", height: "fitContent" }}
+              />
             </VideoBox>
             <div style={{ display: "flex", marginBottom: "30px" }}>
               <SmartButton
@@ -106,13 +115,18 @@ export default function About(props) {
               >
                 Click to get started with Xmartly
               </ReactTooltip>
-                <TooltipImg
-                  style={{ width: "15px", height: "13px", marginTop: "35px", marginLeft: "5px" }}
-                  data-tip="button"
-                  data-for="button"
-                  alt=""
-                  src="/images/Subtraction 2.svg"
-                />
+              <TooltipImg
+                style={{
+                  width: "15px",
+                  height: "13px",
+                  marginTop: "35px",
+                  marginLeft: "5px",
+                }}
+                data-tip="button"
+                data-for="button"
+                alt=""
+                src="/images/Subtraction 2.svg"
+              />
             </div>
           </RightContainer>
         </Container>
@@ -156,11 +170,21 @@ export default function About(props) {
 
       <div>
         {!sessionManager.getDataFromCookies(cookiesConstants.IS_LOGGED_IN) && (
-          <WalletPopUp
-            getCurrentUserDetails={props.getCurrentUserDetails}
-            click={() => setState(false)}
-            state={state}
-          />
+          <>
+            {screen.width >= 0 && screen.width <= 1024 ? (
+              <IpadPopup
+                getCurrentUserDetails={props.getCurrentUserDetails}
+                click={() => setState(false)}
+                state={state}
+              />
+            ) : (
+              <WalletPopUp
+                getCurrentUserDetails={props.getCurrentUserDetails}
+                click={() => setState(false)}
+                state={state}
+              />
+            )}
+          </>
         )}
       </div>
     </>
@@ -277,14 +301,13 @@ const LeftContainer = styled.div`
   }
 `;
 const ImgMain = styled.img`
-@media (min-width: 300px) and (max-width: 767px) {
-  width: 260px;
- }
+  @media (min-width: 300px) and (max-width: 767px) {
+    width: 260px;
+  }
 
- @media (min-width: 768px) and (max-width: 1024px) {
-  width: 350px;
- }
-
+  @media (min-width: 768px) and (max-width: 1024px) {
+    width: 350px;
+  }
 `;
 const Span = styled.span`
   color: #0089ff;

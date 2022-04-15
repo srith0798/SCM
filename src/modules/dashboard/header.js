@@ -132,13 +132,16 @@ const Button = styled.button`
   font-size: 14px;
   color: white;
   padding: 5px 20px 5px 20px;
-  @media (min-width: 300px) and (max-width: 767px) {
+  /* @media (min-width: 300px) and (max-width: 767px) {
     padding: 1px 4px 1px 4px;
     font-size: 12px;
     height: -webkit-fit-content;
     height: -moz-fit-content;
     height: fit-content;
     margin-top: 7px;
+  } */
+  @media (min-width: 0px) and (max-width: 1024px) {
+    display: none;
   }
 `;
 const XDCInfo = styled.button`

@@ -94,15 +94,13 @@ export default function AddContract(props) {
       props.getContractList();
     }
   };
-  React.useEffect(()=>{
-  if(address.length >=40)
-  handleEnterKey();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[address])
-
+  React.useEffect(() => {
+    if (address.length >= 40) handleEnterKey();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [address]);
 
   const handleEnterKey = () => {
-      checkAddress();
+    checkAddress();
   };
 
   console.log("check", error);
@@ -162,12 +160,21 @@ export default function AddContract(props) {
             <ErrorTag>{error}</ErrorTag>
             {hideStep && (
               <Text>
-                1. Go to XDC Observatory/Origin <br></br>
-                2. Check for contract <br></br> 3. Copy contract address{" "}
-                <br></br>4. Paste it on the given field above
+                <PaddingDiv>
+                  1. Go to XDC Observatory/Origin <br></br>
+                </PaddingDiv>
+                <PaddingDiv>
+                  {" "}
+                  2. Check for contract <br></br>
+                </PaddingDiv>
+                <PaddingDiv>
+                  {" "}
+                  3. Copy contract address <br></br>
+                </PaddingDiv>
+                <PaddingDiv>4. Paste it on the given field above</PaddingDiv>
               </Text>
             )}
-            {verifyAddress === "" ? (
+            {!error && verifyAddress === "" ? (
               ""
             ) : (
               <ImportBox>
@@ -203,7 +210,9 @@ export default function AddContract(props) {
 const CheckBox = styled.input`
   outline: none;
 `;
-
+const PaddingDiv = styled.div`
+  padding: 6px 0px 5px 2px;
+`;
 const CheckDivMob = styled.div`
   @media (min-width: 300px) and (max-width: 767px) {
     display: none;
@@ -239,7 +248,7 @@ const ImportBox = styled.div`
 `;
 const ErrorTag = styled.div`
   color: red;
-  font-size: 16px;
+  font-size: 14px;
   padding: 0px 0px 8px 10px;
   margin-bottom: 0px;
 `;
@@ -256,7 +265,7 @@ const SelectImport = styled.div`
 
 const Text = styled.div`
   font-size: 0.8rem;
-  font-weight: 600;
+  font-weight: 500;
   margin-bottom: 15px;
   color: #303134;
 `;
@@ -285,7 +294,7 @@ const Add = styled.div`
 `;
 const Content = styled.div`
   color: #303134;
-  margin-top: 15px;
+  margin-top: 20px;
   font-size: 0.8rem;
   font-weight: 600;
   white-space: nowrap;
@@ -306,7 +315,7 @@ const Input = styled.input`
   width: 100%;
   height: 30px;
   margin-bottom: 5px;
-  margin-top: 15px;
+  margin-top: 20px;
   font-size: 0.8rem;
   font-weight: 600;
   outline: none;

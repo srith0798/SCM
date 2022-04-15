@@ -19,6 +19,9 @@ const FooterContainer = styled.div`
 `;
 const ColumnContainer = styled.div`
   display: flex;
+  @media (min-width: 300px) and (max-width: 767px) {
+    display: unset;
+  }
 `;
 const Column = styled.div`
   width: 277px;
@@ -31,7 +34,8 @@ const Column = styled.div`
     margin: 55.66px 0 0 0px;
   }
   @media (min-width: 300px) and (max-width: 768px) {
-    margin: 50px 23px 0 0.5px;
+    margin: 0px 23px 0 0.5px;
+    padding-top: 40px;
   } 
   @media (min-width: 768px) and (max-width: 1200px) {
     margin: 50px 23px 0px 10px;
@@ -40,7 +44,7 @@ const Column = styled.div`
 const FooterImg = styled.img`
   height: 37.23px;
   width: 189.8px;
-  margin: 0 0 24.84px 0;
+  margin: 0 0 24.84px -20px;
   @media screen and (min-width: 375px) and (max-width: 425px) {
     padding: 0 0 0 10px;
     margin: 0 0 22.45px 0;
@@ -175,7 +179,7 @@ function FooterComponent() {
     <FooterContainer>
       <ColumnContainer>
         <Column>
-          <FooterImg src="/images/smarthub.svg" alt="" />
+          <FooterImg src="/images/xmartly-icon.svg" alt="" />
           <Text>
             Easily govern your smart contract deployment with end-to-end
             lifecycle utility

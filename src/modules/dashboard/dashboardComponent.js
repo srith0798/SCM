@@ -52,7 +52,7 @@ const HomeComponent = (props) => {
               <TransactionList />
             ))}
           {Utility.isMenuActive("/about") && (
-            <About getCurrentUserDetails={props.getCurrentUserDetails} />
+            <About getCurrentUserDetails={props.getCurrentUserDetails} loginSuccessMessage={props.message} />
           )}
           {Utility.isMenuActive("/faqs") && <Faqs />}
           {Utility.isMenuActive("/analytics") && <Analytics />}
@@ -89,8 +89,24 @@ function truncateToDecimals(num, dec = 2) {
 }
 
 const dashboardComponent = (props) => {
+
+  const login = ()=> {
+    loginSuccessMessage();
+    setTimeout(()=>{
+      history.replace("/about");
+    },700);
+  }
   const loginErrorMessage = () =>
     toast.error(httpConstants.MESSAGE.VALIDATE_BROWSER_LOGIN, {
+      duration: 4000,
+
+      position: httpConstants.MESSAGE.TOASTS_POSITION,
+
+      className: "toast-div-address",
+    });
+
+    const loginSuccessMessage = () =>
+    toast.success(httpConstants.MESSAGE.LOGIN_SUCCESS, {
       duration: 4000,
 
       position: httpConstants.MESSAGE.TOASTS_POSITION,
@@ -149,7 +165,7 @@ const dashboardComponent = (props) => {
               sessionManager.setDataInCookies(network, cookiesConstants.NETWORK);
               sessionManager.setDataInCookies(balance, cookiesConstants.BALANCE);
               sessionManager.setDataInCookies(true, cookiesConstants.IS_LOGGED_IN);
-              history.replace("/about");
+              login();
             }
           }
         }
@@ -178,6 +194,7 @@ const dashboardComponent = (props) => {
             <HomeComponent
               {...props}
               getCurrentUserDetails={getCurrentUserDetails}
+              message={loginSuccessMessage}
             />
           </ScrollableDiv>
         </HomeContainer>

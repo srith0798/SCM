@@ -4,26 +4,28 @@ import Dialog from "@mui/material/Dialog";
 import { makeStyles } from "@material-ui/styles";
 import { Toaster } from "react-hot-toast";
 
+
 const useStyles = makeStyles(() => ({
   dialogBox: {
     width: "100% !important",
     marginBottom: "275px",
-    height: "440px",
     ['@media screen and (min-width: 300px) and (max-width: 580px)']:{
-      height: "540px",
+      height: "250px",
       marginBottom: "51px",
       width:"88% !important",
-      overflow :"hidden"
+      overflow :"hidden",
+      bottom: "22.5%"
   },
+  ['@media screen and (min-width: 767px) and (max-width: 1024px)']:{
+    height: "215px",
+    bottom: "17%"
+},
 
   },
 }));
 
 export default function WalletPopUp(props) {
   const classes = useStyles();
-  const connectWallet = () => {
-    if (props.getCurrentUserDetails()) props.click(); 
-  };
 
   return (
     <>
@@ -35,127 +37,17 @@ export default function WalletPopUp(props) {
           <Dialog classes={{ paper: classes.dialogBox }} open={true}>
             <MainContainer>
               <Container>
-                <RowContainer>
-                  <Add>
-                    Connect Wallet
-                    <CrossIcon
-                      alt=""
-                      src="/images/xdc-cut.svg"
-                      onClick={props.click}
-                    />
-                  </Add>
-                </RowContainer>
-                <Line></Line>
-                <DetailBox>
-                  <IconContainer>
-                    <StepsTitle>Step 1</StepsTitle>
-                    <img
-                      style={{ width: "40px", marginTop: "10px" }}
-                      alt=""
-                      src="/images/xdc-install.svg"
-                    />
-                    <Title style={{ marginTop: "2px" }}>Install XDCPay</Title>
-                    <SubTitle>
-                      Install XDCPay Chrome extension from{" "}
-                      <a
-                        href="https://chrome.google.com/webstore/detail/xdcpay/bocpokimicclpaiekenaeelehdjllofo?hl=en-GB"
-                        rel="noopener noreferrer"
-                        target="_blank"
-                      >
-                        here
-                      </a>
-                    </SubTitle>
-                  </IconContainer>
-                  <IconContainer>
-                    <StepsTitle>Step 2</StepsTitle>
-                    <img alt="" src="/images/xdc-login.svg" />
-                    <Title>Login to XDCPay</Title>
-                    <SubTitle>
-                      Login to you account on XDCPay Chrome extension.
-                    </SubTitle>
-                  </IconContainer>
-                  <IconContainer>
-                    <StepsTitle>Step 3</StepsTitle>
-                    <img alt="" src="/images/xdc-wallet.svg" />
-                    <Title>Connect Wallet</Title>
-                    <SubTitle>
-                      Connect your XDCPay wallet with SmartHub.
-                    </SubTitle>
-                  </IconContainer>
-                </DetailBox>
-
-                {/* for mobile devices */}
-                <DetailBoxMobile>
-                <IconContainerMobile>
-                    <StepsTitleMobile>Step 1</StepsTitleMobile>
-                    <DivMobile>
-                    <img
-                      style={{ width: "40px",margin: "1px 8px 1px 5px" }}
-                      alt=""
-                      src="/images/xdc-install.svg"
-                    />
-                    <SubDivMob>
-                    <TitleMobile style={{ marginTop: "2px" }}>Install XDCPay</TitleMobile>
-                    <SubTitleMobile>
-                      Install XDCPay Chrome extension from{" "}
-                      <a
-                        href="https://chrome.google.com/webstore/detail/xdcpay/bocpokimicclpaiekenaeelehdjllofo?hl=en-GB"
-                        rel="noopener noreferrer"
-                        target="_blank"
-                      >
-                        here
-                      </a>
-                    </SubTitleMobile>
-                    </SubDivMob>
-                   
-                    </DivMobile>
-                    
-                  </IconContainerMobile>
-                  <IconContainerMobile>
-                    <StepsTitleMobile>Step 2</StepsTitleMobile>
-                    <DivMobile>
-                    <img alt="" src="/images/xdc-login.svg" />
-                    <SubDivMob>
-                    <TitleMobile>Login to XDCPay</TitleMobile>
-                    <SubTitleMobile>
-                      Login to you account on XDCPay Chrome extension.
-                    </SubTitleMobile>
-                    </SubDivMob>
-                    </DivMobile>
-                  </IconContainerMobile>
-                  <IconContainerMobile>
-                    <StepsTitleMobile>Step 3</StepsTitleMobile>
-                    <DivMobile>
-                    <img alt="" src="/images/xdc-wallet.svg" />
-                    <SubDivMob>
-                    <TitleMobile>Connect Wallet</TitleMobile>
-                    <SubTitleMobile>
-                      Connect your XDCPay wallet with Xmartly.
-                    </SubTitleMobile>
-                    </SubDivMob>
-                    </DivMobile>
-                  </IconContainerMobile>
-
-
-                </DetailBoxMobile>
-                <Button onClick={() => connectWallet()}>
-                  <img
-                    style={{ paddingLeft: "30px", marginRight: "15px", marginTop: "-3px" }}
-                    alt=""
-                    src="/images/xdc-logo-white.svg"
-                  />
-                  Connect Wallet
-                </Button>
-               <ButtonDivMobile>
-                <ButtonMobile onClick={() => connectWallet()}>
-                  <img
-                    style={{ paddingLeft: "30px", marginRight: "15px", marginTop: "-3px"}}
-                    alt=""
-                    src="/images/xdc-logo-white.svg"
-                  />
-                  Connect Wallet..
-                </ButtonMobile>
-                </ButtonDivMobile>
+              <HeadingDiv>
+                  XDC Pay not detected
+              </HeadingDiv>
+              <ContentDiv>
+              Use the desktop version of XDC Smart Contract Manager to manage contracts
+              </ContentDiv>
+              <ButtonDivMobile>
+                  <ButtonMobile onClick={()=> props.click()}>
+                  I understood
+                  </ButtonMobile>
+              </ButtonDivMobile>
               </Container>
             </MainContainer>
           </Dialog>
@@ -164,6 +56,38 @@ export default function WalletPopUp(props) {
     </>
   );
 }
+
+const HeadingDiv = styled.div`
+display: flex;
+justify-content: center;
+align-items: center;
+padding: 20px;
+font-size: 16px;
+font-weight: 500;
+font-family: 'Inter', Medium;
+color: #303134;
+@media (min-width: 767px) and (max-width: 1024px){
+    font-weight: 600;
+    font-size: 24px;
+}
+`;
+
+const ContentDiv = styled.div`
+display: flex;
+justify-content: center;
+align-items: center;
+padding: 20px;
+font-size: 14px;
+font-weight: 500;
+font-family: 'Inter', Medium;
+color: #303134;
+@media (min-width: 767px) and (max-width: 1024px){
+padding-top: 10px;
+font-size: 17px;
+}
+`;
+
+
 const Button = styled.button`
   background-repeat: no-repeat;
   display: -webkit-inline-box;
@@ -173,7 +97,7 @@ const Button = styled.button`
   background-size: 0.875rem;
   width: 264px;
   height: 50px;
-  padding-top: 12px;
+  padding-top: 9px;
   background-color: #3163f0;
   color: #ffffff;
   border: none;
@@ -185,6 +109,7 @@ const Button = styled.button`
     margin-top: 9px;
     display:none;
   }
+  
 `;
 const ButtonMobile = styled.button`
 background-repeat: no-repeat;
@@ -194,25 +119,31 @@ padding: 14px;
 item-align: center;
 background-size: 0.875rem;
 width: 264px;
-height: 50px;
-padding-top: 9px;
+height: 30px;
+padding-top: 6px;
 background-color: #3163f0;
 color: #ffffff;
 border: none;
 border-radius: 0.25rem;
-font-size: 16px;
+font-size: 12px;
 font-weight: 600;
 margin-top: 27px;
 @media (min-width: 300px) and (max-width: 580px) {
   margin-top: 9px;
+  padding-left: 95px;
 }
-@media (min-width: 580px){
+@media (min-width: 1024px){
   display:none;
+}
+@media (min-width: 767px) and (max-width: 1024px){
+margin-top: 10px;
+padding-left: 89px;
+font-size: 15px;
 }
 `;
 const ButtonDivMobile = styled.div`
-padding:2px
-@media (min-width: 580px){
+padding:2px;
+@media (min-width: 1024px){
   display:none;
 }
 `;
@@ -347,7 +278,7 @@ const Container = styled.div`
   max-width: 563px;
   align-items: center;
   text-align: center;
-  height: 420px;
+  height: 200px;
   @media (min-width: 300px) and (max-width: 767px) {
     padding-left: 17px;
     padding-right: 17px;

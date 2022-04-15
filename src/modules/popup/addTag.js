@@ -7,6 +7,7 @@ import contractsService from "../../services/contractsService";
 const useStyles = makeStyles(() => ({
   dialogBox: {
     width: "100% !important",
+    bottom: "20%"
   },
 }));
 export default function AddTags(props) {
@@ -103,7 +104,7 @@ const SubContainer = styled.div`
   justify-content: space-between;
 `;
 const Add = styled.div`
-  font: normal normal 600 24px/29px Inter;
+  font: normal normal 700 24px/29px Inter;
   color: #303134;
 `;
 const Input = styled.input`
