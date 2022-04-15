@@ -323,7 +323,11 @@ export default function TransactionList() {
 
   function setfunction(val) {
     let trim = val?.split("(");
+    if(trim[0] === "unpause")
+    return "resume";
+    else
     return trim[0];
+    
   }
 
   let user = "";
@@ -475,7 +479,7 @@ export default function TransactionList() {
           </Card>
         </SubContainer>
         <TableContainer>
-          <Div>
+          <HeadingDiv>
             <RowData>
               {toggle.transactionHash && (
                 <ColumnOne>
@@ -570,7 +574,7 @@ export default function TransactionList() {
                 </ColumnOne>
               )}
             </RowData>
-          </Div>
+          </HeadingDiv>
 
           <div>
             {(input === "" ? address : searchRow).map((data, index) => {
@@ -578,13 +582,21 @@ export default function TransactionList() {
               const func = setfunction(data?.function ? data.function : "");
               return (
                 <Div>
-                  <RowData
-                    
-                  >
+                  <RowData>
                     {toggle.transactionHash && (
                       <ColumnSecond>
                         <BackgroundChangerTxhash>
-                          {utility.truncateTxnAddress(data.hash)}
+                          <div
+                            onClick={() =>
+                              redirectToTransactionDetails(
+                                data?.hash,
+                                status,
+                                selected
+                              )
+                            }
+                          >
+                            {utility.truncateTxnAddress(data.hash)}
+                          </div>
                           <CopyToClipboard
                             text={data.hash}
                             onCopy={() => setcopyToolTip(true)}
@@ -603,34 +615,57 @@ export default function TransactionList() {
 
                     {status !== "Success"
                       ? toggle.status && (
-                          <ColumnSecond  
-                          onClick={() =>
-                            redirectToTransactionDetails(data?.hash, status, selected)
-                          }
-                          style={{ color: "red" }}>
+                          <ColumnSecond
+                            onClick={() =>
+                              redirectToTransactionDetails(
+                                data?.hash,
+                                status,
+                                selected
+                              )
+                            }
+                            style={{ color: "red" }}
+                          >
                             {status}
                           </ColumnSecond>
                         )
                       : toggle.status && (
                           <ColumnSecond
-                          onClick={() =>
-                            redirectToTransactionDetails(data?.hash, status, selected)
-                          }
-                          style={{ color: "green" }}>
+                            onClick={() =>
+                              redirectToTransactionDetails(
+                                data?.hash,
+                                status,
+                                selected
+                              )
+                            }
+                            style={{ color: "green" }}
+                          >
                             {status}
                           </ColumnSecond>
                         )}
 
-                    {toggle.function && <ColumnSecond
-                    onClick={() =>
-                      redirectToTransactionDetails(data?.hash, status, selected)
-                    }
-                    >{func}</ColumnSecond>}
+                    {toggle.function && (
+                      <ColumnSecond
+                        onClick={() =>
+                          redirectToTransactionDetails(
+                            data?.hash,
+                            status,
+                            selected
+                          )
+                        }
+                      >
+                        {func}
+                      </ColumnSecond>
+                    )}
                     {toggle.contracts && (
                       <ColumnSecond
-                      onClick={() =>
-                        redirectToTransactionDetails(data?.hash, status, selected)
-                      }>
+                        onClick={() =>
+                          redirectToTransactionDetails(
+                            data?.hash,
+                            status,
+                            selected
+                          )
+                        }
+                      >
                         {/* {utility.truncateTxnAddress(data.contractAddress)} */}
                         {selectedName || "Contract"}
                       </ColumnSecond>
@@ -639,7 +674,17 @@ export default function TransactionList() {
                     {toggle.from && (
                       <ColumnSecond>
                         <BackgroundChangerFrom>
-                          {utility.truncateTxnAddress(data.from)}
+                          <div
+                            onClick={() =>
+                              redirectToTransactionDetails(
+                                data?.hash,
+                                status,
+                                selected
+                              )
+                            }
+                          >
+                            {utility.truncateTxnAddress(data.from)}
+                          </div>
                           <CopyToClipboard
                             text={data.from}
                             onCopy={() => setcopyToolTip(true)}
@@ -659,7 +704,17 @@ export default function TransactionList() {
                     {toggle.to && (
                       <ColumnSecond>
                         <BackgroundChangerTo>
-                          {utility.truncateTxnAddress(data.to)}
+                          <div
+                            onClick={() =>
+                              redirectToTransactionDetails(
+                                data?.hash,
+                                status,
+                                selected
+                              )
+                            }
+                          >
+                            {utility.truncateTxnAddress(data.to)}
+                          </div>
                           <CopyToClipboard
                             text={data.to}
                             onCopy={() => setcopyToolTip(true)}
@@ -693,9 +748,9 @@ export default function TransactionList() {
                 (input !== "" && searchRow.length === 0)) && (
                 <PlaceHolderContainer>
                   <PlaceHolderImage src="/images/transactions-blue.svg" />
-                  No transactions found <br />
+                  No transactions found. <br />
                   <span>
-                    <a href="/contracts">add </a> your first contract{" "}
+                    <Link href="/contracts">Add </Link> your first contract{" "}
                   </span>
                 </PlaceHolderContainer>
               )
@@ -754,6 +809,10 @@ export default function TransactionList() {
   );
 }
 
+const Link = styled.span`
+  color: dodgerblue !important;
+`;
+
 const PageVerifyCheck = styled.div`
   display: ${(props) => (props.check === 1 ? "none" : "block")};
   height: auto;
@@ -781,7 +840,27 @@ const Div = styled.div`
   @media (min-width: 768px) and (max-width: 1200px) {
     width: 1111px;
   }
+
+  :hover{
+  background-color: #F5F6FD ;
+  }
 `;
+
+const HeadingDiv = styled.div`
+  padding: 0.75rem;
+  border-bottom: 1px solid #e3e7eb;
+  white-space: nowrap;
+  column-gap: 20px;
+  width: auto;
+  @media (min-width: 300px) and (max-width: 767px) {
+    column-gap: 70px;
+    width: 1381px !important;
+  }
+  @media (min-width: 768px) and (max-width: 1200px) {
+    width: 1111px;
+  }
+`;
+
 const RowData = styled.div`
   display: flex;
   flex-direction: row;
@@ -851,9 +930,9 @@ const CopyToClipboardImage = styled.img`
     @media (min-width: 340px) and (max-width: 767px) {
       margin-left: 2px;
     }
-    @media (min-width: 768px) and (max-width: 1023px) {
+    /* @media (min-width: 768px) and (max-width: 1023px) {
       margin-left: 83px;
-    }
+    } */
     @media (min-width: 1024px) and (max-width: 1075px) {
       margin-left: 84px;
     }
@@ -1049,6 +1128,7 @@ const BackgroundChangerTxhash = styled.div`
 const BackgroundChangerTo = styled.div`
   width: fit-content;
   height: auto;
+  display: flex;
   background-repeat: no-repeat;
   background: #eaefff 0% 0% no-repeat padding-box;
   border-radius: 6px;
@@ -1063,6 +1143,7 @@ const BackgroundChangerTo = styled.div`
 const BackgroundChangerFrom = styled.div`
   width: fit-content;
   height: auto;
+  display: flex;
   background-repeat: no-repeat;
   background: #eaefff 0% 0% no-repeat padding-box;
   border-radius: 6px;

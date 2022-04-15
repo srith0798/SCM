@@ -295,6 +295,7 @@ min-width: 130px;
     opacity: 1;
     width: 100%;
     padding: 3.5rem;
+    padding-top: 4.75%;
     height: max-content;
     min-height: 100%;
     /* max-height: 200vh; */
@@ -303,21 +304,28 @@ min-width: 130px;
     }
   `;
 
-  const Button = styled.button`
-    background-image: url("/images/Add.svg");
-    background-repeat: no-repeat;
-    background-position: 0.5rem;
-    padding-left: 1.313rem;
-    background-size: 0.875rem;
-    position: relative;
-    background-color: #3163f0;
-    color: #ffffff;
-    border: none;
-    border-radius: 0.25rem;
-    width: 6.25rem;
-    height: 1.875rem;
-    font-size: 0.75rem;
-  `;
+const Button = styled.button`
+background-image: url("/images/Add.svg");
+background-repeat: no-repeat;
+background-position: 0.5rem;
+padding-left: 1.313rem;
+background-size: 0.875rem;
+position: relative;
+background-color: #3163f0;
+color: #ffffff;
+border: none;
+border-radius: 0.25rem;
+width: 8.125rem;
+height: 2.125rem;
+font-size: 0.875rem;
+
+@media (max-width: 767px) {
+  width: 35px;
+  font-size: 0rem;
+  height: 33px;
+  background-position: 0.6rem;
+}
+`;
 
   const NewDiv = styled.div`
     padding: 0.938rem;
@@ -327,6 +335,9 @@ min-width: 130px;
       width: fit-content;
       min-width: 1025px;
     }
+    :hover{
+  background-color: #F5F6FD ;
+  }
   `;
   const NewDivOne = styled.div`
     border-bottom: 0.063rem solid #e3e7eb;
@@ -360,7 +371,7 @@ min-width: 130px;
       <MainContainer>
         <TitleContainer>
           <Title style={{ color: "#191919" }}>Alerting</Title>
-          <Button onClick={() => history.push("/add-alert")}>Add Alert</Button>
+          <Button disabled={contracts.length === 0 ? true: false} onClick={() => history.push("/add-alert")}>Add Alert</Button>
         </TitleContainer>
         <Container>
           <NewDivOne>
@@ -591,11 +602,6 @@ min-width: 130px;
                   </ImgDiv>
                   <PlaceHolderContainer>
                     No alerts found <br />
-                    You can start monitoring by adding contracts <br />
-                    <PlaceholderSpan>
-                      Click <Link href="/contracts">here </Link> to add
-                      contracts
-                    </PlaceholderSpan>
                   </PlaceHolderContainer>
                 </div>
                 // </CheckDiv>

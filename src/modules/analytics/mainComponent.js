@@ -16,8 +16,12 @@ import { analytics } from "../../constants";
 import Grid from "@mui/material/Grid";
 import { history } from "../../managers/history";
 import { cookiesConstants } from "../../constants";
+import { useIdleTimer } from 'react-idle-timer';
 
 export default function MainComponent(props) {
+
+  const timeout = 60000;
+  const [remaining, setRemaining] = React.useState(timeout);
   const [isSetOpen, setOpen] = React.useState(false);
   const [contracts, setContracts] = React.useState([]);
   const [selected, setSelected] = React.useState({});
@@ -49,6 +53,7 @@ export default function MainComponent(props) {
   const [topCallersError, setTopCallersError] = React.useState("");
   const [topFunctionCallsError, setTopFunctionCallsError] = React.useState("");
   const [error, setError] = React.useState("");
+  const [refreshCheck, setRefreshCheck] = React.useState("");
 
   const handleClick = () => {
     setOpen((prev) => !prev);
@@ -99,19 +104,19 @@ export default function MainComponent(props) {
       console.log("insideee");
       setTransactionOverTimeError("No Transactions Available");
       setActiveUserGraphError("No active users available");
-      setGasUsedOverTimeError("No gas used data available ")
+      setGasUsedOverTimeError("No gas used data available ");
       setTopCallersError("No Top Callers Available");
       setTopFunctionCallsError("No Top Function Calls Available");
       return;
     }
-    getTransactionAnalytics(response.contractList[0].address);
-    getGasUsedAnalytics(response.contractList[0].address);
-    getActiveUsersAnalytics(response.contractList[0].address);
-    getTopCallers(response.contractList[0].address);
-    getTopFunctionCalls(response.contractList[0].address);
-    setLoader(false);
+    let temp = refreshCheck ? refreshCheck : response.contractList[0];
+    getTransactionAnalytics(temp.address);
+    getGasUsedAnalytics(temp.address);
+    getActiveUsersAnalytics(temp.address);
+    getTopCallers(temp.address);
+    getTopFunctionCalls(temp.address);
     setContracts(response.contractList);
-    setSelected(response.contractList[0]);
+    setSelected(temp);
   };
   const getTransactionAnalytics = async (address, event) => {
     if (event?.target?.value) {
@@ -151,7 +156,6 @@ export default function MainComponent(props) {
       "successfullTransactions"
     );
     resultData.push(success);
-    console.log(resultData);
     setNoOfTransactions(resultData);
     setData(resultData);
   };
@@ -324,9 +328,23 @@ export default function MainComponent(props) {
     setSelected(item);
   };
   useEffect(() => {
+    setRemaining(getRemainingTime());
+
+    setInterval(() => {
+      setRemaining(getRemainingTime());
+    }, 1000);
     getContractNames();
     //eslint-disable-next-line
   }, []);
+
+  const handleOnIdle = () => {
+    getContractNames();
+  };
+
+  const { getRemainingTime } = useIdleTimer({
+    timeout,
+    onIdle: handleOnIdle
+  });
 
   const expandGraphs = (value, data, dropDownValue) => {
     setExpanded(value);
@@ -359,6 +377,7 @@ export default function MainComponent(props) {
     setDropDownValue(dropDownValue);
   };
   const changeContract = (item) => {
+    setRefreshCheck(item);
     selectContract(item);
     getTransactionAnalytics(item.address);
     getGasUsedAnalytics(item.address);
@@ -382,6 +401,17 @@ export default function MainComponent(props) {
     sessionManager.removeDataFromCookies("profilePicture");
     history.replace("/");
   };
+
+  var time = new Date().getTime();
+  document.addEventListener("mousemove", function () {
+    time = new Date().getTime();
+  });
+  setInterval(function () {
+    if (new Date().getTime() - time >= 10000) {
+    // getContractNames();
+    // time = new Date().getTime() + 1;
+    }
+  }, 1000);
 
   return (
     <>
@@ -820,6 +850,8 @@ const TableRow = styled.div`
   display: flex;
   flex-flow: column-nowrap;
   margin-bottom: 6px;
+  width: 100%;
+  max-width: 715px;
   border-top: 1px solid rgb(227, 231, 235);
   @media (min-width: 300px) and (max-width: 768px) {
     width: 653px;

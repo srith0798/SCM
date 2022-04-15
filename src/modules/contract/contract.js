@@ -436,11 +436,11 @@ const AddTag = styled.button`
   color: #416be0;
   z-index: 99;
   background: #ffffff 0% 0% no-repeat padding-box;
-  font-size: 1rem;
+  font-size: 0.875rem;
   font-weight: 600;
   border: none;
   outline: none;
-  pointer: cursor;
+  cursor: pointer;
   white-space: nowrap;
   background-image: url("/images/add-icon.svg");
   background-repeat: no-repeat;
@@ -681,6 +681,9 @@ const Div = styled.div`
   @media (min-width: 300px) and (max-width: 750px) {
     width: fit-content;
     min-width: 180px;
+  }
+  :hover{
+  background-color: #F5F6FD ;
   }
 `;
 const ColumnOne = styled.div`

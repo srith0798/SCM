@@ -82,7 +82,7 @@ export default function TransactionDetails() {
   };
 
   function getfunction(val) {
-    return val?.substring(0,10);
+    return val?.substring(0, 10);
   }
   const getContractByAddress = async (address, func) => {
     let userId = sessionManager.getDataFromCookies(cookiesConstants.USER_ID);
@@ -134,6 +134,7 @@ export default function TransactionDetails() {
     let selected = history?.location?.state?.selected;
     setSelected(selected);
     getTransaction(id);
+    setLoader(true);
   }, [url]);
 
   const MainContainer = styled.div`
@@ -407,8 +408,8 @@ export default function TransactionDetails() {
     height: 2.125rem;
     font-size: 0.875rem;
     @media (min-width: 300px) and (max-width: 485px) {
-    font-size: 11px;
-    width: 140px;
+      font-size: 11px;
+      width: 140px;
     }
   `;
   const SubContainer = styled.div`
@@ -955,10 +956,17 @@ export default function TransactionDetails() {
                         .format("MMM DD, YYYY, hh:mm A")) ||
                     ""
                   } ${("Asia/Calcutta" && utility.getUtcOffset("Asia/Calcutta")) || ""}`} */}
-                  {moment(row.timestamp * 1000)
-                    .utc()
-                    .format("lll")}
-                  {" " + "UTC"}
+                  {row.timestamp ? (
+                    <div>
+                      {moment(row.timestamp * 1000)
+                        .utc()
+                        .format("lll")}
+                      {" " + "UTC"}
+                    </div>
+                  ) : (
+                    ""
+                  )}
+
                   {/* {moment(row.createdOn).fromNow() +
                   " " +
                   "(" +
@@ -970,7 +978,7 @@ export default function TransactionDetails() {
             <CommonDiv>
               <Row>
                 <Heading>Value</Heading>
-                <SubHead>{row.value} XDC</SubHead>
+                <SubHead>{row.value ? <div>{row.value} XDC</div> : ""}</SubHead>
               </Row>
             </CommonDiv>
             <CommonDiv>
@@ -982,19 +990,31 @@ export default function TransactionDetails() {
             <CommonDiv>
               <Row>
                 <Heading>Gas Used</Heading>
-                <SubHead>{new Intl.NumberFormat().format(row.gasUsed)}</SubHead>
+                <SubHead>
+                  {row.gasUsed ? (
+                    <div>{new Intl.NumberFormat().format(row.gasUsed)}</div>
+                  ) : (
+                    ""
+                  )}
+                </SubHead>
               </Row>
             </CommonDiv>
             <CommonDiv>
               <Row>
                 <Heading>Gas Price</Heading>
                 <SubHead>
-                  {(row.gasPrice / 1000000000000000000)
-                    .toFixed(12)
-                    .toLocaleString("fullwide", { useGrouping: false })
-                    .replace(/\.?0+$/, "") || 0}{" "}
-                  XDC ($
-                  {gasPriceUSD.toFixed(12) || 0} )
+                  {row.gasPrice ? (
+                    <div>
+                      {(row.gasPrice / 1000000000000000000)
+                        .toFixed(12)
+                        .toLocaleString("fullwide", { useGrouping: false })
+                        .replace(/\.?0+$/, "") || 0}{" "}
+                      XDC ($
+                      {gasPriceUSD.toFixed(12) || 0} )
+                    </div>
+                  ) : (
+                    ""
+                  )}
                 </SubHead>
               </Row>
             </CommonDiv>
@@ -1002,10 +1022,16 @@ export default function TransactionDetails() {
               <Row>
                 <Heading>Transaction Fee</Heading>
                 <SubHead>
-                  {((row.gasPrice * row.gasUsed) / 1000000000000000000)
-                    .toFixed(12)
-                    .replace(/\.?0+$/, "") || 0}{" "}
-                  XDC
+                  {row.gasUsed ? (
+                    <div>
+                      {((row.gasPrice * row.gasUsed) / 1000000000000000000)
+                        .toFixed(12)
+                        .replace(/\.?0+$/, "") || 0}{" "}
+                      XDC
+                    </div>
+                  ) : (
+                    ""
+                  )}
                 </SubHead>
               </Row>
             </CommonDiv>
