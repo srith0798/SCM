@@ -11,6 +11,7 @@ import { cookiesConstants } from "../../constants";
 import ReactTooltip from "react-tooltip";
 import ScreenSizeDetector from "screen-size-detector";
 import IpadPopup from "./ipadPopup";
+import OriginPopup from "./originLink";
 
 export default function About(props) {
   const screen = new ScreenSizeDetector();
@@ -41,7 +42,7 @@ export default function About(props) {
               lifecycle utility, empowering the entire on-chain critical
               business logic.
             </DataBox>
-
+            <div style={{display: "flex"}}> 
             <Button
               onClick={() =>
                 sessionManager.getDataFromCookies(cookiesConstants.IS_LOGGED_IN)
@@ -67,6 +68,26 @@ export default function About(props) {
                 />
               </Tooltip>
             </Button>
+
+            <ButtonOrigin
+              // onClick={() =>
+              //   // OriginPopup
+              // }
+            >
+              Go to Origin
+              <Tooltip
+                disableFocusListener
+                title="You will be redirected to XDC Origin to deploy your own contracts."
+              >
+                <img
+                  style={{ marginLeft: "0.375rem" }}
+                  alt=""
+                  src="/images/question-mark.svg"
+                />
+              </Tooltip>
+            </ButtonOrigin>
+            </div>
+
           </LeftContainer>
           <RightContainer>
             <VideoBox>
@@ -351,6 +372,8 @@ const DataBox = styled.div`
   display: flex;
   width: 100%;
   font-size: 1.2rem;
+  font-family: 'Inter';
+  font-weight: 400;
   @media (min-width: 300px) and (max-width: 414px) {
     font-size: 14px;
   }
@@ -389,7 +412,7 @@ const Button = styled.button`
   width: fit-content;
   display: flex;
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 500;
   white-space: nowrap;
   @media (min-width: 340px) and (max-width: 1023px) {
     margin-left: auto;
@@ -410,6 +433,45 @@ const Button = styled.button`
     display: none;
   }
 `;
+
+const ButtonOrigin = styled.button`
+  background-repeat: no-repeat;
+  margin-left: 20px;
+  background-position: 0.5rem;
+  padding: 0.875rem;
+  item-align: center;
+  background-size: 0.875rem;
+  position: relative;
+  background-color: #3163f0;
+  color: #ffffff;
+  border: none;
+  border-radius: 0.25rem;
+  margin-top: 1.875rem;
+  width: fit-content;
+  display: flex;
+  font-size: 1rem;
+  font-weight: 500;
+  white-space: nowrap;
+  @media (min-width: 340px) and (max-width: 1023px) {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  @media (min-width: 300px) and (max-width: 414px) {
+    margin-left: 30px;
+    font-size: 0.6rem;
+    height: 40px;
+  }
+  @media (max-width: 456px) {
+    margin-left: 30px;
+    font-size: 0.6rem;
+    height: 40px;
+  }
+
+  @media (max-width: 1023px) {
+    display: none;
+  }
+`;
+
 const VideoBox = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
   border-radius: 0.125rem;
@@ -460,6 +522,7 @@ const SubTitle = styled.div`
   font-size: 1rem;
   color: #4b4b4b;
   margin-top: 0.438rem;
+  font-weight: 400;
   @media (min-width: 300px) and (max-width: 414px) {
     font-size: 0.9rem;
   }
@@ -488,6 +551,7 @@ const SubHead = styled.div`
   text-align: center;
   width: 100%;
   padding-bottom: 1.25rem;
+  font-weight: 400;
   @media (min-width: 300px) and (max-width: 414px) {
     font-size: 0.8rem;
   }

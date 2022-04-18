@@ -36,7 +36,7 @@ const  topFunctionCallheaders = [
         {props.graphNo === 4 ?  <CSVLink style={props?.data?.length > 0 ? csvLink : csvLinkDisabled} data={props.data} headers={topCallersheaders}
         filename="Top Callers"
         >Export Data</CSVLink>:
-        <CSVLink style={props?.data?.length > 0 ? csvLink : csvLinkDisabled} data={props.data} headers={topFunctionCallheaders} filename="Top Function Calls"
+        <CSVLink style={props?.data?.length > 0 ? csvLink : csvLinkDisabled} data={props.data} headers={topFunctionCallheaders} filename={props.graphName}
         >Export Data</CSVLink>}
           <Icon src="/images/refresh.svg" />
         </AlignmentContainer>

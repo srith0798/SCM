@@ -578,7 +578,7 @@ const SubContainer = styled.div`
 `;
 const Heading = styled.div`
   font-size: 1.5rem;
-  font-weight: 600;
+  font-weight: 700;
   color: #191919;
   margin-right: 0.625rem;
   @media (max-width: 768px) {
@@ -688,7 +688,7 @@ const Div = styled.div`
 `;
 const ColumnOne = styled.div`
   font-size: 0.875rem;
-  font-weight: 600;
+  font-weight: 500;
   color: #102c78;
   width: 100%;
   min-width: 130px;

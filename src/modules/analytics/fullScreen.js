@@ -18,7 +18,7 @@ export default function FullScreen(props) {
       headers: ['Date', 'Count'],
       title: `Contract Address : ${props?.selected?.address}`,
       showTitle:true,
-      filename:'Data Over Time'
+      filename:`${props.graphName ? props.graphName : "Data"}`
     };
      data && data.length && data.map((item)=>{
      if((item.id).includes("Transaction"))  {

@@ -266,7 +266,7 @@ const Add = styled.div`
 
 const Content = styled.div`
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 500;
   color: #303134;
   white-space: nowrap;
   @media (min-width: 300px) and (max-width: 767px) {

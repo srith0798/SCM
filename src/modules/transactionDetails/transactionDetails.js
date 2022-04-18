@@ -173,7 +173,7 @@ export default function TransactionDetails() {
     width: 100%;
     max-width: 267px;
     font-size: 24px;
-    font-weight: 600;
+    font-weight: 500;
     @media (min-width: 300px) and (max-width: 767px) {
       font-size: 15px;
       margin-left: 10px;
@@ -181,6 +181,8 @@ export default function TransactionDetails() {
   `;
   const Title = styled.div`
     white-space: nowrap;
+    font-family: "Inter", Medium,;
+    font-weight: 500;
     @media (min-width: 340px) and (max-width: 767px) {
       align-items: left;
     }
@@ -343,13 +345,13 @@ export default function TransactionDetails() {
     max-height: 70rem;
     /* height: 18.75rem; */
     padding: 2rem;
-    font-weight: 600;
+    font-weight: 500;
   `;
 
   const Heading = styled.div`
     text-align: left;
     font-size: 0.875rem;
-    font-weight: 600;
+    font-weight: 500;
     color: #102c78;
     width: 100%;
     max-width: 16.25rem;
@@ -364,13 +366,13 @@ export default function TransactionDetails() {
 
   const TransactionNumber = styled.div`
     color: #416be0;
-    font-weight: 600;
+    font-weight: 500;
   `;
 
   const From = styled.div`
     text-align: left;
     font-size: 0.875rem;
-    font-weight: 600;
+    font-weight: 500;
     color: #102c78;
     width: 100%;
     max-width: 16.25rem;
@@ -383,7 +385,7 @@ export default function TransactionDetails() {
   const InputHeading = styled.div`
     text-align: left;
     font-size: 0.875rem;
-    font-weight: 600;
+    font-weight: 500;
     color: #102c78;
     width: 100%;
     max-width: 16.25rem;
@@ -479,7 +481,7 @@ export default function TransactionDetails() {
   `;
   const SubHeading = styled.div`
     font-size: 0.8rem;
-    font-weight: 600;
+    font-weight: 500;
     color: #102c78;
     display: flex;
   `;

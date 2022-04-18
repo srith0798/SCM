@@ -250,7 +250,7 @@ const VerifiedButton = styled.div`
 `;
 const Verified = styled.div`
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 500;
   color: #00a58c;
 
   @media (min-width: 320px) and (max-width: 768px) {
@@ -424,7 +424,7 @@ const VerifyDiv = styled.div`
 
 const TableData = styled.div`
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 500;
   color: #191919;
   width: 100%;
   /* max-width: 9.375rem; */
@@ -432,7 +432,7 @@ const TableData = styled.div`
   margin-right: 6px;
 `;
 const SolidityData = styled.div`
-  font-weight: 600;
+  font-weight: 500;
   color: #191919;
   width: 100%;
   max-width: 9.375rem;
@@ -473,7 +473,7 @@ const CopyImg = styled.img`
 `;
 const TableHeading = styled.div`
   font-size: 0.875rem;
-  font-weight: 600;
+  font-weight: 500;
   color: #102c78;
   max-width: 18.75rem;
   width: 100%;

@@ -1070,13 +1070,13 @@ const IconContainer = styled.div`
 const Heading = styled.span`
   color: #102c78;
   font-size: 0.975rem;
-  font-weight: 600;
+  font-weight: 500;
 `;
 const InstructionText = styled.span`
   margin-top: 0.625rem;
   color: rgb(25, 25, 25);
   font-size: 0.9rem;
-  font-weight: 600;
+  font-weight: 500;
   margin-bottom: 1.2rem;
 `;
 const Card = styled.div`
@@ -1087,7 +1087,7 @@ const Card = styled.div`
 `;
 const ColumnOne = styled.div`
   font-size: 0.875rem;
-  font-weight: 700;
+  font-weight: 500;
   color: #102c78;
   column-gap: 20px;
   width: 100%;
