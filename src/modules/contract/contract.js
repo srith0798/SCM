@@ -424,9 +424,6 @@ const CopyToClipboardImage = styled.img`
     @media (min-width: 340px) and (max-width: 767px) {
       margin-left: 2px;
     }
-    @media (min-width: 768px) and (max-width: 1023px) {
-      margin-left: 83px;
-    }
     @media (min-width: 1024px) and (max-width: 1075px) {
       margin-left: 84px;
     }

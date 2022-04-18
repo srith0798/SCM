@@ -79,7 +79,7 @@ export default function WalletPopUp(props) {
                     <img alt="" src="/images/xdc-wallet.svg" />
                     <Title>Connect Wallet</Title>
                     <SubTitle>
-                      Connect your XDCPay wallet with SmartHub.
+                      Connect your XDCPay wallet with Xmartly.
                     </SubTitle>
                   </IconContainer>
                 </DetailBox>

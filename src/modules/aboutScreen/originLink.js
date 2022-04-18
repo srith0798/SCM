@@ -2,42 +2,25 @@ import React from "react";
 import styled from "styled-components";
 import Dialog from "@mui/material/Dialog";
 import { makeStyles } from "@material-ui/styles";
-import { Toaster } from "react-hot-toast";
 
 const useStyles = makeStyles(() => ({
   dialogBox: {
     width: "100% !important",
-    marginBottom: "275px",
-    height: "440px",
-    ['@media screen and (min-width: 300px) and (max-width: 580px)']:{
-      height: "540px",
-      marginBottom: "51px",
-      width:"88% !important",
-      overflow :"hidden"
-  },
-
+    backgroundColor: "#FFFFFF",
+    bottom: "180px",
   },
 }));
 
-export default function WalletPopUp(props) {
+export default function OriginPopup(props) {
   const classes = useStyles();
-  const connectWallet = () => {
-    if (props.getCurrentUserDetails()) props.click(); 
-  };
-
   return (
-    <>
-      <div>
-        <Toaster />
-      </div>
-      <div>
-        {props.state ? (
-          <Dialog classes={{ paper: classes.dialogBox }} open={true}>
+    <div>
+      <Dialog classes={{ paper: classes.dialogBox }} open={true}>
             <MainContainer>
               <Container>
                 <RowContainer>
                   <Add>
-                    Create Smart Contract
+                     Create Smart Contract
                     <CrossIcon
                       alt=""
                       src="/images/xdc-cut.svg"
@@ -48,104 +31,41 @@ export default function WalletPopUp(props) {
                 <Line></Line>
                 <DetailBox>
                   <IconContainer>
+                    <StepsTitle>Step 1</StepsTitle>
                     <img
                       style={{ width: "40px", marginTop: "10px" }}
                       alt=""
-                      src="/images/xdc-install.svg"
+                      src="/images/token-origin.svg"
                     />
                     <SubTitle>
-                      Create XRC-20 token using Origin{" "}
+                    Create XRC-20 token using Origin{" "}
                     </SubTitle>
                   </IconContainer>
                   <IconContainer>
-                    <img alt="" src="/images/xdc-login.svg" />
+                    <StepsTitle>Step 2</StepsTitle>
+                    <img alt="" src="/images/circle-origin.svg" />
                     <SubTitle>
-                    Analyze Transactions of XRC20 Tokens.
+                    Analyze Transactions of XRC20 Tokens
                     </SubTitle>
                   </IconContainer>
                   <IconContainer>
-                    <img alt="" src="/images/xdc-wallet.svg" />
+                    <StepsTitle>Step 3</StepsTitle>
+                    <img alt="" src="/images/alert-origin.svg" />
                     <SubTitle>
                     Set Alerts on Transactions
                     </SubTitle>
                   </IconContainer>
                 </DetailBox>
-
-                {/* for mobile devices */}
-                <DetailBoxMobile>
-                <IconContainerMobile>
-                    <StepsTitleMobile>Step 1</StepsTitleMobile>
-                    <DivMobile>
-                    <img
-                      style={{ width: "40px",margin: "1px 8px 1px 5px" }}
-                      alt=""
-                      src="/images/xdc-install.svg"
-                    />
-                    <SubDivMob>
-                    <TitleMobile style={{ marginTop: "2px" }}>Install XDCPay</TitleMobile>
-                    <SubTitleMobile>
-                      Install XDCPay Chrome extension from{" "}
-                      <a
-                        href="https://chrome.google.com/webstore/detail/xdcpay/bocpokimicclpaiekenaeelehdjllofo?hl=en-GB"
-                        rel="noopener noreferrer"
-                        target="_blank"
-                      >
-                        here
-                      </a>
-                    </SubTitleMobile>
-                    </SubDivMob>
-                   
-                    </DivMobile>
-                    
-                  </IconContainerMobile>
-                  <IconContainerMobile>
-                    <StepsTitleMobile>Step 2</StepsTitleMobile>
-                    <DivMobile>
-                    <img alt="" src="/images/xdc-login.svg" />
-                    <SubDivMob>
-                    <TitleMobile>Login to XDCPay</TitleMobile>
-                    <SubTitleMobile>
-                      Login to you account on XDCPay Chrome extension.
-                    </SubTitleMobile>
-                    </SubDivMob>
-                    </DivMobile>
-                  </IconContainerMobile>
-                  <IconContainerMobile>
-                    <StepsTitleMobile>Step 3</StepsTitleMobile>
-                    <DivMobile>
-                    <img alt="" src="/images/xdc-wallet.svg" />
-                    <SubDivMob>
-                    <TitleMobile>Connect Wallet</TitleMobile>
-                    <SubTitleMobile>
-                      Connect your XDCPay wallet with Xmartly.
-                    </SubTitleMobile>
-                    </SubDivMob>
-                    </DivMobile>
-                  </IconContainerMobile>
-
-
-                </DetailBoxMobile>
-                <Button onClick={() => window.open("https://origin.xdc.org/")}>
+                <Button onClick={()=> window.open("https://origin.xdc.org/")}>
                   Go to Origin
                 </Button>
-               <ButtonDivMobile>
-                <ButtonMobile onClick={() => connectWallet()}>
-                  <img
-                    style={{ paddingLeft: "30px", marginRight: "15px", marginTop: "-3px"}}
-                    alt=""
-                    src="/images/xdc-logo-white.svg"
-                  />
-                  Connect Wallet..
-                </ButtonMobile>
-                </ButtonDivMobile>
               </Container>
             </MainContainer>
           </Dialog>
-        ) : null}
-      </div>
-    </>
+    </div>
   );
 }
+
 const Button = styled.button`
   background-repeat: no-repeat;
   display: -webkit-inline-box;
@@ -161,63 +81,14 @@ const Button = styled.button`
   border: none;
   border-radius: 0.25rem;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 500;
   margin-top: 27px;
+  padding-left: 88px;
   @media (min-width: 300px) and (max-width: 580px) {
     margin-top: 9px;
     display:none;
   }
 `;
-const ButtonMobile = styled.button`
-background-repeat: no-repeat;
-display: -webkit-inline-box;
-background-position: 0.5rem;
-padding: 14px;
-item-align: center;
-background-size: 0.875rem;
-width: 264px;
-height: 50px;
-padding-top: 9px;
-background-color: #3163f0;
-color: #ffffff;
-border: none;
-border-radius: 0.25rem;
-font-size: 16px;
-font-weight: 600;
-margin-top: 27px;
-@media (min-width: 300px) and (max-width: 580px) {
-  margin-top: 9px;
-}
-@media (min-width: 580px){
-  display:none;
-}
-`;
-const ButtonDivMobile = styled.div`
-padding:2px
-@media (min-width: 580px){
-  display:none;
-}
-`;
-const Title = styled.div`
-  text-align: center;
-  font: normal normal 600 16px/20px Inter;
-  font-size: 16px;
-  font-weight: 600;
-  letter-spacing: 0px;
-  color: #1f1f1f;
-  opacity: 1;
-  padding-top: 20px;
-`;
-const TitleMobile = styled.div`
-text-align: left;
-  font: normal normal 600 16px/20px Inter;
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 0px;
-  color: #1f1f1f;
-  opacity: 1;
-  padding-top: 0px;`;
-
 const StepsTitle = styled.div`
   text-align: center;
   font: normal normal normal 14px/17px Inter;
@@ -225,16 +96,6 @@ const StepsTitle = styled.div`
   color: #7b7979;
   opacity: 1;
   padding-bottom: 10px;
-`;
-const StepsTitleMobile = styled.div`
-  text-align: left;
-  font: normal normal normal 14px/17px Inter;
-  letter-spacing: 0px;
-  color: #7b7979;
-  opacity: 1;
-  padding-bottom: 10px;
-  margin-top: 0px;
-  margin-left: 15px;
 `;
 const SubTitle = styled.div`
   text-align: center;
@@ -244,35 +105,15 @@ const SubTitle = styled.div`
   font-size: 16px;
   font-weight: normal;
 `;
-const SubTitleMobile =styled.div`
-text-align: left;
-  letter-spacing: 0px;
-  opacity: 1;
-  padding-top: 10px;
-  font-size: 14px;
-  font-weight: normal;
-  @media (min-width: 300px) and (max-width: 767px){
-    padding-top: 5px;
-  }
-`;
 
 const IconContainer = styled.div`
   padding: 6px;
   border: 0.031rem #eaf1ec solid;
   width: 200px;
-  height: 233px;
+  height: 175px;
   margin: 3px;
 `;
-const IconContainerMobile = styled.div`
-  padding: 6px;
-  border: 0.031rem #eaf1ec solid;
-  width: 96%;
-  height: 107px;
-  margin: 3px;
-  margin-bottom: 12px;
-  border-radius: 6px;
-  margin-left: 9px;
-`;
+
 const CrossIcon = styled.img`
   cursor: pointer;
   width: 16px;
@@ -293,27 +134,6 @@ const DetailBox = styled.div`
     display:none;
   }
 `;
-const DetailBoxMobile = styled.div`
-  display: flex;
-  margin-top: 26px;
-  // padding-bottom: 18px;
-  @media (min-width: 250px) and (max-width:580px) {
-    flex-direction: column;
-  }
-  @media (min-width: 580px) {
-    display:none;
-  }
-`;
-const DivMobile = styled.div`
-@media (min-width: 250px) and (max-width:768px) {
-  display: flex;
-  flex-direction: row;
-  margin-top: 0px;
-  margin-left: 12px;
-}
-`;
-const SubDivMob = styled.div``;
-
 const MainContainer = styled.div`
   width: 100%;
   display: flex;
@@ -329,7 +149,7 @@ const Container = styled.div`
   max-width: 563px;
   align-items: center;
   text-align: center;
-  height: 420px;
+  height: 380px;
   @media (min-width: 300px) and (max-width: 767px) {
     padding-left: 17px;
     padding-right: 17px;

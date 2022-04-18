@@ -20,7 +20,6 @@ const useStyles = makeStyles(() => ({
     height: "215px",
     bottom: "17%"
 },
-
   },
 }));
 
