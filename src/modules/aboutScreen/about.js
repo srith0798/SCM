@@ -69,7 +69,7 @@ export default function About(props) {
               </Tooltip>
             </Button>
 
-            <ButtonOrigin
+            {/* <ButtonOrigin
               // onClick={() =>
               //   // OriginPopup
               // }
@@ -85,7 +85,7 @@ export default function About(props) {
                   src="/images/question-mark.svg"
                 />
               </Tooltip>
-            </ButtonOrigin>
+            </ButtonOrigin> */}
             </div>
 
           </LeftContainer>
