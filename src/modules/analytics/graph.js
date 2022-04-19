@@ -148,7 +148,7 @@ const ToolTipElement = (props) => {
 
 const MyResponsiveLine = ({ data, MouseMovePoint, CustomPoint }) => (
   <ResponsiveLine
-    margin={{ bottom: 10, left: 38, top: 25, right: 20 }}
+    margin={{ bottom: 25, left: 38, top: 25, right: 20 }}
     data={data}
     tooltip={ToolTipElement}
     yScale={{
@@ -224,6 +224,7 @@ const LegendImg = styled.img`
   width: 12px;
 `;
 const LegendSpan = styled.span`
+  font-weight: 400;
   margin-right: 5px;
 `;
 const Oval = styled.div`

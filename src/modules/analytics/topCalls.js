@@ -8,8 +8,6 @@ export default function TopCalls(props) {
   const ClickMe = () => {
     props.changeExpand(0);
   };
-  console.log("props", props);
-
 const  topCallersheaders = [
     { label: 'Address', key: 'address' },
     { label: 'Network', key: 'network' },
@@ -49,7 +47,7 @@ const  topFunctionCallheaders = [
         }}
       >
         <GraphContainer>
-          <FlexEnd>
+          <FlexEnd style={{display: props.data.length===0?"none":""}}>
           <select id="dates" className="select" value={props.dropDownValue} onChange={(event)=>{props.getAnalytics("", event)}}>
         {analytics && analytics.ANALYTICS_DROPDOWN  && analytics.ANALYTICS_DROPDOWN.map((option)=>(
           <option value={option.VALUE} className="select-dropdown">
@@ -157,7 +155,7 @@ const ContractFrom = styled.div`
   width: 26%;
   color: #102C78;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 500;
   @media (min-width: 300px) and (max-width: 767px) {
     word-break: break-all;
   }
@@ -166,6 +164,7 @@ const Network = styled.div`
   color: #303134;
   font-size: 14px;
   width: 100%;
+  font-weight: 400;
   @media (min-width: 300px) and (max-width: 767px) {
     word-break: break-all;
   }
@@ -189,6 +188,7 @@ const Count = styled.div`
  color: #3163F0;
  padding-top:15px;
  padding-right: 45px;
+ font-weight: 400;
 `;
 
 const csvLink ={

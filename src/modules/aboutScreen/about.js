@@ -17,10 +17,14 @@ export default function About(props) {
   const [state, setState] = useState(true);
   const [address] = React.useState({});
   const [originPopup, setOriginPopup] = useState(false);
-
+  const [screenWidth, setScreenWidth] = useState(false);
   const handleOpen = () => {
     setOriginPopup(true);
   };
+
+  window.addEventListener('resize', ()=>{
+    setScreenWidth(window.innerWidth);
+  });
 
   return (
     <>
@@ -365,6 +369,7 @@ const ImgMain = styled.img`
 const Span = styled.span`
   color: #0089ff;
   white-space: nowrap;
+  font-weight: 600;
 `;
 const Span1 = styled.span`
   @media (min-width: 300px) and (max-width: 414px) {
@@ -372,6 +377,7 @@ const Span1 = styled.span`
   }
 `;
 const DivDesktop = styled.div`
+  font-weight: 600 !important;
   @media (min-width: 300px) and (max-width: 414px) {
     display: none;
   }

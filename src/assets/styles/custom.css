@@ -413,7 +413,7 @@ input:checked + .slider:before {
   border: 1px solid #b2c5fa;
   border-radius: 4px;
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 500;
   color: #303134;
   outline: none;
   white-space: nowrap;
@@ -498,7 +498,7 @@ input[type="date"]:valid::before {
   text-align: left;
   font-size: 16px;
   font: normal normal medium 16px/20px Inter;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: 0px;
   color: #102c78;
   opacity: 1;
@@ -510,7 +510,7 @@ input[type="date"]:valid::before {
   text-align: left;
 
   margin-top: 15px;
-  font-weight: 500;
+  font-weight: 400;
   letter-spacing: 0px;
   color: #191919;
   opacity: 1;

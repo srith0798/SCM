@@ -114,12 +114,14 @@ const MainBoxContainer = styled.div`
 const Title = styled.div`
   font-size: 0.875rem;
   color: #1d3c93;
+  font-weight: 500;
   margin-bottom: 0.413rem;
 `;
 const SubTitle = styled.div`
   font-size: 0.875rem;
   color: #191919;
   margin-bottom: 0.513rem;
+  font-weight: 400;
   @media (min-width: 300px) and (max-width: 414px) {
   font-size: 8px;
   }
@@ -138,6 +140,7 @@ const Button = styled.button`
   text-align: center;
   font-size: 0.75rem;
   color: #ffffff;
+  font-weight: 400;
 `;
 
 const BoxContainer = styled.div`
@@ -211,7 +214,7 @@ const Heading = styled.div`
 const TextLi = styled.div`
   text-align: left;
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 500;
   cursor: pointer;
   @media (min-width: 768px) and (max-width: 1024px) {
     font-size: 10px;
