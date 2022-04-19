@@ -37,6 +37,7 @@ export default function AddAlert() {
   const [targetComparator, setTargetComparator] = React.useState("");
   const [selectedAddress, setSelectedAddress] = React.useState([]);
   const [selectedTag, setSelectedTag] = React.useState("");
+  const [placeholder, setPlaceholder] = React.useState("");
 
   const [icon, setIcon] = React.useState({
     successfulTransaction:
@@ -95,9 +96,15 @@ export default function AddAlert() {
   };
   const selectAlertTarget = (type) => {
     setAlertTarget(type);
+
     changeProgress("PARAMETERS");
-    if (type === genericConstants.ALERT_TYPE.ADDRESS) getContracts();
-    else if (type === genericConstants.ALERT_TYPE.TAG) getTags();
+    if (type === genericConstants.ALERT_TYPE.ADDRESS) {
+      getContracts();
+      setPlaceholder("Select Address");
+    } else if (type === genericConstants.ALERT_TYPE.TAG) {
+      getTags();
+      setPlaceholder("Select Tag");
+    }
   };
   const openDestinationPopup = (value) => {
     setAddDestinationPopup(true);
@@ -451,9 +458,7 @@ export default function AddAlert() {
                           className="Formalert"
                         >
                           <InputLabel shrink={false}>
-                            {targetValue === "" && alertTarget === "TAG"
-                              ? "Select Tag"
-                              : "Select Address"}
+                            {targetValue === "" && placeholder}
                           </InputLabel>
                           <Select
                             value={targetValue}
@@ -834,7 +839,7 @@ const AlertTarget = (props) => {
 };
 
 const ImgBox = styled.img`
-margin-top: 4px;
+  margin-top: 4px;
 `;
 
 const DestinationDetail = styled.div`
@@ -1088,8 +1093,6 @@ const BoxContainerFailed = styled.div`
     margin: 0px 10px 20px 10px;
   }
 `;
-
-
 
 const MainBoxContainer = styled.div`
   display: flex;

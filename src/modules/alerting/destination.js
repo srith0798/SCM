@@ -193,16 +193,16 @@ export default function Destination() {
     word-break: break-all;
   `;
   const EmailDiv = styled.div`
-  display: flex;
-  flex-flow: column nowrap;
-  font-size: 0.875rem;
-  font-weight: 400;
-  max-width: 100px;
-  color: #102c78;
-  width: 100%;
-  margin: 0.25rem;
-  word-break: break-all;
-`;
+    display: flex;
+    flex-flow: column nowrap;
+    font-size: 0.875rem;
+    font-weight: 400;
+    max-width: 100px;
+    color: #102c78;
+    width: 100%;
+    margin: 0.25rem;
+    word-break: break-all;
+  `;
   const DeleteDiv = styled.div`
     display: flex;
     flex-flow: column nowrap;
@@ -295,15 +295,7 @@ export default function Destination() {
           </RowContainer>
         </Div>
 
-        <ColumnActive>
-          Active Destination
-          <Tooltip
-            disableFocusListener
-            title="Users' active notifications destination "
-          >
-            <ToolTipIcon src="/images/tool-tip.svg" />
-          </Tooltip>
-        </ColumnActive>
+        <ColumnActive>Active Destination</ColumnActive>
         <LastDiv>
           {destinations &&
             destinations.length > 0 &&
@@ -312,7 +304,17 @@ export default function Destination() {
                 <RowData>
                   <Img alt="" src="/images/email.svg" />
                   <EmailDiv style={{ color: "#191919" }}>
-                    {destination.type}
+                    {destination.type
+                      ? destination.type
+                          .toLowerCase()
+                          .replace("_", " ")
+                          .substring(0, 1)
+                          .toUpperCase() +
+                        destination.type
+                          .toLowerCase()
+                          .replace("_", " ")
+                          .substring(1)
+                      : ""}
                   </EmailDiv>
                   <ColumnTwo style={{ fontWeight: "normal" }}>
                     {destination.url}

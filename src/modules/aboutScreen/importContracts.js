@@ -157,7 +157,7 @@ export default function AddContract(props) {
               placeholder="Find a public contract by address"
               onChange={(e) => setAddress(e.target.value)}
             />
-            <ErrorTag>{error ? "No contract found, try again." : ""}</ErrorTag>
+            <ErrorTag>{error}</ErrorTag>
             {hideStep && (
               <Text>
                 <PaddingDiv>
@@ -247,8 +247,7 @@ const ImportBox = styled.div`
   width: 100%;
 `;
 const ErrorTag = styled.div`
-  color: #CE1A1A;
-  font-weight: 500;
+  color: red;
   font-size: 14px;
   padding: 0px 0px 8px 10px;
   margin-bottom: 0px;

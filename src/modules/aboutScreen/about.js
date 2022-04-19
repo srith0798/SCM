@@ -5,7 +5,6 @@ import { sessionManager } from "../../managers/sessionManager";
 import WalletPopUp from "./walletPopUp";
 import Tooltip from "@mui/material/Tooltip";
 import FooterComponent from "../dashboard/footerComponent";
-import ReactPlayer from "react-player";
 import { history } from "../../managers/history";
 import { cookiesConstants } from "../../constants";
 import ReactTooltip from "react-tooltip";
@@ -17,8 +16,11 @@ export default function About(props) {
   const screen = new ScreenSizeDetector();
   const [state, setState] = useState(true);
   const [address] = React.useState({});
+  const [originPopup, setOriginPopup] = useState(false);
 
-  console.log("proops", props);
+  const handleOpen = () => {
+    setOriginPopup(true);
+  };
 
   return (
     <>
@@ -42,53 +44,51 @@ export default function About(props) {
               lifecycle utility, empowering the entire on-chain critical
               business logic.
             </DataBox>
-            <div style={{display: "flex"}}> 
-            <Button
-              onClick={() =>
-                sessionManager.getDataFromCookies(cookiesConstants.IS_LOGGED_IN)
-                  ? history.push({
-                      pathname: "/contracts",
-                      state: {
-                        id: address.address,
-                        homepageHistory: "from-home-page",
-                      },
-                    })
-                  : history.push("/")
-              }
-            >
-              Add Your Smart Contract
-              <Tooltip
-                disableFocusListener
-                title="Click to get started with Xmartly"
+            <div style={{ display: "flex" }}>
+              <Button
+                onClick={() =>
+                  sessionManager.getDataFromCookies(
+                    cookiesConstants.IS_LOGGED_IN
+                  )
+                    ? history.push({
+                        pathname: "/contracts",
+                        state: {
+                          id: address.address,
+                          homepageHistory: "from-home-page",
+                        },
+                      })
+                    : history.push("/")
+                }
               >
-                <img
-                  style={{ marginLeft: "0.375rem" }}
-                  alt=""
-                  src="/images/question-mark.svg"
-                />
-              </Tooltip>
-            </Button>
+                Add Your Smart Contract
+                <Tooltip
+                  disableFocusListener
+                  title="Click to get started with Xmartly"
+                >
+                  <img
+                    style={{ marginLeft: "0.375rem" }}
+                    alt=""
+                    src="/images/question-mark.svg"
+                  />
+                </Tooltip>
+              </Button>
 
-            {/* <ButtonOrigin
-              // onClick={() =>
-              //   // OriginPopup
-              // }
-            >
-              Go to Origin
-              <Tooltip
-                disableFocusListener
-                title="You will be redirected to XDC Origin to deploy your own contracts."
-              >
-                <img
-                  style={{ marginLeft: "0.375rem" }}
-                  alt=""
-                  src="/images/question-mark.svg"
-                />
-              </Tooltip>
-            </ButtonOrigin> */}
+              <ButtonOrigin onClick={() => handleOpen()}>
+                Create using origin
+                <Tooltip
+                  disableFocusListener
+                  title="You will be redirected to XDC Origin to deploy your own contracts."
+                >
+                  <img
+                    style={{ marginLeft: "0.375rem" }}
+                    alt=""
+                    src="/images/question-mark.svg"
+                  />
+                </Tooltip>
+              </ButtonOrigin>
             </div>
-
           </LeftContainer>
+          {originPopup === true ?  <OriginPopup click={()=> setOriginPopup(false)} /> : ""}
           <RightContainer>
             <VideoBox>
               {/* <ReactPlayer
@@ -103,7 +103,7 @@ export default function About(props) {
                 style={{ width: "fitContent", height: "fitContent" }}
               />
             </VideoBox>
-            <div style={{ display: "flex", marginBottom: "30px" }}>
+            <div style={{ display: "flex"}}>
               <SmartButton
                 onClick={() =>
                   sessionManager.getDataFromCookies(
@@ -149,6 +149,38 @@ export default function About(props) {
                 src="/images/Subtraction 2.svg"
               />
             </div>
+            <div style={{ display: "flex"}}>
+            <ButtonOriginMob onClick={() => handleOpen()}>
+                Create using origin
+              </ButtonOriginMob>
+              <ReactTooltip
+                className="extra"
+                id="origin"
+                arrowColor="transparent"
+                textColor="black"
+                borderColor="white"
+                border={true}
+                delayHide={0}
+                delayShow={0}
+                clickable={true}
+                place="bottom"
+                effect="solid"
+              >
+                You will be redirected to XDC Origin to deploy your own contracts.
+              </ReactTooltip>
+              <TooltipImg
+                style={{
+                  width: "15px",
+                  height: "13px",
+                  marginTop: "45px",
+                  marginLeft: "5px",
+                }}
+                data-tip="origin"
+                data-for="origin"
+                alt=""
+                src="/images/Subtraction 2.svg"
+              />
+              </div>
           </RightContainer>
         </Container>
 
@@ -225,7 +257,7 @@ const MainBoxContainer = styled.div`
   height: -webkit-fill-available;
   @media (min-width: 300px) and (max-width: 700px) {
     padding: 1.125rem;
-    height: 1377px;
+    height: 1450px;
   }
   @media (min-width: 414px) and (max-width: 768px) {
     padding: 1.125rem;
@@ -277,10 +309,10 @@ const Container = styled.div`
     padding-right: 30px;
     padding-top: 30px;
     padding-left: 46px;
-    height: 778px;
+    height: 860px;
   }
   @media (min-width: 800px) and (max-width: 1200px) {
-    height: 800px !important;
+    height: 860px !important;
   }
   @media (min-width: 300px) and (max-width: 414px) {
     flex-direction: column;
@@ -297,7 +329,7 @@ const RightContainer = styled.div`
   width: 100%;
   padding: 4.7rem;
   @media (min-width: 340px) and (max-width: 803px) {
-    padding: 1.375rem 3rem 9rem 3rem;
+    padding: 1.375rem 3rem 12rem 3rem;
     height: 100%;
   }
   @media (min-width: 300px) and (max-width: 414px) {
@@ -372,7 +404,7 @@ const DataBox = styled.div`
   display: flex;
   width: 100%;
   font-size: 1.2rem;
-  font-family: 'Inter';
+  font-family: "Inter";
   font-weight: 400;
   @media (min-width: 300px) and (max-width: 414px) {
     font-size: 14px;
@@ -471,6 +503,56 @@ const ButtonOrigin = styled.button`
     display: none;
   }
 `;
+
+const ButtonOriginMob = styled.button`
+  background-repeat: no-repeat;
+  margin-left: 20px;
+  background-position: 0.5rem;
+  padding: 0.875rem;
+  item-align: center;
+  background-size: 0.875rem;
+  position: relative;
+  background-color: #3163f0;
+  color: #ffffff;
+  border: none;
+  border-radius: 0.25rem;
+  margin-top: 1.875rem;
+  width: fit-content;
+  display: flex;
+  font-size: 1rem;
+  font-weight: 500;
+  white-space: nowrap;
+  margin-bottom: 15px;
+  @media (min-width: 768px) and (max-width: 1024px) {
+    margin-left: 38%;
+    margin-top: 21px;
+  }
+  @media (min-width: 392px) and (max-width: 413px) {
+    margin-left: 102px;
+    font-size: 0.6rem;
+    height: 40px;
+  }
+  @media (min-width: 377px) and (max-width: 391px) {
+    margin-left: 95px;
+    font-size: 0.6rem;
+    height: 40px;
+  }
+  @media (min-width: 360px) and (max-width: 376px) {
+    margin-left: 85px;
+    font-size: 0.6rem;
+    height: 40px;
+  }
+  @media (min-width: 414px) and (max-width: 420px) {
+    margin-left: 88px;
+    font-size: 0.6rem;
+    height: 40px;
+  }
+  
+  @media (min-width: 1024px) {
+    display: none;
+  }
+`;
+
 
 const VideoBox = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
@@ -578,33 +660,45 @@ const SmartButton = styled.div`
   font-size: 1rem;
   font-weight: 600;
   white-space: nowrap;
-  @media (min-width: 340px) and (max-width: 767px) {
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 21px;
-  }
   @media (min-width: 768px) and (max-width: 1024px) {
     margin-left: 30%;
     margin-top: 21px;
   }
-  @media (max-width: 414px) {
+  @media (min-width: 392px) and (max-width: 413px) {
     margin-left: 30px;
     font-size: 0.6rem;
     height: 40px;
     margin-right: 5px;
-    margin-left: 75px;
+    margin-left: 72px;
     width: 146px;
   }
-
-  @media (max-width: 375px) {
+  @media (min-width: 377px) and (max-width: 391px) {
     margin-left: 30px;
     font-size: 0.6rem;
     height: 40px;
-    margin-right: 64px;
-    margin-left: 44px;
-    width: 162px;
+    margin-right: 5px;
+    margin-left: 66px;
+    width: 146px;
   }
-  @media (min-width: 1024px) {
+
+  @media (min-width: 360px) and (max-width: 376px) {
+    margin-left: 30px;
+    font-size: 0.6rem;
+    height: 40px;
+    margin-right: 5px;
+    margin-left: 50px;
+    width: 146px;
+  }
+
+  @media (min-width: 414px) and (max-width: 420px) {
+    margin-left: 30px;
+    font-size: 0.6rem;
+    height: 40px;
+    margin-right: 5px;
+    margin-left: 55px;
+    width: 146px;
+  }
+    @media (min-width: 1024px) {
     display: none;
   }
 `;

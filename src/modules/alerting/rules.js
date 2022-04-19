@@ -114,6 +114,8 @@ export default function Rules() {
   useEffect(() => {
     let final = [];
     alerts.forEach((alert) => {
+      if(alert?.target?.type === "TAG")
+        final.push(alert);
       contracts.forEach((contract) => {
         if (alert?.target?.value === contract.address) {
           final.push(alert);
@@ -137,12 +139,6 @@ export default function Rules() {
     sessionManager.removeDataFromCookies("profilePicture");
     history.replace("/");
   };
-  const PlaceholderSpan = styled.span`
-    display: contents;
-  `;
-  const Link = styled.a`
-    display: contents;
-  `;
 
   const ImgDiv = styled.div`
     display: flex;
@@ -283,7 +279,7 @@ flex-flow: column nowrap;
 font-size: 0.875rem;
 color: #191919;
 width: 100%;
-min-width: 130px;
+min-width: 50px;
 @media (min-width: 300px) and (max-width: 1024px) {
   width: 100%;
   min-width: 160px;
