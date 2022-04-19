@@ -104,7 +104,7 @@ const SubContainer = styled.div`
   justify-content: space-between;
 `;
 const Add = styled.div`
-  font: normal normal 700 24px/29px Inter;
+  font: normal normal 600 24px/29px Inter;
   color: #303134;
 `;
 const Input = styled.input`
@@ -132,7 +132,7 @@ const CancelButton = styled.button`
 `;
 const Content = styled.div`
   font-size: 0.9rem;
-  font-weight: 600;
+  font-weight: 500;
   font-family: Inter;
   color: #303134;
   margin-top: 20px;

@@ -177,7 +177,9 @@ export default function TransactionList() {
   const [input, setInput] = useState("");
   const search = (event) => {
     setInput(event.target.value);
+    if (event.target.value.length % 3 === 0) {
     searchTransaction(event.target.value, ["hash"]);
+    }
   };
 
   const [isSetOpen, setOpen] = React.useState(false);
@@ -615,7 +617,7 @@ export default function TransactionList() {
 
                     {status !== "Success"
                       ? toggle.status && (
-                          <ColumnSecond
+                          <ColumnStatus
                             onClick={() =>
                               redirectToTransactionDetails(
                                 data?.hash,
@@ -626,7 +628,7 @@ export default function TransactionList() {
                             style={{ color: "red" }}
                           >
                             {status}
-                          </ColumnSecond>
+                          </ColumnStatus>
                         )
                       : toggle.status && (
                           <ColumnSecond
@@ -1096,6 +1098,17 @@ const ColumnOne = styled.div`
 `;
 const ColumnSecond = styled.div`
   font-size: 0.875rem;
+  font-weight: 400;
+  color: #191919;
+  width: 100%;
+  min-width: 120px;
+  white-space: nowrap;
+  width: 100%;
+  cursor: pointer;
+`;
+
+const ColumnStatus = styled.div`
+  font-size: 0.875rem;
   font-weight: 500;
   color: #191919;
   width: 100%;
@@ -1124,6 +1137,7 @@ const BackgroundChangerTxhash = styled.div`
   //   border-radius: 6px;
   //   opacity: 1;
   // }
+  font-weight: 400;
 `;
 const BackgroundChangerTo = styled.div`
   width: fit-content;

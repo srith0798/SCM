@@ -432,7 +432,6 @@ const CopyToClipboardImage = styled.img`
 const AddTag = styled.button`
   color: #416be0;
   z-index: 99;
-  background: #ffffff 0% 0% no-repeat padding-box;
   font-size: 0.875rem;
   font-weight: 600;
   border: none;
@@ -445,12 +444,15 @@ const AddTag = styled.button`
   padding-left: 0.3rem;
   background-size: 0.875rem;
   position: relative;
-  background-color: #ffffff;
+  background-color: transparent;
   border: none;
   border-radius: 0.25rem;
   width: 100px;
   white-space: nowrap;
   height: 2.125rem;
+  :hover{
+  background-color: #F5F6FD ;
+  }
 `;
 const PaginationDiv = styled.div`
   display: flex;
@@ -743,6 +745,9 @@ const ColumnVisible = styled.div`
 `;
 const TagCol = styled.div`
   display: flex;
+  :hover{
+  background-color: #F5F6FD ;
+  }
   @media (min-width: 300px) and (max-width: 767px) {
   }
   @media (min-width: 768px) and (max-width: 1128px) {

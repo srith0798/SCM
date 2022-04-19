@@ -103,7 +103,7 @@ const SubTitle = styled.div`
   opacity: 1;
   padding-top: 10px;
   font-size: 16px;
-  font-weight: normal;
+  font-weight: 600;
 `;
 
 const IconContainer = styled.div`

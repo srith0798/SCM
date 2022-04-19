@@ -137,6 +137,7 @@ const Input = styled.input`
   padding: 7px;
   border: 0px;
   width: 100%;
+  font-weight: 500;
   max-width: 636px;
   margin-top: 30px;
   background-image: url("/images/Tag.svg");
@@ -149,7 +150,7 @@ const Input = styled.input`
 
 const Content = styled.div`
   font-size: 0.9rem;
-  font-weight: 600;
+  font-weight: 500;
   font-family: Inter;
   color: #303134;
   margin-top: 20px;

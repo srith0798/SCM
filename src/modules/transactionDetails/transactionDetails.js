@@ -182,7 +182,7 @@ export default function TransactionDetails() {
   const Title = styled.div`
     white-space: nowrap;
     font-family: "Inter", Medium,;
-    font-weight: 500;
+    font-weight: 600;
     @media (min-width: 340px) and (max-width: 767px) {
       align-items: left;
     }
@@ -236,6 +236,7 @@ export default function TransactionDetails() {
     color: #416be0;
     cursor: pointer;
     white-space: pre;
+    font-weight: 500;
     @media (min-width: 300px) and (max-width: 767px) {
       margin-left: 5px;
     }
@@ -531,6 +532,7 @@ export default function TransactionDetails() {
     padding-left: 1.875rem;
     background-size: 0.75rem;
     position: relative;
+    font-weight: 400;
     /* &:focus: {
     outline: none;
     border: none;
@@ -559,6 +561,7 @@ export default function TransactionDetails() {
     padding: 0.313rem 0.5rem 0.313rem 0.5rem;
     display: flex;
     padding-bottom: 1.2rem;
+    font-weight: 500;
     @media (min-width: 320px) and (max-width: 425px) {
       padding: 1rem 0.5rem 0.313rem 0.5rem;
       padding-bottom: 1.2rem;
@@ -583,6 +586,7 @@ export default function TransactionDetails() {
     width: 69px;
     height: 25px;
     background: #fde7e7 0% 0% no-repeat padding-box;
+    font-weight: 500;
     border: 1px solid #fda6a6;
     border-radius: 4px;
     opacity: 1;
@@ -601,6 +605,7 @@ export default function TransactionDetails() {
     padding: 0px 18px 0px 18px;
     width: 100%;
     margin-left: 1rem;
+    font-weight: 500;
     display: ${(props) => (props.check === "Success" ? "flex" : "none")};
     align-items: center;
     width: 99px;
@@ -632,6 +637,7 @@ export default function TransactionDetails() {
     width: 100px;
     height: 27px;
     font-size: 14px;
+    font-weight: 500;
     background: #ffffff 0% 0% no-repeat padding-box;
     border: 1px solid #3163f0;
     border-radius: 4px;
@@ -1220,6 +1226,7 @@ export default function TransactionDetails() {
                           customStyle={{
                             backgroundColor: "#f0f2fc",
                             margin: 0,
+                            fontWeight: 400,
                           }}
                         >
                           {functionOccured !== undefined

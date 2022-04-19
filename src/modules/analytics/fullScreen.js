@@ -6,7 +6,6 @@ import Tooltip from "@mui/material/Tooltip";
 import { ExportToCsv } from 'export-to-csv';
 
 export default function FullScreen(props) {
-  console.log("props", props);
   const ClickMe = () => {
     props.expandGraphs(0);
   };

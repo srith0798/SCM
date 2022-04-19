@@ -3,6 +3,8 @@ import styled from "styled-components";
 import Dialog from "@mui/material/Dialog";
 import { makeStyles } from "@material-ui/styles";
 import { Toaster } from "react-hot-toast";
+import ScreenSizeDetector from "screen-size-detector";
+
 
 const useStyles = makeStyles(() => ({
   dialogBox: {
@@ -20,6 +22,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 export default function WalletPopUp(props) {
+  const screen = new ScreenSizeDetector();
   const classes = useStyles();
   const connectWallet = () => {
     if (props.getCurrentUserDetails()) props.click(); 
@@ -30,7 +33,6 @@ export default function WalletPopUp(props) {
       <div>
         <Toaster />
       </div>
-      <div>
         {props.state ? (
           <Dialog classes={{ paper: classes.dialogBox }} open={true}>
             <MainContainer>
@@ -160,7 +162,6 @@ export default function WalletPopUp(props) {
             </MainContainer>
           </Dialog>
         ) : null}
-      </div>
     </>
   );
 }
@@ -179,7 +180,7 @@ const Button = styled.button`
   border: none;
   border-radius: 0.25rem;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 500;
   margin-top: 27px;
   @media (min-width: 300px) and (max-width: 580px) {
     margin-top: 9px;

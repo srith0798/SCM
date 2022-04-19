@@ -851,7 +851,7 @@ const TableRow = styled.div`
   flex-flow: column-nowrap;
   margin-bottom: 6px;
   width: 100%;
-  max-width: 715px;
+  max-width: 730px;
   border-top: 1px solid rgb(227, 231, 235);
   @media (min-width: 300px) and (max-width: 768px) {
     width: 653px;
@@ -864,6 +864,8 @@ const DataColumn = styled.div`
 const Count = styled.div`
   color: #3163f0;
   padding-top: 15px;
+  font-weight: 400;
+  padding-right: 20px;
   @media (min-width: 300px) and (max-width: 768px) {
     margin-left: 162px;
     padding-right: 17px;
@@ -906,7 +908,7 @@ const ContractFrom = styled.div`
   width: 26%;
   color: #102c78;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 500;
   display: flex;
   white-space: nowrap;
   @media (min-width: 300px) and (max-width: 767px) {
@@ -920,7 +922,7 @@ const FunctionFrom = styled.div`
   width: 26%;
   color: #102c78;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 500;
   display: flex;
   @media (min-width: 300px) and (max-width: 767px) {
     word-break: break-all;
@@ -934,7 +936,7 @@ const NetworkHead = styled.div`
   width: 20.5%;
   color: #102c78;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 500;
   display: flex;
   @media (min-width: 300px) and (max-width: 767px) {
     word-break: break-all;
@@ -947,6 +949,7 @@ const Network = styled.div`
   font-size: 14px;
   width: 100%;
   display: flex;
+  font-weight: 400;
   @media (min-width: 300px) and (max-width: 767px) {
     word-break: break-all;
     white-space: nowrap;
@@ -959,6 +962,7 @@ const FunctionAddress = styled.div`
   font-size: 14px;
   width: 100%;
   display: flex;
+  font-weight: 400;
   @media (min-width: 300px) and (max-width: 767px) {
     word-break: break-all;
     white-space: nowrap;
