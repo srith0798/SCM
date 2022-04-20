@@ -177,7 +177,7 @@ export default function TransactionList() {
   const [input, setInput] = useState("");
   const search = (event) => {
     setInput(event.target.value);
-    if (event.target.value.length % 3 === 0) {
+    if (!event.target.value.slice(0, event.target.value.length).includes(" ") && event.target.value.length % 3 === 0) {
     searchTransaction(event.target.value, ["hash"]);
     }
   };
@@ -454,7 +454,7 @@ export default function TransactionList() {
                       {contracts.length !== 0
                         ? contracts.length &&
                           contracts.map((item) => (
-                            <div
+                            <Hover
                               onClick={() => {
                                 setOpen(false);
                                 getTransaction(item.address);
@@ -470,7 +470,7 @@ export default function TransactionList() {
                               />
                               <br />
                               <TransactionHash>{item.address}</TransactionHash>
-                            </div>
+                            </Hover>
                           ))
                         : ""}
                     </Box>
@@ -579,7 +579,7 @@ export default function TransactionList() {
           </HeadingDiv>
 
           <div>
-            {(input === "" ? address : searchRow).map((data, index) => {
+            {(searchRow.length === 0 ? address : searchRow).map((data, index) => {
               const status = setStatus(data?.status);
               const func = setfunction(data?.function ? data.function : "");
               return (
@@ -747,11 +747,11 @@ export default function TransactionList() {
           </div>
           {loader === false
             ? ((input === "" && address.length === 0) ||
-                (input !== "" && searchRow.length === 0)) && (
+                (input === "" && searchRow.length === 0 && input.substring(0, input.length).includes(" "))) && (
                 <PlaceHolderContainer>
                   <PlaceHolderImage src="/images/transactions-blue.svg" />
                   No transactions found. <br />
-                  <span>
+                  <span style={{color: "#3163F0 !important"}}>
                     <Link href="/contracts">Add </Link> your first contract{" "}
                   </span>
                 </PlaceHolderContainer>
@@ -811,8 +811,14 @@ export default function TransactionList() {
   );
 }
 
-const Link = styled.span`
-  color: dodgerblue !important;
+const Hover = styled.div`
+:hover{
+  background-color: #E6EBFC;
+}
+`;
+
+const Link = styled.a`
+  color: #3163F0 !important;
 `;
 
 const PageVerifyCheck = styled.div`

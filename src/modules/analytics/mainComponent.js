@@ -475,7 +475,7 @@ export default function MainComponent(props) {
                         <Box sx={styles}>
                           {contracts.length &&
                             contracts.map((item) => (
-                              <div onClick={() => changeContract(item)}>
+                              <Hover onClick={() => changeContract(item)}>
                                 <Label>Contract</Label>
                                 {item?.contractName
                                   ? item.contractName
@@ -484,7 +484,7 @@ export default function MainComponent(props) {
                                 <TransactionHash>
                                   {item.address}
                                 </TransactionHash>
-                              </div>
+                              </Hover>
                             ))}
                         </Box>
                       ) : null}
@@ -747,6 +747,12 @@ const TableData = (props) => {
     </>
   );
 };
+
+const Hover = styled.div`
+:hover{
+  background-color: #E6EBFC;
+}
+`;
 
 const MainContainer = styled.div`
   width: 100%;

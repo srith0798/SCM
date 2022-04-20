@@ -237,18 +237,19 @@ cursor: pointer;
     font-size: 0.875rem;
     font-weight: 600;
     color: #102c78;
-    width: 100%;
+    width: 18.5%;
     min-width: 130px;
     cursor: pointer;
     @media (min-width: 300px) and (max-width: 1024px) {
-      width: 100%;
+      width: 17%;
       min-width: 160px;
     }
   `;
   const FlexDiv = styled.div`
     display: flex !important;
     justify-content: space-between !important;
-    width: 20%;
+    width: 30%;
+    margin-left: 35px;
   `;
   const BackgroundChanger = styled.div`
     width: fit-content;
@@ -278,7 +279,7 @@ display: flex;
 flex-flow: column nowrap;
 font-size: 0.875rem;
 color: #191919;
-width: 100%;
+width: 70%;
 min-width: 50px;
 @media (min-width: 300px) and (max-width: 1024px) {
   width: 100%;
@@ -522,7 +523,7 @@ font-size: 0.875rem;
                     </Tooltip>
                   </ColumnOne>
                   <ColumnOne></ColumnOne>
-                  <ColumnOne></ColumnOne>
+                  {/* <ColumnOne></ColumnOne> */}
                 </RowData>
               </NewDiv>
 
