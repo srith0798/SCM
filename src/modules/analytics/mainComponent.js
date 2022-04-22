@@ -659,6 +659,7 @@ export default function MainComponent(props) {
                         data={topFunctionCallsData}
                         graphNo={5}
                         error={topFunctionCallsError}
+                        tooltip="List of the functions executed a maximum number of times"
                       ></TableData>
                     </GraphContainer>
                   </Grid>
