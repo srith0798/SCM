@@ -64,7 +64,7 @@ export default function WalletPopUp(props) {
                         rel="noopener noreferrer"
                         target="_blank"
                       >
-                        here
+                        here.
                       </a>
                     </SubTitle>
                   </IconContainer>

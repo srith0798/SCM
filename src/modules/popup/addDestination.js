@@ -25,6 +25,9 @@ export default function DestinationTags(props) {
   const [destinationError, setDestinationError] = useState("");
 
   const addDestination = (url) => {
+    if(props?.type === "SLACK") {
+      return true;
+    }
     if (!utility.validateEmail(url)) {
       setDestinationError("Invalid Email");
       setTimeout(() => {

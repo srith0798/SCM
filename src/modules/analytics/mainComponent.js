@@ -16,10 +16,9 @@ import { analytics } from "../../constants";
 import Grid from "@mui/material/Grid";
 import { history } from "../../managers/history";
 import { cookiesConstants } from "../../constants";
-import { useIdleTimer } from 'react-idle-timer';
+import { useIdleTimer } from "react-idle-timer";
 
 export default function MainComponent(props) {
-
   const timeout = 60000;
   const [remaining, setRemaining] = React.useState(timeout);
   const [isSetOpen, setOpen] = React.useState(false);
@@ -343,7 +342,7 @@ export default function MainComponent(props) {
 
   const { getRemainingTime } = useIdleTimer({
     timeout,
-    onIdle: handleOnIdle
+    onIdle: handleOnIdle,
   });
 
   const expandGraphs = (value, data, dropDownValue) => {
@@ -408,8 +407,8 @@ export default function MainComponent(props) {
   });
   setInterval(function () {
     if (new Date().getTime() - time >= 10000) {
-    // getContractNames();
-    // time = new Date().getTime() + 1;
+      // getContractNames();
+      // time = new Date().getTime() + 1;
     }
   }, 1000);
 
@@ -475,7 +474,7 @@ export default function MainComponent(props) {
                         <Box sx={styles}>
                           {contracts.length &&
                             contracts.map((item) => (
-                              <div onClick={() => changeContract(item)}>
+                              <Hover onClick={() => changeContract(item)}>
                                 <Label>Contract</Label>
                                 {item?.contractName
                                   ? item.contractName
@@ -484,7 +483,7 @@ export default function MainComponent(props) {
                                 <TransactionHash>
                                   {item.address}
                                 </TransactionHash>
-                              </div>
+                              </Hover>
                             ))}
                         </Box>
                       ) : null}
@@ -509,6 +508,7 @@ export default function MainComponent(props) {
                           data={noOfTransactions}
                           graphNo={1}
                           error1={transactionOverTimeError}
+                          tooltip="Transaction executed in due course"
                         ></SelectComponent>
                       </SubContainer>
                       {noOfTransactions.length === 0 ? (
@@ -541,6 +541,7 @@ export default function MainComponent(props) {
                           data={gasPriceData}
                           graphNo={2}
                           error1={gasUsedOverTimeError}
+                          tooltip="Amount of gas utilized in the specified time range"
                         ></SelectComponent>
                       </SubContainer>
                       {noOfTransactions.length === 0 ? (
@@ -582,6 +583,7 @@ export default function MainComponent(props) {
                           data={topCallersData}
                           graphNo={4}
                           error={topCallersError}
+                          tooltip="List of top callers in past days"
                         ></TableData>
                       ) : (
                         <TableData
@@ -592,6 +594,7 @@ export default function MainComponent(props) {
                           data={topCallersData}
                           graphNo={4}
                           error={topCallersError}
+                          tooltip="List of top callers in past days"
                         ></TableData>
                       )}
                       {/* <TableData
@@ -617,6 +620,7 @@ export default function MainComponent(props) {
                           data={activeUserData}
                           graphNo={3}
                           error1={transactionOverTimeError}
+                          tooltip="Number of active users in the given time range"
                         ></SelectComponent>
                       </SubContainer>
                       {noOfTransactions.length === 0 ? (
@@ -655,6 +659,7 @@ export default function MainComponent(props) {
                         data={topFunctionCallsData}
                         graphNo={5}
                         error={topFunctionCallsError}
+                        tooltip="List of the functions executed a maximum number of times"
                       ></TableData>
                     </GraphContainer>
                   </Grid>
@@ -708,35 +713,59 @@ const TableData = (props) => {
           getAnalyticsData={props.getAnalyticsData}
           error={props.error}
           error1={props.error}
+          tooltip={props.tooltip}
         ></SelectComponent>
       </SubContainer>
       <Table>
         {props?.data && props.data.length && props.data.length > 0 ? (
           props.data.map((item) => (
-            <TableRow>
-              <DataColumn>
-                <Div>
-                  {props.graphNo === 4 ? (
-                    <ContractFrom>Contract from:</ContractFrom>
-                  ) : (
-                    <FunctionFrom>Function:</FunctionFrom>
-                  )}
-                  {props.graphNo === 4 ? (
-                    <Network>{item.address}</Network>
-                  ) : (
-                    <FunctionAddress>{item.function}</FunctionAddress>
-                  )}
-                </Div>
-                <Div>
-                  <NetworkHead>Network:</NetworkHead>
-                  <SubNetwork>
-                    <Network>{item.network}</Network>
-                  </SubNetwork>
-                  <MobileNetwork>{item.network}</MobileNetwork>
-                </Div>
-              </DataColumn>
-              <Count>{item.count}</Count>
-            </TableRow>
+            <>
+              {props.heading === "Top Function Calls" && !item.function ? (
+                ""
+              ) : (
+                <TableRow>
+                  <DataColumn>
+                    <Div>
+                      {props.graphNo === 4 ? (
+                        <ContractFrom>Contract from:</ContractFrom>
+                      ) : (
+                        <>
+                          {item.function ? (
+                            <FunctionFrom>Function:</FunctionFrom>
+                          ) : (
+                            ""
+                          )}
+                        </>
+                      )}
+                      {props.graphNo === 4 ? (
+                        <Network>{item.address}</Network>
+                      ) : (
+                        <>
+                          {item.function ? (
+                            <FunctionAddress>{item.function}</FunctionAddress>
+                          ) : (
+                            ""
+                          )}
+                        </>
+                      )}
+                    </Div>
+                    {props.heading === "Top Function Calls" &&
+                    !item.function ? (
+                      ""
+                    ) : (
+                      <Div>
+                        <NetworkHead>Network:</NetworkHead>
+                        <SubNetwork>
+                          <Network>{item.network}</Network>
+                        </SubNetwork>
+                        <MobileNetwork>{item.network}</MobileNetwork>
+                      </Div>
+                    )}
+                  </DataColumn>
+                  <Count>{item.count}</Count>
+                </TableRow>
+              )}
+            </>
           ))
         ) : (
           <>
@@ -747,6 +776,12 @@ const TableData = (props) => {
     </>
   );
 };
+
+const Hover = styled.div`
+  :hover {
+    background-color: #e6ebfc;
+  }
+`;
 
 const MainContainer = styled.div`
   width: 100%;
@@ -1071,7 +1106,7 @@ const SelectComponent = (props) => {
           {props.heading}
           <Tooltip
             disableFocusListener
-            title="This is a default Graph that was created for your added contract and cannot be edited"
+            title={props?.tooltip}
           >
             <ToolTipIcon src="/images/tool-tip.svg" />
           </Tooltip>

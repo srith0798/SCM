@@ -166,10 +166,10 @@ const WrapperFaq = styled.div`
     background: #1d3c93;
   }
   @media (min-width: 767px) and (max-width: 819px) {
-    margin-top: 42rem !important;
+    margin-top: 19rem !important;
   }
   @media (min-width: 820px) and (max-width: 1024px) {
-    margin-top: 50rem !important;
+    margin-top: 30rem !important;
   }
   @media (min-width: 300px) and (max-width: 376px) {
     margin-top: 20rem !important;

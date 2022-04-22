@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Row } from "simple-flexbox";
 import { sessionManager } from "../../managers/sessionManager";
@@ -11,6 +11,9 @@ import ReactTooltip from "react-tooltip";
 import ScreenSizeDetector from "screen-size-detector";
 import IpadPopup from "./ipadPopup";
 import OriginPopup from "./originLink";
+import ImportedContracts from "./importedContracts";
+import ContractsService from "../../services/contractsService";
+import Utility from "../../utility";
 
 export default function About(props) {
   const screen = new ScreenSizeDetector();
@@ -18,14 +21,43 @@ export default function About(props) {
   const [address] = React.useState({});
   const [originPopup, setOriginPopup] = useState(false);
   const [screenWidth, setScreenWidth] = useState(false);
+  const [importPopup, setImportPopup] = useState(false);
+  const [contracts, setContracts] = useState([]);
+
   const handleOpen = () => {
     setOriginPopup(true);
   };
 
-  window.addEventListener('resize', ()=>{
+  window.addEventListener("resize", () => {
     setScreenWidth(window.innerWidth);
   });
 
+  useEffect(() => {
+    const getContractList = async () => {
+      let userId = sessionManager.getDataFromCookies(cookiesConstants.USER_ID);
+      const requestData = {
+        userId: userId,
+      };
+      const [error, response] = await Utility.parseResponse(
+        ContractsService.importContractsFromObserver(requestData)
+      );
+      if (error || !response || response.length === 0) {
+        setContracts([]);
+        return;
+      }
+      setContracts(response);
+      if (
+        response &&
+        response.length !== 0 &&
+        sessionManager.getDataFromCookies(cookiesConstants.IS_LOGGED_IN)
+      ) {
+        setImportPopup(true);
+      }
+    };
+    if (sessionManager.getDataFromCookies(cookiesConstants.IS_LOGGED_IN)) {
+      getContractList();
+    }
+  }, []);
   return (
     <>
       <MainBoxContainer>
@@ -78,7 +110,7 @@ export default function About(props) {
               </Button>
 
               <ButtonOrigin onClick={() => handleOpen()}>
-                Create using origin
+                Create Using Origin
                 <Tooltip
                   disableFocusListener
                   title="You will be redirected to XDC Origin to deploy your own contracts."
@@ -92,22 +124,20 @@ export default function About(props) {
               </ButtonOrigin>
             </div>
           </LeftContainer>
-          {originPopup === true ?  <OriginPopup click={()=> setOriginPopup(false)} /> : ""}
+          {originPopup === true ? (
+            <OriginPopup click={() => setOriginPopup(false)} />
+          ) : (
+            ""
+          )}
           <RightContainer>
             <VideoBox>
-              {/* <ReactPlayer
-                url="https://www.youtube.com/watch?v=qfXJKTkXzD8"
-                controls
-                width="100%"
-                height="100%"
-              /> */}
               <ImgMain
                 src="/images/smart-contract-manger-infographic.svg"
                 alt="img"
                 style={{ width: "fitContent", height: "fitContent" }}
               />
             </VideoBox>
-            <div style={{ display: "flex"}}>
+            <div style={{ display: "flex" }}>
               <SmartButton
                 onClick={() =>
                   sessionManager.getDataFromCookies(
@@ -153,8 +183,8 @@ export default function About(props) {
                 src="/images/Subtraction 2.svg"
               />
             </div>
-            <div style={{ display: "flex"}}>
-            <ButtonOriginMob onClick={() => handleOpen()}>
+            <div style={{ display: "flex" }}>
+              <ButtonOriginMob onClick={() => handleOpen()}>
                 Create using origin
               </ButtonOriginMob>
               <ReactTooltip
@@ -170,7 +200,8 @@ export default function About(props) {
                 place="bottom"
                 effect="solid"
               >
-                You will be redirected to XDC Origin to deploy your own contracts.
+                You will be redirected to XDC Origin to deploy your own
+                contracts.
               </ReactTooltip>
               <TooltipImg
                 style={{
@@ -184,37 +215,44 @@ export default function About(props) {
                 alt=""
                 src="/images/Subtraction 2.svg"
               />
-              </div>
+            </div>
           </RightContainer>
         </Container>
-
+        {importPopup && (
+          <ImportedContracts
+            click={() => setImportPopup(false)}
+            contracts={contracts}
+          />
+        )}
         <GreyContainer>
           <HeadingContainer>
-            Introducing the Smart Contracts - by XDC
-            <SubHead>Add smart contract and managing them</SubHead>
+            Introducing the XDC Smart Contracts
+            <SubHead>
+              Add your smart contracts and manage them efficiently.
+            </SubHead>
           </HeadingContainer>
           <IconRow>
             <IconContainer>
               <img alt="" src="/images/manage contracts.svg" />
               <Title>Manage Contracts</Title>
               <SubTitle>
-                You can add and manage any contract deployed on XDC Network.
+                Add and manage your smart contracts deployed on XDC Network.
               </SubTitle>
             </IconContainer>
             <IconContainer>
               <img alt="" src="/images/analyticsicon.svg" />
               <Title>Analytics</Title>
               <SubTitle>
-                View analytics like number of transactions, gas fee etc for the
-                added contract.
+                View analytics like the number of transactions, gas fees etc.,
+                for the added contract.
               </SubTitle>
             </IconContainer>
             <IconContainer>
               <img alt="" src="/images/set alerts.svg" />
               <Title>Set Alerts</Title>
               <SubTitle>
-                You can set different types of alert for you contracts, without
-                missing any information
+                Stay informed and updated by setting different types of alerts
+                for your contracts.
               </SubTitle>
             </IconContainer>
           </IconRow>
@@ -364,6 +402,14 @@ const ImgMain = styled.img`
 
   @media (min-width: 768px) and (max-width: 1024px) {
     width: 350px;
+  }
+
+  @media (min-width: 1030px) and (max-width: 1105px) {
+    width: 160px;
+  }
+
+  @media (min-width: 1105px) and (max-width: 1550px) {
+    width: 250px;
   }
 `;
 const Span = styled.span`
@@ -553,12 +599,11 @@ const ButtonOriginMob = styled.button`
     font-size: 0.6rem;
     height: 40px;
   }
-  
+
   @media (min-width: 1024px) {
     display: none;
   }
 `;
-
 
 const VideoBox = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
@@ -704,7 +749,7 @@ const SmartButton = styled.div`
     margin-left: 55px;
     width: 146px;
   }
-    @media (min-width: 1024px) {
+  @media (min-width: 1024px) {
     display: none;
   }
 `;

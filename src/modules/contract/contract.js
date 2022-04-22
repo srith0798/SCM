@@ -51,6 +51,7 @@ export default function Contract(props) {
 
   const getContractList = async (skip = 0, limit = 10) => {
     let userId = sessionManager.getDataFromCookies(cookiesConstants.USER_ID);
+    console.log("userIdd", userId);
     try {
       const requestData = {
         skip: skip,
@@ -62,7 +63,6 @@ export default function Contract(props) {
       setLoader(true);
 
       const response = await ContractsService.getContractsList(requestData);
-      // data empty or not !response.responseData
       setLoader(false);
       setAddress(response.contractList);
       let pageCount = response.contractList.length;
@@ -71,8 +71,6 @@ export default function Contract(props) {
       } else {
         setPage(parseInt(pageCount / 10) + 1);
       }
-      // if (response.contractList.length === 0) setShowPlaceHolder(true);
-      // // else setShowPlaceHolder(false);
     } catch (e) {
       setLoader(false);
     }
@@ -99,7 +97,10 @@ export default function Contract(props) {
   const [input, setInput] = useState("");
   const search = (e) => {
     setInput(e.target.value);
-    if (e.target.value.length % 3 === 0) {
+    if (
+      !e.target.value.slice(0, e.target.value.length).includes(" ") &&
+      e.target.value.length % 3 === 0
+    ) {
       searching(e.target.value, ["address", "contractName"]);
     }
   };
@@ -275,7 +276,7 @@ export default function Contract(props) {
               </ColumnOne>
             </RowContainer>
           </Div>
-          {(input === "" ? address : searchRow).map((data, index) => {
+          {(searchRow.length === 0 ? address : searchRow).map((data, index) => {
             return (
               <div style={{ cursor: "pointer" }}>
                 <Div>
@@ -283,6 +284,18 @@ export default function Contract(props) {
                     <ColumnSecond
                       onClick={(e) => redirectTODetails(e, data._id)}
                     >
+                      {data?.tokenImage ? (
+                        <img
+                          style={{
+                            height: "20px",
+                            width: "20px",
+                            marginRight: "10px",
+                          }}
+                          src={data.tokenImage}
+                        ></img>
+                      ) : (
+                        ""
+                      )}
                       {data.contractName || "Contract"}
                     </ColumnSecond>
                     <ColumnSecond>
@@ -360,7 +373,9 @@ export default function Contract(props) {
           })}
           {loader === false
             ? ((input === "" && address.length === 0) ||
-                (input !== "" && searchRow.length === 0)) && (
+                (input === "" &&
+                  searchRow.length === 0 &&
+                  input.substring(0, input.length).includes(" "))) && (
                 <PlaceHolderContainer>
                   <PlaceHolderImage src="/images/contracts.svg" />
                   No Contracts Available
@@ -450,8 +465,8 @@ const AddTag = styled.button`
   width: 100px;
   white-space: nowrap;
   height: 2.125rem;
-  :hover{
-  background-color: #F5F6FD ;
+  :hover {
+    background-color: #f5f6fd;
   }
 `;
 const PaginationDiv = styled.div`
@@ -681,8 +696,8 @@ const Div = styled.div`
     width: fit-content;
     min-width: 180px;
   }
-  :hover{
-  background-color: #F5F6FD ;
+  :hover {
+    background-color: #f5f6fd;
   }
 `;
 const ColumnOne = styled.div`
@@ -745,8 +760,8 @@ const ColumnVisible = styled.div`
 `;
 const TagCol = styled.div`
   display: flex;
-  :hover{
-  background-color: #F5F6FD ;
+  :hover {
+    background-color: #f5f6fd;
   }
   @media (min-width: 300px) and (max-width: 767px) {
   }
