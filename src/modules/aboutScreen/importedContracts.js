@@ -118,14 +118,16 @@ export default function ImportContract(props) {
                   <FlexDivInside>
                     <ContractContent>
                       {" "}
-                      <img
+                      {item?.tokenImage ? (
+                        <img
                         style={{
                           height: "20px",
                           width: "20px",
-                          marginRight: "5px",
+                          marginRight: "10px",
                         }}
-                        src={item?.tokenImage}
+                        src={item.tokenImage}
                       ></img>
+                      ) : ""}
                       {item.tokenName}
                     </ContractContent>
                     <BackgroundChangerTxhash>
