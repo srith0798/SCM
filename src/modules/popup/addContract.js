@@ -77,7 +77,7 @@ export default function AddContract(props) {
   const addContract = async () => {
     let userId = sessionManager.getDataFromCookies(cookiesConstants.USER_ID);
     let requestData = {
-      contractAddress: address,
+      contractAddress: [address],
       userId: userId,
     };
     setLoader(true);

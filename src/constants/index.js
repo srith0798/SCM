@@ -33,6 +33,7 @@ export const httpConstants = {
     GET_NETWORK_LIST: "/get-network",
     GET_CONTRACT_BY_ADDRESS: "/contract/",
     GET_GASPRICE_IN_USD: "/get-gasprice-in-USD",
+    IMPORT_CONTRACTS: "/import-contracts"
   },
   MESSAGE: {
     TOASTS_POSITION: "top-center",
