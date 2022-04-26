@@ -172,3 +172,12 @@ export const cookiesConstants = {
   BALANCE: "BALANCE",
   IS_LOGGED_IN: "IS LOGGED IN",
 };
+
+export const comparator = {
+  EQUAL_TO: "EQUAL TO",
+  NOT_EQUAL_TO: "NOT EQUAL TO",
+  GREATER_EQUAL_TO: "GREATER EQUAL TO",
+  GREATER_THAN: "GREATER THAN",
+  LESS_EQUAL_TO: "LESS EQUAL TO",
+  LESS_THAN: "LESS THAN"
+}

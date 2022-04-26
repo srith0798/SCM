@@ -576,8 +576,10 @@ const ButtonOriginMob = styled.button`
   white-space: nowrap;
   margin-bottom: 15px;
   @media (min-width: 768px) and (max-width: 1024px) {
-    margin-left: 38%;
+    margin-left: 30%;
     margin-top: 21px;
+    padding-left: 40px;
+    width: 222px;
   }
   @media (min-width: 392px) and (max-width: 413px) {
     margin-left: 102px;

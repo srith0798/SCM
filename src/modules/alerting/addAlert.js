@@ -22,6 +22,7 @@ import Select from "@mui/material/Select";
 import ShowLoader from "../../common/components/showLoader";
 import ScreenSizeDetector from "screen-size-detector";
 import { cookiesConstants } from "../../constants";
+import { comparator } from "../../constants";
 
 export default function AddAlert() {
   const screen = new ScreenSizeDetector();
@@ -30,7 +31,7 @@ export default function AddAlert() {
   const [alertTarget, setAlertTarget] = React.useState("");
   const [loader, setLoader] = React.useState(false);
   const [parametersData, setParametersData] = React.useState(false);
-  const [threshold, setThreshold] = React.useState("");
+  const [threshold, setThreshold] = React.useState(0);
   const [destinations, setDestinations] = React.useState([]);
   const [selectedDestinations, setSelectedDestinations] = React.useState([]);
   const [targetValue, setTargetValue] = React.useState("");
@@ -184,7 +185,9 @@ export default function AddAlert() {
     }
   };
 
-  const selectTargetComparator = (event) => {};
+  const selectTargetComparator = (event) => {
+    setTargetComparator(event.target.value);
+  };
   const addAlert = async () => {
     let requestData = {
       userId: sessionManager.getDataFromCookies(cookiesConstants.USER_ID),
@@ -197,6 +200,7 @@ export default function AddAlert() {
       },
       destinations: selectedDestinations,
     };
+    console.log("chcks", targetComparator, typeof(targetComparator));
     if (alertTarget === genericConstants.ALERT_TYPE.ADDRESS) {
       requestData["target"]["name"] = selectedAddress?.contractName;
       requestData["target"]["network"] = selectedAddress?.network;
@@ -204,6 +208,9 @@ export default function AddAlert() {
     }
     if (alertTarget === genericConstants.ALERT_TYPE.TAG)
       requestData["target"]["name"] = selectedTag;
+
+    if(alertType === genericConstants.ALERT_TYPE.TRANSACTION_VALUE)
+      requestData["target"]["comparator"] = targetComparator;
     setLoader(true);
     const [error] = await utility.parseResponse(
       AlertService.addAlert(requestData)
@@ -522,16 +529,24 @@ export default function AddAlert() {
                                   color: "black",
                                 }}
                               >
-                                <MenuItem value="">Equal to </MenuItem>
-                                <MenuItem value="">Not equal to </MenuItem>
-                                <MenuItem value="">
+                                <MenuItem value={comparator.EQUAL_TO}>
+                                  Equal to{" "}
+                                </MenuItem>
+                                <MenuItem value={comparator.NOT_EQUAL_TO}>
+                                  Not equal to{" "}
+                                </MenuItem>
+                                <MenuItem value={comparator.GREATER_EQUAL_TO}>
                                   Greater than or equal to{" "}
                                 </MenuItem>
-                                <MenuItem value="">Greater than </MenuItem>
-                                <MenuItem value="">
+                                <MenuItem value={comparator.GREATER_THAN}>
+                                  Greater than{" "}
+                                </MenuItem>
+                                <MenuItem value={comparator.LESS_EQUAL_TO}>
                                   Less than or equal to{" "}
                                 </MenuItem>
-                                <MenuItem value="">Less than </MenuItem>
+                                <MenuItem value={comparator.LESS_THAN}>
+                                  Less than{" "}
+                                </MenuItem>
                               </Select>
                             </FormControl>
                           </Box>
@@ -649,9 +664,9 @@ const AlertTypeContainer = (props) => {
         <SubTitle>Triggers when transactions fails</SubTitle>
       </BoxContainerFailed>
       <BoxContainer
-        // onClick={() =>
-        //   props.selectAlertType(genericConstants.ALERT_TYPE.TRANSACTION_VALUE)
-        // }
+        onClick={() =>
+          props.selectAlertType(genericConstants.ALERT_TYPE.TRANSACTION_VALUE)
+        }
         onMouseOver={() =>
           props.changeSourceForIcons(
             genericConstants.ALERT_TYPE.TRANSACTION_VALUE,

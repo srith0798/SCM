@@ -43,14 +43,14 @@ export default function OriginPopup(props) {
                   </IconContainer>
                   <IconContainer>
                     <StepsTitle>Step 2</StepsTitle>
-                    <img alt="" src="/images/circle-origin.svg" />
+                    <img alt="" src="/images/circle-origin.svg" style={{ width: "40px", marginTop: "10px" }}/>
                     <SubTitle>
                     Analyze Transactions of XRC20 Tokens
                     </SubTitle>
                   </IconContainer>
                   <IconContainer>
                     <StepsTitle>Step 3</StepsTitle>
-                    <img alt="" src="/images/alert-origin.svg" />
+                    <img alt="" src="/images/alert-origin.svg" style={{ width: "40px", marginTop: "10px" }}/>
                     <SubTitle>
                     Set Alerts on Transactions
                     </SubTitle>
@@ -109,6 +109,7 @@ const SubTitle = styled.div`
 const IconContainer = styled.div`
   padding: 6px;
   border: 0.031rem #eaf1ec solid;
+  border-radius: 6px;
   width: 200px;
   height: 175px;
   margin: 3px;

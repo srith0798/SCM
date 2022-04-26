@@ -687,7 +687,7 @@ export default function MainComponent(props) {
       {expandGraph > 3 && (
         <TopCalls
           graphName={graphName}
-          data={expandGraph === 4 ? topCallersData : tableData}
+          data={expandGraph === 4 ? topCallersData : topFunctionCallsData}
           graphNo={expandGraph}
           changeExpand={expandGraphs}
           getAnalytics={callAnalyticsFunctions}

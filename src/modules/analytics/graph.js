@@ -140,7 +140,7 @@ const ToolTipElement = (props) => {
         </TooltipData>
       </TooltipGraph>
       <DivOval class="outer-oval-trans">
-        <Oval></Oval>
+        <Oval check={(props?.point?.id).includes("Failed")}></Oval>
       </DivOval>
     </div>
   );
@@ -205,11 +205,11 @@ const Legend = () => {
   return (
     <LegendDiv>
       <LegendSpan>
-        <LegendImg src="/images/indicator.svg"></LegendImg>Successful
+        <LegendImg src="/images/transaction-success.svg"></LegendImg>Successful
         Transactions
       </LegendSpan>
       <LegendSpan>
-        <LegendImg src="/images/Failed transaction white.svg"></LegendImg>{" "}
+        <LegendImg src="/images/transaction-failed.svg"></LegendImg>{" "}
         Failed Transactions
       </LegendSpan>
     </LegendDiv>
@@ -230,9 +230,8 @@ const LegendSpan = styled.span`
 const Oval = styled.div`
   width: 10px;
   height: 10px;
-  background-color: #3763dd;
   border-radius: 10px;
-
+  background-color: ${(props) => (props.check === true ? "#97AFF4" : "#3763dd")};
   text-align: center;
   margin-left: 60px;
   margin-top: 10px;

@@ -166,16 +166,16 @@ const WrapperFaq = styled.div`
     background: #1d3c93;
   }
   @media (min-width: 767px) and (max-width: 819px) {
-    margin-top: 19rem !important;
+    margin-top: 40rem !important;
   }
   @media (min-width: 820px) and (max-width: 1024px) {
-    margin-top: 30rem !important;
+    margin-top: 50rem !important;
   }
   @media (min-width: 300px) and (max-width: 376px) {
-    margin-top: 20rem !important;
+    margin-top: 22rem !important;
   }
   @media (min-width: 377px) and (max-width: 394px) {
-    margin-top: 25rem !important;
+    margin-top: 29rem !important;
   }
 `;
 
@@ -185,7 +185,7 @@ const Heading = styled.span`
 
   return (
     <>
-      <Hamburger src="/images/hamburger.svg" onClick={() => setOpen(true)} />
+      <Hamburger src="/images/hamburger.svg" onClick={() => setOpen(!open)} />
       {open && (
         <div>
         <SidebarContainer>
@@ -238,7 +238,7 @@ const Heading = styled.span`
             style={{
               marginTop: sessionManager.getDataFromCookies(cookiesConstants.IS_LOGGED_IN)
                 ? "10rem"
-                : "35rem",
+                : "33rem",
             }}
             onClick={redirectToFaqs}
           >

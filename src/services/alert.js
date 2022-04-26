@@ -21,7 +21,7 @@ function getHeaders() {
 }
 
 async function addAlert(requestData) {
-  let url = process.env.REACT_APP_ALERT_MICROSERVICE + "/alert";
+  let url = "http://localhost:3003/alert";
   return httpService(
     httpConstants.METHOD_TYPE.POST,
     getHeaders(),

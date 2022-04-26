@@ -369,7 +369,7 @@ export default function ContractDetails(props) {
     border-radius: 0.375rem;
     width: 100%;
     margin-top: 0.625rem;
-    max-height: 160px;
+    max-height: 155px;
     min-height: 145px;
   `;
 
