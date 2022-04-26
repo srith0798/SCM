@@ -4,6 +4,9 @@ import Dialog from "@mui/material/Dialog";
 import { makeStyles } from "@material-ui/styles";
 import ButtonConfirm from "../../common/components/buttonConfirm";
 import contractsService from "../../services/contractsService";
+import { sessionManager } from "../../managers/sessionManager";
+import { cookiesConstants } from "../../constants";
+
 const useStyles = makeStyles(() => ({
   dialogBox: {
     width: "100% !important",
@@ -16,10 +19,12 @@ export default function AddTags(props) {
   const classes = useStyles();
   let contractId = props.contractId;
   const addContractTag = async () => {
+    let userId = sessionManager.getDataFromCookies(cookiesConstants.USER_ID);
     let requestData = {};
     requestData = {
       contractId: contractId,
       tags: input,
+      userId: userId,
     };
 
     try {

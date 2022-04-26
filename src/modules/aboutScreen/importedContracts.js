@@ -15,6 +15,7 @@ const useStyles = makeStyles(() => ({
     backgroundColor: "#FFFFFF",
     bottom: "180px",
     maxWidth: "635px",
+    maxHeight: "430px",
     "@media screen and (min-width: 300px) and (max-width: 360px)": {
       backgroundColor: "#ECF0F7 !important",
       margin: "0px !important",
@@ -102,6 +103,7 @@ export default function ImportContract(props) {
       >
         <MainContainer>
           <Container>
+            <div>
             <Add>Import Contract</Add>
             <Content>
               We have found {props?.contracts?.length} Contracts linked with
@@ -112,6 +114,7 @@ export default function ImportContract(props) {
               <HeadingTwo>Address</HeadingTwo>
               <HeadingThree>Network</HeadingThree>
             </FlexDiv>
+            </div>
             {props?.contracts.length !== 0
               ? props?.contracts.length &&
                 props?.contracts.map((item) => (
