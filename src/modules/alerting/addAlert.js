@@ -31,7 +31,7 @@ export default function AddAlert() {
   const [alertTarget, setAlertTarget] = React.useState("");
   const [loader, setLoader] = React.useState(false);
   const [parametersData, setParametersData] = React.useState(false);
-  const [threshold, setThreshold] = React.useState(0);
+  const [threshold, setThreshold] = React.useState("");
   const [destinations, setDestinations] = React.useState([]);
   const [selectedDestinations, setSelectedDestinations] = React.useState([]);
   const [targetValue, setTargetValue] = React.useState("");
@@ -682,10 +682,7 @@ const AlertTypeContainer = (props) => {
       >
         <img alt="" src={props.icon.transactionValue} />
         <Title>Transaction Value</Title>
-        <SubTitle style={{ fontSize: "22px", fontWeight: 600 }}>
-          Coming soon
-        </SubTitle>
-        {/* <SubTitle>Triggers whenever transaction value matches</SubTitle> */}
+        <SubTitle>Triggers whenever transaction value matches</SubTitle>
       </BoxContainer>
 
       <BoxContainer
@@ -1190,7 +1187,7 @@ const Threshold = styled.input`
   padding: 0px 10px 0px 10px;
   font-size: 15.5px;
   height: 3rem;
-  color: #a6aabf;
+  color: #191919;
   max-width: 1000px;
   @media (min-width: 768px) and (max-width: 1024px) {
     max-width: 350px;
