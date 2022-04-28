@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12">
-  <g id="Arrow" transform="translate(-716 -492)">
-    <rect id="Rectangle_554" data-name="Rectangle 554" width="12" height="12" transform="translate(716 492)" fill="none"/>
-    <path id="Icon_awesome-arrow-right" data-name="Icon awesome-arrow-right" d="M4.317,3.31l.5-.5a.542.542,0,0,1,.768,0l4.406,4.4a.542.542,0,0,1,0,.768L5.589,12.385a.542.542,0,0,1-.768,0l-.5-.5a.545.545,0,0,1,.009-.777L7.057,8.5H.544A.543.543,0,0,1,0,7.958V7.233a.543.543,0,0,1,.544-.544H7.057l-2.731-2.6A.541.541,0,0,1,4.317,3.31Z" transform="translate(717 490.354)"/>
-  </g>
-</svg>
