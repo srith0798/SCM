@@ -1,4 +1,5 @@
 @import "../../../node_modules/bootstrap/dist/css/bootstrap.css";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap');
 
 body {
   background-color: #ffffff;
@@ -14,7 +15,7 @@ div,
 p,
 span,
 label {
-  font-family: "Roboto", "Open Sans", "Helvetica Neue", "Helvetica", "Arial",
+  font-family: "Inter","Roboto", "Open Sans", "Helvetica Neue", "Helvetica", "Arial",
     "sans-serif" !important;
 }
 
@@ -22,6 +23,7 @@ html,
 body {
   width: 100%;
   height: 100%;
+  /* letter-spacing: 0px; */
 }
 
 body,
@@ -411,7 +413,7 @@ input:checked + .slider:before {
   border: 1px solid #b2c5fa;
   border-radius: 4px;
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 500;
   color: #303134;
   outline: none;
   white-space: nowrap;
@@ -496,8 +498,7 @@ input[type="date"]:valid::before {
   text-align: left;
   font-size: 16px;
   font: normal normal medium 16px/20px Inter;
-  height: 20px;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: 0px;
   color: #102c78;
   opacity: 1;
@@ -509,7 +510,7 @@ input[type="date"]:valid::before {
   text-align: left;
 
   margin-top: 15px;
-  font-weight: 500;
+  font-weight: 400;
   letter-spacing: 0px;
   color: #191919;
   opacity: 1;
@@ -563,6 +564,7 @@ input[type="date"]:valid::before {
   letter-spacing: 0px;
   color: #1f1f1f;
   opacity: 1;
+  margin-left: 10px;
 }
 .faq-item {
   padding: 10px 0px 20px 30px;
@@ -589,7 +591,7 @@ input[type="date"]:valid::before {
 @media (min-width: 768px) and (max-width: 1024px) {
   .faq-item {
     width: 100% !important;
-    padding: 4px 0px 36px 10px;
+    padding: 4px 0px 15px 10px;
   }
   .ui-margin {
     width: 100%;
@@ -630,6 +632,7 @@ input[type="date"]:valid::before {
   }
   .faqs-container {
     width: 100%;
+    height: auto;
   }
   .question {
     justify-content: center;

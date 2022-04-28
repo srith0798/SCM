@@ -305,11 +305,6 @@ export default function Sidebar(props) {
           )
             ? "12rem"
             : "35rem",
-          paddingLeft: sessionManager.getDataFromCookies(
-            cookiesConstants.IS_LOGGED_IN
-          )
-            ? "22px"
-            : "50px",
           backgroundColor: utility.isMenuActive("faqs") ? "#1d3c93" : "",
         }}
         onClick={redirectToFaqs}
@@ -394,4 +389,5 @@ const WrapperLogout = styled.div`
 
 const Heading = styled.span`
   color: #ffffff;
+  font-weight: 500;
 `;

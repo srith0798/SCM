@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Dialog from "@mui/material/Dialog";
 import { makeStyles } from "@material-ui/styles";
 import { genericConstants } from "../../constants";
+import utility from "../../utility";
+
 const useStyles = makeStyles(() => ({
   dialogBox: {
     width: "100% !important",
@@ -11,15 +13,29 @@ const useStyles = makeStyles(() => ({
     position: "absolute",
     top: "5rem",
     maxWidth: 570,
-    ['@media screen and (min-width: 300px) and (max-width: 768px)']: { 
-     top: "12rem"
-  }
+    ["@media screen and (min-width: 300px) and (max-width: 768px)"]: {
+      top: "12rem",
+    },
   },
 }));
 export default function DestinationTags(props) {
   const [label, setLabel] = useState("");
   const [url, setUrl] = useState("");
   const [channelName, setChannelName] = useState("");
+  const [destinationError, setDestinationError] = useState("");
+
+  const addDestination = (url) => {
+    if(props?.type === "SLACK") {
+      return true;
+    }
+    if (!utility.validateEmail(url)) {
+      setDestinationError("Invalid Email");
+      setTimeout(() => {
+        setDestinationError("");
+      }, 2000);
+      return false;
+    } else return true;
+  };
 
   const classes = useStyles();
   return (
@@ -37,7 +53,8 @@ export default function DestinationTags(props) {
               />
             </SubContainer>
             <Content>
-              Add an {props?.type === "EMAIL" ? "email" : "url"} that can receive alert notifications from Xmartly.
+              Add an {props?.type === "EMAIL" ? "email" : "url"} that can
+              receive alert notifications from Xmartly.
             </Content>
             <Input
               type="text"
@@ -60,6 +77,7 @@ export default function DestinationTags(props) {
                 onChange={(e) => setChannelName(e.target.value)}
               />
             </CheckDiv>
+            {destinationError ? <ErrorTag>{destinationError}</ErrorTag> : ""}
             <SubContainer>
               <ConfirmButton
                 disabled={
@@ -68,9 +86,11 @@ export default function DestinationTags(props) {
                     : label === "" || url === ""
                 }
                 onClick={() =>
-                  props?.type === "SLACK"
-                    ? props.click(label, url, channelName)
-                    : props.click(label, url)
+                  addDestination(url)
+                    ? props?.type === "SLACK"
+                      ? props.click(label, url, channelName)
+                      : props.click(label, url)
+                    : ""
                 }
               >{`Add ${
                 genericConstants.DESTINATION_TYPE[props.type]
@@ -107,11 +127,20 @@ const Add = styled.div`
   font: normal normal 600 24px/29px Inter;
   color: #303134;
 `;
+
+const ErrorTag = styled.div`
+  color: red;
+  font-size: 14px;
+  padding: 12px 0px 0px 10px;
+  margin-bottom: 0px;
+`;
+
 const Input = styled.input`
   background: #f0f2fc 0% 0% no-repeat padding-box;
   padding: 7px;
   border: 0px;
   width: 100%;
+  font-weight: 500;
   max-width: 636px;
   margin-top: 30px;
   background-image: url("/images/Tag.svg");
@@ -124,7 +153,7 @@ const Input = styled.input`
 
 const Content = styled.div`
   font-size: 0.9rem;
-  font-weight: 600;
+  font-weight: 500;
   font-family: Inter;
   color: #303134;
   margin-top: 20px;

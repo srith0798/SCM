@@ -51,6 +51,7 @@ export default function Contract(props) {
 
   const getContractList = async (skip = 0, limit = 10) => {
     let userId = sessionManager.getDataFromCookies(cookiesConstants.USER_ID);
+    console.log("userIdd", userId);
     try {
       const requestData = {
         skip: skip,
@@ -62,7 +63,6 @@ export default function Contract(props) {
       setLoader(true);
 
       const response = await ContractsService.getContractsList(requestData);
-      // data empty or not !response.responseData
       setLoader(false);
       setAddress(response.contractList);
       let pageCount = response.contractList.length;
@@ -71,8 +71,6 @@ export default function Contract(props) {
       } else {
         setPage(parseInt(pageCount / 10) + 1);
       }
-      // if (response.contractList.length === 0) setShowPlaceHolder(true);
-      // // else setShowPlaceHolder(false);
     } catch (e) {
       setLoader(false);
     }
@@ -99,7 +97,10 @@ export default function Contract(props) {
   const [input, setInput] = useState("");
   const search = (e) => {
     setInput(e.target.value);
-    if (e.target.value.length % 3 === 0) {
+    if (
+      !e.target.value.slice(0, e.target.value.length).includes(" ") &&
+      e.target.value.length % 3 === 0
+    ) {
       searching(e.target.value, ["address", "contractName"]);
     }
   };
@@ -275,7 +276,7 @@ export default function Contract(props) {
               </ColumnOne>
             </RowContainer>
           </Div>
-          {(input === "" ? address : searchRow).map((data, index) => {
+          {(searchRow.length === 0 ? address : searchRow).map((data, index) => {
             return (
               <div style={{ cursor: "pointer" }}>
                 <Div>
@@ -283,6 +284,18 @@ export default function Contract(props) {
                     <ColumnSecond
                       onClick={(e) => redirectTODetails(e, data._id)}
                     >
+                      {data?.tokenImage ? (
+                        <img
+                          style={{
+                            height: "20px",
+                            width: "20px",
+                            marginRight: "10px",
+                          }}
+                          src={data.tokenImage}
+                        ></img>
+                      ) : (
+                        ""
+                      )}
                       {data.contractName || "Contract"}
                     </ColumnSecond>
                     <ColumnSecond>
@@ -360,7 +373,9 @@ export default function Contract(props) {
           })}
           {loader === false
             ? ((input === "" && address.length === 0) ||
-                (input !== "" && searchRow.length === 0)) && (
+                (input === "" &&
+                  searchRow.length === 0 &&
+                  input.substring(0, input.length).includes(" "))) && (
                 <PlaceHolderContainer>
                   <PlaceHolderImage src="/images/contracts.svg" />
                   No Contracts Available
@@ -424,9 +439,6 @@ const CopyToClipboardImage = styled.img`
     @media (min-width: 340px) and (max-width: 767px) {
       margin-left: 2px;
     }
-    @media (min-width: 768px) and (max-width: 1023px) {
-      margin-left: 83px;
-    }
     @media (min-width: 1024px) and (max-width: 1075px) {
       margin-left: 84px;
     }
@@ -435,12 +447,11 @@ const CopyToClipboardImage = styled.img`
 const AddTag = styled.button`
   color: #416be0;
   z-index: 99;
-  background: #ffffff 0% 0% no-repeat padding-box;
-  font-size: 1rem;
+  font-size: 0.875rem;
   font-weight: 600;
   border: none;
   outline: none;
-  pointer: cursor;
+  cursor: pointer;
   white-space: nowrap;
   background-image: url("/images/add-icon.svg");
   background-repeat: no-repeat;
@@ -448,12 +459,15 @@ const AddTag = styled.button`
   padding-left: 0.3rem;
   background-size: 0.875rem;
   position: relative;
-  background-color: #ffffff;
+  background-color: transparent;
   border: none;
   border-radius: 0.25rem;
   width: 100px;
   white-space: nowrap;
   height: 2.125rem;
+  :hover {
+    background-color: #f5f6fd;
+  }
 `;
 const PaginationDiv = styled.div`
   display: flex;
@@ -578,7 +592,7 @@ const SubContainer = styled.div`
 `;
 const Heading = styled.div`
   font-size: 1.5rem;
-  font-weight: 600;
+  font-weight: 700;
   color: #191919;
   margin-right: 0.625rem;
   @media (max-width: 768px) {
@@ -682,10 +696,13 @@ const Div = styled.div`
     width: fit-content;
     min-width: 180px;
   }
+  :hover {
+    background-color: #f5f6fd;
+  }
 `;
 const ColumnOne = styled.div`
   font-size: 0.875rem;
-  font-weight: 600;
+  font-weight: 500;
   color: #102c78;
   width: 100%;
   min-width: 130px;
@@ -743,6 +760,9 @@ const ColumnVisible = styled.div`
 `;
 const TagCol = styled.div`
   display: flex;
+  :hover {
+    background-color: #f5f6fd;
+  }
   @media (min-width: 300px) and (max-width: 767px) {
   }
   @media (min-width: 768px) and (max-width: 1128px) {

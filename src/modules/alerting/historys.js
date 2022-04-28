@@ -92,6 +92,11 @@ const Div = styled.div`
   @media (min-width: 300px) and (max-width: 1024px) {
     width: fit-content;
   }
+  :hover{
+  background-color: #F5F6FD ;
+  }
+}
+  
 `;
 const RowData = styled.div`
   display: flex;

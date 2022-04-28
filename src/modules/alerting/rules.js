@@ -114,6 +114,8 @@ export default function Rules() {
   useEffect(() => {
     let final = [];
     alerts.forEach((alert) => {
+      if(alert?.target?.type === "TAG")
+        final.push(alert);
       contracts.forEach((contract) => {
         if (alert?.target?.value === contract.address) {
           final.push(alert);
@@ -137,12 +139,6 @@ export default function Rules() {
     sessionManager.removeDataFromCookies("profilePicture");
     history.replace("/");
   };
-  const PlaceholderSpan = styled.span`
-    display: contents;
-  `;
-  const Link = styled.a`
-    display: contents;
-  `;
 
   const ImgDiv = styled.div`
     display: flex;
@@ -197,7 +193,7 @@ export default function Rules() {
   `;
   const Title = styled.div`
     font-size: 1.5rem;
-    font-weight: 600;
+    font-weight: 700;
     @media (min-width: 300px) and (max-width: 768px) {
       font-size: 1.2rem;
       font-weight: 600;
@@ -221,9 +217,6 @@ cursor: pointer;
 @media (min-width: 340px) and (max-width: 767px) {
   margin-left: 2px;
 }
-@media (min-width: 768px) and (max-width: 1023px) {
-  margin-left: 83px;
-}
 @media (min-width: 1024px) and (max-width: 1075px) {
   margin-left: 84px;
 }
@@ -244,11 +237,11 @@ cursor: pointer;
     font-size: 0.875rem;
     font-weight: 600;
     color: #102c78;
-    width: 100%;
+    width: 18.5%;
     min-width: 130px;
     cursor: pointer;
     @media (min-width: 300px) and (max-width: 1024px) {
-      width: 100%;
+      width: 17%;
       min-width: 160px;
     }
   `;
@@ -256,6 +249,7 @@ cursor: pointer;
     display: flex !important;
     justify-content: space-between !important;
     width: 30%;
+    margin-left: 35px;
   `;
   const BackgroundChanger = styled.div`
     width: fit-content;
@@ -280,11 +274,25 @@ cursor: pointer;
     }
   `;
 
+const ColumnLast = styled.div`
+display: flex;
+flex-flow: column nowrap;
+font-size: 0.875rem;
+color: #191919;
+width: 70%;
+min-width: 50px;
+@media (min-width: 300px) and (max-width: 1024px) {
+  width: 100%;
+  min-width: 160px;
+}
+`;
+
   const MainContainer = styled.div`
     background: #ecf0f7 0% 0% no-repeat padding-box;
     opacity: 1;
     width: 100%;
     padding: 3.5rem;
+    padding-top: 4.75%;
     height: max-content;
     min-height: 100%;
     /* max-height: 200vh; */
@@ -293,21 +301,28 @@ cursor: pointer;
     }
   `;
 
-  const Button = styled.button`
-    background-image: url("/images/Add.svg");
-    background-repeat: no-repeat;
-    background-position: 0.5rem;
-    padding-left: 1.313rem;
-    background-size: 0.875rem;
-    position: relative;
-    background-color: #3163f0;
-    color: #ffffff;
-    border: none;
-    border-radius: 0.25rem;
-    width: 6.25rem;
-    height: 1.875rem;
-    font-size: 0.75rem;
-  `;
+const Button = styled.button`
+background-image: url("/images/Add.svg");
+background-repeat: no-repeat;
+background-position: 0.5rem;
+padding-left: 1.313rem;
+background-size: 0.875rem;
+position: relative;
+background-color: #3163f0;
+color: #ffffff;
+border: none;
+border-radius: 0.25rem;
+width: 8.125rem;
+height: 2.125rem;
+font-size: 0.875rem;
+
+@media (max-width: 767px) {
+  width: 35px;
+  font-size: 0rem;
+  height: 33px;
+  background-position: 0.6rem;
+}
+`;
 
   const NewDiv = styled.div`
     padding: 0.938rem;
@@ -317,6 +332,9 @@ cursor: pointer;
       width: fit-content;
       min-width: 1025px;
     }
+    :hover{
+  background-color: #F5F6FD ;
+  }
   `;
   const NewDivOne = styled.div`
     border-bottom: 0.063rem solid #e3e7eb;
@@ -350,7 +368,7 @@ cursor: pointer;
       <MainContainer>
         <TitleContainer>
           <Title style={{ color: "#191919" }}>Alerting</Title>
-          <Button onClick={() => history.push("/add-alert")}>Add Alert</Button>
+          <Button disabled={contracts.length === 0 ? true: false} onClick={() => history.push("/add-alert")}>Add Alert</Button>
         </TitleContainer>
         <Container>
           <NewDivOne>
@@ -505,7 +523,7 @@ cursor: pointer;
                     </Tooltip>
                   </ColumnOne>
                   <ColumnOne></ColumnOne>
-                  <ColumnOne></ColumnOne>
+                  {/* <ColumnOne></ColumnOne> */}
                 </RowData>
               </NewDiv>
 
@@ -541,15 +559,17 @@ cursor: pointer;
                       >
                         {genericConstants.ALERT_TYPE_NAMES[alert?.type]}
                       </ColumnTwo>
-                      <ColumnTwo
+                      <ColumnLast
                         style={{
                           fontSize: "14px",
                           color: "#00A58C",
                         }}
                       >
+                        <div style={{paddingLeft: 75}}>
                         {alert.status ? "Enabled" : "Disabled"}
-                      </ColumnTwo>
-                      <ColumnTwo>
+                        </div>
+                      </ColumnLast>
+                      <ColumnLast>
                         <FlexDiv>
                           <img
                             onClick={() =>
@@ -568,7 +588,7 @@ cursor: pointer;
                             />
                           </Tooltip>
                         </FlexDiv>
-                      </ColumnTwo>
+                      </ColumnLast>
                     </RowData1>
                   </NewDiv>
                 ))
@@ -579,11 +599,6 @@ cursor: pointer;
                   </ImgDiv>
                   <PlaceHolderContainer>
                     No alerts found <br />
-                    You can start monitoring by adding contracts <br />
-                    <PlaceholderSpan>
-                      Click <Link href="/contracts">here </Link> to add
-                      contracts
-                    </PlaceholderSpan>
                   </PlaceHolderContainer>
                 </div>
                 // </CheckDiv>

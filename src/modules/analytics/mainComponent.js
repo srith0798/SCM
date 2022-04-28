@@ -16,8 +16,11 @@ import { analytics } from "../../constants";
 import Grid from "@mui/material/Grid";
 import { history } from "../../managers/history";
 import { cookiesConstants } from "../../constants";
+import { useIdleTimer } from "react-idle-timer";
 
 export default function MainComponent(props) {
+  const timeout = 60000;
+  const [remaining, setRemaining] = React.useState(timeout);
   const [isSetOpen, setOpen] = React.useState(false);
   const [contracts, setContracts] = React.useState([]);
   const [selected, setSelected] = React.useState({});
@@ -49,6 +52,7 @@ export default function MainComponent(props) {
   const [topCallersError, setTopCallersError] = React.useState("");
   const [topFunctionCallsError, setTopFunctionCallsError] = React.useState("");
   const [error, setError] = React.useState("");
+  const [refreshCheck, setRefreshCheck] = React.useState("");
 
   const handleClick = () => {
     setOpen((prev) => !prev);
@@ -99,19 +103,19 @@ export default function MainComponent(props) {
       console.log("insideee");
       setTransactionOverTimeError("No Transactions Available");
       setActiveUserGraphError("No active users available");
-      setGasUsedOverTimeError("No gas used data available ")
+      setGasUsedOverTimeError("No gas used data available ");
       setTopCallersError("No Top Callers Available");
       setTopFunctionCallsError("No Top Function Calls Available");
       return;
     }
-    getTransactionAnalytics(response.contractList[0].address);
-    getGasUsedAnalytics(response.contractList[0].address);
-    getActiveUsersAnalytics(response.contractList[0].address);
-    getTopCallers(response.contractList[0].address);
-    getTopFunctionCalls(response.contractList[0].address);
-    setLoader(false);
+    let temp = refreshCheck ? refreshCheck : response.contractList[0];
+    getTransactionAnalytics(temp.address);
+    getGasUsedAnalytics(temp.address);
+    getActiveUsersAnalytics(temp.address);
+    getTopCallers(temp.address);
+    getTopFunctionCalls(temp.address);
     setContracts(response.contractList);
-    setSelected(response.contractList[0]);
+    setSelected(temp);
   };
   const getTransactionAnalytics = async (address, event) => {
     if (event?.target?.value) {
@@ -151,7 +155,6 @@ export default function MainComponent(props) {
       "successfullTransactions"
     );
     resultData.push(success);
-    console.log(resultData);
     setNoOfTransactions(resultData);
     setData(resultData);
   };
@@ -324,9 +327,23 @@ export default function MainComponent(props) {
     setSelected(item);
   };
   useEffect(() => {
+    setRemaining(getRemainingTime());
+
+    setInterval(() => {
+      setRemaining(getRemainingTime());
+    }, 1000);
     getContractNames();
     //eslint-disable-next-line
   }, []);
+
+  const handleOnIdle = () => {
+    getContractNames();
+  };
+
+  const { getRemainingTime } = useIdleTimer({
+    timeout,
+    onIdle: handleOnIdle,
+  });
 
   const expandGraphs = (value, data, dropDownValue) => {
     setExpanded(value);
@@ -359,6 +376,7 @@ export default function MainComponent(props) {
     setDropDownValue(dropDownValue);
   };
   const changeContract = (item) => {
+    setRefreshCheck(item);
     selectContract(item);
     getTransactionAnalytics(item.address);
     getGasUsedAnalytics(item.address);
@@ -382,6 +400,17 @@ export default function MainComponent(props) {
     sessionManager.removeDataFromCookies("profilePicture");
     history.replace("/");
   };
+
+  var time = new Date().getTime();
+  document.addEventListener("mousemove", function () {
+    time = new Date().getTime();
+  });
+  setInterval(function () {
+    if (new Date().getTime() - time >= 10000) {
+      // getContractNames();
+      // time = new Date().getTime() + 1;
+    }
+  }, 1000);
 
   return (
     <>
@@ -445,7 +474,7 @@ export default function MainComponent(props) {
                         <Box sx={styles}>
                           {contracts.length &&
                             contracts.map((item) => (
-                              <div onClick={() => changeContract(item)}>
+                              <Hover onClick={() => changeContract(item)}>
                                 <Label>Contract</Label>
                                 {item?.contractName
                                   ? item.contractName
@@ -454,7 +483,7 @@ export default function MainComponent(props) {
                                 <TransactionHash>
                                   {item.address}
                                 </TransactionHash>
-                              </div>
+                              </Hover>
                             ))}
                         </Box>
                       ) : null}
@@ -479,6 +508,7 @@ export default function MainComponent(props) {
                           data={noOfTransactions}
                           graphNo={1}
                           error1={transactionOverTimeError}
+                          tooltip="Transaction executed in due course"
                         ></SelectComponent>
                       </SubContainer>
                       {noOfTransactions.length === 0 ? (
@@ -511,6 +541,7 @@ export default function MainComponent(props) {
                           data={gasPriceData}
                           graphNo={2}
                           error1={gasUsedOverTimeError}
+                          tooltip="Amount of gas utilized in the specified time range"
                         ></SelectComponent>
                       </SubContainer>
                       {noOfTransactions.length === 0 ? (
@@ -552,6 +583,7 @@ export default function MainComponent(props) {
                           data={topCallersData}
                           graphNo={4}
                           error={topCallersError}
+                          tooltip="List of top callers in past days"
                         ></TableData>
                       ) : (
                         <TableData
@@ -562,6 +594,7 @@ export default function MainComponent(props) {
                           data={topCallersData}
                           graphNo={4}
                           error={topCallersError}
+                          tooltip="List of top callers in past days"
                         ></TableData>
                       )}
                       {/* <TableData
@@ -587,6 +620,7 @@ export default function MainComponent(props) {
                           data={activeUserData}
                           graphNo={3}
                           error1={transactionOverTimeError}
+                          tooltip="Number of active users in the given time range"
                         ></SelectComponent>
                       </SubContainer>
                       {noOfTransactions.length === 0 ? (
@@ -625,6 +659,7 @@ export default function MainComponent(props) {
                         data={topFunctionCallsData}
                         graphNo={5}
                         error={topFunctionCallsError}
+                        tooltip="List of the functions executed a maximum number of times"
                       ></TableData>
                     </GraphContainer>
                   </Grid>
@@ -652,7 +687,7 @@ export default function MainComponent(props) {
       {expandGraph > 3 && (
         <TopCalls
           graphName={graphName}
-          data={expandGraph === 4 ? topCallersData : tableData}
+          data={expandGraph === 4 ? topCallersData : topFunctionCallsData}
           graphNo={expandGraph}
           changeExpand={expandGraphs}
           getAnalytics={callAnalyticsFunctions}
@@ -678,35 +713,59 @@ const TableData = (props) => {
           getAnalyticsData={props.getAnalyticsData}
           error={props.error}
           error1={props.error}
+          tooltip={props.tooltip}
         ></SelectComponent>
       </SubContainer>
       <Table>
         {props?.data && props.data.length && props.data.length > 0 ? (
           props.data.map((item) => (
-            <TableRow>
-              <DataColumn>
-                <Div>
-                  {props.graphNo === 4 ? (
-                    <ContractFrom>Contract from:</ContractFrom>
-                  ) : (
-                    <FunctionFrom>Function:</FunctionFrom>
-                  )}
-                  {props.graphNo === 4 ? (
-                    <Network>{item.address}</Network>
-                  ) : (
-                    <FunctionAddress>{item.function}</FunctionAddress>
-                  )}
-                </Div>
-                <Div>
-                  <NetworkHead>Network:</NetworkHead>
-                  <SubNetwork>
-                    <Network>{item.network}</Network>
-                  </SubNetwork>
-                  <MobileNetwork>{item.network}</MobileNetwork>
-                </Div>
-              </DataColumn>
-              <Count>{item.count}</Count>
-            </TableRow>
+            <>
+              {props.heading === "Top Function Calls" && !item.function ? (
+                ""
+              ) : (
+                <TableRow>
+                  <DataColumn>
+                    <Div>
+                      {props.graphNo === 4 ? (
+                        <ContractFrom>Contract from:</ContractFrom>
+                      ) : (
+                        <>
+                          {item.function ? (
+                            <FunctionFrom>Function:</FunctionFrom>
+                          ) : (
+                            ""
+                          )}
+                        </>
+                      )}
+                      {props.graphNo === 4 ? (
+                        <Network>{item.address}</Network>
+                      ) : (
+                        <>
+                          {item.function ? (
+                            <FunctionAddress>{item.function}</FunctionAddress>
+                          ) : (
+                            ""
+                          )}
+                        </>
+                      )}
+                    </Div>
+                    {props.heading === "Top Function Calls" &&
+                    !item.function ? (
+                      ""
+                    ) : (
+                      <Div>
+                        <NetworkHead>Network:</NetworkHead>
+                        <SubNetwork>
+                          <Network>{item.network}</Network>
+                        </SubNetwork>
+                        <MobileNetwork>{item.network}</MobileNetwork>
+                      </Div>
+                    )}
+                  </DataColumn>
+                  <Count>{item.count}</Count>
+                </TableRow>
+              )}
+            </>
           ))
         ) : (
           <>
@@ -717,6 +776,12 @@ const TableData = (props) => {
     </>
   );
 };
+
+const Hover = styled.div`
+  :hover {
+    background-color: #e6ebfc;
+  }
+`;
 
 const MainContainer = styled.div`
   width: 100%;
@@ -733,7 +798,7 @@ const MainContainer = styled.div`
 const MainHeading = styled.div`
   text-align: left;
   font-size: 1.5rem;
-  font-weight: 600;
+  font-weight: 700;
   color: #191919;
   @media (min-width: 300px) and (max-width: 767px) {
     font-size: 1.2rem;
@@ -780,14 +845,14 @@ const Table = styled.div`
 `;
 const View = styled.div`
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 500;
   color: #102c78;
   @media (min-width: 300px) and (max-width: 767px) {
     font-size: 0.85rem;
   }
 `;
 const Content = styled.div`
-  font-weight: 600;
+  font-weight: 500;
   font-size: 0.875rem;
   color: #191919;
   margin-top: 0.625rem;
@@ -820,6 +885,8 @@ const TableRow = styled.div`
   display: flex;
   flex-flow: column-nowrap;
   margin-bottom: 6px;
+  width: 100%;
+  max-width: 730px;
   border-top: 1px solid rgb(227, 231, 235);
   @media (min-width: 300px) and (max-width: 768px) {
     width: 653px;
@@ -832,6 +899,8 @@ const DataColumn = styled.div`
 const Count = styled.div`
   color: #3163f0;
   padding-top: 15px;
+  font-weight: 400;
+  padding-right: 20px;
   @media (min-width: 300px) and (max-width: 768px) {
     margin-left: 162px;
     padding-right: 17px;
@@ -874,7 +943,7 @@ const ContractFrom = styled.div`
   width: 26%;
   color: #102c78;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 500;
   display: flex;
   white-space: nowrap;
   @media (min-width: 300px) and (max-width: 767px) {
@@ -888,7 +957,7 @@ const FunctionFrom = styled.div`
   width: 26%;
   color: #102c78;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 500;
   display: flex;
   @media (min-width: 300px) and (max-width: 767px) {
     word-break: break-all;
@@ -902,7 +971,7 @@ const NetworkHead = styled.div`
   width: 20.5%;
   color: #102c78;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 500;
   display: flex;
   @media (min-width: 300px) and (max-width: 767px) {
     word-break: break-all;
@@ -915,6 +984,7 @@ const Network = styled.div`
   font-size: 14px;
   width: 100%;
   display: flex;
+  font-weight: 400;
   @media (min-width: 300px) and (max-width: 767px) {
     word-break: break-all;
     white-space: nowrap;
@@ -927,6 +997,7 @@ const FunctionAddress = styled.div`
   font-size: 14px;
   width: 100%;
   display: flex;
+  font-weight: 400;
   @media (min-width: 300px) and (max-width: 767px) {
     word-break: break-all;
     white-space: nowrap;
@@ -1035,7 +1106,7 @@ const SelectComponent = (props) => {
           {props.heading}
           <Tooltip
             disableFocusListener
-            title="This is a default Graph that was created for your added contract and cannot be edited"
+            title={props?.tooltip}
           >
             <ToolTipIcon src="/images/tool-tip.svg" />
           </Tooltip>

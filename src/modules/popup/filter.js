@@ -59,6 +59,7 @@ export default function Filter(props) {
   font-size: 14px;
   margin-right: 25px;
   text-align: center;
+  font-weight: 500;
   cursor: pointer;
 
   @media (min-width: 300px) and (max-width: 767px) {
@@ -74,6 +75,7 @@ const CancelButton = styled.div`
   left: 1179px;
   width: 72px;
   height: 34px;
+  font-weight: 500;
   border: 1px solid #3163f0;
   opacity: 1;
   padding-top: 6px;
@@ -93,6 +95,7 @@ const CancelButton = styled.div`
 const ButtonA = styled.div`
   width: 38px;
   height: 34px;
+  font-weight: 500;
   background: #ffffff 0% 0% no-repeat padding-box;
   border: ${(props) =>
     props.tag === 1 ? "1px solid #3163f0" : "1px solid #d9d9d9"};
@@ -122,6 +125,7 @@ const ButtonB = styled.div`
   width: 78px;
   text-size: 14px;
   height: 34px;
+  font-weight: 500;
   background: #ffffff 0% 0% no-repeat padding-box;
   border: ${(props) =>
     props.tag === 2 ? "1px solid #3163f0" : "1px solid #d9d9d9"};
@@ -150,6 +154,7 @@ const ButtonB = styled.div`
 const ButtonC = styled.div`
   width: 78px;
   height: 34px;
+  font-weight: 500;
   background: #ffffff 0% 0% no-repeat padding-box;
   border: ${(props) =>
     props.tag === 3 ? "1px solid #3163f0" : "1px solid #d9d9d9"};
@@ -183,7 +188,7 @@ const Input = styled.input`
   border: 1px solid #d5e0ff;
   border-radius: 6px;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 500;
   color: #b7b7b7;
   height: 34px;
   padding-left: 9px;
@@ -266,7 +271,7 @@ const Add = styled.div`
 
 const Content = styled.div`
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 500;
   color: #303134;
   white-space: nowrap;
   @media (min-width: 300px) and (max-width: 767px) {

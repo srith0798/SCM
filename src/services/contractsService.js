@@ -21,7 +21,8 @@ export default {
   getContractByAddress,
   updateContract,
   getGasPriceInUSD,
-  checkIfContractVerified
+  checkIfContractVerified,
+  importContractsFromObserver
 };
 
 function getHeaders() {
@@ -88,6 +89,20 @@ async function getContractsById(requestData) {
 
 async function getContractByAddress(requestData, id) {
   let url = process.env.REACT_APP_USER_CONTRACT_MICROSERVICE + httpConstants.API_END_POINT.GET_CONTRACT_BY_ADDRESS + id;
+  console.log("url----", url);
+  return httpService(httpConstants.METHOD_TYPE.POST, getHeaders(), requestData, url)
+    .then((response) => {
+      if (!response.success || response.responseCode !== 200 || !response.responseData || response.responseData.length === 0)
+        return Promise.reject(response);
+      return Promise.resolve(response.responseData);
+    })
+    .catch(function (err) {
+      return Promise.reject(err);
+    });
+}
+
+async function importContractsFromObserver(requestData) {
+  let url = process.env.REACT_APP_USER_CONTRACT_MICROSERVICE + httpConstants.API_END_POINT.IMPORT_CONTRACTS;
   console.log("url----", url);
   return httpService(httpConstants.METHOD_TYPE.POST, getHeaders(), requestData, url)
     .then((response) => {

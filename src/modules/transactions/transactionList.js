@@ -177,7 +177,9 @@ export default function TransactionList() {
   const [input, setInput] = useState("");
   const search = (event) => {
     setInput(event.target.value);
+    if (!event.target.value.slice(0, event.target.value.length).includes(" ") && event.target.value.length % 3 === 0) {
     searchTransaction(event.target.value, ["hash"]);
+    }
   };
 
   const [isSetOpen, setOpen] = React.useState(false);
@@ -323,7 +325,11 @@ export default function TransactionList() {
 
   function setfunction(val) {
     let trim = val?.split("(");
+    if(trim[0] === "unpause")
+    return "resume";
+    else
     return trim[0];
+    
   }
 
   let user = "";
@@ -448,7 +454,7 @@ export default function TransactionList() {
                       {contracts.length !== 0
                         ? contracts.length &&
                           contracts.map((item) => (
-                            <div
+                            <Hover
                               onClick={() => {
                                 setOpen(false);
                                 getTransaction(item.address);
@@ -464,7 +470,7 @@ export default function TransactionList() {
                               />
                               <br />
                               <TransactionHash>{item.address}</TransactionHash>
-                            </div>
+                            </Hover>
                           ))
                         : ""}
                     </Box>
@@ -475,7 +481,7 @@ export default function TransactionList() {
           </Card>
         </SubContainer>
         <TableContainer>
-          <Div>
+          <HeadingDiv>
             <RowData>
               {toggle.transactionHash && (
                 <ColumnOne>
@@ -570,21 +576,29 @@ export default function TransactionList() {
                 </ColumnOne>
               )}
             </RowData>
-          </Div>
+          </HeadingDiv>
 
           <div>
-            {(input === "" ? address : searchRow).map((data, index) => {
+            {(searchRow.length === 0 ? address : searchRow).map((data, index) => {
               const status = setStatus(data?.status);
               const func = setfunction(data?.function ? data.function : "");
               return (
                 <Div>
-                  <RowData
-                    
-                  >
+                  <RowData>
                     {toggle.transactionHash && (
                       <ColumnSecond>
                         <BackgroundChangerTxhash>
-                          {utility.truncateTxnAddress(data.hash)}
+                          <div
+                            onClick={() =>
+                              redirectToTransactionDetails(
+                                data?.hash,
+                                status,
+                                selected
+                              )
+                            }
+                          >
+                            {utility.truncateTxnAddress(data.hash)}
+                          </div>
                           <CopyToClipboard
                             text={data.hash}
                             onCopy={() => setcopyToolTip(true)}
@@ -603,34 +617,57 @@ export default function TransactionList() {
 
                     {status !== "Success"
                       ? toggle.status && (
-                          <ColumnSecond  
-                          onClick={() =>
-                            redirectToTransactionDetails(data?.hash, status, selected)
-                          }
-                          style={{ color: "red" }}>
+                          <ColumnStatus
+                            onClick={() =>
+                              redirectToTransactionDetails(
+                                data?.hash,
+                                status,
+                                selected
+                              )
+                            }
+                            style={{ color: "red" }}
+                          >
                             {status}
-                          </ColumnSecond>
+                          </ColumnStatus>
                         )
                       : toggle.status && (
                           <ColumnSecond
-                          onClick={() =>
-                            redirectToTransactionDetails(data?.hash, status, selected)
-                          }
-                          style={{ color: "green" }}>
+                            onClick={() =>
+                              redirectToTransactionDetails(
+                                data?.hash,
+                                status,
+                                selected
+                              )
+                            }
+                            style={{ color: "green" }}
+                          >
                             {status}
                           </ColumnSecond>
                         )}
 
-                    {toggle.function && <ColumnSecond
-                    onClick={() =>
-                      redirectToTransactionDetails(data?.hash, status, selected)
-                    }
-                    >{func}</ColumnSecond>}
+                    {toggle.function && (
+                      <ColumnSecond
+                        onClick={() =>
+                          redirectToTransactionDetails(
+                            data?.hash,
+                            status,
+                            selected
+                          )
+                        }
+                      >
+                        {func}
+                      </ColumnSecond>
+                    )}
                     {toggle.contracts && (
                       <ColumnSecond
-                      onClick={() =>
-                        redirectToTransactionDetails(data?.hash, status, selected)
-                      }>
+                        onClick={() =>
+                          redirectToTransactionDetails(
+                            data?.hash,
+                            status,
+                            selected
+                          )
+                        }
+                      >
                         {/* {utility.truncateTxnAddress(data.contractAddress)} */}
                         {selectedName || "Contract"}
                       </ColumnSecond>
@@ -639,7 +676,17 @@ export default function TransactionList() {
                     {toggle.from && (
                       <ColumnSecond>
                         <BackgroundChangerFrom>
-                          {utility.truncateTxnAddress(data.from)}
+                          <div
+                            onClick={() =>
+                              redirectToTransactionDetails(
+                                data?.hash,
+                                status,
+                                selected
+                              )
+                            }
+                          >
+                            {utility.truncateTxnAddress(data.from)}
+                          </div>
                           <CopyToClipboard
                             text={data.from}
                             onCopy={() => setcopyToolTip(true)}
@@ -659,7 +706,17 @@ export default function TransactionList() {
                     {toggle.to && (
                       <ColumnSecond>
                         <BackgroundChangerTo>
-                          {utility.truncateTxnAddress(data.to)}
+                          <div
+                            onClick={() =>
+                              redirectToTransactionDetails(
+                                data?.hash,
+                                status,
+                                selected
+                              )
+                            }
+                          >
+                            {utility.truncateTxnAddress(data.to)}
+                          </div>
                           <CopyToClipboard
                             text={data.to}
                             onCopy={() => setcopyToolTip(true)}
@@ -690,12 +747,12 @@ export default function TransactionList() {
           </div>
           {loader === false
             ? ((input === "" && address.length === 0) ||
-                (input !== "" && searchRow.length === 0)) && (
+                (input === "" && searchRow.length === 0 && input.substring(0, input.length).includes(" "))) && (
                 <PlaceHolderContainer>
                   <PlaceHolderImage src="/images/transactions-blue.svg" />
-                  No transactions found <br />
-                  <span>
-                    <a href="/contracts">add </a> your first contract{" "}
+                  No transactions found. <br />
+                  <span style={{color: "#3163F0 !important"}}>
+                    <Link href="/contracts">Add </Link> your first contract{" "}
                   </span>
                 </PlaceHolderContainer>
               )
@@ -754,6 +811,16 @@ export default function TransactionList() {
   );
 }
 
+const Hover = styled.div`
+:hover{
+  background-color: #E6EBFC;
+}
+`;
+
+const Link = styled.a`
+  color: #3163F0 !important;
+`;
+
 const PageVerifyCheck = styled.div`
   display: ${(props) => (props.check === 1 ? "none" : "block")};
   height: auto;
@@ -781,7 +848,27 @@ const Div = styled.div`
   @media (min-width: 768px) and (max-width: 1200px) {
     width: 1111px;
   }
+
+  :hover{
+  background-color: #F5F6FD ;
+  }
 `;
+
+const HeadingDiv = styled.div`
+  padding: 0.75rem;
+  border-bottom: 1px solid #e3e7eb;
+  white-space: nowrap;
+  column-gap: 20px;
+  width: auto;
+  @media (min-width: 300px) and (max-width: 767px) {
+    column-gap: 70px;
+    width: 1381px !important;
+  }
+  @media (min-width: 768px) and (max-width: 1200px) {
+    width: 1111px;
+  }
+`;
+
 const RowData = styled.div`
   display: flex;
   flex-direction: row;
@@ -851,9 +938,9 @@ const CopyToClipboardImage = styled.img`
     @media (min-width: 340px) and (max-width: 767px) {
       margin-left: 2px;
     }
-    @media (min-width: 768px) and (max-width: 1023px) {
+    /* @media (min-width: 768px) and (max-width: 1023px) {
       margin-left: 83px;
-    }
+    } */
     @media (min-width: 1024px) and (max-width: 1075px) {
       margin-left: 84px;
     }
@@ -991,13 +1078,13 @@ const IconContainer = styled.div`
 const Heading = styled.span`
   color: #102c78;
   font-size: 0.975rem;
-  font-weight: 600;
+  font-weight: 500;
 `;
 const InstructionText = styled.span`
   margin-top: 0.625rem;
   color: rgb(25, 25, 25);
   font-size: 0.9rem;
-  font-weight: 600;
+  font-weight: 500;
   margin-bottom: 1.2rem;
 `;
 const Card = styled.div`
@@ -1008,7 +1095,7 @@ const Card = styled.div`
 `;
 const ColumnOne = styled.div`
   font-size: 0.875rem;
-  font-weight: 700;
+  font-weight: 500;
   color: #102c78;
   column-gap: 20px;
   width: 100%;
@@ -1016,6 +1103,17 @@ const ColumnOne = styled.div`
   white-space: nowrap;
 `;
 const ColumnSecond = styled.div`
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: #191919;
+  width: 100%;
+  min-width: 120px;
+  white-space: nowrap;
+  width: 100%;
+  cursor: pointer;
+`;
+
+const ColumnStatus = styled.div`
   font-size: 0.875rem;
   font-weight: 500;
   color: #191919;
@@ -1045,10 +1143,12 @@ const BackgroundChangerTxhash = styled.div`
   //   border-radius: 6px;
   //   opacity: 1;
   // }
+  font-weight: 400;
 `;
 const BackgroundChangerTo = styled.div`
   width: fit-content;
   height: auto;
+  display: flex;
   background-repeat: no-repeat;
   background: #eaefff 0% 0% no-repeat padding-box;
   border-radius: 6px;
@@ -1063,6 +1163,7 @@ const BackgroundChangerTo = styled.div`
 const BackgroundChangerFrom = styled.div`
   width: fit-content;
   height: auto;
+  display: flex;
   background-repeat: no-repeat;
   background: #eaefff 0% 0% no-repeat padding-box;
   border-radius: 6px;
@@ -1098,6 +1199,7 @@ const TransactionHash = styled.div`
   margin-top: 0.5rem;
   cursor: pointer;
   width: 100%;
+  margin-bottom: 1rem;
   @media (min-width: 300px) and (max-width: 767px) {
     font-size: 0.6rem;
   }

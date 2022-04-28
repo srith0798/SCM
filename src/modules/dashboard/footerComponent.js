@@ -19,8 +19,8 @@ const FooterContainer = styled.div`
 `;
 const ColumnContainer = styled.div`
   display: flex;
-  @media screen and (min-width: 375px) and (max-width: 768px) {
-    flex-direction: column;
+  @media (min-width: 300px) and (max-width: 767px) {
+    display: unset;
   }
 `;
 const Column = styled.div`
@@ -34,16 +34,17 @@ const Column = styled.div`
     margin: 55.66px 0 0 0px;
   }
   @media (min-width: 300px) and (max-width: 768px) {
-    margin: 50px 23px 0 0.5px;
+    margin: 0px 23px 0 0.5px;
+    padding-top: 40px;
   } 
   @media (min-width: 768px) and (max-width: 1200px) {
-    margin: 50px 23px 0px 61.5px;
+    margin: 50px 23px 0px 10px;
   }
 `;
 const FooterImg = styled.img`
   height: 37.23px;
   width: 189.8px;
-  margin: 0 0 24.84px 0;
+  margin: 0 0 24.84px -20px;
   @media screen and (min-width: 375px) and (max-width: 425px) {
     padding: 0 0 0 10px;
     margin: 0 0 22.45px 0;
@@ -116,6 +117,7 @@ const Link = styled.a`
   color: #8ca6f0;
   opacity: 1;
   cursor: pointer;
+  white-space: nowrap;
 `;
 const ContactRow = styled.div`
   margin: 116px 0 0 407px;
@@ -177,7 +179,7 @@ function FooterComponent() {
     <FooterContainer>
       <ColumnContainer>
         <Column>
-          <FooterImg src="/images/smarthub.svg" alt="" />
+          <FooterImg src="/images/xmartly-icon.svg" alt="" />
           <Text>
             Easily govern your smart contract deployment with end-to-end
             lifecycle utility
@@ -187,13 +189,16 @@ function FooterComponent() {
           <SubColOne>
             <ColHeading>Tools</ColHeading>
             <LinkContainer>
+            <br/>
               <Link href="https://observer.xdc.org/" target="_blank">
                 Observatory
               </Link>
+              <br/>
               <Link href="https://stats.xdc.org/" target="_blank">
                 {" "}
                 NetworkStats{" "}
               </Link>
+              <br/>
               <Link
                 href="https://chrome.google.com/webstore/detail/xdcpay/bocpokimicclpaiekenaeelehdjllofo?hl=en-US"
                 target="_blank"
@@ -201,6 +206,7 @@ function FooterComponent() {
                 {" "}
                 XDCPay{" "}
               </Link>
+              <br/>
             </LinkContainer>
           </SubColOne>
 
@@ -213,13 +219,16 @@ function FooterComponent() {
               >
                 About XDC
               </Link>
+              <br/>
               <Link href="https://docs.xdc.org/" target="_blank">
                 {" "}
                 Documentation{" "}
               </Link>
+              <br/>
               <Link> Privacy Policy</Link>
-
+              <br/>
               <Link> Terms and Conditions</Link>
+              <br/>
             </LinkContainerSecond>
           </SubColTwo>
         </SecondColumn>

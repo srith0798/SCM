@@ -22,6 +22,7 @@ import Select from "@mui/material/Select";
 import ShowLoader from "../../common/components/showLoader";
 import ScreenSizeDetector from "screen-size-detector";
 import { cookiesConstants } from "../../constants";
+import { comparator } from "../../constants";
 
 export default function AddAlert() {
   const screen = new ScreenSizeDetector();
@@ -37,6 +38,7 @@ export default function AddAlert() {
   const [targetComparator, setTargetComparator] = React.useState("");
   const [selectedAddress, setSelectedAddress] = React.useState([]);
   const [selectedTag, setSelectedTag] = React.useState("");
+  const [placeholder, setPlaceholder] = React.useState("");
 
   const [icon, setIcon] = React.useState({
     successfulTransaction:
@@ -95,9 +97,15 @@ export default function AddAlert() {
   };
   const selectAlertTarget = (type) => {
     setAlertTarget(type);
+
     changeProgress("PARAMETERS");
-    if (type === genericConstants.ALERT_TYPE.ADDRESS) getContracts();
-    else if (type === genericConstants.ALERT_TYPE.TAG) getTags();
+    if (type === genericConstants.ALERT_TYPE.ADDRESS) {
+      getContracts();
+      setPlaceholder("Select Address");
+    } else if (type === genericConstants.ALERT_TYPE.TAG) {
+      getTags();
+      setPlaceholder("Select Tag");
+    }
   };
   const openDestinationPopup = (value) => {
     setAddDestinationPopup(true);
@@ -118,6 +126,7 @@ export default function AddAlert() {
       return;
     }
     if (response.contractList.length === 0) {
+      setLoader(false);
       return;
     }
     setLoader(false);
@@ -177,7 +186,7 @@ export default function AddAlert() {
   };
 
   const selectTargetComparator = (event) => {
-    console.log("event", event);
+    setTargetComparator(event.target.value);
   };
   const addAlert = async () => {
     let requestData = {
@@ -191,6 +200,7 @@ export default function AddAlert() {
       },
       destinations: selectedDestinations,
     };
+    console.log("chcks", targetComparator, typeof(targetComparator));
     if (alertTarget === genericConstants.ALERT_TYPE.ADDRESS) {
       requestData["target"]["name"] = selectedAddress?.contractName;
       requestData["target"]["network"] = selectedAddress?.network;
@@ -198,6 +208,9 @@ export default function AddAlert() {
     }
     if (alertTarget === genericConstants.ALERT_TYPE.TAG)
       requestData["target"]["name"] = selectedTag;
+
+    if(alertType === genericConstants.ALERT_TYPE.TRANSACTION_VALUE)
+      requestData["target"]["comparator"] = targetComparator;
     setLoader(true);
     const [error] = await utility.parseResponse(
       AlertService.addAlert(requestData)
@@ -224,15 +237,17 @@ export default function AddAlert() {
       label: label,
       url: url,
       channelName: channelName ? channelName : "",
-      status: destinationType === "EMAIL" ? genericConstants.DESTINATION_STATUS.UNVERIFIED.type : genericConstants.DESTINATION_STATUS.NOT_CONNECTED.type
-
+      status:
+        destinationType === "EMAIL"
+          ? genericConstants.DESTINATION_STATUS.UNVERIFIED.type
+          : genericConstants.DESTINATION_STATUS.NOT_CONNECTED.type,
     };
 
     const [error, response] = await utility.parseResponse(
       DestinationService.addDestination(requestData)
     );
     if (error) {
-      utility.apiFailureToast(error ? error : "Not able to add destination")
+      utility.apiFailureToast(error ? error : "Not able to add destination");
       setAddDestinationPopup(false);
       return;
     }
@@ -445,9 +460,12 @@ export default function AddAlert() {
                   <AlertTargetContainer style={{ flexDirection: "column" }}>
                     <ParameterContainer>
                       <Box sx={{ minWidth: 120 }}>
-                        <FormControl sx={{ width: "100%", maxWidth: 1000 }} className="Formalert">
+                        <FormControl
+                          sx={{ width: "100%", maxWidth: 1000 }}
+                          className="Formalert"
+                        >
                           <InputLabel shrink={false}>
-                            {targetValue === "" && "Select Address"}
+                            {targetValue === "" && placeholder}
                           </InputLabel>
                           <Select
                             value={targetValue}
@@ -496,7 +514,10 @@ export default function AddAlert() {
                       <div>
                         <ParameterContainer>
                           <Box sx={{ minWidth: 120 }}>
-                            <FormControl sx={{ width: "100%", maxWidth: 1000 }} className="Formalert">
+                            <FormControl
+                              sx={{ width: "100%", maxWidth: 1000 }}
+                              className="Formalert"
+                            >
                               <InputLabel shrink={false}>
                                 {targetComparator === "" && "Select Comparator"}
                               </InputLabel>
@@ -508,28 +529,36 @@ export default function AddAlert() {
                                   color: "black",
                                 }}
                               >
-                                <MenuItem value="">Equal to </MenuItem>
-                                <MenuItem value="">Not equal to </MenuItem>
-                                <MenuItem value="">
+                                <MenuItem value={comparator.EQUAL_TO}>
+                                  Equal to{" "}
+                                </MenuItem>
+                                <MenuItem value={comparator.NOT_EQUAL_TO}>
+                                  Not equal to{" "}
+                                </MenuItem>
+                                <MenuItem value={comparator.GREATER_EQUAL_TO}>
                                   Greater than or equal to{" "}
                                 </MenuItem>
-                                <MenuItem value="">Greater than </MenuItem>
-                                <MenuItem value="">
+                                <MenuItem value={comparator.GREATER_THAN}>
+                                  Greater than{" "}
+                                </MenuItem>
+                                <MenuItem value={comparator.LESS_EQUAL_TO}>
                                   Less than or equal to{" "}
                                 </MenuItem>
-                                <MenuItem value="">Less than </MenuItem>
+                                <MenuItem value={comparator.LESS_THAN}>
+                                  Less than{" "}
+                                </MenuItem>
                               </Select>
                             </FormControl>
                           </Box>
                         </ParameterContainer>
                         <ParameterContainer>
-                        <Threshold
-                          placeholder="Enter Threshold"
-                          value={threshold}
-                          onChange={(event) => {
-                            setThreshold(event.target.value);
-                          }}
-                        ></Threshold>
+                          <Threshold
+                            placeholder="Enter Threshold"
+                            value={threshold}
+                            onChange={(event) => {
+                              setThreshold(event.target.value);
+                            }}
+                          ></Threshold>
                         </ParameterContainer>
                       </div>
                     ) : (
@@ -609,11 +638,11 @@ const AlertTypeContainer = (props) => {
           )
         }
       >
-        <img alt="" src={props.icon.successfulTransaction} />
+        <ImgBox alt="" src={props.icon.successfulTransaction} />
         <Title>Successful transaction</Title>
         <SubTitle>Triggers when successful transaction happen</SubTitle>
       </BoxContainer>
-      <BoxContainer
+      <BoxContainerFailed
         onClick={() =>
           props.selectAlertType(genericConstants.ALERT_TYPE.FAILED_TRANSACTIONS)
         }
@@ -633,11 +662,11 @@ const AlertTypeContainer = (props) => {
         <img alt="" src={props.icon.failedTransaction} />
         <Title>Failed transaction</Title>
         <SubTitle>Triggers when transactions fails</SubTitle>
-      </BoxContainer>
+      </BoxContainerFailed>
       <BoxContainer
-        // onClick={() =>
-        //   props.selectAlertType(genericConstants.ALERT_TYPE.TRANSACTION_VALUE)
-        // }
+        onClick={() =>
+          props.selectAlertType(genericConstants.ALERT_TYPE.TRANSACTION_VALUE)
+        }
         onMouseOver={() =>
           props.changeSourceForIcons(
             genericConstants.ALERT_TYPE.TRANSACTION_VALUE,
@@ -653,10 +682,7 @@ const AlertTypeContainer = (props) => {
       >
         <img alt="" src={props.icon.transactionValue} />
         <Title>Transaction Value</Title>
-        <SubTitle style={{ fontSize: "22px", fontWeight: 600 }}>
-          Coming soon
-        </SubTitle>
-        {/* <SubTitle>Triggers whenever transaction value matches</SubTitle> */}
+        <SubTitle>Triggers whenever transaction value matches</SubTitle>
       </BoxContainer>
 
       <BoxContainer
@@ -823,6 +849,10 @@ const AlertTarget = (props) => {
     </AlertTargetContainer>
   );
 };
+
+const ImgBox = styled.img`
+  margin-top: 4px;
+`;
 
 const DestinationDetail = styled.div`
   margin-bottom: 10px;
@@ -1049,6 +1079,33 @@ const BoxContainer = styled.div`
   }
 `;
 
+const BoxContainerFailed = styled.div`
+  padding: 0.625rem;
+  height: 150px;
+  padding-top: 23px;
+  margin: 0px 10px 20px 10px;
+  width: 215px;
+  background: #f5f6fd;
+  border: solid #d5e0ff;
+  outline: none;
+  background: #f5f6fd 0% 0% no-repeat padding-box;
+  border: 1px solid #d5e0ff;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  color: #1d3c93;
+  &:hover {
+    background-color: #3163f0;
+    color: white;
+  }
+  @media (min-width: 340px) and (max-width: 768px) {
+    margin: 0px 10px 20px 10px;
+  }
+`;
+
 const MainBoxContainer = styled.div`
   display: flex;
   flex-flow: row wrap;
@@ -1124,13 +1181,13 @@ const FilterSelect = styled.select`
 const Threshold = styled.input`
   outline: none;
   border: none;
-  background-color: #ECF0F7;
+  background-color: #ecf0f7;
   border-radius: 3px;
   width: 100%;
   padding: 0px 10px 0px 10px;
   font-size: 15.5px;
   height: 3rem;
-  color: #a6aabf;
+  color: #191919;
   max-width: 1000px;
   @media (min-width: 768px) and (max-width: 1024px) {
     max-width: 350px;

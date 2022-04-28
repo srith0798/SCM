@@ -108,6 +108,30 @@ const SidebarContainer = styled.div`
     display: none;
   }
 `;
+const SidebarContainerRightDiv = styled.div`
+  position: absolute;
+  z-index: 1000;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  left: 248px;
+  padding-top: 15px;
+  overflow-x: hidden;
+  @media (min-width: 1023px) {
+    display: none;
+  }
+  @media (min-width: 767px) and (max-width: 819px) {
+  width: 520px;
+  }
+  @media (min-width: 820px) and (max-width: 1024px) {
+    width: 572px;
+  }
+  @media (min-width: 300px) and (max-width: 500px) {
+    width: 140px;
+  }
+`;
 // const LogoutTag = styled.div`
 // display: flex;
 // /* @media (min-width: 300px) and (max-width: 768px) {
@@ -141,6 +165,18 @@ const WrapperFaq = styled.div`
   &:hover {
     background: #1d3c93;
   }
+  @media (min-width: 767px) and (max-width: 819px) {
+    margin-top: 40rem !important;
+  }
+  @media (min-width: 820px) and (max-width: 1024px) {
+    margin-top: 50rem !important;
+  }
+  @media (min-width: 300px) and (max-width: 376px) {
+    margin-top: 22rem !important;
+  }
+  @media (min-width: 377px) and (max-width: 394px) {
+    margin-top: 29rem !important;
+  }
 `;
 
 const Heading = styled.span`
@@ -151,6 +187,7 @@ const Heading = styled.span`
     <>
       <Hamburger src="/images/hamburger.svg" onClick={() => setOpen(!open)} />
       {open && (
+        <div>
         <SidebarContainer>
           <Wrapper onClick={redirectToAbout} style={{ marginTop: "20px" }}>
             <Icon src="/images/Xmartly.svg" />
@@ -201,10 +238,7 @@ const Heading = styled.span`
             style={{
               marginTop: sessionManager.getDataFromCookies(cookiesConstants.IS_LOGGED_IN)
                 ? "10rem"
-                : "35rem",
-              paddingLeft: sessionManager.getDataFromCookies(cookiesConstants.IS_LOGGED_IN)
-                ? "22px"
-                : "50px",
+                : "33rem",
             }}
             onClick={redirectToFaqs}
           >
@@ -221,6 +255,8 @@ const Heading = styled.span`
             <img alt="" src="/images/Group 12.svg" />
           </CenterDiv>
         </SidebarContainer>
+        <SidebarContainerRightDiv onClick={() => setOpen(false)}/>
+        </div>
       )}
     </>
   );

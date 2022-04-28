@@ -3,6 +3,8 @@ import styled from "styled-components";
 import Dialog from "@mui/material/Dialog";
 import { makeStyles } from "@material-ui/styles";
 import { Toaster } from "react-hot-toast";
+import ScreenSizeDetector from "screen-size-detector";
+
 
 const useStyles = makeStyles(() => ({
   dialogBox: {
@@ -20,6 +22,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 export default function WalletPopUp(props) {
+  const screen = new ScreenSizeDetector();
   const classes = useStyles();
   const connectWallet = () => {
     if (props.getCurrentUserDetails()) props.click(); 
@@ -30,7 +33,6 @@ export default function WalletPopUp(props) {
       <div>
         <Toaster />
       </div>
-      <div>
         {props.state ? (
           <Dialog classes={{ paper: classes.dialogBox }} open={true}>
             <MainContainer>
@@ -62,7 +64,7 @@ export default function WalletPopUp(props) {
                         rel="noopener noreferrer"
                         target="_blank"
                       >
-                        here
+                        here.
                       </a>
                     </SubTitle>
                   </IconContainer>
@@ -79,7 +81,7 @@ export default function WalletPopUp(props) {
                     <img alt="" src="/images/xdc-wallet.svg" />
                     <Title>Connect Wallet</Title>
                     <SubTitle>
-                      Connect your XDCPay wallet with SmartHub.
+                      Connect your XDCPay wallet with Xmartly.
                     </SubTitle>
                   </IconContainer>
                 </DetailBox>
@@ -130,7 +132,7 @@ export default function WalletPopUp(props) {
                     <SubDivMob>
                     <TitleMobile>Connect Wallet</TitleMobile>
                     <SubTitleMobile>
-                      Connect your XDCPay wallet with SmartHub.
+                      Connect your XDCPay wallet with Xmartly.
                     </SubTitleMobile>
                     </SubDivMob>
                     </DivMobile>
@@ -140,7 +142,7 @@ export default function WalletPopUp(props) {
                 </DetailBoxMobile>
                 <Button onClick={() => connectWallet()}>
                   <img
-                    style={{ paddingLeft: "30px", marginRight: "15px" }}
+                    style={{ paddingLeft: "30px", marginRight: "15px", marginTop: "-3px" }}
                     alt=""
                     src="/images/xdc-logo-white.svg"
                   />
@@ -149,7 +151,7 @@ export default function WalletPopUp(props) {
                <ButtonDivMobile>
                 <ButtonMobile onClick={() => connectWallet()}>
                   <img
-                    style={{ paddingLeft: "30px", marginRight: "15px" }}
+                    style={{ paddingLeft: "30px", marginRight: "15px", marginTop: "-3px"}}
                     alt=""
                     src="/images/xdc-logo-white.svg"
                   />
@@ -160,7 +162,6 @@ export default function WalletPopUp(props) {
             </MainContainer>
           </Dialog>
         ) : null}
-      </div>
     </>
   );
 }
@@ -173,13 +174,13 @@ const Button = styled.button`
   background-size: 0.875rem;
   width: 264px;
   height: 50px;
-  padding-top: 9px;
+  padding-top: 12px;
   background-color: #3163f0;
   color: #ffffff;
   border: none;
   border-radius: 0.25rem;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 500;
   margin-top: 27px;
   @media (min-width: 300px) and (max-width: 580px) {
     margin-top: 9px;
