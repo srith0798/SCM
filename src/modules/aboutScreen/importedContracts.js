@@ -115,6 +115,7 @@ export default function ImportContract(props) {
               <HeadingThree>Network</HeadingThree>
             </FlexDiv>
             </div>
+            <ContractHolder>
             {props?.contracts.length !== 0
               ? props?.contracts.length &&
                 props?.contracts.map((item) => (
@@ -154,6 +155,7 @@ export default function ImportContract(props) {
                   </FlexDivInside>
                 ))
               : ""}
+              </ContractHolder>
             <Button onClick={addContract}>Import</Button>
             <ButtonSkip onClick={props.click}>Skip</ButtonSkip>
           </Container>
@@ -162,7 +164,11 @@ export default function ImportContract(props) {
     </div>
   );
 }
-
+const ContractHolder = styled.div`
+height: auto;
+max-height: 167px;
+overflow-x: scroll;
+`;
 const HeadingOne = styled.div`
   color: #102c78;
   font-weight: 500;
