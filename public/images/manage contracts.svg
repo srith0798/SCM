@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="152" height="152" viewBox="0 0 152 152">
+  <g id="manage_contracts" data-name="manage contracts" transform="translate(-744 -1004)">
+    <g id="mange_contract" data-name="mange contract" transform="translate(67 247)">
+      <circle id="Ellipse_98" data-name="Ellipse 98" cx="76" cy="76" r="76" transform="translate(677 757)" fill="none"/>
+      <g id="Group_750" data-name="Group 750" transform="translate(703 -172.362)">
+        <path id="Path_789" data-name="Path 789" d="M18,959.362a2.168,2.168,0,0,0-2,2v82a2.078,2.078,0,0,0,2,2H82a2.078,2.078,0,0,0,2-2v-64a2.042,2.042,0,0,0-.594-1.437l-18-18A2.024,2.024,0,0,0,64,959.362Zm2,4H62v16a2.078,2.078,0,0,0,2,2H80v60H20Zm46,2.813,11.188,11.188H66Z" fill="#102c78"/>
+      </g>
+    </g>
+    <g id="Group_766" data-name="Group 766" transform="translate(770 74.638)">
+      <path id="Path_789-2" data-name="Path 789" d="M28,993.362a2,2,0,0,0,0,4H52a2,2,0,0,0,0-4Zm0,16a2,2,0,0,0,0,4H72a2,2,0,0,0,0-4Zm0,16a2,2,0,0,0,0,4H72a2,2,0,0,0,0-4Z" fill="#0089ff"/>
+    </g>
+  </g>
+</svg>
